@@ -27,4 +27,7 @@ class Images {
   static const String malePerson = "assets/images/male-person.jpg";
   static const String user = "assets/images/user.png";
   static const String cashkaro = "assets/images/cashkaro.jpg";
+  static const String amazon = "assets/images/amazon.jpg";
+  static const String rupee = "assets/images/rupee.png";
+  static const String referearn = "assets/images/referearn.png";
 }

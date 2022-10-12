@@ -1,8 +1,8 @@
-import 'package:astrotalk/controllers/callController.dart';
-import 'package:astrotalk/controllers/chatController.dart';
-import 'package:astrotalk/controllers/homeController.dart';
+import 'package:cashbackapp/controllers/callController.dart';
+import 'package:cashbackapp/controllers/chatController.dart';
+import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:get/get.dart';
-import 'package:astrotalk/controllers/bottomNavigationController.dart';
+import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 
 class NetworkBinding extends Bindings {
   @override

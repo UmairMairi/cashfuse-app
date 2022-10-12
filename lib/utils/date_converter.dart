@@ -1,4 +1,4 @@
-import 'package:astrotalk/utils/global.dart' as global;
+import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:intl/intl.dart';
 
 class DateConverter {

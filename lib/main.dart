@@ -2,12 +2,12 @@
 //flutter
 import 'dart:io';
 
-import 'package:astrotalk/l10n/l10n.dart';
-import 'package:astrotalk/provider/local_provider.dart';
-import 'package:astrotalk/theme/nativeTheme.dart';
-import 'package:astrotalk/utils/binding/networkBinding.dart';
-import 'package:astrotalk/utils/global.dart' as global;
-import 'package:astrotalk/views/bottomNavigationBarScreen.dart';
+import 'package:cashbackapp/l10n/l10n.dart';
+import 'package:cashbackapp/provider/local_provider.dart';
+import 'package:cashbackapp/theme/nativeTheme.dart';
+import 'package:cashbackapp/utils/binding/networkBinding.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashbackapp/views/bottomNavigationBarScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

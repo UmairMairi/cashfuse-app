@@ -1,4 +1,4 @@
-import 'package:astrotalk/utils/images.dart';
+import 'package:cashbackapp/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

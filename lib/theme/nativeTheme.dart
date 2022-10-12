@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:astrotalk/utils/global.dart' as global;
+import 'package:cashbackapp/utils/global.dart' as global;
 
 ThemeData nativeTheme({bool darkModeEnabled}) {
   if (darkModeEnabled == null) {
@@ -42,7 +42,9 @@ ThemeData nativeTheme({bool darkModeEnabled}) {
     );
   } else {
     return ThemeData(
+        scaffoldBackgroundColor: Colors.grey[200],
         appBarTheme: AppBarTheme(
+          backgroundColor: global.defaultColor,
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: global.defaultColor,
             statusBarIconBrightness: Brightness.light,

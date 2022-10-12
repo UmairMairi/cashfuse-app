@@ -2,11 +2,13 @@
 
 import 'dart:async';
 
-import 'package:astrotalk/controllers/bottomNavigationController.dart';
-import 'package:astrotalk/views/callScreen.dart';
-import 'package:astrotalk/views/chatScreen.dart';
-import 'package:astrotalk/views/historyScreen.dart';
-import 'package:astrotalk/views/homeScreen.dart';
+import 'package:cashbackapp/controllers/bottomNavigationController.dart';
+import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/views/homeScreen.dart';
+import 'package:cashbackapp/views/profileScreen.dart';
+import 'package:cashbackapp/views/recentClicksScreen.dart';
+import 'package:cashbackapp/views/referEarnScreen.dart';
+import 'package:cashbackapp/views/searchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,25 +17,28 @@ class BottomNavigationBarScreen extends StatelessWidget {
 
   bool _canExit = GetPlatform.isWeb ? true : false;
 
-  List<IconData> iconList = [
-    Icons.home,
-    Icons.search,
-    Icons.ads_click_rounded,
-    Icons.person,
+  List<Widget> iconList = [
+    Icon(Icons.home),
+    Icon(Icons.search),
+    Icon(Icons.abc),
+    Icon(Icons.ads_click_rounded),
+    Icon(Icons.person),
   ];
 
   List<String> tabList = [
     'Home',
     'Search',
+    'Refer & Earn',
     'Recents Clicks',
     'Profile',
   ];
 
   List<Widget> _screens() => [
         HomeScreen(),
-        ChatScreen(),
-        CallScreen(),
-        HistoryScreen(),
+        SearchScreen(),
+        ReferEarnScreen(),
+        RecentClickScreen(),
+        ProfieScreen(),
       ];
 
   @override
@@ -68,26 +73,49 @@ class BottomNavigationBarScreen extends StatelessWidget {
           child: Scaffold(
             bottomNavigationBar: SizedBox(
               height: 45,
-              child: BottomNavigationBar(
-                iconSize: 22,
-                type: BottomNavigationBarType.fixed,
-                selectedItemColor: Colors.black,
-                unselectedItemColor: Colors.black,
-                currentIndex: navController.bottomNavIndex.value,
-                showSelectedLabels: true,
-                showUnselectedLabels: true,
-                selectedLabelStyle: TextStyle(fontSize: 8, fontWeight: FontWeight.w300),
-                unselectedLabelStyle: TextStyle(fontSize: 8, fontWeight: FontWeight.w300),
-                items: List.generate(iconList.length, (index) {
-                  return BottomNavigationBarItem(
-                    icon: Icon(iconList[index]),
-                    label: tabList[index],
-                  );
-                }),
-                elevation: 5,
-                onTap: (index) {
-                  navController.setBottomIndex(index);
-                },
+              child: Stack(
+                alignment: Alignment.topCenter,
+                clipBehavior: Clip.none,
+                children: [
+                  BottomNavigationBar(
+                    backgroundColor: Colors.white,
+                    iconSize: 22,
+                    type: BottomNavigationBarType.fixed,
+                    selectedItemColor: Colors.black,
+                    unselectedItemColor: Colors.black,
+                    currentIndex: navController.bottomNavIndex.value,
+                    showSelectedLabels: true,
+                    showUnselectedLabels: true,
+                    selectedLabelStyle: TextStyle(fontSize: 8, fontWeight: FontWeight.w300),
+                    unselectedLabelStyle: TextStyle(fontSize: 8, fontWeight: FontWeight.w300),
+                    items: List.generate(iconList.length, (index) {
+                      return BottomNavigationBarItem(
+                        icon: iconList[index],
+                        label: tabList[index],
+                      );
+                    }),
+                    elevation: 5,
+                    onTap: (index) {
+                      navController.setBottomIndex(index);
+                    },
+                  ),
+                  Positioned(
+                    bottom: 20,
+                    child: InkWell(
+                      onTap: () {
+                        navController.setBottomIndex(2);
+                      },
+                      child: CircleAvatar(
+                        radius: 20,
+                        backgroundColor: Colors.white,
+                        child: Image.asset(
+                          Images.rupee,
+                          height: 25,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             body: _screens().elementAt(navController.bottomNavIndex.value),

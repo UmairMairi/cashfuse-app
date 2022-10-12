@@ -2,7 +2,7 @@
 //packages
 import 'package:get/get.dart';
 //contoller
-import 'package:astrotalk/controllers/networkController.dart';
+import 'package:cashbackapp/controllers/networkController.dart';
 
 class ImageControlller extends GetxController {
   NetworkController networkController = Get.find<NetworkController>();

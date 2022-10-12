@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:astrotalk/l10n/l10n.dart';
+import 'package:cashbackapp/l10n/l10n.dart';
 
 class LocaleProvider extends ChangeNotifier {
   Locale _locale;

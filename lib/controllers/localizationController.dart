@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:astrotalk/controllers/networkController.dart';
+import 'package:cashbackapp/controllers/networkController.dart';
 
 class LocalizationController extends GetxController {
   NetworkController networkController = Get.put(NetworkController());
