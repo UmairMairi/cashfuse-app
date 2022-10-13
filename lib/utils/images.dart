@@ -30,4 +30,6 @@ class Images {
   static const String amazon = "assets/images/amazon.jpg";
   static const String rupee = "assets/images/rupee.png";
   static const String referearn = "assets/images/referearn.png";
+  static const String google = "assets/images/google.png";
+  static const String keys = "assets/images/keys.jpg";
 }

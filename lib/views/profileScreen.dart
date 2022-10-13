@@ -1,6 +1,9 @@
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
+import 'package:cashbackapp/views/accountSettingScreen.dart';
+import 'package:cashbackapp/views/myEarningScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ProfieScreen extends StatelessWidget {
   @override
@@ -89,46 +92,56 @@ class ProfieScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.settings,
-                    color: Get.theme.iconTheme.color,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'Account Settings',
-                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      letterSpacing: -0.5,
-                      fontWeight: FontWeight.w300,
+            InkWell(
+              onTap: () {
+                Get.to(() => AccountSettingScreen());
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.settings,
+                      color: Get.theme.iconTheme.color,
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      'Account Settings',
+                      style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                        letterSpacing: -0.5,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.currency_rupee,
-                    color: Get.theme.iconTheme.color,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'My Earnings',
-                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      letterSpacing: -0.5,
-                      fontWeight: FontWeight.w300,
+            InkWell(
+              onTap: () {
+                Get.to(() => MyEarningSceen());
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.currency_rupee,
+                      color: Get.theme.iconTheme.color,
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      'My Earnings',
+                      style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                        letterSpacing: -0.5,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Padding(
@@ -194,25 +207,30 @@ class ProfieScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.person_add,
-                    color: Get.theme.iconTheme.color,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'Refer and Earn',
-                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      letterSpacing: -0.5,
-                      fontWeight: FontWeight.w300,
+            InkWell(
+              onTap: () {
+                Get.find<BottomNavigationController>().setBottomIndex(2);
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.person_add,
+                      color: Get.theme.iconTheme.color,
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      'Refer and Earn',
+                      style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                        letterSpacing: -0.5,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Padding(
@@ -236,25 +254,30 @@ class ProfieScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.ads_click,
-                    color: Get.theme.iconTheme.color,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'Recent Clicks',
-                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      letterSpacing: -0.5,
-                      fontWeight: FontWeight.w300,
+            InkWell(
+              onTap: () {
+                Get.find<BottomNavigationController>().setBottomIndex(3);
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.ads_click,
+                      color: Get.theme.iconTheme.color,
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      'Recent Clicks',
+                      style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                        letterSpacing: -0.5,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Padding(
@@ -278,25 +301,34 @@ class ProfieScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.call,
-                    color: Get.theme.iconTheme.color,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'Call Us',
-                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      letterSpacing: -0.5,
-                      fontWeight: FontWeight.w300,
+            InkWell(
+              onTap: () async {
+                if (await canLaunchUrlString('tel:${9999999999}')) {
+                  await launchUrlString('tel:${9999999999}');
+                } else {
+                  throw 'Could not launch';
+                }
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.call,
+                      color: Get.theme.iconTheme.color,
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      'Call Us',
+                      style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                        letterSpacing: -0.5,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Divider(
@@ -347,26 +379,29 @@ class ProfieScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.power_settings_new_rounded,
-                    color: Get.theme.iconTheme.color,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'Logout',
-                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      letterSpacing: -0.5,
-                      color: Colors.red,
-                      fontWeight: FontWeight.w500,
+            InkWell(
+              onTap: () {},
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.power_settings_new_rounded,
+                      color: Get.theme.iconTheme.color,
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      'Logout',
+                      style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                        letterSpacing: -0.5,
+                        color: Colors.red,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
