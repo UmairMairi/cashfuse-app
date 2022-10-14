@@ -12,7 +12,7 @@ class BottomNavigationController extends GetxController {
   void onInit() async {
     _init();
     videoPlayerController = VideoPlayerController.network(
-      'https://dm0qx8t0i9gc9.cloudfront.net/watermarks/video/yRF5c-O/videoblocks-zodiac-horoscope-astrological-sun-signs-on-a-spinning-wheel-or-chakra-seamless-looping-animated-motion-background-gold-golden-brown-yellow-orange_rdngum3mm__1d234f9703b80881130961848a843dbe__P360.mp4',
+      'https://media.istockphoto.com/id/1323271459/video/connected-lines-and-particles-on-black-background.mp4?s=mp4-640x640-is&k=20&c=Jzkaf3VHLlSrBvCZDPqQgHzb0Ph5OdPhuDlMBBkDyFM=',
     )..initialize().then((_) {
         videoPlayerController.pause();
         videoPlayerController.setLooping(true);

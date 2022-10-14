@@ -10,4 +10,11 @@ class HomeController extends GetxController {
     CategoryModel(name: 'pharmacy', image: ''),
     CategoryModel(name: 'grocery', image: ''),
   ];
+
+  bool isCategoryExpand = false;
+
+  void setCategoryExpand(bool val) {
+    isCategoryExpand = val;
+    update();
+  }
 }

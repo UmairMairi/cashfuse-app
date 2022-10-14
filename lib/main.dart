@@ -7,7 +7,7 @@ import 'package:cashbackapp/provider/local_provider.dart';
 import 'package:cashbackapp/theme/nativeTheme.dart';
 import 'package:cashbackapp/utils/binding/networkBinding.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
+import 'package:cashbackapp/views/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
-          home: LoginOrSignUpScreen(),
+          home: SplashScreen(),
         );
       });
 }

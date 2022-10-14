@@ -1,3 +1,6 @@
+import 'package:cashbackapp/views/appWiseoffershowListScreen.dart';
+import 'package:cashbackapp/views/categoryScreen.dart';
+import 'package:cashbackapp/views/retailerCategoryScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,6 +29,9 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           ListTile(
+            onTap: () {
+              Get.to(() => CategoryScreen());
+            },
             horizontalTitleGap: 0,
             leading: Icon(
               Icons.store_outlined,
@@ -37,6 +43,9 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           ListTile(
+            onTap: () {
+              Get.to(() => RetailerCategoryScreen());
+            },
             horizontalTitleGap: 0,
             leading: Icon(
               Icons.edit_calendar_sharp,
@@ -67,92 +76,112 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.man,
-                  color: Colors.black.withOpacity(0.7),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  'Men Fashion',
-                  style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                    letterSpacing: -0.5,
-                    fontWeight: FontWeight.w300,
+          InkWell(
+            onTap: () {
+              Get.to(() => AppWiseOfferShowListScreen());
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.man,
                     color: Colors.black.withOpacity(0.7),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    'Men Fashion',
+                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                      letterSpacing: -0.5,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.black.withOpacity(0.7),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.woman_outlined,
-                  color: Colors.black.withOpacity(0.7),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  'Women Fashion',
-                  style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                    letterSpacing: -0.5,
-                    fontWeight: FontWeight.w300,
+          InkWell(
+            onTap: () {
+              Get.to(() => AppWiseOfferShowListScreen());
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.woman_outlined,
                     color: Colors.black.withOpacity(0.7),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    'Women Fashion',
+                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                      letterSpacing: -0.5,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.black.withOpacity(0.7),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.man,
-                  color: Colors.black.withOpacity(0.7),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  'Men Shoes',
-                  style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                    letterSpacing: -0.5,
-                    fontWeight: FontWeight.w300,
+          InkWell(
+            onTap: () {
+              Get.to(() => AppWiseOfferShowListScreen());
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.man,
                     color: Colors.black.withOpacity(0.7),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    'Men Shoes',
+                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                      letterSpacing: -0.5,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.black.withOpacity(0.7),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.woman_outlined,
-                  color: Colors.black.withOpacity(0.7),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  'Women Shoes',
-                  style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                    letterSpacing: -0.5,
-                    fontWeight: FontWeight.w300,
+          InkWell(
+            onTap: () {
+              Get.to(() => AppWiseOfferShowListScreen());
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.woman_outlined,
                     color: Colors.black.withOpacity(0.7),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    'Women Shoes',
+                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                      letterSpacing: -0.5,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.black.withOpacity(0.7),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

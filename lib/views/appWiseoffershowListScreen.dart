@@ -1,3 +1,5 @@
+import 'package:cashbackapp/views/dealDetailScreen.dart';
+import 'package:cashbackapp/views/filterScreen.dart';
 import 'package:cashbackapp/widget/appWiseoffershowWidget.dart';
 import 'package:cashbackapp/widget/sortDialogWidget.dart';
 import 'package:flutter/material.dart';
@@ -33,17 +35,26 @@ class AppWiseOfferShowListScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.filter,
-                      size: 15,
-                    ),
-                    Text(
-                      ' Filters',
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w300),
-                    ),
-                  ],
+                InkWell(
+                  onTap: () {
+                    Get.to(
+                      () => FilterScreen(),
+                      transition: Transition.downToUp,
+                      duration: Duration(milliseconds: 600),
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.filter,
+                        size: 15,
+                      ),
+                      Text(
+                        ' Filters',
+                        style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w300),
+                      ),
+                    ],
+                  ),
                 ),
                 Container(
                   width: 1,
@@ -83,8 +94,13 @@ class AppWiseOfferShowListScreen extends StatelessWidget {
               shrinkWrap: true,
               padding: EdgeInsets.all(10).copyWith(top: 20),
               itemBuilder: (context, index) {
-                return AppWiseOfferShowWidget(
-                  isTimeShow: false,
+                return InkWell(
+                  onTap: () {
+                    Get.to(() => DealDetailScreen());
+                  },
+                  child: AppWiseOfferShowWidget(
+                    isTimeShow: false,
+                  ),
                 );
               },
             ),

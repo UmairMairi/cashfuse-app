@@ -13,11 +13,16 @@ class LoginOrSignUpScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-              child: Icon(
-                Icons.arrow_back,
-                color: Colors.black,
+            InkWell(
+              onTap: () {
+                Get.back();
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                ),
               ),
             ),
             Center(

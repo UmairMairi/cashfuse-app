@@ -18,11 +18,11 @@ class BottomNavigationBarScreen extends StatelessWidget {
   bool _canExit = GetPlatform.isWeb ? true : false;
 
   List<Widget> iconList = [
-    Icon(Icons.home),
+    Icon(Icons.home_outlined),
     Icon(Icons.search),
     Icon(Icons.abc),
     Icon(Icons.ads_click_rounded),
-    Icon(Icons.person),
+    Icon(Icons.person_outline),
   ];
 
   List<String> tabList = [
@@ -81,7 +81,7 @@ class BottomNavigationBarScreen extends StatelessWidget {
                     backgroundColor: Colors.white,
                     iconSize: 22,
                     type: BottomNavigationBarType.fixed,
-                    selectedItemColor: Colors.black,
+                    selectedItemColor: Get.theme.secondaryHeaderColor,
                     unselectedItemColor: Colors.black,
                     currentIndex: navController.bottomNavIndex.value,
                     showSelectedLabels: true,

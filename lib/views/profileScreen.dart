@@ -1,6 +1,11 @@
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 import 'package:cashbackapp/views/accountSettingScreen.dart';
+import 'package:cashbackapp/views/getHelpScreen.dart';
+import 'package:cashbackapp/views/missingCashbackScreen.dart';
 import 'package:cashbackapp/views/myEarningScreen.dart';
+import 'package:cashbackapp/views/privacyPolicyScreen.dart';
+import 'package:cashbackapp/views/rateUsScreen.dart';
+import 'package:cashbackapp/views/referralNetworkScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -144,67 +149,72 @@ class ProfieScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.account_balance_wallet_rounded,
-                    color: Get.theme.iconTheme.color,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'Payments',
-                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      letterSpacing: -0.5,
-                      fontWeight: FontWeight.w300,
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            //   child: Row(
+            //     children: [
+            //       Icon(
+            //         Icons.account_balance_wallet_rounded,
+            //         color: Get.theme.iconTheme.color,
+            //       ),
+            //       SizedBox(
+            //         width: 20,
+            //       ),
+            //       Text(
+            //         'Payments',
+            //         style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+            //           letterSpacing: -0.5,
+            //           fontWeight: FontWeight.w300,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            //   child: Row(
+            //     children: [
+            //       Icon(
+            //         Icons.history,
+            //         color: Get.theme.iconTheme.color,
+            //       ),
+            //       SizedBox(
+            //         width: 20,
+            //       ),
+            //       Text(
+            //         'Payments History',
+            //         style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+            //           letterSpacing: -0.5,
+            //           fontWeight: FontWeight.w300,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            InkWell(
+              onTap: () {
+                Get.to(() => MissingCashbackScreen());
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.search,
+                      color: Get.theme.iconTheme.color,
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.history,
-                    color: Get.theme.iconTheme.color,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'Payments History',
-                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      letterSpacing: -0.5,
-                      fontWeight: FontWeight.w300,
+                    SizedBox(
+                      width: 20,
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.search,
-                    color: Get.theme.iconTheme.color,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'Missing Cashback',
-                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      letterSpacing: -0.5,
-                      fontWeight: FontWeight.w300,
+                    Text(
+                      'Missing Cashback',
+                      style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                        letterSpacing: -0.5,
+                        fontWeight: FontWeight.w300,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             InkWell(
@@ -233,25 +243,30 @@ class ProfieScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Get.theme.iconTheme.color,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'Referral Network',
-                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      letterSpacing: -0.5,
-                      fontWeight: FontWeight.w300,
+            InkWell(
+              onTap: () {
+                Get.to(() => ReferralNetworkScreen());
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.person,
+                      color: Get.theme.iconTheme.color,
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      'Referral Network',
+                      style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                        letterSpacing: -0.5,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             InkWell(
@@ -280,25 +295,30 @@ class ProfieScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.live_help_outlined,
-                    color: Get.theme.iconTheme.color,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'Get Help',
-                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      letterSpacing: -0.5,
-                      fontWeight: FontWeight.w300,
+            InkWell(
+              onTap: () {
+                Get.to(() => GetHelpScreen());
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.live_help_outlined,
+                      color: Get.theme.iconTheme.color,
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      'Get Help',
+                      style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                        letterSpacing: -0.5,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             InkWell(
@@ -334,49 +354,59 @@ class ProfieScreen extends StatelessWidget {
             Divider(
               height: 0,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.star,
-                    color: Get.theme.iconTheme.color,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'Rate US',
-                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      letterSpacing: -0.5,
-                      fontWeight: FontWeight.w300,
+            InkWell(
+              onTap: () {
+                Get.to(() => RateUsScreen());
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.star,
+                      color: Get.theme.iconTheme.color,
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      'Rate US',
+                      style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                        letterSpacing: -0.5,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Divider(
               height: 0,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.lock_open,
-                    color: Get.theme.iconTheme.color,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'Privacy Policy',
-                    style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      letterSpacing: -0.5,
-                      fontWeight: FontWeight.w300,
+            InkWell(
+              onTap: () {
+                Get.to(() => PrivacyPolicyScreen());
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.lock_open,
+                      color: Get.theme.iconTheme.color,
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      'Privacy Policy',
+                      style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                        letterSpacing: -0.5,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             InkWell(

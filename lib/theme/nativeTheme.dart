@@ -55,6 +55,7 @@ ThemeData nativeTheme({bool darkModeEnabled}) {
         primaryColorLight: global.defaultColor,
         iconTheme: IconThemeData(color: Colors.black),
         primaryIconTheme: IconThemeData(color: Colors.black),
+        secondaryHeaderColor: Color(0xFFF07532),
         textTheme: TextTheme(
           headline1: TextStyle(color: Colors.black),
           headline2: TextStyle(color: Colors.black),

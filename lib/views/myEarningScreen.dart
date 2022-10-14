@@ -1,4 +1,6 @@
+import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/views/getHelpScreen.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -206,289 +208,300 @@ class MyEarningSceen extends StatelessWidget {
               ),
             ),
           ),
-          Card(
-            margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Container(
-              decoration: BoxDecoration(
+          InkWell(
+            onTap: () {
+              Get.back();
+              Get.find<BottomNavigationController>().setBottomIndex(3);
+            },
+            child: Card(
+              margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFF0FCBF9),
-                    Color(0xFFA0F7FE),
-                  ],
-                ),
               ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Recent Clicks',
-                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: DottedLine(
-                              dashLength: 1,
-                              lineThickness: 1.5,
-                              dashGapLength: 1.5,
-                              dashColor: Colors.white,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'View More ',
-                                style: Get.theme.primaryTextTheme.subtitle2.copyWith(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              CircleAvatar(
-                                radius: 6,
-                                backgroundColor: Colors.white,
-                                child: Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  size: 8,
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color(0xFF0FCBF9),
+                      Color(0xFFA0F7FE),
+                    ],
                   ),
-                  Card(
-                    margin: EdgeInsets.symmetric(horizontal: 30),
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: ShaderMask(
-                        blendMode: BlendMode.srcIn,
-                        shaderCallback: (Rect bounds) {
-                          return LinearGradient(
-                            colors: [
-                              Color(0xFFBC53E1),
-                              Color(0xFF6285E3),
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ).createShader(bounds);
-                        },
-                        child: Icon(
-                          MdiIcons.gestureTap,
-                          color: Colors.white,
-                          size: 25,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Recent Clicks',
+                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: DottedLine(
+                                dashLength: 1,
+                                lineThickness: 1.5,
+                                dashGapLength: 1.5,
+                                dashColor: Colors.white,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'View More ',
+                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                CircleAvatar(
+                                  radius: 6,
+                                  backgroundColor: Colors.white,
+                                  child: Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    size: 8,
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    Card(
+                      margin: EdgeInsets.symmetric(horizontal: 30),
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ShaderMask(
+                          blendMode: BlendMode.srcIn,
+                          shaderCallback: (Rect bounds) {
+                            return LinearGradient(
+                              colors: [
+                                Color(0xFFBC53E1),
+                                Color(0xFF6285E3),
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ).createShader(bounds);
+                          },
+                          child: Icon(
+                            MdiIcons.gestureTap,
+                            color: Colors.white,
+                            size: 25,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-          Card(
-            margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Container(
-              decoration: BoxDecoration(
+          // Card(
+          //   margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+          //   shape: RoundedRectangleBorder(
+          //     borderRadius: BorderRadius.circular(10),
+          //   ),
+          //   child: Container(
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(10),
+          //       gradient: LinearGradient(
+          //         begin: Alignment.centerLeft,
+          //         end: Alignment.bottomRight,
+          //         colors: [
+          //           Color(0xFF0FCBF9),
+          //           Color(0xFFA0F7FE),
+          //         ],
+          //       ),
+          //     ),
+          //     child: Row(
+          //       children: [
+          //         Expanded(
+          //           child: Padding(
+          //             padding: const EdgeInsets.all(12.0),
+          //             child: Column(
+          //               crossAxisAlignment: CrossAxisAlignment.start,
+          //               children: [
+          //                 Text(
+          //                   'Request Paymets',
+          //                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+          //                     color: Colors.white,
+          //                     fontSize: 18,
+          //                     fontWeight: FontWeight.w600,
+          //                   ),
+          //                 ),
+          //                 Padding(
+          //                   padding: const EdgeInsets.symmetric(vertical: 10),
+          //                   child: DottedLine(
+          //                     dashLength: 1,
+          //                     lineThickness: 1.5,
+          //                     dashGapLength: 1.5,
+          //                     dashColor: Colors.white,
+          //                   ),
+          //                 ),
+          //                 Row(
+          //                   children: [
+          //                     Text(
+          //                       'View More ',
+          //                       style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+          //                         color: Colors.white,
+          //                       ),
+          //                     ),
+          //                     CircleAvatar(
+          //                       radius: 6,
+          //                       backgroundColor: Colors.white,
+          //                       child: Icon(
+          //                         Icons.arrow_forward_ios_outlined,
+          //                         size: 8,
+          //                       ),
+          //                     )
+          //                   ],
+          //                 )
+          //               ],
+          //             ),
+          //           ),
+          //         ),
+          //         Card(
+          //           margin: EdgeInsets.symmetric(horizontal: 30),
+          //           elevation: 5,
+          //           shape: RoundedRectangleBorder(
+          //             borderRadius: BorderRadius.circular(25),
+          //           ),
+          //           child: Padding(
+          //             padding: const EdgeInsets.all(10.0),
+          //             child: ShaderMask(
+          //               blendMode: BlendMode.srcIn,
+          //               shaderCallback: (Rect bounds) {
+          //                 return LinearGradient(
+          //                   colors: [
+          //                     Color(0xFFBC53E1),
+          //                     Color(0xFF6285E3),
+          //                   ],
+          //                   begin: Alignment.topLeft,
+          //                   end: Alignment.bottomRight,
+          //                 ).createShader(bounds);
+          //               },
+          //               child: Icon(
+          //                 Icons.currency_rupee_rounded,
+          //                 size: 25,
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          InkWell(
+            onTap: () {
+              Get.to(() => GetHelpScreen());
+            },
+            child: Card(
+              margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFF0FCBF9),
-                    Color(0xFFA0F7FE),
-                  ],
-                ),
               ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Request Paymets',
-                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: DottedLine(
-                              dashLength: 1,
-                              lineThickness: 1.5,
-                              dashGapLength: 1.5,
-                              dashColor: Colors.white,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'View More ',
-                                style: Get.theme.primaryTextTheme.subtitle2.copyWith(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              CircleAvatar(
-                                radius: 6,
-                                backgroundColor: Colors.white,
-                                child: Icon(
-                                  Icons.arrow_forward_ios_outlined,
-                                  size: 8,
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color(0xFF0FCBF9),
+                      Color(0xFFA0F7FE),
+                    ],
                   ),
-                  Card(
-                    margin: EdgeInsets.symmetric(horizontal: 30),
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: ShaderMask(
-                        blendMode: BlendMode.srcIn,
-                        shaderCallback: (Rect bounds) {
-                          return LinearGradient(
-                            colors: [
-                              Color(0xFFBC53E1),
-                              Color(0xFF6285E3),
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ).createShader(bounds);
-                        },
-                        child: Icon(
-                          Icons.currency_rupee_rounded,
-                          size: 25,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Get Help',
+                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: DottedLine(
+                                dashLength: 1,
+                                lineThickness: 1.5,
+                                dashGapLength: 1.5,
+                                dashColor: Colors.white,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'View More ',
+                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                CircleAvatar(
+                                  radius: 6,
+                                  backgroundColor: Colors.white,
+                                  child: Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    size: 8,
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Card(
-            margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFF0FCBF9),
-                    Color(0xFFA0F7FE),
-                  ],
-                ),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Get Help',
-                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: DottedLine(
-                              dashLength: 1,
-                              lineThickness: 1.5,
-                              dashGapLength: 1.5,
-                              dashColor: Colors.white,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'View More ',
-                                style: Get.theme.primaryTextTheme.subtitle2.copyWith(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              CircleAvatar(
-                                radius: 6,
-                                backgroundColor: Colors.white,
-                                child: Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  size: 8,
-                                ),
-                              )
-                            ],
-                          )
-                        ],
+                    Card(
+                      margin: EdgeInsets.symmetric(horizontal: 30),
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
                       ),
-                    ),
-                  ),
-                  Card(
-                    margin: EdgeInsets.symmetric(horizontal: 30),
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: ShaderMask(
-                        blendMode: BlendMode.srcIn,
-                        shaderCallback: (Rect bounds) {
-                          return LinearGradient(
-                            colors: [
-                              Color(0xFFBC53E1),
-                              Color(0xFF6285E3),
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ).createShader(bounds);
-                        },
-                        child: Icon(
-                          Icons.headset_mic,
-                          size: 25,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ShaderMask(
+                          blendMode: BlendMode.srcIn,
+                          shaderCallback: (Rect bounds) {
+                            return LinearGradient(
+                              colors: [
+                                Color(0xFFBC53E1),
+                                Color(0xFF6285E3),
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ).createShader(bounds);
+                          },
+                          child: Icon(
+                            Icons.headset_mic,
+                            size: 25,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
