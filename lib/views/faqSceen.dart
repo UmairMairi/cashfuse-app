@@ -66,7 +66,7 @@ class FaqScreen extends StatelessWidget {
             height: 40,
             width: Get.width,
             decoration: BoxDecoration(
-              color: Colors.orange[800],
+              color: Get.theme.secondaryHeaderColor,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(5),
                 topRight: Radius.circular(5),

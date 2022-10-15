@@ -135,7 +135,7 @@ class RateUsScreen extends StatelessWidget {
         child: Container(
           height: 40,
           width: Get.width,
-          color: Colors.orange[800],
+          color: Get.theme.secondaryHeaderColor,
           alignment: Alignment.center,
           child: Text(
             '+ WRITE A TESTIMONIAL',

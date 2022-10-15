@@ -71,7 +71,7 @@ class MissingCashbackScreen extends StatelessWidget {
                     child: Container(
                       height: 40,
                       width: Get.width / 2,
-                      color: Colors.orange[800],
+                      color: Get.theme.secondaryHeaderColor,
                       alignment: Alignment.center,
                       child: Text(
                         'ADD A TICKET',

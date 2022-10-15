@@ -39,75 +39,78 @@ class ForgotPasswordScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Container(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30, bottom: 30),
-                    child: Center(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Container(
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30, bottom: 30),
+                      child: Center(
+                        child: Text(
+                          'Verify Account',
+                          style: Get.theme.primaryTextTheme.headline6.copyWith(
+                            letterSpacing: -0.5,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 19,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      'Enter your registered Email ID / Mobile Number to reset password',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontWeight: FontWeight.w300, color: Colors.grey[800]),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                      child: TextFormField(
+                        focusNode: cEmail,
+                        scrollPadding: EdgeInsets.zero,
+                        cursorColor: Get.theme.primaryColor,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.zero,
+                          labelText: 'Email ID / Mobile Number',
+                          labelStyle: TextStyle(
+                            color: cEmail.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                          ),
+                          focusColor: Get.theme.primaryColor,
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                            color: cEmail.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                          )),
+                          border: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                            color: cEmail.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                          )),
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                            color: cEmail.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                          )),
+                        ),
+                        onTap: () {
+                          FocusScope.of(context).unfocus(disposition: UnfocusDisposition.previouslyFocusedChild);
+                        },
+                      ),
+                    ),
+                    Container(
+                      width: Get.width,
+                      height: 45,
+                      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+                      padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: Get.theme.secondaryHeaderColor,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      alignment: Alignment.center,
                       child: Text(
-                        'Verify Account',
-                        style: Get.theme.primaryTextTheme.headline6.copyWith(
-                          letterSpacing: -0.5,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 19,
-                        ),
+                        'Get OTP',
+                        style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                       ),
                     ),
-                  ),
-                  Text(
-                    'Enter your registered Email ID / Mobile Number to reset password',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.w300, color: Colors.grey[800]),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                    child: TextFormField(
-                      focusNode: cEmail,
-                      scrollPadding: EdgeInsets.zero,
-                      cursorColor: Get.theme.primaryColor,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.zero,
-                        labelText: 'Email ID / Mobile Number',
-                        labelStyle: TextStyle(
-                          color: cEmail.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                        ),
-                        focusColor: Get.theme.primaryColor,
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                          color: cEmail.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                        )),
-                        border: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                          color: cEmail.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                        )),
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                          color: cEmail.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                        )),
-                      ),
-                      onTap: () {
-                        FocusScope.of(context).unfocus(disposition: UnfocusDisposition.previouslyFocusedChild);
-                      },
-                    ),
-                  ),
-                  Container(
-                    width: Get.width,
-                    height: 45,
-                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-                    padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: Colors.orange[800],
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Get OTP',
-                      style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

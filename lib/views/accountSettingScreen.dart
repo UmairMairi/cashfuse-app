@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AccountSettingScreen extends StatelessWidget {
+  final fnameFocus = new FocusNode();
   final cPasswordFocus = new FocusNode();
   final newPasswordFocus = new FocusNode();
   final conPasswordFocus = new FocusNode();
@@ -11,6 +12,7 @@ class AccountSettingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CommonController>(builder: (commonController) {
       return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           elevation: 0,
           leading: InkWell(
@@ -57,11 +59,25 @@ class AccountSettingScreen extends StatelessWidget {
                           style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w300),
                         ),
                         TextFormField(
+                          focusNode: fnameFocus,
                           scrollPadding: EdgeInsets.zero,
                           cursorColor: Get.theme.primaryColor,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.zero,
                             hintText: 'Test User',
+                            focusColor: Get.theme.primaryColor,
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                              color: fnameFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                            )),
+                            border: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                              color: fnameFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                            )),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                              color: fnameFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                            )),
                           ),
                         ),
                         SizedBox(
@@ -133,117 +149,123 @@ class AccountSettingScreen extends StatelessWidget {
                       ],
                     ),
                   )
-                : Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextFormField(
-                          focusNode: cPasswordFocus,
-                          scrollPadding: EdgeInsets.zero,
-                          cursorColor: Get.theme.primaryColor,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.zero,
-                            labelText: 'Current Password',
-                            labelStyle: TextStyle(
-                              color: cPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                : StatefulBuilder(
+                    builder: (BuildContext context, StateSetter setState) => Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextFormField(
+                            focusNode: cPasswordFocus,
+                            scrollPadding: EdgeInsets.zero,
+                            cursorColor: Get.theme.primaryColor,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.zero,
+                              labelText: 'Current Password',
+                              labelStyle: TextStyle(
+                                color: cPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                              ),
+                              focusColor: Get.theme.primaryColor,
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: cPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                              )),
+                              border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: cPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                              )),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: cPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                              )),
+                              suffixIcon: Icon(
+                                Icons.visibility_off_rounded,
+                                color: Colors.grey,
+                              ),
                             ),
-                            focusColor: Get.theme.primaryColor,
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                              color: cPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                            )),
-                            border: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                              color: cPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                            )),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                              color: cPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                            )),
-                            suffixIcon: Icon(
-                              Icons.visibility_off_rounded,
-                              color: Colors.grey,
-                            ),
+                            onTap: () {
+                              //FocusScope.of(context).unfocus(disposition: UnfocusDisposition.previouslyFocusedChild);
+                              FocusScope.of(context).requestFocus(cPasswordFocus);
+                              setState(() {});
+                            },
                           ),
-                          onTap: () {
-                            FocusScope.of(context).unfocus(disposition: UnfocusDisposition.previouslyFocusedChild);
-                          },
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          focusNode: newPasswordFocus,
-                          scrollPadding: EdgeInsets.zero,
-                          cursorColor: Get.theme.primaryColor,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.zero,
-                            labelText: 'New Password',
-                            labelStyle: TextStyle(
-                              color: newPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                            ),
-                            focusColor: Get.theme.primaryColor,
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                              color: newPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                            )),
-                            border: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                              color: newPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                            )),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                              color: newPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                            )),
-                            suffixIcon: Icon(
-                              Icons.visibility_off_rounded,
-                              color: Colors.grey,
-                            ),
+                          SizedBox(
+                            height: 20,
                           ),
-                          onTap: () {
-                            FocusScope.of(context).unfocus(disposition: UnfocusDisposition.previouslyFocusedChild);
-                          },
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          focusNode: conPasswordFocus,
-                          scrollPadding: EdgeInsets.zero,
-                          cursorColor: Get.theme.primaryColor,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.zero,
-                            labelText: 'Confirm Password',
-                            labelStyle: TextStyle(
-                              color: conPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                          TextFormField(
+                            focusNode: newPasswordFocus,
+                            scrollPadding: EdgeInsets.zero,
+                            cursorColor: Get.theme.primaryColor,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.zero,
+                              labelText: 'New Password',
+                              labelStyle: TextStyle(
+                                color: newPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                              ),
+                              focusColor: Get.theme.primaryColor,
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: newPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                              )),
+                              border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: newPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                              )),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: newPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                              )),
+                              suffixIcon: Icon(
+                                Icons.visibility_off_rounded,
+                                color: Colors.grey,
+                              ),
                             ),
-                            focusColor: Get.theme.primaryColor,
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                              color: conPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                            )),
-                            border: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                              color: conPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                            )),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                              color: conPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                            )),
-                            suffixIcon: Icon(
-                              Icons.visibility_off_rounded,
-                              color: Colors.grey,
-                            ),
+                            onTap: () {
+                              FocusScope.of(context).requestFocus(newPasswordFocus);
+                              setState(() {});
+                            },
                           ),
-                          onTap: () {
-                            FocusScope.of(context).unfocus(disposition: UnfocusDisposition.previouslyFocusedChild);
-                          },
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                      ],
+                          SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            focusNode: conPasswordFocus,
+                            scrollPadding: EdgeInsets.zero,
+                            cursorColor: Get.theme.primaryColor,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.zero,
+                              labelText: 'Confirm Password',
+                              labelStyle: TextStyle(
+                                color: conPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                              ),
+                              focusColor: Get.theme.primaryColor,
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: conPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                              )),
+                              border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: conPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                              )),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: conPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                              )),
+                              suffixIcon: Icon(
+                                Icons.visibility_off_rounded,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            onTap: () {
+                              FocusScope.of(context).requestFocus(conPasswordFocus);
+                              setState(() {});
+                            },
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      ),
                     ),
                   )
           ],
@@ -252,7 +274,7 @@ class AccountSettingScreen extends StatelessWidget {
           height: 40,
           width: Get.width,
           decoration: BoxDecoration(
-            color: Colors.orange[800],
+            color: Get.theme.secondaryHeaderColor,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(5),
               topRight: Radius.circular(5),

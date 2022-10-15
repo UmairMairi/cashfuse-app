@@ -1,6 +1,7 @@
 import 'package:cashbackapp/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 
 class DealDetailScreen extends StatelessWidget {
   @override
@@ -29,26 +30,31 @@ class DealDetailScreen extends StatelessWidget {
             style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
           ),
           actions: [
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 12).copyWith(right: 10),
-              padding: EdgeInsets.only(left: 10, right: 3),
-              decoration: BoxDecoration(
-                color: Colors.green[500],
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Row(
-                children: [
-                  Text('Share  '),
-                  CircleAvatar(
-                    radius: 12,
-                    backgroundColor: Colors.green[700],
-                    child: Icon(
-                      Icons.share_outlined,
-                      color: Colors.white,
-                      size: 15,
-                    ),
-                  )
-                ],
+            InkWell(
+              onTap: () {
+                global.share('');
+              },
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 12).copyWith(right: 10),
+                padding: EdgeInsets.only(left: 10, right: 3),
+                decoration: BoxDecoration(
+                  color: Colors.green[500],
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Row(
+                  children: [
+                    Text('Share  '),
+                    CircleAvatar(
+                      radius: 12,
+                      backgroundColor: Colors.green[700],
+                      child: Icon(
+                        Icons.share_outlined,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    )
+                  ],
+                ),
               ),
             )
           ],
@@ -83,7 +89,7 @@ class DealDetailScreen extends StatelessWidget {
                         margin: EdgeInsets.symmetric(horizontal: 40, vertical: 25),
                         padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
                         decoration: BoxDecoration(
-                          color: Colors.orange[800],
+                          color: Get.theme.secondaryHeaderColor,
                           borderRadius: BorderRadius.circular(2),
                         ),
                         alignment: Alignment.center,

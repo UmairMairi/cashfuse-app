@@ -39,7 +39,7 @@ class SortDialogWidget extends StatelessWidget {
             Divider(),
             Text(
               'Popular',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: Colors.orange[800]),
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: Get.theme.secondaryHeaderColor),
             ),
             Divider(),
             Text(

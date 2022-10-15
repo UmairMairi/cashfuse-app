@@ -34,4 +34,6 @@ class Images {
   static const String google = "assets/images/google.png";
   static const String keys = "assets/images/keys.jpg";
   static const String cube = "assets/images/cube.png";
+  static const String curve = "assets/images/curve.png";
+  static const String imoji = "assets/images/imoji.png";
 }

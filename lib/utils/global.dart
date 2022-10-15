@@ -1,4 +1,5 @@
 import 'package:flutter/animation.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String appName = "CashBackApp";
@@ -13,3 +14,11 @@ String appDeviceId;
 String languageCode = 'en';
 bool isRTL = false;
 Color defaultColor = Color(0xFF2D3D95);
+
+Future share(String url) async {
+  try {
+    await FlutterShare.share(linkUrl: url, title: ' ', text: ' ');
+  } catch (e) {
+    print("Exception - global.dart - share():" + e.toString());
+  }
+}

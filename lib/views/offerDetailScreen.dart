@@ -1,8 +1,11 @@
 import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/views/moreOfferScreen.dart';
+import 'package:cashbackapp/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:customizable_space_bar/customizable_space_bar.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 
 class OfferDetailScreen extends StatelessWidget {
   @override
@@ -62,26 +65,31 @@ class OfferDetailScreen extends StatelessWidget {
                   : SizedBox();
             }),
             actions: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                padding: EdgeInsets.only(left: 10, right: 3),
-                decoration: BoxDecoration(
-                  color: Colors.green[500],
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Row(
-                  children: [
-                    Text('Share  '),
-                    CircleAvatar(
-                      radius: 12,
-                      backgroundColor: Colors.green[700],
-                      child: Icon(
-                        Icons.share_outlined,
-                        color: Colors.white,
-                        size: 15,
-                      ),
-                    )
-                  ],
+              InkWell(
+                onTap: () {
+                  global.share('');
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  padding: EdgeInsets.only(left: 10, right: 3),
+                  decoration: BoxDecoration(
+                    color: Colors.green[500],
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Row(
+                    children: [
+                      Text('Share  '),
+                      CircleAvatar(
+                        radius: 12,
+                        backgroundColor: Colors.green[700],
+                        child: Icon(
+                          Icons.share_outlined,
+                          color: Colors.white,
+                          size: 15,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               )
             ],
@@ -127,7 +135,7 @@ class OfferDetailScreen extends StatelessWidget {
                       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                       padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
                       decoration: BoxDecoration(
-                        color: Colors.orange[800],
+                        color: Get.theme.secondaryHeaderColor,
                         borderRadius: BorderRadius.circular(5),
                       ),
                       alignment: Alignment.center,
@@ -150,7 +158,7 @@ class OfferDetailScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           CircleAvatar(
-                            backgroundColor: Colors.orange[800],
+                            backgroundColor: Get.theme.secondaryHeaderColor,
                             radius: 10,
                             child: CircleAvatar(
                               radius: 7,
@@ -176,7 +184,7 @@ class OfferDetailScreen extends StatelessWidget {
                             ],
                           ),
                           CircleAvatar(
-                            backgroundColor: Colors.orange[800],
+                            backgroundColor: Get.theme.secondaryHeaderColor,
                             radius: 10,
                             child: CircleAvatar(
                               radius: 7,
@@ -225,21 +233,34 @@ class OfferDetailScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Container(
-                        width: Get.width,
-                        height: 45,
-                        margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                        padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              color: Colors.teal[200],
-                              width: 1.5,
-                            )),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'See More Offers  >',
-                          style: TextStyle(color: Colors.teal[200], fontSize: 14, fontWeight: FontWeight.w400),
+                      InkWell(
+                        onTap: () {
+                          Get.bottomSheet(
+                            ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                              ),
+                              child: MoreOfferScreen(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: Get.width,
+                          height: 45,
+                          margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: Colors.teal[200],
+                                width: 1.5,
+                              )),
+                          alignment: Alignment.center,
+                          child: Text(
+                            'See More Offers  >',
+                            style: TextStyle(color: Colors.teal[200], fontSize: 14, fontWeight: FontWeight.w400),
+                          ),
                         ),
                       ),
                     ],
@@ -259,9 +280,24 @@ class OfferDetailScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
-                'Cashback Rates',
-                style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+              InkWell(
+                onTap: () {
+                  Get.bottomSheet(
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15),
+                      ),
+                      child: RatesAndOfferTermsSheetWidget(
+                        isOffer: false,
+                      ),
+                    ),
+                  );
+                },
+                child: Text(
+                  'Cashback Rates',
+                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                ),
               ),
               Icon(
                 Icons.more_vert,
@@ -269,7 +305,19 @@ class OfferDetailScreen extends StatelessWidget {
                 color: Colors.white.withOpacity(0.3),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Get.bottomSheet(
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15),
+                      ),
+                      child: RatesAndOfferTermsSheetWidget(
+                        isOffer: true,
+                      ),
+                    ),
+                  );
+                },
                 child: Text(
                   'Offer Terms',
                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),

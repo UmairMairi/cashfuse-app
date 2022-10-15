@@ -1,4 +1,5 @@
 import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/views/helpDetailSceen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -72,47 +73,52 @@ class GetHelpScreen extends StatelessWidget {
               shrinkWrap: true,
               padding: EdgeInsets.only(top: 15),
               itemBuilder: (context, index) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Card(
-                        elevation: 5,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: ShaderMask(
-                            blendMode: BlendMode.srcIn,
-                            shaderCallback: (Rect bounds) {
-                              return LinearGradient(
-                                colors: [
-                                  Color(0xFFBC53E1),
-                                  Color(0xFF6285E3),
-                                ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ).createShader(bounds);
-                            },
-                            child: Image.asset(
-                              Images.cube,
-                              height: 25,
+                return InkWell(
+                  onTap: () {
+                    Get.to(() => HelpDetailSceen());
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Card(
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (Rect bounds) {
+                                return LinearGradient(
+                                  colors: [
+                                    Color(0xFFBC53E1),
+                                    Color(0xFF6285E3),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ).createShader(bounds);
+                              },
+                              child: Image.asset(
+                                Images.cube,
+                                height: 25,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Text(
-                        'How CashKaro Works?',
-                        textAlign: TextAlign.center,
-                        style: Get.theme.primaryTextTheme.subtitle2,
-                      ),
-                    ],
+                        Text(
+                          'How CashKaro Works?',
+                          textAlign: TextAlign.center,
+                          style: Get.theme.primaryTextTheme.subtitle2,
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },

@@ -75,7 +75,7 @@ class GetStartedScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: Colors.orange[800],
+                    color: Get.theme.secondaryHeaderColor,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(

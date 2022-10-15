@@ -1,5 +1,6 @@
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/views/offerDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -54,47 +55,45 @@ class SearchScreen extends StatelessWidget {
               itemCount: 5,
               padding: EdgeInsets.symmetric(horizontal: 10),
               itemBuilder: (context, index) {
-                return Container(
-                  width: 150,
-                  margin: EdgeInsets.only(right: 15),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Images.amazon,
-                        height: 20,
-                      ),
-                      Divider(
-                        height: 10,
-                        color: Colors.grey[400],
-                      ),
-                      Container(
-                        height: 60,
-                        alignment: Alignment.center,
-                        child: Text(
-                          'EARN 30% CASHBACK NOW >',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.orange[700], fontSize: 12, fontWeight: FontWeight.w400),
+                return InkWell(
+                  onTap: () {
+                    Get.to(() => OfferDetailScreen());
+                  },
+                  child: Container(
+                    width: 150,
+                    margin: EdgeInsets.only(right: 15),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          Images.amazon,
+                          height: 20,
                         ),
-                      ),
-                    ],
+                        Divider(
+                          height: 10,
+                          color: Colors.grey[400],
+                        ),
+                        Container(
+                          height: 60,
+                          alignment: Alignment.center,
+                          child: Text(
+                            'EARN 30% CASHBACK NOW >',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.orange[700], fontSize: 12, fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          //   child: Text(
-          //     'in Products',
-          //     style: Get.theme.primaryTextTheme.subtitle2,
-          //   ),
-          // ),
         ],
       ),
     );

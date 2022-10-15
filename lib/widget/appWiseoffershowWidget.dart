@@ -46,7 +46,7 @@ class AppWiseOfferShowWidget extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(
-                      color: Colors.orange[800],
+                      color: Get.theme.secondaryHeaderColor,
                       borderRadius: BorderRadius.circular(2),
                     ),
                     child: Text(

@@ -124,7 +124,7 @@ class LoginOrSignUpScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomSheet: InkWell(
+      bottomNavigationBar: InkWell(
         onTap: () {
           Get.to(() => OtpVerificationScreen());
         },
@@ -134,7 +134,7 @@ class LoginOrSignUpScreen extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
           padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
           decoration: BoxDecoration(
-            color: Colors.orange[800],
+            color: Get.theme.secondaryHeaderColor,
             borderRadius: BorderRadius.circular(10),
           ),
           alignment: Alignment.center,
