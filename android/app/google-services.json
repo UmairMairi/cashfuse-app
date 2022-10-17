@@ -1,94 +1,49 @@
 {
   "project_info": {
-    "project_number": "185630426935",
-    "project_id": "homzo-6ce30",
-    "storage_bucket": "homzo-6ce30.appspot.com"
+    "project_number": "321087897479",
+    "project_id": "cashbackapp-c1fae",
+    "storage_bucket": "cashbackapp-c1fae.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:185630426935:android:63ba187102fc95bd5f7cb2",
+        "mobilesdk_app_id": "1:321087897479:android:9052ac66e227a05041dd22",
         "android_client_info": {
-          "package_name": "com.cashbackkro.app"
+          "package_name": "com.cashback.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "185630426935-bg4jbdldh5g6kj4s2c6e70jo454q9sq7.apps.googleusercontent.com",
+          "client_id": "321087897479-ruu6k54b77k7vqvjmkabbt6s5rqdg5j2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.cashbackkro.app",
-            "certificate_hash": "a0c043a53cfaae18772d6e004bdc5c30a526492f"
-          }
-        },
-        {
-          "client_id": "185630426935-msiek4sve32qmp66vcbf0t14hephgl08.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.cashbackkro.app",
+            "package_name": "com.cashback.app",
             "certificate_hash": "fdd456e1cdf249d2ef3e9a09806313514123daf1"
           }
         },
         {
-          "client_id": "185630426935-da4ikpabrsbih32v8b7gkqv2aan9fkaa.apps.googleusercontent.com",
+          "client_id": "321087897479-tvnqs8um1p6f0tl2tpl5u25j2h0leslk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cashback.app",
+            "certificate_hash": "a0c043a53cfaae18772d6e004bdc5c30a526492f"
+          }
+        },
+        {
+          "client_id": "321087897479-1tlnntndl17cuf5je7eo8ppbf557l742.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCM2HCYWwzoIuvRqhY1quig6_A6bIzuEHg"
+          "current_key": "AIzaSyA0hkg4JU36P6HKTzbPY5k5G42I2TSFcXM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "185630426935-da4ikpabrsbih32v8b7gkqv2aan9fkaa.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:185630426935:android:1d5e5a1afff50d1f5f7cb2",
-        "android_client_info": {
-          "package_name": "com.sphomzo.app"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "185630426935-1610tn8l3g8afm0lj8v1402otkgrh9ph.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.sphomzo.app",
-            "certificate_hash": "a0c043a53cfaae18772d6e004bdc5c30a526492f"
-          }
-        },
-        {
-          "client_id": "185630426935-ojti9h2rlnscofkd0u597eps9vshfsrt.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.sphomzo.app",
-            "certificate_hash": "fdd456e1cdf249d2ef3e9a09806313514123daf1"
-          }
-        },
-        {
-          "client_id": "185630426935-da4ikpabrsbih32v8b7gkqv2aan9fkaa.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCM2HCYWwzoIuvRqhY1quig6_A6bIzuEHg"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "185630426935-da4ikpabrsbih32v8b7gkqv2aan9fkaa.apps.googleusercontent.com",
+              "client_id": "321087897479-1tlnntndl17cuf5je7eo8ppbf557l742.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

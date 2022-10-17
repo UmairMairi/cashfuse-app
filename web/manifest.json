@@ -1,6 +1,6 @@
 {
-  "name": "Homzo",
-  "short_name": "Homzo",
+  "name": "CashbackApp",
+  "short_name": "CashbackApp",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",

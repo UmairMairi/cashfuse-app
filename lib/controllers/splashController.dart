@@ -1,9 +1,23 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:developer';
 
+import 'package:cashbackapp/constants/appConstant.dart';
+import 'package:cashbackapp/controllers/networkController.dart';
+import 'package:cashbackapp/models/userModel.dart';
+import 'package:cashbackapp/services/apiHelper.dart';
+import 'package:cashbackapp/views/bottomNavigationBarScreen.dart';
 import 'package:cashbackapp/views/getStartedScreen.dart';
+import 'package:cashbackapp/widget/customSnackbar.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashController extends GetxController {
+  APIHelper apiHelper = new APIHelper();
+  NetworkController networkController = Get.find<NetworkController>();
+
   @override
   void onInit() async {
     init();
@@ -17,11 +31,41 @@ class SplashController extends GetxController {
 
   void init() {
     try {
-      Timer(Duration(seconds: 5), () {
-        Get.to(() => GetStartedScreen());
+      Timer(Duration(seconds: 5), () async {
+        global.appDeviceId = await FirebaseMessaging.instance.getToken();
+        global.sp = await SharedPreferences.getInstance();
+
+        log(global.appDeviceId);
+        await getAppInfo();
+        if (global.sp.getString('currentUser') != null) {
+          global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
+          Get.to(() => BottomNavigationBarScreen());
+        } else {
+          Get.to(() => GetStartedScreen());
+        }
       });
     } catch (e) {
-      print("Exception - SplashScreen.dart - init():" + e.toString());
+      print("Exception - SplashController.dart - init():" + e.toString());
+    }
+  }
+
+  Future getAppInfo() async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.getAppInfo().then((response) {
+          if (response.status == "1") {
+            global.appInfo = response.data;
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+
+      update();
+    } catch (e) {
+      print("Exception - splashController.dart - getAppInfo():" + e.toString());
     }
   }
 }

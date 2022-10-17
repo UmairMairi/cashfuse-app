@@ -12,9 +12,15 @@ class HomeController extends GetxController {
   ];
 
   bool isCategoryExpand = false;
+  bool isOffer = false;
 
   void setCategoryExpand(bool val) {
     isCategoryExpand = val;
+    update();
+  }
+
+  void setIsOffer(bool val) {
+    isOffer = val;
     update();
   }
 }

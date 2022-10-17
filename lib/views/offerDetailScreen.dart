@@ -1,3 +1,4 @@
+import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/views/moreOfferScreen.dart';
 import 'package:cashbackapp/widget/ratesAndOfferTermsSheetWidget.dart';
@@ -282,15 +283,14 @@ class OfferDetailScreen extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
+                  Get.find<HomeController>().setIsOffer(false);
                   Get.bottomSheet(
                     ClipRRect(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(15),
                         topRight: Radius.circular(15),
                       ),
-                      child: RatesAndOfferTermsSheetWidget(
-                        isOffer: false,
-                      ),
+                      child: RatesAndOfferTermsSheetWidget(),
                     ),
                   );
                 },
@@ -306,15 +306,14 @@ class OfferDetailScreen extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
+                  Get.find<HomeController>().setIsOffer(true);
                   Get.bottomSheet(
                     ClipRRect(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(15),
                         topRight: Radius.circular(15),
                       ),
-                      child: RatesAndOfferTermsSheetWidget(
-                        isOffer: true,
-                      ),
+                      child: RatesAndOfferTermsSheetWidget(),
                     ),
                   );
                 },
