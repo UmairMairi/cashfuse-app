@@ -427,6 +427,7 @@ class ProfieScreen extends StatelessWidget {
                               CupertinoDialogAction(
                                 child: Text(
                                   'Yes',
+                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.red),
                                 ),
                                 onPressed: () {
                                   authController.logout();
@@ -436,6 +437,7 @@ class ProfieScreen extends StatelessWidget {
                               CupertinoDialogAction(
                                 child: Text(
                                   'No',
+                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.blue),
                                 ),
                                 onPressed: () {
                                   Get.back();

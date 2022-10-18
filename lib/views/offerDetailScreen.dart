@@ -1,6 +1,7 @@
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/views/moreOfferScreen.dart';
+import 'package:cashbackapp/views/webViewScreen.dart';
 import 'package:cashbackapp/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:customizable_space_bar/customizable_space_bar.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -130,19 +131,24 @@ class OfferDetailScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
-                    Container(
-                      width: Get.width,
-                      height: 45,
-                      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                      padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: Get.theme.secondaryHeaderColor,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        'EARN 10% CASHBACK NOW >',
-                        style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => WebViewScreen());
+                      },
+                      child: Container(
+                        width: Get.width,
+                        height: 45,
+                        margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Get.theme.secondaryHeaderColor,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          'EARN 10% CASHBACK NOW >',
+                          style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                        ),
                       ),
                     ),
                   ],

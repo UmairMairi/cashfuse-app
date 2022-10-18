@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:cashbackapp/models/appInfoModel.dart';
 import 'package:cashbackapp/models/userModel.dart';
@@ -30,8 +31,8 @@ Future<Map<String, String>> getApiHeaders(bool authorizationRequired) async {
     sp = await SharedPreferences.getInstance();
     if (sp.getString("currentUser") != null) {
       UserModel currentUser = UserModel.fromJson(json.decode(sp.getString("currentUser")));
-      // log("Token  == Bearer " + currentUser.token + 'id -- ' + currentUser.id.toString());
-      //apiHeader.addAll({"Authorization": "Bearer " + currentUser.token});
+      log("Token  == Bearer " + currentUser.token + 'id -- ' + currentUser.id.toString());
+      apiHeader.addAll({"Authorization": "Bearer " + currentUser.token});
     }
   }
 

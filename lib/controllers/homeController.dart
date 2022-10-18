@@ -13,6 +13,7 @@ class HomeController extends GetxController {
 
   bool isCategoryExpand = false;
   bool isOffer = false;
+  int webBottomIndex = 0;
 
   void setCategoryExpand(bool val) {
     isCategoryExpand = val;
@@ -21,6 +22,11 @@ class HomeController extends GetxController {
 
   void setIsOffer(bool val) {
     isOffer = val;
+    update();
+  }
+
+  void setWebBottomIndex(int val) {
+    webBottomIndex = val;
     update();
   }
 }

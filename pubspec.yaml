@@ -51,6 +51,7 @@ dependencies:
   video_player: ^2.4.7
   rating_bar: ^0.2.0
   custom_clippers: ^2.0.0
+  webview_flutter: ^3.0.4
 
   #CONNECTIVITY
   connectivity_plus: ^2.1.0
