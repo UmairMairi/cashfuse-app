@@ -27,7 +27,7 @@ class Images {
   static const String video = "assets/images/video.jpg";
   static const String malePerson = "assets/images/male-person.jpg";
   static const String user = "assets/images/user.png";
-  static const String cashkaro = "assets/images/cashkaro.jpg";
+  static const String dummyImage = "assets/images/dummy-image.jpg";
   static const String amazon = "assets/images/amazon.jpg";
   static const String rupee = "assets/images/rupee.png";
   static const String referearn = "assets/images/referearn.png";
@@ -36,4 +36,5 @@ class Images {
   static const String cube = "assets/images/cube.png";
   static const String curve = "assets/images/curve.png";
   static const String imoji = "assets/images/imoji.png";
+  static const String banner_bg = "assets/images/banner_bg.jpg";
 }

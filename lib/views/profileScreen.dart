@@ -1,5 +1,6 @@
 import 'package:cashbackapp/controllers/authController.dart';
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/views/accountSettingScreen.dart';
 import 'package:cashbackapp/views/getHelpScreen.dart';
 import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
@@ -12,8 +13,6 @@ import 'package:cashbackapp/widget/confirmationDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher_string.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
 
 class ProfieScreen extends StatelessWidget {
   @override
@@ -122,9 +121,9 @@ class ProfieScreen extends StatelessWidget {
                               ),
                               Text(
                                 'Account Settings',
-                                style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                                  letterSpacing: -0.5,
-                                  fontWeight: FontWeight.w300,
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
                                 ),
                               ),
                             ],
@@ -148,57 +147,57 @@ class ProfieScreen extends StatelessWidget {
                               ),
                               Text(
                                 'My Earnings',
-                                style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                                  letterSpacing: -0.5,
-                                  fontWeight: FontWeight.w300,
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
                                 ),
                               ),
                             ],
                           ),
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      //   child: Row(
-                      //     children: [
-                      //       Icon(
-                      //         Icons.account_balance_wallet_rounded,
-                      //         color: Get.theme.iconTheme.color,
-                      //       ),
-                      //       SizedBox(
-                      //         width: 20,
-                      //       ),
-                      //       Text(
-                      //         'Payments',
-                      //         style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      //           letterSpacing: -0.5,
-                      //           fontWeight: FontWeight.w300,
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      //   child: Row(
-                      //     children: [
-                      //       Icon(
-                      //         Icons.history,
-                      //         color: Get.theme.iconTheme.color,
-                      //       ),
-                      //       SizedBox(
-                      //         width: 20,
-                      //       ),
-                      //       Text(
-                      //         'Payments History',
-                      //         style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      //           letterSpacing: -0.5,
-                      //           fontWeight: FontWeight.w300,
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.account_balance_wallet_rounded,
+                              color: Get.theme.iconTheme.color,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              'Payments',
+                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                letterSpacing: 0,
+                                color: Colors.black.withOpacity(0.75),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.history,
+                              color: Get.theme.iconTheme.color,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              'Payments History',
+                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                letterSpacing: 0,
+                                color: Colors.black.withOpacity(0.75),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       InkWell(
                         onTap: () {
                           Get.to(() => MissingCashbackScreen());
@@ -216,9 +215,9 @@ class ProfieScreen extends StatelessWidget {
                               ),
                               Text(
                                 'Missing Cashback',
-                                style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                                  letterSpacing: -0.5,
-                                  fontWeight: FontWeight.w300,
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
                                 ),
                               ),
                             ],
@@ -242,9 +241,9 @@ class ProfieScreen extends StatelessWidget {
                               ),
                               Text(
                                 'Refer and Earn',
-                                style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                                  letterSpacing: -0.5,
-                                  fontWeight: FontWeight.w300,
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
                                 ),
                               ),
                             ],
@@ -268,9 +267,9 @@ class ProfieScreen extends StatelessWidget {
                               ),
                               Text(
                                 'Referral Network',
-                                style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                                  letterSpacing: -0.5,
-                                  fontWeight: FontWeight.w300,
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
                                 ),
                               ),
                             ],
@@ -294,9 +293,9 @@ class ProfieScreen extends StatelessWidget {
                               ),
                               Text(
                                 'Recent Clicks',
-                                style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                                  letterSpacing: -0.5,
-                                  fontWeight: FontWeight.w300,
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
                                 ),
                               ),
                             ],
@@ -320,45 +319,45 @@ class ProfieScreen extends StatelessWidget {
                               ),
                               Text(
                                 'Get Help',
-                                style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                                  letterSpacing: -0.5,
-                                  fontWeight: FontWeight.w300,
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
                                 ),
                               ),
                             ],
                           ),
                         ),
                       ),
-                      InkWell(
-                        onTap: () async {
-                          if (await canLaunchUrlString('tel:${9999999999}')) {
-                            await launchUrlString('tel:${9999999999}');
-                          } else {
-                            throw 'Could not launch';
-                          }
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.call,
-                                color: Get.theme.iconTheme.color,
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                'Call Us',
-                                style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                                  letterSpacing: -0.5,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () async {
+                      //     if (await canLaunchUrlString('tel:${9999999999}')) {
+                      //       await launchUrlString('tel:${9999999999}');
+                      //     } else {
+                      //       throw 'Could not launch';
+                      //     }
+                      //   },
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      //     child: Row(
+                      //       children: [
+                      //         Icon(
+                      //           Icons.call,
+                      //           color: Get.theme.iconTheme.color,
+                      //         ),
+                      //         SizedBox(
+                      //           width: 20,
+                      //         ),
+                      //         Text(
+                      //           'Call Us',
+                      //           style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                      //             letterSpacing: -0.5,
+                      //             fontWeight: FontWeight.w300,
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                       Divider(
                         height: 0,
                       ),
@@ -379,9 +378,9 @@ class ProfieScreen extends StatelessWidget {
                               ),
                               Text(
                                 'Rate US',
-                                style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                                  letterSpacing: -0.5,
-                                  fontWeight: FontWeight.w300,
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
                                 ),
                               ),
                             ],
@@ -408,9 +407,9 @@ class ProfieScreen extends StatelessWidget {
                               ),
                               Text(
                                 'Privacy Policy',
-                                style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                                  letterSpacing: -0.5,
-                                  fontWeight: FontWeight.w300,
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
                                 ),
                               ),
                             ],

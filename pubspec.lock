@@ -176,6 +176,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
+  coupon_uikit:
+    dependency: "direct main"
+    description:
+      name: coupon_uikit
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+2"
   cross_file:
     dependency: transitive
     description:
@@ -246,6 +253,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0+2"
+  dotted_decoration:
+    dependency: "direct main"
+    description:
+      name: dotted_decoration
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   dotted_line:
     dependency: "direct main"
     description:
@@ -356,6 +370,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_animation_set:
+    dependency: "direct main"
+    description:
+      name: flutter_animation_set
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.4"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -950,6 +971,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  slide_countdown:
+    dependency: "direct main"
+    description:
+      name: slide_countdown
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.4"
   source_span:
     dependency: transitive
     description:
@@ -985,6 +1013,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  stream_duration:
+    dependency: transitive
+    description:
+      name: stream_duration
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.4"
   stream_transform:
     dependency: transitive
     description:

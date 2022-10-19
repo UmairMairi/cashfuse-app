@@ -76,7 +76,7 @@ class DealDetailScreen extends StatelessWidget {
                       Stack(
                         children: [
                           Image.asset(
-                            Images.cashkaro,
+                            Images.dummyImage,
                             height: 200,
                             width: Get.width,
                             fit: BoxFit.fill,

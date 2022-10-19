@@ -3,11 +3,13 @@ import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/views/appWiseoffershowListScreen.dart';
 import 'package:cashbackapp/views/categoryScreen.dart';
+import 'package:cashbackapp/views/couponDetailScreen.dart';
 import 'package:cashbackapp/views/dealDetailScreen.dart';
 import 'package:cashbackapp/views/faqSceen.dart';
 import 'package:cashbackapp/views/myEarningScreen.dart';
 import 'package:cashbackapp/views/offerDetailScreen.dart';
 import 'package:cashbackapp/widget/appWiseoffershowWidget.dart';
+import 'package:cashbackapp/widget/couponWidget.dart';
 import 'package:cashbackapp/widget/drawerWidget.dart';
 import 'package:cashbackapp/widget/storeOfferWidget.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -15,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:slide_countdown/slide_countdown.dart';
 
 class HomeScreen extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -38,9 +41,25 @@ class HomeScreen extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          title: Image.asset(
-            Images.cashkaro,
-            height: 80,
+          title: RichText(
+            text: TextSpan(
+              text: "CASH",
+              style: Get.theme.primaryTextTheme.headline4.copyWith(
+                letterSpacing: 0.1,
+                color: Color(0xFFfe3d00),
+                fontFamily: 'Bebas Neue',
+              ),
+              children: <TextSpan>[
+                TextSpan(
+                  text: 'BACK',
+                  style: Get.theme.primaryTextTheme.headline4.copyWith(
+                    color: Colors.white,
+                    letterSpacing: 0.1,
+                    fontFamily: 'Bebas Neue',
+                  ),
+                ),
+              ],
+            ),
           ),
           actions: [
             InkWell(
@@ -72,63 +91,109 @@ class HomeScreen extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(6.0).copyWith(right: 0),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    CarouselSlider.builder(
-                        options: CarouselOptions(
-                          height: 165,
-                          autoPlay: true,
-                          enlargeCenterPage: false,
-                          disableCenter: false,
-                          autoPlayCurve: Curves.easeIn,
-                          aspectRatio: 1,
-                          autoPlayInterval: Duration(seconds: 5),
-                          onPageChanged: (index, reason) {},
-                          viewportFraction: 1,
-                          pageSnapping: false,
-                        ),
-                        itemCount: 5,
-                        itemBuilder: (context, index, _) {
-                          return InkWell(
-                            onTap: () {
-                              Get.to(() => OfferDetailScreen());
-                            },
-                            child: Container(
-                              width: Get.width,
-                              margin: EdgeInsets.only(right: 6),
-                              decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: ClipRRect(
+                CarouselSlider.builder(
+                    options: CarouselOptions(
+                      clipBehavior: Clip.none,
+                      enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                      height: 180,
+                      autoPlay: true,
+                      enlargeCenterPage: true,
+                      disableCenter: true,
+                      autoPlayCurve: Curves.easeIn,
+                      autoPlayInterval: Duration(seconds: 5),
+                      //viewportFraction: 0.85,
+                      onPageChanged: (index, reason) {},
+                      pageSnapping: false,
+                    ),
+                    itemCount: 5,
+                    itemBuilder: (context, index, _) {
+                      return InkWell(
+                        onTap: () {
+                          Get.to(() => OfferDetailScreen());
+                        },
+                        child: Container(
+                          //width: Get.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Stack(
+                            alignment: Alignment.topCenter,
+                            children: [
+                              ClipRRect(
                                 borderRadius: BorderRadius.circular(5),
                                 child: Image.asset(
-                                  Images.cashkaro,
+                                  Images.banner_bg,
+                                  width: Get.width,
                                   fit: BoxFit.fill,
                                 ),
                               ),
-                            ),
-                          );
-                        }),
-                    DotsIndicator(
+                              Container(
+                                width: Get.width,
+                                margin: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.8),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '40% OFF EVERYTHING',
+                                      style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.white),
+                                    ),
+                                    Text(
+                                      'extra 10% with code:MYNTRA',
+                                      style: Get.theme.primaryTextTheme.subtitle1.copyWith(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Every 10th Wins',
+                                      style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.teal),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Positioned(
+                                top: 10,
+                                child: Card(
+                                  margin: EdgeInsets.zero,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'myntra',
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: DotsIndicator(
                       dotsCount: 5,
                       position: 1,
                       decorator: DotsDecorator(
-                        activeSize: Size(7, 7),
-                        size: Size(7, 7),
+                        activeSize: Size(8, 8),
+                        size: Size(8, 8),
                         color: Colors.white, // Inactive color
                         activeColor: Colors.orange,
                       ),
-                    )
-                  ],
+                    ),
+                  ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                   child: Text(
                     'TOP CATEGORIES',
                     style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
@@ -140,6 +205,7 @@ class HomeScreen extends StatelessWidget {
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: homeController.catList.length,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -152,7 +218,7 @@ class HomeScreen extends StatelessWidget {
                           margin: EdgeInsets.only(right: 15),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
+                            color: index == 0 ? Colors.blue[700] : Colors.white,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -163,6 +229,7 @@ class HomeScreen extends StatelessWidget {
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w500,
+                                  color: index == 0 ? Colors.white : Colors.black,
                                 ),
                               ),
                               SizedBox(
@@ -180,7 +247,46 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Coupons of the day'.toUpperCase(),
+                        style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        child: Text(
+                          'View All >',
+                          style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 100,
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 5,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          Get.to(() => CouponDetailScreen());
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: CouponWidget(),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                   child: Text(
                     'EXCLUSIVE OFFERS FOR YOU',
                     style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
@@ -192,6 +298,7 @@ class HomeScreen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: 5,
                     shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -204,12 +311,30 @@ class HomeScreen extends StatelessWidget {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              Images.cashkaro,
-                              fit: BoxFit.fill,
-                            ),
+                          child: Stack(
+                            alignment: Alignment.bottomLeft,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.asset(
+                                  Images.dummyImage,
+                                  height: 165,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: SlideCountdown(
+                                  slideDirection: SlideDirection.none,
+                                  textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
+                                  decoration: BoxDecoration(
+                                    color: Colors.red[800],
+                                    borderRadius: BorderRadius.circular(3),
+                                  ),
+                                  duration: const Duration(days: 2),
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       );
@@ -217,7 +342,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -243,6 +368,7 @@ class HomeScreen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: 5,
                     shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -260,7 +386,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -286,6 +412,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: 5,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -300,7 +427,7 @@ class HomeScreen extends StatelessWidget {
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -326,6 +453,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: 5,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -339,7 +467,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -365,6 +493,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: 5,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -378,7 +507,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -404,6 +533,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: 5,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -417,7 +547,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -443,6 +573,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: 5,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -456,7 +587,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -482,6 +613,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: 5,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -495,7 +627,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -521,6 +653,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: 5,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -534,7 +667,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -560,6 +693,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: 5,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -607,7 +741,7 @@ class HomeScreen extends StatelessWidget {
                 // ),
                 // ProductWidget(),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -633,6 +767,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: 5,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -646,7 +781,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -672,6 +807,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: 5,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {

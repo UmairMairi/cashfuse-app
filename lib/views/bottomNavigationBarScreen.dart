@@ -72,7 +72,7 @@ class BottomNavigationBarScreen extends StatelessWidget {
           },
           child: Scaffold(
             bottomNavigationBar: SizedBox(
-              height: 45,
+              height: 52,
               child: Stack(
                 alignment: Alignment.topCenter,
                 clipBehavior: Clip.none,

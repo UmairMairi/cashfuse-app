@@ -1,6 +1,7 @@
 import 'package:cashbackapp/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:slide_countdown/slide_countdown.dart';
 
 class AppWiseOfferShowWidget extends StatelessWidget {
   final bool isTimeShow;
@@ -31,16 +32,14 @@ class AppWiseOfferShowWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   isTimeShow
-                      ? Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                      ? SlideCountdown(
+                          slideDirection: SlideDirection.none,
+                          textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
                           decoration: BoxDecoration(
                             color: Colors.red[800],
                             borderRadius: BorderRadius.circular(3),
                           ),
-                          child: Text(
-                            '02  :  19  :  56',
-                            style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w500),
-                          ),
+                          duration: const Duration(hours: 2),
                         )
                       : SizedBox(),
                   Container(

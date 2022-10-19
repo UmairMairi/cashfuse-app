@@ -3,7 +3,10 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   List<CategoryModel> catList = [
-    CategoryModel(name: 'Fashion', image: ''),
+    CategoryModel(
+      name: 'Fashion',
+      image: '',
+    ),
     CategoryModel(name: 'mobiles', image: ''),
     CategoryModel(name: 'beauty', image: ''),
     CategoryModel(name: 'home', image: ''),
@@ -12,6 +15,7 @@ class HomeController extends GetxController {
   ];
 
   bool isCategoryExpand = false;
+  bool isRoted = true;
   bool isOffer = false;
   int webBottomIndex = 0;
 
@@ -27,6 +31,11 @@ class HomeController extends GetxController {
 
   void setWebBottomIndex(int val) {
     webBottomIndex = val;
+    update();
+  }
+
+  void updtaeRotate(bool val) {
+    isRoted = val;
     update();
   }
 }

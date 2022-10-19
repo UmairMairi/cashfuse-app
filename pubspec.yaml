@@ -34,6 +34,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
 
   #UI DESIGN
+  flutter_animation_set: ^0.0.4
+  dotted_decoration: ^2.0.0
+  coupon_uikit: ^0.0.1+2
+  slide_countdown: ^0.3.4
   customizable_space_bar: ^0.2.0
   dots_indicator: ^2.1.0
   font_awesome_flutter: ^10.2.1
@@ -146,6 +150,10 @@ flutter:
         - asset: assets/fonts/Poppins-ExtraBold.ttf
         - asset: assets/fonts/Poppins-ExtraLight.ttf
         - asset: assets/fonts/Poppins-Light.ttf
+
+    - family: Bebas Neue
+      fonts:
+        - asset: assets/fonts/BebasNeue-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
