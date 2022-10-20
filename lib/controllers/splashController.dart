@@ -53,7 +53,7 @@ class SplashController extends GetxController {
     try {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         await apiHelper.getAppInfo().then((response) {
-          if (response.status == "1") {
+          if (response.statusCode == 200) {
             global.appInfo = response.data;
           } else {
             showCustomSnackBar(response.message);

@@ -6,4 +6,7 @@ class AppConstants {
   static const String APP_INFO_URI = '/app_info';
   static const String LOGIN_RESGISTER = '/auth/login_or_register';
   static const String VERIFY_OTP = '/auth/verify-phone';
+  static const String CAEGORY_URI = '/getcategory';
+  static const String CASHBACK_URI = '/topcashback';
+  static const String HOME_ADV_URI = '/homeadv';
 }

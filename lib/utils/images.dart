@@ -37,4 +37,9 @@ class Images {
   static const String curve = "assets/images/curve.png";
   static const String imoji = "assets/images/imoji.png";
   static const String banner_bg = "assets/images/banner_bg.jpg";
+  static const String webview_gif = "assets/images/webview_gif.gif";
+  static const String paytm = "assets/images/paytm.jpg";
+  static const String upi = "assets/images/upi.png";
+  static const String bank = "assets/images/bank.jpg";
+  static const String Amazon_pay = "assets/images/Amazon-pay.jpg";
 }

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cashbackapp/controllers/homeController.dart';
+import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/widget/webview/seeMoreSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,7 @@ class WebViewScreen extends StatelessWidget {
     return GetBuilder<HomeController>(builder: (homeController) {
       return SafeArea(
         child: Scaffold(
+          backgroundColor: Colors.white,
           body: Stack(
             alignment: Alignment.center,
             children: [
@@ -30,20 +32,21 @@ class WebViewScreen extends StatelessWidget {
                 },
               ),
               homeController.isRoted
-                  ? AnimatedContainer(
-                      width: 200,
-                      height: 50,
-                      color: Get.theme.primaryColor,
-                      duration: Duration(seconds: 3),
-                      child: AnimatedAlign(
-                        alignment: homeController.isRoted ? Alignment.centerLeft : Alignment.centerRight,
-                        duration: Duration(seconds: 1),
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundColor: Colors.yellow,
-                        ),
-                      ),
-                    )
+                  ? Image.asset(Images.webview_gif)
+                  // AnimatedContainer(
+                  //     width: 200,
+                  //     height: 50,
+                  //     color: Get.theme.primaryColor,
+                  //     duration: Duration(seconds: 3),
+                  //     child: AnimatedAlign(
+                  //       alignment: homeController.isRoted ? Alignment.centerLeft : Alignment.centerRight,
+                  //       duration: Duration(seconds: 1),
+                  //       child: CircleAvatar(
+                  //         radius: 20,
+                  //         backgroundColor: Colors.yellow,
+                  //       ),
+                  //     ),
+                  //   )
                   : SizedBox(),
             ],
           ),

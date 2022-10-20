@@ -1,11 +1,15 @@
+import 'package:cashbackapp/models/categoryModel.dart';
 import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:slide_countdown/slide_countdown.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 
 class AppWiseOfferShowWidget extends StatelessWidget {
   final bool isTimeShow;
-  AppWiseOfferShowWidget({this.isTimeShow});
+  final CategoryModel category;
+  AppWiseOfferShowWidget({this.isTimeShow, this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +23,23 @@ class AppWiseOfferShowWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Image.asset(
-            Images.blog,
-            height: 160,
-            fit: BoxFit.fill,
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+            ),
+            child: CustomImage(
+              image: '${global.appInfo.baseUrls.categoryImageUrl}/${category.image}',
+              height: 145,
+              width: Get.width,
+              fit: BoxFit.fill,
+            ),
           ),
+          // Image.asset(
+          //   Images.blog,
+          //   height: 160,
+          //   fit: BoxFit.fill,
+          // ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -49,7 +65,7 @@ class AppWiseOfferShowWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(2),
                     ),
                     child: Text(
-                      'GRAB DEAL',
+                      'GRAB NOW',
                       style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
                     ),
                   ),

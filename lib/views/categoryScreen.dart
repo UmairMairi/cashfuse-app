@@ -1,5 +1,5 @@
 import 'package:cashbackapp/models/categoryModel.dart';
-import 'package:cashbackapp/views/offerDetailScreen.dart';
+import 'package:cashbackapp/views/dealDetailScreen.dart';
 import 'package:cashbackapp/widget/storeOfferWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,59 +26,96 @@ class CategoryScreen extends StatelessWidget {
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
       ),
-      body: Column(
-        children: [
-          Container(
-            height: 90,
-            alignment: Alignment.center,
-            color: Colors.blue[800],
-            child: Text(
-              category != null ? '${category.name}(5)' : '',
-              style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
-            ),
-          ),
-          DefaultTabController(
-            length: 4,
-            child: TabBar(
-              indicatorWeight: 2.5,
-              indicatorSize: TabBarIndicatorSize.label,
-              tabs: [
-                Tab(
-                  text: 'Popular',
-                ),
-                Tab(
-                  text: 'A-Z',
-                ),
-                Tab(
-                  text: 'Percent',
-                ),
-                Tab(
-                  text: 'Amount',
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: GridView.builder(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // category.ads != []
+            //     ? Container(
+            //         height: 50,
+            //         alignment: Alignment.center,
+            //         color: Colors.blue[800],
+            //         child: Text(
+            //           'Ads(${category.ads.length})',
+            //           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+            //         ),
+            //       )
+            //     : SizedBox(),
+            // DefaultTabController(
+            //   length: 4,
+            //   child: TabBar(
+            //     indicatorWeight: 2.5,
+            //     indicatorSize: TabBarIndicatorSize.label,
+            //     tabs: [
+            //       Tab(
+            //         text: 'Popular',
+            //       ),
+            //       Tab(
+            //         text: 'A-Z',
+            //       ),
+            //       Tab(
+            //         text: 'Percent',
+            //       ),
+            //       Tab(
+            //         text: 'Amount',
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 15.0,
                 mainAxisSpacing: 15.0,
               ),
-              itemCount: 5,
+              itemCount: category.ads.length,
+              physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              padding: EdgeInsets.all(10).copyWith(top: 30),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
-                    Get.to(() => OfferDetailScreen());
+                    Get.to(() => DealDetailScreen());
                   },
-                  child: StoreOfferWidget(),
+                  child: StoreOfferWidget(
+                    ads: category.ads[index],
+                  ),
                 );
               },
             ),
-          ),
-        ],
+            // category.cuecampaigns != []
+            //     ? Container(
+            //         height: 50,
+            //         alignment: Alignment.center,
+            //         color: Colors.blue[800],
+            //         child: Text(
+            //           'Campaigns(${category.cuecampaigns.length})',
+            //           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+            //         ),
+            //       )
+            //     : SizedBox(),
+            GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 15.0,
+                mainAxisSpacing: 15.0,
+              ),
+              itemCount: category.cuecampaigns.length,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {
+                    Get.to(() => DealDetailScreen());
+                  },
+                  child: StoreOfferWidget(
+                    campaign: category.cuecampaigns[index],
+                  ),
+                );
+              },
+            )
+          ],
+        ),
       ),
     );
   }

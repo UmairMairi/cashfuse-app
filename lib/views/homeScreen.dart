@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cashbackapp/controllers/homeController.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/views/appWiseoffershowListScreen.dart';
 import 'package:cashbackapp/views/categoryScreen.dart';
@@ -8,10 +9,12 @@ import 'package:cashbackapp/views/dealDetailScreen.dart';
 import 'package:cashbackapp/views/faqSceen.dart';
 import 'package:cashbackapp/views/myEarningScreen.dart';
 import 'package:cashbackapp/views/offerDetailScreen.dart';
+import 'package:cashbackapp/views/ratesAndTermScreen.dart';
 import 'package:cashbackapp/widget/appWiseoffershowWidget.dart';
 import 'package:cashbackapp/widget/couponWidget.dart';
+import 'package:cashbackapp/widget/customImage.dart';
 import 'package:cashbackapp/widget/drawerWidget.dart';
-import 'package:cashbackapp/widget/storeOfferWidget.dart';
+import 'package:custom_clippers/custom_clippers.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -204,13 +207,13 @@ class HomeScreen extends StatelessWidget {
                   child: ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: homeController.catList.length,
+                    itemCount: homeController.topCategoryList.length,
                     padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
                           Get.to(() => CategoryScreen(
-                                category: homeController.catList[index],
+                                category: homeController.topCategoryList[index],
                               ));
                         },
                         child: Container(
@@ -225,7 +228,7 @@ class HomeScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                homeController.catList[index].name.toUpperCase(),
+                                homeController.topCategoryList[index].name.toUpperCase(),
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w500,
@@ -235,10 +238,10 @@ class HomeScreen extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
-                              Image.asset(
-                                Images.placeholder,
+                              CustomImage(
+                                image: '${global.appInfo.baseUrls.categoryImageUrl}/${homeController.topCategoryList[index].image}',
                                 height: 25,
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -352,7 +355,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(() => CategoryScreen());
+                          //Get.to(() => CategoryScreen());
                         },
                         child: Text(
                           'View All >',
@@ -366,7 +369,7 @@ class HomeScreen extends StatelessWidget {
                   height: 155,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 5,
+                    itemCount: homeController.topCashbackList.length,
                     shrinkWrap: true,
                     padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
@@ -376,9 +379,87 @@ class HomeScreen extends StatelessWidget {
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(right: 13),
-                          child: SizedBox(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                             width: 155,
-                            child: StoreOfferWidget(),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: RotatedBox(
+                                    quarterTurns: -45,
+                                    child: ClipPath(
+                                      clipper: MultiplePointsClipper(Sides.bottom, heightOfPoint: 10, numberOfPoints: 1),
+                                      child: Container(
+                                        width: 20,
+                                        height: 135,
+                                        decoration: BoxDecoration(
+                                            color: Colors.red[600],
+                                            borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(10),
+                                            )),
+                                        alignment: Alignment.topCenter,
+                                        padding: EdgeInsets.only(top: 5),
+                                        child: RotatedBox(
+                                          quarterTurns: 45,
+                                          child: Text(
+                                            homeController.topCashbackList[index].tagline,
+                                            textAlign: TextAlign.center,
+                                            style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                              color: Colors.white,
+                                              fontSize: 10,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: CustomImage(
+                                    image: '${global.appInfo.baseUrls.categoryImageUrl}/${homeController.topCashbackList[index].image}',
+                                    height: 32,
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                                  decoration: BoxDecoration(
+                                    color: Colors.orange[700],
+                                    borderRadius: BorderRadius.circular(2),
+                                  ),
+                                  child: Text(
+                                    'Grab deal',
+                                    style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Get.to(
+                                      () => RatesAndTermScreen(),
+                                      transition: Transition.rightToLeft,
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 45,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Rewards Rates & Terms',
+                                      textAlign: TextAlign.center,
+                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        color: Colors.teal,
+                                        fontSize: 10,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -409,7 +490,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 200,
                   child: ListView.builder(
-                    itemCount: 5,
+                    itemCount: homeController.homeAdvList.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -419,6 +500,7 @@ class HomeScreen extends StatelessWidget {
                           Get.to(() => DealDetailScreen());
                         },
                         child: AppWiseOfferShowWidget(
+                          category: homeController.homeAdvList[index],
                           isTimeShow: true,
                         ),
                       );
@@ -450,7 +532,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 200,
                   child: ListView.builder(
-                    itemCount: 5,
+                    itemCount: homeController.homeAdvList.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -460,7 +542,8 @@ class HomeScreen extends StatelessWidget {
                           Get.to(() => DealDetailScreen());
                         },
                         child: AppWiseOfferShowWidget(
-                          isTimeShow: false,
+                          category: homeController.homeAdvList[index],
+                          isTimeShow: true,
                         ),
                       );
                     },
@@ -490,7 +573,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 200,
                   child: ListView.builder(
-                    itemCount: 5,
+                    itemCount: homeController.homeAdvList.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -500,7 +583,8 @@ class HomeScreen extends StatelessWidget {
                           Get.to(() => DealDetailScreen());
                         },
                         child: AppWiseOfferShowWidget(
-                          isTimeShow: false,
+                          category: homeController.homeAdvList[index],
+                          isTimeShow: true,
                         ),
                       );
                     },
@@ -530,7 +614,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 200,
                   child: ListView.builder(
-                    itemCount: 5,
+                    itemCount: homeController.homeAdvList.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -540,7 +624,8 @@ class HomeScreen extends StatelessWidget {
                           Get.to(() => DealDetailScreen());
                         },
                         child: AppWiseOfferShowWidget(
-                          isTimeShow: false,
+                          category: homeController.homeAdvList[index],
+                          isTimeShow: true,
                         ),
                       );
                     },
@@ -570,7 +655,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 200,
                   child: ListView.builder(
-                    itemCount: 5,
+                    itemCount: homeController.homeAdvList.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -580,7 +665,8 @@ class HomeScreen extends StatelessWidget {
                           Get.to(() => DealDetailScreen());
                         },
                         child: AppWiseOfferShowWidget(
-                          isTimeShow: false,
+                          category: homeController.homeAdvList[index],
+                          isTimeShow: true,
                         ),
                       );
                     },
@@ -610,7 +696,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 200,
                   child: ListView.builder(
-                    itemCount: 5,
+                    itemCount: homeController.homeAdvList.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -620,7 +706,8 @@ class HomeScreen extends StatelessWidget {
                           Get.to(() => DealDetailScreen());
                         },
                         child: AppWiseOfferShowWidget(
-                          isTimeShow: false,
+                          category: homeController.homeAdvList[index],
+                          isTimeShow: true,
                         ),
                       );
                     },
@@ -650,7 +737,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 200,
                   child: ListView.builder(
-                    itemCount: 5,
+                    itemCount: homeController.homeAdvList.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -660,7 +747,8 @@ class HomeScreen extends StatelessWidget {
                           Get.to(() => DealDetailScreen());
                         },
                         child: AppWiseOfferShowWidget(
-                          isTimeShow: false,
+                          category: homeController.homeAdvList[index],
+                          isTimeShow: true,
                         ),
                       );
                     },
@@ -690,7 +778,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 200,
                   child: ListView.builder(
-                    itemCount: 5,
+                    itemCount: homeController.homeAdvList.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -700,7 +788,8 @@ class HomeScreen extends StatelessWidget {
                           Get.to(() => DealDetailScreen());
                         },
                         child: AppWiseOfferShowWidget(
-                          isTimeShow: false,
+                          category: homeController.homeAdvList[index],
+                          isTimeShow: true,
                         ),
                       );
                     },
@@ -764,7 +853,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 200,
                   child: ListView.builder(
-                    itemCount: 5,
+                    itemCount: homeController.homeAdvList.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -774,6 +863,7 @@ class HomeScreen extends StatelessWidget {
                           Get.to(() => DealDetailScreen());
                         },
                         child: AppWiseOfferShowWidget(
+                          category: homeController.homeAdvList[index],
                           isTimeShow: true,
                         ),
                       );
@@ -804,7 +894,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 200,
                   child: ListView.builder(
-                    itemCount: 5,
+                    itemCount: homeController.homeAdvList.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -814,6 +904,7 @@ class HomeScreen extends StatelessWidget {
                           Get.to(() => DealDetailScreen());
                         },
                         child: AppWiseOfferShowWidget(
+                          category: homeController.homeAdvList[index],
                           isTimeShow: true,
                         ),
                       );

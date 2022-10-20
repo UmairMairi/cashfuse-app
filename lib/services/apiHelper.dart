@@ -1,5 +1,6 @@
 import 'package:cashbackapp/constants/appConstant.dart';
 import 'package:cashbackapp/models/appInfoModel.dart';
+import 'package:cashbackapp/models/categoryModel.dart';
 import 'package:cashbackapp/models/userModel.dart';
 import 'package:cashbackapp/services/dioResult.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
@@ -84,6 +85,72 @@ class APIHelper {
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - verifyOtp():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getTopCategories() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.CAEGORY_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<CategoryModel>.from(response.data['data'].map((x) => CategoryModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.CAEGORY_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getTopCategories():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getTopCashBack() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.CASHBACK_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<CategoryModel>.from(response.data['data'].map((x) => CategoryModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.CASHBACK_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getTopCashBack():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getHomeAdv() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.HOME_ADV_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<CategoryModel>.from(response.data['data'].map((x) => CategoryModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.HOME_ADV_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getHomeAdv():" + e.toString());
     }
   }
 }

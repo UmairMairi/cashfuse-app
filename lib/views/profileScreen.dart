@@ -2,6 +2,7 @@ import 'package:cashbackapp/controllers/authController.dart';
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/views/accountSettingScreen.dart';
+import 'package:cashbackapp/views/appTabinationScreen.dart';
 import 'package:cashbackapp/views/getHelpScreen.dart';
 import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
 import 'package:cashbackapp/views/missingCashbackScreen.dart';
@@ -215,6 +216,32 @@ class ProfieScreen extends StatelessWidget {
                               ),
                               Text(
                                 'Missing Cashback',
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => AppTabinationScreen());
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.search,
+                                color: Get.theme.iconTheme.color,
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                'All in One Search',
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),

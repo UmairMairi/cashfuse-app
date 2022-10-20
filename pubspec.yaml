@@ -34,15 +34,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
 
   #UI DESIGN
-  flutter_animation_set: ^0.0.4
   dotted_decoration: ^2.0.0
-  coupon_uikit: ^0.0.1+2
   slide_countdown: ^0.3.4
   customizable_space_bar: ^0.2.0
   dots_indicator: ^2.1.0
   font_awesome_flutter: ^10.2.1
   cupertino_icons: ^1.0.2
-  animated_bottom_navigation_bar: ^1.1.0
   carousel_slider: ^4.1.1
   shimmer_animation: ^2.1.0+1
   flutter_custom_clippers: ^2.0.0
@@ -69,7 +66,6 @@ dependencies:
   geocoding: ^2.0.5
   google_maps_flutter: ^2.2.1
   google_place: ^0.4.7
-  uuid: ^3.0.6
 
   #STATE MANAGEMENT
   get: ^4.6.1
