@@ -9,4 +9,8 @@ class AppConstants {
   static const String CAEGORY_URI = '/getcategory';
   static const String CASHBACK_URI = '/topcashback';
   static const String HOME_ADV_URI = '/homeadv';
+  static const String ALL_ADV = '/alladv';
+  static const String EXCLUSIVE_OFFER_URI = '/exclusiveoffers';
+  static const String NEW_FLASH_OFFER_URI = '/getalloffers';
+  static const String BANNER_URI = '/getallbanners';
 }

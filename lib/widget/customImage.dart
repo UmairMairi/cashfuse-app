@@ -25,7 +25,7 @@ class CustomImage extends StatelessWidget {
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(0),
-          image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+          image: DecorationImage(image: imageProvider, fit: fit),
         ),
       ),
       placeholder: (context, url) => Center(
@@ -35,7 +35,7 @@ class CustomImage extends StatelessWidget {
       errorWidget: (context, url, error) => Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(0),
-          image: DecorationImage(image: AssetImage('${Images.dummyImage}'), fit: BoxFit.cover),
+          image: DecorationImage(image: AssetImage('${Images.dummyImage}'), fit: fit),
         ),
       ),
     );

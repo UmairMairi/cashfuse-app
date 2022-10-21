@@ -92,7 +92,7 @@ class AppWiseOfferShowListScreen extends StatelessWidget {
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
-                itemCount: homeController.homeAdvList.length,
+                itemCount: homeController.newFlashOfferList.length,
                 shrinkWrap: true,
                 padding: EdgeInsets.all(10).copyWith(top: 20),
                 itemBuilder: (context, index) {
@@ -102,7 +102,7 @@ class AppWiseOfferShowListScreen extends StatelessWidget {
                     },
                     child: AppWiseOfferShowWidget(
                       isTimeShow: false,
-                      category: homeController.homeAdvList[index],
+                      offer: homeController.newFlashOfferList[index],
                     ),
                   );
                 },

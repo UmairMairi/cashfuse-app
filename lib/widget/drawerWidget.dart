@@ -13,114 +13,119 @@ class DrawerWidget extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(top: 30, left: 10, right: 10),
-              color: Get.theme.primaryColor,
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Icon(
-                      Icons.settings_outlined,
-                      color: Colors.white,
-                    ),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: CircleAvatar(
-                      radius: 25,
-                      backgroundColor: Colors.white,
-                      child: Image.asset(
-                        Images.malePerson,
-                        height: 30,
+                padding: EdgeInsets.only(top: 30, left: 10, right: 10),
+                color: Get.theme.primaryColor,
+                child:
+                    // global.currentUser.id != null
+                    //     ?
+                    Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Icon(
+                        Icons.settings_outlined,
+                        color: Colors.white,
                       ),
                     ),
-                    title: Text(
-                      global.currentUser.name,
-                      style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.white),
-                    ),
-                    subtitle: Text(
-                      global.currentUser.phone,
-                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Pending',
-                            style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                              color: Colors.white,
-                              fontSize: 11,
-                              letterSpacing: 0,
-                            ),
-                          ),
-                          Text(
-                            '₹0.00',
-                            textAlign: TextAlign.center,
-                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 50,
-                        child: VerticalDivider(
-                          // width: 2,
-                          // thickness: 2,
-                          color: Colors.white,
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: CircleAvatar(
+                        radius: 25,
+                        backgroundColor: Colors.white,
+                        child: Image.asset(
+                          Images.malePerson,
+                          height: 30,
                         ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Approved',
-                            style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                              color: Colors.white,
-                              letterSpacing: 0,
-                              fontSize: 11,
-                            ),
-                          ),
-                          Text(
-                            '₹0.00',
-                            textAlign: TextAlign.center,
-                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
-                          ),
-                        ],
+                      title: Text(
+                        'Test User',
+                        style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.white),
                       ),
-                      SizedBox(
-                        height: 50,
-                        child: VerticalDivider(
-                          // width: 2,
-                          // thickness: 2,
-                          color: Colors.white,
+                      subtitle: Text(
+                        'test@gmail.com',
+                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Pending',
+                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                color: Colors.white,
+                                fontSize: 11,
+                                letterSpacing: 0,
+                              ),
+                            ),
+                            Text(
+                              '₹0.00',
+                              textAlign: TextAlign.center,
+                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                            ),
+                          ],
                         ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Redeemed',
-                            style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                              color: Colors.white,
-                              letterSpacing: 0,
-                              fontSize: 11,
+                        SizedBox(
+                          height: 50,
+                          child: VerticalDivider(
+                            // width: 2,
+                            // thickness: 2,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Approved',
+                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                color: Colors.white,
+                                letterSpacing: 0,
+                                fontSize: 11,
+                              ),
                             ),
+                            Text(
+                              '₹0.00',
+                              textAlign: TextAlign.center,
+                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: VerticalDivider(
+                            // width: 2,
+                            // thickness: 2,
+                            color: Colors.white,
                           ),
-                          Text(
-                            '₹0.00',
-                            textAlign: TextAlign.center,
-                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Redeemed',
+                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                color: Colors.white,
+                                letterSpacing: 0,
+                                fontSize: 11,
+                              ),
+                            ),
+                            Text(
+                              '₹0.00',
+                              textAlign: TextAlign.center,
+                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                )
+                //: Text('Welcome!'),
+                ),
             InkWell(
               onTap: () {},
               child: Padding(

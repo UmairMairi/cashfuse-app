@@ -41,6 +41,8 @@ class AuthController extends GetxController {
     try {
       global.sp.remove('currentUser');
       global.currentUser = new UserModel();
+      contactNo.clear();
+
       update();
     } catch (e) {
       print("Exception - authController.dart - logout():" + e.toString());
@@ -80,6 +82,7 @@ class AuthController extends GetxController {
 
   Future sendOTP() async {
     try {
+      otp.clear();
       if (GetPlatform.isWeb) {
         FirebaseAuth auth = FirebaseAuth.instance;
         Get.back();
@@ -92,7 +95,10 @@ class AuthController extends GetxController {
       } else {
         await FirebaseAuth.instance.verifyPhoneNumber(
           phoneNumber: coutryCode + contactNo.text,
-          verificationCompleted: (PhoneAuthCredential credential) {},
+          verificationCompleted: (PhoneAuthCredential credential) {
+            otp.text = credential.smsCode;
+            update();
+          },
           verificationFailed: (FirebaseAuthException e) {
             Get.back();
             showCustomSnackBar(e.message.toString());

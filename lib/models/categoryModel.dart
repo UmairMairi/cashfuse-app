@@ -1,5 +1,6 @@
 import 'package:cashbackapp/models/adsModel.dart';
 import 'package:cashbackapp/models/campaignModel.dart';
+import 'package:cashbackapp/models/commonModel.dart';
 
 class CategoryModel {
   int id;
@@ -25,6 +26,7 @@ class CategoryModel {
   int pId;
   int rank;
   String tagline;
+  List<CommonModel> commonList = [];
 
   CategoryModel({
     this.id,
@@ -50,6 +52,7 @@ class CategoryModel {
     this.pId,
     this.rank,
     this.tagline,
+    this.commonList,
   });
 
   CategoryModel.fromJson(Map<String, dynamic> json) {

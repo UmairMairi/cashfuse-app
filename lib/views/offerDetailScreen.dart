@@ -1,4 +1,5 @@
 import 'package:cashbackapp/controllers/homeController.dart';
+import 'package:cashbackapp/models/offerModel.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/views/moreOfferScreen.dart';
@@ -10,6 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OfferDetailScreen extends StatelessWidget {
+  final OfferModel offer;
+  OfferDetailScreen({this.offer});
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (homeController) {

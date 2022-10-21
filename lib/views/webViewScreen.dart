@@ -8,6 +8,9 @@ import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewScreen extends StatelessWidget {
+  final String url;
+  WebViewScreen({this.url});
+
   @override
   Widget build(BuildContext context) {
     if (Platform.isAndroid) WebView.platform = AndroidWebView();
@@ -19,7 +22,7 @@ class WebViewScreen extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               WebView(
-                initialUrl: 'https://flutter.dev',
+                initialUrl: url != null && url.isNotEmpty ? url : 'https://flutter.dev',
                 javascriptMode: JavascriptMode.unrestricted,
                 onProgress: (val) {
                   homeController.updtaeRotate(true);

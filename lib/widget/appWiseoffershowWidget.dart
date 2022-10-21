@@ -1,15 +1,15 @@
-import 'package:cashbackapp/models/categoryModel.dart';
-import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/controllers/homeController.dart';
+import 'package:cashbackapp/models/offerModel.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:slide_countdown/slide_countdown.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
 
 class AppWiseOfferShowWidget extends StatelessWidget {
   final bool isTimeShow;
-  final CategoryModel category;
-  AppWiseOfferShowWidget({this.isTimeShow, this.category});
+  final OfferModel offer;
+  AppWiseOfferShowWidget({this.isTimeShow, this.offer});
 
   @override
   Widget build(BuildContext context) {
@@ -23,23 +23,36 @@ class AppWiseOfferShowWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-            ),
-            child: CustomImage(
-              image: '${global.appInfo.baseUrls.categoryImageUrl}/${category.image}',
-              height: 145,
-              width: Get.width,
-              fit: BoxFit.fill,
-            ),
+          Stack(
+            alignment: Alignment.topLeft,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+                child: CustomImage(
+                  image: '${global.appInfo.baseUrls.offerImageUrl}/${offer.bannerImage}',
+                  height: 145,
+                  width: Get.width,
+                  fit: BoxFit.fill,
+                ),
+              ),
+              Card(
+                color: Colors.white,
+                margin: EdgeInsets.all(10),
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: CustomImage(
+                    image: '${global.appInfo.baseUrls.offerImageUrl}/${offer.image}',
+                    height: 30,
+                    width: 60,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+            ],
           ),
-          // Image.asset(
-          //   Images.blog,
-          //   height: 160,
-          //   fit: BoxFit.fill,
-          // ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -47,7 +60,7 @@ class AppWiseOfferShowWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  isTimeShow
+                  Get.find<HomeController>().countTimer(DateTime.now(), offer.endDate) != null
                       ? SlideCountdown(
                           slideDirection: SlideDirection.none,
                           textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
@@ -55,7 +68,7 @@ class AppWiseOfferShowWidget extends StatelessWidget {
                             color: Colors.red[800],
                             borderRadius: BorderRadius.circular(3),
                           ),
-                          duration: const Duration(hours: 2),
+                          duration: Duration(days: Get.find<HomeController>().countTimer(DateTime.now(), offer.endDate)),
                         )
                       : SizedBox(),
                   Container(
@@ -65,7 +78,7 @@ class AppWiseOfferShowWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(2),
                     ),
                     child: Text(
-                      'GRAB NOW',
+                      offer.buttonText,
                       style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
                     ),
                   ),

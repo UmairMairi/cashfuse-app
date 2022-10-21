@@ -1,6 +1,9 @@
 import 'package:cashbackapp/constants/appConstant.dart';
 import 'package:cashbackapp/controllers/networkController.dart';
+import 'package:cashbackapp/models/bannerModel.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
+import 'package:cashbackapp/models/commonModel.dart';
+import 'package:cashbackapp/models/offerModel.dart';
 import 'package:cashbackapp/services/apiHelper.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:get/get.dart';
@@ -17,16 +20,38 @@ class HomeController extends GetxController {
   List<CategoryModel> _homeAdvList = [];
   List<CategoryModel> get homeAdvList => _homeAdvList;
 
+  List<CategoryModel> _allAdvList = [];
+  List<CategoryModel> get allAdvList => _allAdvList;
+
+  List<OfferModel> _exclusiveOfferList = [];
+  List<OfferModel> get exclusiveOfferList => _exclusiveOfferList;
+
+  List<OfferModel> _newFlashOfferList = [];
+  List<OfferModel> get newFlashOfferList => _newFlashOfferList;
+
+  List<BannerModel> _topBannerList = [];
+  List<BannerModel> get topBannerList => _topBannerList;
+
+  bool isCategoryLoaded = false;
+  bool isBannerLoaded = false;
+  bool isOfferLoaded = false;
+
   bool isCategoryExpand = false;
   bool isRoted = true;
   bool isOffer = false;
   int webBottomIndex = 0;
+  int bannerIndex = 0;
 
   @override
   void onInit() async {
+    await getTopBanners();
     await getTopCategories();
+    await getExclusiveOffers();
     await getTopCashBack();
+    await getNewFlashOffers();
     await getHomeAdv();
+    await getAllAdv();
+
     super.onInit();
   }
 
@@ -55,21 +80,57 @@ class HomeController extends GetxController {
     update();
   }
 
+  void setBannerIndex(int val) {
+    bannerIndex = val;
+    update();
+  }
+
   Future getTopCategories() async {
     try {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         await apiHelper.getTopCategories().then((response) {
           if (response.status == "1") {
             _topCategoryList = response.data;
+
+            if (_topCategoryList != []) {
+              for (var i = 0; i < _topCategoryList.length; i++) {
+                if (_topCategoryList[i].ads != []) {
+                  for (var j = 0; j < _topCategoryList[i].ads.length; j++) {
+                    _topCategoryList[i].commonList.add(
+                          CommonModel(
+                            name: _topCategoryList[i].ads[j].name,
+                            image: _topCategoryList[i].ads[j].image,
+                            buttonText: _topCategoryList[i].ads[j].buttonText,
+                            trackingLink: _topCategoryList[i].ads[j].trackingLink,
+                          ),
+                        );
+                  }
+                }
+              }
+              for (var n = 0; n < _topCategoryList.length; n++) {
+                if (_topCategoryList[n].cuecampaigns != []) {
+                  for (var k = 0; k < _topCategoryList[n].cuecampaigns.length; k++) {
+                    _topCategoryList[n].commonList.add(
+                          CommonModel(
+                            name: _topCategoryList[n].cuecampaigns[k].name,
+                            image: _topCategoryList[n].cuecampaigns[k].image,
+                            buttonText: _topCategoryList[n].cuecampaigns[k].buttonText,
+                            trackingLink: _topCategoryList[n].cuecampaigns[k].url,
+                          ),
+                        );
+                  }
+                }
+              }
+            }
           } else {
             showCustomSnackBar(response.message);
           }
         });
+        isCategoryLoaded = true;
+        update();
       } else {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
-
-      update();
     } catch (e) {
       print("Exception - HomeController.dart - getTopCategories():" + e.toString());
     }
@@ -81,6 +142,38 @@ class HomeController extends GetxController {
         await apiHelper.getTopCashBack().then((response) {
           if (response.status == "1") {
             _topCashbackList = response.data;
+            update();
+            if (_topCashbackList != []) {
+              for (var i = 0; i < _topCashbackList.length; i++) {
+                if (_topCashbackList[i].ads != []) {
+                  for (var j = 0; j < _topCashbackList[i].ads.length; j++) {
+                    _topCashbackList[i].commonList.add(
+                          CommonModel(
+                            name: _topCashbackList[i].ads[j].name,
+                            image: _topCashbackList[i].ads[j].image,
+                            buttonText: _topCashbackList[i].ads[j].buttonText,
+                            trackingLink: _topCashbackList[i].ads[j].trackingLink,
+                          ),
+                        );
+                  }
+                }
+              }
+              for (var n = 0; n < _topCashbackList.length; n++) {
+                if (_topCashbackList[n].cuecampaigns != []) {
+                  for (var k = 0; k < _topCashbackList[n].cuecampaigns.length; k++) {
+                    _topCashbackList[n].commonList.add(
+                          CommonModel(
+                            name: _topCashbackList[n].cuecampaigns[k].name,
+                            image: _topCashbackList[n].cuecampaigns[k].image,
+                            buttonText: _topCashbackList[n].cuecampaigns[k].buttonText,
+                            trackingLink: _topCashbackList[n].cuecampaigns[k].url,
+                          ),
+                        );
+                  }
+                }
+              }
+              update();
+            }
           } else {
             showCustomSnackBar(response.message);
           }
@@ -88,8 +181,6 @@ class HomeController extends GetxController {
       } else {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
-
-      update();
     } catch (e) {
       print("Exception - HomeController.dart - getTopCashBack():" + e.toString());
     }
@@ -101,6 +192,7 @@ class HomeController extends GetxController {
         await apiHelper.getHomeAdv().then((response) {
           if (response.status == "1") {
             _homeAdvList = response.data;
+            update();
           } else {
             showCustomSnackBar(response.message);
           }
@@ -108,10 +200,101 @@ class HomeController extends GetxController {
       } else {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
-
-      update();
     } catch (e) {
       print("Exception - HomeController.dart - getHomeAdv():" + e.toString());
+    }
+  }
+
+  Future getAllAdv() async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.getAllAdv().then((response) {
+          if (response.status == "1") {
+            _allAdvList = response.data;
+            update();
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+    } catch (e) {
+      print("Exception - HomeController.dart - getAllAdv():" + e.toString());
+    }
+  }
+
+  Future getExclusiveOffers() async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.getExclusiveOffers().then((response) {
+          if (response.status == "1") {
+            _exclusiveOfferList = response.data;
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+      isOfferLoaded = true;
+      update();
+    } catch (e) {
+      print("Exception - HomeController.dart - getExclusiveOffers():" + e.toString());
+    }
+  }
+
+  Future getNewFlashOffers() async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.getNewFlashOffers().then((response) {
+          if (response.status == "1") {
+            _newFlashOfferList = response.data;
+            update();
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+    } catch (e) {
+      print("Exception - HomeController.dart - getNewFlashOffers():" + e.toString());
+    }
+  }
+
+  Future getTopBanners() async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.getTopBanners().then((response) {
+          if (response.status == "1") {
+            _topBannerList = response.data;
+            update();
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+        isBannerLoaded = true;
+        update();
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+    } catch (e) {
+      print("Exception - HomeController.dart - getTopBanners():" + e.toString());
+    }
+  }
+
+  int countTimer(DateTime startTime, DateTime endTime) {
+    try {
+      int diff;
+      if (startTime != null && endTime != null) {
+        diff = endTime.difference(startTime).inDays;
+        print(diff);
+      }
+      return diff > 0 ? diff : null;
+    } catch (e) {
+      print("Exception - HomeController.dart - countTimer():" + e.toString());
+      return null;
     }
   }
 }

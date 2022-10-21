@@ -1,6 +1,8 @@
 import 'package:cashbackapp/constants/appConstant.dart';
 import 'package:cashbackapp/models/appInfoModel.dart';
+import 'package:cashbackapp/models/bannerModel.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
+import 'package:cashbackapp/models/offerModel.dart';
 import 'package:cashbackapp/models/userModel.dart';
 import 'package:cashbackapp/services/dioResult.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
@@ -151,6 +153,94 @@ class APIHelper {
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getHomeAdv():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getAllAdv() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.ALL_ADV}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<CategoryModel>.from(response.data['data'].map((x) => CategoryModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ALL_ADV}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getAllAdv():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getExclusiveOffers() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.EXCLUSIVE_OFFER_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<OfferModel>.from(response.data['data'].map((x) => OfferModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.EXCLUSIVE_OFFER_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getExclusiveOffers():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getNewFlashOffers() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.NEW_FLASH_OFFER_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<OfferModel>.from(response.data['data'].map((x) => OfferModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.NEW_FLASH_OFFER_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getNewFlashOffers():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getTopBanners() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.BANNER_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<BannerModel>.from(response.data['data'].map((x) => BannerModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.BANNER_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getTopBanners():" + e.toString());
     }
   }
 }

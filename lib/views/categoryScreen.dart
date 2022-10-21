@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CategoryScreen extends StatelessWidget {
+  final String title;
   final CategoryModel category;
-  CategoryScreen({this.category});
+  CategoryScreen({this.category, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -61,13 +62,14 @@ class CategoryScreen extends StatelessWidget {
             //     ],
             //   ),
             // ),
+
             GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 15.0,
                 mainAxisSpacing: 15.0,
               ),
-              itemCount: category.ads.length,
+              itemCount: category.commonList.length,
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -77,43 +79,11 @@ class CategoryScreen extends StatelessWidget {
                     Get.to(() => DealDetailScreen());
                   },
                   child: StoreOfferWidget(
-                    ads: category.ads[index],
+                    commonModel: category.commonList[index],
                   ),
                 );
               },
             ),
-            // category.cuecampaigns != []
-            //     ? Container(
-            //         height: 50,
-            //         alignment: Alignment.center,
-            //         color: Colors.blue[800],
-            //         child: Text(
-            //           'Campaigns(${category.cuecampaigns.length})',
-            //           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
-            //         ),
-            //       )
-            //     : SizedBox(),
-            GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 15.0,
-                mainAxisSpacing: 15.0,
-              ),
-              itemCount: category.cuecampaigns.length,
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-                    Get.to(() => DealDetailScreen());
-                  },
-                  child: StoreOfferWidget(
-                    campaign: category.cuecampaigns[index],
-                  ),
-                );
-              },
-            )
           ],
         ),
       ),
