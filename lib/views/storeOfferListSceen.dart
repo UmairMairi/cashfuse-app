@@ -50,6 +50,7 @@ class StoreOfferListScreen extends StatelessWidget {
                   name: list[index].name,
                   image: list[index].image,
                   tagline: list[index].tagline,
+                  adId: list[index].id.toString(),
                 ),
               ),
             );

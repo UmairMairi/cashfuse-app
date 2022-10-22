@@ -1,6 +1,7 @@
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/views/dealDetailScreen.dart';
 import 'package:cashbackapp/views/filterScreen.dart';
+import 'package:cashbackapp/views/offerDetailScreen.dart';
 import 'package:cashbackapp/widget/appWiseoffershowWidget.dart';
 import 'package:cashbackapp/widget/sortDialogWidget.dart';
 import 'package:flutter/material.dart';
@@ -97,8 +98,13 @@ class AppWiseOfferShowListScreen extends StatelessWidget {
                 padding: EdgeInsets.all(10).copyWith(top: 20),
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: () {
-                      Get.to(() => DealDetailScreen());
+                    onTap: () async {
+                      await homeController.getOfferDetails(
+                        homeController.newFlashOfferList[index].id.toString(),
+                      );
+                      Get.to(() => OfferDetailScreen(
+                            offer: homeController.offer,
+                          ));
                     },
                     child: AppWiseOfferShowWidget(
                       isTimeShow: false,

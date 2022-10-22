@@ -1,14 +1,15 @@
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/offerModel.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/views/moreOfferScreen.dart';
 import 'package:cashbackapp/views/webViewScreen.dart';
+import 'package:cashbackapp/widget/customImage.dart';
 import 'package:cashbackapp/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:customizable_space_bar/customizable_space_bar.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:slide_countdown/slide_countdown.dart';
 
 class OfferDetailScreen extends StatelessWidget {
   final OfferModel offer;
@@ -38,7 +39,7 @@ class OfferDetailScreen extends StatelessWidget {
                 },
               ),
               title: Text(
-                'Health and Glow',
+                offer.campaignName,
                 style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
               ),
               flexibleSpace: CustomizableSpaceBar(builder: (context, scrollingRate) {
@@ -48,21 +49,30 @@ class OfferDetailScreen extends StatelessWidget {
                         clipBehavior: Clip.none,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(bottom: 20),
-                            child: Image.asset(
-                              Images.dummyImage,
+                            //margin: EdgeInsets.only(bottom: 20),
+                            child: CustomImage(
+                              image: '${global.appInfo.baseUrls.offerImageUrl}/${offer.bannerImage}',
                               width: Get.width,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                             ),
+                            // Image.asset(
+                            //   Images.dummyImage,
+                            //   width: Get.width,
+                            //   fit: BoxFit.cover,
+                            // ),
                           ),
                           Positioned(
                             bottom: -30,
                             child: Card(
+                              color: Colors.white,
+                              margin: EdgeInsets.all(10),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 15),
-                                child: Text(
-                                  'health & glow',
-                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.orange[500]),
+                                padding: const EdgeInsets.all(4.0),
+                                child: CustomImage(
+                                  image: '${global.appInfo.baseUrls.offerImageUrl}/${offer.image}',
+                                  height: 30,
+                                  width: 60,
+                                  fit: BoxFit.contain,
                                 ),
                               ),
                             ),
@@ -114,7 +124,7 @@ class OfferDetailScreen extends StatelessWidget {
                           height: 40,
                         ),
                         Text(
-                          'Free at home Skin Assessment in 5 min Personalized Regime',
+                          offer.name,
                           textAlign: TextAlign.center,
                           style: TextStyle(fontStyle: FontStyle.italic, color: Get.theme.primaryColor),
                         ),
@@ -122,24 +132,64 @@ class OfferDetailScreen extends StatelessWidget {
                           height: 15,
                         ),
                         Text(
-                          'Free at home Skin Assessment in 5 min Personalized Regime',
+                          offer.description,
                           textAlign: TextAlign.center,
                         ),
                         Text(
-                          'Free at home Skin Assessment in 5 min Personalized Regime',
+                          offer.terms,
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          'Free at home Skin Assessment in 5 min Personalized Regime',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontWeight: FontWeight.w600),
-                        ),
+                        // SizedBox(
+                        //   height: 15,
+                        // ),
+                        // Text(
+                        //   'Free at home Skin Assessment in 5 min Personalized Regime',
+                        //   textAlign: TextAlign.center,
+                        //   style: TextStyle(fontWeight: FontWeight.w600),
+                        // ),
+                        Get.find<HomeController>().countTimer(DateTime.now(), offer.endDate) != null
+                            ? Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[100],
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                padding: EdgeInsets.all(15),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Just for You',
+                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 10),
+                                      child: SlideCountdownSeparated(
+                                        separatorType: SeparatorType.symbol,
+                                        durationTitle: DurationTitle(
+                                          hours: 'hr',
+                                          minutes: 'min',
+                                          seconds: 'sec',
+                                          days: 'day',
+                                        ),
+                                        slideDirection: SlideDirection.none,
+                                        textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
+                                        decoration: BoxDecoration(
+                                          color: Colors.red[800],
+                                          borderRadius: BorderRadius.circular(3),
+                                        ),
+                                        duration: Duration(days: Get.find<HomeController>().countTimer(DateTime.now(), offer.endDate)),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : SizedBox(),
                         InkWell(
                           onTap: () {
-                            Get.to(() => WebViewScreen());
+                            Get.to(() => WebViewScreen(
+                                  url: offer.url,
+                                ));
                           },
                           child: Container(
                             width: Get.width,
@@ -152,7 +202,7 @@ class OfferDetailScreen extends StatelessWidget {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              'EARN 10% CASHBACK NOW >',
+                              offer.buttonText.isNotEmpty ? offer.buttonText : 'EARN CASHBACK',
                               style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                             ),
                           ),

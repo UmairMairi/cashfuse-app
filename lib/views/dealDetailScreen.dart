@@ -1,9 +1,15 @@
+import 'package:cashbackapp/models/adsModel.dart';
 import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/views/webViewScreen.dart';
+import 'package:cashbackapp/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 
 class DealDetailScreen extends StatelessWidget {
+  final AdsModel ads;
+  DealDetailScreen({this.ads});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +32,7 @@ class DealDetailScreen extends StatelessWidget {
             },
           ),
           title: Text(
-            'New Flash Deals - Live Now',
+            ads.advName,
             style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
           ),
           actions: [
@@ -75,27 +81,42 @@ class DealDetailScreen extends StatelessWidget {
                     children: [
                       Stack(
                         children: [
-                          Image.asset(
-                            Images.dummyImage,
+                          CustomImage(
+                            image: '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}',
                             height: 200,
                             width: Get.width,
-                            fit: BoxFit.fill,
+                            fit: BoxFit.contain,
                           ),
+                          // Image.asset(
+                          //   Images.dummyImage,
+                          //   height: 200,
+                          //   width: Get.width,
+                          //   fit: BoxFit.fill,
+                          // ),
                         ],
                       ),
-                      Container(
-                        width: Get.width,
-                        height: 45,
-                        margin: EdgeInsets.symmetric(horizontal: 40, vertical: 25),
-                        padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: Get.theme.secondaryHeaderColor,
-                          borderRadius: BorderRadius.circular(2),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'GRAB DEAL',
-                          style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                      InkWell(
+                        onTap: () {
+                          Get.to(
+                            () => WebViewScreen(
+                              url: ads.trackingLink,
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: Get.width,
+                          height: 45,
+                          margin: EdgeInsets.symmetric(horizontal: 40, vertical: 25),
+                          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: Get.theme.secondaryHeaderColor,
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            'GRAB DEAL',
+                            style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                          ),
                         ),
                       ),
                     ],

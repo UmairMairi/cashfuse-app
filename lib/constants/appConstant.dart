@@ -13,4 +13,7 @@ class AppConstants {
   static const String EXCLUSIVE_OFFER_URI = '/exclusiveoffers';
   static const String NEW_FLASH_OFFER_URI = '/getalloffers';
   static const String BANNER_URI = '/getallbanners';
+  static const String AD_DETAIL_URI = '/ads_details';
+  static const String OFEFER_DETAIL_URI = '/offer_details';
+  static const String CAMPAIGN_DETAIL_URI = '/campaigns_details';
 }

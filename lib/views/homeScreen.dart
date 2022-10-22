@@ -124,7 +124,7 @@ class HomeScreen extends StatelessWidget {
                         itemCount: controller.topBannerList.length,
                         itemBuilder: (context, index, _) {
                           return InkWell(
-                            onTap: () {
+                            onTap: () async {
                               if (controller.topBannerList[index].type == 'url') {
                                 Get.to(
                                   () => WebViewScreen(
@@ -132,7 +132,14 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 );
                               } else {
-                                Get.to(() => OfferDetailScreen());
+                                await controller.getOfferDetails(
+                                  controller.topBannerList[index].offerId.toString(),
+                                );
+                                Get.to(
+                                  () => OfferDetailScreen(
+                                    offer: controller.offer,
+                                  ),
+                                );
                               }
                             },
                             child: Container(
@@ -375,9 +382,10 @@ class HomeScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 6),
                           itemBuilder: (context, index) {
                             return InkWell(
-                              onTap: () {
+                              onTap: () async {
+                                await hmCon.getOfferDetails(hmCon.exclusiveOfferList[index].id.toString());
                                 Get.to(() => OfferDetailScreen(
-                                      offer: hmCon.exclusiveOfferList[index],
+                                      offer: hmCon.offer,
                                     ));
                               },
                               child: Container(
@@ -516,6 +524,7 @@ class HomeScreen extends StatelessWidget {
                                 name: hmController.topCashbackList[index].name,
                                 image: hmController.topCashbackList[index].image,
                                 tagline: hmController.topCashbackList[index].tagline,
+                                adId: hmController.topCashbackList[index].id.toString(),
                               ),
                             ),
                           ),
@@ -556,8 +565,11 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 6),
                     itemBuilder: (context, index) {
                       return InkWell(
-                        onTap: () {
-                          Get.to(() => DealDetailScreen());
+                        onTap: () async {
+                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+                          Get.to(() => OfferDetailScreen(
+                                offer: home.offer,
+                              ));
                         },
                         child: AppWiseOfferShowWidget(
                           offer: home.newFlashOfferList[index],
@@ -590,26 +602,31 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              // SizedBox(
-              //   height: 200,
-              //   child: ListView.builder(
-              //     itemCount: homeController2.homeAdvList.length,
-              //     shrinkWrap: true,
-              //     scrollDirection: Axis.horizontal,
-              //     padding: const EdgeInsets.symmetric(horizontal: 6),
-              //     itemBuilder: (context, index) {
-              //       return InkWell(
-              //         onTap: () {
-              //           Get.to(() => DealDetailScreen());
-              //         },
-              //         child: AppWiseOfferShowWidget(
-              //           category: homeController2.homeAdvList[index],
-              //           isTimeShow: true,
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // ),
+              GetBuilder<HomeController>(builder: (home) {
+                return SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    itemCount: home.newFlashOfferList.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () async {
+                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+                          Get.to(() => OfferDetailScreen(
+                                offer: home.offer,
+                              ));
+                        },
+                        child: AppWiseOfferShowWidget(
+                          offer: home.newFlashOfferList[index],
+                          isTimeShow: true,
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                 child: Row(
@@ -631,26 +648,31 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              // SizedBox(
-              //   height: 200,
-              //   child: ListView.builder(
-              //     itemCount: homeController2.homeAdvList.length,
-              //     shrinkWrap: true,
-              //     scrollDirection: Axis.horizontal,
-              //     padding: const EdgeInsets.symmetric(horizontal: 6),
-              //     itemBuilder: (context, index) {
-              //       return InkWell(
-              //         onTap: () {
-              //           Get.to(() => DealDetailScreen());
-              //         },
-              //         child: AppWiseOfferShowWidget(
-              //           category: homeController2.homeAdvList[index],
-              //           isTimeShow: true,
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // ),
+              GetBuilder<HomeController>(builder: (home) {
+                return SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    itemCount: home.newFlashOfferList.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () async {
+                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+                          Get.to(() => OfferDetailScreen(
+                                offer: home.offer,
+                              ));
+                        },
+                        child: AppWiseOfferShowWidget(
+                          offer: home.newFlashOfferList[index],
+                          isTimeShow: true,
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                 child: Row(
@@ -672,26 +694,31 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              // SizedBox(
-              //   height: 200,
-              //   child: ListView.builder(
-              //     itemCount: homeController2.homeAdvList.length,
-              //     shrinkWrap: true,
-              //     scrollDirection: Axis.horizontal,
-              //     padding: const EdgeInsets.symmetric(horizontal: 6),
-              //     itemBuilder: (context, index) {
-              //       return InkWell(
-              //         onTap: () {
-              //           Get.to(() => DealDetailScreen());
-              //         },
-              //         child: AppWiseOfferShowWidget(
-              //           category: homeController2.homeAdvList[index],
-              //           isTimeShow: true,
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // ),
+              GetBuilder<HomeController>(builder: (home) {
+                return SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    itemCount: home.newFlashOfferList.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () async {
+                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+                          Get.to(() => OfferDetailScreen(
+                                offer: home.offer,
+                              ));
+                        },
+                        child: AppWiseOfferShowWidget(
+                          offer: home.newFlashOfferList[index],
+                          isTimeShow: true,
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                 child: Row(
@@ -713,26 +740,31 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              // SizedBox(
-              //   height: 200,
-              //   child: ListView.builder(
-              //     itemCount: homeController2.homeAdvList.length,
-              //     shrinkWrap: true,
-              //     scrollDirection: Axis.horizontal,
-              //     padding: const EdgeInsets.symmetric(horizontal: 6),
-              //     itemBuilder: (context, index) {
-              //       return InkWell(
-              //         onTap: () {
-              //           Get.to(() => DealDetailScreen());
-              //         },
-              //         child: AppWiseOfferShowWidget(
-              //           category: homeController2.homeAdvList[index],
-              //           isTimeShow: true,
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // ),
+              GetBuilder<HomeController>(builder: (home) {
+                return SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    itemCount: home.newFlashOfferList.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () async {
+                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+                          Get.to(() => OfferDetailScreen(
+                                offer: home.offer,
+                              ));
+                        },
+                        child: AppWiseOfferShowWidget(
+                          offer: home.newFlashOfferList[index],
+                          isTimeShow: true,
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                 child: Row(
@@ -754,26 +786,31 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              // SizedBox(
-              //   height: 200,
-              //   child: ListView.builder(
-              //     itemCount: homeController2.homeAdvList.length,
-              //     shrinkWrap: true,
-              //     scrollDirection: Axis.horizontal,
-              //     padding: const EdgeInsets.symmetric(horizontal: 6),
-              //     itemBuilder: (context, index) {
-              //       return InkWell(
-              //         onTap: () {
-              //           Get.to(() => DealDetailScreen());
-              //         },
-              //         child: AppWiseOfferShowWidget(
-              //           category: homeController2.homeAdvList[index],
-              //           isTimeShow: true,
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // ),
+              GetBuilder<HomeController>(builder: (home) {
+                return SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    itemCount: home.newFlashOfferList.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () async {
+                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+                          Get.to(() => OfferDetailScreen(
+                                offer: home.offer,
+                              ));
+                        },
+                        child: AppWiseOfferShowWidget(
+                          offer: home.newFlashOfferList[index],
+                          isTimeShow: true,
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                 child: Row(
@@ -795,26 +832,31 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              // SizedBox(
-              //   height: 200,
-              //   child: ListView.builder(
-              //     itemCount: homeController2.homeAdvList.length,
-              //     shrinkWrap: true,
-              //     scrollDirection: Axis.horizontal,
-              //     padding: const EdgeInsets.symmetric(horizontal: 6),
-              //     itemBuilder: (context, index) {
-              //       return InkWell(
-              //         onTap: () {
-              //           Get.to(() => DealDetailScreen());
-              //         },
-              //         child: AppWiseOfferShowWidget(
-              //           category: homeController2.homeAdvList[index],
-              //           isTimeShow: true,
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // ),
+              GetBuilder<HomeController>(builder: (home) {
+                return SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    itemCount: home.newFlashOfferList.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () async {
+                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+                          Get.to(() => OfferDetailScreen(
+                                offer: home.offer,
+                              ));
+                        },
+                        child: AppWiseOfferShowWidget(
+                          offer: home.newFlashOfferList[index],
+                          isTimeShow: true,
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                 child: Row(
@@ -836,26 +878,31 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              // SizedBox(
-              //   height: 200,
-              //   child: ListView.builder(
-              //     itemCount: homeController2.homeAdvList.length,
-              //     shrinkWrap: true,
-              //     scrollDirection: Axis.horizontal,
-              //     padding: const EdgeInsets.symmetric(horizontal: 6),
-              //     itemBuilder: (context, index) {
-              //       return InkWell(
-              //         onTap: () {
-              //           Get.to(() => DealDetailScreen());
-              //         },
-              //         child: AppWiseOfferShowWidget(
-              //           category: homeController2.homeAdvList[index],
-              //           isTimeShow: true,
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // ),
+              GetBuilder<HomeController>(builder: (home) {
+                return SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    itemCount: home.newFlashOfferList.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () async {
+                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+                          Get.to(() => OfferDetailScreen(
+                                offer: home.offer,
+                              ));
+                        },
+                        child: AppWiseOfferShowWidget(
+                          offer: home.newFlashOfferList[index],
+                          isTimeShow: true,
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }),
               // Padding(
               //   padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
               //   child: Row(
@@ -911,26 +958,31 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              // SizedBox(
-              //   height: 200,
-              //   child: ListView.builder(
-              //     itemCount: homeController2.homeAdvList.length,
-              //     shrinkWrap: true,
-              //     scrollDirection: Axis.horizontal,
-              //     padding: const EdgeInsets.symmetric(horizontal: 6),
-              //     itemBuilder: (context, index) {
-              //       return InkWell(
-              //         onTap: () {
-              //           Get.to(() => DealDetailScreen());
-              //         },
-              //         child: AppWiseOfferShowWidget(
-              //           category: homeController2.homeAdvList[index],
-              //           isTimeShow: true,
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // ),
+              GetBuilder<HomeController>(builder: (home) {
+                return SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    itemCount: home.newFlashOfferList.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () async {
+                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+                          Get.to(() => OfferDetailScreen(
+                                offer: home.offer,
+                              ));
+                        },
+                        child: AppWiseOfferShowWidget(
+                          offer: home.newFlashOfferList[index],
+                          isTimeShow: true,
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                 child: Row(
@@ -952,26 +1004,31 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              // SizedBox(
-              //   height: 200,
-              //   child: ListView.builder(
-              //     itemCount: homeController2.homeAdvList.length,
-              //     shrinkWrap: true,
-              //     scrollDirection: Axis.horizontal,
-              //     padding: const EdgeInsets.symmetric(horizontal: 6),
-              //     itemBuilder: (context, index) {
-              //       return InkWell(
-              //         onTap: () {
-              //           Get.to(() => DealDetailScreen());
-              //         },
-              //         child: AppWiseOfferShowWidget(
-              //           category: homeController2.homeAdvList[index],
-              //           isTimeShow: true,
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // ),
+              GetBuilder<HomeController>(builder: (home) {
+                return SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    itemCount: home.newFlashOfferList.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () async {
+                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+                          Get.to(() => OfferDetailScreen(
+                                offer: home.offer,
+                              ));
+                        },
+                        child: AppWiseOfferShowWidget(
+                          offer: home.newFlashOfferList[index],
+                          isTimeShow: true,
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }),
             ],
           ),
         ),
