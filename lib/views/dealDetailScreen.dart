@@ -1,10 +1,10 @@
 import 'package:cashbackapp/models/adsModel.dart';
-import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
 import 'package:cashbackapp/views/webViewScreen.dart';
 import 'package:cashbackapp/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
 
 class DealDetailScreen extends StatelessWidget {
   final AdsModel ads;
@@ -97,11 +97,15 @@ class DealDetailScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(
-                            () => WebViewScreen(
-                              url: ads.trackingLink,
-                            ),
-                          );
+                          if (global.currentUser.id != null) {
+                            Get.to(
+                              () => WebViewScreen(
+                                url: ads.trackingLink,
+                              ),
+                            );
+                          } else {
+                            Get.to(() => LoginOrSignUpScreen());
+                          }
                         },
                         child: Container(
                           width: Get.width,

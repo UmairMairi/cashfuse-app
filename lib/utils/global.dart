@@ -16,7 +16,7 @@ double lng = 73.0940926;
 String currentLocation = '';
 SharedPreferences sp;
 UserModel currentUser = new UserModel();
-AppInfo appInfo;
+AppInfo appInfo = new AppInfo();
 String timeFormat = '24';
 String appDeviceId;
 String languageCode = 'en';

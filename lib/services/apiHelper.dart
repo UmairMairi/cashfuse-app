@@ -3,6 +3,8 @@ import 'package:cashbackapp/models/adsModel.dart';
 import 'package:cashbackapp/models/appInfoModel.dart';
 import 'package:cashbackapp/models/bannerModel.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
+import 'package:cashbackapp/models/couponModel.dart';
+import 'package:cashbackapp/models/faqModel.dart';
 import 'package:cashbackapp/models/offerModel.dart';
 import 'package:cashbackapp/models/userModel.dart';
 import 'package:cashbackapp/services/dioResult.dart';
@@ -308,6 +310,142 @@ class APIHelper {
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getCampignDetails():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getCoupons() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.COUPON_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<Coupon>.from(response.data['data'].map((x) => Coupon.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.COUPON_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getCoupons():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getFaqs() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.FAQ_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<FaqModel>.from(response.data['data'].map((x) => FaqModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.FAQ_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getFaqs():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getAboutUs() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.ABOUT_US_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = response.data['data'];
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ABOUT_US_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getAboutUs():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getPrivacyPolicy() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.PRIVACY_POLICY_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = response.data['data'];
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.PRIVACY_POLICY_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getPrivacyPolicy():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getAccountDetails() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.ACCOUNT_DETAILS_URI}?user_id=${global.currentUser.id}',
+          options: Options(
+            headers: await global.getApiHeaders(true),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = response.data['data'];
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ACCOUNT_DETAILS_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getAccountDetails():" + e.toString());
+    }
+  }
+
+  Future<dynamic> addAccountDetails() async {
+    try {
+      Response response;
+      var dio = Dio();
+      var data = FormData.fromMap({
+        'user_id': global.currentUser.id,
+      });
+      response = await dio.post('${global.baseUrl}${AppConstants.ADD_ACCOUNT_DETAILS_URI}',
+          data: data,
+          options: Options(
+            headers: await global.getApiHeaders(true),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = response.data['data'];
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_ACCOUNT_DETAILS_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - addAccountDetails():" + e.toString());
     }
   }
 }

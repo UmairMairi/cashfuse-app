@@ -1,9 +1,13 @@
-import 'package:cashbackapp/views/aboutScreen.dart';
+import 'package:cashbackapp/views/helpDetailSceen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
+import '../controllers/commonController.dart';
+
 class FaqScreen extends StatelessWidget {
+  CommonController commonController = Get.find<CommonController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,34 +35,40 @@ class FaqScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView.builder(
-        padding: EdgeInsets.only(top: 5),
-        shrinkWrap: true,
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              Get.to(() => AboutScreen());
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'How to use CashKaro?',
-                    style: Get.theme.primaryTextTheme.bodyText2.copyWith(color: Colors.grey[600]),
+      body: GetBuilder<CommonController>(builder: (controller) {
+        return ListView.builder(
+          padding: EdgeInsets.only(top: 5),
+          shrinkWrap: true,
+          itemCount: commonController.faqList.length,
+          itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () {
+                Get.to(
+                  () => HelpDetailSceen(
+                    faq: commonController.faqList[index],
                   ),
-                ),
-                Divider(
-                  color: Colors.grey,
-                  thickness: 1,
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+                );
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      commonController.faqList[index].ques,
+                      style: Get.theme.primaryTextTheme.bodyText2.copyWith(color: Colors.grey[600]),
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                    thickness: 1,
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      }),
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

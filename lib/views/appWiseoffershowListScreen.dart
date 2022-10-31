@@ -1,5 +1,4 @@
 import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/views/dealDetailScreen.dart';
 import 'package:cashbackapp/views/filterScreen.dart';
 import 'package:cashbackapp/views/offerDetailScreen.dart';
 import 'package:cashbackapp/widget/appWiseoffershowWidget.dart';

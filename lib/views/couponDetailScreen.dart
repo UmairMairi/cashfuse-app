@@ -1,3 +1,5 @@
+import 'package:cashbackapp/controllers/homeController.dart';
+import 'package:cashbackapp/models/couponModel.dart';
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:custom_clippers/custom_clippers.dart';
@@ -9,6 +11,10 @@ import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:slide_countdown/slide_countdown.dart';
 
 class CouponDetailScreen extends StatelessWidget {
+  final Coupon coupon;
+  CouponDetailScreen({this.coupon});
+  HomeController homeController = Get.find<HomeController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,25 +74,29 @@ class CouponDetailScreen extends StatelessWidget {
               'Deal ends in:',
               style: Get.theme.primaryTextTheme.subtitle2,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: SlideCountdownSeparated(
-                separatorType: SeparatorType.symbol,
-                durationTitle: DurationTitle(
-                  hours: 'hr',
-                  minutes: 'min',
-                  seconds: 'sec',
-                  days: 'day',
-                ),
-                slideDirection: SlideDirection.none,
-                textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
-                decoration: BoxDecoration(
-                  color: Colors.red[800],
-                  borderRadius: BorderRadius.circular(3),
-                ),
-                duration: const Duration(hours: 2),
-              ),
-            ),
+            homeController.countTimer(DateTime.now(), coupon.endDate) != null
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: SlideCountdownSeparated(
+                      separatorType: SeparatorType.symbol,
+                      durationTitle: DurationTitle(
+                        hours: 'hr',
+                        minutes: 'min',
+                        seconds: 'sec',
+                        days: 'day',
+                      ),
+                      slideDirection: SlideDirection.none,
+                      textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
+                      decoration: BoxDecoration(
+                        color: Colors.red[800],
+                        borderRadius: BorderRadius.circular(3),
+                      ),
+                      duration: Duration(
+                        days: homeController.countTimer(DateTime.now(), coupon.endDate),
+                      ),
+                    ),
+                  )
+                : SizedBox(),
             SizedBox(
               height: 20,
             ),
@@ -150,7 +160,7 @@ class CouponDetailScreen extends StatelessWidget {
                           padding: EdgeInsets.all(10),
                           color: Get.theme.secondaryHeaderColor,
                           child: Text(
-                            'CB50',
+                            coupon.code,
                             style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                               color: Get.theme.secondaryHeaderColor,
                             ),
@@ -161,7 +171,7 @@ class CouponDetailScreen extends StatelessWidget {
                         onTap: () {
                           Clipboard.setData(
                             ClipboardData(
-                              text: 'MYNTRA200',
+                              text: coupon.code,
                             ),
                           ).then((value) {
                             showCustomSnackBar(

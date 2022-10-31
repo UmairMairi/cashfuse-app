@@ -1,5 +1,6 @@
 import 'package:cashbackapp/controllers/authController.dart';
 import 'package:cashbackapp/controllers/commonController.dart';
+import 'package:cashbackapp/controllers/couponController.dart';
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/controllers/networkController.dart';
 import 'package:cashbackapp/controllers/ratingController.dart';
@@ -17,5 +18,6 @@ class NetworkBinding extends Bindings {
     Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
     Get.lazyPut<CommonController>(() => CommonController(), fenix: true);
     Get.lazyPut<RatingController>(() => RatingController(), fenix: true);
+    Get.lazyPut<CouponController>(() => CouponController(), fenix: true);
   }
 }

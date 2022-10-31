@@ -1,6 +1,7 @@
 import 'package:cashbackapp/controllers/authController.dart';
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashbackapp/views/aboutUsScreen.dart';
 import 'package:cashbackapp/views/accountSettingScreen.dart';
 import 'package:cashbackapp/views/appTabinationScreen.dart';
 import 'package:cashbackapp/views/getHelpScreen.dart';
@@ -416,6 +417,32 @@ class ProfieScreen extends StatelessWidget {
                       ),
                       Divider(
                         height: 0,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => AboutUsScreen());
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.info_outline,
+                                color: Get.theme.iconTheme.color,
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                'About Us',
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                       InkWell(
                         onTap: () {

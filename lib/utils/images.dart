@@ -40,6 +40,6 @@ class Images {
   static const String webview_gif = "assets/images/webview_gif.gif";
   static const String paytm = "assets/images/paytm.jpg";
   static const String upi = "assets/images/upi.png";
-  static const String bank = "assets/images/bank.jpg";
+  static const String bank = "assets/images/bank.png";
   static const String Amazon_pay = "assets/images/Amazon-pay.jpg";
 }

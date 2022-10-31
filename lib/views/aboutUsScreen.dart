@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 
-class PrivacyPolicyScreen extends StatelessWidget {
+class AboutUsScreen extends StatelessWidget {
   CommonController commonController = Get.find<CommonController>();
 
   @override
@@ -20,7 +20,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Privacy Policy',
+          'About Us',
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
       ),
@@ -31,7 +31,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
           margin: EdgeInsets.all(10).copyWith(bottom: 0),
           child: SingleChildScrollView(
             child: Html(
-              data: commonController.privacyPolicy,
+              data: commonController.aboutUs,
             ),
           ),
         );

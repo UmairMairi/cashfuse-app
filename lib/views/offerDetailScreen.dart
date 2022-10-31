@@ -1,6 +1,7 @@
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/offerModel.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
 import 'package:cashbackapp/views/moreOfferScreen.dart';
 import 'package:cashbackapp/views/webViewScreen.dart';
 import 'package:cashbackapp/widget/customImage.dart';
@@ -14,10 +15,11 @@ import 'package:slide_countdown/slide_countdown.dart';
 class OfferDetailScreen extends StatelessWidget {
   final OfferModel offer;
   OfferDetailScreen({this.offer});
+  HomeController homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(builder: (homeController) {
+    return GetBuilder<HomeController>(builder: (homeController1) {
       return Scaffold(
         body: CustomScrollView(
           slivers: [
@@ -147,7 +149,7 @@ class OfferDetailScreen extends StatelessWidget {
                         //   textAlign: TextAlign.center,
                         //   style: TextStyle(fontWeight: FontWeight.w600),
                         // ),
-                        Get.find<HomeController>().countTimer(DateTime.now(), offer.endDate) != null
+                        homeController.countTimer(DateTime.now(), offer.endDate) != null
                             ? Container(
                                 decoration: BoxDecoration(
                                   color: Colors.grey[100],
@@ -178,7 +180,7 @@ class OfferDetailScreen extends StatelessWidget {
                                           color: Colors.red[800],
                                           borderRadius: BorderRadius.circular(3),
                                         ),
-                                        duration: Duration(days: Get.find<HomeController>().countTimer(DateTime.now(), offer.endDate)),
+                                        duration: Duration(days: homeController.countTimer(DateTime.now(), offer.endDate)),
                                       ),
                                     ),
                                   ],
@@ -187,9 +189,15 @@ class OfferDetailScreen extends StatelessWidget {
                             : SizedBox(),
                         InkWell(
                           onTap: () {
-                            Get.to(() => WebViewScreen(
+                            if (global.currentUser.id != null) {
+                              Get.to(
+                                () => WebViewScreen(
                                   url: offer.url,
-                                ));
+                                ),
+                              );
+                            } else {
+                              Get.to(() => LoginOrSignUpScreen());
+                            }
                           },
                           child: Container(
                             width: Get.width,

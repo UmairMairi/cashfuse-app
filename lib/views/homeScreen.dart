@@ -1,12 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cashbackapp/controllers/couponController.dart';
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/commonModel.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/views/appWiseoffershowListScreen.dart';
 import 'package:cashbackapp/views/categoryScreen.dart';
 import 'package:cashbackapp/views/couponDetailScreen.dart';
-import 'package:cashbackapp/views/dealDetailScreen.dart';
 import 'package:cashbackapp/views/faqSceen.dart';
+import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
 import 'package:cashbackapp/views/myEarningScreen.dart';
 import 'package:cashbackapp/views/offerDetailScreen.dart';
 import 'package:cashbackapp/views/storeOfferListSceen.dart';
@@ -29,6 +30,7 @@ class HomeScreen extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   HomeController homeController2 = Get.find<HomeController>();
+  CouponController couponC = Get.find<CouponController>();
 
   @override
   Widget build(BuildContext context) {
@@ -126,11 +128,15 @@ class HomeScreen extends StatelessWidget {
                           return InkWell(
                             onTap: () async {
                               if (controller.topBannerList[index].type == 'url') {
-                                Get.to(
-                                  () => WebViewScreen(
-                                    url: controller.topBannerList[index].url,
-                                  ),
-                                );
+                                if (global.currentUser.id != null) {
+                                  Get.to(
+                                    () => WebViewScreen(
+                                      url: controller.topBannerList[index].url,
+                                    ),
+                                  );
+                                } else {
+                                  Get.to(() => LoginOrSignUpScreen());
+                                }
                               } else {
                                 await controller.getOfferDetails(
                                   controller.topBannerList[index].offerId.toString(),
@@ -344,26 +350,34 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 100,
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 6),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        Get.to(() => CouponDetailScreen());
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: CouponWidget(),
-                      ),
-                    );
-                  },
-                ),
-              ),
+              GetBuilder<CouponController>(builder: (couponController) {
+                return SizedBox(
+                  height: 100,
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: couponC.couponList.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          Get.to(
+                            () => CouponDetailScreen(
+                              coupon: couponC.couponList[index],
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: CouponWidget(
+                            coupon: couponC.couponList[index],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
                 child: Text(

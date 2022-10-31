@@ -1,10 +1,15 @@
-import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/models/couponModel.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashbackapp/widget/customImage.dart';
 import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CouponWidget extends StatelessWidget {
+  final Coupon coupon;
+  CouponWidget({this.coupon});
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -33,12 +38,18 @@ class CouponWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      Images.amazon,
-                      width: 70,
+                    CustomImage(
+                      image: '${global.appInfo.baseUrls.partnerImageUrl}/${coupon.image}',
+                      //width: 70,
+                      height: 30,
+                      fit: BoxFit.cover,
                     ),
+                    // Image.asset(
+                    //   Images.amazon,
+                    //   width: 70,
+                    // ),
                     Text(
-                      'Amazon offer',
+                      coupon.name,
                       style: Get.theme.primaryTextTheme.subtitle1.copyWith(
                         fontWeight: FontWeight.w600,
                         color: Get.theme.primaryColor,
@@ -47,7 +58,7 @@ class CouponWidget extends StatelessWidget {
                     SizedBox(
                       width: 180,
                       child: Text(
-                        'Get upto 50% off on women & mens clothing',
+                        coupon.heading,
                         style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                           color: Colors.grey[500],
                         ),

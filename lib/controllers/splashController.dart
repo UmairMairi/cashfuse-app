@@ -34,38 +34,27 @@ class SplashController extends GetxController {
       Timer(Duration(seconds: 5), () async {
         global.appDeviceId = await FirebaseMessaging.instance.getToken();
         global.sp = await SharedPreferences.getInstance();
-
         log(global.appDeviceId);
-        await getAppInfo();
-        if (global.sp.getString('currentUser') != null) {
-          global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
-          Get.to(() => BottomNavigationBarScreen());
+        if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+          await apiHelper.getAppInfo().then((response) {
+            if (response.statusCode == 200) {
+              global.appInfo = response.data;
+              if (global.sp.getString('currentUser') != null) {
+                global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
+                Get.to(() => BottomNavigationBarScreen());
+              } else {
+                Get.to(() => GetStartedScreen());
+              }
+            } else {
+              showCustomSnackBar(response.message);
+            }
+          });
         } else {
-          Get.to(() => GetStartedScreen());
+          showCustomSnackBar(AppConstants.NO_INTERNET);
         }
       });
     } catch (e) {
       print("Exception - SplashController.dart - init():" + e.toString());
-    }
-  }
-
-  Future getAppInfo() async {
-    try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
-        await apiHelper.getAppInfo().then((response) {
-          if (response.statusCode == 200) {
-            global.appInfo = response.data;
-          } else {
-            showCustomSnackBar(response.message);
-          }
-        });
-      } else {
-        showCustomSnackBar(AppConstants.NO_INTERNET);
-      }
-
-      update();
-    } catch (e) {
-      print("Exception - splashController.dart - getAppInfo():" + e.toString());
     }
   }
 }
