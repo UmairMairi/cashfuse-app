@@ -40,6 +40,7 @@ class UserModel {
       status = json["status"];
       createdAt = DateTime.parse(json["created_at"]);
       updatedAt = DateTime.parse(json["updated_at"]);
+      token = json['token'] != null ? json['token'] : null;
     } catch (e) {
       print("Exception - UserModel.dart - UserModel.fromJson():" + e.toString());
     }

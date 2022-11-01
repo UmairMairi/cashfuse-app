@@ -53,6 +53,7 @@ dependencies:
   rating_bar: ^0.2.0
   custom_clippers: ^2.0.0
   webview_flutter: ^3.0.4
+  flutter_inappwebview: ^5.7.1
 
   #CONNECTIVITY
   connectivity_plus: ^2.1.0

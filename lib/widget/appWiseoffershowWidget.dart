@@ -11,6 +11,8 @@ class AppWiseOfferShowWidget extends StatelessWidget {
   final OfferModel offer;
   AppWiseOfferShowWidget({this.isTimeShow, this.offer});
 
+  HomeController homeController = Get.find<HomeController>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -60,7 +62,7 @@ class AppWiseOfferShowWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Get.find<HomeController>().countTimer(DateTime.now(), offer.endDate) != null
+                  homeController.countTimer(DateTime.now(), offer.endDate) != null
                       ? SlideCountdown(
                           slideDirection: SlideDirection.none,
                           textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
@@ -68,7 +70,7 @@ class AppWiseOfferShowWidget extends StatelessWidget {
                             color: Colors.red[800],
                             borderRadius: BorderRadius.circular(3),
                           ),
-                          duration: Duration(days: Get.find<HomeController>().countTimer(DateTime.now(), offer.endDate)),
+                          duration: Duration(days: homeController.countTimer(DateTime.now(), offer.endDate)),
                         )
                       : SizedBox(),
                   Container(

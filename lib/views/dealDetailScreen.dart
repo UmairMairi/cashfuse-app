@@ -1,3 +1,4 @@
+import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/adsModel.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
@@ -9,6 +10,8 @@ import 'package:get/get.dart';
 class DealDetailScreen extends StatelessWidget {
   final AdsModel ads;
   DealDetailScreen({this.ads});
+
+  HomeController homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -96,11 +99,12 @@ class DealDetailScreen extends StatelessWidget {
                         ],
                       ),
                       InkWell(
-                        onTap: () {
+                        onTap: () async {
                           if (global.currentUser.id != null) {
+                            await homeController.getTrackingLink(ads.landingPage, ads.affiliatePartner, cId: ads.cId);
                             Get.to(
                               () => WebViewScreen(
-                                url: ads.trackingLink,
+                                url: homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.trackingLink,
                               ),
                             );
                           } else {

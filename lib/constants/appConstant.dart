@@ -21,5 +21,10 @@ class AppConstants {
   static const String ABOUT_US_URI = '/about_us';
   static const String PRIVACY_POLICY_URI = '/privacy_policy';
   static const String ACCOUNT_DETAILS_URI = '/get_bank_detail';
-  static const String ADD_ACCOUNT_DETAILS_URI = '/add_bank_detail';
+  static const String ADD_BANK_DETAILS_URI = '/add_bank_detail';
+  static const String ADD_AMAZON_DETAILS_URI = '/add_amazon_detail';
+  static const String ADD_PAYTM_DETAILS_URI = '/add_paytm_detail';
+  static const String ADD_UPI_DETAILS_URI = '/add_upi_detail';
+  static const String TRACKING_LINK_URI = '/get_tracking_link';
+  static const String SEARCH_URI = '/search';
 }

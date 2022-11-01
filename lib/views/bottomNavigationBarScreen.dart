@@ -18,11 +18,11 @@ class BottomNavigationBarScreen extends StatelessWidget {
   bool _canExit = GetPlatform.isWeb ? true : false;
 
   List<Widget> iconList = [
-    Icon(Icons.home_outlined),
+    Icon(Icons.home),
     Icon(Icons.search),
     Icon(Icons.abc),
-    Icon(Icons.ads_click_rounded),
-    Icon(Icons.person_outline),
+    Icon(Icons.light_mode_outlined),
+    Icon(Icons.person),
   ];
 
   List<String> tabList = [
@@ -72,7 +72,7 @@ class BottomNavigationBarScreen extends StatelessWidget {
           },
           child: Scaffold(
             bottomNavigationBar: SizedBox(
-              height: 52,
+              height: kBottomNavigationBarHeight,
               child: Stack(
                 alignment: Alignment.topCenter,
                 clipBehavior: Clip.none,
@@ -82,12 +82,12 @@ class BottomNavigationBarScreen extends StatelessWidget {
                     iconSize: 22,
                     type: BottomNavigationBarType.fixed,
                     selectedItemColor: Get.theme.secondaryHeaderColor,
-                    unselectedItemColor: Colors.black,
+                    unselectedItemColor: Colors.grey[450],
                     currentIndex: navController.bottomNavIndex.value,
                     showSelectedLabels: true,
                     showUnselectedLabels: true,
-                    selectedLabelStyle: TextStyle(fontSize: 8, fontWeight: FontWeight.w300),
-                    unselectedLabelStyle: TextStyle(fontSize: 8, fontWeight: FontWeight.w300),
+                    selectedLabelStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
+                    unselectedLabelStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
                     items: List.generate(iconList.length, (index) {
                       return BottomNavigationBarItem(
                         icon: iconList[index],
@@ -100,7 +100,7 @@ class BottomNavigationBarScreen extends StatelessWidget {
                     },
                   ),
                   Positioned(
-                    bottom: 20,
+                    bottom: 24,
                     child: InkWell(
                       onTap: () {
                         navController.setBottomIndex(2);

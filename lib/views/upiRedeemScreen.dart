@@ -1,10 +1,15 @@
+import 'package:cashbackapp/controllers/paymentController.dart';
 import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UpiRedeemScreen extends StatelessWidget {
   final fContactNo = new FocusNode();
   final fUpiId = new FocusNode();
+  var upiId = TextEditingController();
+
+  PaymentController paymentController = Get.find<PaymentController>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,141 +66,179 @@ class UpiRedeemScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Account Details',
-                          style: Get.theme.primaryTextTheme.subtitle1.copyWith(fontWeight: FontWeight.w600),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.dialog(
-                              Dialog(
-                                child: Container(
-                                  height: 250,
-                                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      // SizedBox(
-                                      //   height: 20,
-                                      // ),
-                                      Text(
-                                        'Add Upi Account',
-                                        style: Get.theme.primaryTextTheme.headline6.copyWith(fontWeight: FontWeight.w600),
-                                      ),
-                                      TextFormField(
-                                        focusNode: fContactNo,
-                                        scrollPadding: EdgeInsets.zero,
-                                        cursorColor: Get.theme.primaryColor,
-                                        decoration: InputDecoration(
-                                          contentPadding: EdgeInsets.zero,
-                                          hintText: 'Mobile Number',
-                                          labelStyle: TextStyle(
-                                            color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
+              GetBuilder<PaymentController>(builder: (controller) {
+                return Container(
+                  margin: EdgeInsets.symmetric(vertical: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Account Details',
+                            style: Get.theme.primaryTextTheme.subtitle1.copyWith(fontWeight: FontWeight.w600),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              if (paymentController.upiDetails != null) {
+                                upiId.text = paymentController.upiDetails.upi;
+                              }
+                              Get.dialog(
+                                Dialog(
+                                  child: Container(
+                                    height: 210,
+                                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        // SizedBox(
+                                        //   height: 20,
+                                        // ),
+                                        Text(
+                                          'Add Upi Account',
+                                          style: Get.theme.primaryTextTheme.headline6.copyWith(fontWeight: FontWeight.w600),
+                                        ),
+                                        // TextFormField(
+                                        //   focusNode: fContactNo,
+                                        //   scrollPadding: EdgeInsets.zero,
+                                        //   cursorColor: Get.theme.primaryColor,
+                                        //   decoration: InputDecoration(
+                                        //     contentPadding: EdgeInsets.zero,
+                                        //     hintText: 'Mobile Number',
+                                        //     labelStyle: TextStyle(
+                                        //       color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                        //     ),
+                                        //     focusColor: Get.theme.primaryColor,
+                                        //     focusedBorder: UnderlineInputBorder(
+                                        //         borderSide: BorderSide(
+                                        //       color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                        //     )),
+                                        //     border: UnderlineInputBorder(
+                                        //         borderSide: BorderSide(
+                                        //       color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                        //     )),
+                                        //     enabledBorder: UnderlineInputBorder(
+                                        //         borderSide: BorderSide(
+                                        //       color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                        //     )),
+                                        //   ),
+                                        //   onTap: () {
+                                        //     //FocusScope.of(context).unfocus(disposition: UnfocusDisposition.previouslyFocusedChild);
+                                        //     FocusScope.of(context).requestFocus(fContactNo);
+                                        //   },
+                                        // ),
+                                        TextFormField(
+                                          focusNode: fUpiId,
+                                          controller: upiId,
+                                          scrollPadding: EdgeInsets.zero,
+                                          cursorColor: Get.theme.primaryColor,
+                                          keyboardType: TextInputType.emailAddress,
+                                          decoration: InputDecoration(
+                                            contentPadding: EdgeInsets.zero,
+                                            hintText: 'UPI address',
+                                            labelStyle: TextStyle(
+                                              color: fUpiId.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                            ),
+                                            focusColor: Get.theme.primaryColor,
+                                            focusedBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                              color: fUpiId.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                            )),
+                                            border: UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                              color: fUpiId.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                            )),
+                                            enabledBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                              color: fUpiId.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                            )),
                                           ),
-                                          focusColor: Get.theme.primaryColor,
-                                          focusedBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                            color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                                          )),
-                                          border: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                            color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                                          )),
-                                          enabledBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                            color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                                          )),
+                                          onTap: () {
+                                            //FocusScope.of(context).unfocus(disposition: UnfocusDisposition.previouslyFocusedChild);
+                                            FocusScope.of(context).requestFocus(fUpiId);
+                                          },
                                         ),
-                                        onTap: () {
-                                          //FocusScope.of(context).unfocus(disposition: UnfocusDisposition.previouslyFocusedChild);
-                                          FocusScope.of(context).requestFocus(fContactNo);
-                                        },
-                                      ),
-                                      TextFormField(
-                                        focusNode: fUpiId,
-                                        scrollPadding: EdgeInsets.zero,
-                                        cursorColor: Get.theme.primaryColor,
-                                        decoration: InputDecoration(
-                                          contentPadding: EdgeInsets.zero,
-                                          hintText: 'UPI address',
-                                          labelStyle: TextStyle(
-                                            color: fUpiId.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                        InkWell(
+                                          onTap: () {
+                                            if (upiId.text.isNotEmpty) {
+                                              Get.back();
+                                              paymentController.addUpiDetails(upiId.text.trim());
+                                            } else {
+                                              showCustomSnackBar('Please enter UPI address.');
+                                            }
+                                          },
+                                          child: Container(
+                                            height: 45,
+                                            width: Get.width / 3,
+                                            margin: EdgeInsets.only(top: 30),
+                                            padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                                            decoration: BoxDecoration(
+                                              color: Get.theme.secondaryHeaderColor,
+                                              borderRadius: BorderRadius.circular(5),
+                                            ),
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              paymentController.upiDetails != null ? 'EDIT' : 'ADD +',
+                                              style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                                            ),
                                           ),
-                                          focusColor: Get.theme.primaryColor,
-                                          focusedBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                            color: fUpiId.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                                          )),
-                                          border: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                            color: fUpiId.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                                          )),
-                                          enabledBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                            color: fUpiId.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                                          )),
                                         ),
-                                        onTap: () {
-                                          //FocusScope.of(context).unfocus(disposition: UnfocusDisposition.previouslyFocusedChild);
-                                          FocusScope.of(context).requestFocus(fUpiId);
-                                        },
-                                      ),
-                                      Container(
-                                        height: 45,
-                                        width: Get.width / 3,
-                                        margin: EdgeInsets.only(top: 30),
-                                        padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-                                        decoration: BoxDecoration(
-                                          color: Get.theme.secondaryHeaderColor,
-                                          borderRadius: BorderRadius.circular(5),
-                                        ),
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          'ADD +',
-                                          style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                                        ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
+                              );
+                            },
+                            child: Container(
+                              height: 45,
+                              //margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                              padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                              decoration: BoxDecoration(
+                                color: Get.theme.secondaryHeaderColor,
+                                borderRadius: BorderRadius.circular(5),
                               ),
-                            );
-                          },
-                          child: Container(
-                            height: 45,
-                            //margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                            padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: Get.theme.secondaryHeaderColor,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            alignment: Alignment.center,
-                            child: Text(
-                              'ADD +',
-                              style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                              alignment: Alignment.center,
+                              child: Text(
+                                paymentController.upiDetails != null ? 'EDIT' : 'ADD +',
+                                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
+                        ],
+                      ),
+                      paymentController.upiDetails != null
+                          ? RichText(
+                              text: TextSpan(
+                                text: "UPI address: ",
+                                style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                  letterSpacing: -0.2,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: paymentController.upiDetails.upi,
+                                    style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                      letterSpacing: -0.2,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : SizedBox(),
+                    ],
+                  ),
+                );
+              }),
             ],
           ),
         ),

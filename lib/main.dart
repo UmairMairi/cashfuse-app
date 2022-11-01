@@ -11,6 +11,7 @@ import 'package:cashbackapp/views/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart' as webview;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,23 @@ void main() async {
 
   HttpOverrides.global = new MyHttpOverrides();
   await Firebase.initializeApp();
+  if (Platform.isAndroid) {
+    await webview.AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
+
+    var swAvailable = await webview.AndroidWebViewFeature.isFeatureSupported(webview.AndroidWebViewFeature.SERVICE_WORKER_BASIC_USAGE);
+    var swInterceptAvailable = await webview.AndroidWebViewFeature.isFeatureSupported(webview.AndroidWebViewFeature.SERVICE_WORKER_SHOULD_INTERCEPT_REQUEST);
+
+    if (swAvailable && swInterceptAvailable) {
+      webview.AndroidServiceWorkerController serviceWorkerController = webview.AndroidServiceWorkerController.instance();
+
+      await serviceWorkerController.setServiceWorkerClient(webview.AndroidServiceWorkerClient(
+        shouldInterceptRequest: (request) async {
+          print(request);
+          return null;
+        },
+      ));
+    }
+  }
   runApp(
     MyApp(),
   );

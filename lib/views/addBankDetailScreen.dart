@@ -1,13 +1,11 @@
+import 'package:cashbackapp/controllers/paymentController.dart';
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/widget/addBankAccountDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddPaymentDetailScreen extends StatelessWidget {
-  final fnameFocus = new FocusNode();
-  final cPasswordFocus = new FocusNode();
-  final newPasswordFocus = new FocusNode();
-  final conPasswordFocus = new FocusNode();
+  PaymentController paymentController = Get.find<PaymentController>();
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +69,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,13 +97,92 @@ class AddPaymentDetailScreen extends StatelessWidget {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              'ADD +',
+                              paymentController.bankDetails != null ? 'EDIT' : 'ADD +',
                               style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                             ),
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    paymentController.bankDetails != null
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  text: "Holder Name: ",
+                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                    letterSpacing: -0.2,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: paymentController.bankDetails.acHolderName,
+                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        letterSpacing: -0.2,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  text: "Account No. ",
+                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                    letterSpacing: -0.2,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: paymentController.bankDetails.acNo,
+                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        letterSpacing: -0.2,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  text: "Bank Name: ",
+                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                    letterSpacing: -0.2,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: paymentController.bankDetails.bankName,
+                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        letterSpacing: -0.2,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  text: "IFSC Code: ",
+                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                    letterSpacing: -0.2,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: paymentController.bankDetails.ifsc,
+                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        letterSpacing: -0.2,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
+                        : SizedBox(),
                   ],
                 ),
               ),

@@ -1,11 +1,15 @@
+import 'dart:developer';
+
 import 'package:cashbackapp/constants/appConstant.dart';
 import 'package:cashbackapp/models/adsModel.dart';
 import 'package:cashbackapp/models/appInfoModel.dart';
+import 'package:cashbackapp/models/bankDetailsModel.dart';
 import 'package:cashbackapp/models/bannerModel.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
 import 'package:cashbackapp/models/couponModel.dart';
 import 'package:cashbackapp/models/faqModel.dart';
 import 'package:cashbackapp/models/offerModel.dart';
+import 'package:cashbackapp/models/searchDataModel.dart';
 import 'package:cashbackapp/models/userModel.dart';
 import 'package:cashbackapp/services/dioResult.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
@@ -412,7 +416,7 @@ class APIHelper {
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = response.data['data'];
+        recordList = BankDetailsModel.fromJson(response.data['data']);
       } else {
         recordList = null;
       }
@@ -423,14 +427,18 @@ class APIHelper {
     }
   }
 
-  Future<dynamic> addAccountDetails() async {
+  Future<dynamic> addBankDetails(String acHolderName, String accountNo, String bankName, String ifscCode) async {
     try {
       Response response;
       var dio = Dio();
       var data = FormData.fromMap({
         'user_id': global.currentUser.id,
+        'holder_name': acHolderName,
+        'ac_no': accountNo,
+        'bank_name': bankName,
+        'ifsc': ifscCode,
       });
-      response = await dio.post('${global.baseUrl}${AppConstants.ADD_ACCOUNT_DETAILS_URI}',
+      response = await dio.post('${global.baseUrl}${AppConstants.ADD_BANK_DETAILS_URI}',
           data: data,
           options: Options(
             headers: await global.getApiHeaders(true),
@@ -438,14 +446,146 @@ class APIHelper {
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = response.data['data'];
+        recordList = BankDetailsModel.fromJson(response.data['data']);
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_ACCOUNT_DETAILS_URI}\n${response.data}');
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_BANK_DETAILS_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
-      print("Exception -  apiHelper.dart - addAccountDetails():" + e.toString());
+      print("Exception -  apiHelper.dart - addBankDetails():" + e.toString());
+    }
+  }
+
+  Future<dynamic> addAmazonPayDetails(String amazonNo) async {
+    try {
+      Response response;
+      var dio = Dio();
+      var data = FormData.fromMap({
+        'user_id': global.currentUser.id,
+        'amazon_no': amazonNo,
+      });
+      response = await dio.post('${global.baseUrl}${AppConstants.ADD_AMAZON_DETAILS_URI}',
+          data: data,
+          options: Options(
+            headers: await global.getApiHeaders(true),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = BankDetailsModel.fromJson(response.data['data']);
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_AMAZON_DETAILS_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - addAmazonPayDetails():" + e.toString());
+    }
+  }
+
+  Future<dynamic> addPayTMDetails(String paytmNo) async {
+    try {
+      Response response;
+      var dio = Dio();
+      var data = FormData.fromMap({
+        'user_id': global.currentUser.id,
+        'paytm_no': paytmNo,
+      });
+      response = await dio.post('${global.baseUrl}${AppConstants.ADD_PAYTM_DETAILS_URI}',
+          data: data,
+          options: Options(
+            headers: await global.getApiHeaders(true),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = BankDetailsModel.fromJson(response.data['data']);
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_PAYTM_DETAILS_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - addPayTMDetails():" + e.toString());
+    }
+  }
+
+  Future<dynamic> addUpiDetails(String upi) async {
+    try {
+      Response response;
+      var dio = Dio();
+      var data = FormData.fromMap({
+        'user_id': global.currentUser.id,
+        'upi': upi,
+      });
+      response = await dio.post('${global.baseUrl}${AppConstants.ADD_UPI_DETAILS_URI}',
+          data: data,
+          options: Options(
+            headers: await global.getApiHeaders(true),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = BankDetailsModel.fromJson(response.data['data']);
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_UPI_DETAILS_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - addUpiDetails():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getTrackingLink(String url, String type, {String cId}) async {
+    try {
+      Response response;
+      var dio = Dio();
+
+      response = await dio.get(
+        cId != null ? '${global.baseUrl}${AppConstants.TRACKING_LINK_URI}?user_id=${global.currentUser.id}&url=$url&type=$type&c_id=$cId' : '${global.baseUrl}${AppConstants.TRACKING_LINK_URI}?user_id=${global.currentUser.id}&url=$url&type=$type',
+        options: Options(
+          headers: await global.getApiHeaders(true),
+        ),
+      );
+
+      log('${global.baseUrl}${AppConstants.TRACKING_LINK_URI}?user_id=${global.currentUser.id}&url=$url&type=$type&c_id=$cId +++++' '${global.baseUrl}${AppConstants.TRACKING_LINK_URI}?user_id=${global.currentUser.id}&url=$url&type=$type');
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = response.data['tracking_link'];
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.TRACKING_LINK_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getTrackingLink():" + e.toString());
+    }
+  }
+
+  Future<dynamic> search(String keyword) async {
+    try {
+      Response response;
+      var dio = Dio();
+      var formData = FormData.fromMap({'keyword': keyword});
+      response = await dio.post(
+        '${global.baseUrl}${AppConstants.SEARCH_URI}',
+        data: formData,
+        options: Options(headers: await global.getApiHeaders(false)),
+      );
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = SearchDataModel.fromJson(response.data);
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.SEARCH_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - search():" + e.toString());
     }
   }
 }

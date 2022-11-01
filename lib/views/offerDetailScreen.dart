@@ -188,11 +188,12 @@ class OfferDetailScreen extends StatelessWidget {
                               )
                             : SizedBox(),
                         InkWell(
-                          onTap: () {
+                          onTap: () async {
                             if (global.currentUser.id != null) {
+                              await homeController.getTrackingLink(offer.url, offer.affiliatePartner);
                               Get.to(
                                 () => WebViewScreen(
-                                  url: offer.url,
+                                  url: homeController.createdLink.isNotEmpty ? homeController.createdLink : offer.url,
                                 ),
                               );
                             } else {

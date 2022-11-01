@@ -1,6 +1,7 @@
 class AdsModel {
   int id;
   String adId;
+  String cId;
   String advName;
   String advId;
   String trackingLink;
@@ -21,6 +22,7 @@ class AdsModel {
   AdsModel({
     this.id,
     this.adId,
+    this.cId,
     this.advName,
     this.advId,
     this.trackingLink,
@@ -43,6 +45,7 @@ class AdsModel {
     try {
       id = json["id"];
       adId = json["ad_id"];
+      cId = json["c_id"];
       advId = json["adv_id"];
       advName = json["adv_name"];
 

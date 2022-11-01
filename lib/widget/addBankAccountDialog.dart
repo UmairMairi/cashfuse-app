@@ -1,4 +1,7 @@
+import 'package:cashbackapp/controllers/paymentController.dart';
+import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class AddBankAccountDialog extends StatelessWidget {
@@ -7,8 +10,21 @@ class AddBankAccountDialog extends StatelessWidget {
   final fBankName = new FocusNode();
   final fIfscCode = new FocusNode();
 
+  var name = new TextEditingController();
+  var accountNo = new TextEditingController();
+  var bankName = new TextEditingController();
+  var ifscCode = new TextEditingController();
+
+  PaymentController paymentController = Get.find<PaymentController>();
+
   @override
   Widget build(BuildContext context) {
+    if (paymentController.bankDetails != null) {
+      name.text = paymentController.bankDetails.acHolderName;
+      accountNo.text = paymentController.bankDetails.acNo;
+      bankName.text = paymentController.bankDetails.bankName;
+      ifscCode.text = paymentController.bankDetails.ifsc;
+    }
     return Container(
       height: 410,
       padding: EdgeInsets.symmetric(vertical: 20),
@@ -34,8 +50,10 @@ class AddBankAccountDialog extends StatelessWidget {
                 children: [
                   TextFormField(
                     focusNode: fName,
+                    controller: name,
                     scrollPadding: EdgeInsets.zero,
                     cursorColor: Get.theme.primaryColor,
+                    keyboardType: TextInputType.name,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       hintText: 'Holder Name',
@@ -66,9 +84,14 @@ class AddBankAccountDialog extends StatelessWidget {
                     height: 20,
                   ),
                   TextFormField(
+                    controller: accountNo,
                     focusNode: fAccountNo,
                     scrollPadding: EdgeInsets.zero,
                     cursorColor: Get.theme.primaryColor,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       hintText: 'Account No.',
@@ -99,8 +122,10 @@ class AddBankAccountDialog extends StatelessWidget {
                   ),
                   TextFormField(
                     focusNode: fBankName,
+                    controller: bankName,
                     scrollPadding: EdgeInsets.zero,
                     cursorColor: Get.theme.primaryColor,
+                    keyboardType: TextInputType.name,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       hintText: 'Bank Name',
@@ -131,8 +156,10 @@ class AddBankAccountDialog extends StatelessWidget {
                   ),
                   TextFormField(
                     focusNode: fIfscCode,
+                    controller: ifscCode,
                     scrollPadding: EdgeInsets.zero,
                     cursorColor: Get.theme.primaryColor,
+                    keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       hintText: 'IFSC Code',
@@ -164,7 +191,23 @@ class AddBankAccountDialog extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Get.back();
+              if (name.text.isEmpty) {
+                showCustomSnackBar('Please enter name.');
+              } else if (accountNo.text.isEmpty) {
+                showCustomSnackBar('Please enter account No.');
+              } else if (bankName.text.isEmpty) {
+                showCustomSnackBar('Please enter bank name.');
+              } else if (ifscCode.text.isEmpty) {
+                showCustomSnackBar('Please enter IFSC code.');
+              } else {
+                Get.back();
+                paymentController.addBankDetails(
+                  name.text.trim(),
+                  accountNo.text.trim(),
+                  bankName.text.trim(),
+                  ifscCode.text.trim(),
+                );
+              }
             },
             child: Container(
               height: 45,

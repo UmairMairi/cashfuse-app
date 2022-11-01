@@ -237,7 +237,7 @@ class HomeScreen extends StatelessWidget {
                 return controller1.topBannerList != null && controller1.topBannerList.length > 0
                     ? Center(
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.only(top: 6),
                           child: DotsIndicator(
                             dotsCount: controller1.topBannerList.length,
                             position: controller1.bannerIndex.toDouble(),
@@ -253,10 +253,15 @@ class HomeScreen extends StatelessWidget {
                     : SizedBox();
               }),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 5, bottom: 10),
                 child: Text(
                   'TOP CATEGORIES',
-                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black.withOpacity(0.79),
+                    letterSpacing: -0.3,
+                  ),
                 ),
               ),
               GetBuilder<HomeController>(builder: (hm) {
@@ -332,13 +337,18 @@ class HomeScreen extends StatelessWidget {
                 );
               }),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Coupons of the day'.toUpperCase(),
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.79),
+                        letterSpacing: -0.3,
+                      ),
                     ),
                     InkWell(
                       onTap: () {},
@@ -379,10 +389,15 @@ class HomeScreen extends StatelessWidget {
                 );
               }),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 12),
                 child: Text(
                   'EXCLUSIVE OFFERS FOR YOU',
-                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black.withOpacity(0.79),
+                    letterSpacing: -0.3,
+                  ),
                 ),
               ),
               GetBuilder<HomeController>(builder: (hmCon) {
@@ -489,13 +504,18 @@ class HomeScreen extends StatelessWidget {
                 );
               }),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 20, bottom: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'TOP CASHBACK STORES',
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.79),
+                        letterSpacing: -0.3,
+                      ),
                     ),
                     InkWell(
                       onTap: () {
@@ -549,13 +569,18 @@ class HomeScreen extends StatelessWidget {
                 );
               }),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'NEW FLASH DEALS - LIVE NOW',
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.79),
+                        letterSpacing: -0.3,
+                      ),
                     ),
                     InkWell(
                       onTap: () {
@@ -596,13 +621,18 @@ class HomeScreen extends StatelessWidget {
               }),
 
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'CROMA - FESTIVAL OF DREAMS',
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.79),
+                        letterSpacing: -0.3,
+                      ),
                     ),
                     InkWell(
                       onTap: () {
@@ -642,13 +672,18 @@ class HomeScreen extends StatelessWidget {
                 );
               }),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'AMAZON - GREAT INDIAN FESTIVAL',
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.79),
+                        letterSpacing: -0.3,
+                      ),
                     ),
                     InkWell(
                       onTap: () {
@@ -688,13 +723,18 @@ class HomeScreen extends StatelessWidget {
                 );
               }),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'FLIPKART - BIG DIWALI SALE',
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.79),
+                        letterSpacing: -0.3,
+                      ),
                     ),
                     InkWell(
                       onTap: () {
@@ -734,13 +774,18 @@ class HomeScreen extends StatelessWidget {
                 );
               }),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'MYNTRA DIWALI SALE',
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.79),
+                        letterSpacing: -0.3,
+                      ),
                     ),
                     InkWell(
                       onTap: () {
@@ -780,13 +825,18 @@ class HomeScreen extends StatelessWidget {
                 );
               }),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'AMAZON - GIF TOP SELLING MOBILES',
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.79),
+                        letterSpacing: -0.3,
+                      ),
                     ),
                     InkWell(
                       onTap: () {
@@ -826,13 +876,18 @@ class HomeScreen extends StatelessWidget {
                 );
               }),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'AJIO - ALL STARTS SALE',
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.79),
+                        letterSpacing: -0.3,
+                      ),
                     ),
                     InkWell(
                       onTap: () {
@@ -872,13 +927,18 @@ class HomeScreen extends StatelessWidget {
                 );
               }),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'THE MAN COMPANY - EXCLUSIVE OFFERS',
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.79),
+                        letterSpacing: -0.3,
+                      ),
                     ),
                     InkWell(
                       onTap: () {
@@ -952,13 +1012,18 @@ class HomeScreen extends StatelessWidget {
               // ),
               // ProductWidget(),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'ALL BEAUTY DEALS',
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.79),
+                        letterSpacing: -0.3,
+                      ),
                     ),
                     InkWell(
                       onTap: () {
@@ -998,13 +1063,18 @@ class HomeScreen extends StatelessWidget {
                 );
               }),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'NEW ON CASHKARO',
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.79),
+                        letterSpacing: -0.3,
+                      ),
                     ),
                     InkWell(
                       onTap: () {

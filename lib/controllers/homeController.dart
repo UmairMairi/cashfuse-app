@@ -54,6 +54,8 @@ class HomeController extends GetxController {
   int webBottomIndex = 0;
   int bannerIndex = 0;
 
+  String createdLink = '';
+
   @override
   void onInit() async {
     await getTopBanners();
@@ -113,7 +115,7 @@ class HomeController extends GetxController {
                             name: _topCategoryList[i].ads[j].name,
                             image: _topCategoryList[i].ads[j].image,
                             buttonText: _topCategoryList[i].ads[j].buttonText,
-                            trackingLink: _topCategoryList[i].ads[j].trackingLink,
+                            trackingLink: _topCategoryList[i].ads[j].landingPage,
                             adId: _topCategoryList[i].ads[j].id.toString(),
                           ),
                         );
@@ -166,7 +168,7 @@ class HomeController extends GetxController {
                             name: _topCashbackList[i].ads[j].name,
                             image: _topCashbackList[i].ads[j].image,
                             buttonText: _topCashbackList[i].ads[j].buttonText,
-                            trackingLink: _topCashbackList[i].ads[j].trackingLink,
+                            trackingLink: _topCashbackList[i].ads[j].landingPage,
                             adId: _topCashbackList[i].ads[j].id.toString(),
                           ),
                         );
@@ -380,6 +382,27 @@ class HomeController extends GetxController {
       }
     } catch (e) {
       print("Exception - HomeController.dart - getCampignDetails():" + e.toString());
+    }
+  }
+
+  Future getTrackingLink(String url, String type, {String cId}) async {
+    try {
+      createdLink = '';
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.getTrackingLink(url, type, cId: cId).then((response) {
+          if (response.status == "1") {
+            createdLink = response.data;
+            update();
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+        update();
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+    } catch (e) {
+      print("Exception - HomeController.dart - getTrackingLink():" + e.toString());
     }
   }
 }

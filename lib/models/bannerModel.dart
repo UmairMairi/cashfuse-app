@@ -8,6 +8,8 @@ class BannerModel {
   String url;
   int offerId;
   int status;
+  String heading;
+  String description;
   DateTime createdAt;
   DateTime updatedAt;
   OfferModel cuelinkoffer;
@@ -20,6 +22,8 @@ class BannerModel {
     this.url,
     this.offerId,
     this.status,
+    this.heading,
+    this.description,
     this.createdAt,
     this.updatedAt,
     this.cuelinkoffer,
@@ -34,6 +38,8 @@ class BannerModel {
       url = json["url"] == null ? null : json["url"];
       offerId = json["offer_id"] == null ? null : json["offer_id"];
       status = json["status"];
+      heading = json["heading"] != null ? json["heading"] : '';
+      description = json["description"] != null ? json["description"] : '';
       createdAt = DateTime.parse(json["created_at"]);
       updatedAt = DateTime.parse(json["updated_at"]);
       cuelinkoffer = json["cuelinkoffer"] == null ? null : OfferModel.fromJson(json["cuelinkoffer"]);

@@ -1,11 +1,9 @@
-import 'dart:io';
-
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/widget/webview/seeMoreSheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewScreen extends StatelessWidget {
   final String url;
@@ -13,7 +11,7 @@ class WebViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isAndroid) WebView.platform = AndroidWebView();
+    //if (Platform.isAndroid) WebView.platform = AndroidWebView();
     return GetBuilder<HomeController>(builder: (homeController) {
       return SafeArea(
         child: Scaffold(
@@ -21,18 +19,37 @@ class WebViewScreen extends StatelessWidget {
           body: Stack(
             alignment: Alignment.center,
             children: [
-              WebView(
-                initialUrl: url != null && url.isNotEmpty ? url : 'https://flutter.dev',
-                javascriptMode: JavascriptMode.unrestricted,
-                onProgress: (val) {
+              // WebView(
+              //   initialUrl: url != null && url.isNotEmpty ? url : 'https://flutter.dev',
+              //   javascriptMode: JavascriptMode.unrestricted,
+              //   debuggingEnabled: true,
+              //   onWebResourceError: (error) {
+              //     homeController.updtaeRotate(false);
+              //     log(error.description);
+              //   },
+              //   onProgress: (val) {
+              //     homeController.updtaeRotate(true);
+              //   },
+              //   onPageStarted: (url) {
+              //     homeController.updtaeRotate(true);
+              //   },
+              //   onPageFinished: (controller) {
+              //     homeController.updtaeRotate(false);
+              //   },
+              // ),
+              InAppWebView(
+                initialUrlRequest: URLRequest(url: Uri.parse(url)),
+                onLoadStart: (controller, url) {
                   homeController.updtaeRotate(true);
                 },
-                onPageStarted: (url) {
-                  homeController.updtaeRotate(true);
-                },
-                onPageFinished: (controller) {
+                onLoadStop: (controller, url) {
                   homeController.updtaeRotate(false);
                 },
+                initialOptions: InAppWebViewGroupOptions(
+                  android: AndroidInAppWebViewOptions(
+                    mixedContentMode: AndroidMixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW,
+                  ),
+                ),
               ),
               homeController.isRoted
                   ? Image.asset(Images.webview_gif)

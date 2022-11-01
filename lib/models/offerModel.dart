@@ -68,7 +68,7 @@ class OfferModel {
       status = json["status"];
       startDate = json["start_date"] != null ? DateTime.parse(json["start_date"]) : null;
       endDate = json["end_date"] != null ? DateTime.parse(json["end_date"]) : null;
-      buttonText = json["button_text"];
+      buttonText = json["button_text"] != null ? json["button_text"] : '';
       affiliatePartner = json["affiliate_partner"];
       exclusive = json["exclusive"];
       createdAt = DateTime.parse(json["created_at"]);
