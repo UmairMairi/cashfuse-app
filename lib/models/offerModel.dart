@@ -60,7 +60,7 @@ class OfferModel {
       name = json["name"] != null ? json["name"] : '';
       bannerImage = json["banner_image"] != null ? json["banner_image"] : '';
       image = json["image"] != null ? json["image"] : '';
-      description = json["description"];
+      description = json["description"] != null ? json["description"] : '';
       terms = json["terms"];
       couponCode = json["coupon_code"];
       url = json["url"];

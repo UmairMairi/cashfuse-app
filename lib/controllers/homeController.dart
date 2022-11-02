@@ -4,12 +4,14 @@ import 'package:cashbackapp/models/adsModel.dart';
 import 'package:cashbackapp/models/bannerModel.dart';
 import 'package:cashbackapp/models/campaignModel.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
+import 'package:cashbackapp/models/clickModel.dart';
 import 'package:cashbackapp/models/commonModel.dart';
 import 'package:cashbackapp/models/offerModel.dart';
 import 'package:cashbackapp/services/apiHelper.dart';
 import 'package:cashbackapp/widget/customLoader.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:get/get.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 
 class HomeController extends GetxController {
   APIHelper apiHelper = new APIHelper();
@@ -34,6 +36,9 @@ class HomeController extends GetxController {
 
   List<BannerModel> _topBannerList = [];
   List<BannerModel> get topBannerList => _topBannerList;
+
+  List<ClickModel> _recentClickList = [];
+  List<ClickModel> get recentClickList => _recentClickList;
 
   OfferModel _offer = new OfferModel();
   OfferModel get offer => _offer;
@@ -65,6 +70,9 @@ class HomeController extends GetxController {
     await getNewFlashOffers();
     await getHomeAdv();
     await getAllAdv();
+    if (global.currentUser.id != null) {
+      await getClick();
+    }
 
     super.onInit();
   }
@@ -403,6 +411,46 @@ class HomeController extends GetxController {
       }
     } catch (e) {
       print("Exception - HomeController.dart - getTrackingLink():" + e.toString());
+    }
+  }
+
+  Future addClick(String name, String image) async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.addClick(name, image).then((response) {
+          if (response.status == "1") {
+            getClick();
+            update();
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+        update();
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+    } catch (e) {
+      print("Exception - HomeController.dart - addClick():" + e.toString());
+    }
+  }
+
+  Future getClick() async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.getClick().then((response) {
+          if (response.status == "1") {
+            _recentClickList = response.data;
+            update();
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+        update();
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+    } catch (e) {
+      print("Exception - HomeController.dart - getClick():" + e.toString());
     }
   }
 }

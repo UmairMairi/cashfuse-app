@@ -88,13 +88,13 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                 Dialog(
                                   child: StatefulBuilder(
                                     builder: (BuildContext context, StateSetter setState) => Container(
-                                      height: 200,
                                       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(15),
                                       ),
                                       child: Column(
+                                        mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Text(
                                             'Add Amazon Account',

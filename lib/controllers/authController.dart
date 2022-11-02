@@ -22,6 +22,8 @@ class AuthController extends GetxController {
   var otp = TextEditingController();
   final FocusNode phoneFocus = FocusNode();
   var contactNo = TextEditingController();
+  var name = TextEditingController();
+  var email = TextEditingController();
   int seconds = 60;
   Timer timer;
   String status;
@@ -220,6 +222,31 @@ class AuthController extends GetxController {
       });
     } catch (e) {
       print("Exception - authController.dart - resendOtp():" + e.toString());
+    }
+  }
+
+  Future updateProfile() async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        Get.dialog(CustomLoader(), barrierDismissible: false);
+        await apiHelper.updateProfile(name.text.trim(), global.currentUser.phone, email.text.trim()).then((response) {
+          Get.back();
+          if (response.statusCode == 200) {
+            // global.currentUser = response.data;
+            // global.sp.setString('currentUser', json.encode(global.currentUser.toJson()));
+            // Get.back();
+            showCustomSnackBar(response.message, isError: false);
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+
+      update();
+    } catch (e) {
+      print("Exception - authController.dart - updateProfile():" + e.toString());
     }
   }
 }

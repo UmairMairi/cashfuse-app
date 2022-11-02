@@ -6,6 +6,7 @@ import 'package:cashbackapp/models/appInfoModel.dart';
 import 'package:cashbackapp/models/bankDetailsModel.dart';
 import 'package:cashbackapp/models/bannerModel.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
+import 'package:cashbackapp/models/clickModel.dart';
 import 'package:cashbackapp/models/couponModel.dart';
 import 'package:cashbackapp/models/faqModel.dart';
 import 'package:cashbackapp/models/offerModel.dart';
@@ -586,6 +587,84 @@ class APIHelper {
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - search():" + e.toString());
+    }
+  }
+
+  Future<dynamic> addClick(String name, String image) async {
+    try {
+      Response response;
+      var dio = Dio();
+      var formData = FormData.fromMap({
+        'user_id': global.currentUser.id,
+        'name': name,
+        'image': image,
+      });
+      response = await dio.post(
+        '${global.baseUrl}${AppConstants.ADD_CLICK_URI}',
+        data: formData,
+        options: Options(headers: await global.getApiHeaders(true)),
+      );
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_CLICK_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - search():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getClick() async {
+    try {
+      Response response;
+      var dio = Dio();
+
+      response = await dio.get(
+        '${global.baseUrl}${AppConstants.GET_CLICK_URI}?user_id=${global.currentUser.id}',
+        options: Options(headers: await global.getApiHeaders(true)),
+      );
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<ClickModel>.from(response.data['data'].map((x) => ClickModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.GET_CLICK_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getClick():" + e.toString());
+    }
+  }
+
+  Future<dynamic> updateProfile(String name, String phone, String email) async {
+    try {
+      Response response;
+      var dio = Dio();
+      var formData = FormData.fromMap({
+        'user_id': global.currentUser.id,
+        'name': name,
+        'phone': phone,
+        'email': email,
+      });
+      response = await dio.post(
+        '${global.baseUrl}${AppConstants.UPDATE_PROFILE_URI}',
+        data: formData,
+        options: Options(headers: await global.getApiHeaders(false)),
+      );
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.UPDATE_PROFILE_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - updateProfile():" + e.toString());
     }
   }
 }

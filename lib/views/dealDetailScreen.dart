@@ -101,6 +101,7 @@ class DealDetailScreen extends StatelessWidget {
                       InkWell(
                         onTap: () async {
                           if (global.currentUser.id != null) {
+                            await homeController.addClick(ads.advName, global.appInfo.baseUrls.offerImageUrl + '/' + ads.image);
                             await homeController.getTrackingLink(ads.landingPage, ads.affiliatePartner, cId: ads.cId);
                             Get.to(
                               () => WebViewScreen(

@@ -183,20 +183,20 @@ class HomeScreen extends StatelessWidget {
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                '40% OFF EVERYTHING',
+                                                controller.topBannerList[index].heading,
                                                 style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.white),
                                               ),
                                               Text(
-                                                'extra 10% with code:MYNTRA',
+                                                controller.topBannerList[index].description,
                                                 style: Get.theme.primaryTextTheme.subtitle1.copyWith(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.w300,
                                                 ),
                                               ),
-                                              Text(
-                                                'Every 10th Wins',
-                                                style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.teal),
-                                              ),
+                                              // Text(
+                                              //   'Every 10th Wins',
+                                              //   style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.teal),
+                                              // ),
                                             ],
                                           ),
                                         )

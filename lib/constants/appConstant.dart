@@ -27,4 +27,7 @@ class AppConstants {
   static const String ADD_UPI_DETAILS_URI = '/add_upi_detail';
   static const String TRACKING_LINK_URI = '/get_tracking_link';
   static const String SEARCH_URI = '/search';
+  static const String ADD_CLICK_URI = '/add_click';
+  static const String GET_CLICK_URI = '/get_click';
+  static const String UPDATE_PROFILE_URI = '/update-profile';
 }

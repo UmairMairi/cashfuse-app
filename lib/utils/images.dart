@@ -42,4 +42,5 @@ class Images {
   static const String upi = "assets/images/upi.png";
   static const String bank = "assets/images/bank.png";
   static const String Amazon_pay = "assets/images/Amazon-pay.jpg";
+  static const String Click_image = "assets/images/click_image.jpg";
 }

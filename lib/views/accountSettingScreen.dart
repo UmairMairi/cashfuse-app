@@ -1,17 +1,22 @@
+import 'package:cashbackapp/controllers/authController.dart';
 import 'package:cashbackapp/controllers/commonController.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 
 class AccountSettingScreen extends StatelessWidget {
   final fnameFocus = new FocusNode();
+  final femailFocus = new FocusNode();
   final cPasswordFocus = new FocusNode();
   final newPasswordFocus = new FocusNode();
   final conPasswordFocus = new FocusNode();
 
+  AuthController authController = Get.find<AuthController>();
+
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CommonController>(builder: (commonController) {
+    return GetBuilder<AuthController>(builder: (auth) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -62,6 +67,7 @@ class AccountSettingScreen extends StatelessWidget {
                   ),
                   TextFormField(
                     focusNode: fnameFocus,
+                    controller: authController.name,
                     scrollPadding: EdgeInsets.zero,
                     cursorColor: Get.theme.primaryColor,
                     decoration: InputDecoration(
@@ -92,19 +98,42 @@ class AccountSettingScreen extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    'test@gmail.com',
-                    style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w300),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: DottedLine(
-                      dashLength: 1,
-                      lineThickness: 1.5,
-                      dashGapLength: 1.5,
-                      dashColor: Colors.grey,
+                  TextFormField(
+                    focusNode: femailFocus,
+                    controller: authController.email,
+                    scrollPadding: EdgeInsets.zero,
+                    cursorColor: Get.theme.primaryColor,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.zero,
+                      hintText: 'test@gmail.com',
+                      focusColor: Get.theme.primaryColor,
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                        color: femailFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                      )),
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                        color: femailFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                      )),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                        color: femailFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                      )),
                     ),
                   ),
+                  // Text(
+                  //   'test@gmail.com',
+                  //   style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w300),
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(vertical: 5),
+                  //   child: DottedLine(
+                  //     dashLength: 1,
+                  //     lineThickness: 1.5,
+                  //     dashGapLength: 1.5,
+                  //     dashColor: Colors.grey,
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 20,
                   ),
@@ -116,8 +145,8 @@ class AccountSettingScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    '+91 | 9999999999',
-                    style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w300),
+                    '${global.currentUser.phone}',
+                    style: TextStyle(fontWeight: FontWeight.w300),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
@@ -131,23 +160,23 @@ class AccountSettingScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'Receive email when I get referral earning',
-                        ),
-                      ),
-                      Switch(
-                        thumbColor: MaterialStateProperty.all(
-                          Colors.white,
-                        ),
-                        value: true,
-                        onChanged: (val) {},
-                      )
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Expanded(
+                  //       child: Text(
+                  //         'Receive email when I get referral earning',
+                  //       ),
+                  //     ),
+                  //     Switch(
+                  //       thumbColor: MaterialStateProperty.all(
+                  //         Colors.white,
+                  //       ),
+                  //       value: true,
+                  //       onChanged: (val) {},
+                  //     )
+                  //   ],
+                  // ),
                 ],
               ),
             )
@@ -273,22 +302,27 @@ class AccountSettingScreen extends StatelessWidget {
             //   )
           ],
         ),
-        bottomSheet: Container(
-          height: 40,
-          width: Get.width,
-          decoration: BoxDecoration(
-            color: Get.theme.secondaryHeaderColor,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(5),
-              topRight: Radius.circular(5),
+        bottomSheet: InkWell(
+          onTap: () {
+            authController.updateProfile();
+          },
+          child: Container(
+            height: 40,
+            width: Get.width,
+            decoration: BoxDecoration(
+              color: Get.theme.secondaryHeaderColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(5),
+                topRight: Radius.circular(5),
+              ),
             ),
-          ),
-          alignment: Alignment.center,
-          child: Text(
-            'SAVE CHANGES',
-            style: Get.theme.primaryTextTheme.subtitle2.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
+            alignment: Alignment.center,
+            child: Text(
+              'SAVE CHANGES',
+              style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ),
