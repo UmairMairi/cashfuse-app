@@ -7,6 +7,7 @@ import 'package:cashbackapp/widget/customLoader.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 
 class SearchController extends GetxController {
   APIHelper apiHelper = new APIHelper();
@@ -40,7 +41,7 @@ class SearchController extends GetxController {
                   searchData.commonList.add(
                     CommonModel(
                       name: searchData.adsList[j].name,
-                      image: searchData.adsList[j].image,
+                      image: '${global.appInfo.baseUrls.offerImageUrl}/${searchData.adsList[j].image}',
                       buttonText: searchData.adsList[j].buttonText,
                       trackingLink: searchData.adsList[j].landingPage,
                       adId: searchData.adsList[j].id.toString(),
@@ -54,12 +55,44 @@ class SearchController extends GetxController {
                   searchData.commonList.add(
                     CommonModel(
                       name: searchData.campaignList[i].name,
-                      image: searchData.campaignList[i].image,
+                      image: '${global.appInfo.baseUrls.offerImageUrl}/${searchData.campaignList[i].image}',
                       buttonText: searchData.campaignList[i].buttonText,
                       trackingLink: searchData.campaignList[i].url,
                       campaignId: searchData.campaignList[i].id,
                     ),
                   );
+                }
+              }
+
+              if (searchData.advertiserList != []) {
+                for (var k = 0; k < searchData.advertiserList.length; k++) {
+                  if (searchData.advertiserList[k].ads != []) {
+                    for (var m = 0; m < searchData.advertiserList[k].ads.length; m++) {
+                      searchData.advertiserList[k].commonList.add(
+                        CommonModel(
+                          name: searchData.advertiserList[k].ads[m].name,
+                          image: '${global.appInfo.baseUrls.offerImageUrl}/${searchData.advertiserList[k].ads[m].image}',
+                          buttonText: searchData.advertiserList[k].ads[m].buttonText,
+                          trackingLink: searchData.advertiserList[k].ads[m].landingPage,
+                          adId: searchData.advertiserList[k].ads[m].id.toString(),
+                        ),
+                      );
+                    }
+                  }
+
+                  if (searchData.advertiserList[k].cuecampaigns != []) {
+                    for (var n = 0; n < searchData.advertiserList[k].cuecampaigns.length; n++) {
+                      searchData.advertiserList[k].commonList.add(
+                        CommonModel(
+                          name: searchData.advertiserList[k].cuecampaigns[n].name,
+                          image: '${global.appInfo.baseUrls.offerImageUrl}/${searchData.advertiserList[k].cuecampaigns[n].image}',
+                          buttonText: searchData.advertiserList[k].cuecampaigns[n].buttonText,
+                          trackingLink: searchData.advertiserList[k].cuecampaigns[n].url,
+                          campaignId: searchData.advertiserList[k].cuecampaigns[n].id,
+                        ),
+                      );
+                    }
+                  }
                 }
               }
 
@@ -79,7 +112,6 @@ class SearchController extends GetxController {
               //   }
               // }
             }
-            update();
           } else {
             showCustomSnackBar(response.message);
           }

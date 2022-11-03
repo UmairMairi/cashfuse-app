@@ -6,6 +6,8 @@ import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/views/appWiseoffershowListScreen.dart';
 import 'package:cashbackapp/views/categoryScreen.dart';
 import 'package:cashbackapp/views/couponDetailScreen.dart';
+import 'package:cashbackapp/views/couponListScreen.dart';
+import 'package:cashbackapp/views/dealDetailScreen.dart';
 import 'package:cashbackapp/views/faqSceen.dart';
 import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
 import 'package:cashbackapp/views/myEarningScreen.dart';
@@ -170,7 +172,7 @@ class HomeScreen extends StatelessWidget {
                                     //   fit: BoxFit.fill,
                                     // ),
                                   ),
-                                  controller.topBannerList[index].type == 'offer'
+                                  controller.topBannerList[index].heading.isNotEmpty || controller.topBannerList[index].description.isNotEmpty
                                       ? Container(
                                           width: Get.width,
                                           margin: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
@@ -201,7 +203,7 @@ class HomeScreen extends StatelessWidget {
                                           ),
                                         )
                                       : SizedBox(),
-                                  controller.topBannerList[index].type == 'offer'
+                                  controller.topBannerList[index].type == 'offer' && (controller.topBannerList[index].heading.isNotEmpty || controller.topBannerList[index].description.isNotEmpty)
                                       ? Positioned(
                                           top: 10,
                                           child: Card(
@@ -351,7 +353,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => CouponListScreen());
+                      },
                       child: Text(
                         'View All >',
                         style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
@@ -366,16 +370,24 @@ class HomeScreen extends StatelessWidget {
                   child: ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 6),
                     scrollDirection: Axis.horizontal,
-                    itemCount: couponC.couponList.length,
+                    itemCount: couponC.couponList.length >= 5 ? 5 : couponC.couponList.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                          Get.to(
-                            () => CouponDetailScreen(
-                              coupon: couponC.couponList[index],
-                            ),
-                          );
+                          if (couponC.couponList[index].offer == null) {
+                            Get.to(
+                              () => OfferDetailScreen(
+                                offer: couponC.couponList[index].offer,
+                              ),
+                            );
+                          } else {
+                            Get.to(
+                              () => CouponDetailScreen(
+                                coupon: couponC.couponList[index],
+                              ),
+                            );
+                          }
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(right: 10),
@@ -433,7 +445,7 @@ class HomeScreen extends StatelessWidget {
                                           image: '${global.appInfo.baseUrls.offerImageUrl}/${hmCon.exclusiveOfferList[index].bannerImage}',
                                           height: 165,
                                           width: Get.width,
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.fill,
                                         )
                                         // Image.asset(
                                         //   Images.dummyImage,
@@ -522,7 +534,7 @@ class HomeScreen extends StatelessWidget {
                         Get.to(
                           () => StoreOfferListScreen(
                             title: 'TOP CASHBACK STORES',
-                            list: homeController2.topCashbackList,
+                            list: homeController2.allAdvList,
                           ),
                         );
                       },
@@ -556,7 +568,7 @@ class HomeScreen extends StatelessWidget {
                             child: StoreOfferWidget(
                               commonModel: CommonModel(
                                 name: hmController.topCashbackList[index].name,
-                                image: hmController.topCashbackList[index].image,
+                                image: '${global.appInfo.baseUrls.partnerImageUrl}/${hmController.topCashbackList[index].image}',
                                 tagline: hmController.topCashbackList[index].tagline,
                                 adId: hmController.topCashbackList[index].id.toString(),
                               ),
@@ -612,7 +624,6 @@ class HomeScreen extends StatelessWidget {
                         },
                         child: AppWiseOfferShowWidget(
                           offer: home.newFlashOfferList[index],
-                          isTimeShow: true,
                         ),
                       );
                     },
@@ -620,499 +631,523 @@ class HomeScreen extends StatelessWidget {
                 );
               }),
 
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'CROMA - FESTIVAL OF DREAMS',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black.withOpacity(0.79),
-                        letterSpacing: -0.3,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(() => AppWiseOfferShowListScreen());
-                      },
-                      child: Text(
-                        'View All >',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
-                      ),
-                    )
-                  ],
-                ),
-              ),
               GetBuilder<HomeController>(builder: (home) {
-                return SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                    itemCount: home.newFlashOfferList.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () async {
-                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
-                          Get.to(() => OfferDetailScreen(
-                                offer: home.offer,
-                              ));
-                        },
-                        child: AppWiseOfferShowWidget(
-                          offer: home.newFlashOfferList[index],
-                          isTimeShow: true,
-                        ),
-                      );
-                    },
-                  ),
-                );
-              }),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'AMAZON - GREAT INDIAN FESTIVAL',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black.withOpacity(0.79),
-                        letterSpacing: -0.3,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(() => AppWiseOfferShowListScreen());
-                      },
-                      child: Text(
-                        'View All >',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              GetBuilder<HomeController>(builder: (home) {
-                return SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                    itemCount: home.newFlashOfferList.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () async {
-                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
-                          Get.to(() => OfferDetailScreen(
-                                offer: home.offer,
-                              ));
-                        },
-                        child: AppWiseOfferShowWidget(
-                          offer: home.newFlashOfferList[index],
-                          isTimeShow: true,
-                        ),
-                      );
-                    },
-                  ),
-                );
-              }),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'FLIPKART - BIG DIWALI SALE',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black.withOpacity(0.79),
-                        letterSpacing: -0.3,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(() => AppWiseOfferShowListScreen());
-                      },
-                      child: Text(
-                        'View All >',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              GetBuilder<HomeController>(builder: (home) {
-                return SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                    itemCount: home.newFlashOfferList.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () async {
-                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
-                          Get.to(() => OfferDetailScreen(
-                                offer: home.offer,
-                              ));
-                        },
-                        child: AppWiseOfferShowWidget(
-                          offer: home.newFlashOfferList[index],
-                          isTimeShow: true,
-                        ),
-                      );
-                    },
-                  ),
-                );
-              }),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'MYNTRA DIWALI SALE',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black.withOpacity(0.79),
-                        letterSpacing: -0.3,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(() => AppWiseOfferShowListScreen());
-                      },
-                      child: Text(
-                        'View All >',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              GetBuilder<HomeController>(builder: (home) {
-                return SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                    itemCount: home.newFlashOfferList.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () async {
-                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
-                          Get.to(() => OfferDetailScreen(
-                                offer: home.offer,
-                              ));
-                        },
-                        child: AppWiseOfferShowWidget(
-                          offer: home.newFlashOfferList[index],
-                          isTimeShow: true,
-                        ),
-                      );
-                    },
-                  ),
-                );
-              }),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'AMAZON - GIF TOP SELLING MOBILES',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black.withOpacity(0.79),
-                        letterSpacing: -0.3,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(() => AppWiseOfferShowListScreen());
-                      },
-                      child: Text(
-                        'View All >',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              GetBuilder<HomeController>(builder: (home) {
-                return SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                    itemCount: home.newFlashOfferList.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () async {
-                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
-                          Get.to(() => OfferDetailScreen(
-                                offer: home.offer,
-                              ));
-                        },
-                        child: AppWiseOfferShowWidget(
-                          offer: home.newFlashOfferList[index],
-                          isTimeShow: true,
-                        ),
-                      );
-                    },
-                  ),
-                );
-              }),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'AJIO - ALL STARTS SALE',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black.withOpacity(0.79),
-                        letterSpacing: -0.3,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(() => AppWiseOfferShowListScreen());
-                      },
-                      child: Text(
-                        'View All >',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              GetBuilder<HomeController>(builder: (home) {
-                return SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                    itemCount: home.newFlashOfferList.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () async {
-                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
-                          Get.to(() => OfferDetailScreen(
-                                offer: home.offer,
-                              ));
-                        },
-                        child: AppWiseOfferShowWidget(
-                          offer: home.newFlashOfferList[index],
-                          isTimeShow: true,
-                        ),
-                      );
-                    },
-                  ),
-                );
-              }),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'THE MAN COMPANY - EXCLUSIVE OFFERS',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black.withOpacity(0.79),
-                        letterSpacing: -0.3,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(() => AppWiseOfferShowListScreen());
-                      },
-                      child: Text(
-                        'View All >',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              GetBuilder<HomeController>(builder: (home) {
-                return SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                    itemCount: home.newFlashOfferList.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () async {
-                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
-                          Get.to(() => OfferDetailScreen(
-                                offer: home.offer,
-                              ));
-                        },
-                        child: AppWiseOfferShowWidget(
-                          offer: home.newFlashOfferList[index],
-                          isTimeShow: true,
-                        ),
-                      );
-                    },
-                  ),
+                return ListView.builder(
+                  itemCount: home.homeAdvList.length,
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return home.homeAdvList[index].commonList != null && home.homeAdvList[index].commonList.length > 0
+                        ? Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      home.homeAdvList[index].name.toUpperCase(),
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black.withOpacity(0.79),
+                                        letterSpacing: -0.3,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(
+                                          () => AppWiseOfferShowListScreen(
+                                            categoryModel: home.homeAdvList[index],
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        'View All >',
+                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 200,
+                                child: ListView.builder(
+                                    itemCount: home.homeAdvList[index].commonList.length,
+                                    shrinkWrap: true,
+                                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, i) {
+                                      return InkWell(
+                                        onTap: () async {
+                                          if (home.homeAdvList[index].commonList[i].adId != null && home.homeAdvList[index].commonList[i].adId.isNotEmpty) {
+                                            await home.getAdDetails(home.homeAdvList[index].commonList[i].adId);
+                                            Get.to(() => DealDetailScreen(
+                                                  ads: home.ads,
+                                                ));
+                                          } else {
+                                            await home.getOfferDetails(home.homeAdvList[index].commonList[i].campaignId.toString());
+                                            Get.to(() => OfferDetailScreen(
+                                                  offer: home.offer,
+                                                ));
+                                          }
+                                        },
+                                        child: AppWiseOfferShowWidget(
+                                          commonModel: home.homeAdvList[index].commonList[i],
+                                          domainImage: home.homeAdvList[index].image,
+                                        ),
+                                      );
+                                    }),
+                              ),
+                            ],
+                          )
+                        : SizedBox();
+                  },
                 );
               }),
               // Padding(
-              //   padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
+              //   padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
               //   child: Row(
               //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //     children: [
               //       Text(
-              //         'AMAZON - GIF HOT SELLING PRODUCTS',
-              //         style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+              //         'AMAZON - GREAT INDIAN FESTIVAL',
+              //         style: TextStyle(
+              //           fontSize: 13,
+              //           fontWeight: FontWeight.w600,
+              //           color: Colors.black.withOpacity(0.79),
+              //           letterSpacing: -0.3,
+              //         ),
               //       ),
-              //       Text(
-              //         'View All >',
-              //         style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+              //       InkWell(
+              //         onTap: () {
+              //           Get.to(() => AppWiseOfferShowListScreen());
+              //         },
+              //         child: Text(
+              //           'View All >',
+              //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+              //         ),
               //       )
               //     ],
               //   ),
               // ),
-              // ProductWidget(),
+              // GetBuilder<HomeController>(builder: (home) {
+              //   return SizedBox(
+              //     height: 200,
+              //     child: ListView.builder(
+              //       itemCount: home.newFlashOfferList.length,
+              //       shrinkWrap: true,
+              //       scrollDirection: Axis.horizontal,
+              //       padding: const EdgeInsets.symmetric(horizontal: 6),
+              //       itemBuilder: (context, index) {
+              //         return InkWell(
+              //           onTap: () async {
+              //             await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+              //             Get.to(() => OfferDetailScreen(
+              //                   offer: home.offer,
+              //                 ));
+              //           },
+              //           child: AppWiseOfferShowWidget(
+              //             offer: home.newFlashOfferList[index],
+              //             isTimeShow: true,
+              //           ),
+              //         );
+              //       },
+              //     ),
+              //   );
+              // }),
               // Padding(
-              //   padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
+              //   padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
               //   child: Row(
               //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //     children: [
               //       Text(
-              //         'TOP SELLING MOBILE PHONES',
-              //         style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+              //         'FLIPKART - BIG DIWALI SALE',
+              //         style: TextStyle(
+              //           fontSize: 13,
+              //           fontWeight: FontWeight.w600,
+              //           color: Colors.black.withOpacity(0.79),
+              //           letterSpacing: -0.3,
+              //         ),
               //       ),
-              //       Text(
-              //         'View All >',
-              //         style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+              //       InkWell(
+              //         onTap: () {
+              //           Get.to(() => AppWiseOfferShowListScreen());
+              //         },
+              //         child: Text(
+              //           'View All >',
+              //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+              //         ),
               //       )
               //     ],
               //   ),
               // ),
-              // ProductWidget(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'ALL BEAUTY DEALS',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black.withOpacity(0.79),
-                        letterSpacing: -0.3,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(() => AppWiseOfferShowListScreen());
-                      },
-                      child: Text(
-                        'View All >',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              GetBuilder<HomeController>(builder: (home) {
-                return SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                    itemCount: home.newFlashOfferList.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () async {
-                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
-                          Get.to(() => OfferDetailScreen(
-                                offer: home.offer,
-                              ));
-                        },
-                        child: AppWiseOfferShowWidget(
-                          offer: home.newFlashOfferList[index],
-                          isTimeShow: true,
-                        ),
-                      );
-                    },
-                  ),
-                );
-              }),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'NEW ON CASHKARO',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black.withOpacity(0.79),
-                        letterSpacing: -0.3,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(() => AppWiseOfferShowListScreen());
-                      },
-                      child: Text(
-                        'View All >',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              GetBuilder<HomeController>(builder: (home) {
-                return SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                    itemCount: home.newFlashOfferList.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () async {
-                          await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
-                          Get.to(() => OfferDetailScreen(
-                                offer: home.offer,
-                              ));
-                        },
-                        child: AppWiseOfferShowWidget(
-                          offer: home.newFlashOfferList[index],
-                          isTimeShow: true,
-                        ),
-                      );
-                    },
-                  ),
-                );
-              }),
+              // GetBuilder<HomeController>(builder: (home) {
+              //   return SizedBox(
+              //     height: 200,
+              //     child: ListView.builder(
+              //       itemCount: home.newFlashOfferList.length,
+              //       shrinkWrap: true,
+              //       scrollDirection: Axis.horizontal,
+              //       padding: const EdgeInsets.symmetric(horizontal: 6),
+              //       itemBuilder: (context, index) {
+              //         return InkWell(
+              //           onTap: () async {
+              //             await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+              //             Get.to(() => OfferDetailScreen(
+              //                   offer: home.offer,
+              //                 ));
+              //           },
+              //           child: AppWiseOfferShowWidget(
+              //             offer: home.newFlashOfferList[index],
+              //             isTimeShow: true,
+              //           ),
+              //         );
+              //       },
+              //     ),
+              //   );
+              // }),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Text(
+              //         'MYNTRA DIWALI SALE',
+              //         style: TextStyle(
+              //           fontSize: 13,
+              //           fontWeight: FontWeight.w600,
+              //           color: Colors.black.withOpacity(0.79),
+              //           letterSpacing: -0.3,
+              //         ),
+              //       ),
+              //       InkWell(
+              //         onTap: () {
+              //           Get.to(() => AppWiseOfferShowListScreen());
+              //         },
+              //         child: Text(
+              //           'View All >',
+              //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ),
+              // GetBuilder<HomeController>(builder: (home) {
+              //   return SizedBox(
+              //     height: 200,
+              //     child: ListView.builder(
+              //       itemCount: home.newFlashOfferList.length,
+              //       shrinkWrap: true,
+              //       scrollDirection: Axis.horizontal,
+              //       padding: const EdgeInsets.symmetric(horizontal: 6),
+              //       itemBuilder: (context, index) {
+              //         return InkWell(
+              //           onTap: () async {
+              //             await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+              //             Get.to(() => OfferDetailScreen(
+              //                   offer: home.offer,
+              //                 ));
+              //           },
+              //           child: AppWiseOfferShowWidget(
+              //             offer: home.newFlashOfferList[index],
+              //             isTimeShow: true,
+              //           ),
+              //         );
+              //       },
+              //     ),
+              //   );
+              // }),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Text(
+              //         'AMAZON - GIF TOP SELLING MOBILES',
+              //         style: TextStyle(
+              //           fontSize: 13,
+              //           fontWeight: FontWeight.w600,
+              //           color: Colors.black.withOpacity(0.79),
+              //           letterSpacing: -0.3,
+              //         ),
+              //       ),
+              //       InkWell(
+              //         onTap: () {
+              //           Get.to(() => AppWiseOfferShowListScreen());
+              //         },
+              //         child: Text(
+              //           'View All >',
+              //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ),
+              // GetBuilder<HomeController>(builder: (home) {
+              //   return SizedBox(
+              //     height: 200,
+              //     child: ListView.builder(
+              //       itemCount: home.newFlashOfferList.length,
+              //       shrinkWrap: true,
+              //       scrollDirection: Axis.horizontal,
+              //       padding: const EdgeInsets.symmetric(horizontal: 6),
+              //       itemBuilder: (context, index) {
+              //         return InkWell(
+              //           onTap: () async {
+              //             await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+              //             Get.to(() => OfferDetailScreen(
+              //                   offer: home.offer,
+              //                 ));
+              //           },
+              //           child: AppWiseOfferShowWidget(
+              //             offer: home.newFlashOfferList[index],
+              //             isTimeShow: true,
+              //           ),
+              //         );
+              //       },
+              //     ),
+              //   );
+              // }),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Text(
+              //         'AJIO - ALL STARTS SALE',
+              //         style: TextStyle(
+              //           fontSize: 13,
+              //           fontWeight: FontWeight.w600,
+              //           color: Colors.black.withOpacity(0.79),
+              //           letterSpacing: -0.3,
+              //         ),
+              //       ),
+              //       InkWell(
+              //         onTap: () {
+              //           Get.to(() => AppWiseOfferShowListScreen());
+              //         },
+              //         child: Text(
+              //           'View All >',
+              //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ),
+              // GetBuilder<HomeController>(builder: (home) {
+              //   return SizedBox(
+              //     height: 200,
+              //     child: ListView.builder(
+              //       itemCount: home.newFlashOfferList.length,
+              //       shrinkWrap: true,
+              //       scrollDirection: Axis.horizontal,
+              //       padding: const EdgeInsets.symmetric(horizontal: 6),
+              //       itemBuilder: (context, index) {
+              //         return InkWell(
+              //           onTap: () async {
+              //             await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+              //             Get.to(() => OfferDetailScreen(
+              //                   offer: home.offer,
+              //                 ));
+              //           },
+              //           child: AppWiseOfferShowWidget(
+              //             offer: home.newFlashOfferList[index],
+              //             isTimeShow: true,
+              //           ),
+              //         );
+              //       },
+              //     ),
+              //   );
+              // }),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Text(
+              //         'THE MAN COMPANY - EXCLUSIVE OFFERS',
+              //         style: TextStyle(
+              //           fontSize: 13,
+              //           fontWeight: FontWeight.w600,
+              //           color: Colors.black.withOpacity(0.79),
+              //           letterSpacing: -0.3,
+              //         ),
+              //       ),
+              //       InkWell(
+              //         onTap: () {
+              //           Get.to(() => AppWiseOfferShowListScreen());
+              //         },
+              //         child: Text(
+              //           'View All >',
+              //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ),
+              // GetBuilder<HomeController>(builder: (home) {
+              //   return SizedBox(
+              //     height: 200,
+              //     child: ListView.builder(
+              //       itemCount: home.newFlashOfferList.length,
+              //       shrinkWrap: true,
+              //       scrollDirection: Axis.horizontal,
+              //       padding: const EdgeInsets.symmetric(horizontal: 6),
+              //       itemBuilder: (context, index) {
+              //         return InkWell(
+              //           onTap: () async {
+              //             await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+              //             Get.to(() => OfferDetailScreen(
+              //                   offer: home.offer,
+              //                 ));
+              //           },
+              //           child: AppWiseOfferShowWidget(
+              //             offer: home.newFlashOfferList[index],
+              //             isTimeShow: true,
+              //           ),
+              //         );
+              //       },
+              //     ),
+              //   );
+              // }),
+              // // Padding(
+              // //   padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
+              // //   child: Row(
+              // //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // //     children: [
+              // //       Text(
+              // //         'AMAZON - GIF HOT SELLING PRODUCTS',
+              // //         style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+              // //       ),
+              // //       Text(
+              // //         'View All >',
+              // //         style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+              // //       )
+              // //     ],
+              // //   ),
+              // // ),
+              // // ProductWidget(),
+              // // Padding(
+              // //   padding: const EdgeInsets.only(top: 15, bottom: 10, right: 6),
+              // //   child: Row(
+              // //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // //     children: [
+              // //       Text(
+              // //         'TOP SELLING MOBILE PHONES',
+              // //         style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
+              // //       ),
+              // //       Text(
+              // //         'View All >',
+              // //         style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+              // //       )
+              // //     ],
+              // //   ),
+              // // ),
+              // // ProductWidget(),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Text(
+              //         'ALL BEAUTY DEALS',
+              //         style: TextStyle(
+              //           fontSize: 13,
+              //           fontWeight: FontWeight.w600,
+              //           color: Colors.black.withOpacity(0.79),
+              //           letterSpacing: -0.3,
+              //         ),
+              //       ),
+              //       InkWell(
+              //         onTap: () {
+              //           Get.to(() => AppWiseOfferShowListScreen());
+              //         },
+              //         child: Text(
+              //           'View All >',
+              //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ),
+              // GetBuilder<HomeController>(builder: (home) {
+              //   return SizedBox(
+              //     height: 200,
+              //     child: ListView.builder(
+              //       itemCount: home.newFlashOfferList.length,
+              //       shrinkWrap: true,
+              //       scrollDirection: Axis.horizontal,
+              //       padding: const EdgeInsets.symmetric(horizontal: 6),
+              //       itemBuilder: (context, index) {
+              //         return InkWell(
+              //           onTap: () async {
+              //             await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+              //             Get.to(() => OfferDetailScreen(
+              //                   offer: home.offer,
+              //                 ));
+              //           },
+              //           child: AppWiseOfferShowWidget(
+              //             offer: home.newFlashOfferList[index],
+              //             isTimeShow: true,
+              //           ),
+              //         );
+              //       },
+              //     ),
+              //   );
+              // }),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Text(
+              //         'NEW ON CASHKARO',
+              //         style: TextStyle(
+              //           fontSize: 13,
+              //           fontWeight: FontWeight.w600,
+              //           color: Colors.black.withOpacity(0.79),
+              //           letterSpacing: -0.3,
+              //         ),
+              //       ),
+              //       InkWell(
+              //         onTap: () {
+              //           Get.to(() => AppWiseOfferShowListScreen());
+              //         },
+              //         child: Text(
+              //           'View All >',
+              //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ),
+              // GetBuilder<HomeController>(builder: (home) {
+              //   return SizedBox(
+              //     height: 200,
+              //     child: ListView.builder(
+              //       itemCount: home.newFlashOfferList.length,
+              //       shrinkWrap: true,
+              //       scrollDirection: Axis.horizontal,
+              //       padding: const EdgeInsets.symmetric(horizontal: 6),
+              //       itemBuilder: (context, index) {
+              //         return InkWell(
+              //           onTap: () async {
+              //             await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+              //             Get.to(() => OfferDetailScreen(
+              //                   offer: home.offer,
+              //                 ));
+              //           },
+              //           child: AppWiseOfferShowWidget(
+              //             offer: home.newFlashOfferList[index],
+              //             isTimeShow: true,
+              //           ),
+              //         );
+              //       },
+              //     ),
+              //   );
+              // }),
             ],
           ),
         ),

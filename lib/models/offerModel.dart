@@ -55,7 +55,7 @@ class OfferModel {
       campaignName = json["campaign_name"] != null ? json["campaign_name"] : '';
       campaignId = json["campaign_id"];
       categoryId = json["category_id"];
-      category = json["category"] != null ? CategoryModel.fromJson(json["category"]) : null;
+
       offerId = json["offer_id"];
       name = json["name"] != null ? json["name"] : '';
       bannerImage = json["banner_image"] != null ? json["banner_image"] : '';
@@ -73,6 +73,7 @@ class OfferModel {
       exclusive = json["exclusive"];
       createdAt = DateTime.parse(json["created_at"]);
       updatedAt = DateTime.parse(json["updated_at"]);
+      category = json["category"] != null ? CategoryModel.fromJson(json["category"]) : null;
     } catch (e) {
       print("Exception - OfferModel.dart - OfferModel.fromJson():" + e.toString());
     }

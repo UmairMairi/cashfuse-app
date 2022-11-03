@@ -1,8 +1,15 @@
+import 'package:cashbackapp/controllers/homeController.dart';
+import 'package:cashbackapp/models/clickModel.dart';
 import 'package:cashbackapp/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RecentClickDialogWidget extends StatelessWidget {
+  final ClickModel click;
+  RecentClickDialogWidget({this.click});
+
+  HomeController homeController = Get.find<HomeController>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,7 +46,7 @@ class RecentClickDialogWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Text(
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+              homeController.clickDialogText(click),
               textAlign: TextAlign.center,
             ),
           ),

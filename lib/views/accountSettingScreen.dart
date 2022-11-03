@@ -1,9 +1,8 @@
 import 'package:cashbackapp/controllers/authController.dart';
-import 'package:cashbackapp/controllers/commonController.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
 
 class AccountSettingScreen extends StatelessWidget {
   final fnameFocus = new FocusNode();

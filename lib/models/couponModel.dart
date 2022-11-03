@@ -1,3 +1,5 @@
+import 'package:cashbackapp/models/offerModel.dart';
+
 class Coupon {
   int id;
   String name;
@@ -11,6 +13,10 @@ class Coupon {
   String affiliatePartner;
   DateTime createdAt;
   DateTime updatedAt;
+  OfferModel offer;
+  String url;
+  String bannerImage;
+  String buttonText;
 
   Coupon({
     this.id,
@@ -25,6 +31,10 @@ class Coupon {
     this.affiliatePartner,
     this.createdAt,
     this.updatedAt,
+    this.offer,
+    this.url,
+    this.bannerImage,
+    this.buttonText,
   });
 
   Coupon.fromJson(Map<String, dynamic> json) {
@@ -41,6 +51,10 @@ class Coupon {
       affiliatePartner = json["affiliate_partner"];
       createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : '';
       updatedAt = json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : '';
+      offer = json["offers"] != null ? OfferModel.fromJson(json["offers"]) : null;
+      url = json["url"] != null ? json["url"] : '';
+      bannerImage = json["banner_image"] != null ? json["banner_image"] : '';
+      buttonText = json["button_text"] != null ? json["button_text"] : '';
     } catch (e) {
       print("Exception - CouponModel.dart - Coupon.fromJson():" + e.toString());
     }

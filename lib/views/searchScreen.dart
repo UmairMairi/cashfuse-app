@@ -9,6 +9,7 @@ import 'package:cashbackapp/widget/appWiseoffershowWidget.dart';
 import 'package:cashbackapp/widget/storeOfferWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 
 class SearchScreen extends StatelessWidget {
   SearchController searchController = Get.find<SearchController>();
@@ -103,7 +104,7 @@ class SearchScreen extends StatelessWidget {
                                           child: StoreOfferWidget(
                                             commonModel: CommonModel(
                                               name: searchController.searchData.advertiserList[index].name,
-                                              image: searchController.searchData.advertiserList[index].image,
+                                              image: '${global.appInfo.baseUrls.partnerImageUrl}/${searchController.searchData.advertiserList[index].image}',
                                               tagline: searchController.searchData.advertiserList[index].tagline,
                                               adId: searchController.searchData.advertiserList[index].id.toString(),
                                             ),
@@ -219,7 +220,6 @@ class SearchScreen extends StatelessWidget {
                                       },
                                       child: AppWiseOfferShowWidget(
                                         offer: searchController.searchData.offerList[index],
-                                        isTimeShow: true,
                                       ),
                                     );
                                   },

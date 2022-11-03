@@ -65,7 +65,7 @@ class RecentClickScreen extends StatelessWidget {
                                   ),
                                 ),
                                 trailing: Text(
-                                  '1 hour ago',
+                                  homeController.clickTime(homeController.recentClickList[index]),
                                   style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                     fontWeight: FontWeight.w300,
                                     color: Colors.grey[600],
@@ -104,7 +104,9 @@ class RecentClickScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       insetPadding: EdgeInsets.symmetric(horizontal: 15),
-                                      child: RecentClickDialogWidget(),
+                                      child: RecentClickDialogWidget(
+                                        click: homeController.recentClickList[index],
+                                      ),
                                     ),
                                   );
                                 },

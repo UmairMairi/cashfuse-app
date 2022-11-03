@@ -60,7 +60,7 @@ class StoreOfferWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0),
             child: CustomImage(
-              image: '${global.appInfo.baseUrls.partnerImageUrl}/${commonModel.image}',
+              image: commonModel.image,
               //height: 32,
               height: 45,
               //width: 100,

@@ -22,7 +22,8 @@ class CouponWidget extends StatelessWidget {
           ),
           color: Colors.white,
           child: Container(
-            width: 310,
+            width: Get.width - 40,
+            //width: 310,
             height: 100,
             decoration: DottedDecoration(
               borderRadius: BorderRadius.circular(9),

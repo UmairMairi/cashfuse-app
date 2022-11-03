@@ -1,4 +1,6 @@
 import 'package:cashbackapp/controllers/homeController.dart';
+import 'package:cashbackapp/models/categoryModel.dart';
+import 'package:cashbackapp/views/dealDetailScreen.dart';
 import 'package:cashbackapp/views/filterScreen.dart';
 import 'package:cashbackapp/views/offerDetailScreen.dart';
 import 'package:cashbackapp/widget/appWiseoffershowWidget.dart';
@@ -8,7 +10,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class AppWiseOfferShowListScreen extends StatelessWidget {
-  AppWiseOfferShowListScreen();
+  final CategoryModel categoryModel;
+  AppWiseOfferShowListScreen({this.categoryModel});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,7 @@ class AppWiseOfferShowListScreen extends StatelessWidget {
             ),
           ),
           title: Text(
-            '',
+            categoryModel != null ? categoryModel.name : 'NEW FLASH DEALS - LIVE NOW',
             style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
           ),
         ),
@@ -85,33 +88,64 @@ class AppWiseOfferShowListScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1,
-                  childAspectRatio: 1.6,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                itemCount: homeController.newFlashOfferList.length,
-                shrinkWrap: true,
-                padding: EdgeInsets.all(10).copyWith(top: 20),
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () async {
-                      await homeController.getOfferDetails(
-                        homeController.newFlashOfferList[index].id.toString(),
-                      );
-                      Get.to(() => OfferDetailScreen(
-                            offer: homeController.offer,
-                          ));
-                    },
-                    child: AppWiseOfferShowWidget(
-                      isTimeShow: false,
-                      offer: homeController.newFlashOfferList[index],
+              child: categoryModel != null
+                  ? GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1,
+                        childAspectRatio: 1.6,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                      ),
+                      itemCount: categoryModel.commonList.length,
+                      shrinkWrap: true,
+                      padding: EdgeInsets.all(10).copyWith(top: 20),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () async {
+                            if (categoryModel.commonList[index].adId != null && categoryModel.commonList[index].adId.isNotEmpty) {
+                              await homeController.getAdDetails(categoryModel.commonList[index].adId);
+                              Get.to(() => DealDetailScreen(
+                                    ads: homeController.ads,
+                                  ));
+                            } else {
+                              await homeController.getOfferDetails(categoryModel.commonList[index].campaignId.toString());
+                              Get.to(() => OfferDetailScreen(
+                                    offer: homeController.offer,
+                                  ));
+                            }
+                          },
+                          child: AppWiseOfferShowWidget(
+                            commonModel: categoryModel.commonList[index],
+                          ),
+                        );
+                      },
+                    )
+                  : GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1,
+                        childAspectRatio: 1.6,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                      ),
+                      itemCount: homeController.newFlashOfferList.length,
+                      shrinkWrap: true,
+                      padding: EdgeInsets.all(10).copyWith(top: 20),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () async {
+                            await homeController.getOfferDetails(
+                              homeController.newFlashOfferList[index].id.toString(),
+                            );
+                            Get.to(() => OfferDetailScreen(
+                                  offer: homeController.offer,
+                                ));
+                          },
+                          child: AppWiseOfferShowWidget(
+                            offer: homeController.newFlashOfferList[index],
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
             ),
           ],
         ),

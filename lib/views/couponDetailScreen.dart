@@ -1,13 +1,14 @@
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/couponModel.dart';
-import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashbackapp/views/webViewScreen.dart';
+import 'package:cashbackapp/widget/customImage.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:slide_countdown/slide_countdown.dart';
 
 class CouponDetailScreen extends StatelessWidget {
@@ -31,7 +32,7 @@ class CouponDetailScreen extends StatelessWidget {
           },
         ),
         title: Text(
-          'Coupon',
+          coupon.name,
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
         actions: [
@@ -107,8 +108,8 @@ class CouponDetailScreen extends StatelessWidget {
                 children: [
                   Stack(
                     children: [
-                      Image.asset(
-                        Images.dummyImage,
+                      CustomImage(
+                        image: '${global.appInfo.baseUrls.offerImageUrl}/${coupon.bannerImage}',
                         height: 200,
                         width: Get.width,
                         fit: BoxFit.fill,
@@ -139,6 +140,19 @@ class CouponDetailScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
+                          ),
+                        ),
+                      ),
+                      Card(
+                        color: Colors.white,
+                        margin: EdgeInsets.all(10),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: CustomImage(
+                            image: '${global.appInfo.baseUrls.partnerImageUrl}/${coupon.image}',
+                            height: 30,
+                            width: 60,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ),
@@ -189,19 +203,26 @@ class CouponDetailScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  Container(
-                    width: Get.width,
-                    height: 45,
-                    margin: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                    padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: Get.theme.secondaryHeaderColor,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'GO NUTS',
-                      style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                  InkWell(
+                    onTap: () {
+                      Get.to(() => WebViewScreen(
+                            url: coupon.url,
+                          ));
+                    },
+                    child: Container(
+                      width: Get.width,
+                      height: 45,
+                      margin: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: Get.theme.secondaryHeaderColor,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        coupon.buttonText,
+                        style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                      ),
                     ),
                   ),
                 ],
@@ -218,214 +239,183 @@ class CouponDetailScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'About this offer',
+                      'About this Coupon',
                       style: Get.theme.primaryTextTheme.subtitle2,
                     ),
                     Divider(),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      horizontalTitleGap: 10,
-                      minLeadingWidth: 0,
-                      leading: CircleAvatar(
-                        radius: 3,
-                        backgroundColor: Colors.black54,
-                      ),
-                      title: Text(
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                        style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                      ),
-                    ),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      horizontalTitleGap: 10,
-                      minLeadingWidth: 0,
-                      leading: CircleAvatar(
-                        radius: 3,
-                        backgroundColor: Colors.black54,
-                      ),
-                      title: Text(
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                        style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                      ),
-                    ),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      horizontalTitleGap: 10,
-                      minLeadingWidth: 0,
-                      leading: CircleAvatar(
-                        radius: 3,
-                        backgroundColor: Colors.black54,
-                      ),
-                      title: Text(
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                        style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
                     Text(
-                      'Important Information',
-                      style: Get.theme.primaryTextTheme.subtitle2,
+                      coupon.heading,
+                      style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w500),
                     ),
-                    Divider(),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      horizontalTitleGap: 10,
-                      minLeadingWidth: 0,
-                      leading: CircleAvatar(
-                        radius: 3,
-                        backgroundColor: Colors.black54,
-                      ),
-                      title: Text(
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                        style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                      ),
-                    ),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      horizontalTitleGap: 10,
-                      minLeadingWidth: 0,
-                      leading: CircleAvatar(
-                        radius: 3,
-                        backgroundColor: Colors.black54,
-                      ),
-                      title: Text(
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                        style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
                     Text(
-                      'Cashkaro Rewards Details',
-                      style: Get.theme.primaryTextTheme.subtitle2,
+                      coupon.description,
+                      style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
                     ),
-                    Divider(),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      horizontalTitleGap: 10,
-                      minLeadingWidth: 0,
-                      leading: CircleAvatar(
-                        radius: 3,
-                        backgroundColor: Colors.black54,
-                      ),
-                      title: Text(
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                        style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                      ),
-                    ),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      horizontalTitleGap: 10,
-                      minLeadingWidth: 0,
-                      leading: CircleAvatar(
-                        radius: 3,
-                        backgroundColor: Colors.black54,
-                      ),
-                      title: Text(
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                        style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                      ),
-                    ),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      horizontalTitleGap: 10,
-                      minLeadingWidth: 0,
-                      leading: CircleAvatar(
-                        radius: 3,
-                        backgroundColor: Colors.black54,
-                      ),
-                      title: Text(
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                        style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                      ),
-                    )
                   ],
                 ),
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'How to get this offer',
-                      style: Get.theme.primaryTextTheme.subtitle2,
-                    ),
-                    Divider(),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      horizontalTitleGap: 10,
-                      minLeadingWidth: 0,
-                      leading: CircleAvatar(
-                        radius: 3,
-                        backgroundColor: Colors.black54,
-                      ),
-                      title: Text(
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                        style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                      ),
-                    ),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      horizontalTitleGap: 10,
-                      minLeadingWidth: 0,
-                      leading: CircleAvatar(
-                        radius: 3,
-                        backgroundColor: Colors.black54,
-                      ),
-                      title: Text(
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                        style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                      ),
-                    ),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      horizontalTitleGap: 10,
-                      minLeadingWidth: 0,
-                      leading: CircleAvatar(
-                        radius: 3,
-                        backgroundColor: Colors.black54,
-                      ),
-                      title: Text(
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                        style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
+            // Container(
+            //   color: Colors.white,
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(10.0),
+            //     child: Column(
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+            //         Text(
+            //           'Important Information',
+            //           style: Get.theme.primaryTextTheme.subtitle2,
+            //         ),
+            //         Divider(),
+            //         ListTile(
+            //           contentPadding: EdgeInsets.zero,
+            //           horizontalTitleGap: 10,
+            //           minLeadingWidth: 0,
+            //           leading: CircleAvatar(
+            //             radius: 3,
+            //             backgroundColor: Colors.black54,
+            //           ),
+            //           title: Text(
+            //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+            //           ),
+            //         ),
+            //         ListTile(
+            //           contentPadding: EdgeInsets.zero,
+            //           horizontalTitleGap: 10,
+            //           minLeadingWidth: 0,
+            //           leading: CircleAvatar(
+            //             radius: 3,
+            //             backgroundColor: Colors.black54,
+            //           ),
+            //           title: Text(
+            //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 10,
+            // ),
+            // Container(
+            //   color: Colors.white,
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(10.0),
+            //     child: Column(
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+            //         Text(
+            //           'Cashkaro Rewards Details',
+            //           style: Get.theme.primaryTextTheme.subtitle2,
+            //         ),
+            //         Divider(),
+            //         ListTile(
+            //           contentPadding: EdgeInsets.zero,
+            //           horizontalTitleGap: 10,
+            //           minLeadingWidth: 0,
+            //           leading: CircleAvatar(
+            //             radius: 3,
+            //             backgroundColor: Colors.black54,
+            //           ),
+            //           title: Text(
+            //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+            //           ),
+            //         ),
+            //         ListTile(
+            //           contentPadding: EdgeInsets.zero,
+            //           horizontalTitleGap: 10,
+            //           minLeadingWidth: 0,
+            //           leading: CircleAvatar(
+            //             radius: 3,
+            //             backgroundColor: Colors.black54,
+            //           ),
+            //           title: Text(
+            //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+            //           ),
+            //         ),
+            //         ListTile(
+            //           contentPadding: EdgeInsets.zero,
+            //           horizontalTitleGap: 10,
+            //           minLeadingWidth: 0,
+            //           leading: CircleAvatar(
+            //             radius: 3,
+            //             backgroundColor: Colors.black54,
+            //           ),
+            //           title: Text(
+            //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+            //           ),
+            //         )
+            //       ],
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 10,
+            // ),
+            // Container(
+            //   color: Colors.white,
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(10.0),
+            //     child: Column(
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+            //         Text(
+            //           'How to get this offer',
+            //           style: Get.theme.primaryTextTheme.subtitle2,
+            //         ),
+            //         Divider(),
+            //         ListTile(
+            //           contentPadding: EdgeInsets.zero,
+            //           horizontalTitleGap: 10,
+            //           minLeadingWidth: 0,
+            //           leading: CircleAvatar(
+            //             radius: 3,
+            //             backgroundColor: Colors.black54,
+            //           ),
+            //           title: Text(
+            //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+            //           ),
+            //         ),
+            //         ListTile(
+            //           contentPadding: EdgeInsets.zero,
+            //           horizontalTitleGap: 10,
+            //           minLeadingWidth: 0,
+            //           leading: CircleAvatar(
+            //             radius: 3,
+            //             backgroundColor: Colors.black54,
+            //           ),
+            //           title: Text(
+            //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+            //           ),
+            //         ),
+            //         ListTile(
+            //           contentPadding: EdgeInsets.zero,
+            //           horizontalTitleGap: 10,
+            //           minLeadingWidth: 0,
+            //           leading: CircleAvatar(
+            //             radius: 3,
+            //             backgroundColor: Colors.black54,
+            //           ),
+            //           title: Text(
+            //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+            //           ),
+            //         )
+            //       ],
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 10,
+            // ),
           ],
         ),
       ),

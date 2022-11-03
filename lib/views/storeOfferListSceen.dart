@@ -5,6 +5,7 @@ import 'package:cashbackapp/views/categoryScreen.dart';
 import 'package:cashbackapp/widget/storeOfferWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 
 class StoreOfferListScreen extends StatelessWidget {
   final List<CategoryModel> list;
@@ -48,7 +49,7 @@ class StoreOfferListScreen extends StatelessWidget {
               child: StoreOfferWidget(
                 commonModel: CommonModel(
                   name: list[index].name,
-                  image: list[index].image,
+                  image: '${global.appInfo.baseUrls.partnerImageUrl}/${list[index].image}',
                   tagline: list[index].tagline,
                   adId: list[index].id.toString(),
                 ),

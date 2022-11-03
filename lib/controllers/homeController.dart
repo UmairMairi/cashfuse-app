@@ -121,7 +121,7 @@ class HomeController extends GetxController {
                     _topCategoryList[i].commonList.add(
                           CommonModel(
                             name: _topCategoryList[i].ads[j].name,
-                            image: _topCategoryList[i].ads[j].image,
+                            image: '${global.appInfo.baseUrls.offerImageUrl}/${_topCategoryList[i].ads[j].image}',
                             buttonText: _topCategoryList[i].ads[j].buttonText,
                             trackingLink: _topCategoryList[i].ads[j].landingPage,
                             adId: _topCategoryList[i].ads[j].id.toString(),
@@ -136,7 +136,7 @@ class HomeController extends GetxController {
                     _topCategoryList[n].commonList.add(
                           CommonModel(
                             name: _topCategoryList[n].cuecampaigns[k].name,
-                            image: _topCategoryList[n].cuecampaigns[k].image,
+                            image: '${global.appInfo.baseUrls.offerImageUrl}/${_topCategoryList[n].cuecampaigns[k].image}',
                             buttonText: _topCategoryList[n].cuecampaigns[k].buttonText,
                             trackingLink: _topCategoryList[n].cuecampaigns[k].url,
                             campaignId: _topCategoryList[n].cuecampaigns[k].id,
@@ -174,7 +174,7 @@ class HomeController extends GetxController {
                     _topCashbackList[i].commonList.add(
                           CommonModel(
                             name: _topCashbackList[i].ads[j].name,
-                            image: _topCashbackList[i].ads[j].image,
+                            image: '${global.appInfo.baseUrls.offerImageUrl}/${_topCashbackList[i].ads[j].image}',
                             buttonText: _topCashbackList[i].ads[j].buttonText,
                             trackingLink: _topCashbackList[i].ads[j].landingPage,
                             adId: _topCashbackList[i].ads[j].id.toString(),
@@ -189,7 +189,7 @@ class HomeController extends GetxController {
                     _topCashbackList[n].commonList.add(
                           CommonModel(
                             name: _topCashbackList[n].cuecampaigns[k].name,
-                            image: _topCashbackList[n].cuecampaigns[k].image,
+                            image: '${global.appInfo.baseUrls.offerImageUrl}/${_topCashbackList[n].cuecampaigns[k].image}',
                             buttonText: _topCashbackList[n].cuecampaigns[k].buttonText,
                             trackingLink: _topCashbackList[n].cuecampaigns[k].url,
                             campaignId: _topCashbackList[n].cuecampaigns[k].id,
@@ -218,6 +218,39 @@ class HomeController extends GetxController {
         await apiHelper.getHomeAdv().then((response) {
           if (response.status == "1") {
             _homeAdvList = response.data;
+
+            if (_homeAdvList != []) {
+              for (var i = 0; i < _homeAdvList.length; i++) {
+                if (_homeAdvList[i].ads != []) {
+                  for (var j = 0; j < _homeAdvList[i].ads.length; j++) {
+                    _homeAdvList[i].commonList.add(
+                          CommonModel(
+                            name: _homeAdvList[i].ads[j].name,
+                            image: _homeAdvList[i].ads[j].image,
+                            buttonText: _homeAdvList[i].ads[j].buttonText,
+                            trackingLink: _homeAdvList[i].ads[j].landingPage,
+                            adId: _homeAdvList[i].ads[j].id.toString(),
+                          ),
+                        );
+                  }
+                }
+              }
+              for (var n = 0; n < _homeAdvList.length; n++) {
+                if (_homeAdvList[n].cuecampaigns != []) {
+                  for (var k = 0; k < _homeAdvList[n].cuecampaigns.length; k++) {
+                    _homeAdvList[n].commonList.add(
+                          CommonModel(
+                            name: _homeAdvList[n].cuecampaigns[k].name,
+                            image: _homeAdvList[n].cuecampaigns[k].image,
+                            buttonText: _homeAdvList[n].cuecampaigns[k].buttonText,
+                            trackingLink: _homeAdvList[n].cuecampaigns[k].url,
+                            campaignId: _homeAdvList[n].cuecampaigns[k].id,
+                          ),
+                        );
+                  }
+                }
+              }
+            }
             update();
           } else {
             showCustomSnackBar(response.message);
@@ -237,6 +270,38 @@ class HomeController extends GetxController {
         await apiHelper.getAllAdv().then((response) {
           if (response.status == "1") {
             _allAdvList = response.data;
+            if (_allAdvList != []) {
+              for (var i = 0; i < _allAdvList.length; i++) {
+                if (_allAdvList[i].ads != []) {
+                  for (var j = 0; j < _allAdvList[i].ads.length; j++) {
+                    _allAdvList[i].commonList.add(
+                          CommonModel(
+                            name: _allAdvList[i].ads[j].name,
+                            image: '${global.appInfo.baseUrls.offerImageUrl}/${_allAdvList[i].ads[j].image}',
+                            buttonText: _allAdvList[i].ads[j].buttonText,
+                            trackingLink: _allAdvList[i].ads[j].landingPage,
+                            adId: _allAdvList[i].ads[j].id.toString(),
+                          ),
+                        );
+                  }
+                }
+              }
+              for (var n = 0; n < _allAdvList.length; n++) {
+                if (_allAdvList[n].cuecampaigns != []) {
+                  for (var k = 0; k < _allAdvList[n].cuecampaigns.length; k++) {
+                    _allAdvList[n].commonList.add(
+                          CommonModel(
+                            name: _allAdvList[n].cuecampaigns[k].name,
+                            image: '${global.appInfo.baseUrls.offerImageUrl}/${_allAdvList[n].cuecampaigns[k].image}',
+                            buttonText: _allAdvList[n].cuecampaigns[k].buttonText,
+                            trackingLink: _allAdvList[n].cuecampaigns[k].url,
+                            campaignId: _allAdvList[n].cuecampaigns[k].id,
+                          ),
+                        );
+                  }
+                }
+              }
+            }
             update();
           } else {
             showCustomSnackBar(response.message);
@@ -451,6 +516,45 @@ class HomeController extends GetxController {
       }
     } catch (e) {
       print("Exception - HomeController.dart - getClick():" + e.toString());
+    }
+  }
+
+  String clickDialogText(ClickModel click) {
+    try {
+      String value = '';
+      if (DateTime.now().difference(click.createdAt).inDays == 0) {
+        value = 'All is Well\nit will take upto 72 hours to track your rewards till then keep shopping so #yougetmore ';
+      } else if (DateTime.now().difference(click.createdAt).inDays == 1) {
+        value = 'All is Well\nit will take upto 36 hours to track your rewards till then keep shopping so #yougetmore ';
+      } else if (DateTime.now().difference(click.createdAt).inDays == 2) {
+        value = 'All is Well\nit will take upto 24 hours to track your rewards till then keep shopping so #yougetmore';
+      } else {
+        value = "your earnings will show on My Orders Details.\nif you don't see your earnings there , please click below.";
+      }
+      return value;
+    } catch (e) {
+      print("Exception - HomeController.dart - clickDialogText():" + e.toString());
+      return '';
+    }
+  }
+
+  String clickTime(ClickModel click) {
+    try {
+      String value = '';
+      if (DateTime.now().difference(click.createdAt).inDays > 0) {
+        value = '${DateTime.now().difference(click.createdAt).inDays} day ago';
+      } else if (DateTime.now().difference(click.createdAt).inHours > 0) {
+        value = '${DateTime.now().difference(click.createdAt).inHours} hour ago';
+      } else if (DateTime.now().difference(click.createdAt).inMinutes > 0) {
+        value = '${DateTime.now().difference(click.createdAt).inMinutes} min ago';
+      } else if (DateTime.now().difference(click.createdAt).inSeconds > 0) {
+        value = 'Just Now';
+      }
+
+      return value;
+    } catch (e) {
+      print("Exception - HomeController.dart - clickTime():" + e.toString());
+      return '';
     }
   }
 }
