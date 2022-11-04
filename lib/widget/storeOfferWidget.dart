@@ -1,5 +1,4 @@
 import 'package:cashbackapp/models/commonModel.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/views/ratesAndTermScreen.dart';
 import 'package:cashbackapp/widget/customImage.dart';
 import 'package:custom_clippers/custom_clippers.dart';

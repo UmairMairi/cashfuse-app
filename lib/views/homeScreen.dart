@@ -4,14 +4,15 @@ import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/commonModel.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/views/appWiseoffershowListScreen.dart';
+import 'package:cashbackapp/views/campaignDetailScreen.dart';
 import 'package:cashbackapp/views/categoryScreen.dart';
 import 'package:cashbackapp/views/couponDetailScreen.dart';
 import 'package:cashbackapp/views/couponListScreen.dart';
-import 'package:cashbackapp/views/dealDetailScreen.dart';
+import 'package:cashbackapp/views/offerDetailScreen.dart';
 import 'package:cashbackapp/views/faqSceen.dart';
 import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
 import 'package:cashbackapp/views/myEarningScreen.dart';
-import 'package:cashbackapp/views/offerDetailScreen.dart';
+import 'package:cashbackapp/views/adsDetailScreen.dart';
 import 'package:cashbackapp/views/storeOfferListSceen.dart';
 import 'package:cashbackapp/views/webViewScreen.dart';
 import 'package:cashbackapp/widget/appWiseoffershowWidget.dart';
@@ -133,7 +134,7 @@ class HomeScreen extends StatelessWidget {
                                 if (global.currentUser.id != null) {
                                   Get.to(
                                     () => WebViewScreen(
-                                      url: controller.topBannerList[index].url,
+                                      urlString: controller.topBannerList[index].url,
                                     ),
                                   );
                                 } else {
@@ -683,13 +684,13 @@ class HomeScreen extends StatelessWidget {
                                         onTap: () async {
                                           if (home.homeAdvList[index].commonList[i].adId != null && home.homeAdvList[index].commonList[i].adId.isNotEmpty) {
                                             await home.getAdDetails(home.homeAdvList[index].commonList[i].adId);
-                                            Get.to(() => DealDetailScreen(
+                                            Get.to(() => AdsDetailScreen(
                                                   ads: home.ads,
                                                 ));
                                           } else {
-                                            await home.getOfferDetails(home.homeAdvList[index].commonList[i].campaignId.toString());
-                                            Get.to(() => OfferDetailScreen(
-                                                  offer: home.offer,
+                                            await home.getCampignDetails(home.homeAdvList[index].commonList[i].campaignId.toString());
+                                            Get.to(() => CampaignDetailScreen(
+                                                  campaign: home.campaign,
                                                 ));
                                           }
                                         },

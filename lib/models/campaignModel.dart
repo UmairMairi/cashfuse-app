@@ -1,3 +1,5 @@
+import 'package:cashbackapp/models/categoryModel.dart';
+
 class CampaignModel {
   int id;
   int campaignId;
@@ -14,6 +16,9 @@ class CampaignModel {
   String affiliatePartner;
   DateTime createdAt;
   DateTime updatedAt;
+  int campaigns;
+  String description;
+  CategoryModel partner;
 
   CampaignModel({
     this.id,
@@ -31,6 +36,9 @@ class CampaignModel {
     this.affiliatePartner,
     this.createdAt,
     this.updatedAt,
+    this.campaigns,
+    this.description,
+    this.partner,
   });
 
   CampaignModel.fromJson(Map<String, dynamic> json) {
@@ -42,7 +50,7 @@ class CampaignModel {
       domain = json["domain"];
       payoutType = json["payout_type"];
       payout = json["payout"].toDouble();
-      image = json["image"];
+      image = json["image"] != null ? json["image"] : '';
       category = json["category"];
       categoryId = json["category_id"];
       status = json["status"];
@@ -50,6 +58,9 @@ class CampaignModel {
       affiliatePartner = json["affiliate_partner"];
       createdAt = DateTime.parse(json["created_at"]);
       updatedAt = DateTime.parse(json["updated_at"]);
+      campaigns = json["campaigns"];
+      description = json["description"] != null ? json["description"] : '';
+      partner = json["partner"] != null ? CategoryModel.fromJson(json["partner"]) : '';
     } catch (e) {
       print("Exception - CampaignModel.dart - CampaignModel.fromJson():" + e.toString());
     }

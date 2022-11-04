@@ -1,8 +1,9 @@
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
-import 'package:cashbackapp/views/dealDetailScreen.dart';
-import 'package:cashbackapp/views/filterScreen.dart';
+import 'package:cashbackapp/views/campaignDetailScreen.dart';
 import 'package:cashbackapp/views/offerDetailScreen.dart';
+import 'package:cashbackapp/views/filterScreen.dart';
+import 'package:cashbackapp/views/adsDetailScreen.dart';
 import 'package:cashbackapp/widget/appWiseoffershowWidget.dart';
 import 'package:cashbackapp/widget/sortDialogWidget.dart';
 import 'package:flutter/material.dart';
@@ -104,13 +105,13 @@ class AppWiseOfferShowListScreen extends StatelessWidget {
                           onTap: () async {
                             if (categoryModel.commonList[index].adId != null && categoryModel.commonList[index].adId.isNotEmpty) {
                               await homeController.getAdDetails(categoryModel.commonList[index].adId);
-                              Get.to(() => DealDetailScreen(
+                              Get.to(() => AdsDetailScreen(
                                     ads: homeController.ads,
                                   ));
                             } else {
-                              await homeController.getOfferDetails(categoryModel.commonList[index].campaignId.toString());
-                              Get.to(() => OfferDetailScreen(
-                                    offer: homeController.offer,
+                              await homeController.getCampignDetails(categoryModel.commonList[index].campaignId.toString());
+                              Get.to(() => CampaignDetailScreen(
+                                    campaign: homeController.campaign,
                                   ));
                             }
                           },

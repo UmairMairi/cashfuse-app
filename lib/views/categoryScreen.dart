@@ -1,7 +1,8 @@
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
-import 'package:cashbackapp/views/dealDetailScreen.dart';
+import 'package:cashbackapp/views/campaignDetailScreen.dart';
 import 'package:cashbackapp/views/offerDetailScreen.dart';
+import 'package:cashbackapp/views/adsDetailScreen.dart';
 import 'package:cashbackapp/widget/storeOfferWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,8 @@ class CategoryScreen extends StatelessWidget {
   final String title;
   final CategoryModel category;
   CategoryScreen({this.category, this.title});
+
+  HomeController homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -65,37 +68,39 @@ class CategoryScreen extends StatelessWidget {
             //   ),
             // ),
             category.commonList != null && category.commonList.length > 0
-                ? GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 15.0,
-                      mainAxisSpacing: 15.0,
-                    ),
-                    itemCount: category.commonList.length,
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () async {
-                          if (category.commonList[index].adId != null && category.commonList[index].adId.isNotEmpty) {
-                            await Get.find<HomeController>().getAdDetails(category.commonList[index].adId);
-                            Get.to(() => DealDetailScreen(
-                                  ads: Get.find<HomeController>().ads,
-                                ));
-                          } else {
-                            await Get.find<HomeController>().getOfferDetails(category.commonList[index].campaignId.toString());
-                            Get.to(() => OfferDetailScreen(
-                                  offer: Get.find<HomeController>().offer,
-                                ));
-                          }
-                        },
-                        child: StoreOfferWidget(
-                          commonModel: category.commonList[index],
-                        ),
-                      );
-                    },
-                  )
+                ? GetBuilder<HomeController>(builder: (controller) {
+                    return GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 15.0,
+                        mainAxisSpacing: 15.0,
+                      ),
+                      itemCount: category.commonList.length,
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () async {
+                            if (category.commonList[index].adId != null && category.commonList[index].adId.isNotEmpty) {
+                              await homeController.getAdDetails(category.commonList[index].adId);
+                              Get.to(() => AdsDetailScreen(
+                                    ads: homeController.ads,
+                                  ));
+                            } else {
+                              await homeController.getCampignDetails(category.commonList[index].campaignId.toString());
+                              Get.to(() => CampaignDetailScreen(
+                                    campaign: homeController.campaign,
+                                  ));
+                            }
+                          },
+                          child: StoreOfferWidget(
+                            commonModel: category.commonList[index],
+                          ),
+                        );
+                      },
+                    );
+                  })
                 : SizedBox(
                     height: Get.height,
                     child: Center(

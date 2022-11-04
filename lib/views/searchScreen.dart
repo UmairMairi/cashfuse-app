@@ -2,9 +2,10 @@ import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/controllers/searchController.dart';
 import 'package:cashbackapp/models/commonModel.dart';
+import 'package:cashbackapp/views/campaignDetailScreen.dart';
 import 'package:cashbackapp/views/categoryScreen.dart';
-import 'package:cashbackapp/views/dealDetailScreen.dart';
 import 'package:cashbackapp/views/offerDetailScreen.dart';
+import 'package:cashbackapp/views/adsDetailScreen.dart';
 import 'package:cashbackapp/widget/appWiseoffershowWidget.dart';
 import 'package:cashbackapp/widget/storeOfferWidget.dart';
 import 'package:flutter/material.dart';
@@ -178,13 +179,13 @@ class SearchScreen extends StatelessWidget {
                                       onTap: () async {
                                         if (searchController.searchData.commonList[index].adId != null && searchController.searchData.commonList[index].adId.isNotEmpty) {
                                           await homeController.getAdDetails(searchController.searchData.commonList[index].adId);
-                                          Get.to(() => DealDetailScreen(
+                                          Get.to(() => AdsDetailScreen(
                                                 ads: homeController.ads,
                                               ));
                                         } else {
-                                          await homeController.getOfferDetails(searchController.searchData.commonList[index].campaignId.toString());
-                                          Get.to(() => OfferDetailScreen(
-                                                offer: homeController.offer,
+                                          await homeController.getCampignDetails(searchController.searchData.commonList[index].campaignId.toString());
+                                          Get.to(() => CampaignDetailScreen(
+                                                campaign: homeController.campaign,
                                               ));
                                         }
                                       },

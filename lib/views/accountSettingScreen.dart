@@ -16,6 +16,8 @@ class AccountSettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthController>(builder: (auth) {
+      authController.name.text = global.currentUser.name;
+      authController.email.text = global.currentUser.email;
       return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -145,7 +147,7 @@ class AccountSettingScreen extends StatelessWidget {
                   ),
                   Text(
                     '${global.currentUser.phone}',
-                    style: TextStyle(fontWeight: FontWeight.w300),
+                    //style: TextStyle(fontWeight: FontWeight.w300),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),

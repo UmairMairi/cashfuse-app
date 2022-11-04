@@ -1,5 +1,6 @@
 import 'package:cashbackapp/controllers/couponController.dart';
 import 'package:cashbackapp/views/couponDetailScreen.dart';
+import 'package:cashbackapp/views/adsDetailScreen.dart';
 import 'package:cashbackapp/views/offerDetailScreen.dart';
 import 'package:cashbackapp/widget/couponWidget.dart';
 import 'package:flutter/material.dart';

@@ -30,4 +30,5 @@ class AppConstants {
   static const String ADD_CLICK_URI = '/add_click';
   static const String GET_CLICK_URI = '/get_click';
   static const String UPDATE_PROFILE_URI = '/update-profile';
+  static const String ALL_IN_ONE_URI = '/allin';
 }

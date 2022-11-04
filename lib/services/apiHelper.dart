@@ -5,6 +5,7 @@ import 'package:cashbackapp/models/adsModel.dart';
 import 'package:cashbackapp/models/appInfoModel.dart';
 import 'package:cashbackapp/models/bankDetailsModel.dart';
 import 'package:cashbackapp/models/bannerModel.dart';
+import 'package:cashbackapp/models/campaignModel.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
 import 'package:cashbackapp/models/clickModel.dart';
 import 'package:cashbackapp/models/couponModel.dart';
@@ -54,7 +55,10 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      var formData = FormData.fromMap({'phone': phone, 'device_id': global.appDeviceId});
+      var formData = FormData.fromMap({
+        'phone': phone,
+        'device_id': global.appDeviceId,
+      });
       response = await dio.post('${global.baseUrl}${AppConstants.LOGIN_RESGISTER}',
           data: formData,
           options: Options(
@@ -77,7 +81,11 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      var formData = FormData.fromMap({'phone': phone, 'otp': status});
+      var formData = FormData.fromMap({
+        'phone': phone,
+        'otp': status,
+        'device_id': global.appDeviceId,
+      });
       response = await dio.post('${global.baseUrl}${AppConstants.VERIFY_OTP}',
           data: formData,
           options: Options(
@@ -307,7 +315,7 @@ class APIHelper {
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = OfferModel.fromJson(response.data);
+        recordList = CampaignModel.fromJson(response.data);
       } else {
         recordList = null;
       }
@@ -658,6 +666,7 @@ class APIHelper {
 
       dynamic recordList;
       if (response.statusCode == 200) {
+        recordList = UserModel.fromJson(response.data['data']);
       } else {
         recordList = null;
       }
@@ -665,6 +674,28 @@ class APIHelper {
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - updateProfile():" + e.toString());
+    }
+  }
+
+  Future<dynamic> allInOneSearch() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.ALL_IN_ONE_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<CampaignModel>.from(response.data['data'].map((x) => CampaignModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ALL_IN_ONE_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - allInOneSearch():" + e.toString());
     }
   }
 }

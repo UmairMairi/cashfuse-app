@@ -232,9 +232,11 @@ class AuthController extends GetxController {
         await apiHelper.updateProfile(name.text.trim(), global.currentUser.phone, email.text.trim()).then((response) {
           Get.back();
           if (response.statusCode == 200) {
-            // global.currentUser = response.data;
-            // global.sp.setString('currentUser', json.encode(global.currentUser.toJson()));
-            // Get.back();
+            String _token = global.currentUser.token;
+            global.currentUser = response.data;
+            global.currentUser.token = _token;
+            global.sp.setString('currentUser', json.encode(global.currentUser.toJson()));
+            Get.back();
             showCustomSnackBar(response.message, isError: false);
           } else {
             showCustomSnackBar(response.message);

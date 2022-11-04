@@ -1,13 +1,17 @@
+import 'dart:developer';
+
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:cashbackapp/widget/webview/seeMoreSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class WebViewScreen extends StatelessWidget {
-  final String url;
-  WebViewScreen({this.url});
+  final String urlString;
+  WebViewScreen({this.urlString});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +42,7 @@ class WebViewScreen extends StatelessWidget {
               //   },
               // ),
               InAppWebView(
-                initialUrlRequest: URLRequest(url: Uri.parse(url)),
+                initialUrlRequest: URLRequest(url: Uri.parse(urlString)),
                 onLoadStart: (controller, url) {
                   homeController.updtaeRotate(true);
                 },
@@ -48,6 +52,7 @@ class WebViewScreen extends StatelessWidget {
                 initialOptions: InAppWebViewGroupOptions(
                   android: AndroidInAppWebViewOptions(
                     mixedContentMode: AndroidMixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW,
+                    cacheMode: AndroidCacheMode.LOAD_NO_CACHE,
                   ),
                 ),
               ),

@@ -206,7 +206,7 @@ class CouponDetailScreen extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       Get.to(() => WebViewScreen(
-                            url: coupon.url,
+                            urlString: coupon.url,
                           ));
                     },
                     child: Container(

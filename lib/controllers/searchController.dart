@@ -1,5 +1,6 @@
 import 'package:cashbackapp/constants/appConstant.dart';
 import 'package:cashbackapp/controllers/networkController.dart';
+import 'package:cashbackapp/models/campaignModel.dart';
 import 'package:cashbackapp/models/commonModel.dart';
 import 'package:cashbackapp/models/searchDataModel.dart';
 import 'package:cashbackapp/services/apiHelper.dart';
@@ -14,6 +15,9 @@ class SearchController extends GetxController {
   NetworkController networkController = Get.find<NetworkController>();
 
   var searchString = new TextEditingController();
+
+  List<CampaignModel> _allInOneList = [];
+  List<CampaignModel> get allInOneList => _allInOneList;
 
   SearchDataModel searchData;
 
@@ -122,6 +126,26 @@ class SearchController extends GetxController {
       update();
     } catch (e) {
       print("Exception - SearchController.dart - getSearchData():" + e.toString());
+    }
+  }
+
+  Future allInOneSearch() async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.allInOneSearch().then((response) {
+          if (response.status == "1") {
+            _allInOneList = response.data;
+            update();
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+      update();
+    } catch (e) {
+      print("Exception - CommonController.dart - allInOneSearch():" + e.toString());
     }
   }
 }

@@ -1,3 +1,5 @@
+import 'package:cashbackapp/models/categoryModel.dart';
+
 class AdsModel {
   int id;
   String adId;
@@ -18,6 +20,8 @@ class AdsModel {
   int status;
   DateTime createdAt;
   DateTime updatedAt;
+  int ads;
+  CategoryModel partner;
 
   AdsModel({
     this.id,
@@ -39,6 +43,8 @@ class AdsModel {
     this.status,
     this.createdAt,
     this.updatedAt,
+    this.ads,
+    this.partner,
   });
 
   AdsModel.fromJson(Map<String, dynamic> json) {
@@ -63,6 +69,8 @@ class AdsModel {
       status = json["status"];
       createdAt = DateTime.parse(json["created_at"]);
       updatedAt = DateTime.parse(json["updated_at"]);
+      ads = json["ads"];
+      partner = json["partner"] != null ? CategoryModel.fromJson(json["partner"]) : '';
     } catch (e) {
       print("Exception - AdsModel.dart - AdsModel.fromJson():" + e.toString());
     }
