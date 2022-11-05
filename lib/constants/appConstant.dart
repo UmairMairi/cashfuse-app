@@ -31,4 +31,7 @@ class AppConstants {
   static const String GET_CLICK_URI = '/get_click';
   static const String UPDATE_PROFILE_URI = '/update-profile';
   static const String ALL_IN_ONE_URI = '/allin';
+  static const String MORE_CAMAPIGN_URI = '/seemorecampaigns';
+  static const String MORE_OFFERS_URI = '/seemoreoffers';
+  static const String MORE_ADS_URI = '/seemoreads';
 }

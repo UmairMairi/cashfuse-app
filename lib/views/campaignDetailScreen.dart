@@ -2,6 +2,7 @@ import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/campaignModel.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
+import 'package:cashbackapp/views/moreCampignScreen.dart';
 import 'package:cashbackapp/views/moreOfferScreen.dart';
 import 'package:cashbackapp/views/webViewScreen.dart';
 import 'package:cashbackapp/widget/customImage.dart';
@@ -13,7 +14,8 @@ import 'package:get/get.dart';
 
 class CampaignDetailScreen extends StatelessWidget {
   final CampaignModel campaign;
-  CampaignDetailScreen({this.campaign});
+  final bool fromSeeMore;
+  CampaignDetailScreen({this.campaign, this.fromSeeMore});
   HomeController homeController = Get.find<HomeController>();
 
   @override
@@ -306,36 +308,41 @@ class CampaignDetailScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            InkWell(
-                              onTap: () {
-                                Get.bottomSheet(
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(15),
-                                      topRight: Radius.circular(15),
-                                    ),
-                                    child: MoreOfferScreen(),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                width: Get.width,
-                                height: 45,
-                                margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                                padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                      color: Colors.teal[200],
-                                      width: 1.5,
-                                    )),
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'See More Offers  >',
-                                  style: TextStyle(color: Colors.teal[200], fontSize: 14, fontWeight: FontWeight.w400),
-                                ),
-                              ),
-                            ),
+                            fromSeeMore
+                                ? SizedBox()
+                                : homeController.seeMoreCampaignList != null && homeController.seeMoreCampaignList.length > 0
+                                    ? InkWell(
+                                        onTap: () async {
+                                          //await homeController.getMoreCampaign(campaign.id.toString());
+                                          Get.bottomSheet(
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(15),
+                                                topRight: Radius.circular(15),
+                                              ),
+                                              child: MoreCampignScreen(),
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          width: Get.width,
+                                          height: 45,
+                                          margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                                          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10),
+                                              border: Border.all(
+                                                color: Colors.teal[200],
+                                                width: 1.5,
+                                              )),
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'See More Offers  >',
+                                            style: TextStyle(color: Colors.teal[200], fontSize: 14, fontWeight: FontWeight.w400),
+                                          ),
+                                        ),
+                                      )
+                                    : SizedBox(),
                           ],
                         ),
                       ),
@@ -345,60 +352,68 @@ class CampaignDetailScreen extends StatelessWidget {
               )
             ],
           ),
-          bottomNavigationBar: SizedBox(
-            height: 50,
-            child: Card(
-              margin: EdgeInsets.zero,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-              color: Get.theme.primaryColor,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Get.find<HomeController>().setIsOffer(false);
-                      Get.bottomSheet(
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
+          bottomNavigationBar: campaign.partner != null && (campaign.partner.leftTab.isNotEmpty || campaign.partner.rightTab.isNotEmpty)
+              ? SizedBox(
+                  height: 50,
+                  child: Card(
+                    margin: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                    color: Get.theme.primaryColor,
+                    child: Row(
+                      mainAxisAlignment: (campaign.partner.leftTab.isNotEmpty && campaign.partner.rightTab.isNotEmpty) ? MainAxisAlignment.spaceEvenly : MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Get.find<HomeController>().setIsOffer(false);
+                            Get.bottomSheet(
+                              ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15),
+                                ),
+                                child: RatesAndOfferTermsSheetWidget(
+                                  partner: campaign.partner,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            campaign.partner.leftTab,
+                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
                           ),
-                          child: RatesAndOfferTermsSheetWidget(),
                         ),
-                      );
-                    },
-                    child: Text(
-                      'Cashback Rates',
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                        (campaign.partner.leftTab.isNotEmpty && campaign.partner.rightTab.isNotEmpty)
+                            ? Icon(
+                                Icons.more_vert,
+                                size: 22,
+                                color: Colors.white.withOpacity(0.3),
+                              )
+                            : SizedBox(),
+                        InkWell(
+                          onTap: () {
+                            Get.find<HomeController>().setIsOffer(true);
+                            Get.bottomSheet(
+                              ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15),
+                                ),
+                                child: RatesAndOfferTermsSheetWidget(
+                                  partner: campaign.partner,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            campaign.partner.rightTab.camelCase,
+                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Icon(
-                    Icons.more_vert,
-                    size: 22,
-                    color: Colors.white.withOpacity(0.3),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.find<HomeController>().setIsOffer(true);
-                      Get.bottomSheet(
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                          ),
-                          child: RatesAndOfferTermsSheetWidget(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      'Offer Terms',
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+                )
+              : SizedBox(),
         ),
       );
     });

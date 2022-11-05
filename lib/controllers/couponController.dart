@@ -11,6 +11,8 @@ class CouponController extends GetxController {
   List<Coupon> _couponList = [];
   List<Coupon> get couponList => _couponList;
 
+  bool isDataLoaded = false;
+
   @override
   void onInit() async {
     await getCouponList();
@@ -24,11 +26,11 @@ class CouponController extends GetxController {
 
   Future getCouponList() async {
     try {
+      isDataLoaded = false;
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         await apiHelper.getCoupons().then((response) {
           if (response.status == "1") {
             _couponList = response.data;
-            update();
           } else {
             showCustomSnackBar(response.message);
           }
@@ -36,6 +38,8 @@ class CouponController extends GetxController {
       } else {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
+      isDataLoaded = true;
+      update();
     } catch (e) {
       print("Exception - CouponController.dart - getCouponList():" + e.toString());
     }

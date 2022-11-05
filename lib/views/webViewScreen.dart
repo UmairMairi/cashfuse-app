@@ -1,13 +1,9 @@
-import 'dart:developer';
-
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/utils/images.dart';
-import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:cashbackapp/widget/webview/seeMoreSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class WebViewScreen extends StatelessWidget {
   final String urlString;

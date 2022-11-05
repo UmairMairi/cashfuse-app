@@ -1,7 +1,11 @@
+import 'package:cashbackapp/models/commonModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RatesAndTermScreen extends StatelessWidget {
+  final CommonModel commonModel;
+  RatesAndTermScreen({this.commonModel});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

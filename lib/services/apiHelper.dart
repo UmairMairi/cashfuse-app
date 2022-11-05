@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cashbackapp/constants/appConstant.dart';
 import 'package:cashbackapp/models/adsModel.dart';
+import 'package:cashbackapp/models/allInOneSearchDataModel.dart';
 import 'package:cashbackapp/models/appInfoModel.dart';
 import 'package:cashbackapp/models/bankDetailsModel.dart';
 import 'package:cashbackapp/models/bannerModel.dart';
@@ -688,7 +689,7 @@ class APIHelper {
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<CampaignModel>.from(response.data['data'].map((x) => CampaignModel.fromJson(x)));
+        recordList = List<AllInOneSearchDataModel>.from(response.data['data'].map((x) => AllInOneSearchDataModel.fromJson(x)));
       } else {
         recordList = null;
       }
@@ -696,6 +697,72 @@ class APIHelper {
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - allInOneSearch():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getMoreCampaign(String campaignId) async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.MORE_CAMAPIGN_URI}?campaign_id=$campaignId',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<CampaignModel>.from(response.data['data'].map((x) => CampaignModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.MORE_CAMAPIGN_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getMoreCampaign():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getMoreOffers(String offerId) async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.MORE_OFFERS_URI}?offer_id=$offerId',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<OfferModel>.from(response.data['data'].map((x) => OfferModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.MORE_OFFERS_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getMoreOffers():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getMoreAds(String adsId) async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.MORE_ADS_URI}?ad_id=$adsId',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<AdsModel>.from(response.data['data'].map((x) => AdsModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.MORE_ADS_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getMoreAds():" + e.toString());
     }
   }
 }

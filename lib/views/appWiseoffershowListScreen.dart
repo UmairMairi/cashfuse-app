@@ -107,11 +107,13 @@ class AppWiseOfferShowListScreen extends StatelessWidget {
                               await homeController.getAdDetails(categoryModel.commonList[index].adId);
                               Get.to(() => AdsDetailScreen(
                                     ads: homeController.ads,
+                                    fromSeeMore: false,
                                   ));
                             } else {
                               await homeController.getCampignDetails(categoryModel.commonList[index].campaignId.toString());
                               Get.to(() => CampaignDetailScreen(
                                     campaign: homeController.campaign,
+                                    fromSeeMore: false,
                                   ));
                             }
                           },
@@ -139,6 +141,7 @@ class AppWiseOfferShowListScreen extends StatelessWidget {
                             );
                             Get.to(() => OfferDetailScreen(
                                   offer: homeController.offer,
+                                  fromSeeMore: false,
                                 ));
                           },
                           child: AppWiseOfferShowWidget(

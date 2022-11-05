@@ -1,14 +1,14 @@
 import 'package:cashbackapp/constants/appConstant.dart';
 import 'package:cashbackapp/controllers/networkController.dart';
-import 'package:cashbackapp/models/campaignModel.dart';
+import 'package:cashbackapp/models/allInOneSearchDataModel.dart';
 import 'package:cashbackapp/models/commonModel.dart';
 import 'package:cashbackapp/models/searchDataModel.dart';
 import 'package:cashbackapp/services/apiHelper.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/widget/customLoader.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
 
 class SearchController extends GetxController {
   APIHelper apiHelper = new APIHelper();
@@ -16,8 +16,8 @@ class SearchController extends GetxController {
 
   var searchString = new TextEditingController();
 
-  List<CampaignModel> _allInOneList = [];
-  List<CampaignModel> get allInOneList => _allInOneList;
+  List<AllInOneSearchDataModel> _allInOneList = [];
+  List<AllInOneSearchDataModel> get allInOneList => _allInOneList;
 
   SearchDataModel searchData;
 

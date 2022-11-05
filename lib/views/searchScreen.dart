@@ -181,11 +181,13 @@ class SearchScreen extends StatelessWidget {
                                           await homeController.getAdDetails(searchController.searchData.commonList[index].adId);
                                           Get.to(() => AdsDetailScreen(
                                                 ads: homeController.ads,
+                                                fromSeeMore: false,
                                               ));
                                         } else {
                                           await homeController.getCampignDetails(searchController.searchData.commonList[index].campaignId.toString());
                                           Get.to(() => CampaignDetailScreen(
                                                 campaign: homeController.campaign,
+                                                fromSeeMore: false,
                                               ));
                                         }
                                       },
@@ -217,6 +219,7 @@ class SearchScreen extends StatelessWidget {
                                         await homeController.getOfferDetails(searchController.searchData.offerList[index].id.toString());
                                         Get.to(() => OfferDetailScreen(
                                               offer: homeController.offer,
+                                              fromSeeMore: false,
                                             ));
                                       },
                                       child: AppWiseOfferShowWidget(

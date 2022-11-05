@@ -107,14 +107,25 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
           ),
           body: Column(
             children: [
-              // smartAppList != null && smartAppList.length > 0
-              //     ?
-              Expanded(
-                child: SizedBox(
-                  child: tabCreate(),
-                ),
-              )
-              //: Text('no data'),
+              _isDataLoaded
+                  ? searchController.allInOneList != null && searchController.allInOneList.length > 0
+                      ? Expanded(
+                          child: SizedBox(
+                            child: tabCreate(),
+                          ),
+                        )
+                      : Expanded(
+                          child: Center(
+                            child: Text(
+                              'No data found.',
+                            ),
+                          ),
+                        )
+                  : Expanded(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
             ],
           ),
         ),
@@ -153,108 +164,101 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
   tabCreate() {
     return GetBuilder<SearchController>(builder: (controller) {
       return Scaffold(
-        backgroundColor: Get.theme.primaryColor,
-        //smartAppList[_currentIndex].appHexCode != null ? _getColorFromHex(smartAppList[_currentIndex].appHexCode) : global.defaultColor,
-        appBar: _isDataLoaded
-            ? TabBar(
-                isScrollable: true,
-                controller: _tabController,
-                indicatorWeight: 3,
-                indicatorColor: Colors.white,
-                labelColor: Theme.of(context).primaryColor,
-                unselectedLabelColor: Theme.of(context).primaryColorLight,
-                onTap: (int index) async {
-                  _tabController.animateTo(index, curve: Curves.slowMiddle);
-                  setState(() {
-                    _isWebLoaded = false;
-                  });
-                },
-                tabs: List<Widget>.generate(searchController.allInOneList.length, (int index) {
-                  return new Tab(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 4),
-                          child: Text(
-                            searchController.allInOneList[index].name,
-                            style: TextStyle(color: Colors.white),
+          backgroundColor: Get.theme.primaryColor,
+          //smartAppList[_currentIndex].appHexCode != null ? _getColorFromHex(smartAppList[_currentIndex].appHexCode) : global.defaultColor,
+          appBar: _isDataLoaded
+              ? TabBar(
+                  isScrollable: true,
+                  controller: _tabController,
+                  indicatorWeight: 3,
+                  indicatorColor: Colors.white,
+                  labelColor: Theme.of(context).primaryColor,
+                  unselectedLabelColor: Theme.of(context).primaryColorLight,
+                  onTap: (int index) async {
+                    _tabController.animateTo(index, curve: Curves.slowMiddle);
+                    setState(() {
+                      _isWebLoaded = false;
+                    });
+                  },
+                  tabs: List<Widget>.generate(searchController.allInOneList.length, (int index) {
+                    return new Tab(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 4),
+                            child: Text(
+                              searchController.allInOneList[index].name,
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
-                        ),
-                        // Padding(
-                        //   padding: const EdgeInsets.only(left: 4),
-                        //   child: Text(
-                        //     'Upto 10% off',
-                        //     style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.w300),
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  );
-                }),
-              )
-            : PreferredSize(
-                preferredSize: Size.zero,
-                child: SizedBox(),
-              ),
-        body: _isDataLoaded
-            ? TabBarView(
-                controller: _tabController,
-                children: List.generate(searchController.allInOneList.length, (index) {
-                  return Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      // smartAppList[index].appSearchLink != null && smartAppList[index].appSearchLink.isNotEmpty && _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty
-                      //     ? WebView(
-                      //         initialUrl: smartAppList[index].appSearchLink + _cSearch.text.trim(),
-                      //         javascriptMode: JavascriptMode.unrestricted,
-                      //         allowsInlineMediaPlayback: true,
-                      //         onWebViewCreated: (controller) {
-                      //           this.controller = controller;
-                      //           setState(() {});
-                      //         },
-                      //         onWebResourceError: (error) {
-                      //           showCustomSnackBar(error.description);
-                      //         },
-                      //         onProgress: (_) {
-                      //           setState(() {});
-                      //         },
-                      //         onPageFinished: (val) {
-                      //           _isDataLoaded = true;
-                      //           setState(() {});
-                      //         },
-                      //       )
-                      //     :
-                      WebView(
-                        initialUrl: searchController.allInOneList[index].url,
-                        javascriptMode: JavascriptMode.unrestricted,
-                        allowsInlineMediaPlayback: true,
-                        onWebViewCreated: (controller) {
-                          this.controller = controller;
-                          setState(() {});
-                        },
-                        onWebResourceError: (error) {
-                          showCustomSnackBar(error.description);
-                        },
-                        onProgress: (_) {
-                          setState(() {});
-                        },
-                        onPageFinished: (val) {
-                          _isWebLoaded = true;
-                          setState(() {});
-                        },
+                          // Padding(
+                          //   padding: const EdgeInsets.only(left: 4),
+                          //   child: Text(
+                          //     'Upto 10% off',
+                          //     style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.w300),
+                          //   ),
+                          // ),
+                        ],
                       ),
-                      _isWebLoaded == false ? CircularProgressIndicator() : SizedBox(),
-                    ],
-                  );
-                }),
-              )
-            : Center(
-                child: CircularProgressIndicator(
-                  color: Colors.white,
+                    );
+                  }),
+                )
+              : PreferredSize(
+                  preferredSize: Size.zero,
+                  child: SizedBox(),
                 ),
-              ),
-      );
+          body: TabBarView(
+            controller: _tabController,
+            children: List.generate(searchController.allInOneList.length, (index) {
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  // smartAppList[index].appSearchLink != null && smartAppList[index].appSearchLink.isNotEmpty && _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty
+                  //     ? WebView(
+                  //         initialUrl: smartAppList[index].appSearchLink + _cSearch.text.trim(),
+                  //         javascriptMode: JavascriptMode.unrestricted,
+                  //         allowsInlineMediaPlayback: true,
+                  //         onWebViewCreated: (controller) {
+                  //           this.controller = controller;
+                  //           setState(() {});
+                  //         },
+                  //         onWebResourceError: (error) {
+                  //           showCustomSnackBar(error.description);
+                  //         },
+                  //         onProgress: (_) {
+                  //           setState(() {});
+                  //         },
+                  //         onPageFinished: (val) {
+                  //           _isDataLoaded = true;
+                  //           setState(() {});
+                  //         },
+                  //       )
+                  //     :
+                  WebView(
+                    initialUrl: searchController.allInOneList[index].trackingUrl,
+                    javascriptMode: JavascriptMode.unrestricted,
+                    allowsInlineMediaPlayback: true,
+                    onWebViewCreated: (controller) {
+                      this.controller = controller;
+                      setState(() {});
+                    },
+                    onWebResourceError: (error) {
+                      showCustomSnackBar(error.description);
+                    },
+                    onProgress: (_) {
+                      setState(() {});
+                    },
+                    onPageFinished: (val) {
+                      _isWebLoaded = true;
+                      setState(() {});
+                    },
+                  ),
+                  _isWebLoaded == false ? CircularProgressIndicator() : SizedBox(),
+                ],
+              );
+            }),
+          ));
     });
   }
 

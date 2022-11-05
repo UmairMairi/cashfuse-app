@@ -23,7 +23,7 @@ class StoreOfferWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: commonModel.tagline != null ? MainAxisAlignment.start : MainAxisAlignment.center,
         children: [
-          commonModel.tagline != null
+          commonModel.tagline != null && commonModel.tagline.isNotEmpty
               ? Align(
                   alignment: Alignment.topLeft,
                   child: RotatedBox(
@@ -91,7 +91,9 @@ class StoreOfferWidget extends StatelessWidget {
           InkWell(
             onTap: () {
               Get.to(
-                () => RatesAndTermScreen(),
+                () => RatesAndTermScreen(
+                  commonModel: commonModel,
+                ),
                 transition: Transition.rightToLeft,
               );
             },

@@ -1,12 +1,11 @@
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/views/campaignDetailScreen.dart';
-import 'package:cashbackapp/views/offerDetailScreen.dart';
 import 'package:cashbackapp/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 
-class MoreOfferScreen extends StatelessWidget {
+class MoreCampignScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -52,46 +51,34 @@ class MoreOfferScreen extends StatelessWidget {
               ListView.builder(
                 padding: EdgeInsets.all(20),
                 shrinkWrap: true,
-                itemCount: homeController.seeMoreOfferList.length,
+                itemCount: homeController.seeMoreCampaignList.length,
                 itemBuilder: (context, index) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
-                          Container(
-                            // decoration: BoxDecoration(
-                            //     shape: BoxShape.circle,
-                            //     color: Colors.white,
-                            //     border: Border.all(
-                            //       color: Colors.grey[200],
-                            //     )),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: CustomImage(
-                                image: '${global.appInfo.baseUrls.offerImageUrl}/${homeController.seeMoreOfferList[index].image}',
-                                height: 50,
-                                fit: BoxFit.contain,
-                              ),
-                            ),
+                          CustomImage(
+                            image: '${global.appInfo.baseUrls.offerImageUrl}/${homeController.seeMoreCampaignList[index].image}',
+                            height: 50,
+                            width: 50,
+                            fit: BoxFit.fill,
                           ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    homeController.seeMoreOfferList[index].name,
-                                    textAlign: TextAlign.start,
-                                    style: Get.theme.primaryTextTheme.subtitle2,
-                                  ),
-                                  Text(
-                                    homeController.seeMoreOfferList[index].description,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  homeController.seeMoreCampaignList[index].name,
+                                  textAlign: TextAlign.start,
+                                  style: Get.theme.primaryTextTheme.subtitle2,
+                                ),
+                                Text(
+                                  homeController.seeMoreCampaignList[index].description,
+                                  textAlign: TextAlign.start,
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -99,9 +86,9 @@ class MoreOfferScreen extends StatelessWidget {
                       InkWell(
                         onTap: () async {
                           Get.back();
-                          await homeController.getCampignDetails(homeController.seeMoreOfferList[index].id.toString());
-                          Get.off(() => OfferDetailScreen(
-                                offer: homeController.offer,
+                          await homeController.getCampignDetails(homeController.seeMoreCampaignList[index].id.toString());
+                          Get.off(() => CampaignDetailScreen(
+                                campaign: homeController.campaign,
                                 fromSeeMore: true,
                               ));
                         },
@@ -118,7 +105,7 @@ class MoreOfferScreen extends StatelessWidget {
                               )),
                           alignment: Alignment.center,
                           child: Text(
-                            homeController.seeMoreOfferList[index].buttonText,
+                            homeController.seeMoreCampaignList[index].buttonText,
                             style: TextStyle(color: Get.theme.secondaryHeaderColor, fontSize: 14, fontWeight: FontWeight.w600),
                           ),
                         ),

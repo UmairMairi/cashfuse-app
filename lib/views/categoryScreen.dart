@@ -1,8 +1,7 @@
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
-import 'package:cashbackapp/views/campaignDetailScreen.dart';
-import 'package:cashbackapp/views/offerDetailScreen.dart';
 import 'package:cashbackapp/views/adsDetailScreen.dart';
+import 'package:cashbackapp/views/campaignDetailScreen.dart';
 import 'package:cashbackapp/widget/storeOfferWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -86,11 +85,13 @@ class CategoryScreen extends StatelessWidget {
                               await homeController.getAdDetails(category.commonList[index].adId);
                               Get.to(() => AdsDetailScreen(
                                     ads: homeController.ads,
+                                    fromSeeMore: false,
                                   ));
                             } else {
                               await homeController.getCampignDetails(category.commonList[index].campaignId.toString());
                               Get.to(() => CampaignDetailScreen(
                                     campaign: homeController.campaign,
+                                    fromSeeMore: false,
                                   ));
                             }
                           },

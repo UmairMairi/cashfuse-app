@@ -1,8 +1,8 @@
 import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/models/adsModel.dart';
 import 'package:cashbackapp/models/offerModel.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
+import 'package:cashbackapp/views/moreOfferScreen.dart';
 import 'package:cashbackapp/views/webViewScreen.dart';
 import 'package:cashbackapp/widget/customImage.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,8 @@ import 'package:get/get.dart';
 
 class OfferDetailScreen extends StatelessWidget {
   final OfferModel offer;
-  OfferDetailScreen({this.offer});
+  final bool fromSeeMore;
+  OfferDetailScreen({this.offer, this.fromSeeMore});
 
   HomeController homeController = Get.find<HomeController>();
 
@@ -86,17 +87,24 @@ class OfferDetailScreen extends StatelessWidget {
                       Stack(
                         children: [
                           CustomImage(
-                            image: '${global.appInfo.baseUrls.offerImageUrl}/${offer.image}',
+                            image: '${global.appInfo.baseUrls.offerImageUrl}/${offer.bannerImage}',
                             height: 200,
                             width: Get.width,
-                            fit: BoxFit.contain,
+                            fit: BoxFit.fill,
                           ),
-                          // Image.asset(
-                          //   Images.dummyImage,
-                          //   height: 200,
-                          //   width: Get.width,
-                          //   fit: BoxFit.fill,
-                          // ),
+                          Card(
+                            color: Colors.white,
+                            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: CustomImage(
+                                image: '${global.appInfo.baseUrls.partnerImageUrl}/${offer.image}',
+                                height: 30,
+                                width: 60,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       InkWell(
@@ -143,213 +151,51 @@ class OfferDetailScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'About this offer',
+                          offer.name,
                           style: Get.theme.primaryTextTheme.subtitle2,
                         ),
-                        Divider(),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          horizontalTitleGap: 10,
-                          minLeadingWidth: 0,
-                          leading: CircleAvatar(
-                            radius: 3,
-                            backgroundColor: Colors.black54,
-                          ),
-                          title: Text(
-                            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                            style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          horizontalTitleGap: 10,
-                          minLeadingWidth: 0,
-                          leading: CircleAvatar(
-                            radius: 3,
-                            backgroundColor: Colors.black54,
-                          ),
-                          title: Text(
-                            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                            style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          horizontalTitleGap: 10,
-                          minLeadingWidth: 0,
-                          leading: CircleAvatar(
-                            radius: 3,
-                            backgroundColor: Colors.black54,
-                          ),
-                          title: Text(
-                            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                            style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
                         Text(
-                          'Important Information',
-                          style: Get.theme.primaryTextTheme.subtitle2,
+                          offer.description,
+                          style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
                         ),
-                        Divider(),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          horizontalTitleGap: 10,
-                          minLeadingWidth: 0,
-                          leading: CircleAvatar(
-                            radius: 3,
-                            backgroundColor: Colors.black54,
-                          ),
-                          title: Text(
-                            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                            style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          horizontalTitleGap: 10,
-                          minLeadingWidth: 0,
-                          leading: CircleAvatar(
-                            radius: 3,
-                            backgroundColor: Colors.black54,
-                          ),
-                          title: Text(
-                            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                            style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                          ),
-                        ),
+                        fromSeeMore
+                            ? SizedBox()
+                            : homeController.seeMoreOfferList != null && homeController.seeMoreOfferList.length > 0
+                                ? InkWell(
+                                    onTap: () async {
+                                      //await homeController.getMoreOffers(offer.id.toString());
+                                      Get.bottomSheet(
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(15),
+                                            topRight: Radius.circular(15),
+                                          ),
+                                          child: MoreOfferScreen(),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      width: Get.width,
+                                      height: 45,
+                                      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                                      padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          border: Border.all(
+                                            color: Colors.teal[200],
+                                            width: 1.5,
+                                          )),
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'See More Offers  >',
+                                        style: TextStyle(color: Colors.teal[200], fontSize: 14, fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                  )
+                                : SizedBox(),
                       ],
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Cashkaro Rewards Details',
-                          style: Get.theme.primaryTextTheme.subtitle2,
-                        ),
-                        Divider(),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          horizontalTitleGap: 10,
-                          minLeadingWidth: 0,
-                          leading: CircleAvatar(
-                            radius: 3,
-                            backgroundColor: Colors.black54,
-                          ),
-                          title: Text(
-                            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                            style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          horizontalTitleGap: 10,
-                          minLeadingWidth: 0,
-                          leading: CircleAvatar(
-                            radius: 3,
-                            backgroundColor: Colors.black54,
-                          ),
-                          title: Text(
-                            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                            style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          horizontalTitleGap: 10,
-                          minLeadingWidth: 0,
-                          leading: CircleAvatar(
-                            radius: 3,
-                            backgroundColor: Colors.black54,
-                          ),
-                          title: Text(
-                            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                            style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'How to get this offer',
-                          style: Get.theme.primaryTextTheme.subtitle2,
-                        ),
-                        Divider(),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          horizontalTitleGap: 10,
-                          minLeadingWidth: 0,
-                          leading: CircleAvatar(
-                            radius: 3,
-                            backgroundColor: Colors.black54,
-                          ),
-                          title: Text(
-                            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                            style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          horizontalTitleGap: 10,
-                          minLeadingWidth: 0,
-                          leading: CircleAvatar(
-                            radius: 3,
-                            backgroundColor: Colors.black54,
-                          ),
-                          title: Text(
-                            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                            style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          horizontalTitleGap: 10,
-                          minLeadingWidth: 0,
-                          leading: CircleAvatar(
-                            radius: 3,
-                            backgroundColor: Colors.black54,
-                          ),
-                          title: Text(
-                            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                            style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
                 ),
               ],
             ),
