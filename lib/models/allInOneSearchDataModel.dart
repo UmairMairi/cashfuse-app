@@ -63,4 +63,25 @@ class AllInOneSearchDataModel {
       print("Exception - AllInOneSearchDataModel.dart - AllInOneSearchDataModel.fromJson():" + e.toString());
     }
   }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "campaign_id": campaignId,
+        "name": name,
+        "url": url,
+        "domain": domain,
+        "payout_type": payoutType,
+        "payout": payout,
+        "image": image == null ? null : image,
+        "category": category,
+        "category_id": categoryId,
+        "status": status,
+        "button_text": buttonText,
+        "affiliate_partner": affiliatePartner,
+        "description": description,
+        "campaigns": campaigns,
+        "created_at": createdAt != null ? createdAt.toIso8601String() : null,
+        "updated_at": updatedAt != null ? updatedAt.toIso8601String() : null,
+        "tracking_url": trackingUrl,
+      };
 }

@@ -19,10 +19,16 @@ class SearchController extends GetxController {
   List<AllInOneSearchDataModel> _allInOneList = [];
   List<AllInOneSearchDataModel> get allInOneList => _allInOneList;
 
+  List<AllInOneSearchDataModel> addNewTabList2;
+  List<AllInOneSearchDataModel> addNewTabList;
+
+  List<AllInOneSearchDataModel> selctedList = [];
+
   SearchDataModel searchData;
 
   @override
   void onInit() async {
+    await allInOneSearch();
     super.onInit();
   }
 
@@ -131,10 +137,28 @@ class SearchController extends GetxController {
 
   Future allInOneSearch() async {
     try {
+      addNewTabList2 = [];
+      addNewTabList = [];
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         await apiHelper.allInOneSearch().then((response) {
           if (response.status == "1") {
             _allInOneList = response.data;
+            //addNewTabList2.addAll(_allInOneList);
+            if (_allInOneList.length >= 6) {
+              addNewTabList.addAll(_allInOneList.sublist(0, 5));
+              addNewTabList2.addAll(_allInOneList.sublist(0, 5));
+              addNewTabList2.insert(
+                5,
+                AllInOneSearchDataModel(name: '+Add Tab'),
+              );
+            } else {
+              addNewTabList.addAll(_allInOneList);
+              addNewTabList2.addAll(_allInOneList);
+            }
+
+            // if (_allInOneList.length >= 6) {
+
+            // }
             update();
           } else {
             showCustomSnackBar(response.message);
@@ -145,7 +169,16 @@ class SearchController extends GetxController {
       }
       update();
     } catch (e) {
-      print("Exception - CommonController.dart - allInOneSearch():" + e.toString());
+      print("Exception - SearchController.dart - allInOneSearch():" + e.toString());
+    }
+  }
+
+  void addNewTab() {
+    try {
+      addNewTabList.add(AllInOneSearchDataModel(name: 'choose'));
+      update();
+    } catch (e) {
+      print("Exception - SearchController.dart - addNewTab():" + e.toString());
     }
   }
 }

@@ -24,6 +24,7 @@ class OfferModel {
   DateTime createdAt;
   DateTime updatedAt;
   int offers;
+  CategoryModel partner;
 
   OfferModel({
     this.id,
@@ -49,6 +50,7 @@ class OfferModel {
     this.createdAt,
     this.updatedAt,
     this.offers,
+    this.partner,
   });
 
   OfferModel.fromJson(Map<String, dynamic> json) {
@@ -75,8 +77,10 @@ class OfferModel {
       exclusive = json["exclusive"];
       createdAt = DateTime.parse(json["created_at"]);
       updatedAt = DateTime.parse(json["updated_at"]);
-      category = json["category"] != null ? CategoryModel.fromJson(json["category"]) : null;
+
       offers = json["offers"];
+      partner = json["partner"] != null ? CategoryModel.fromJson(json["partner"]) : null;
+      category = json["category"] != null ? CategoryModel.fromJson(json["category"]) : null;
     } catch (e) {
       print("Exception - OfferModel.dart - OfferModel.fromJson():" + e.toString());
     }

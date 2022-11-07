@@ -235,7 +235,7 @@ class ProfieScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Icon(
-                                Icons.search,
+                                Icons.screen_search_desktop_outlined,
                                 color: Get.theme.iconTheme.color,
                               ),
                               SizedBox(

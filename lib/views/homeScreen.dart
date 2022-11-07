@@ -472,7 +472,7 @@ class HomeScreen extends StatelessWidget {
                                     onTap: () async {
                                       await hmCon.getOfferDetails(hmCon.exclusiveOfferList[index].id.toString());
                                       Get.to(() => OfferDetailScreen(
-                                            offer: hmCon.offer,
+                                            offer: hmCon.exclusiveOfferList[index],
                                             fromSeeMore: false,
                                           ));
                                     },
@@ -690,7 +690,7 @@ class HomeScreen extends StatelessWidget {
                 }),
                 GetBuilder<HomeController>(builder: (home) {
                   return home.isFlashOffersLoaded
-                      ? homeController2.topCashbackList != null && homeController2.topCashbackList.length > 0
+                      ? home.newFlashOfferList != null && home.newFlashOfferList.length > 0
                           ? SizedBox(
                               height: 200,
                               child: ListView.builder(
@@ -703,7 +703,7 @@ class HomeScreen extends StatelessWidget {
                                     onTap: () async {
                                       await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
                                       Get.to(() => OfferDetailScreen(
-                                            offer: home.offer,
+                                            offer: home.newFlashOfferList[index],
                                             fromSeeMore: false,
                                           ));
                                     },

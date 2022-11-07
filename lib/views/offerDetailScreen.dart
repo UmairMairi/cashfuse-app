@@ -5,6 +5,7 @@ import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
 import 'package:cashbackapp/views/moreOfferScreen.dart';
 import 'package:cashbackapp/views/webViewScreen.dart';
 import 'package:cashbackapp/widget/customImage.dart';
+import 'package:cashbackapp/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -202,6 +203,68 @@ class OfferDetailScreen extends StatelessWidget {
           ),
         ),
       ]),
+      bottomNavigationBar: offer.partner != null && (offer.partner.leftTab.isNotEmpty || offer.partner.rightTab.isNotEmpty)
+          ? SizedBox(
+              height: 50,
+              child: Card(
+                margin: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                color: Get.theme.primaryColor,
+                child: Row(
+                  mainAxisAlignment: (offer.partner.leftTab.isNotEmpty && offer.partner.rightTab.isNotEmpty) ? MainAxisAlignment.spaceEvenly : MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Get.find<HomeController>().setIsOffer(false);
+                        Get.bottomSheet(
+                          ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15),
+                            ),
+                            child: RatesAndOfferTermsSheetWidget(
+                              partner: offer.partner,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        offer.partner.leftTab,
+                        style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                      ),
+                    ),
+                    (offer.partner.leftTab.isNotEmpty && offer.partner.rightTab.isNotEmpty)
+                        ? Icon(
+                            Icons.more_vert,
+                            size: 22,
+                            color: Colors.white.withOpacity(0.3),
+                          )
+                        : SizedBox(),
+                    InkWell(
+                      onTap: () {
+                        Get.find<HomeController>().setIsOffer(true);
+                        Get.bottomSheet(
+                          ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15),
+                            ),
+                            child: RatesAndOfferTermsSheetWidget(
+                              partner: offer.partner,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        offer.partner.rightTab,
+                        style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          : SizedBox(),
     );
   }
 }

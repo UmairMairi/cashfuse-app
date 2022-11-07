@@ -1,4 +1,5 @@
 class Images {
+  static const String logo = "assets/images/logo.png";
   static const String splash_image = "assets/images/splash_image.png";
   static const String splash_bg = "assets/images/splash_bg.png";
   static const String placeholder = "assets/images/placeholder.png";

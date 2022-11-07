@@ -1,30 +1,37 @@
+import 'dart:convert';
+
 import 'package:cashbackapp/controllers/searchController.dart';
+import 'package:cashbackapp/models/allInOneSearchDataModel.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 
 class AppTabinationScreen extends StatefulWidget {
-  final List<dynamic> smartAppList;
-  AppTabinationScreen({a, o, this.smartAppList}) : super();
+  AppTabinationScreen() : super();
   @override
-  _AppTabinationScreenState createState() => new _AppTabinationScreenState(this.smartAppList);
+  _AppTabinationScreenState createState() => new _AppTabinationScreenState();
 }
 
 class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTickerProviderStateMixin {
-  List<dynamic> smartAppList;
   TabController _tabController;
   int _currentIndex = 0;
   bool _isDataLoaded = false;
   bool _isWebLoaded = false;
-  GlobalKey<ScaffoldState> _scaffoldKey;
+
   WebViewController controller;
   TextEditingController _cSearch = new TextEditingController();
   var _fDismiss = new FocusNode();
 
   SearchController searchController = Get.find<SearchController>();
 
-  _AppTabinationScreenState(this.smartAppList) : super();
+  bool _isDuplicate = false;
+
+  AllInOneSearchDataModel selectedValue;
+
+  _AppTabinationScreenState() : super();
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +56,11 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
             automaticallyImplyLeading: false,
             leading: InkWell(
               onTap: () async {
-                if (await controller.canGoBack()) {
-                  controller.goBack();
-                } else {
-                  Navigator.of(context).pop();
-                }
+                // if (await controller.canGoBack()) {
+                //   controller.goBack();
+                // } else {
+                Navigator.of(context).pop();
+                //}
               },
               child: Icon(
                 Icons.arrow_back,
@@ -73,12 +80,12 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
                   border: InputBorder.none,
                   suffixIcon: InkWell(
                     onTap: () async {
-                      FocusScope.of(context).requestFocus(_fDismiss);
-                      _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && smartAppList[_currentIndex].appSearchLink != null && smartAppList[_currentIndex].appSearchLink.isNotEmpty
-                          ? await controller.loadUrl(smartAppList[_currentIndex].appSearchLink + _cSearch.text.trim())
-                          : await controller.loadUrl(smartAppList[_currentIndex].appLink);
-                      _isDataLoaded = false;
-                      setState(() {});
+                      // FocusScope.of(context).requestFocus(_fDismiss);
+                      // _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && smartAppList[_currentIndex].appSearchLink != null && smartAppList[_currentIndex].appSearchLink.isNotEmpty
+                      //     ? await controller.loadUrl(smartAppList[_currentIndex].appSearchLink + _cSearch.text.trim())
+                      //     : await controller.loadUrl(smartAppList[_currentIndex].appLink);
+                      // _isDataLoaded = false;
+                      // setState(() {});
                     },
                     child: Icon(
                       Icons.search,
@@ -90,10 +97,10 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
                   contentPadding: EdgeInsets.only(left: 10),
                 ),
                 onFieldSubmitted: (String val) async {
-                  _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && smartAppList[_currentIndex].appSearchLink != null && smartAppList[_currentIndex].appSearchLink.isNotEmpty
-                      ? await controller.loadUrl(smartAppList[_currentIndex].appSearchLink + _cSearch.text.trim())
-                      : await controller.loadUrl(smartAppList[_currentIndex].appLink);
-                  _isDataLoaded = false;
+                  // _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && smartAppList[_currentIndex].appSearchLink != null && smartAppList[_currentIndex].appSearchLink.isNotEmpty
+                  //     ? await controller.loadUrl(smartAppList[_currentIndex].appSearchLink + _cSearch.text.trim())
+                  //     : await controller.loadUrl(smartAppList[_currentIndex].appLink);
+                  // _isDataLoaded = false;
                   setState(() {});
                 },
               ),
@@ -108,7 +115,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
           body: Column(
             children: [
               _isDataLoaded
-                  ? searchController.allInOneList != null && searchController.allInOneList.length > 0
+                  ? searchController.addNewTabList2 != null && searchController.addNewTabList2.length > 0
                       ? Expanded(
                           child: SizedBox(
                             child: tabCreate(),
@@ -148,11 +155,38 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
 
   _init() async {
     try {
-      await searchController.allInOneSearch();
-      if (searchController.allInOneList != null && searchController.allInOneList.length > 0) {
-        _tabController = new TabController(length: searchController.allInOneList.length, vsync: this, initialIndex: _currentIndex);
+      if (global.sp.getString('tabList') != null) {
+        List<dynamic> list = json.decode(global.sp.getString('tabList'));
+        print(list);
+
+        searchController.addNewTabList2 = List<AllInOneSearchDataModel>.from(list.map((x) => AllInOneSearchDataModel.fromJson(x)));
+        _tabController = new TabController(
+          length: searchController.addNewTabList2.length,
+          vsync: this,
+          initialIndex: _currentIndex,
+        );
         _tabController.addListener(_tabControllerListener);
+      } else {
+        if (searchController.addNewTabList2 != null && searchController.addNewTabList2.length > 0) {
+          // if (searchController.addNewTabList2.length >= 6) {
+          //   searchController.addNewTabList2.addAll(searchController.allInOneList.sublist(0, 5));
+          // }
+
+          // if (searchController.addNewTabList2.length >= 6) {
+          //   searchController.addNewTabList2.insert(
+          //     5,
+          //     AllInOneSearchDataModel(name: '+Add Tab'),
+          //   );
+          // }
+          _tabController = new TabController(
+            length: searchController.addNewTabList2.length,
+            vsync: this,
+            initialIndex: _currentIndex,
+          );
+          _tabController.addListener(_tabControllerListener);
+        }
       }
+
       setState(() {
         _isDataLoaded = true;
       });
@@ -180,7 +214,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
                       _isWebLoaded = false;
                     });
                   },
-                  tabs: List<Widget>.generate(searchController.allInOneList.length, (int index) {
+                  tabs: List<Widget>.generate(searchController.addNewTabList2.length, (int index) {
                     return new Tab(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -188,7 +222,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
                           Padding(
                             padding: const EdgeInsets.only(left: 4),
                             child: Text(
-                              searchController.allInOneList[index].name,
+                              searchController.addNewTabList2[index].name,
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -210,53 +244,220 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
                 ),
           body: TabBarView(
             controller: _tabController,
-            children: List.generate(searchController.allInOneList.length, (index) {
-              return Stack(
-                alignment: Alignment.center,
-                children: [
-                  // smartAppList[index].appSearchLink != null && smartAppList[index].appSearchLink.isNotEmpty && _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty
-                  //     ? WebView(
-                  //         initialUrl: smartAppList[index].appSearchLink + _cSearch.text.trim(),
-                  //         javascriptMode: JavascriptMode.unrestricted,
-                  //         allowsInlineMediaPlayback: true,
-                  //         onWebViewCreated: (controller) {
-                  //           this.controller = controller;
-                  //           setState(() {});
-                  //         },
-                  //         onWebResourceError: (error) {
-                  //           showCustomSnackBar(error.description);
-                  //         },
-                  //         onProgress: (_) {
-                  //           setState(() {});
-                  //         },
-                  //         onPageFinished: (val) {
-                  //           _isDataLoaded = true;
-                  //           setState(() {});
-                  //         },
-                  //       )
-                  //     :
-                  WebView(
-                    initialUrl: searchController.allInOneList[index].trackingUrl,
-                    javascriptMode: JavascriptMode.unrestricted,
-                    allowsInlineMediaPlayback: true,
-                    onWebViewCreated: (controller) {
-                      this.controller = controller;
-                      setState(() {});
-                    },
-                    onWebResourceError: (error) {
-                      showCustomSnackBar(error.description);
-                    },
-                    onProgress: (_) {
-                      setState(() {});
-                    },
-                    onPageFinished: (val) {
-                      _isWebLoaded = true;
-                      setState(() {});
-                    },
-                  ),
-                  _isWebLoaded == false ? CircularProgressIndicator() : SizedBox(),
-                ],
-              );
+            children: List.generate(searchController.addNewTabList2.length, (index) {
+              return searchController.addNewTabList2[index].name == '+Add Tab'
+                  ? Container(
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: searchController.addNewTabList.length,
+                              itemBuilder: (context, i) {
+                                //searchController.addNewTabList2.removeWhere((element) => element.id == null);
+                                return Card(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text(
+                                        'TAB ${i + 1}',
+                                        style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.black54),
+                                      ),
+                                      DropdownButton(
+                                        items: searchController.allInOneList.map<DropdownMenuItem<AllInOneSearchDataModel>>((AllInOneSearchDataModel value) {
+                                          return DropdownMenuItem<AllInOneSearchDataModel>(
+                                            value: value,
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  value.name,
+                                                  style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.black54),
+                                                ),
+                                                Divider(
+                                                  color: Colors.grey,
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        }).toList(),
+                                        onChanged: (value) {
+                                          if (searchController.addNewTabList.where((element) => element.name == value.name).toList().length > 0) {
+                                            _isDuplicate = true;
+                                            setState(() {});
+                                          } else {
+                                            _isDuplicate = false;
+                                            setState(() {});
+                                          }
+
+                                          searchController.addNewTabList[i] = value;
+                                          searchController.addNewTabList2.add(value);
+                                          setState(() {});
+                                        },
+                                        underline: SizedBox(),
+                                        iconEnabledColor: Get.theme.primaryColor,
+                                        iconDisabledColor: Get.theme.primaryColor,
+                                        hint: Text(
+                                          searchController.addNewTabList[i].name,
+                                          style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.black54),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          if (searchController.addNewTabList.length >= 6) {
+                                            searchController.addNewTabList2.removeWhere((element) => element.id == searchController.addNewTabList[i].id);
+                                            searchController.addNewTabList.removeAt(i);
+                                            // searchController.addNewTabList2.addAll(searchController.addNewTabList);
+                                            // searchController.addNewTabList2.insert(
+                                            //   searchController.addNewTabList.length,
+                                            //   AllInOneSearchDataModel(name: '+Add Tab'),
+                                            // );
+                                            setState(() {});
+                                          } else {
+                                            Fluttertoast.showToast(
+                                              msg: 'minimum 5 tabs are reuired.',
+                                              toastLength: Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.CENTER,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor: Colors.black,
+                                              textColor: Colors.white,
+                                              fontSize: 16.0,
+                                            );
+                                          }
+                                        },
+                                        child: Icon(
+                                          Icons.remove_circle,
+                                          color: Colors.grey,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (_isDuplicate) {
+                                        showCustomSnackBar('duplicate tab no allow');
+                                      } else if (searchController.addNewTabList.where((element) => element.id == null).toList().length > 0) {
+                                        showCustomSnackBar('empty tab not allow');
+                                      } else {
+                                        searchController.addNewTabList2.removeWhere((element) => element.id == null);
+                                        searchController.addNewTabList.clear();
+                                        searchController.addNewTabList.addAll(searchController.addNewTabList2);
+
+                                        //global.sp.setString('tabList', searchController.addNewTabList.map((e) => e.toJson()).toString());
+                                        searchController.addNewTabList2.insert(
+                                          searchController.addNewTabList2.length,
+                                          AllInOneSearchDataModel(name: '+Add Tab'),
+                                        );
+                                        global.sp.setString('tabList', jsonEncode(searchController.addNewTabList2.map((i) => i.toJson()).toList()).toString());
+
+                                        Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                            builder: (context) => AppTabinationScreen(),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    child: Container(
+                                      height: 45,
+                                      //margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                                      padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                                      decoration: BoxDecoration(
+                                        color: Get.theme.secondaryHeaderColor,
+                                        //borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'SAVE',
+                                        style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Expanded(
+                                  child: InkWell(
+                                    onTap: () {
+                                      searchController.addNewTab();
+                                    },
+                                    child: Container(
+                                      height: 45,
+                                      // margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                                      padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                                      decoration: BoxDecoration(
+                                        color: Get.theme.secondaryHeaderColor,
+                                        // borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'ADD NEW TAB',
+                                        style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  : Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        // smartAppList[index].appSearchLink != null && smartAppList[index].appSearchLink.isNotEmpty && _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty
+                        //     ? WebView(
+                        //         initialUrl: smartAppList[index].appSearchLink + _cSearch.text.trim(),
+                        //         javascriptMode: JavascriptMode.unrestricted,
+                        //         allowsInlineMediaPlayback: true,
+                        //         onWebViewCreated: (controller) {
+                        //           this.controller = controller;
+                        //           setState(() {});
+                        //         },
+                        //         onWebResourceError: (error) {
+                        //           showCustomSnackBar(error.description);
+                        //         },
+                        //         onProgress: (_) {
+                        //           setState(() {});
+                        //         },
+                        //         onPageFinished: (val) {
+                        //           _isDataLoaded = true;
+                        //           setState(() {});
+                        //         },
+                        //       )
+                        //     :
+                        WebView(
+                          initialUrl: searchController.addNewTabList2[index].trackingUrl,
+                          javascriptMode: JavascriptMode.unrestricted,
+                          allowsInlineMediaPlayback: true,
+                          onWebViewCreated: (controller) {
+                            this.controller = controller;
+                            setState(() {});
+                          },
+                          onWebResourceError: (error) {
+                            showCustomSnackBar(error.description);
+                          },
+                          onProgress: (_) {
+                            setState(() {});
+                          },
+                          onPageFinished: (val) {
+                            _isWebLoaded = true;
+                            setState(() {});
+                          },
+                        ),
+                        _isWebLoaded == false ? CircularProgressIndicator() : SizedBox(),
+                      ],
+                    );
             }),
           ));
     });
