@@ -4,6 +4,7 @@ import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/views/aboutUsScreen.dart';
 import 'package:cashbackapp/views/accountSettingScreen.dart';
 import 'package:cashbackapp/views/appTabinationScreen.dart';
+import 'package:cashbackapp/views/colorPicker.dart';
 import 'package:cashbackapp/views/getHelpScreen.dart';
 import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
 import 'package:cashbackapp/views/missingCashbackScreen.dart';
@@ -226,84 +227,84 @@ class ProfieScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      InkWell(
-                        onTap: () {
-                          Get.to(() => AppTabinationScreen());
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.screen_search_desktop_outlined,
-                                color: Get.theme.iconTheme.color,
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                'All in One Search',
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                  letterSpacing: 0,
-                                  color: Colors.black.withOpacity(0.75),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Get.find<BottomNavigationController>().setBottomIndex(2);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.person_add,
-                                color: Get.theme.iconTheme.color,
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                'Refer and Earn',
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                  letterSpacing: 0,
-                                  color: Colors.black.withOpacity(0.75),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Get.to(() => ReferralNetworkScreen());
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.person,
-                                color: Get.theme.iconTheme.color,
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                'Referral Network',
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                  letterSpacing: 0,
-                                  color: Colors.black.withOpacity(0.75),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     Get.to(() => AppTabinationScreen());
+                      //   },
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      //     child: Row(
+                      //       children: [
+                      //         Icon(
+                      //           Icons.screen_search_desktop_outlined,
+                      //           color: Get.theme.iconTheme.color,
+                      //         ),
+                      //         SizedBox(
+                      //           width: 20,
+                      //         ),
+                      //         Text(
+                      //           'All in One Search',
+                      //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                      //             letterSpacing: 0,
+                      //             color: Colors.black.withOpacity(0.75),
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     Get.find<BottomNavigationController>().setBottomIndex(2);
+                      //   },
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      //     child: Row(
+                      //       children: [
+                      //         Icon(
+                      //           Icons.person_add,
+                      //           color: Get.theme.iconTheme.color,
+                      //         ),
+                      //         SizedBox(
+                      //           width: 20,
+                      //         ),
+                      //         Text(
+                      //           'Refer and Earn',
+                      //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                      //             letterSpacing: 0,
+                      //             color: Colors.black.withOpacity(0.75),
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     Get.to(() => ReferralNetworkScreen());
+                      //   },
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      //     child: Row(
+                      //       children: [
+                      //         Icon(
+                      //           Icons.person,
+                      //           color: Get.theme.iconTheme.color,
+                      //         ),
+                      //         SizedBox(
+                      //           width: 20,
+                      //         ),
+                      //         Text(
+                      //           'Referral Network',
+                      //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                      //             letterSpacing: 0,
+                      //             color: Colors.black.withOpacity(0.75),
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                       InkWell(
                         onTap: () {
                           Get.find<BottomNavigationController>().setBottomIndex(3);
@@ -347,6 +348,32 @@ class ProfieScreen extends StatelessWidget {
                               ),
                               Text(
                                 'Get Help',
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => ColorPickerPage());
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.color_lens,
+                                color: Get.theme.iconTheme.color,
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                'Theme',
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),

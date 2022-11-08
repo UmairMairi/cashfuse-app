@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 import 'package:cashbackapp/controllers/searchController.dart';
 import 'package:cashbackapp/models/allInOneSearchDataModel.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
@@ -21,7 +22,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
   bool _isDataLoaded = false;
   bool _isWebLoaded = false;
 
-  WebViewController controller;
+  WebViewController webViewController;
   TextEditingController _cSearch = new TextEditingController();
   var _fDismiss = new FocusNode();
 
@@ -37,11 +38,11 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (await controller.canGoBack()) {
-          controller.goBack();
+        if (await webViewController.canGoBack()) {
+          webViewController.goBack();
           return false;
         } else {
-          Navigator.of(context).pop();
+          Get.find<BottomNavigationController>().setBottomIndex(0);
           return false;
         }
       },
@@ -51,16 +52,15 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
             elevation: 0,
             bottomOpacity: 0.0,
             shape: RoundedRectangleBorder(side: BorderSide.none),
-            backgroundColor: Get.theme.primaryColor,
-            //smartAppList[_currentIndex].appHexCode != null ? _getColorFromHex(smartAppList[_currentIndex].appHexCode) : global.defaultColor,
+            backgroundColor: searchController.addNewTabList2[_currentIndex].tabColor != null && searchController.addNewTabList2[_currentIndex].tabColor.isNotEmpty ? _getColorFromHex(searchController.addNewTabList2[_currentIndex].tabColor) : Get.theme.primaryColor,
             automaticallyImplyLeading: false,
             leading: InkWell(
               onTap: () async {
-                // if (await controller.canGoBack()) {
-                //   controller.goBack();
-                // } else {
-                Navigator.of(context).pop();
-                //}
+                if (await webViewController.canGoBack()) {
+                  webViewController.goBack();
+                } else {
+                  Get.find<BottomNavigationController>().setBottomIndex(0);
+                }
               },
               child: Icon(
                 Icons.arrow_back,
@@ -73,19 +73,35 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
               //decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(22)),
               child: TextFormField(
                 controller: _cSearch,
-                cursorColor: Theme.of(context).primaryColor,
+                cursorColor: Colors.white,
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.search,
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  suffixIcon: InkWell(
+                  suffixIcon:
+                      // _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty
+                      //     ? InkWell(
+                      //         onTap: () async {
+                      //           FocusScope.of(context).requestFocus(_fDismiss);
+                      //           _cSearch.clear();
+                      //           await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].trackingUrl);
+                      //           setState(() {});
+                      //         },
+                      //         child: Icon(
+                      //           Icons.close,
+                      //           color: Colors.white,
+                      //         ),
+                      //       )
+                      //     :
+                      InkWell(
                     onTap: () async {
-                      // FocusScope.of(context).requestFocus(_fDismiss);
-                      // _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && smartAppList[_currentIndex].appSearchLink != null && smartAppList[_currentIndex].appSearchLink.isNotEmpty
-                      //     ? await controller.loadUrl(smartAppList[_currentIndex].appSearchLink + _cSearch.text.trim())
-                      //     : await controller.loadUrl(smartAppList[_currentIndex].appLink);
-                      // _isDataLoaded = false;
-                      // setState(() {});
+                      FocusScope.of(context).requestFocus(_fDismiss);
+                      _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && searchController.addNewTabList2[_currentIndex].searchUrl != null && searchController.addNewTabList2[_currentIndex].searchUrl.isNotEmpty
+                          ? await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].searchUrl + _cSearch.text.trim())
+                          : await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].trackingUrl);
+                      _isWebLoaded = false;
+                      setState(() {});
                     },
                     child: Icon(
                       Icons.search,
@@ -97,10 +113,10 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
                   contentPadding: EdgeInsets.only(left: 10),
                 ),
                 onFieldSubmitted: (String val) async {
-                  // _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && smartAppList[_currentIndex].appSearchLink != null && smartAppList[_currentIndex].appSearchLink.isNotEmpty
-                  //     ? await controller.loadUrl(smartAppList[_currentIndex].appSearchLink + _cSearch.text.trim())
-                  //     : await controller.loadUrl(smartAppList[_currentIndex].appLink);
-                  // _isDataLoaded = false;
+                  _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && searchController.addNewTabList2[_currentIndex].searchUrl != null && searchController.addNewTabList2[_currentIndex].searchUrl.isNotEmpty
+                      ? await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].searchUrl + _cSearch.text.trim())
+                      : await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].trackingUrl);
+                  _isWebLoaded = false;
                   setState(() {});
                 },
               ),
@@ -165,6 +181,8 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
           vsync: this,
           initialIndex: _currentIndex,
         );
+        searchController.addNewTabList.clear();
+        searchController.addNewTabList.addAll(searchController.addNewTabList2.where((e) => e.id != null).toList());
         _tabController.addListener(_tabControllerListener);
       } else {
         if (searchController.addNewTabList2 != null && searchController.addNewTabList2.length > 0) {
@@ -198,7 +216,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
   tabCreate() {
     return GetBuilder<SearchController>(builder: (controller) {
       return Scaffold(
-          backgroundColor: Get.theme.primaryColor,
+          backgroundColor: searchController.addNewTabList2[_currentIndex].tabColor != null && searchController.addNewTabList2[_currentIndex].tabColor.isNotEmpty ? _getColorFromHex(searchController.addNewTabList2[_currentIndex].tabColor) : Get.theme.primaryColor,
           //smartAppList[_currentIndex].appHexCode != null ? _getColorFromHex(smartAppList[_currentIndex].appHexCode) : global.defaultColor,
           appBar: _isDataLoaded
               ? TabBar(
@@ -291,7 +309,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
                                           }
 
                                           searchController.addNewTabList[i] = value;
-                                          searchController.addNewTabList2.add(value);
+                                          //searchController.addNewTabList2.add(value);
                                           setState(() {});
                                         },
                                         underline: SizedBox(),
@@ -305,7 +323,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
                                       InkWell(
                                         onTap: () {
                                           if (searchController.addNewTabList.length >= 6) {
-                                            searchController.addNewTabList2.removeWhere((element) => element.id == searchController.addNewTabList[i].id);
+                                            //searchController.addNewTabList2.removeWhere((element) => element.id == searchController.addNewTabList[i].id);
                                             searchController.addNewTabList.removeAt(i);
                                             // searchController.addNewTabList2.addAll(searchController.addNewTabList);
                                             // searchController.addNewTabList2.insert(
@@ -344,11 +362,29 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
                                   child: InkWell(
                                     onTap: () {
                                       if (_isDuplicate) {
-                                        showCustomSnackBar('duplicate tab no allow');
+                                        Fluttertoast.showToast(
+                                          msg: 'duplicate tab no allow',
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.CENTER,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: Colors.black,
+                                          textColor: Colors.white,
+                                          fontSize: 16.0,
+                                        );
                                       } else if (searchController.addNewTabList.where((element) => element.id == null).toList().length > 0) {
-                                        showCustomSnackBar('empty tab not allow');
+                                        Fluttertoast.showToast(
+                                          msg: 'empty tab not allow',
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.CENTER,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: Colors.black,
+                                          textColor: Colors.white,
+                                          fontSize: 16.0,
+                                        );
                                       } else {
                                         searchController.addNewTabList2.removeWhere((element) => element.id == null);
+                                        searchController.addNewTabList2.clear();
+                                        searchController.addNewTabList2.addAll(searchController.addNewTabList);
                                         searchController.addNewTabList.clear();
                                         searchController.addNewTabList.addAll(searchController.addNewTabList2);
 
@@ -415,46 +451,45 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
                   : Stack(
                       alignment: Alignment.center,
                       children: [
-                        // smartAppList[index].appSearchLink != null && smartAppList[index].appSearchLink.isNotEmpty && _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty
-                        //     ? WebView(
-                        //         initialUrl: smartAppList[index].appSearchLink + _cSearch.text.trim(),
-                        //         javascriptMode: JavascriptMode.unrestricted,
-                        //         allowsInlineMediaPlayback: true,
-                        //         onWebViewCreated: (controller) {
-                        //           this.controller = controller;
-                        //           setState(() {});
-                        //         },
-                        //         onWebResourceError: (error) {
-                        //           showCustomSnackBar(error.description);
-                        //         },
-                        //         onProgress: (_) {
-                        //           setState(() {});
-                        //         },
-                        //         onPageFinished: (val) {
-                        //           _isDataLoaded = true;
-                        //           setState(() {});
-                        //         },
-                        //       )
-                        //     :
-                        WebView(
-                          initialUrl: searchController.addNewTabList2[index].trackingUrl,
-                          javascriptMode: JavascriptMode.unrestricted,
-                          allowsInlineMediaPlayback: true,
-                          onWebViewCreated: (controller) {
-                            this.controller = controller;
-                            setState(() {});
-                          },
-                          onWebResourceError: (error) {
-                            showCustomSnackBar(error.description);
-                          },
-                          onProgress: (_) {
-                            setState(() {});
-                          },
-                          onPageFinished: (val) {
-                            _isWebLoaded = true;
-                            setState(() {});
-                          },
-                        ),
+                        searchController.addNewTabList2[index].searchUrl != null && searchController.addNewTabList2[index].searchUrl.isNotEmpty && _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty
+                            ? WebView(
+                                initialUrl: searchController.addNewTabList2[index].searchUrl + _cSearch.text.trim(),
+                                javascriptMode: JavascriptMode.unrestricted,
+                                allowsInlineMediaPlayback: true,
+                                onWebViewCreated: (controller) {
+                                  webViewController = controller;
+                                  setState(() {});
+                                },
+                                onWebResourceError: (error) {
+                                  showCustomSnackBar(error.description);
+                                },
+                                onProgress: (_) {
+                                  setState(() {});
+                                },
+                                onPageFinished: (val) {
+                                  _isWebLoaded = true;
+                                  setState(() {});
+                                },
+                              )
+                            : WebView(
+                                initialUrl: searchController.addNewTabList2[index].trackingUrl,
+                                javascriptMode: JavascriptMode.unrestricted,
+                                allowsInlineMediaPlayback: true,
+                                onWebViewCreated: (controller) {
+                                  webViewController = controller;
+                                  setState(() {});
+                                },
+                                onWebResourceError: (error) {
+                                  showCustomSnackBar(error.description);
+                                },
+                                onProgress: (_) {
+                                  setState(() {});
+                                },
+                                onPageFinished: (val) {
+                                  _isWebLoaded = true;
+                                  setState(() {});
+                                },
+                              ),
                         _isWebLoaded == false ? CircularProgressIndicator() : SizedBox(),
                       ],
                     );

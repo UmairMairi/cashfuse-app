@@ -1,13 +1,17 @@
+import 'dart:developer';
+
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/widget/webview/seeMoreSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 
 class WebViewScreen extends StatelessWidget {
   final String urlString;
-  WebViewScreen({this.urlString});
+  final bool isCliked;
+  WebViewScreen({this.urlString, this.isCliked});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +56,7 @@ class WebViewScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              homeController.isRoted
+              homeController.isRoted && isCliked == false
                   ? Image.asset(Images.webview_gif)
                   // AnimatedContainer(
                   //     width: 200,
@@ -78,7 +82,7 @@ class WebViewScreen extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Get.find<HomeController>().setWebBottomIndex(0);
+                    homeController.setWebBottomIndex(0);
                     Get.bottomSheet(
                       SeeMoreSheet(),
                     );
@@ -104,7 +108,7 @@ class WebViewScreen extends StatelessWidget {
                           )),
                       child: RichText(
                         text: TextSpan(
-                          text: "CK",
+                          text: "CB",
                           style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                             letterSpacing: -0.2,
                             color: Get.theme.secondaryHeaderColor,
@@ -128,7 +132,7 @@ class WebViewScreen extends StatelessWidget {
                 Expanded(child: SizedBox()),
                 InkWell(
                   onTap: () {
-                    Get.find<HomeController>().setWebBottomIndex(1);
+                    homeController.setWebBottomIndex(1);
                     Get.bottomSheet(
                       SeeMoreSheet(),
                     );
@@ -141,7 +145,7 @@ class WebViewScreen extends StatelessWidget {
                         size: 15,
                       ),
                       Text(
-                        ' Cashback',
+                        ' ${global.appName}',
                         style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                           letterSpacing: -0.2,
                           fontWeight: FontWeight.w300,
@@ -154,7 +158,7 @@ class WebViewScreen extends StatelessWidget {
                 Expanded(child: SizedBox()),
                 InkWell(
                   onTap: () {
-                    Get.find<HomeController>().setWebBottomIndex(2);
+                    homeController.setWebBottomIndex(2);
                     Get.bottomSheet(
                       SeeMoreSheet(),
                     );
@@ -180,7 +184,7 @@ class WebViewScreen extends StatelessWidget {
                 Expanded(child: SizedBox()),
                 InkWell(
                   onTap: () {
-                    Get.find<HomeController>().setWebBottomIndex(3);
+                    homeController.setWebBottomIndex(3);
                     Get.bottomSheet(
                       SeeMoreSheet(),
                     );

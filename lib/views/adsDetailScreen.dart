@@ -196,8 +196,15 @@ class AdsDetailScreen extends StatelessWidget {
                                 Get.to(
                                   () => WebViewScreen(
                                     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
+                                    isCliked: global.clickedList.contains(ads.advName),
                                   ),
-                                );
+                                ).then((value) {
+                                  if (global.clickedList.contains(ads.advName)) {
+                                  } else {
+                                    global.clickedList.add(ads.advName);
+                                  }
+                                });
+                                ;
                               } else {
                                 Get.to(() => LoginOrSignUpScreen());
                               }

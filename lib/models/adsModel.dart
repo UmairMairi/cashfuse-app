@@ -67,10 +67,10 @@ class AdsModel {
       landingPage = json["landing_page"];
       type = json["type"];
       status = json["status"];
-      createdAt = DateTime.parse(json["created_at"]);
-      updatedAt = DateTime.parse(json["updated_at"]);
+      createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : null;
+      updatedAt = json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null;
       ads = json["ads"];
-      partner = json["partner"] != null ? CategoryModel.fromJson(json["partner"]) : '';
+      partner = json["partner"] != null ? CategoryModel.fromJson(json["partner"]) : null;
     } catch (e) {
       print("Exception - AdsModel.dart - AdsModel.fromJson():" + e.toString());
     }

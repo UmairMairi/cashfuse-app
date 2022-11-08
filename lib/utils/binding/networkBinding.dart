@@ -7,12 +7,14 @@ import 'package:cashbackapp/controllers/paymentController.dart';
 import 'package:cashbackapp/controllers/ratingController.dart';
 import 'package:cashbackapp/controllers/searchController.dart';
 import 'package:cashbackapp/controllers/splashController.dart';
+import 'package:cashbackapp/controllers/themeController.dart';
 import 'package:get/get.dart';
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 
 class NetworkBinding extends Bindings {
   @override
   void dependencies() {
+    Get.put(ThemeController());
     Get.lazyPut<NetworkController>(() => NetworkController(), fenix: true);
     Get.put(SplashController());
     Get.put(BottomNavigationController());

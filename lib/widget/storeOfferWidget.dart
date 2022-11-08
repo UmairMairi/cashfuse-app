@@ -80,7 +80,7 @@ class StoreOfferWidget extends StatelessWidget {
             margin: EdgeInsets.only(top: 5),
             padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
             decoration: BoxDecoration(
-              color: Colors.orange[700],
+              color: Get.theme.secondaryHeaderColor,
               borderRadius: BorderRadius.circular(2),
             ),
             child: Text(

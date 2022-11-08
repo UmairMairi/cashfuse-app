@@ -3,13 +3,13 @@
 import 'dart:async';
 
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
-import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/views/appTabinationScreen.dart';
 import 'package:cashbackapp/views/homeScreen.dart';
 import 'package:cashbackapp/views/profileScreen.dart';
 import 'package:cashbackapp/views/recentClicksScreen.dart';
-import 'package:cashbackapp/views/referEarnScreen.dart';
 import 'package:cashbackapp/views/searchScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class BottomNavigationBarScreen extends StatelessWidget {
@@ -28,7 +28,8 @@ class BottomNavigationBarScreen extends StatelessWidget {
   List<String> tabList = [
     'Home',
     'Search',
-    'Refer & Earn',
+    'All in one\n Search',
+    //'Refer & Earn',
     'Recents Clicks',
     'Profile',
   ];
@@ -36,7 +37,8 @@ class BottomNavigationBarScreen extends StatelessWidget {
   List<Widget> _screens() => [
         HomeScreen(),
         SearchScreen(),
-        ReferEarnScreen(),
+        AppTabinationScreen(),
+        //ReferEarnScreen(),
         RecentClickScreen(),
         ProfieScreen(),
       ];
@@ -62,6 +64,7 @@ class BottomNavigationBarScreen extends StatelessWidget {
                   margin: EdgeInsets.all(10),
                 ));
                 _canExit = true;
+                SystemNavigator.pop();
 
                 Timer(Duration(seconds: 2), () {
                   _canExit = false;
@@ -86,7 +89,12 @@ class BottomNavigationBarScreen extends StatelessWidget {
                     currentIndex: navController.bottomNavIndex.value,
                     showSelectedLabels: true,
                     showUnselectedLabels: true,
-                    selectedLabelStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
+                    selectedLabelStyle: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w400,
+                      height: 1,
+                      textBaseline: TextBaseline.ideographic,
+                    ),
                     unselectedLabelStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
                     items: List.generate(iconList.length, (index) {
                       return BottomNavigationBarItem(
@@ -100,19 +108,33 @@ class BottomNavigationBarScreen extends StatelessWidget {
                     },
                   ),
                   Positioned(
-                    bottom: 24,
+                    bottom: 25,
                     child: InkWell(
                       onTap: () {
                         navController.setBottomIndex(2);
                       },
-                      child: CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Colors.white,
-                        child: Image.asset(
-                          Images.rupee,
-                          height: 25,
-                        ),
-                      ),
+                      child: Card(
+                          elevation: 2,
+                          color: navController.bottomNavIndex.value == 2 ? Get.theme.secondaryHeaderColor : Colors.white,
+                          margin: EdgeInsets.only(bottom: 6),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.screen_search_desktop_outlined,
+                              color: navController.bottomNavIndex.value == 2 ? Colors.white : Colors.grey[450],
+                            ),
+                          )),
+                      //    child: CircleAvatar(
+                      // radius: 20,
+                      // backgroundColor: Colors.white,
+                      // child: Image.asset(
+                      //   Images.rupee,
+                      //   height: 25,
+                      // ),
+                      //),
                     ),
                   ),
                 ],

@@ -1,6 +1,9 @@
+import 'package:cashbackapp/controllers/themeController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:get/get.dart';
+
+ThemeController themeController = Get.find<ThemeController>();
 
 ThemeData nativeTheme({bool darkModeEnabled}) {
   if (darkModeEnabled == null) {
@@ -44,18 +47,18 @@ ThemeData nativeTheme({bool darkModeEnabled}) {
     return ThemeData(
         scaffoldBackgroundColor: Colors.grey[200],
         appBarTheme: AppBarTheme(
-          backgroundColor: global.defaultColor,
+          backgroundColor: themeController.pickColor,
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: global.defaultColor,
+            statusBarColor: themeController.pickColor,
             statusBarIconBrightness: Brightness.light,
           ),
         ),
         fontFamily: 'Poppins',
-        primaryColor: global.defaultColor, //Color(0xFFF8CB46), //Color(0xFFEF7822),
-        primaryColorLight: global.defaultColor,
+        primaryColor: themeController.pickColor, //Color(0xFFF8CB46), //Color(0xFFEF7822),
+        primaryColorLight: themeController.pickColor,
         iconTheme: IconThemeData(color: Colors.black),
         primaryIconTheme: IconThemeData(color: Colors.black),
-        secondaryHeaderColor: Color(0xFFF07532),
+        secondaryHeaderColor: themeController.pickSecondaryColor,
         textTheme: TextTheme(
           headline1: TextStyle(color: Colors.black),
           headline2: TextStyle(color: Colors.black),

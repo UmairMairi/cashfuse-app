@@ -21,7 +21,8 @@ String timeFormat = '24';
 String appDeviceId;
 String languageCode = 'en';
 bool isRTL = false;
-Color defaultColor = Color(0xFF2D3D95);
+List<String> clickedList = [];
+//Color defaultColor = Color(0xFF2D3D95);
 
 //Api Header
 Future<Map<String, String>> getApiHeaders(bool authorizationRequired) async {

@@ -2,6 +2,7 @@
 //flutter
 import 'dart:io';
 
+import 'package:cashbackapp/controllers/themeController.dart';
 import 'package:cashbackapp/l10n/l10n.dart';
 import 'package:cashbackapp/provider/local_provider.dart';
 import 'package:cashbackapp/theme/nativeTheme.dart';
@@ -13,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart' as webview;
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -44,29 +46,34 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  ThemeController themeController = Get.put(ThemeController());
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (context) => LocaleProvider(),
-      builder: (context, child) {
-        final provider = Provider.of<LocaleProvider>(context);
-        return GetMaterialApp(
-          navigatorKey: Get.key,
-          debugShowCheckedModeBanner: false,
-          enableLog: true,
-          theme: nativeTheme(),
-          initialBinding: NetworkBinding(),
-          title: global.appName,
-          locale: provider.locale,
-          supportedLocales: L10n.all,
-          localizationsDelegates: [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          home: SplashScreen(),
-        );
-      });
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+        create: (context) => LocaleProvider(),
+        builder: (context, child) {
+          final provider = Provider.of<LocaleProvider>(context);
+          return GetBuilder<ThemeController>(builder: (themeController) {
+            return GetMaterialApp(
+              navigatorKey: Get.key,
+              debugShowCheckedModeBanner: false,
+              enableLog: true,
+              theme: nativeTheme(),
+              initialBinding: NetworkBinding(),
+              title: global.appName,
+              locale: provider.locale,
+              supportedLocales: L10n.all,
+              localizationsDelegates: [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              home: SplashScreen(),
+            );
+          });
+        });
+  }
 }
 
 class MyHttpOverrides extends HttpOverrides {

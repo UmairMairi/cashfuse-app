@@ -25,6 +25,7 @@ class OfferModel {
   DateTime updatedAt;
   int offers;
   CategoryModel partner;
+  bool isCliked = false; // for first loader in webview
 
   OfferModel({
     this.id,
@@ -51,6 +52,7 @@ class OfferModel {
     this.updatedAt,
     this.offers,
     this.partner,
+    this.isCliked,
   });
 
   OfferModel.fromJson(Map<String, dynamic> json) {

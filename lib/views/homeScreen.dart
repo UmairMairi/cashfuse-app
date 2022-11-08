@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
             text: "CASH",
             style: Get.theme.primaryTextTheme.headline4.copyWith(
               letterSpacing: 0.1,
-              color: Color(0xFFfe3d00),
+              color: Get.theme.secondaryHeaderColor,
               fontFamily: 'Bebas Neue',
             ),
             children: <TextSpan>[

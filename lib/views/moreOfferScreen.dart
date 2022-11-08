@@ -100,10 +100,14 @@ class MoreOfferScreen extends StatelessWidget {
                         onTap: () async {
                           Get.back();
                           await homeController.getCampignDetails(homeController.seeMoreOfferList[index].id.toString());
-                          Get.off(() => OfferDetailScreen(
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => OfferDetailScreen(
                                 offer: homeController.offer,
                                 fromSeeMore: true,
-                              ));
+                              ),
+                            ),
+                          );
                         },
                         child: Container(
                           width: Get.width / 2,

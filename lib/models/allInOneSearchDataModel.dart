@@ -17,6 +17,8 @@ class AllInOneSearchDataModel {
   DateTime createdAt;
   DateTime updatedAt;
   String trackingUrl;
+  String tabColor;
+  String searchUrl;
 
   AllInOneSearchDataModel({
     this.id,
@@ -37,6 +39,8 @@ class AllInOneSearchDataModel {
     this.createdAt,
     this.updatedAt,
     this.trackingUrl,
+    this.tabColor,
+    this.searchUrl,
   });
 
   AllInOneSearchDataModel.fromJson(Map<String, dynamic> json) {
@@ -56,9 +60,11 @@ class AllInOneSearchDataModel {
       affiliatePartner = json["affiliate_partner"];
       description = json["description"] != null ? json["description"] : '';
       campaigns = json["campaigns"];
-      createdAt = DateTime.parse(json["created_at"]);
-      updatedAt = DateTime.parse(json["updated_at"]);
       trackingUrl = json["tracking_url"] != null ? json["tracking_url"] : '';
+      tabColor = json["tab_color"] != null ? json["tab_color"] : '';
+      searchUrl = json["search_url"] != null ? json["search_url"] : '';
+      createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : null;
+      updatedAt = json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null;
     } catch (e) {
       print("Exception - AllInOneSearchDataModel.dart - AllInOneSearchDataModel.fromJson():" + e.toString());
     }
@@ -83,5 +89,7 @@ class AllInOneSearchDataModel {
         "created_at": createdAt != null ? createdAt.toIso8601String() : null,
         "updated_at": updatedAt != null ? updatedAt.toIso8601String() : null,
         "tracking_url": trackingUrl,
+        "tab_color": tabColor,
+        "search_url": searchUrl,
       };
 }

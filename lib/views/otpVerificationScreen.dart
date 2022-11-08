@@ -80,6 +80,7 @@ class OtpVerificationScreen extends StatelessWidget {
                     onChanged: (code) async {
                       if (code.length == 6) {
                         FocusScope.of(context).requestFocus(FocusNode());
+                        await authController.checkOTP(verificationCode);
                       }
                     },
                     scrollPadding: EdgeInsets.zero,

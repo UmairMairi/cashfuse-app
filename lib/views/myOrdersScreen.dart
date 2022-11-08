@@ -1,3 +1,6 @@
+import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/views/missingCashbackScreen.dart';
+import 'package:cashbackapp/widget/customImage.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,26 +46,32 @@ class MyOrdersScreen extends StatelessWidget {
                           color: Colors.grey[400],
                         ),
                       ),
-                    ),
-                    title: Text('Mamaearth'),
-                    subtitle: Text(
-                      '10:00 pm | 7 Nov 2022',
-                      style: TextStyle(fontSize: 10, color: Colors.grey),
-                    ),
-                    trailing: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(3),
-                        border: Border.all(
-                          color: Get.theme.primaryColor,
-                        ),
+                      padding: EdgeInsets.all(3),
+                      child: CustomImage(
+                        image: Images.amazon,
+                        fit: BoxFit.contain,
                       ),
-                      child: Text(
-                        'Raise Ticket',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Get.theme.primaryColor,
+                    ),
+                    title: Text('Amazon'),
+                    trailing: InkWell(
+                      onTap: () {
+                        Get.to(() => MissingCashbackScreen());
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(3),
+                          border: Border.all(
+                            color: Get.theme.primaryColor,
+                          ),
+                        ),
+                        child: Text(
+                          'Raise Ticket',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Get.theme.primaryColor,
+                          ),
                         ),
                       ),
                     ),
@@ -81,21 +90,21 @@ class MyOrdersScreen extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
                           decoration: BoxDecoration(
-                            color: Colors.yellowAccent.withOpacity(0.2),
+                            color: Get.theme.secondaryHeaderColor.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Row(
                             children: [
                               Icon(
                                 Icons.check_circle,
-                                color: Colors.yellow,
+                                color: Get.theme.secondaryHeaderColor,
                                 size: 20,
                               ),
                               Text(
                                 'Clicked Tracked',
                                 style: TextStyle(
                                   fontSize: 10,
-                                  color: Colors.yellow,
+                                  color: Get.theme.secondaryHeaderColor,
                                 ),
                               ),
                             ],
@@ -151,18 +160,9 @@ class MyOrdersScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Clicked Tracked',
-                            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
-                          ),
-                          Text(
-                            '20 % off',
-                            style: TextStyle(fontSize: 10, color: Colors.grey),
-                          ),
-                        ],
+                      child: Text(
+                        'Clicked Tracked',
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                     ),
                     Expanded(child: SizedBox()),
@@ -174,12 +174,11 @@ class MyOrdersScreen extends StatelessWidget {
                 ),
                 Stack(
                   alignment: Alignment.centerLeft,
-                  clipBehavior: Clip.none,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: DottedLine(
-                        lineLength: 120,
+                        lineLength: 125,
                         direction: Axis.vertical,
                         dashColor: Colors.grey,
                       ),
@@ -200,18 +199,9 @@ class MyOrdersScreen extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Sale Tracked',
-                                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
-                              ),
-                              Text(
-                                '20 % off',
-                                style: TextStyle(fontSize: 10, color: Colors.grey),
-                              ),
-                            ],
+                          child: Text(
+                            'Sale Tracked',
+                            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
                           ),
                         ),
                         Expanded(child: SizedBox()),
@@ -232,18 +222,9 @@ class MyOrdersScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Cashback Received',
-                            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
-                          ),
-                          Text(
-                            '20 % off',
-                            style: TextStyle(fontSize: 10, color: Colors.grey),
-                          ),
-                        ],
+                      child: Text(
+                        'Cashback Received',
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                     ),
                     Expanded(child: SizedBox()),

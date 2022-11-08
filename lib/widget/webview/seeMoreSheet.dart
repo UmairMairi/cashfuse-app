@@ -5,6 +5,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 
 class SeeMoreSheet extends StatelessWidget {
   final int screenId;
@@ -40,7 +41,7 @@ class SeeMoreSheet extends StatelessWidget {
                                 radius: 15,
                                 backgroundColor: Get.theme.primaryColor,
                                 child: Text(
-                                  'CK',
+                                  'CB',
                                   style: Get.theme.primaryTextTheme.headline6.copyWith(
                                     color: Get.theme.secondaryHeaderColor,
                                   ),
@@ -100,7 +101,7 @@ class SeeMoreSheet extends StatelessWidget {
                                     radius: 10,
                                   ),
                                   Text(
-                                    ' Myntra pays commison to CaskKaro',
+                                    ' Myntra pays commison to ${global.appName}',
                                     style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -122,7 +123,7 @@ class SeeMoreSheet extends StatelessWidget {
                                     radius: 10,
                                   ),
                                   Text(
-                                    ' CaskKaro Pays you Cashback',
+                                    ' ${global.appName} Pays you Rewards',
                                     style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                       fontWeight: FontWeight.w600,
                                     ),

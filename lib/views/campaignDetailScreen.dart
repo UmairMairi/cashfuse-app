@@ -197,8 +197,15 @@ class CampaignDetailScreen extends StatelessWidget {
                                 Get.to(
                                   () => WebViewScreen(
                                     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
+                                    isCliked: global.clickedList.contains(campaign.name),
                                   ),
-                                );
+                                ).then((value) {
+                                  if (global.clickedList.contains(campaign.name)) {
+                                  } else {
+                                    global.clickedList.add(campaign.name);
+                                  }
+                                });
+                                ;
                               } else {
                                 Get.to(() => LoginOrSignUpScreen());
                               }
