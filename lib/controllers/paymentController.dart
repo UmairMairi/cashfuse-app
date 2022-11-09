@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cashbackapp/constants/appConstant.dart';
 import 'package:cashbackapp/controllers/networkController.dart';
 import 'package:cashbackapp/models/bankDetailsModel.dart';
+import 'package:cashbackapp/models/paymentHistoryModel.dart';
 import 'package:cashbackapp/services/apiHelper.dart';
 import 'package:cashbackapp/widget/customLoader.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
@@ -18,6 +19,9 @@ class PaymentController extends GetxController {
   BankDetailsModel payTMDetails;
   BankDetailsModel upiDetails;
 
+  List<PaymentHistoryModel> _paymentHistoryList = [];
+  List<PaymentHistoryModel> get paymentHistoryList => _paymentHistoryList;
+
   @override
   void onInit() async {
     await init();
@@ -31,6 +35,7 @@ class PaymentController extends GetxController {
 
   Future init() async {
     try {
+      await getPaymentHistory();
       if (global.sp.getString('amazon_pay') != null) {
         amazonDetails = BankDetailsModel.fromJson(json.decode(global.sp.getString("amazon_pay")));
       }
@@ -152,6 +157,47 @@ class PaymentController extends GetxController {
       }
     } catch (e) {
       print("Exception - PaymentController.dart - addBankDetails():" + e.toString());
+    }
+  }
+
+  Future sendWithdrawalRequest(String medium) async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        Get.dialog(CustomLoader(), barrierDismissible: false);
+        await apiHelper.sendWithdrawalRequest(medium).then((response) {
+          Get.back();
+          if (response.status == "1") {
+          } else if (response.status == "0") {
+            showCustomSnackBar(response.data);
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+        update();
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+    } catch (e) {
+      print("Exception - PaymentController.dart - sendWithdrawalRequest():" + e.toString());
+    }
+  }
+
+  Future getPaymentHistory() async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.getPaymentHistory().then((response) {
+          if (response.status == "1") {
+            _paymentHistoryList = response.data;
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+        update();
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+    } catch (e) {
+      print("Exception - PaymentController.dart - getPaymentHistory():" + e.toString());
     }
   }
 }

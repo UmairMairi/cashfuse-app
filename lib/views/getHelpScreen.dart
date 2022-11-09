@@ -33,9 +33,10 @@ class GetHelpScreen extends StatelessWidget {
           padding: EdgeInsets.all(15),
           decoration: BoxDecoration(
             gradient: LinearGradient(
+              begin: Alignment.center,
               colors: [
-                Color(0xFFBC53E1),
-                Color(0xFF6285E3),
+                Get.theme.primaryColor.withOpacity(0.7),
+                Get.theme.secondaryHeaderColor.withOpacity(0.4),
               ],
             ),
           ),

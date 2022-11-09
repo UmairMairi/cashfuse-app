@@ -1,3 +1,6 @@
+import 'package:cashbackapp/models/bankDetailsModel.dart';
+import 'package:cashbackapp/models/earningModel.dart';
+
 class UserModel {
   int id;
   String name;
@@ -11,6 +14,10 @@ class UserModel {
   DateTime createdAt;
   DateTime updatedAt;
   String token;
+
+  EarningModel earning;
+  List<dynamic> withdrawalRequest;
+  BankDetailsModel bankDetail;
 
   UserModel({
     this.id,
@@ -41,6 +48,8 @@ class UserModel {
       createdAt = DateTime.parse(json["created_at"]);
       updatedAt = DateTime.parse(json["updated_at"]);
       token = json['token'] != null ? json['token'] : null;
+      earning = json['earning'] != null ? EarningModel.fromJson(json['earning']) : null;
+      bankDetail = json['bank_detail'] != null ? BankDetailsModel.fromJson(json['bank_detail']) : null;
     } catch (e) {
       print("Exception - UserModel.dart - UserModel.fromJson():" + e.toString());
     }
@@ -59,5 +68,8 @@ class UserModel {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "token": token,
+        "earning": earning != null ? earning.toJson() : null,
+        "bank_detail": bankDetail != null ? bankDetail.toJson() : null,
+        "withdrawal_request": withdrawalRequest != null && withdrawalRequest.length > 0 ? withdrawalRequest : null,
       };
 }

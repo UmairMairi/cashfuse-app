@@ -34,72 +34,72 @@ class AppWiseOfferShowListScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Card(
-              margin: EdgeInsets.zero,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-              color: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Get.to(
-                        () => FilterScreen(),
-                        transition: Transition.downToUp,
-                        duration: Duration(milliseconds: 600),
-                      );
-                    },
-                    child: Row(
-                      children: [
-                        Icon(
-                          FontAwesomeIcons.filter,
-                          size: 15,
-                        ),
-                        Text(
-                          ' Filters',
-                          style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w300),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: 1,
-                    height: 25,
-                    color: Colors.grey[400],
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.dialog(SortDialogWidget());
-                    },
-                    child: Row(
-                      children: [
-                        Icon(
-                          FontAwesomeIcons.sort,
-                          size: 15,
-                        ),
-                        Text(
-                          ' Sort',
-                          style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.orange[700]),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Card(
+            //   margin: EdgeInsets.zero,
+            //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+            //   color: Colors.white,
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //     children: [
+            //       InkWell(
+            //         onTap: () {
+            //           Get.to(
+            //             () => FilterScreen(),
+            //             transition: Transition.downToUp,
+            //             duration: Duration(milliseconds: 600),
+            //           );
+            //         },
+            //         child: Row(
+            //           children: [
+            //             Icon(
+            //               FontAwesomeIcons.filter,
+            //               size: 15,
+            //             ),
+            //             Text(
+            //               ' Filters',
+            //               style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w300),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //       Container(
+            //         width: 1,
+            //         height: 25,
+            //         color: Colors.grey[400],
+            //         margin: EdgeInsets.symmetric(vertical: 10),
+            //       ),
+            //       InkWell(
+            //         onTap: () {
+            //           Get.dialog(SortDialogWidget());
+            //         },
+            //         child: Row(
+            //           children: [
+            //             Icon(
+            //               FontAwesomeIcons.sort,
+            //               size: 15,
+            //             ),
+            //             Text(
+            //               ' Sort',
+            //               style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.orange[700]),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Expanded(
               child: categoryModel != null
-                  ? GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        childAspectRatio: 1.6,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                      ),
+                  ? ListView.builder(
+                      // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      //   crossAxisCount: 1,
+                      //   //childAspectRatio: 1.6,
+                      //   crossAxisSpacing: 10,
+                      //   mainAxisSpacing: 10,
+                      // ),
                       itemCount: categoryModel.commonList.length,
                       shrinkWrap: true,
-                      padding: EdgeInsets.all(10).copyWith(top: 20),
+                      padding: EdgeInsets.all(10),
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () async {
@@ -119,20 +119,21 @@ class AppWiseOfferShowListScreen extends StatelessWidget {
                           },
                           child: AppWiseOfferShowWidget(
                             commonModel: categoryModel.commonList[index],
+                            fromList: true,
                           ),
                         );
                       },
                     )
-                  : GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        childAspectRatio: 1.6,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                      ),
+                  : ListView.builder(
+                      // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      //   crossAxisCount: 1,
+                      //   childAspectRatio: 1.5,
+                      //   crossAxisSpacing: 10,
+                      //   mainAxisSpacing: 10,
+                      // ),
                       itemCount: homeController.newFlashOfferList.length,
                       shrinkWrap: true,
-                      padding: EdgeInsets.all(10).copyWith(top: 20),
+                      padding: EdgeInsets.all(10),
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () async {
@@ -146,6 +147,7 @@ class AppWiseOfferShowListScreen extends StatelessWidget {
                           },
                           child: AppWiseOfferShowWidget(
                             offer: homeController.newFlashOfferList[index],
+                            fromList: true,
                           ),
                         );
                       },

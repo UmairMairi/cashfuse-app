@@ -3,19 +3,19 @@ import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/views/aboutUsScreen.dart';
 import 'package:cashbackapp/views/accountSettingScreen.dart';
-import 'package:cashbackapp/views/appTabinationScreen.dart';
 import 'package:cashbackapp/views/colorPicker.dart';
 import 'package:cashbackapp/views/getHelpScreen.dart';
 import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
 import 'package:cashbackapp/views/missingCashbackScreen.dart';
 import 'package:cashbackapp/views/myEarningScreen.dart';
+import 'package:cashbackapp/views/paymentHistoryScreen.dart';
 import 'package:cashbackapp/views/privacyPolicyScreen.dart';
 import 'package:cashbackapp/views/rateUsScreen.dart';
-import 'package:cashbackapp/views/referralNetworkScreen.dart';
 import 'package:cashbackapp/widget/confirmationDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:store_redirect/store_redirect.dart';
 
 class ProfieScreen extends StatelessWidget {
   @override
@@ -78,27 +78,27 @@ class ProfieScreen extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      '₹0.00',
+                                      global.currentUser.earning != null ? '₹${global.currentUser.earning.totalEarnings}' : '₹0.00',
                                       style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                                     ),
                                   ],
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Total Rewards:',
-                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                        color: Colors.white,
-                                        fontSize: 11,
-                                      ),
-                                    ),
-                                    Text(
-                                      '₹0.00',
-                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
-                                    ),
-                                  ],
-                                )
+                                // Column(
+                                //   crossAxisAlignment: CrossAxisAlignment.start,
+                                //   children: [
+                                //     Text(
+                                //       'Total Rewards:',
+                                //       style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                //         color: Colors.white,
+                                //         fontSize: 11,
+                                //       ),
+                                //     ),
+                                //     Text(
+                                //       '₹0.00',
+                                //       style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                                //     ),
+                                //   ],
+                                // )
                               ],
                             ),
                             SizedBox(
@@ -180,25 +180,30 @@ class ProfieScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.history,
-                              color: Get.theme.iconTheme.color,
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              'Payments History',
-                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                letterSpacing: 0,
-                                color: Colors.black.withOpacity(0.75),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => PaymentHistoryScreen());
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.history,
+                                color: Get.theme.iconTheme.color,
                               ),
-                            ),
-                          ],
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                'Payments History',
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       InkWell(
@@ -418,7 +423,10 @@ class ProfieScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(() => RateUsScreen());
+                          //Get.to(() => RateUsScreen());
+                          StoreRedirect.redirect(
+                            androidAppId: 'com.cashback.app',
+                          );
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

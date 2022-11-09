@@ -21,10 +21,12 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
   int _currentIndex = 0;
   bool _isDataLoaded = false;
   bool _isWebLoaded = false;
+  bool _isSearched = false;
 
   WebViewController webViewController;
   TextEditingController _cSearch = new TextEditingController();
   var _fDismiss = new FocusNode();
+  var searchNode = new FocusNode();
 
   SearchController searchController = Get.find<SearchController>();
 
@@ -77,6 +79,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.search,
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
+                focusNode: searchNode,
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   suffixIcon:
@@ -96,12 +99,15 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
                       //     :
                       InkWell(
                     onTap: () async {
-                      FocusScope.of(context).requestFocus(_fDismiss);
-                      _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && searchController.addNewTabList2[_currentIndex].searchUrl != null && searchController.addNewTabList2[_currentIndex].searchUrl.isNotEmpty
-                          ? await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].searchUrl + _cSearch.text.trim())
-                          : await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].trackingUrl);
-                      _isWebLoaded = false;
+                      FocusScope.of(context).requestFocus(searchNode);
                       setState(() {});
+                      if (_cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && searchController.addNewTabList2[_currentIndex].searchUrl != null && searchController.addNewTabList2[_currentIndex].searchUrl.isNotEmpty) {
+                        await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].searchUrl + _cSearch.text.trim()).then((value) {
+                          FocusScope.of(context).requestFocus(_fDismiss);
+                        });
+                        _isWebLoaded = false;
+                        setState(() {});
+                      } else {}
                     },
                     child: Icon(
                       Icons.search,
@@ -121,12 +127,12 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
                 },
               ),
             ),
-            actions: [
-              Icon(
-                Icons.more_vert,
-                color: Colors.white,
-              ),
-            ],
+            // actions: [
+            //   Icon(
+            //     Icons.more_vert,
+            //     color: Colors.white,
+            //   ),
+            // ],
           ),
           body: Column(
             children: [

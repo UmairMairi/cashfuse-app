@@ -8,6 +8,7 @@ import 'package:cashbackapp/views/campaignDetailScreen.dart';
 import 'package:cashbackapp/views/categoryScreen.dart';
 import 'package:cashbackapp/views/couponDetailScreen.dart';
 import 'package:cashbackapp/views/couponListScreen.dart';
+import 'package:cashbackapp/views/getHelpScreen.dart';
 import 'package:cashbackapp/views/offerDetailScreen.dart';
 import 'package:cashbackapp/views/faqSceen.dart';
 import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
@@ -98,7 +99,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Get.theme.primaryColor,
         child: Icon(FontAwesomeIcons.commentDots),
         onPressed: () {
-          Get.to(() => FaqScreen());
+          Get.to(() => GetHelpScreen());
         },
       ),
       body: RefreshIndicator(
@@ -301,18 +302,19 @@ class HomeScreen extends StatelessWidget {
                                     children: [
                                       Text(
                                         hm.topCategoryList[index].name.toUpperCase(),
+                                        textAlign: TextAlign.center,
                                         style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w500,
                                           color: index == 0 ? Colors.white : Colors.black,
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
+                                      // SizedBox(
+                                      //   height: 10,
+                                      // ),
                                       CustomImage(
                                         image: '${global.appInfo.baseUrls.categoryImageUrl}/${hm.topCategoryList[index].image}',
-                                        height: 25,
+                                        height: 40,
                                       ),
                                     ],
                                   ),
@@ -472,7 +474,7 @@ class HomeScreen extends StatelessWidget {
                                     onTap: () async {
                                       await hmCon.getOfferDetails(hmCon.exclusiveOfferList[index].id.toString());
                                       Get.to(() => OfferDetailScreen(
-                                            offer: hmCon.exclusiveOfferList[index],
+                                            offer: hmCon.offer,
                                             fromSeeMore: false,
                                           ));
                                     },
@@ -703,12 +705,13 @@ class HomeScreen extends StatelessWidget {
                                     onTap: () async {
                                       await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
                                       Get.to(() => OfferDetailScreen(
-                                            offer: home.newFlashOfferList[index],
+                                            offer: home.offer,
                                             fromSeeMore: false,
                                           ));
                                     },
                                     child: AppWiseOfferShowWidget(
                                       offer: home.newFlashOfferList[index],
+                                      fromList: false,
                                     ),
                                   );
                                 },
@@ -834,6 +837,7 @@ class HomeScreen extends StatelessWidget {
                                               child: AppWiseOfferShowWidget(
                                                 commonModel: home.homeAdvList[index].commonList[i],
                                                 domainImage: home.homeAdvList[index].image,
+                                                fromList: false,
                                               ),
                                             );
                                           }),

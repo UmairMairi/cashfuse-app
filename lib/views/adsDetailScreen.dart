@@ -87,7 +87,10 @@ class AdsDetailScreen extends StatelessWidget {
                 actions: [
                   InkWell(
                     onTap: () {
-                      global.share('');
+                      global.share(
+                        ads.trackingLink,
+                        '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}',
+                      );
                     },
                     child: Container(
                       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -197,6 +200,9 @@ class AdsDetailScreen extends StatelessWidget {
                                   () => WebViewScreen(
                                     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
                                     isCliked: global.clickedList.contains(ads.advName),
+                                    couponList: ads.couponList,
+                                    partner: ads.partner,
+                                    brandName: ads.advName,
                                   ),
                                 ).then((value) {
                                   if (global.clickedList.contains(ads.advName)) {

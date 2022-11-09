@@ -61,7 +61,8 @@ class StoreOfferWidget extends StatelessWidget {
             child: CustomImage(
               image: commonModel.image,
               //height: 32,
-              height: 45,
+              height: 70,
+
               //width: 100,
               fit: BoxFit.contain,
             ),

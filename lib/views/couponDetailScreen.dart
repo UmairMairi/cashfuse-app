@@ -38,7 +38,10 @@ class CouponDetailScreen extends StatelessWidget {
         actions: [
           InkWell(
             onTap: () {
-              global.share('');
+              global.share(
+                coupon.url,
+                '${global.appInfo.baseUrls.offerImageUrl}/${coupon.bannerImage}',
+              );
             },
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 12).copyWith(right: 10),

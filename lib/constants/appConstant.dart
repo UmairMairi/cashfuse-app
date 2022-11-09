@@ -34,4 +34,7 @@ class AppConstants {
   static const String MORE_CAMAPIGN_URI = '/seemorecampaigns';
   static const String MORE_OFFERS_URI = '/seemoreoffers';
   static const String MORE_ADS_URI = '/seemoreads';
+  static const String MY_PROFILE_URI = '/my_profile';
+  static const String SEND_WITHDRAWAL_REQUEST_URI = '/send_withdrawal_request';
+  static const String Payment_HISTORY_URI = '/payment_history';
 }

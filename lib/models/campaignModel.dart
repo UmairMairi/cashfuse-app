@@ -1,4 +1,5 @@
 import 'package:cashbackapp/models/categoryModel.dart';
+import 'package:cashbackapp/models/couponModel.dart';
 
 class CampaignModel {
   int id;
@@ -19,6 +20,7 @@ class CampaignModel {
   int campaigns;
   String description;
   CategoryModel partner;
+  List<Coupon> couponList;
 
   CampaignModel({
     this.id,
@@ -39,6 +41,7 @@ class CampaignModel {
     this.campaigns,
     this.description,
     this.partner,
+    this.couponList,
   });
 
   CampaignModel.fromJson(Map<String, dynamic> json) {
@@ -61,6 +64,7 @@ class CampaignModel {
       campaigns = json["campaigns"];
       description = json["description"] != null ? json["description"] : '';
       partner = json["partner"] != null ? CategoryModel.fromJson(json["partner"]) : null;
+      couponList = json["coupon"] != null && json["coupon"] != [] ? List<Coupon>.from(json["coupon"].map((x) => Coupon.fromJson(x))) : [];
     } catch (e) {
       print("Exception - CampaignModel.dart - CampaignModel.fromJson():" + e.toString());
     }

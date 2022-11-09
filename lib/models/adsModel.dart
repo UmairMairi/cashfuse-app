@@ -1,4 +1,5 @@
 import 'package:cashbackapp/models/categoryModel.dart';
+import 'package:cashbackapp/models/couponModel.dart';
 
 class AdsModel {
   int id;
@@ -22,6 +23,7 @@ class AdsModel {
   DateTime updatedAt;
   int ads;
   CategoryModel partner;
+  List<Coupon> couponList;
 
   AdsModel({
     this.id,
@@ -45,6 +47,7 @@ class AdsModel {
     this.updatedAt,
     this.ads,
     this.partner,
+    this.couponList,
   });
 
   AdsModel.fromJson(Map<String, dynamic> json) {
@@ -71,6 +74,7 @@ class AdsModel {
       updatedAt = json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null;
       ads = json["ads"];
       partner = json["partner"] != null ? CategoryModel.fromJson(json["partner"]) : null;
+      couponList = json["coupon"] != null && json["coupon"] != [] ? List<Coupon>.from(json["coupon"].map((x) => Coupon.fromJson(x))) : [];
     } catch (e) {
       print("Exception - AdsModel.dart - AdsModel.fromJson():" + e.toString());
     }

@@ -174,12 +174,14 @@ class AuthController extends GetxController {
     try {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
-        await apiHelper.verifyOtp(coutryCode + contactNo.text, status).then((response) {
+        await apiHelper.verifyOtp(coutryCode + contactNo.text, status).then((response) async {
           Get.back();
           if (response.statusCode == 200) {
             global.currentUser = response.data;
+
             global.sp.setString('currentUser', json.encode(global.currentUser.toJson()));
             Get.to(() => BottomNavigationBarScreen());
+            await getProfile();
           } else {
             showCustomSnackBar(response.message);
           }
@@ -229,15 +231,11 @@ class AuthController extends GetxController {
     try {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
-        await apiHelper.updateProfile(name.text.trim(), global.currentUser.phone, email.text.trim()).then((response) {
+        await apiHelper.updateProfile(name.text.trim(), global.currentUser.phone, email.text.trim()).then((response) async {
           Get.back();
           if (response.statusCode == 200) {
-            String _token = global.currentUser.token;
-            global.currentUser = response.data;
-            global.currentUser.token = _token;
-            global.sp.setString('currentUser', json.encode(global.currentUser.toJson()));
-            Get.back();
             showCustomSnackBar(response.message, isError: false);
+            await getProfile();
           } else {
             showCustomSnackBar(response.message);
           }
@@ -249,6 +247,29 @@ class AuthController extends GetxController {
       update();
     } catch (e) {
       print("Exception - authController.dart - updateProfile():" + e.toString());
+    }
+  }
+
+  Future getProfile() async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.myProfile().then((response) {
+          if (response.statusCode == 200) {
+            String _token = global.currentUser.token;
+            global.currentUser = response.data;
+            global.currentUser.token = _token;
+            global.sp.setString('currentUser', json.encode(global.currentUser.toJson()));
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+
+      update();
+    } catch (e) {
+      print("Exception - authController.dart - getProfile():" + e.toString());
     }
   }
 }

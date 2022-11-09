@@ -156,7 +156,7 @@ class MyOrdersScreen extends StatelessWidget {
                     Icon(
                       Icons.check_circle,
                       size: 20,
-                      color: Colors.yellow,
+                      color: Get.theme.secondaryHeaderColor,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
@@ -194,7 +194,7 @@ class MyOrdersScreen extends StatelessWidget {
                           child: Icon(
                             Icons.check_circle,
                             size: 20,
-                            color: Colors.orange,
+                            color: Get.theme.primaryColor,
                           ),
                         ),
                         Padding(

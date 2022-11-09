@@ -224,6 +224,7 @@ class SearchScreen extends StatelessWidget {
                                       },
                                       child: AppWiseOfferShowWidget(
                                         offer: searchController.searchData.offerList[index],
+                                        fromList: false,
                                       ),
                                     );
                                   },

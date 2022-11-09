@@ -11,16 +11,17 @@ class AppWiseOfferShowWidget extends StatelessWidget {
   final OfferModel offer;
   final CommonModel commonModel;
   final String domainImage;
-  AppWiseOfferShowWidget({this.offer, this.commonModel, this.domainImage});
+  final bool fromList;
+  AppWiseOfferShowWidget({this.offer, this.commonModel, this.domainImage, this.fromList});
 
   HomeController homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width - 60,
-      height: 200,
-      margin: EdgeInsets.only(right: 10),
+      width: 260,
+      height: fromList ? 250 : 200,
+      margin: fromList ? EdgeInsets.only(top: 15) : EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -38,7 +39,7 @@ class AppWiseOfferShowWidget extends StatelessWidget {
                       ),
                       child: CustomImage(
                         image: '${global.appInfo.baseUrls.offerImageUrl}/${commonModel.image}',
-                        height: 145,
+                        height: fromList ? 180 : 145,
                         width: Get.width,
                         fit: BoxFit.fill,
                       ),
@@ -58,21 +59,23 @@ class AppWiseOfferShowWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: Get.theme.secondaryHeaderColor,
-                        borderRadius: BorderRadius.circular(2),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: Get.theme.secondaryHeaderColor,
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                        child: Text(
+                          commonModel.buttonText,
+                          style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
+                        ),
                       ),
-                      child: Text(
-                        commonModel.buttonText,
-                        style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
-                      ),
-                    ),
+                    ],
                   ),
                 ),
               ],
@@ -90,7 +93,7 @@ class AppWiseOfferShowWidget extends StatelessWidget {
                           ),
                           child: CustomImage(
                             image: '${global.appInfo.baseUrls.offerImageUrl}/${offer.bannerImage}',
-                            height: 145,
+                            height: fromList ? 180 : 145,
                             width: Get.width,
                             fit: BoxFit.fill,
                           ),

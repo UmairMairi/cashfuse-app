@@ -1,22 +1,27 @@
 import 'package:cashbackapp/controllers/homeController.dart';
+import 'package:cashbackapp/models/categoryModel.dart';
+import 'package:cashbackapp/models/couponModel.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
 
 class SeeMoreSheet extends StatelessWidget {
   final int screenId;
-  SeeMoreSheet({this.screenId});
+  final List<Coupon> couponList;
+  final CategoryModel partner;
+  final String brandName;
+  SeeMoreSheet({this.screenId, this.couponList, this.partner, this.brandName});
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       builder: (homeController) {
         return Container(
-          height: homeController.webBottomIndex == 3 ? 400 : 300,
+          //height: homeController.webBottomIndex == 3 ? 400 : 300,
           padding: EdgeInsets.only(top: 10),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -26,6 +31,7 @@ class SeeMoreSheet extends StatelessWidget {
             ),
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               homeController.webBottomIndex == 0
@@ -79,7 +85,7 @@ class SeeMoreSheet extends StatelessWidget {
                                     radius: 10,
                                   ),
                                   Text(
-                                    ' Shop at Myntra',
+                                    ' Shop at $brandName',
                                     style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -100,10 +106,13 @@ class SeeMoreSheet extends StatelessWidget {
                                     backgroundColor: Get.theme.secondaryHeaderColor,
                                     radius: 10,
                                   ),
-                                  Text(
-                                    ' Myntra pays commison to ${global.appName}',
-                                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(
-                                      fontWeight: FontWeight.w600,
+                                  Expanded(
+                                    child: Text(
+                                      ' $brandName pays commison to ${global.appName}',
+                                      maxLines: 2,
+                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   )
                                 ],

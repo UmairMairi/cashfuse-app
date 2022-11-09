@@ -1,8 +1,16 @@
 import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/utils/images.dart';
+import 'package:cashbackapp/views/accountSettingScreen.dart';
+import 'package:cashbackapp/views/allcategoriesScreen.dart';
+import 'package:cashbackapp/views/appTabinationScreen.dart';
+import 'package:cashbackapp/views/getHelpScreen.dart';
+import 'package:cashbackapp/views/getStartedScreen.dart';
+import 'package:cashbackapp/views/paymentScreen.dart';
+import 'package:cashbackapp/widget/videoPlayerWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:store_redirect/store_redirect.dart';
 
 class DrawerWidget extends StatelessWidget {
   @override
@@ -15,38 +23,30 @@ class DrawerWidget extends StatelessWidget {
             Container(
                 padding: EdgeInsets.only(top: 30, left: 10, right: 10),
                 color: Get.theme.primaryColor,
-                child:
-                    // global.currentUser.id != null
-                    //     ?
-                    Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Icon(
-                        Icons.settings_outlined,
-                        color: Colors.white,
-                      ),
-                    ),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: CircleAvatar(
-                        radius: 25,
-                        backgroundColor: Colors.white,
-                        child: Image.asset(
-                          Images.malePerson,
-                          height: 30,
-                        ),
-                      ),
-                      title: Text(
-                        'Test User',
-                        style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.white),
-                      ),
-                      subtitle: Text(
-                        'test@gmail.com',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
-                      ),
-                    ),
+                    global.currentUser.id != null
+                        ? ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: CircleAvatar(
+                              radius: 25,
+                              backgroundColor: Colors.white,
+                              child: Image.asset(
+                                Images.malePerson,
+                                height: 30,
+                              ),
+                            ),
+                            title: Text(
+                              global.currentUser.name,
+                              style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.white),
+                            ),
+                            subtitle: Text(
+                              global.currentUser.email.isNotEmpty ? global.currentUser.email : global.currentUser.phone,
+                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
+                            ),
+                          )
+                        : Text('Welcome'),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -62,7 +62,7 @@ class DrawerWidget extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '₹0.00',
+                              global.currentUser.earning != null ? '₹${global.currentUser.earning.remEarning}' : '₹0.00',
                               textAlign: TextAlign.center,
                               style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                             ),
@@ -88,7 +88,7 @@ class DrawerWidget extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '₹0.00',
+                              global.currentUser.earning != null ? '₹${global.currentUser.earning.totalEarnings}' : '₹0.00',
                               textAlign: TextAlign.center,
                               style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                             ),
@@ -114,7 +114,7 @@ class DrawerWidget extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '₹0.00',
+                              global.currentUser.earning != null ? '₹${global.currentUser.earning.sentForWithdrawal}' : '₹0.00',
                               textAlign: TextAlign.center,
                               style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                             ),
@@ -126,33 +126,36 @@ class DrawerWidget extends StatelessWidget {
                 )
                 //: Text('Welcome!'),
                 ),
+            // InkWell(
+            //   onTap: () {},
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            //     child: Row(
+            //       children: [
+            //         Icon(
+            //           Icons.home_outlined,
+            //           color: Colors.black.withOpacity(0.5),
+            //         ),
+            //         SizedBox(
+            //           width: 20,
+            //         ),
+            //         Text(
+            //           'Home',
+            //           style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+            //             letterSpacing: 0,
+            //             fontWeight: FontWeight.w300,
+            //             color: Colors.black.withOpacity(0.6),
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
             InkWell(
-              onTap: () {},
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.home_outlined,
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                      'Home',
-                      style: Get.theme.primaryTextTheme.bodyText1.copyWith(
-                        letterSpacing: 0,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.black.withOpacity(0.6),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.back();
+                Get.to(() => AccountSettingScreen());
+              },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
@@ -177,7 +180,10 @@ class DrawerWidget extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.back();
+                Get.to(() => AllCategoriesScreen());
+              },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
@@ -190,7 +196,7 @@ class DrawerWidget extends StatelessWidget {
                       width: 20,
                     ),
                     Text(
-                      'Stores',
+                      'All Categories',
                       style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                         letterSpacing: 0,
                         fontWeight: FontWeight.w300,
@@ -202,7 +208,10 @@ class DrawerWidget extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.back();
+                Get.to(() => PaymentScreen());
+              },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
@@ -227,7 +236,10 @@ class DrawerWidget extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.back();
+                Get.to(() => AppTabinationScreen());
+              },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
@@ -251,33 +263,38 @@ class DrawerWidget extends StatelessWidget {
                 ),
               ),
             ),
+            // InkWell(
+            //   onTap: () {},
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            //     child: Row(
+            //       children: [
+            //         Icon(
+            //           Icons.countertops_outlined,
+            //           color: Colors.black.withOpacity(0.5),
+            //         ),
+            //         SizedBox(
+            //           width: 20,
+            //         ),
+            //         Text(
+            //           'Missing Cashback',
+            //           style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+            //             letterSpacing: 0,
+            //             fontWeight: FontWeight.w300,
+            //             color: Colors.black.withOpacity(0.6),
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
             InkWell(
-              onTap: () {},
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.countertops_outlined,
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                      'Missing Cashback',
-                      style: Get.theme.primaryTextTheme.bodyText1.copyWith(
-                        letterSpacing: 0,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.black.withOpacity(0.6),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.back();
+                Get.to(() => GetStartedScreen(
+                      fromSplash: false,
+                    ));
+              },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
@@ -303,7 +320,10 @@ class DrawerWidget extends StatelessWidget {
             ),
             Divider(),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.back();
+                global.share(global.appName, '');
+              },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
@@ -328,7 +348,12 @@ class DrawerWidget extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.back();
+                StoreRedirect.redirect(
+                  androidAppId: 'com.cashback.app',
+                );
+              },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
@@ -353,7 +378,10 @@ class DrawerWidget extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.back();
+                Get.to(() => GetHelpScreen());
+              },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
@@ -366,7 +394,7 @@ class DrawerWidget extends StatelessWidget {
                       width: 20,
                     ),
                     Text(
-                      'Help & Support',
+                      'Get Help',
                       style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                         letterSpacing: 0,
                         fontWeight: FontWeight.w300,
@@ -377,31 +405,31 @@ class DrawerWidget extends StatelessWidget {
                 ),
               ),
             ),
-            InkWell(
-              onTap: () {},
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.power_settings_new_outlined,
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                      'Logout',
-                      style: Get.theme.primaryTextTheme.bodyText1.copyWith(
-                        letterSpacing: 0,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.black.withOpacity(0.6),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            // InkWell(
+            //   onTap: () {},
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            //     child: Row(
+            //       children: [
+            //         Icon(
+            //           Icons.power_settings_new_outlined,
+            //           color: Colors.black.withOpacity(0.5),
+            //         ),
+            //         SizedBox(
+            //           width: 20,
+            //         ),
+            //         Text(
+            //           'Logout',
+            //           style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+            //             letterSpacing: 0,
+            //             fontWeight: FontWeight.w300,
+            //             color: Colors.black.withOpacity(0.6),
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
           ],
         )
         //  Column(

@@ -1,17 +1,20 @@
-import 'dart:developer';
-
 import 'package:cashbackapp/controllers/homeController.dart';
+import 'package:cashbackapp/models/categoryModel.dart';
+import 'package:cashbackapp/models/couponModel.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/widget/webview/seeMoreSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
 
 class WebViewScreen extends StatelessWidget {
   final String urlString;
   final bool isCliked;
-  WebViewScreen({this.urlString, this.isCliked});
+  final List<Coupon> couponList;
+  final CategoryModel partner;
+  final String brandName;
+  WebViewScreen({this.urlString, this.isCliked, this.couponList, this.partner, this.brandName});
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +87,9 @@ class WebViewScreen extends StatelessWidget {
                   onTap: () {
                     homeController.setWebBottomIndex(0);
                     Get.bottomSheet(
-                      SeeMoreSheet(),
+                      SeeMoreSheet(
+                        brandName: brandName,
+                      ),
                     );
                   },
                   child: Card(
@@ -134,33 +139,45 @@ class WebViewScreen extends StatelessWidget {
                   onTap: () {
                     homeController.setWebBottomIndex(1);
                     Get.bottomSheet(
-                      SeeMoreSheet(),
+                      SeeMoreSheet(
+                        partner: partner,
+                      ),
                     );
                   },
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.currency_rupee_sharp,
-                        color: Colors.white,
-                        size: 15,
-                      ),
-                      Text(
-                        ' ${global.appName}',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                          letterSpacing: -0.2,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
+                  child: Text(
+                    partner.leftTab,
+                    style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                      letterSpacing: -0.2,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.white,
+                    ),
                   ),
+                  // Row(
+                  //   children: [
+                  //     Icon(
+                  //       Icons.currency_rupee_sharp,
+                  //       color: Colors.white,
+                  //       size: 15,
+                  //     ),
+                  //     Text(
+                  //       ' ${global.appName}',
+                  //       style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                  //         letterSpacing: -0.2,
+                  //         fontWeight: FontWeight.w300,
+                  //         color: Colors.white,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 ),
                 Expanded(child: SizedBox()),
                 InkWell(
                   onTap: () {
                     homeController.setWebBottomIndex(2);
                     Get.bottomSheet(
-                      SeeMoreSheet(),
+                      SeeMoreSheet(
+                        couponList: couponList,
+                      ),
                     );
                   },
                   child: Row(
@@ -186,7 +203,9 @@ class WebViewScreen extends StatelessWidget {
                   onTap: () {
                     homeController.setWebBottomIndex(3);
                     Get.bottomSheet(
-                      SeeMoreSheet(),
+                      SeeMoreSheet(
+                        partner: partner,
+                      ),
                     );
                   },
                   child: Row(

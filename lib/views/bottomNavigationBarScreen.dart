@@ -74,13 +74,13 @@ class BottomNavigationBarScreen extends StatelessWidget {
             }
           },
           child: Scaffold(
-            bottomNavigationBar: SizedBox(
-              height: kBottomNavigationBarHeight,
-              child: Stack(
-                alignment: Alignment.topCenter,
-                clipBehavior: Clip.none,
-                children: [
-                  BottomNavigationBar(
+            bottomNavigationBar: Stack(
+              alignment: Alignment.topCenter,
+              clipBehavior: Clip.none,
+              children: [
+                SizedBox(
+                  height: 60,
+                  child: BottomNavigationBar(
                     backgroundColor: Colors.white,
                     iconSize: 22,
                     type: BottomNavigationBarType.fixed,
@@ -92,10 +92,14 @@ class BottomNavigationBarScreen extends StatelessWidget {
                     selectedLabelStyle: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w400,
-                      height: 1,
+                      height: 1.3,
                       textBaseline: TextBaseline.ideographic,
                     ),
-                    unselectedLabelStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
+                    unselectedLabelStyle: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w400,
+                      height: 1.3,
+                    ),
                     items: List.generate(iconList.length, (index) {
                       return BottomNavigationBarItem(
                         icon: iconList[index],
@@ -107,38 +111,38 @@ class BottomNavigationBarScreen extends StatelessWidget {
                       navController.setBottomIndex(index);
                     },
                   ),
-                  Positioned(
-                    bottom: 25,
-                    child: InkWell(
-                      onTap: () {
-                        navController.setBottomIndex(2);
-                      },
-                      child: Card(
-                          elevation: 2,
-                          color: navController.bottomNavIndex.value == 2 ? Get.theme.secondaryHeaderColor : Colors.white,
-                          margin: EdgeInsets.only(bottom: 6),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                ),
+                Positioned(
+                  bottom: 28,
+                  child: InkWell(
+                    onTap: () {
+                      navController.setBottomIndex(2);
+                    },
+                    child: Card(
+                        elevation: 2,
+                        color: navController.bottomNavIndex.value == 2 ? Get.theme.secondaryHeaderColor : Colors.white,
+                        margin: EdgeInsets.only(bottom: 6),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.screen_search_desktop_outlined,
+                            color: navController.bottomNavIndex.value == 2 ? Colors.white : Colors.grey[450],
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.screen_search_desktop_outlined,
-                              color: navController.bottomNavIndex.value == 2 ? Colors.white : Colors.grey[450],
-                            ),
-                          )),
-                      //    child: CircleAvatar(
-                      // radius: 20,
-                      // backgroundColor: Colors.white,
-                      // child: Image.asset(
-                      //   Images.rupee,
-                      //   height: 25,
-                      // ),
-                      //),
-                    ),
+                        )),
+                    //    child: CircleAvatar(
+                    // radius: 20,
+                    // backgroundColor: Colors.white,
+                    // child: Image.asset(
+                    //   Images.rupee,
+                    //   height: 25,
+                    // ),
+                    //),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             body: _screens().elementAt(navController.bottomNavIndex.value),
           ),

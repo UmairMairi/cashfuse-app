@@ -217,24 +217,28 @@ class PaytmRedeemScreen extends StatelessWidget {
           ),
         ),
       ),
-      // bottomNavigationBar: InkWell(
-      //   onTap: () {},
-      //   child: Container(
-      //     width: Get.width,
-      //     height: 45,
-      //     margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-      //     padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-      //     decoration: BoxDecoration(
-      //       color: Get.theme.secondaryHeaderColor,
-      //       borderRadius: BorderRadius.circular(5),
-      //     ),
-      //     alignment: Alignment.center,
-      //     child: Text(
-      //       'Continue',
-      //       style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-      //     ),
-      //   ),
-      // ),
+      bottomNavigationBar: paymentController.payTMDetails != null
+          ? InkWell(
+              onTap: () {
+                paymentController.sendWithdrawalRequest('paytm');
+              },
+              child: Container(
+                width: Get.width,
+                height: 45,
+                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Get.theme.secondaryHeaderColor,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  'Send Withdrawal Request',
+                  style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                ),
+              ),
+            )
+          : SizedBox(),
     );
   }
 }

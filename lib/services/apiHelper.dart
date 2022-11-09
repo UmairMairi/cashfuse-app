@@ -12,6 +12,7 @@ import 'package:cashbackapp/models/clickModel.dart';
 import 'package:cashbackapp/models/couponModel.dart';
 import 'package:cashbackapp/models/faqModel.dart';
 import 'package:cashbackapp/models/offerModel.dart';
+import 'package:cashbackapp/models/paymentHistoryModel.dart';
 import 'package:cashbackapp/models/searchDataModel.dart';
 import 'package:cashbackapp/models/userModel.dart';
 import 'package:cashbackapp/services/dioResult.dart';
@@ -763,6 +764,79 @@ class APIHelper {
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getMoreAds():" + e.toString());
+    }
+  }
+
+  Future<dynamic> myProfile() async {
+    try {
+      Response response;
+      var dio = Dio();
+
+      response = await dio.get(
+        '${global.baseUrl}${AppConstants.MY_PROFILE_URI}?user_id=${global.currentUser.id}',
+        options: Options(headers: await global.getApiHeaders(true)),
+      );
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = UserModel.fromJson(response.data['data']);
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.MY_PROFILE_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - myProfile():" + e.toString());
+    }
+  }
+
+  Future<dynamic> sendWithdrawalRequest(String medium) async {
+    try {
+      Response response;
+      var dio = Dio();
+      var formData = FormData.fromMap({
+        'user_id': global.currentUser.id,
+        'medium': medium,
+      });
+      response = await dio.post('${global.baseUrl}${AppConstants.SEND_WITHDRAWAL_REQUEST_URI}',
+          data: formData,
+          options: Options(
+            headers: await global.getApiHeaders(true),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = response.data['data'];
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.SEND_WITHDRAWAL_REQUEST_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - sendWithdrawalRequest():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getPaymentHistory() async {
+    try {
+      Response response;
+      var dio = Dio();
+
+      response = await dio.get('${global.baseUrl}${AppConstants.Payment_HISTORY_URI}?user_id=${global.currentUser.id}',
+          options: Options(
+            headers: await global.getApiHeaders(true),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<PaymentHistoryModel>.from(response.data['data'].map((x) => PaymentHistoryModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.Payment_HISTORY_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getPaymentHistory():" + e.toString());
     }
   }
 }

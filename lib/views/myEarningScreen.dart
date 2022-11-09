@@ -7,6 +7,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 
 class MyEarningSceen extends StatelessWidget {
   @override
@@ -61,7 +62,7 @@ class MyEarningSceen extends StatelessWidget {
                         ],
                       ),
                       subtitle: Text(
-                        '₹0.00',
+                        global.currentUser.earning != null ? '₹${global.currentUser.earning.totalEarnings}' : '₹0.00',
                         style: Get.theme.primaryTextTheme.headline5.copyWith(fontWeight: FontWeight.w600),
                       ),
                       trailing: Card(

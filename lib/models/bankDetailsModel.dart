@@ -1,6 +1,6 @@
 class BankDetailsModel {
   int id;
-  String userId;
+  int userId;
   String acNo;
   String acHolderName;
   String bankName;
@@ -28,7 +28,7 @@ class BankDetailsModel {
   BankDetailsModel.fromJson(Map<String, dynamic> json) {
     try {
       id = json["id"];
-      userId = json["user_id"];
+      userId = json["user_id"] != null ? int.parse(json["user_id"].toString()) : null;
       acNo = json["ac_no"] != null ? json["ac_no"] : '';
       acHolderName = json["ac_holder_name"] != null ? json["ac_holder_name"] : '';
       bankName = json["bank_name"] != null ? json["bank_name"] : '';

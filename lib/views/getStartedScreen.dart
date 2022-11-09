@@ -6,12 +6,15 @@ import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 class GetStartedScreen extends StatelessWidget {
+  final bool fromSplash;
+  GetStartedScreen({this.fromSplash});
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<BottomNavigationController>(builder: (navController) {
       return WillPopScope(
         onWillPop: () async {
-          SystemNavigator.pop();
+          fromSplash ? SystemNavigator.pop() : Get.back();
           return true;
         },
         child: Scaffold(
@@ -65,28 +68,30 @@ class GetStartedScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              InkWell(
-                onTap: () {
-                  Get.to(() => LoginOrSignUpScreen());
-                },
-                child: Container(
-                  height: 50,
-                  margin: EdgeInsets.all(20),
-                  width: MediaQuery.of(context).size.width,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Get.theme.secondaryHeaderColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    'LOG IN OR SIGN UP',
-                    style: Get.theme.primaryTextTheme.bodyText1.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
+              fromSplash
+                  ? InkWell(
+                      onTap: () {
+                        Get.to(() => LoginOrSignUpScreen());
+                      },
+                      child: Container(
+                        height: 50,
+                        margin: EdgeInsets.all(20),
+                        width: MediaQuery.of(context).size.width,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Get.theme.secondaryHeaderColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text(
+                          'LOG IN OR SIGN UP',
+                          style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    )
+                  : SizedBox(),
             ],
           ),
         ),

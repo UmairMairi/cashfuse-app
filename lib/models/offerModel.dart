@@ -1,4 +1,5 @@
 import 'package:cashbackapp/models/categoryModel.dart';
+import 'package:cashbackapp/models/couponModel.dart';
 
 class OfferModel {
   int id;
@@ -26,6 +27,7 @@ class OfferModel {
   int offers;
   CategoryModel partner;
   bool isCliked = false; // for first loader in webview
+  List<Coupon> couponList;
 
   OfferModel({
     this.id,
@@ -53,6 +55,7 @@ class OfferModel {
     this.offers,
     this.partner,
     this.isCliked,
+    this.couponList,
   });
 
   OfferModel.fromJson(Map<String, dynamic> json) {
@@ -83,6 +86,7 @@ class OfferModel {
       offers = json["offers"];
       partner = json["partner"] != null ? CategoryModel.fromJson(json["partner"]) : null;
       category = json["category"] != null ? CategoryModel.fromJson(json["category"]) : null;
+      couponList = json["coupon"] != null && json["coupon"] != [] ? List<Coupon>.from(json["coupon"].map((x) => Coupon.fromJson(x))) : [];
     } catch (e) {
       print("Exception - OfferModel.dart - OfferModel.fromJson():" + e.toString());
     }

@@ -43,7 +43,9 @@ class SplashController extends GetxController {
                 global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
                 Get.to(() => BottomNavigationBarScreen());
               } else {
-                Get.to(() => GetStartedScreen());
+                Get.to(() => GetStartedScreen(
+                      fromSplash: true,
+                    ));
               }
             } else {
               showCustomSnackBar(response.message);

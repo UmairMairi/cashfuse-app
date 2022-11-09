@@ -3,7 +3,6 @@ import 'package:cashbackapp/models/campaignModel.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
 import 'package:cashbackapp/views/moreCampignScreen.dart';
-import 'package:cashbackapp/views/moreOfferScreen.dart';
 import 'package:cashbackapp/views/webViewScreen.dart';
 import 'package:cashbackapp/widget/customImage.dart';
 import 'package:cashbackapp/widget/ratesAndOfferTermsSheetWidget.dart';
@@ -88,7 +87,10 @@ class CampaignDetailScreen extends StatelessWidget {
                 actions: [
                   InkWell(
                     onTap: () {
-                      global.share('');
+                      global.share(
+                        campaign.url,
+                        '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}',
+                      );
                     },
                     child: Container(
                       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -198,6 +200,9 @@ class CampaignDetailScreen extends StatelessWidget {
                                   () => WebViewScreen(
                                     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
                                     isCliked: global.clickedList.contains(campaign.name),
+                                    couponList: campaign.couponList,
+                                    partner: campaign.partner,
+                                    brandName: campaign.name,
                                   ),
                                 ).then((value) {
                                   if (global.clickedList.contains(campaign.name)) {
@@ -205,7 +210,6 @@ class CampaignDetailScreen extends StatelessWidget {
                                     global.clickedList.add(campaign.name);
                                   }
                                 });
-                                ;
                               } else {
                                 Get.to(() => LoginOrSignUpScreen());
                               }

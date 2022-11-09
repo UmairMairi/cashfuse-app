@@ -1,4 +1,5 @@
 import 'package:cashbackapp/constants/appConstant.dart';
+import 'package:cashbackapp/controllers/authController.dart';
 import 'package:cashbackapp/controllers/networkController.dart';
 import 'package:cashbackapp/models/adsModel.dart';
 import 'package:cashbackapp/models/bannerModel.dart';
@@ -90,6 +91,7 @@ class HomeController extends GetxController {
       getAllAdv();
       if (global.currentUser.id != null) {
         getClick();
+        Get.find<AuthController>().getProfile();
       }
     } catch (e) {
       print("Exception - HomeController.dart - _init():" + e.toString());
