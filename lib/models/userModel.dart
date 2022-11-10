@@ -1,5 +1,6 @@
 import 'package:cashbackapp/models/bankDetailsModel.dart';
 import 'package:cashbackapp/models/earningModel.dart';
+import 'package:cashbackapp/models/paymentHistoryModel.dart';
 
 class UserModel {
   int id;
@@ -16,7 +17,7 @@ class UserModel {
   String token;
 
   EarningModel earning;
-  List<dynamic> withdrawalRequest;
+  List<PaymentHistoryModel> withdrawalRequest;
   BankDetailsModel bankDetail;
 
   UserModel({
@@ -50,6 +51,7 @@ class UserModel {
       token = json['token'] != null ? json['token'] : null;
       earning = json['earning'] != null ? EarningModel.fromJson(json['earning']) : null;
       bankDetail = json['bank_detail'] != null ? BankDetailsModel.fromJson(json['bank_detail']) : null;
+      withdrawalRequest = json["withdrawal_request"] != null && json["withdrawal_request"] != [] ? List<PaymentHistoryModel>.from(json["withdrawal_request"].map((x) => PaymentHistoryModel.fromJson(x))) : [];
     } catch (e) {
       print("Exception - UserModel.dart - UserModel.fromJson():" + e.toString());
     }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:cashbackapp/constants/appConstant.dart';
+import 'package:cashbackapp/controllers/authController.dart';
 import 'package:cashbackapp/controllers/networkController.dart';
 import 'package:cashbackapp/models/userModel.dart';
 import 'package:cashbackapp/services/apiHelper.dart';
@@ -36,11 +37,13 @@ class SplashController extends GetxController {
         global.sp = await SharedPreferences.getInstance();
         log(global.appDeviceId);
         if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
-          await apiHelper.getAppInfo().then((response) {
+          await apiHelper.getAppInfo().then((response) async {
             if (response.statusCode == 200) {
               global.appInfo = response.data;
               if (global.sp.getString('currentUser') != null) {
                 global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
+                await Get.find<AuthController>().getProfile();
+
                 Get.to(() => BottomNavigationBarScreen());
               } else {
                 Get.to(() => GetStartedScreen(

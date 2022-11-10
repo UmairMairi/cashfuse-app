@@ -57,6 +57,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                 image: '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}',
                                 width: Get.width,
                                 fit: BoxFit.fill,
+                                campaign: campaign,
                               ),
                               // Image.asset(
                               //   Images.dummyImage,
@@ -89,7 +90,7 @@ class CampaignDetailScreen extends StatelessWidget {
                     onTap: () {
                       global.share(
                         campaign.url,
-                        '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}',
+                        campaign.image.isNotEmpty && !campaign.isImageError ? '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}' : '',
                       );
                     },
                     child: Container(
@@ -194,8 +195,13 @@ class CampaignDetailScreen extends StatelessWidget {
                           InkWell(
                             onTap: () async {
                               if (global.currentUser.id != null) {
-                                await homeController.addClick(campaign.name, global.appInfo.baseUrls.offerImageUrl + '/' + campaign.image);
                                 await homeController.getTrackingLink(campaign.url, campaign.affiliatePartner);
+                                await homeController.addClick(
+                                  campaign.name,
+                                  global.appInfo.baseUrls.offerImageUrl + '/' + campaign.image,
+                                  homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
+                                );
+
                                 Get.to(
                                   () => WebViewScreen(
                                     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,

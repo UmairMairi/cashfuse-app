@@ -600,7 +600,7 @@ class APIHelper {
     }
   }
 
-  Future<dynamic> addClick(String name, String image) async {
+  Future<dynamic> addClick(String name, String image, String trackingLink) async {
     try {
       Response response;
       var dio = Dio();
@@ -608,6 +608,7 @@ class APIHelper {
         'user_id': global.currentUser.id,
         'name': name,
         'image': image,
+        'tracking_link': trackingLink,
       });
       response = await dio.post(
         '${global.baseUrl}${AppConstants.ADD_CLICK_URI}',

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 import 'package:cashbackapp/controllers/searchController.dart';
 import 'package:cashbackapp/models/allInOneSearchDataModel.dart';
+import 'package:cashbackapp/views/bottomNavigationBarScreen.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -45,7 +46,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
           return false;
         } else {
           Get.find<BottomNavigationController>().setBottomIndex(0);
-          return false;
+          return true;
         }
       },
       child: SafeArea(
@@ -62,6 +63,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with SingleTi
                   webViewController.goBack();
                 } else {
                   Get.find<BottomNavigationController>().setBottomIndex(0);
+                  Get.to(() => BottomNavigationBarScreen());
                 }
               },
               child: Icon(

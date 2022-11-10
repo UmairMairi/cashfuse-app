@@ -22,6 +22,8 @@ class PaymentController extends GetxController {
   List<PaymentHistoryModel> _paymentHistoryList = [];
   List<PaymentHistoryModel> get paymentHistoryList => _paymentHistoryList;
 
+  bool isPaymentHistoryLoaded = false;
+
   @override
   void onInit() async {
     await init();
@@ -184,6 +186,7 @@ class PaymentController extends GetxController {
 
   Future getPaymentHistory() async {
     try {
+      isPaymentHistoryLoaded = false;
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         await apiHelper.getPaymentHistory().then((response) {
           if (response.status == "1") {
@@ -192,8 +195,11 @@ class PaymentController extends GetxController {
             showCustomSnackBar(response.message);
           }
         });
+        isPaymentHistoryLoaded = true;
         update();
       } else {
+        isPaymentHistoryLoaded = true;
+        update();
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
     } catch (e) {

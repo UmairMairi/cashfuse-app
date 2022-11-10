@@ -24,6 +24,7 @@ class AdsModel {
   int ads;
   CategoryModel partner;
   List<Coupon> couponList;
+  bool isImageError = false; //for check image error
 
   AdsModel({
     this.id,
@@ -48,6 +49,7 @@ class AdsModel {
     this.ads,
     this.partner,
     this.couponList,
+    this.isImageError,
   });
 
   AdsModel.fromJson(Map<String, dynamic> json) {

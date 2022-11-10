@@ -4,7 +4,6 @@ import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/views/webViewScreen.dart';
 import 'package:cashbackapp/widget/customImage.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
-import 'package:custom_clippers/custom_clippers.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,7 +39,7 @@ class CouponDetailScreen extends StatelessWidget {
             onTap: () {
               global.share(
                 coupon.url,
-                '${global.appInfo.baseUrls.offerImageUrl}/${coupon.bannerImage}',
+                coupon.bannerImage.isNotEmpty && !coupon.isImageError ? '${global.appInfo.baseUrls.couponBannerImageUrl}/${coupon.bannerImage}' : '',
               );
             },
             child: Container(
@@ -112,40 +111,41 @@ class CouponDetailScreen extends StatelessWidget {
                   Stack(
                     children: [
                       CustomImage(
-                        image: '${global.appInfo.baseUrls.offerImageUrl}/${coupon.bannerImage}',
+                        image: '${global.appInfo.baseUrls.couponBannerImageUrl}/${coupon.bannerImage}',
                         height: 200,
                         width: Get.width,
                         fit: BoxFit.fill,
+                        coupon: coupon,
                       ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: RotatedBox(
-                          quarterTurns: 45,
-                          child: ClipPath(
-                            clipper: MultiplePointsClipper(Sides.bottom, heightOfPoint: 10, numberOfPoints: 1),
-                            child: Container(
-                              width: 20,
-                              height: 140,
-                              decoration: BoxDecoration(
-                                color: Colors.red[600],
-                              ),
-                              alignment: Alignment.topCenter,
-                              padding: EdgeInsets.only(bottom: 5, top: 5),
-                              child: RotatedBox(
-                                quarterTurns: -45,
-                                child: Text(
-                                  'LOWEST PRICE GURRENTY',
-                                  textAlign: TextAlign.center,
-                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                    color: Colors.white,
-                                    fontSize: 10,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Align(
+                      //   alignment: Alignment.topRight,
+                      //   child: RotatedBox(
+                      //     quarterTurns: 45,
+                      //     child: ClipPath(
+                      //       clipper: MultiplePointsClipper(Sides.bottom, heightOfPoint: 10, numberOfPoints: 1),
+                      //       child: Container(
+                      //         width: 20,
+                      //         height: 140,
+                      //         decoration: BoxDecoration(
+                      //           color: Colors.red[600],
+                      //         ),
+                      //         alignment: Alignment.topCenter,
+                      //         padding: EdgeInsets.only(bottom: 5, top: 5),
+                      //         child: RotatedBox(
+                      //           quarterTurns: -45,
+                      //           child: Text(
+                      //             'LOWEST PRICE GURRENTY',
+                      //             textAlign: TextAlign.center,
+                      //             style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                      //               color: Colors.white,
+                      //               fontSize: 10,
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       Card(
                         color: Colors.white,
                         margin: EdgeInsets.all(10),

@@ -21,6 +21,7 @@ class CampaignModel {
   String description;
   CategoryModel partner;
   List<Coupon> couponList;
+  bool isImageError = false; //for check image error
 
   CampaignModel({
     this.id,
@@ -42,6 +43,7 @@ class CampaignModel {
     this.description,
     this.partner,
     this.couponList,
+    this.isImageError,
   });
 
   CampaignModel.fromJson(Map<String, dynamic> json) {

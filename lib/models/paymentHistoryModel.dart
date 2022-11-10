@@ -1,3 +1,5 @@
+import 'package:cashbackapp/models/userModel.dart';
+
 class PaymentHistoryModel {
   int id;
   int userId;
@@ -7,6 +9,7 @@ class PaymentHistoryModel {
   DateTime updatedAt;
   String medium;
   String mediumDetails;
+  UserModel user;
 
   PaymentHistoryModel({
     this.id,
@@ -17,6 +20,7 @@ class PaymentHistoryModel {
     this.updatedAt,
     this.medium,
     this.mediumDetails,
+    this.user,
   });
 
   PaymentHistoryModel.fromJson(Map<String, dynamic> json) {
@@ -29,6 +33,7 @@ class PaymentHistoryModel {
       updatedAt = DateTime.parse(json["updated_at"]);
       medium = json["medium"];
       mediumDetails = json["medium_details"];
+      user = json["user"] != null ? UserModel.fromJson(json["user"]) : null;
     } catch (e) {
       print("Exception - PaymentHistoryModel.dart - PaymentHistoryModel.fromJson():" + e.toString());
     }

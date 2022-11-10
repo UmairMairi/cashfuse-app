@@ -178,6 +178,8 @@ class HomeController extends GetxController {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
     } catch (e) {
+      isCategoryLoaded = true;
+      update();
       print("Exception - HomeController.dart - getTopCategories():" + e.toString());
     }
   }
@@ -232,6 +234,8 @@ class HomeController extends GetxController {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
     } catch (e) {
+      isTopCashbackLoaded = true;
+      update();
       print("Exception - HomeController.dart - getTopCashBack():" + e.toString());
     }
   }
@@ -285,6 +289,8 @@ class HomeController extends GetxController {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
     } catch (e) {
+      isHomeAdvLoaded = true;
+      update();
       print("Exception - HomeController.dart - getHomeAdv():" + e.toString());
     }
   }
@@ -357,6 +363,8 @@ class HomeController extends GetxController {
       isOfferLoaded = true;
       update();
     } catch (e) {
+      isOfferLoaded = true;
+      update();
       print("Exception - HomeController.dart - getExclusiveOffers():" + e.toString());
     }
   }
@@ -378,6 +386,8 @@ class HomeController extends GetxController {
       isFlashOffersLoaded = true;
       update();
     } catch (e) {
+      isFlashOffersLoaded = true;
+      update();
       print("Exception - HomeController.dart - getNewFlashOffers():" + e.toString());
     }
   }
@@ -400,6 +410,8 @@ class HomeController extends GetxController {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
     } catch (e) {
+      isBannerLoaded = true;
+      update();
       print("Exception - HomeController.dart - getTopBanners():" + e.toString());
     }
   }
@@ -432,8 +444,6 @@ class HomeController extends GetxController {
           }
           getMoreOffers(offerId);
         });
-        isBannerLoaded = true;
-        update();
       } else {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
@@ -456,8 +466,6 @@ class HomeController extends GetxController {
           }
           getMoreAds(adId);
         });
-        isBannerLoaded = true;
-        update();
       } else {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
@@ -481,8 +489,6 @@ class HomeController extends GetxController {
           }
           getMoreCampaign(campaignId);
         });
-        isBannerLoaded = true;
-        update();
       } else {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
@@ -512,10 +518,10 @@ class HomeController extends GetxController {
     }
   }
 
-  Future addClick(String name, String image) async {
+  Future addClick(String name, String image, String trackingLink) async {
     try {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
-        await apiHelper.addClick(name, image).then((response) {
+        await apiHelper.addClick(name, image, trackingLink).then((response) {
           if (response.status == "1") {
             getClick();
             update();

@@ -9,8 +9,8 @@ import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
 import 'package:cashbackapp/views/missingCashbackScreen.dart';
 import 'package:cashbackapp/views/myEarningScreen.dart';
 import 'package:cashbackapp/views/paymentHistoryScreen.dart';
+import 'package:cashbackapp/views/paymentScreen.dart';
 import 'package:cashbackapp/views/privacyPolicyScreen.dart';
-import 'package:cashbackapp/views/rateUsScreen.dart';
 import 'package:cashbackapp/widget/confirmationDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -159,25 +159,30 @@ class ProfieScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.account_balance_wallet_rounded,
-                              color: Get.theme.iconTheme.color,
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              'Payments',
-                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                letterSpacing: 0,
-                                color: Colors.black.withOpacity(0.75),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => PaymentScreen());
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.account_balance_wallet_rounded,
+                                color: Get.theme.iconTheme.color,
                               ),
-                            ),
-                          ],
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                'Payments',
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       InkWell(

@@ -10,7 +10,6 @@ import 'package:cashbackapp/views/couponDetailScreen.dart';
 import 'package:cashbackapp/views/couponListScreen.dart';
 import 'package:cashbackapp/views/getHelpScreen.dart';
 import 'package:cashbackapp/views/offerDetailScreen.dart';
-import 'package:cashbackapp/views/faqSceen.dart';
 import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
 import 'package:cashbackapp/views/myEarningScreen.dart';
 import 'package:cashbackapp/views/adsDetailScreen.dart';
@@ -113,122 +112,90 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GetBuilder<HomeController>(builder: (controller) {
-                  return controller.isBannerLoaded
-                      ? CarouselSlider.builder(
-                          options: CarouselOptions(
-                            clipBehavior: Clip.none,
-                            enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                            height: 180,
-                            autoPlay: true,
-                            enlargeCenterPage: true,
-                            disableCenter: true,
-                            autoPlayCurve: Curves.easeIn,
-                            autoPlayInterval: Duration(seconds: 5),
-                            enableInfiniteScroll: false,
-                            //viewportFraction: 0.85,
-                            onPageChanged: (index, reason) {
-                              controller.setBannerIndex(index);
-                            },
-                            pageSnapping: false,
-                          ),
-                          itemCount: controller.topBannerList.length,
-                          itemBuilder: (context, index, _) {
-                            return InkWell(
-                              onTap: () async {
-                                if (controller.topBannerList[index].type == 'url') {
-                                  if (global.currentUser.id != null) {
-                                    Get.to(
-                                      () => WebViewScreen(
-                                        urlString: controller.topBannerList[index].url,
+                  return homeController2.isBannerLoaded
+                      ? Stack(
+                          alignment: Alignment.bottomCenter,
+                          children: [
+                            CarouselSlider.builder(
+                                options: CarouselOptions(
+                                  height: 170,
+                                  autoPlay: true,
+                                  enlargeCenterPage: false,
+                                  disableCenter: false,
+                                  autoPlayCurve: Curves.easeIn,
+                                  aspectRatio: 1,
+                                  autoPlayInterval: Duration(seconds: 2),
+                                  onPageChanged: (index, reason) {
+                                    homeController2.setBannerIndex(index);
+                                  },
+                                  viewportFraction: 1,
+                                  pageSnapping: false,
+                                ),
+                                itemCount: homeController2.topBannerList.length,
+                                itemBuilder: (context, index, _) {
+                                  return InkWell(
+                                    onTap: () async {
+                                      if (homeController2.topBannerList[index].type == 'url') {
+                                        if (global.currentUser.id != null) {
+                                          Get.to(
+                                            () => WebViewScreen(
+                                              urlString: homeController2.topBannerList[index].url,
+                                            ),
+                                          );
+                                        } else {
+                                          Get.to(() => LoginOrSignUpScreen());
+                                        }
+                                      } else {
+                                        await homeController2.getOfferDetails(
+                                          homeController2.topBannerList[index].offerId.toString(),
+                                        );
+                                        Get.to(
+                                          () => OfferDetailScreen(
+                                            offer: homeController2.offer,
+                                            fromSeeMore: false,
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    child: Container(
+                                      width: Get.width,
+                                      margin: EdgeInsets.only(right: 0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
                                       ),
-                                    );
-                                  } else {
-                                    Get.to(() => LoginOrSignUpScreen());
-                                  }
-                                } else {
-                                  await controller.getOfferDetails(
-                                    controller.topBannerList[index].offerId.toString(),
-                                  );
-                                  Get.to(
-                                    () => OfferDetailScreen(
-                                      offer: controller.offer,
-                                      fromSeeMore: false,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(0),
+                                        child: CustomImage(
+                                          image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController2.topBannerList[index].image}',
+                                          //height: 25,
+                                          width: Get.width,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
                                     ),
                                   );
-                                }
-                              },
-                              child: Container(
-                                //width: Get.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Stack(
-                                  alignment: Alignment.topCenter,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(5),
-                                      child: CustomImage(
-                                        image: '${global.appInfo.baseUrls.bannerImageUrl}/${controller.topBannerList[index].image}',
-                                        //height: 25,
-                                        width: Get.width,
-                                        fit: BoxFit.fill,
+                                }),
+                            GetBuilder<HomeController>(builder: (controller1) {
+                              return homeController2.topBannerList != null && homeController2.topBannerList.length > 0
+                                  ? Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(top: 6),
+                                        child: DotsIndicator(
+                                          dotsCount: homeController2.topBannerList.length,
+                                          position: homeController2.bannerIndex.toDouble(),
+                                          decorator: DotsDecorator(
+                                            activeSize: Size(7, 7),
+                                            size: Size(7, 7),
+                                            color: Colors.white, // Inactive color
+                                            activeColor: Colors.orange,
+                                          ),
+                                        ),
                                       ),
-                                      // Image.asset(
-                                      //   Images.banner_bg,
-                                      //   width: Get.width,
-                                      //   fit: BoxFit.fill,
-                                      // ),
-                                    ),
-                                    controller.topBannerList[index].heading.isNotEmpty || controller.topBannerList[index].description.isNotEmpty
-                                        ? Container(
-                                            width: Get.width,
-                                            margin: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
-                                            decoration: BoxDecoration(
-                                              color: Colors.black.withOpacity(0.8),
-                                              borderRadius: BorderRadius.circular(5),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  controller.topBannerList[index].heading,
-                                                  style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.white),
-                                                ),
-                                                Text(
-                                                  controller.topBannerList[index].description,
-                                                  style: Get.theme.primaryTextTheme.subtitle1.copyWith(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w300,
-                                                  ),
-                                                ),
-                                                // Text(
-                                                //   'Every 10th Wins',
-                                                //   style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.teal),
-                                                // ),
-                                              ],
-                                            ),
-                                          )
-                                        : SizedBox(),
-                                    controller.topBannerList[index].type == 'offer' && controller.topBannerList[index].cuelinkoffer != null && (controller.topBannerList[index].heading.isNotEmpty || controller.topBannerList[index].description.isNotEmpty)
-                                        ? Positioned(
-                                            top: 10,
-                                            child: Card(
-                                              margin: EdgeInsets.zero,
-                                              child: Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                  controller.topBannerList[index].cuelinkoffer.campaignName,
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        : SizedBox()
-                                  ],
-                                ),
-                              ),
-                            );
-                          })
+                                    )
+                                  : SizedBox();
+                            }),
+                          ],
+                        )
                       : Shimmer(
                           duration: Duration(seconds: 2),
                           child: Container(
@@ -242,25 +209,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         );
                 }),
-                GetBuilder<HomeController>(builder: (controller1) {
-                  return controller1.topBannerList != null && controller1.topBannerList.length > 0
-                      ? Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 6),
-                            child: DotsIndicator(
-                              dotsCount: controller1.topBannerList.length,
-                              position: controller1.bannerIndex.toDouble(),
-                              decorator: DotsDecorator(
-                                activeSize: Size(8, 8),
-                                size: Size(8, 8),
-                                color: Colors.white, // Inactive color
-                                activeColor: Colors.orange,
-                              ),
-                            ),
-                          ),
-                        )
-                      : SizedBox();
-                }),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 5, bottom: 10),
                   child: Text(
@@ -604,7 +553,7 @@ class HomeScreen extends StatelessWidget {
                 }),
                 GetBuilder<HomeController>(builder: (hmController) {
                   return hmController.isTopCashbackLoaded
-                      ? homeController2.topCashbackList != null && homeController2.topCashbackList.length > 0
+                      ? hmController.topCashbackList != null && hmController.topCashbackList.length > 0
                           ? SizedBox(
                               height: 155,
                               child: ListView.builder(
@@ -768,15 +717,15 @@ class HomeScreen extends StatelessWidget {
                         );
                 }),
 
-                GetBuilder<HomeController>(builder: (home) {
+                GetBuilder<HomeController>(builder: (home1) {
                   return ListView.builder(
-                    itemCount: home.homeAdvList.length,
+                    itemCount: home1.homeAdvList.length,
                     shrinkWrap: true,
                     padding: const EdgeInsets.symmetric(horizontal: 6),
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return home.isHomeAdvLoaded
-                          ? home.homeAdvList[index].commonList != null && home.homeAdvList[index].commonList.length > 0
+                      return home1.isHomeAdvLoaded
+                          ? home1.homeAdvList[index].commonList != null && home1.homeAdvList[index].commonList.length > 0
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -786,7 +735,7 @@ class HomeScreen extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            home.homeAdvList[index].name.toUpperCase(),
+                                            home1.homeAdvList[index].name.toUpperCase(),
                                             style: TextStyle(
                                               fontSize: 13,
                                               fontWeight: FontWeight.w600,
@@ -798,7 +747,7 @@ class HomeScreen extends StatelessWidget {
                                             onTap: () {
                                               Get.to(
                                                 () => AppWiseOfferShowListScreen(
-                                                  categoryModel: home.homeAdvList[index],
+                                                  categoryModel: home1.homeAdvList[index],
                                                 ),
                                               );
                                             },
@@ -813,30 +762,30 @@ class HomeScreen extends StatelessWidget {
                                     SizedBox(
                                       height: 200,
                                       child: ListView.builder(
-                                          itemCount: home.homeAdvList[index].commonList.length,
+                                          itemCount: home1.homeAdvList[index].commonList.length,
                                           shrinkWrap: true,
                                           padding: const EdgeInsets.symmetric(horizontal: 6),
                                           scrollDirection: Axis.horizontal,
                                           itemBuilder: (context, i) {
                                             return InkWell(
                                               onTap: () async {
-                                                if (home.homeAdvList[index].commonList[i].adId != null && home.homeAdvList[index].commonList[i].adId.isNotEmpty) {
-                                                  await home.getAdDetails(home.homeAdvList[index].commonList[i].adId);
+                                                if (home1.homeAdvList[index].commonList[i].adId != null && home1.homeAdvList[index].commonList[i].adId.isNotEmpty) {
+                                                  await home1.getAdDetails(home1.homeAdvList[index].commonList[i].adId);
                                                   Get.to(() => AdsDetailScreen(
-                                                        ads: home.ads,
+                                                        ads: home1.ads,
                                                         fromSeeMore: false,
                                                       ));
                                                 } else {
-                                                  await home.getCampignDetails(home.homeAdvList[index].commonList[i].campaignId.toString());
+                                                  await home1.getCampignDetails(home1.homeAdvList[index].commonList[i].campaignId.toString());
                                                   Get.to(() => CampaignDetailScreen(
-                                                        campaign: home.campaign,
+                                                        campaign: home1.campaign,
                                                         fromSeeMore: false,
                                                       ));
                                                 }
                                               },
                                               child: AppWiseOfferShowWidget(
-                                                commonModel: home.homeAdvList[index].commonList[i],
-                                                domainImage: home.homeAdvList[index].image,
+                                                commonModel: home1.homeAdvList[index].commonList[i],
+                                                domainImage: home1.homeAdvList[index].image,
                                                 fromList: false,
                                               ),
                                             );

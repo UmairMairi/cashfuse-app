@@ -17,6 +17,7 @@ class Coupon {
   String url;
   String bannerImage;
   String buttonText;
+  bool isImageError = false; //for check image error
 
   Coupon({
     this.id,
@@ -35,6 +36,7 @@ class Coupon {
     this.url,
     this.bannerImage,
     this.buttonText,
+    this.isImageError,
   });
 
   Coupon.fromJson(Map<String, dynamic> json) {

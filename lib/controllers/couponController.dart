@@ -41,6 +41,8 @@ class CouponController extends GetxController {
       isDataLoaded = true;
       update();
     } catch (e) {
+      isDataLoaded = true;
+      update();
       print("Exception - CouponController.dart - getCouponList():" + e.toString());
     }
   }

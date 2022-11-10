@@ -5,8 +5,7 @@ import 'package:cashbackapp/views/allcategoriesScreen.dart';
 import 'package:cashbackapp/views/appTabinationScreen.dart';
 import 'package:cashbackapp/views/getHelpScreen.dart';
 import 'package:cashbackapp/views/getStartedScreen.dart';
-import 'package:cashbackapp/views/paymentScreen.dart';
-import 'package:cashbackapp/widget/videoPlayerWidget.dart';
+import 'package:cashbackapp/views/requestPaymentScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -210,7 +209,7 @@ class DrawerWidget extends StatelessWidget {
             InkWell(
               onTap: () {
                 Get.back();
-                Get.to(() => PaymentScreen());
+                Get.to(() => RequestPaymentScreen());
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

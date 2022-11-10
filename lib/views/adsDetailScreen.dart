@@ -57,6 +57,7 @@ class AdsDetailScreen extends StatelessWidget {
                                 image: '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}',
                                 width: Get.width,
                                 fit: BoxFit.fill,
+                                ads: ads,
                               ),
                               // Image.asset(
                               //   Images.dummyImage,
@@ -89,7 +90,7 @@ class AdsDetailScreen extends StatelessWidget {
                     onTap: () {
                       global.share(
                         ads.trackingLink,
-                        '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}',
+                        ads.image.isNotEmpty ? '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}' : '',
                       );
                     },
                     child: Container(
@@ -194,8 +195,13 @@ class AdsDetailScreen extends StatelessWidget {
                           InkWell(
                             onTap: () async {
                               if (global.currentUser.id != null) {
-                                await homeController.addClick(ads.advName, global.appInfo.baseUrls.offerImageUrl + '/' + ads.image);
-                                await homeController.getTrackingLink(ads.landingPage, ads.affiliatePartner);
+                                await homeController.getTrackingLink(ads.landingPage, ads.affiliatePartner, cId: ads.cId);
+                                await homeController.addClick(
+                                  ads.advName,
+                                  global.appInfo.baseUrls.offerImageUrl + '/' + ads.image,
+                                  homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
+                                );
+
                                 Get.to(
                                   () => WebViewScreen(
                                     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
@@ -210,7 +216,6 @@ class AdsDetailScreen extends StatelessWidget {
                                     global.clickedList.add(ads.advName);
                                   }
                                 });
-                                ;
                               } else {
                                 Get.to(() => LoginOrSignUpScreen());
                               }

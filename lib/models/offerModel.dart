@@ -28,6 +28,7 @@ class OfferModel {
   CategoryModel partner;
   bool isCliked = false; // for first loader in webview
   List<Coupon> couponList;
+  bool isImageError = false; //for check image error
 
   OfferModel({
     this.id,
@@ -56,6 +57,7 @@ class OfferModel {
     this.partner,
     this.isCliked,
     this.couponList,
+    this.isImageError,
   });
 
   OfferModel.fromJson(Map<String, dynamic> json) {

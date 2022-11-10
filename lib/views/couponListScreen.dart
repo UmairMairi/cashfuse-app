@@ -39,7 +39,7 @@ class CouponListScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              if (couponController.couponList[index].offer == null) {
+              if (couponController.couponList[index].offer != null) {
                 Get.to(
                   () => OfferDetailScreen(
                     offer: couponController.couponList[index].offer,

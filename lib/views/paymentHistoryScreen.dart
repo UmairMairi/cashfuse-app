@@ -1,4 +1,6 @@
 import 'package:cashbackapp/controllers/paymentController.dart';
+import 'package:cashbackapp/utils/date_converter.dart';
+import 'package:cashbackapp/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,34 +24,71 @@ class PaymentHistoryScreen extends StatelessWidget {
         ),
       ),
       body: GetBuilder<PaymentController>(builder: (controller) {
-        return ListView.builder(
-          itemCount: controller.paymentHistoryList.length,
-          shrinkWrap: true,
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-          itemBuilder: (context, index) {
-            return InkWell(
-              onTap: () async {},
-              child: ListTile(
-                  // title: Text(
-                  //   controller.paymentHistoryList[index].amount.toString(),
-                  //   textAlign: TextAlign.center,
-                  //   style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                  //     fontSize: 10,
-                  //     fontWeight: FontWeight.w500,
-                  //     color: index == 0 ? Colors.white : Colors.black,
-                  //   ),
-                  // ),
-                  // SizedBox(
-                  //   height: 5,
-                  // ),
-                  // CustomImage(
-                  //   image: '${global.appInfo.baseUrls.categoryImageUrl}/${controller.topCategoryList[index].image}',
-                  //   height: 40,
-                  // ),
-                  ),
-            );
-          },
-        );
+        return controller.isPaymentHistoryLoaded
+            ? ListView.builder(
+                itemCount: controller.paymentHistoryList.length,
+                shrinkWrap: true,
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                      leading: Image.asset(
+                        controller.paymentHistoryList[index].medium == 'UPI'
+                            ? Images.upi
+                            : controller.paymentHistoryList[index].medium == 'Bank'
+                                ? Images.bank
+                                : Images.amazon,
+                        height: 40,
+                        width: 40,
+                      ),
+                      title: Row(
+                        children: [
+                          Text(
+                            controller.paymentHistoryList[index].amount.toString(),
+                          ),
+                        ],
+                      ),
+                      subtitle: Text(
+                        DateConverter.formatDate(
+                          controller.paymentHistoryList[index].createdAt,
+                        ),
+                      ),
+                      trailing: Container(
+                        width: 80,
+                        height: 40,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: controller.paymentHistoryList[index].approved == 1
+                              ? Colors.green
+                              : controller.paymentHistoryList[index].approved == 2
+                                  ? Colors.red
+                                  : Colors.orange,
+                        ),
+                        child: Text(
+                          controller.paymentHistoryList[index].approved == 1
+                              ? 'Approved'
+                              : controller.paymentHistoryList[index].approved == 2
+                                  ? 'Rejected'
+                                  : controller.paymentHistoryList[index].approved == 0
+                                      ? 'Pending'
+                                      : '',
+                          style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                        ),
+                      ),
+                      // SizedBox(
+                      //   height: 5,
+                      // ),
+                      // CustomImage(
+                      //   image: '${global.appInfo.baseUrls.categoryImageUrl}/${controller.topCategoryList[index].image}',
+                      //   height: 40,
+                      // ),
+                    ),
+                  );
+                },
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              );
       }),
     );
   }

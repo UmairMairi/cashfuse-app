@@ -1,7 +1,6 @@
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
 import 'package:cashbackapp/models/couponModel.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/widget/webview/seeMoreSheet.dart';
 import 'package:flutter/material.dart';

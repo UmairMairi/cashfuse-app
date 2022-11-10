@@ -8,7 +8,6 @@ import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String appName = "CashBackApp";
@@ -67,7 +66,7 @@ Future share(String link, String image) async {
       final temp = await getExternalStorageDirectory();
       final path = '${temp.path}/image.jpg';
       File(path).writeAsBytesSync(bytes);
-      await FlutterShare.shareFile(filePath: path, title: '$appName', text: link, fileType: 'image/png').then((value) {}).catchError((e) {
+      await FlutterShare.shareFile(filePath: path, title: '$appName', text: link).then((value) {}).catchError((e) {
         showCustomSnackBar(e.toString());
       });
     } else {

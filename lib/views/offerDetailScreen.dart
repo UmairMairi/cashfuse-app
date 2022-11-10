@@ -45,7 +45,10 @@ class OfferDetailScreen extends StatelessWidget {
             actions: [
               InkWell(
                 onTap: () {
-                  global.share(offer.url, '${global.appInfo.baseUrls.offerImageUrl}/${offer.bannerImage}');
+                  global.share(
+                    offer.url,
+                    offer.bannerImage.isNotEmpty && !offer.isImageError ? '${global.appInfo.baseUrls.offerImageUrl}/${offer.bannerImage}' : '',
+                  );
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 12).copyWith(right: 10),
@@ -93,6 +96,7 @@ class OfferDetailScreen extends StatelessWidget {
                               height: 200,
                               width: Get.width,
                               fit: BoxFit.fill,
+                              offer: offer,
                             ),
                             Card(
                               color: Colors.white,
@@ -112,8 +116,13 @@ class OfferDetailScreen extends StatelessWidget {
                         InkWell(
                           onTap: () async {
                             if (global.currentUser.id != null) {
-                              await homeController.addClick(offer.campaignName, global.appInfo.baseUrls.offerImageUrl + '/' + offer.image);
                               await homeController.getTrackingLink(offer.url, offer.affiliatePartner);
+                              await homeController.addClick(
+                                offer.campaignName,
+                                global.appInfo.baseUrls.offerImageUrl + '/' + offer.image,
+                                homeController.createdLink.isNotEmpty ? homeController.createdLink : offer.url,
+                              );
+
                               Get.to(
                                 () => WebViewScreen(
                                   urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : offer.url,
