@@ -1,13 +1,10 @@
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
+import 'package:cashbackapp/views/adsDetailScreen.dart';
 import 'package:cashbackapp/views/campaignDetailScreen.dart';
 import 'package:cashbackapp/views/offerDetailScreen.dart';
-import 'package:cashbackapp/views/filterScreen.dart';
-import 'package:cashbackapp/views/adsDetailScreen.dart';
 import 'package:cashbackapp/widget/appWiseoffershowWidget.dart';
-import 'package:cashbackapp/widget/sortDialogWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class AppWiseOfferShowListScreen extends StatelessWidget {

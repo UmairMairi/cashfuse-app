@@ -5,7 +5,7 @@ import 'package:cashbackapp/models/paymentHistoryModel.dart';
 class UserModel {
   int id;
   String name;
-  String image;
+  String userImage;
   String email;
   String phone;
   String cmFirebaseToken;
@@ -23,7 +23,7 @@ class UserModel {
   UserModel({
     this.id,
     this.name,
-    this.image,
+    this.userImage,
     this.email,
     this.phone,
     this.cmFirebaseToken,
@@ -39,7 +39,7 @@ class UserModel {
     try {
       id = json["id"];
       name = json["name"] != null ? json["name"] : '';
-      image = json["image"] != null ? json["image"] : '';
+      userImage = json["image"] != null ? json["image"] : '';
       email = json["email"] != null ? json["email"] : '';
       phone = json["phone"] != null ? json["phone"] : '';
       cmFirebaseToken = json["cm_firebase_token"] != null ? json["cm_firebase_token"] : '';
@@ -60,7 +60,7 @@ class UserModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "image": image,
+        "image": userImage,
         "email": email,
         "phone": phone,
         "cm_firebase_token": cmFirebaseToken,

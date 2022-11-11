@@ -6,6 +6,7 @@ import 'package:cashbackapp/views/moreOfferScreen.dart';
 import 'package:cashbackapp/views/webViewScreen.dart';
 import 'package:cashbackapp/widget/customImage.dart';
 import 'package:cashbackapp/widget/ratesAndOfferTermsSheetWidget.dart';
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -179,6 +180,86 @@ class OfferDetailScreen extends StatelessWidget {
                           Text(
                             offer.description,
                             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Get.theme.secondaryHeaderColor,
+                                radius: 10,
+                                child: CircleAvatar(
+                                  radius: 7,
+                                  backgroundColor: Colors.white,
+                                ),
+                              ),
+                              Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  DottedLine(
+                                    lineLength: 130,
+                                    dashColor: Colors.grey,
+                                  ),
+                                  Card(
+                                    margin: EdgeInsets.zero,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                                    child: Text(
+                                      '>>',
+                                      style: TextStyle(color: Colors.grey, fontSize: 20, letterSpacing: -5),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              CircleAvatar(
+                                backgroundColor: Get.theme.secondaryHeaderColor,
+                                radius: 10,
+                                child: CircleAvatar(
+                                  radius: 7,
+                                  backgroundColor: Colors.white,
+                                ),
+                              )
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 40),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Purchase',
+                                      style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
+                                    ),
+                                    Text(
+                                      'Today',
+                                      style: TextStyle(fontWeight: FontWeight.w600),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 50,
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Cashback tracks in',
+                                      style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
+                                    ),
+                                    Text(
+                                      '24 hours',
+                                      style: TextStyle(fontWeight: FontWeight.w600),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                           fromSeeMore
                               ? SizedBox()

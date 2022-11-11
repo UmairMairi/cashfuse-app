@@ -54,6 +54,7 @@ class BottomNavigationBarScreen extends StatelessWidget {
               return false;
             } else {
               if (_canExit) {
+                SystemNavigator.pop();
                 return true;
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -64,7 +65,6 @@ class BottomNavigationBarScreen extends StatelessWidget {
                   margin: EdgeInsets.all(10),
                 ));
                 _canExit = true;
-                SystemNavigator.pop();
 
                 Timer(Duration(seconds: 2), () {
                   _canExit = false;

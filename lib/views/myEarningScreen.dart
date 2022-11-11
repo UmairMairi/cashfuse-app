@@ -102,7 +102,7 @@ class MyEarningSceen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       child: Text(
-                        'Earning will show here within 72 hours of your shopping via Cashkaro.',
+                        'Earning will show here within 24 hours of your shopping via ${global.appName}.',
                         style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                           color: Colors.grey[600],
                           fontWeight: FontWeight.w400,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 
 class AboutScreen extends StatelessWidget {
   @override
@@ -17,7 +18,7 @@ class AboutScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'About Cashkaro',
+          'About ${global.appName}',
           style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.white),
         ),
       ),

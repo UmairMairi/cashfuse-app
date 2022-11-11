@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cashbackapp/constants/appConstant.dart';
 import 'package:cashbackapp/models/adsModel.dart';
@@ -9,15 +10,18 @@ import 'package:cashbackapp/models/bannerModel.dart';
 import 'package:cashbackapp/models/campaignModel.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
 import 'package:cashbackapp/models/clickModel.dart';
+import 'package:cashbackapp/models/complainModel.dart';
 import 'package:cashbackapp/models/couponModel.dart';
 import 'package:cashbackapp/models/faqModel.dart';
 import 'package:cashbackapp/models/offerModel.dart';
+import 'package:cashbackapp/models/orderModel.dart';
 import 'package:cashbackapp/models/paymentHistoryModel.dart';
 import 'package:cashbackapp/models/searchDataModel.dart';
 import 'package:cashbackapp/models/userModel.dart';
 import 'package:cashbackapp/services/dioResult.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
 
 class APIHelper {
   //bind you api result using it
@@ -108,11 +112,11 @@ class APIHelper {
     }
   }
 
-  Future<dynamic> getTopCategories() async {
+  Future<dynamic> getTopCategories(int page) async {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.CAEGORY_URI}',
+      response = await dio.get('${global.baseUrl}${AppConstants.CAEGORY_URI}?page=$page',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
@@ -130,11 +134,11 @@ class APIHelper {
     }
   }
 
-  Future<dynamic> getTopCashBack() async {
+  Future<dynamic> getTopCashBack(int page) async {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.CASHBACK_URI}',
+      response = await dio.get('${global.baseUrl}${AppConstants.CASHBACK_URI}?page=$page',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
@@ -174,11 +178,11 @@ class APIHelper {
     }
   }
 
-  Future<dynamic> getAllAdv() async {
+  Future<dynamic> getAllAdv(int page) async {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.ALL_ADV}',
+      response = await dio.get('${global.baseUrl}${AppConstants.ALL_ADV}?page=$page',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
@@ -651,7 +655,7 @@ class APIHelper {
     }
   }
 
-  Future<dynamic> updateProfile(String name, String phone, String email) async {
+  Future<dynamic> updateProfile(String name, String phone, String email, File userImage) async {
     try {
       Response response;
       var dio = Dio();
@@ -660,11 +664,16 @@ class APIHelper {
         'name': name,
         'phone': phone,
         'email': email,
+        if (userImage != null && userImage.path.isNotEmpty)
+          "user_profile": await MultipartFile.fromFile(
+            userImage.path,
+            contentType: new MediaType("image", "jpeg"),
+          ),
       });
       response = await dio.post(
         '${global.baseUrl}${AppConstants.UPDATE_PROFILE_URI}',
         data: formData,
-        options: Options(headers: await global.getApiHeaders(false)),
+        options: Options(headers: await global.getApiHeaders(true)),
       );
 
       dynamic recordList;
@@ -838,6 +847,100 @@ class APIHelper {
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getPaymentHistory():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getOrders() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.ORDER_HISTORY_URI}?user_id=${global.currentUser.id}',
+          options: Options(
+            headers: await global.getApiHeaders(true),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<OrderModel>.from(response.data['data'].map((x) => OrderModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ORDER_HISTORY_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getOrders():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getOrderComplains(int orderId) async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.GET_ORDER_COMPLAIN_URI}?order_id=$orderId',
+          options: Options(
+            headers: await global.getApiHeaders(true),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<ComplainModel>.from(response.data['data'].map((x) => ComplainModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.GET_ORDER_COMPLAIN_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getOrderComplains():" + e.toString());
+    }
+  }
+
+  Future<dynamic> addOrderComplain(int orderId, String complain) async {
+    try {
+      Response response;
+      var dio = Dio();
+      var formData = FormData.fromMap({
+        'user_id': global.currentUser.id,
+        'order_id': orderId,
+        'complain': complain,
+      });
+      response = await dio.post('${global.baseUrl}${AppConstants.ADD_COMPLAIN_URI}',
+          data: formData,
+          options: Options(
+            headers: await global.getApiHeaders(true),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = ComplainModel.fromJson(response.data['data']);
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_COMPLAIN_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - addOrderComplain():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getBannerNotification() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.BANNER_NOTIFICATION_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = response.data['data'];
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.BANNER_NOTIFICATION_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getBannerNotification():" + e.toString());
     }
   }
 }

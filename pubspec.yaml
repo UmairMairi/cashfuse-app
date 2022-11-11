@@ -95,6 +95,7 @@ dependencies:
   flutter_share: ^2.0.0
   path_provider: ^2.0.11
   store_redirect: ^2.0.1
+  flutter_pagewise: ^2.0.4
 
   #IMAGE
   image_picker: ^0.8.5+3

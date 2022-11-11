@@ -15,10 +15,12 @@ class WebViewScreen extends StatelessWidget {
   final String brandName;
   WebViewScreen({this.urlString, this.isCliked, this.couponList, this.partner, this.brandName});
 
+  HomeController homeController = Get.find<HomeController>();
+
   @override
   Widget build(BuildContext context) {
     //if (Platform.isAndroid) WebView.platform = AndroidWebView();
-    return GetBuilder<HomeController>(builder: (homeController) {
+    return GetBuilder<HomeController>(builder: (controller1) {
       return SafeArea(
         child: Scaffold(
           backgroundColor: Colors.white,
@@ -55,6 +57,8 @@ class WebViewScreen extends StatelessWidget {
                   android: AndroidInAppWebViewOptions(
                     mixedContentMode: AndroidMixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW,
                     cacheMode: AndroidCacheMode.LOAD_NO_CACHE,
+                    clearSessionCache: true,
+                    networkAvailable: true,
                   ),
                 ),
               ),
@@ -81,13 +85,16 @@ class WebViewScreen extends StatelessWidget {
             color: Get.theme.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
                   onTap: () {
                     homeController.setWebBottomIndex(0);
                     Get.bottomSheet(
                       SeeMoreSheet(
+                        partner: partner,
                         brandName: brandName,
+                        couponList: couponList,
                       ),
                     );
                   },
@@ -133,98 +140,81 @@ class WebViewScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Expanded(child: SizedBox()),
-                InkWell(
-                  onTap: () {
-                    homeController.setWebBottomIndex(1);
-                    Get.bottomSheet(
-                      SeeMoreSheet(
-                        partner: partner,
-                      ),
-                    );
-                  },
-                  child: Text(
-                    partner.leftTab,
-                    style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                      letterSpacing: -0.2,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.white,
-                    ),
-                  ),
-                  // Row(
-                  //   children: [
-                  //     Icon(
-                  //       Icons.currency_rupee_sharp,
-                  //       color: Colors.white,
-                  //       size: 15,
-                  //     ),
-                  //     Text(
-                  //       ' ${global.appName}',
-                  //       style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                  //         letterSpacing: -0.2,
-                  //         fontWeight: FontWeight.w300,
-                  //         color: Colors.white,
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                ),
-                Expanded(child: SizedBox()),
-                InkWell(
-                  onTap: () {
-                    homeController.setWebBottomIndex(2);
-                    Get.bottomSheet(
-                      SeeMoreSheet(
-                        couponList: couponList,
-                      ),
-                    );
-                  },
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.local_offer,
-                        color: Colors.white,
-                        size: 15,
-                      ),
-                      Text(
-                        ' Coupon',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                          letterSpacing: -0.2,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(child: SizedBox()),
-                InkWell(
-                  onTap: () {
-                    homeController.setWebBottomIndex(3);
-                    Get.bottomSheet(
-                      SeeMoreSheet(
-                        partner: partner,
-                      ),
-                    );
-                  },
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.info,
-                        color: Colors.white,
-                        size: 15,
-                      ),
-                      Text(
-                        ' Info',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                          letterSpacing: -0.2,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
+                //Expanded(child: SizedBox()),
+                partner != null && partner.leftTab.isNotEmpty
+                    ? InkWell(
+                        onTap: () {
+                          homeController.setWebBottomIndex(1);
+                          Get.bottomSheet(
+                            SeeMoreSheet(
+                              partner: partner,
+                              brandName: brandName,
+                              couponList: couponList,
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Text(
+                            partner.leftTab,
+                            style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                              letterSpacing: -0.2,
+                              fontWeight: FontWeight.w300,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       )
-                    ],
-                  ),
-                ),
+                    : SizedBox(),
+                //Expanded(child: SizedBox()),
+                couponList != null && couponList.length > 0
+                    ? InkWell(
+                        onTap: () {
+                          homeController.setWebBottomIndex(2);
+                          Get.bottomSheet(
+                            SeeMoreSheet(
+                              partner: partner,
+                              brandName: brandName,
+                              couponList: couponList,
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15).copyWith(left: 5),
+                          child: Text(
+                            ' Coupon',
+                            style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                              letterSpacing: -0.2,
+                              fontWeight: FontWeight.w300,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      )
+                    : SizedBox(),
+                //Expanded(child: SizedBox()),
+                partner != null && partner.rightTab.isNotEmpty
+                    ? InkWell(
+                        onTap: () {
+                          homeController.setWebBottomIndex(3);
+                          Get.bottomSheet(
+                            SeeMoreSheet(
+                              partner: partner,
+                              brandName: brandName,
+                              couponList: couponList,
+                            ),
+                          );
+                        },
+                        child: Text(
+                          partner.rightTab,
+                          style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                            letterSpacing: -0.2,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    : SizedBox(),
               ],
             ),
           ),

@@ -311,7 +311,7 @@ class CouponDetailScreen extends StatelessWidget {
             //       crossAxisAlignment: CrossAxisAlignment.start,
             //       children: [
             //         Text(
-            //           'Cashkaro Rewards Details',
+            //           '${global.appName} Rewards Details',
             //           style: Get.theme.primaryTextTheme.subtitle2,
             //         ),
             //         Divider(),

@@ -6,6 +6,7 @@ import 'package:cashbackapp/views/appTabinationScreen.dart';
 import 'package:cashbackapp/views/getHelpScreen.dart';
 import 'package:cashbackapp/views/getStartedScreen.dart';
 import 'package:cashbackapp/views/requestPaymentScreen.dart';
+import 'package:cashbackapp/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -31,10 +32,16 @@ class DrawerWidget extends StatelessWidget {
                             leading: CircleAvatar(
                               radius: 25,
                               backgroundColor: Colors.white,
-                              child: Image.asset(
-                                Images.malePerson,
-                                height: 30,
-                              ),
+                              child: global.currentUser.userImage.isNotEmpty
+                                  ? CustomImage(
+                                      image: global.appInfo.baseUrls.userImageUrl + '/' + global.currentUser.userImage,
+                                      height: 30,
+                                      width: 30,
+                                    )
+                                  : Image.asset(
+                                      Images.malePerson,
+                                      height: 30,
+                                    ),
                             ),
                             title: Text(
                               global.currentUser.name,

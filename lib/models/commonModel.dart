@@ -1,3 +1,5 @@
+import 'package:cashbackapp/models/categoryModel.dart';
+
 class CommonModel {
   String adId;
   String advName;
@@ -10,6 +12,7 @@ class CommonModel {
   String category;
   String buttonText;
   String tagline;
+  CategoryModel partner;
 
   CommonModel({
     this.adId,
@@ -23,5 +26,6 @@ class CommonModel {
     this.category,
     this.buttonText,
     this.tagline,
+    this.partner,
   });
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cashbackapp/constants/appConstant.dart';
 import 'package:cashbackapp/controllers/networkController.dart';
@@ -227,19 +228,27 @@ class AuthController extends GetxController {
     }
   }
 
-  Future updateProfile() async {
+  Future updateProfile(File userImage) async {
     try {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
-        Get.dialog(CustomLoader(), barrierDismissible: false);
-        await apiHelper.updateProfile(name.text.trim(), global.currentUser.phone, email.text.trim()).then((response) async {
-          Get.back();
-          if (response.statusCode == 200) {
-            showCustomSnackBar(response.message, isError: false);
-            await getProfile();
-          } else {
-            showCustomSnackBar(response.message);
-          }
-        });
+        if (email.text.trim().isNotEmpty) {
+          Get.dialog(CustomLoader(), barrierDismissible: false);
+          await apiHelper.updateProfile(name.text.trim(), global.currentUser.phone, email.text.trim(), userImage).then((response) async {
+            Get.back();
+            if (response != null) {
+              if (response.statusCode == 200) {
+                showCustomSnackBar(response.message, isError: false);
+                await getProfile();
+              } else {
+                showCustomSnackBar(response.message);
+              }
+            } else {
+              showCustomSnackBar('Email has been already taken');
+            }
+          });
+        } else {
+          showCustomSnackBar('Please enter Email.');
+        }
       } else {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }

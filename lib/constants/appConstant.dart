@@ -37,4 +37,8 @@ class AppConstants {
   static const String MY_PROFILE_URI = '/my_profile';
   static const String SEND_WITHDRAWAL_REQUEST_URI = '/send_withdrawal_request';
   static const String Payment_HISTORY_URI = '/payment_history';
+  static const String ORDER_HISTORY_URI = '/order_history';
+  static const String ADD_COMPLAIN_URI = '/add_complain';
+  static const String GET_ORDER_COMPLAIN_URI = '/get_order_complain';
+  static const String BANNER_NOTIFICATION_URI = '/bannernotification';
 }

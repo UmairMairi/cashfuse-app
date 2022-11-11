@@ -7,6 +7,8 @@ class BaseUrls {
   String bannerImageUrl;
   String faqImageUrl;
   String couponBannerImageUrl;
+  String orderImageUrl;
+  String notificationBannerImageUrl;
 
   BaseUrls({
     this.offerImageUrl,
@@ -17,6 +19,8 @@ class BaseUrls {
     this.bannerImageUrl,
     this.faqImageUrl,
     this.couponBannerImageUrl,
+    this.orderImageUrl,
+    this.notificationBannerImageUrl,
   });
 
   BaseUrls.fromJson(Map<String, dynamic> json) {
@@ -29,6 +33,8 @@ class BaseUrls {
       bannerImageUrl = json["banner_image_url"] != null ? json["banner_image_url"] : '';
       faqImageUrl = json["faq_image_url"] != null ? json["faq_image_url"] : '';
       couponBannerImageUrl = json["coupon_banner_url"] != null ? json["coupon_banner_url"] : '';
+      orderImageUrl = json["order_image_url"] != null ? json["order_image_url"] : '';
+      notificationBannerImageUrl = json["notification_image_url"] != null ? json["notification_image_url"] : '';
     } catch (e) {
       print("Exception - BaseUrls.dart - BaseUrls.fromJson():" + e.toString());
     }

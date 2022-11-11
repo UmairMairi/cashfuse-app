@@ -317,7 +317,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                         style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
                                       ),
                                       Text(
-                                        '8 hours',
+                                        '24 hours',
                                         style: TextStyle(fontWeight: FontWeight.w600),
                                       ),
                                     ],

@@ -4,28 +4,28 @@ import 'dart:io';
 
 import 'package:cashbackapp/models/appInfoModel.dart';
 import 'package:cashbackapp/models/userModel.dart';
+import 'package:cashbackapp/utils/date_converter.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-String appName = "CashBackApp";
+String appName = "CashBack";
 
 String baseUrl = "https://okaydemo.com/cashback/api";
-String imageUrl = "";
-double lat = 21.1445031;
-double lng = 73.0940926;
-String currentLocation = '';
+
 SharedPreferences sp;
 UserModel currentUser = new UserModel();
 AppInfo appInfo = new AppInfo();
 String timeFormat = '24';
 String appDeviceId;
-String languageCode = 'en';
 bool isRTL = false;
 List<String> clickedList = [];
-//Color defaultColor = Color(0xFF2D3D95);
+
+String isBannerDate = DateConverter.dateTimeToDateOnly(DateTime.now());
+bool isBannerShow = false;
+String bannerImage = '';
 
 //Api Header
 Future<Map<String, String>> getApiHeaders(bool authorizationRequired) async {

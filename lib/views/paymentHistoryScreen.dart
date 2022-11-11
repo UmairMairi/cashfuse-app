@@ -25,67 +25,69 @@ class PaymentHistoryScreen extends StatelessWidget {
       ),
       body: GetBuilder<PaymentController>(builder: (controller) {
         return controller.isPaymentHistoryLoaded
-            ? ListView.builder(
-                itemCount: controller.paymentHistoryList.length,
-                shrinkWrap: true,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: ListTile(
-                      leading: Image.asset(
-                        controller.paymentHistoryList[index].medium == 'UPI'
-                            ? Images.upi
-                            : controller.paymentHistoryList[index].medium == 'Bank'
-                                ? Images.bank
-                                : Images.amazon,
-                        height: 40,
-                        width: 40,
-                      ),
-                      title: Row(
-                        children: [
-                          Text(
-                            controller.paymentHistoryList[index].amount.toString(),
+            ? controller.paymentHistoryList != null && controller.paymentHistoryList.length > 0
+                ? ListView.builder(
+                    itemCount: controller.paymentHistoryList.length,
+                    shrinkWrap: true,
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: ListTile(
+                          leading: Image.asset(
+                            controller.paymentHistoryList[index].medium == 'UPI'
+                                ? Images.upi
+                                : controller.paymentHistoryList[index].medium == 'Bank'
+                                    ? Images.bank
+                                    : Images.amazon,
+                            height: 40,
+                            width: 40,
                           ),
-                        ],
-                      ),
-                      subtitle: Text(
-                        DateConverter.formatDate(
-                          controller.paymentHistoryList[index].createdAt,
+                          title: Row(
+                            children: [
+                              Text(
+                                controller.paymentHistoryList[index].amount.toString(),
+                              ),
+                            ],
+                          ),
+                          subtitle: Text(
+                            DateConverter.formatDate(
+                              controller.paymentHistoryList[index].createdAt,
+                            ),
+                          ),
+                          trailing: Container(
+                            width: 80,
+                            height: 40,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: controller.paymentHistoryList[index].approved == 1
+                                  ? Colors.green
+                                  : controller.paymentHistoryList[index].approved == 2
+                                      ? Colors.red
+                                      : Colors.orange,
+                            ),
+                            child: Text(
+                              controller.paymentHistoryList[index].approved == 1
+                                  ? 'Approved'
+                                  : controller.paymentHistoryList[index].approved == 2
+                                      ? 'Rejected'
+                                      : controller.paymentHistoryList[index].approved == 0
+                                          ? 'Pending'
+                                          : '',
+                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                            ),
+                          ),
+                          // SizedBox(
+                          //   height: 5,
+                          // ),
+                          // CustomImage(
+                          //   image: '${global.appInfo.baseUrls.categoryImageUrl}/${controller.topCategoryList[index].image}',
+                          //   height: 40,
+                          // ),
                         ),
-                      ),
-                      trailing: Container(
-                        width: 80,
-                        height: 40,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: controller.paymentHistoryList[index].approved == 1
-                              ? Colors.green
-                              : controller.paymentHistoryList[index].approved == 2
-                                  ? Colors.red
-                                  : Colors.orange,
-                        ),
-                        child: Text(
-                          controller.paymentHistoryList[index].approved == 1
-                              ? 'Approved'
-                              : controller.paymentHistoryList[index].approved == 2
-                                  ? 'Rejected'
-                                  : controller.paymentHistoryList[index].approved == 0
-                                      ? 'Pending'
-                                      : '',
-                          style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
-                        ),
-                      ),
-                      // SizedBox(
-                      //   height: 5,
-                      // ),
-                      // CustomImage(
-                      //   image: '${global.appInfo.baseUrls.categoryImageUrl}/${controller.topCategoryList[index].image}',
-                      //   height: 40,
-                      // ),
-                    ),
-                  );
-                },
-              )
+                      );
+                    },
+                  )
+                : Center(child: Text('No data found'))
             : Center(
                 child: CircularProgressIndicator(),
               );

@@ -211,32 +211,32 @@ class ProfieScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      InkWell(
-                        onTap: () {
-                          Get.to(() => MissingCashbackScreen());
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.search,
-                                color: Get.theme.iconTheme.color,
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                'Missing Cashback',
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                  letterSpacing: 0,
-                                  color: Colors.black.withOpacity(0.75),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     Get.to(() => MissingCashbackScreen());
+                      //   },
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      //     child: Row(
+                      //       children: [
+                      //         Icon(
+                      //           Icons.search,
+                      //           color: Get.theme.iconTheme.color,
+                      //         ),
+                      //         SizedBox(
+                      //           width: 20,
+                      //         ),
+                      //         Text(
+                      //           'Missing Cashback',
+                      //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                      //             letterSpacing: 0,
+                      //             color: Colors.black.withOpacity(0.75),
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                       // InkWell(
                       //   onTap: () {
                       //     Get.to(() => AppTabinationScreen());

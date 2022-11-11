@@ -11,6 +11,7 @@ import 'package:cashbackapp/models/offerModel.dart';
 import 'package:cashbackapp/services/apiHelper.dart';
 import 'package:cashbackapp/widget/customLoader.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 
@@ -71,8 +72,11 @@ class HomeController extends GetxController {
   bool isOffer = false;
   int webBottomIndex = 0;
   int bannerIndex = 0;
+  int page = 1;
+  var isMoreDataAvailable = true.obs;
 
   String createdLink = '';
+  ScrollController scrollController = ScrollController();
 
   @override
   void onInit() async {
@@ -82,10 +86,12 @@ class HomeController extends GetxController {
 
   init() async {
     try {
-      await getTopBanners();
       await getTopCategories();
+      await getTopCashBack(page);
+      await getTopBanners();
+
       await getExclusiveOffers();
-      await getTopCashBack();
+
       await getNewFlashOffers();
       await getHomeAdv();
       getAllAdv();
@@ -132,9 +138,20 @@ class HomeController extends GetxController {
     try {
       isCategoryLoaded = false;
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
-        await apiHelper.getTopCategories().then((response) {
+        if (_topCategoryList.length > 0) {
+          page++;
+        } else {
+          page = 1;
+        }
+        await apiHelper.getTopCategories(page).then((response) {
           if (response.status == "1") {
-            _topCategoryList = response.data;
+            List<CategoryModel> _tList = response.data;
+            if (_tList.isEmpty) {
+              isMoreDataAvailable.value = false;
+            }
+            _topCategoryList.addAll(_tList);
+
+            update();
 
             if (_topCategoryList != []) {
               for (var i = 0; i < _topCategoryList.length; i++) {
@@ -184,13 +201,22 @@ class HomeController extends GetxController {
     }
   }
 
-  Future getTopCashBack() async {
+  Future getTopCashBack(int page) async {
     try {
       isTopCashbackLoaded = false;
+
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
-        await apiHelper.getTopCashBack().then((response) {
+        if (_topCashbackList.length > 0) {
+          page = page++;
+        }
+        await apiHelper.getTopCashBack(page).then((response) {
           if (response.status == "1") {
-            _topCashbackList = response.data;
+            List<CategoryModel> _tList = response.data;
+            if (_tList.isEmpty) {
+              isMoreDataAvailable.value = false;
+            }
+            _topCashbackList.addAll(_tList);
+
             update();
             if (_topCashbackList != []) {
               for (var i = 0; i < _topCashbackList.length; i++) {
@@ -298,9 +324,20 @@ class HomeController extends GetxController {
   Future getAllAdv() async {
     try {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
-        await apiHelper.getAllAdv().then((response) {
+        if (_allAdvList.length > 0) {
+          page++;
+        } else {
+          page = 1;
+        }
+        await apiHelper.getAllAdv(page).then((response) {
           if (response.status == "1") {
-            _allAdvList = response.data;
+            List<CategoryModel> _tList = response.data;
+            if (_tList.isEmpty) {
+              isMoreDataAvailable.value = false;
+            }
+            _allAdvList.addAll(_tList);
+
+            update();
             if (_allAdvList != []) {
               for (var i = 0; i < _allAdvList.length; i++) {
                 if (_allAdvList[i].ads != []) {
@@ -501,7 +538,9 @@ class HomeController extends GetxController {
     try {
       createdLink = '';
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper.getTrackingLink(url, type, cId: cId).then((response) {
+          Get.back();
           if (response.status == "1") {
             createdLink = response.data;
             update();

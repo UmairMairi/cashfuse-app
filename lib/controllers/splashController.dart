@@ -7,6 +7,7 @@ import 'package:cashbackapp/controllers/authController.dart';
 import 'package:cashbackapp/controllers/networkController.dart';
 import 'package:cashbackapp/models/userModel.dart';
 import 'package:cashbackapp/services/apiHelper.dart';
+import 'package:cashbackapp/utils/date_converter.dart';
 import 'package:cashbackapp/views/bottomNavigationBarScreen.dart';
 import 'package:cashbackapp/views/getStartedScreen.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
@@ -35,6 +36,19 @@ class SplashController extends GetxController {
       Timer(Duration(seconds: 5), () async {
         global.appDeviceId = await FirebaseMessaging.instance.getToken();
         global.sp = await SharedPreferences.getInstance();
+        if (global.sp.getString('isBannerDate') != null) {
+          if (DateConverter.dateTimeToDateOnly(DateTime.now()) == global.sp.getString('isBannerDate')) {
+            global.isBannerShow = false;
+          } else {
+            global.isBannerShow = true;
+            global.isBannerDate = DateConverter.dateTimeToDateOnly(DateTime.now());
+            global.sp.setString('isBannerDate', global.isBannerDate);
+          }
+        } else {
+          global.isBannerShow = true;
+          global.isBannerDate = DateConverter.dateTimeToDateOnly(DateTime.now());
+          global.sp.setString('isBannerDate', global.isBannerDate);
+        }
         log(global.appDeviceId);
         if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
           await apiHelper.getAppInfo().then((response) async {
@@ -43,7 +57,9 @@ class SplashController extends GetxController {
               if (global.sp.getString('currentUser') != null) {
                 global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
                 await Get.find<AuthController>().getProfile();
-
+                await apiHelper.getBannerNotification().then((result) {
+                  global.bannerImage = result.data['image'];
+                });
                 Get.to(() => BottomNavigationBarScreen());
               } else {
                 Get.to(() => GetStartedScreen(

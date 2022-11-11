@@ -89,29 +89,29 @@ class StoreOfferWidget extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
             ),
           ),
-          InkWell(
-            onTap: () {
-              Get.to(
-                () => RatesAndTermScreen(
-                  commonModel: commonModel,
-                ),
-                transition: Transition.rightToLeft,
-              );
-            },
-            child: Padding(
-              padding: EdgeInsets.only(top: 10),
-              //height: 20,
-              //alignment: Alignment.center,
-              child: Text(
-                'Rewards Rates & Terms',
-                textAlign: TextAlign.center,
-                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                  color: Colors.teal,
-                  fontSize: 10,
-                ),
-              ),
-            ),
-          )
+          // InkWell(
+          //   onTap: () {
+          //     Get.to(
+          //       () => RatesAndTermScreen(
+          //         commonModel: commonModel,
+          //       ),
+          //       transition: Transition.rightToLeft,
+          //     );
+          //   },
+          //   child: Padding(
+          //     padding: EdgeInsets.only(top: 10),
+          //     //height: 20,
+          //     //alignment: Alignment.center,
+          //     child: Text(
+          //       'Rewards Rates & Terms',
+          //       textAlign: TextAlign.center,
+          //       style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+          //         color: Colors.teal,
+          //         fontSize: 10,
+          //       ),
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
