@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/paymentController.dart';
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/widget/addBankAccountDialog.dart';

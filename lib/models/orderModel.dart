@@ -1,5 +1,4 @@
 import 'package:cashbackapp/models/userModel.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class OrderModel {
   int id;

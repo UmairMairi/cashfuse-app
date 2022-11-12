@@ -10,11 +10,14 @@ class CommonController extends GetxController with GetTickerProviderStateMixin {
   APIHelper apiHelper = new APIHelper();
   NetworkController networkController = Get.find<NetworkController>();
   List<FaqModel> _faqList = [];
+  List<FaqModel> _mainFaqList = [];
   List<FaqModel> get faqList => _faqList;
   String aboutUs = '';
   String privacyPolicy = '';
 
   TabController tabController;
+
+  var searchString = TextEditingController();
 
   bool isfaqLoaded = false;
 
@@ -43,6 +46,7 @@ class CommonController extends GetxController with GetTickerProviderStateMixin {
         await apiHelper.getFaqs().then((response) {
           if (response.status == "1") {
             _faqList = response.data;
+            _mainFaqList = response.data;
             update();
           } else {
             showCustomSnackBar(response.message);
@@ -55,6 +59,39 @@ class CommonController extends GetxController with GetTickerProviderStateMixin {
       update();
     } catch (e) {
       print("Exception - CommonController.dart - getFaqs():" + e.toString());
+    }
+  }
+
+  void faqLocalSearch() {
+    try {
+      isfaqLoaded = false;
+      update();
+      if (searchString.text.trim().isEmpty) {
+        _faqList = List.from(_mainFaqList);
+      } else {
+        if (_mainFaqList.length > 0) {
+          // List<String> _list = [];
+          // for (var i = 0; i < _mainFaqList.length; i++) {
+          //   _list = _mainFaqList[i].ques.toLowerCase().split(' ').toString().split('?');
+          // }
+          _faqList = List.from(
+            _mainFaqList
+                .where((e) => ((e.ques.isNotEmpty &&
+                        e.ques.toLowerCase().split(' ').toString().split('?').toString().contains(
+                              searchString.text.trim().toLowerCase(),
+                            )) ||
+                    (e.ans.isNotEmpty &&
+                        e.ans.toLowerCase().split(' ').toString().split('?').toString().contains(
+                              searchString.text.trim().toLowerCase(),
+                            ))))
+                .toList(),
+          );
+        }
+      }
+      isfaqLoaded = true;
+      update();
+    } catch (e) {
+      print("Exception - CommonController.dart - faqLocalSearch():" + e.toString());
     }
   }
 

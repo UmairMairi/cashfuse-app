@@ -1,5 +1,6 @@
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 import 'package:cashbackapp/controllers/homeController.dart';
+import 'package:cashbackapp/controllers/splashController.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/widget/customImage.dart';
@@ -16,7 +17,8 @@ class RecentClickScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
-          onTap: () {
+          onTap: () async {
+            await Get.find<SplashController>().bannerShow();
             Get.find<BottomNavigationController>().setBottomIndex(0);
           },
           child: Icon(
@@ -177,6 +179,7 @@ class RecentClickScreen extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () async {
+                        await Get.find<SplashController>().bannerShow();
                         Get.find<BottomNavigationController>().setBottomIndex(0);
                       },
                       child: Container(

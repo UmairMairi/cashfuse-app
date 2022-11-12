@@ -356,7 +356,7 @@ class SeeMoreSheet extends StatelessWidget {
                                 Divider(),
                                 Padding(
                                   padding: const EdgeInsets.all(10.0),
-                                  child: HtmlWidget(partner.rightTab),
+                                  child: HtmlWidget(partner.rightTabDesc),
                                 ),
                               ],
                             ),

@@ -1,11 +1,12 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/models/categoryModel.dart';
 import 'package:cashbackapp/models/commonModel.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/views/categoryScreen.dart';
 import 'package:cashbackapp/widget/storeOfferWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
 
 class StoreOfferListScreen extends StatelessWidget {
   final String title;

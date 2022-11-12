@@ -117,6 +117,7 @@ class AppWiseOfferShowListScreen extends StatelessWidget {
                           child: AppWiseOfferShowWidget(
                             commonModel: categoryModel.commonList[index],
                             fromList: true,
+                            domainImage: categoryModel.image,
                           ),
                         );
                       },

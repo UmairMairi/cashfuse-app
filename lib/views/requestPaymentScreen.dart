@@ -49,7 +49,7 @@ class RequestPaymentScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Approved Cashback',
+                            'Remaining Earning',
                             style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w300,
@@ -66,7 +66,7 @@ class RequestPaymentScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Approved Rewards',
+                          'Sent for Withdrawal',
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w300,
@@ -84,7 +84,7 @@ class RequestPaymentScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Approved Referral Bonus',
+                            'Successful Withdrawal',
                             style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w300,
@@ -101,7 +101,7 @@ class RequestPaymentScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Total',
+                          'Total Earning',
                           style: Get.theme.primaryTextTheme.subtitle2,
                         ),
                         Text(

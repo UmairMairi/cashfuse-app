@@ -1,6 +1,7 @@
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/controllers/searchController.dart';
+import 'package:cashbackapp/controllers/splashController.dart';
 import 'package:cashbackapp/models/commonModel.dart';
 import 'package:cashbackapp/views/campaignDetailScreen.dart';
 import 'package:cashbackapp/views/categoryScreen.dart';
@@ -21,7 +22,8 @@ class SearchScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
-          onTap: () {
+          onTap: () async {
+            await Get.find<SplashController>().bannerShow();
             Get.find<BottomNavigationController>().setBottomIndex(0);
           },
           child: Icon(

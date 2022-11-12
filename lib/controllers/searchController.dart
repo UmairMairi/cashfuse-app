@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cashbackapp/constants/appConstant.dart';
 import 'package:cashbackapp/controllers/networkController.dart';
 import 'package:cashbackapp/models/allInOneSearchDataModel.dart';
@@ -179,6 +181,32 @@ class SearchController extends GetxController {
       update();
     } catch (e) {
       print("Exception - SearchController.dart - addNewTab():" + e.toString());
+    }
+  }
+
+  Future saveTab() async {
+    try {
+      addNewTabList2.removeWhere((element) => element.id == null);
+      print('addNewTabList2 ------------------ ${addNewTabList2.length.toString()}');
+      addNewTabList2 = List.from(addNewTabList);
+      print('addNewTabList +++++++++++++ ${addNewTabList.length.toString()}');
+      print('addNewTabList2 +++++++++++++ ${addNewTabList2.length.toString()}');
+      //addNewTabList = List.from(addNewTabList2);
+      // searchController.addNewTabList2.clear();
+      // searchController.addNewTabList2.addAll(searchController.addNewTabList);
+      // searchController.addNewTabList.clear();
+      // searchController.addNewTabList.addAll(searchController.addNewTabList2);
+
+      //global.sp.setString('tabList', searchController.addNewTabList.map((e) => e.toJson()).toString());
+
+      addNewTabList2.insert(
+        addNewTabList2.length,
+        AllInOneSearchDataModel(name: '+Add Tab'),
+      );
+
+      global.sp.setString('tabList', jsonEncode(addNewTabList2.map((i) => i.toJson()).toList()).toString());
+    } catch (e) {
+      print("Exception - SearchController.dart - saveTab():" + e.toString());
     }
   }
 }

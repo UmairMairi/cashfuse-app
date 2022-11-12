@@ -45,9 +45,10 @@ class OfferDetailScreen extends StatelessWidget {
             ),
             actions: [
               InkWell(
-                onTap: () {
+                onTap: () async {
+                  await homeController.getTrackingLink(offer.url, offer.affiliatePartner);
                   global.share(
-                    offer.url,
+                    homeController.createdLink.isNotEmpty ? homeController.createdLink : offer.url,
                     offer.bannerImage.isNotEmpty && !offer.isImageError ? '${global.appInfo.baseUrls.offerImageUrl}/${offer.bannerImage}' : '',
                   );
                 },

@@ -87,9 +87,10 @@ class CampaignDetailScreen extends StatelessWidget {
                 }),
                 actions: [
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
+                      await homeController.getTrackingLink(campaign.url, campaign.affiliatePartner);
                       global.share(
-                        campaign.url,
+                        homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
                         campaign.image.isNotEmpty && !campaign.isImageError ? '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}' : '',
                       );
                     },

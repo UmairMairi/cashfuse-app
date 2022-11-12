@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/adsModel.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
@@ -87,9 +89,10 @@ class AdsDetailScreen extends StatelessWidget {
                 }),
                 actions: [
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
+                      await homeController.getTrackingLink(ads.landingPage, ads.affiliatePartner, cId: ads.cId);
                       global.share(
-                        ads.trackingLink,
+                        homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
                         ads.image.isNotEmpty ? '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}' : '',
                       );
                     },

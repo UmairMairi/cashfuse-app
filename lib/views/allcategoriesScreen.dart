@@ -49,7 +49,7 @@ class AllCategoriesScreen extends StatelessWidget {
           shrinkWrap: true,
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
           itemBuilder: (context, index) {
-            return controller.isMoreDataAvailable.value == true && controller.topCategoryList.length - 1 == index
+            return controller.isMoreDataAvailable.value == true && controller.isAllDataLoaded.value && controller.topCategoryList.length - 1 == index
                 ? Center(
                     child: CircularProgressIndicator(),
                   )

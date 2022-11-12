@@ -26,7 +26,6 @@ class Images {
   static const String planets = "assets/images/planets.jpg";
   static const String punchang = "assets/images/punchang.jpg";
   static const String video = "assets/images/video.jpg";
-  static const String malePerson = "assets/images/male-person.jpg";
   static const String user = "assets/images/user.png";
   static const String dummyImage = "assets/images/dummy-image.jpg";
   static const String amazon = "assets/images/amazon.jpg";
@@ -43,5 +42,5 @@ class Images {
   static const String upi = "assets/images/upi.png";
   static const String bank = "assets/images/bank.png";
   static const String Amazon_pay = "assets/images/Amazon-pay.jpg";
-  static const String Click_image = "assets/images/click_image.jpg";
+  static const String Click_image = "assets/images/click_image.png";
 }

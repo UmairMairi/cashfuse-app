@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
+import 'package:cashbackapp/controllers/splashController.dart';
 import 'package:cashbackapp/views/appTabinationScreen.dart';
 import 'package:cashbackapp/views/homeScreen.dart';
 import 'package:cashbackapp/views/profileScreen.dart';
@@ -50,6 +51,7 @@ class BottomNavigationBarScreen extends StatelessWidget {
         return WillPopScope(
           onWillPop: () async {
             if (navController.bottomNavIndex.value != 0) {
+              await Get.find<SplashController>().bannerShow();
               navController.setBottomIndex(0);
               return false;
             } else {

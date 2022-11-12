@@ -1,17 +1,19 @@
 import 'package:cashbackapp/controllers/authController.dart';
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
+import 'package:cashbackapp/controllers/splashController.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/views/aboutUsScreen.dart';
 import 'package:cashbackapp/views/accountSettingScreen.dart';
 import 'package:cashbackapp/views/colorPicker.dart';
 import 'package:cashbackapp/views/getHelpScreen.dart';
 import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
-import 'package:cashbackapp/views/missingCashbackScreen.dart';
 import 'package:cashbackapp/views/myEarningScreen.dart';
 import 'package:cashbackapp/views/paymentHistoryScreen.dart';
 import 'package:cashbackapp/views/paymentScreen.dart';
 import 'package:cashbackapp/views/privacyPolicyScreen.dart';
 import 'package:cashbackapp/widget/confirmationDialog.dart';
+import 'package:cashbackapp/widget/customImage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +29,8 @@ class ProfieScreen extends StatelessWidget {
           appBar: AppBar(
             elevation: 0,
             leading: InkWell(
-              onTap: () {
+              onTap: () async {
+                await Get.find<SplashController>().bannerShow();
                 Get.find<BottomNavigationController>().setBottomIndex(0);
               },
               child: Icon(
@@ -44,69 +47,179 @@ class ProfieScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Container(
-                        color: Get.theme.primaryColor,
-                        padding: EdgeInsets.only(left: 20, top: 5, right: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Hello ' + global.currentUser.name,
-                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Divider(
-                              color: Colors.white.withOpacity(0.2),
-                              height: 0,
-                              thickness: 1.2,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Total Cashback:',
-                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                        color: Colors.white,
-                                        fontSize: 11,
-                                      ),
-                                    ),
-                                    Text(
-                                      global.currentUser.earning != null ? '₹${global.currentUser.earning.totalEarnings}' : '₹0.00',
-                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
-                                    ),
-                                  ],
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          color: Get.theme.primaryColor,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                leading: CircleAvatar(
+                                  radius: 25,
+                                  backgroundColor: Colors.white,
+                                  child: global.currentUser.userImage.isNotEmpty
+                                      ? CustomImage(
+                                          image: global.appInfo.baseUrls.userImageUrl + '/' + global.currentUser.userImage,
+                                          height: 30,
+                                          width: 30,
+                                        )
+                                      : Image.asset(
+                                          Images.user,
+                                          height: 30,
+                                        ),
                                 ),
-                                // Column(
-                                //   crossAxisAlignment: CrossAxisAlignment.start,
-                                //   children: [
-                                //     Text(
-                                //       'Total Rewards:',
-                                //       style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                //         color: Colors.white,
-                                //         fontSize: 11,
-                                //       ),
-                                //     ),
-                                //     Text(
-                                //       '₹0.00',
-                                //       style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
-                                //     ),
-                                //   ],
-                                // )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        ),
-                      ),
+                                title: Text(
+                                  global.currentUser.name,
+                                  style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.white),
+                                ),
+                                subtitle: Text(
+                                  global.currentUser.email.isNotEmpty ? global.currentUser.email : global.currentUser.phone,
+                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Pending',
+                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                          color: Colors.white,
+                                          fontSize: 11,
+                                          letterSpacing: 0,
+                                        ),
+                                      ),
+                                      Text(
+                                        global.currentUser.earning != null ? '₹${global.currentUser.earning.remEarning}' : '₹0.00',
+                                        textAlign: TextAlign.center,
+                                        style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    child: VerticalDivider(
+                                      // width: 2,
+                                      // thickness: 2,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Approved',
+                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                          color: Colors.white,
+                                          letterSpacing: 0,
+                                          fontSize: 11,
+                                        ),
+                                      ),
+                                      Text(
+                                        global.currentUser.earning != null ? '₹${global.currentUser.earning.totalEarnings}' : '₹0.00',
+                                        textAlign: TextAlign.center,
+                                        style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    child: VerticalDivider(
+                                      // width: 2,
+                                      // thickness: 2,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Redeemed',
+                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                          color: Colors.white,
+                                          letterSpacing: 0,
+                                          fontSize: 11,
+                                        ),
+                                      ),
+                                      Text(
+                                        global.currentUser.earning != null ? '₹${global.currentUser.earning.sentForWithdrawal}' : '₹0.00',
+                                        textAlign: TextAlign.center,
+                                        style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
+                          )
+                          //: Text('Welcome!'),
+                          ),
+                      // Container(
+                      //   color: Get.theme.primaryColor,
+                      //   padding: EdgeInsets.only(left: 20, top: 5, right: 20),
+                      //   child: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: [
+                      //       Text(
+                      //         'Hello ' + global.currentUser.name,
+                      //         style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                      //       ),
+                      //       SizedBox(
+                      //         height: 10,
+                      //       ),
+                      //       Divider(
+                      //         color: Colors.white.withOpacity(0.2),
+                      //         height: 0,
+                      //         thickness: 1.2,
+                      //       ),
+                      //       SizedBox(
+                      //         height: 10,
+                      //       ),
+                      //       Row(
+                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //         children: [
+                      //           Column(
+                      //             crossAxisAlignment: CrossAxisAlignment.start,
+                      //             children: [
+                      //               Text(
+                      //                 'Total Cashback:',
+                      //                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                      //                   color: Colors.white,
+                      //                   fontSize: 11,
+                      //                 ),
+                      //               ),
+                      //               Text(
+                      //                 global.currentUser.earning != null ? '₹${global.currentUser.earning.totalEarnings}' : '₹0.00',
+                      //                 style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //           // Column(
+                      //           //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //           //   children: [
+                      //           //     Text(
+                      //           //       'Total Rewards:',
+                      //           //       style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                      //           //         color: Colors.white,
+                      //           //         fontSize: 11,
+                      //           //       ),
+                      //           //     ),
+                      //           //     Text(
+                      //           //       '₹0.00',
+                      //           //       style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                      //           //     ),
+                      //           //   ],
+                      //           // )
+                      //         ],
+                      //       ),
+                      //       SizedBox(
+                      //         height: 10,
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       InkWell(
                         onTap: () {
                           Get.to(() => AccountSettingScreen());

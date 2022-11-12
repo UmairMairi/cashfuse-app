@@ -74,6 +74,7 @@ class HomeController extends GetxController {
   int bannerIndex = 0;
   int page = 1;
   var isMoreDataAvailable = true.obs;
+  var isAllDataLoaded = false.obs;
 
   String createdLink = '';
   ScrollController scrollController = ScrollController();
@@ -148,6 +149,7 @@ class HomeController extends GetxController {
             List<CategoryModel> _tList = response.data;
             if (_tList.isEmpty) {
               isMoreDataAvailable.value = false;
+              isAllDataLoaded.value = true;
             }
             _topCategoryList.addAll(_tList);
 

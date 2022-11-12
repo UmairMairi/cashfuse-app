@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/authController.dart';
 import 'package:cashbackapp/controllers/imageController.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
@@ -73,23 +75,31 @@ class AccountSettingScreen extends StatelessWidget {
                       width: 150,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        shape: BoxShape.circle,
+                        borderRadius: BorderRadius.circular(100),
                         border: Border.all(
                           color: Get.theme.primaryColor.withOpacity(0.2),
                           width: 4,
                         ),
                       ),
                       child: imageControlller.imageFile != null && imageControlller.imageFile.path.isNotEmpty
-                          ? Image.file(
-                              imageControlller.imageFile,
-                              height: 100,
-                              width: 120,
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: Image.file(
+                                imageControlller.imageFile,
+                                fit: BoxFit.cover,
+                                // height: 100,
+                                // width: 120,
+                              ),
                             )
                           : global.currentUser.userImage.isNotEmpty
-                              ? CustomImage(
-                                  image: global.appInfo.baseUrls.userImageUrl + '/' + global.currentUser.userImage,
-                                  height: 100,
-                                  width: 120,
+                              ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: CustomImage(
+                                    image: global.appInfo.baseUrls.userImageUrl + '/' + global.currentUser.userImage,
+                                    fit: BoxFit.cover,
+                                    // height: 150,
+                                    // width: 150,
+                                  ),
                                 )
                               : CircleAvatar(
                                   radius: 50,

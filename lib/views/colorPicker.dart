@@ -45,7 +45,7 @@ class _ColorPickerPageState extends State<ColorPickerPage> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: (() {
+      onWillPop: (() async {
         Get.find<BottomNavigationController>().setBottomIndex(4);
         Get.to(() => BottomNavigationBarScreen());
         return;

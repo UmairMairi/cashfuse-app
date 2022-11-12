@@ -8,7 +8,6 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 
 class GetHelpScreen extends StatelessWidget {
   final fSeachNode = new FocusNode();
-  CommonController commonController = Get.find<CommonController>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +49,7 @@ class GetHelpScreen extends StatelessWidget {
                   ),
                   margin: EdgeInsets.zero,
                   child: TextFormField(
+                    controller: controller.searchString,
                     focusNode: fSeachNode,
                     textAlign: TextAlign.start,
                     textAlignVertical: TextAlignVertical.center,
@@ -65,83 +65,93 @@ class GetHelpScreen extends StatelessWidget {
                       ),
                       prefixIconColor: fSeachNode.hasFocus ? Get.theme.primaryColor : Colors.grey,
                     ),
+                    onFieldSubmitted: (value) {
+                      controller.faqLocalSearch();
+                    },
                   ),
                 ),
               ),
-              commonController.isfaqLoaded
-                  ? GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 15.0,
-                        mainAxisSpacing: 15.0,
-                        childAspectRatio: 1.3,
-                      ),
-                      itemCount: commonController.faqList.length,
-                      shrinkWrap: true,
-                      padding: EdgeInsets.only(top: 15),
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Get.to(
-                              () => HelpDetailSceen(
-                                faq: commonController.faqList[index],
+              controller.isfaqLoaded
+                  ? controller.faqList != null && controller.faqList.length > 0
+                      ? GridView.builder(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 15.0,
+                            mainAxisSpacing: 15.0,
+                            childAspectRatio: 1.3,
+                          ),
+                          itemCount: controller.faqList.length,
+                          shrinkWrap: true,
+                          padding: EdgeInsets.only(top: 15),
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () {
+                                Get.to(
+                                  () => HelpDetailSceen(
+                                    faq: controller.faqList[index],
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Card(
+                                      elevation: 5,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child:
+                                            // ShaderMask(
+                                            //   blendMode: BlendMode.srcIn,
+                                            //   shaderCallback: (Rect bounds) {
+                                            //     return LinearGradient(
+                                            //       colors: [
+                                            //         Color(0xFFBC53E1),
+                                            //         Color(0xFF6285E3),
+                                            //       ],
+                                            //       begin: Alignment.topLeft,
+                                            //       end: Alignment.bottomRight,
+                                            //     ).createShader(bounds);
+                                            //   },
+                                            //   child:
+                                            CustomImage(
+                                          image: '${global.appInfo.baseUrls.faqImageUrl}/${controller.faqList[index].image}',
+                                          height: 25,
+                                          //width: Get.width,
+                                          fit: BoxFit.contain,
+                                        ),
+                                        // Image.asset(
+                                        //   Images.cube,
+                                        //   height: 25,
+                                        // ),
+                                      ),
+                                      //),
+                                    ),
+                                    Text(
+                                      controller.faqList[index].ques,
+                                      textAlign: TextAlign.center,
+                                      style: Get.theme.primaryTextTheme.subtitle2,
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
                           },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Card(
-                                  elevation: 5,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child:
-                                        // ShaderMask(
-                                        //   blendMode: BlendMode.srcIn,
-                                        //   shaderCallback: (Rect bounds) {
-                                        //     return LinearGradient(
-                                        //       colors: [
-                                        //         Color(0xFFBC53E1),
-                                        //         Color(0xFF6285E3),
-                                        //       ],
-                                        //       begin: Alignment.topLeft,
-                                        //       end: Alignment.bottomRight,
-                                        //     ).createShader(bounds);
-                                        //   },
-                                        //   child:
-                                        CustomImage(
-                                      image: '${global.appInfo.baseUrls.faqImageUrl}/${commonController.faqList[index].image}',
-                                      height: 25,
-                                      //width: Get.width,
-                                      fit: BoxFit.contain,
-                                    ),
-                                    // Image.asset(
-                                    //   Images.cube,
-                                    //   height: 25,
-                                    // ),
-                                  ),
-                                  //),
-                                ),
-                                Text(
-                                  commonController.faqList[index].ques,
-                                  textAlign: TextAlign.center,
-                                  style: Get.theme.primaryTextTheme.subtitle2,
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    )
+                        )
+                      : Expanded(
+                          child: Center(
+                              child: Text(
+                          'No Data found.',
+                          style: TextStyle(color: Colors.white),
+                        )))
                   : GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,

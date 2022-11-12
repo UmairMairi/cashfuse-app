@@ -48,121 +48,123 @@ class MoreCampignScreen extends StatelessWidget {
               Divider(
                 height: 0,
               ),
-              ListView.builder(
-                padding: EdgeInsets.all(20),
-                shrinkWrap: true,
-                itemCount: homeController.seeMoreCampaignList.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          CustomImage(
-                            image: '${global.appInfo.baseUrls.offerImageUrl}/${homeController.seeMoreCampaignList[index].image}',
-                            height: 50,
-                            width: 50,
-                            fit: BoxFit.fill,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  homeController.seeMoreCampaignList[index].name,
-                                  textAlign: TextAlign.start,
-                                  style: Get.theme.primaryTextTheme.subtitle2,
-                                ),
-                                Text(
-                                  homeController.seeMoreCampaignList[index].description,
-                                  textAlign: TextAlign.start,
-                                ),
-                              ],
+              Expanded(
+                child: ListView.builder(
+                  padding: EdgeInsets.all(20),
+                  shrinkWrap: true,
+                  itemCount: homeController.seeMoreCampaignList.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            CustomImage(
+                              image: '${global.appInfo.baseUrls.offerImageUrl}/${homeController.seeMoreCampaignList[index].image}',
+                              height: 50,
+                              width: 50,
+                              fit: BoxFit.fill,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    homeController.seeMoreCampaignList[index].name,
+                                    textAlign: TextAlign.start,
+                                    style: Get.theme.primaryTextTheme.subtitle2,
+                                  ),
+                                  Text(
+                                    homeController.seeMoreCampaignList[index].description,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            Get.back();
+                            await homeController.getCampignDetails(homeController.seeMoreCampaignList[index].id.toString());
+                            Get.off(() => CampaignDetailScreen(
+                                  campaign: homeController.campaign,
+                                  fromSeeMore: true,
+                                ));
+                          },
+                          child: Container(
+                            width: Get.width / 2,
+                            height: 45,
+                            margin: EdgeInsets.only(top: 10, bottom: 10),
+                            padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                  color: Get.theme.secondaryHeaderColor,
+                                  width: 1,
+                                )),
+                            alignment: Alignment.center,
+                            child: Text(
+                              homeController.seeMoreCampaignList[index].buttonText,
+                              style: TextStyle(color: Get.theme.secondaryHeaderColor, fontSize: 14, fontWeight: FontWeight.w600),
                             ),
                           ),
-                        ],
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          Get.back();
-                          await homeController.getCampignDetails(homeController.seeMoreCampaignList[index].id.toString());
-                          Get.off(() => CampaignDetailScreen(
-                                campaign: homeController.campaign,
-                                fromSeeMore: true,
-                              ));
-                        },
-                        child: Container(
-                          width: Get.width / 2,
-                          height: 45,
-                          margin: EdgeInsets.only(top: 10, bottom: 10),
-                          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                color: Get.theme.secondaryHeaderColor,
-                                width: 1,
-                              )),
-                          alignment: Alignment.center,
-                          child: Text(
-                            homeController.seeMoreCampaignList[index].buttonText,
-                            style: TextStyle(color: Get.theme.secondaryHeaderColor, fontSize: 14, fontWeight: FontWeight.w600),
-                          ),
                         ),
-                      ),
-                      Container(
-                        height: 10,
-                        margin: EdgeInsets.symmetric(vertical: 10),
-                        color: Colors.grey[200],
-                      ),
-                    ],
-                  );
-                  // Column(
-                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                  //   children: [
-                  //     Text(
-                  //       'Expires in 15 days',
-                  //       style: TextStyle(
-                  //         fontSize: 11,
-                  //         color: Colors.grey,
-                  //       ),
-                  //     ),
-                  //     Padding(
-                  //       padding: const EdgeInsets.symmetric(vertical: 10),
-                  //       child: Text('Earn upto 6% Cashback on all Myntra Orders + 24% Bonus Cashback (Once per user)'),
-                  //     ),
-                  //     Text(
-                  //       'See Details',
-                  //       style: TextStyle(
-                  //         fontSize: 10,
-                  //         color: Colors.blue,
-                  //       ),
-                  //     ),
-                  //     Container(
-                  //       width: Get.width / 2,
-                  //       height: 45,
-                  //       margin: EdgeInsets.only(top: 10, bottom: 10),
-                  //       padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-                  //       decoration: BoxDecoration(
-                  //           borderRadius: BorderRadius.circular(5),
-                  //           border: Border.all(
-                  //             color: Get.theme.secondaryHeaderColor,
-                  //             width: 1,
-                  //           )),
-                  //       alignment: Alignment.center,
-                  //       child: Text(
-                  //         'ACTIVATE CASHBACK',
-                  //         style: TextStyle(color: Get.theme.secondaryHeaderColor, fontSize: 14, fontWeight: FontWeight.w600),
-                  //       ),
-                  //     ),
-                  //     Container(
-                  //       height: 10,
-                  //       margin: EdgeInsets.symmetric(vertical: 10),
-                  //       color: Colors.grey[200],
-                  //     ),
-                  //   ],
-                  // );
-                },
+                        Container(
+                          height: 10,
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          color: Colors.grey[200],
+                        ),
+                      ],
+                    );
+                    // Column(
+                    //   crossAxisAlignment: CrossAxisAlignment.start,
+                    //   children: [
+                    //     Text(
+                    //       'Expires in 15 days',
+                    //       style: TextStyle(
+                    //         fontSize: 11,
+                    //         color: Colors.grey,
+                    //       ),
+                    //     ),
+                    //     Padding(
+                    //       padding: const EdgeInsets.symmetric(vertical: 10),
+                    //       child: Text('Earn upto 6% Cashback on all Myntra Orders + 24% Bonus Cashback (Once per user)'),
+                    //     ),
+                    //     Text(
+                    //       'See Details',
+                    //       style: TextStyle(
+                    //         fontSize: 10,
+                    //         color: Colors.blue,
+                    //       ),
+                    //     ),
+                    //     Container(
+                    //       width: Get.width / 2,
+                    //       height: 45,
+                    //       margin: EdgeInsets.only(top: 10, bottom: 10),
+                    //       padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                    //       decoration: BoxDecoration(
+                    //           borderRadius: BorderRadius.circular(5),
+                    //           border: Border.all(
+                    //             color: Get.theme.secondaryHeaderColor,
+                    //             width: 1,
+                    //           )),
+                    //       alignment: Alignment.center,
+                    //       child: Text(
+                    //         'ACTIVATE CASHBACK',
+                    //         style: TextStyle(color: Get.theme.secondaryHeaderColor, fontSize: 14, fontWeight: FontWeight.w600),
+                    //       ),
+                    //     ),
+                    //     Container(
+                    //       height: 10,
+                    //       margin: EdgeInsets.symmetric(vertical: 10),
+                    //       color: Colors.grey[200],
+                    //     ),
+                    //   ],
+                    // );
+                  },
+                ),
               ),
             ],
           ),

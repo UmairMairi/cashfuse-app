@@ -1,6 +1,5 @@
 import 'package:cashbackapp/utils/images.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -9,16 +8,17 @@ class SplashScreen extends StatelessWidget {
       //backgroundColor: Get.theme.primaryColor,
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Get.theme.primaryColor,
+          color: Colors.white,
+          // gradient: LinearGradient(
+          //   begin: Alignment.topCenter,
+          //   end: Alignment.bottomCenter,
+          //   colors: [
+          //     Get.theme.primaryColor,
 
-              ///Get.theme.primaryColor,
-              Get.theme.primaryColor.withOpacity(0.2),
-            ],
-          ),
+          //     ///Get.theme.primaryColor,
+          //     Get.theme.primaryColor.withOpacity(0.2),
+          //   ],
+          // ),
         ),
         child: Center(
           child: Column(
