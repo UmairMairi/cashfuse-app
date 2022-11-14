@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SeeMoreSheet extends StatelessWidget {
   final int screenId;
@@ -53,7 +54,7 @@ class SeeMoreSheet extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "What's Next",
+                                AppLocalizations.of(context).what_next,
                                 style: Get.theme.primaryTextTheme.subtitle1.copyWith(
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -250,7 +251,7 @@ class SeeMoreSheet extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "Coupons",
+                                        AppLocalizations.of(context).coupon,
                                         style: Get.theme.primaryTextTheme.subtitle1.copyWith(
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -306,7 +307,7 @@ class SeeMoreSheet extends StatelessWidget {
                                                 });
                                               },
                                               child: Text(
-                                                'Copy Code',
+                                                AppLocalizations.of(context).copy_code,
                                                 style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                                                   decoration: TextDecoration.underline,
                                                   color: Get.theme.secondaryHeaderColor,
@@ -400,7 +401,7 @@ class SeeMoreSheet extends StatelessWidget {
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: ' See more',
+                                    text: ' ${AppLocalizations.of(context).see_more}',
                                     style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w300,
@@ -441,7 +442,7 @@ class SeeMoreSheet extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 5, right: 15),
                                 child: Text(
-                                  ' Coupon',
+                                  ' ${AppLocalizations.of(context).coupon}',
                                   style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                     letterSpacing: -0.2,
                                     fontWeight: FontWeight.w300,

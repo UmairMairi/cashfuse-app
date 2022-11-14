@@ -6,6 +6,7 @@ import 'package:cashbackapp/widget/webview/seeMoreSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WebViewScreen extends StatelessWidget {
   final String urlString;
@@ -48,11 +49,15 @@ class WebViewScreen extends StatelessWidget {
               InAppWebView(
                 initialUrlRequest: URLRequest(url: Uri.parse(urlString)),
                 onLoadStart: (controller, url) {
-                  homeController.updtaeRotate(true);
-                },
-                onLoadStop: (controller, url) {
                   homeController.updtaeRotate(false);
                 },
+                onWebViewCreated: (controller) {
+                  homeController.updtaeRotate(true);
+                },
+
+                // onLoadStop: (controller, url) {
+                //   homeController.updtaeRotate(false);
+                // },
                 initialOptions: InAppWebViewGroupOptions(
                   android: AndroidInAppWebViewOptions(
                     mixedContentMode: AndroidMixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW,
@@ -182,7 +187,7 @@ class WebViewScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15).copyWith(left: 5),
                           child: Text(
-                            ' Coupon',
+                            ' ${AppLocalizations.of(context).coupon}',
                             style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                               letterSpacing: -0.2,
                               fontWeight: FontWeight.w300,

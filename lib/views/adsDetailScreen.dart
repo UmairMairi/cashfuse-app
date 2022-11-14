@@ -12,6 +12,7 @@ import 'package:customizable_space_bar/customizable_space_bar.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AdsDetailScreen extends StatelessWidget {
   final AdsModel ads;
@@ -105,7 +106,7 @@ class AdsDetailScreen extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Text('Share  '),
+                          Text('${AppLocalizations.of(context).share}  '),
                           CircleAvatar(
                             radius: 12,
                             backgroundColor: Colors.green[700],
@@ -234,7 +235,7 @@ class AdsDetailScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                ads.buttonText.isNotEmpty ? ads.buttonText : 'EARN CASHBACK',
+                                ads.buttonText,
                                 style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                               ),
                             ),
@@ -299,7 +300,7 @@ class AdsDetailScreen extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Purchase',
+                                        AppLocalizations.of(context).purchase,
                                         style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
                                       ),
                                       Text(
@@ -316,7 +317,7 @@ class AdsDetailScreen extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Cashback tracks in',
+                                        AppLocalizations.of(context).cashback_tracks_in,
                                         style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
                                       ),
                                       Text(
@@ -355,7 +356,7 @@ class AdsDetailScreen extends StatelessWidget {
                                           )),
                                       alignment: Alignment.center,
                                       child: Text(
-                                        'See More Offers  >',
+                                        '${AppLocalizations.of(context).see_more_offers}  >',
                                         style: TextStyle(color: Colors.teal[200], fontSize: 14, fontWeight: FontWeight.w400),
                                       ),
                                     ),

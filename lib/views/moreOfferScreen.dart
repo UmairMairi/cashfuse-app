@@ -4,6 +4,7 @@ import 'package:cashbackapp/views/offerDetailScreen.dart';
 import 'package:cashbackapp/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MoreOfferScreen extends StatelessWidget {
   @override
@@ -24,7 +25,7 @@ class MoreOfferScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'See more offers',
+                      AppLocalizations.of(context).see_more_offers,
                       style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.1,
@@ -99,14 +100,14 @@ class MoreOfferScreen extends StatelessWidget {
                         InkWell(
                           onTap: () async {
                             Get.back();
-                            await homeController.getCampignDetails(homeController.seeMoreOfferList[index].id.toString());
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (context) => OfferDetailScreen(
-                                  offer: homeController.offer,
-                                  fromSeeMore: true,
-                                ),
+                            await homeController.getOfferDetails(homeController.seeMoreOfferList[index].id.toString());
+
+                            Get.off(
+                              () => OfferDetailScreen(
+                                fromSeeMore: true,
+                                offer: homeController.offer,
                               ),
+                              preventDuplicates: false,
                             );
                           },
                           child: Container(

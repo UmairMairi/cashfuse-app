@@ -2,7 +2,7 @@ import 'package:cashbackapp/views/helpDetailSceen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../controllers/commonController.dart';
 
 class FaqScreen extends StatelessWidget {
@@ -22,7 +22,7 @@ class FaqScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'FAQs',
+          AppLocalizations.of(context).faqs,
           style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.white),
         ),
         actions: [
@@ -84,7 +84,7 @@ class FaqScreen extends StatelessWidget {
             ),
             alignment: Alignment.center,
             child: Text(
-              'Message Us',
+              AppLocalizations.of(context).message_us,
               style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w400,
@@ -97,7 +97,7 @@ class FaqScreen extends StatelessWidget {
             color: Colors.black,
             alignment: Alignment.center,
             child: Text(
-              'Powered by Freshdesk',
+              AppLocalizations.of(context).powered_by,
               style: Get.theme.primaryTextTheme.caption.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w300,

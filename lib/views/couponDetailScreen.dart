@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:slide_countdown/slide_countdown.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CouponDetailScreen extends StatelessWidget {
   final Coupon coupon;
@@ -51,7 +52,7 @@ class CouponDetailScreen extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Text('Share  '),
+                  Text('${AppLocalizations.of(context).share}  '),
                   CircleAvatar(
                     radius: 12,
                     backgroundColor: Colors.green[700],
@@ -74,7 +75,7 @@ class CouponDetailScreen extends StatelessWidget {
               height: 20,
             ),
             Text(
-              'Deal ends in:',
+              AppLocalizations.of(context).deal_ends_in,
               style: Get.theme.primaryTextTheme.subtitle2,
             ),
             homeController.countTimer(DateTime.now(), coupon.endDate) != null
@@ -165,7 +166,7 @@ class CouponDetailScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Use Code',
+                        AppLocalizations.of(context).use_code,
                         style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                           color: Colors.grey,
                           fontWeight: FontWeight.w300,
@@ -197,7 +198,7 @@ class CouponDetailScreen extends StatelessWidget {
                           });
                         },
                         child: Text(
-                          'Copy Code',
+                          AppLocalizations.of(context).copy_code,
                           style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                             color: Colors.teal,
                             fontWeight: FontWeight.w300,
@@ -242,7 +243,7 @@ class CouponDetailScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'About this Coupon',
+                      AppLocalizations.of(context).about_this_coupon,
                       style: Get.theme.primaryTextTheme.subtitle2,
                     ),
                     Divider(),

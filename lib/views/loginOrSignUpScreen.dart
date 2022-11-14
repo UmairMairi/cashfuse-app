@@ -4,6 +4,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginOrSignUpScreen extends StatelessWidget {
   @override
@@ -29,7 +30,7 @@ class LoginOrSignUpScreen extends StatelessWidget {
               ),
               Center(
                 child: Text(
-                  'Login or signup',
+                  AppLocalizations.of(context).login,
                   style: Get.theme.primaryTextTheme.displaySmall.copyWith(
                     letterSpacing: -1,
                     fontWeight: FontWeight.w700,
@@ -39,7 +40,7 @@ class LoginOrSignUpScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
-                  'We will send a SMS to verify',
+                  AppLocalizations.of(context).login_subtitle,
                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                     letterSpacing: -0.2,
                     fontWeight: FontWeight.w600,
@@ -189,7 +190,7 @@ class LoginOrSignUpScreen extends StatelessWidget {
             ),
             alignment: Alignment.center,
             child: Text(
-              'Continue',
+              AppLocalizations.of(context).conti,
               style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
             ),
           ),

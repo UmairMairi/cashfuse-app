@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GetStartedScreen extends StatelessWidget {
   final bool fromSplash;
@@ -32,7 +33,7 @@ class GetStartedScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 70),
                   child: Text(
-                    'See How To',
+                    AppLocalizations.of(context).see_how_to,
                     style: Get.theme.primaryTextTheme.headline5.copyWith(
                       letterSpacing: -1.5,
                       fontWeight: FontWeight.w400,
@@ -46,7 +47,7 @@ class GetStartedScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 100),
                   child: Text(
-                    'Earn Cashback',
+                    AppLocalizations.of(context).earn_cashback,
                     style: Get.theme.primaryTextTheme.displaySmall.copyWith(
                       letterSpacing: -2,
                       fontWeight: FontWeight.w500,
@@ -83,7 +84,7 @@ class GetStartedScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(
-                          'LOG IN OR SIGN UP',
+                          AppLocalizations.of(context).login_or_signup,
                           style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.w500,

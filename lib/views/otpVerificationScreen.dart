@@ -2,6 +2,7 @@ import 'package:cashbackapp/controllers/authController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OtpVerificationScreen extends StatelessWidget {
   final String verificationCode;
@@ -32,7 +33,7 @@ class OtpVerificationScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
-                  'Enter 6 digit code we have sent you',
+                  AppLocalizations.of(context).otp_title,
                   textAlign: TextAlign.left,
                   style: Get.theme.primaryTextTheme.displaySmall.copyWith(
                     height: 1.2,
@@ -47,7 +48,7 @@ class OtpVerificationScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Code sent to ${authController.contactNo.text}',
+                      '${AppLocalizations.of(context).otp_subtitle} ${authController.contactNo.text}',
                       style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                         letterSpacing: -0.2,
                         fontWeight: FontWeight.w500,
@@ -120,14 +121,14 @@ class OtpVerificationScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: RichText(
                           text: TextSpan(
-                            text: "Haven't receive the OTP?",
+                            text: AppLocalizations.of(context).otp_not_receive,
                             style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                               letterSpacing: -0.2,
                               fontWeight: FontWeight.w600,
                             ),
                             children: <TextSpan>[
                               TextSpan(
-                                text: ' Resend',
+                                text: ' ${AppLocalizations.of(context).resend}',
                                 style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                   letterSpacing: -0.2,
                                   fontWeight: FontWeight.w500,
@@ -175,7 +176,7 @@ class OtpVerificationScreen extends StatelessWidget {
             ),
             alignment: Alignment.center,
             child: Text(
-              'Continue',
+              AppLocalizations.of(context).conti,
               style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
             ),
           ),

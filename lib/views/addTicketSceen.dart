@@ -5,6 +5,7 @@ import 'package:cashbackapp/models/orderModel.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddTicketSceen extends StatelessWidget {
   final OrderModel orderModel;
@@ -25,7 +26,7 @@ class AddTicketSceen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Add Complaint',
+          AppLocalizations.of(context).add_complaint,
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
       ),
@@ -259,7 +260,7 @@ class AddTicketSceen extends StatelessWidget {
           color: Get.theme.secondaryHeaderColor,
           alignment: Alignment.center,
           child: Text(
-            'SUBMIT',
+            AppLocalizations.of(context).submit,
             style: Get.theme.primaryTextTheme.subtitle2.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w600,

@@ -5,6 +5,7 @@ import 'package:cashbackapp/models/clickModel.dart';
 import 'package:cashbackapp/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RecentClickDialogWidget extends StatelessWidget {
   final ClickModel click;
@@ -70,7 +71,7 @@ class RecentClickDialogWidget extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: Text(
-                'SEE BEST DEALS',
+                AppLocalizations.of(context).see_best_deals,
                 style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
               ),
             ),

@@ -7,6 +7,7 @@ import 'package:cashbackapp/views/aboutUsScreen.dart';
 import 'package:cashbackapp/views/accountSettingScreen.dart';
 import 'package:cashbackapp/views/colorPicker.dart';
 import 'package:cashbackapp/views/getHelpScreen.dart';
+import 'package:cashbackapp/views/languageScreen.dart';
 import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
 import 'package:cashbackapp/views/myEarningScreen.dart';
 import 'package:cashbackapp/views/paymentHistoryScreen.dart';
@@ -18,6 +19,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:store_redirect/store_redirect.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfieScreen extends StatelessWidget {
   @override
@@ -38,7 +40,7 @@ class ProfieScreen extends StatelessWidget {
               ),
             ),
             title: Text(
-              global.currentUser.id != null ? 'Profile' : '',
+              global.currentUser.id != null ? AppLocalizations.of(context).profile : '',
               style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
             ),
           ),
@@ -58,14 +60,22 @@ class ProfieScreen extends StatelessWidget {
                                   radius: 25,
                                   backgroundColor: Colors.white,
                                   child: global.currentUser.userImage.isNotEmpty
-                                      ? CustomImage(
-                                          image: global.appInfo.baseUrls.userImageUrl + '/' + global.currentUser.userImage,
-                                          height: 30,
-                                          width: 30,
+                                      ? ClipRRect(
+                                          borderRadius: BorderRadius.circular(25),
+                                          child: CustomImage(
+                                            image: global.appInfo.baseUrls.userImageUrl + '/' + global.currentUser.userImage,
+                                            // height: 30,
+                                            // width: 30,
+                                            fit: BoxFit.cover,
+                                          ),
                                         )
-                                      : Image.asset(
-                                          Images.user,
-                                          height: 30,
+                                      : ClipRRect(
+                                          borderRadius: BorderRadius.circular(25),
+                                          child: Image.asset(
+                                            Images.user,
+                                            //height: 30,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                 ),
                                 title: Text(
@@ -84,7 +94,7 @@ class ProfieScreen extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Pending',
+                                        AppLocalizations.of(context).pending,
                                         style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                           color: Colors.white,
                                           fontSize: 11,
@@ -110,7 +120,7 @@ class ProfieScreen extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Approved',
+                                        AppLocalizations.of(context).approved,
                                         style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                           color: Colors.white,
                                           letterSpacing: 0,
@@ -136,7 +146,7 @@ class ProfieScreen extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Redeemed',
+                                        AppLocalizations.of(context).redeemed,
                                         style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                           color: Colors.white,
                                           letterSpacing: 0,
@@ -236,7 +246,7 @@ class ProfieScreen extends StatelessWidget {
                                 width: 20,
                               ),
                               Text(
-                                'Account Settings',
+                                AppLocalizations.of(context).account_settings,
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
@@ -262,7 +272,7 @@ class ProfieScreen extends StatelessWidget {
                                 width: 20,
                               ),
                               Text(
-                                'My Earnings',
+                                AppLocalizations.of(context).my_earnings,
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
@@ -288,7 +298,7 @@ class ProfieScreen extends StatelessWidget {
                                 width: 20,
                               ),
                               Text(
-                                'Payments',
+                                AppLocalizations.of(context).payments,
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
@@ -314,7 +324,7 @@ class ProfieScreen extends StatelessWidget {
                                 width: 20,
                               ),
                               Text(
-                                'Payments History',
+                                AppLocalizations.of(context).payment_history,
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
@@ -444,7 +454,7 @@ class ProfieScreen extends StatelessWidget {
                                 width: 20,
                               ),
                               Text(
-                                'Recent Clicks',
+                                AppLocalizations.of(context).recents_clicks,
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
@@ -470,7 +480,7 @@ class ProfieScreen extends StatelessWidget {
                                 width: 20,
                               ),
                               Text(
-                                'Get Help',
+                                AppLocalizations.of(context).get_help,
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
@@ -496,7 +506,37 @@ class ProfieScreen extends StatelessWidget {
                                 width: 20,
                               ),
                               Text(
-                                'Theme',
+                                AppLocalizations.of(context).theme,
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => LanguageScreen());
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          child: Row(
+                            children: [
+                              // Icon(
+                              //   Icons.,
+                              //   color: Get.theme.iconTheme.color,
+                              // ),
+                              Image.asset(
+                                Images.translation,
+                                height: 20,
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                AppLocalizations.of(context).language,
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
@@ -558,7 +598,7 @@ class ProfieScreen extends StatelessWidget {
                                 width: 20,
                               ),
                               Text(
-                                'Rate US',
+                                AppLocalizations.of(context).rate_us,
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
@@ -587,7 +627,7 @@ class ProfieScreen extends StatelessWidget {
                                 width: 20,
                               ),
                               Text(
-                                'About Us',
+                                AppLocalizations.of(context).about_us,
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
@@ -613,7 +653,7 @@ class ProfieScreen extends StatelessWidget {
                                 width: 20,
                               ),
                               Text(
-                                'Privacy Policy',
+                                AppLocalizations.of(context).privacy_policy,
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
@@ -627,12 +667,12 @@ class ProfieScreen extends StatelessWidget {
                         onTap: () {
                           showConfirmationDialog(
                             context,
-                            'Logout',
-                            'Are you sure you want to logout ?',
+                            AppLocalizations.of(context).logout,
+                            AppLocalizations.of(context).logout_desc,
                             [
                               CupertinoDialogAction(
                                 child: Text(
-                                  'Yes',
+                                  AppLocalizations.of(context).yes,
                                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.red),
                                 ),
                                 onPressed: () {
@@ -642,7 +682,7 @@ class ProfieScreen extends StatelessWidget {
                               ),
                               CupertinoDialogAction(
                                 child: Text(
-                                  'No',
+                                  AppLocalizations.of(context).no,
                                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.blue),
                                 ),
                                 onPressed: () {
@@ -664,7 +704,7 @@ class ProfieScreen extends StatelessWidget {
                                 width: 20,
                               ),
                               Text(
-                                'Logout',
+                                AppLocalizations.of(context).logout,
                                 style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
                                   letterSpacing: -0.5,
                                   color: Colors.red,
@@ -684,7 +724,7 @@ class ProfieScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Login or signup',
+                        AppLocalizations.of(context).login,
                         style: Get.theme.primaryTextTheme.displaySmall.copyWith(
                           letterSpacing: -1,
                           fontWeight: FontWeight.w700,
@@ -693,7 +733,7 @@ class ProfieScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Text(
-                          'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
+                          AppLocalizations.of(context).profile_desc,
                           textAlign: TextAlign.center,
                           style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                             letterSpacing: -0.2,
@@ -716,7 +756,7 @@ class ProfieScreen extends StatelessWidget {
                           ),
                           alignment: Alignment.center,
                           child: Text(
-                            'Continue'.toUpperCase(),
+                            AppLocalizations.of(context).conti.toUpperCase(),
                             style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                           ),
                         ),

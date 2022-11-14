@@ -3,6 +3,7 @@ import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpiRedeemScreen extends StatelessWidget {
   final fContactNo = new FocusNode();
@@ -25,7 +26,7 @@ class UpiRedeemScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Upi Redeem',
+          AppLocalizations.of(context).upi_redeem,
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
       ),
@@ -81,7 +82,7 @@ class UpiRedeemScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Account Details',
+                            AppLocalizations.of(context).account_details,
                             style: Get.theme.primaryTextTheme.subtitle1.copyWith(fontWeight: FontWeight.w600),
                           ),
                           InkWell(
@@ -104,7 +105,7 @@ class UpiRedeemScreen extends StatelessWidget {
                                         //   height: 20,
                                         // ),
                                         Text(
-                                          'Add Upi Account',
+                                          AppLocalizations.of(context).upi_account_add,
                                           style: Get.theme.primaryTextTheme.headline6.copyWith(fontWeight: FontWeight.w600),
                                         ),
                                         // TextFormField(
@@ -187,7 +188,7 @@ class UpiRedeemScreen extends StatelessWidget {
                                             ),
                                             alignment: Alignment.center,
                                             child: Text(
-                                              paymentController.upiDetails != null ? 'EDIT' : 'ADD +',
+                                              paymentController.upiDetails != null ? AppLocalizations.of(context).edit.toString().toUpperCase() : '${AppLocalizations.of(context).add.toString().toUpperCase()} +',
                                               style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                                             ),
                                           ),
@@ -208,7 +209,7 @@ class UpiRedeemScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                paymentController.upiDetails != null ? 'EDIT' : 'ADD +',
+                                paymentController.upiDetails != null ? AppLocalizations.of(context).edit.toString().toUpperCase() : '${AppLocalizations.of(context).add.toString().toUpperCase()} +',
                                 style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                               ),
                             ),
@@ -218,7 +219,7 @@ class UpiRedeemScreen extends StatelessWidget {
                       paymentController.upiDetails != null
                           ? RichText(
                               text: TextSpan(
-                                text: "UPI address: ",
+                                text: "${AppLocalizations.of(context).upi_address} ",
                                 style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                   letterSpacing: -0.2,
                                   fontWeight: FontWeight.w500,
@@ -259,7 +260,7 @@ class UpiRedeemScreen extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 child: Text(
-                  'Send Withdrawal Request',
+                  AppLocalizations.of(context).send_withdrawal_request,
                   style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                 ),
               ),

@@ -11,6 +11,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyOrdersScreen extends StatelessWidget {
   OrderController orderController = Get.find<OrderController>();
@@ -29,7 +30,7 @@ class MyOrdersScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'My Orders',
+          AppLocalizations.of(context).my_orders,
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
       ),
@@ -85,7 +86,7 @@ class MyOrdersScreen extends StatelessWidget {
                                           ),
                                         ),
                                         child: Text(
-                                          'Raise Ticket',
+                                          AppLocalizations.of(context).raise_complaint,
                                           style: TextStyle(
                                             fontSize: 10,
                                             color: Get.theme.primaryColor,
@@ -152,7 +153,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                         size: 20,
                                                       ),
                                                       Text(
-                                                        'Shopping',
+                                                        AppLocalizations.of(context).shopping,
                                                         style: TextStyle(
                                                           fontSize: 10,
                                                           color: Colors.black54,
@@ -349,7 +350,7 @@ class MyOrdersScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 10),
                           child: Text(
-                            "There is where it all happens!",
+                            AppLocalizations.of(context).orders_title,
                             style: Get.theme.primaryTextTheme.subtitle1.copyWith(fontWeight: FontWeight.w500),
                           ),
                         ),
@@ -378,7 +379,7 @@ class MyOrdersScreen extends StatelessWidget {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              'SEE BEST DEALS',
+                              AppLocalizations.of(context).see_best_deals,
                               style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                             ),
                           ),

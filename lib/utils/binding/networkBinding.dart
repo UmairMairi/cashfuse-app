@@ -3,6 +3,7 @@ import 'package:cashbackapp/controllers/commonController.dart';
 import 'package:cashbackapp/controllers/couponController.dart';
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/controllers/imageController.dart';
+import 'package:cashbackapp/controllers/localizationController.dart';
 import 'package:cashbackapp/controllers/networkController.dart';
 import 'package:cashbackapp/controllers/orderController.dart';
 import 'package:cashbackapp/controllers/paymentController.dart';
@@ -29,5 +30,6 @@ class NetworkBinding extends Bindings {
     Get.lazyPut<SearchController>(() => SearchController(), fenix: true);
     Get.lazyPut<ImageControlller>(() => ImageControlller(), fenix: true);
     Get.lazyPut<OrderController>(() => OrderController(), fenix: true);
+    Get.lazyPut<LocalizationController>(() => LocalizationController(), fenix: true);
   }
 }

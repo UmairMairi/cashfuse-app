@@ -5,6 +5,7 @@ import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/widget/addBankAccountDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddPaymentDetailScreen extends StatelessWidget {
   PaymentController paymentController = Get.find<PaymentController>();
@@ -24,7 +25,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
             ),
           ),
           title: Text(
-            'Bank Transfer Redeem',
+            AppLocalizations.of(context).bank_transfer_redeem,
             style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
           ),
         ),
@@ -78,7 +79,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Account Details',
+                            AppLocalizations.of(context).account_details,
                             style: Get.theme.primaryTextTheme.subtitle1.copyWith(fontWeight: FontWeight.w600),
                           ),
                           InkWell(
@@ -100,7 +101,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                paymentController.bankDetails != null ? 'EDIT' : 'ADD +',
+                                paymentController.bankDetails != null ? AppLocalizations.of(context).edit.toString().toUpperCase() : '${AppLocalizations.of(context).add.toString().toUpperCase()} +',
                                 style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                               ),
                             ),
@@ -113,7 +114,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                               children: [
                                 RichText(
                                   text: TextSpan(
-                                    text: "Holder Name: ",
+                                    text: AppLocalizations.of(context).holder_name,
                                     style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
@@ -131,7 +132,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                 ),
                                 RichText(
                                   text: TextSpan(
-                                    text: "Account No. ",
+                                    text: AppLocalizations.of(context).account_no,
                                     style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
@@ -149,7 +150,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                 ),
                                 RichText(
                                   text: TextSpan(
-                                    text: "Bank Name: ",
+                                    text: AppLocalizations.of(context).bank_name,
                                     style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
@@ -167,7 +168,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                 ),
                                 RichText(
                                   text: TextSpan(
-                                    text: "IFSC Code: ",
+                                    text: AppLocalizations.of(context).ifsc_code,
                                     style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
@@ -209,7 +210,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                   ),
                   alignment: Alignment.center,
                   child: Text(
-                    'Send Withdrawal Request',
+                    AppLocalizations.of(context).send_withdrawal_request,
                     style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                   ),
                 ),

@@ -943,4 +943,26 @@ class APIHelper {
       print("Exception -  apiHelper.dart - getBannerNotification():" + e.toString());
     }
   }
+
+  Future<dynamic> deleteClicks() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.DELETE_CLICK_URI}?user_id=${global.currentUser.id}',
+          options: Options(
+            headers: await global.getApiHeaders(true),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = response.data['data'];
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.DELETE_CLICK_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - deleteClicks():" + e.toString());
+    }
+  }
 }

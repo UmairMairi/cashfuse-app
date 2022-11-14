@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GetHelpScreen extends StatelessWidget {
   final fSeachNode = new FocusNode();
@@ -23,7 +24,7 @@ class GetHelpScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Get Help',
+          AppLocalizations.of(context).get_help,
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
       ),

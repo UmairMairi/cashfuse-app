@@ -37,7 +37,8 @@ class ImageControlller extends GetxController {
           sourcePath: _selectedImage.path,
           uiSettings: [
             AndroidUiSettings(
-              initAspectRatio: CropAspectRatioPreset.ratio4x3,
+              initAspectRatio: CropAspectRatioPreset.square,
+              hideBottomControls: true,
               backgroundColor: Colors.grey,
               toolbarColor: Colors.grey[100],
               toolbarWidgetColor: Colors.blue[200],

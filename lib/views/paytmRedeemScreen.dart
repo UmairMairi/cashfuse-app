@@ -4,6 +4,7 @@ import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaytmRedeemScreen extends StatelessWidget {
   final fContactNo = new FocusNode();
@@ -25,7 +26,7 @@ class PaytmRedeemScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'PayTM Redeem',
+          AppLocalizations.of(context).payTM_redeem,
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
       ),
@@ -81,7 +82,7 @@ class PaytmRedeemScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Account Details',
+                            AppLocalizations.of(context).account_details,
                             style: Get.theme.primaryTextTheme.subtitle1.copyWith(fontWeight: FontWeight.w600),
                           ),
                           InkWell(
@@ -104,7 +105,7 @@ class PaytmRedeemScreen extends StatelessWidget {
                                         //   height: 20,
                                         // ),
                                         Text(
-                                          'Add PayTM Account',
+                                          AppLocalizations.of(context).add_payTM_account,
                                           style: Get.theme.primaryTextTheme.headline6.copyWith(fontWeight: FontWeight.w600),
                                         ),
                                         TextFormField(
@@ -162,7 +163,7 @@ class PaytmRedeemScreen extends StatelessWidget {
                                             ),
                                             alignment: Alignment.center,
                                             child: Text(
-                                              paymentController.payTMDetails != null ? 'EDIT' : 'ADD +',
+                                              paymentController.payTMDetails != null ? AppLocalizations.of(context).edit.toString().toUpperCase() : '${AppLocalizations.of(context).add.toString().toUpperCase()} +',
                                               style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                                             ),
                                           ),
@@ -182,7 +183,7 @@ class PaytmRedeemScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                paymentController.payTMDetails != null ? 'EDIT' : 'ADD +',
+                                paymentController.payTMDetails != null ? AppLocalizations.of(context).edit.toString().toUpperCase() : '${AppLocalizations.of(context).add.toString().toUpperCase()} +',
                                 style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                               ),
                             ),
@@ -192,7 +193,7 @@ class PaytmRedeemScreen extends StatelessWidget {
                       paymentController.payTMDetails != null
                           ? RichText(
                               text: TextSpan(
-                                text: "Phone No. ",
+                                text: AppLocalizations.of(context).phone_no,
                                 style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                   letterSpacing: -0.2,
                                   fontWeight: FontWeight.w500,
@@ -233,7 +234,7 @@ class PaytmRedeemScreen extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 child: Text(
-                  'Send Withdrawal Request',
+                  AppLocalizations.of(context).send_withdrawal_request,
                   style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                 ),
               ),

@@ -4,6 +4,7 @@ import 'package:cashbackapp/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MoreAdsScreen extends StatelessWidget {
   @override
@@ -24,7 +25,7 @@ class MoreAdsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'See more offers',
+                      AppLocalizations.of(context).see_more_offers,
                       style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.1,
@@ -89,10 +90,13 @@ class MoreAdsScreen extends StatelessWidget {
                           onTap: () async {
                             Get.back();
                             await homeController.getAdDetails(homeController.seeMoreAdsList[index].id.toString());
-                            Get.off(() => AdsDetailScreen(
-                                  ads: homeController.ads,
-                                  fromSeeMore: true,
-                                ));
+                            Get.off(
+                              () => AdsDetailScreen(
+                                ads: homeController.ads,
+                                fromSeeMore: true,
+                              ),
+                              preventDuplicates: false,
+                            );
                           },
                           child: Container(
                             width: Get.width / 2,

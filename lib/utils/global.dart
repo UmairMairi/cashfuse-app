@@ -26,6 +26,7 @@ List<String> clickedList = [];
 String isBannerDate = DateConverter.dateTimeToDateOnly(DateTime.now());
 bool isBannerShow = false;
 String bannerImage = '';
+String languageCode = 'en';
 
 //Api Header
 Future<Map<String, String>> getApiHeaders(bool authorizationRequired) async {

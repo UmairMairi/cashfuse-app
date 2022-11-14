@@ -4,6 +4,7 @@ import 'package:cashbackapp/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaymentScreen extends StatelessWidget {
   @override
@@ -20,7 +21,7 @@ class PaymentScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Payments',
+          AppLocalizations.of(context).payments,
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
       ),
@@ -88,7 +89,9 @@ class PaymentScreen extends StatelessWidget {
                 },
               )
             : Center(
-                child: Text('No data found.'),
+                child: Text(
+                  AppLocalizations.of(context).no_data_found,
+                ),
               );
       }),
     );

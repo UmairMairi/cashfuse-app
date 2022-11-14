@@ -14,7 +14,7 @@ class CustomImage extends StatelessWidget {
   final double height;
   double width;
   final BoxFit fit;
-  final String placeholder;
+  final String errorImage;
   final OfferModel offer;
   final CampaignModel campaign;
   final AdsModel ads;
@@ -24,7 +24,7 @@ class CustomImage extends StatelessWidget {
     this.height,
     this.width,
     this.fit,
-    this.placeholder = Images.placeholder,
+    this.errorImage = Images.placeholder,
     this.offer,
     this.campaign,
     this.ads,
@@ -63,7 +63,7 @@ class CustomImage extends StatelessWidget {
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(0),
-              image: DecorationImage(image: AssetImage('${Images.dummyImage}'), fit: fit),
+              image: DecorationImage(image: AssetImage(errorImage), fit: fit),
             ),
           );
         });

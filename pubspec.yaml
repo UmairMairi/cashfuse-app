@@ -59,6 +59,7 @@ dependencies:
   timelines: ^0.1.0
   flex_color_picker: ^2.6.1
   flutter_phoenix: ^1.1.0
+  flutter_material_color_picker: ^1.1.0+2
 
   #CONNECTIVITY
   connectivity_plus: ^2.1.0

@@ -9,11 +9,13 @@ import 'package:cashbackapp/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OfferDetailScreen extends StatelessWidget {
   final OfferModel offer;
   final bool fromSeeMore;
-  OfferDetailScreen({this.offer, this.fromSeeMore});
+  final BuildContext context1;
+  OfferDetailScreen({this.offer, this.fromSeeMore, this.context1});
 
   HomeController homeController = Get.find<HomeController>();
 
@@ -61,7 +63,7 @@ class OfferDetailScreen extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Text('Share  '),
+                      Text('${AppLocalizations.of(context).share}  '),
                       CircleAvatar(
                         radius: 12,
                         backgroundColor: Colors.green[700],
@@ -155,7 +157,7 @@ class OfferDetailScreen extends StatelessWidget {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              'GRAB DEAL',
+                              offer.buttonText,
                               style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                             ),
                           ),
@@ -233,7 +235,7 @@ class OfferDetailScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'Purchase',
+                                      AppLocalizations.of(context).purchase,
                                       style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
                                     ),
                                     Text(
@@ -250,7 +252,7 @@ class OfferDetailScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'Cashback tracks in',
+                                      AppLocalizations.of(context).cashback_tracks_in,
                                       style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
                                     ),
                                     Text(
@@ -263,9 +265,12 @@ class OfferDetailScreen extends StatelessWidget {
                             ),
                           ),
                           fromSeeMore
-                              ? SizedBox()
+                              ? SizedBox(
+                                  key: UniqueKey(),
+                                )
                               : homeController.seeMoreOfferList != null && homeController.seeMoreOfferList.length > 0
                                   ? InkWell(
+                                      key: UniqueKey(),
                                       onTap: () async {
                                         //await homeController.getMoreOffers(offer.id.toString());
                                         Get.bottomSheet(
@@ -291,7 +296,7 @@ class OfferDetailScreen extends StatelessWidget {
                                             )),
                                         alignment: Alignment.center,
                                         child: Text(
-                                          'See More Offers  >',
+                                          '${AppLocalizations.of(context).see_more_offers}  >',
                                           style: TextStyle(color: Colors.teal[200], fontSize: 14, fontWeight: FontWeight.w400),
                                         ),
                                       ),

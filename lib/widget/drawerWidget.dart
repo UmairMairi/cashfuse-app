@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:store_redirect/store_redirect.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DrawerWidget extends StatelessWidget {
   @override
@@ -34,14 +35,22 @@ class DrawerWidget extends StatelessWidget {
                             radius: 25,
                             backgroundColor: Colors.white,
                             child: global.currentUser.userImage.isNotEmpty
-                                ? CustomImage(
-                                    image: global.appInfo.baseUrls.userImageUrl + '/' + global.currentUser.userImage,
-                                    height: 30,
-                                    width: 30,
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(25),
+                                    child: CustomImage(
+                                      image: global.appInfo.baseUrls.userImageUrl + '/' + global.currentUser.userImage,
+                                      // height: 30,
+                                      // width: 30,
+                                      fit: BoxFit.cover,
+                                    ),
                                   )
-                                : Image.asset(
-                                    Images.user,
-                                    height: 30,
+                                : ClipRRect(
+                                    borderRadius: BorderRadius.circular(25),
+                                    child: Image.asset(
+                                      Images.user,
+                                      //height: 30,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                           ),
                           title: Text(
@@ -60,7 +69,7 @@ class DrawerWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Pending',
+                                  AppLocalizations.of(context).pending,
                                   style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                     color: Colors.white,
                                     fontSize: 11,
@@ -86,7 +95,7 @@ class DrawerWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Approved',
+                                  AppLocalizations.of(context).approved,
                                   style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                     color: Colors.white,
                                     letterSpacing: 0,
@@ -112,7 +121,7 @@ class DrawerWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Redeemed',
+                                  AppLocalizations.of(context).redeemed,
                                   style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                     color: Colors.white,
                                     letterSpacing: 0,
@@ -174,7 +183,7 @@ class DrawerWidget extends StatelessWidget {
                           width: 20,
                         ),
                         Text(
-                          'My account',
+                          AppLocalizations.of(context).my_account,
                           style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
@@ -202,7 +211,7 @@ class DrawerWidget extends StatelessWidget {
                           width: 20,
                         ),
                         Text(
-                          'All Categories',
+                          AppLocalizations.of(context).all_categories,
                           style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
@@ -230,7 +239,7 @@ class DrawerWidget extends StatelessWidget {
                           width: 20,
                         ),
                         Text(
-                          'Redeem Cashback',
+                          AppLocalizations.of(context).redeem_cashback,
                           style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
@@ -258,7 +267,7 @@ class DrawerWidget extends StatelessWidget {
                           width: 20,
                         ),
                         Text(
-                          'All in One Search',
+                          AppLocalizations.of(context).all_in_one_search,
                           style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
@@ -342,7 +351,7 @@ class DrawerWidget extends StatelessWidget {
                           width: 20,
                         ),
                         Text(
-                          'Share The App',
+                          AppLocalizations.of(context).share_the_app,
                           style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
@@ -372,7 +381,7 @@ class DrawerWidget extends StatelessWidget {
                           width: 20,
                         ),
                         Text(
-                          'Rate the App',
+                          AppLocalizations.of(context).rate_the_app,
                           style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
@@ -400,7 +409,7 @@ class DrawerWidget extends StatelessWidget {
                           width: 20,
                         ),
                         Text(
-                          'Get Help',
+                          AppLocalizations.of(context).get_help,
                           style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
@@ -443,7 +452,7 @@ class DrawerWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Login or signup',
+                  AppLocalizations.of(context).login,
                   textAlign: TextAlign.center,
                   style: Get.theme.primaryTextTheme.headline5.copyWith(
                     letterSpacing: -1,
@@ -454,7 +463,7 @@ class DrawerWidget extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Text(
-                    'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
+                    AppLocalizations.of(context).login_subtitle,
                     textAlign: TextAlign.center,
                     style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                       letterSpacing: -0.2,
@@ -478,7 +487,7 @@ class DrawerWidget extends StatelessWidget {
                     ),
                     alignment: Alignment.center,
                     child: Text(
-                      'Continue'.toUpperCase(),
+                      AppLocalizations.of(context).conti.toUpperCase(),
                       style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                     ),
                   ),

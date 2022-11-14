@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AccountSettingScreen extends StatelessWidget {
   final fnameFocus = new FocusNode();
@@ -38,7 +39,7 @@ class AccountSettingScreen extends StatelessWidget {
               ),
             ),
             title: Text(
-              'Account Settings',
+              AppLocalizations.of(context).account_settings,
               style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.white),
             ),
           ),
@@ -118,7 +119,7 @@ class AccountSettingScreen extends StatelessWidget {
                           Get.bottomSheet(
                             CupertinoActionSheet(
                               title: Text(
-                                'Select',
+                                AppLocalizations.of(context).select,
                                 style: Get.theme.primaryTextTheme.headline6.copyWith(
                                   color: Colors.grey,
                                 ),
@@ -133,7 +134,7 @@ class AccountSettingScreen extends StatelessWidget {
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(15),
                                     child: Text(
-                                      'Take Picture',
+                                      AppLocalizations.of(context).take_picture,
                                       style: Get.theme.primaryTextTheme.subtitle1,
                                     ),
                                   ),
@@ -147,7 +148,7 @@ class AccountSettingScreen extends StatelessWidget {
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(15),
                                     child: Text(
-                                      'Image from Gallery',
+                                      AppLocalizations.of(context).image_from_gallery,
                                       style: Get.theme.primaryTextTheme.subtitle1,
                                     ),
                                   ),
@@ -155,7 +156,7 @@ class AccountSettingScreen extends StatelessWidget {
                               ],
                               cancelButton: TextButton(
                                 child: Text(
-                                  'Cancel',
+                                  AppLocalizations.of(context).cancel,
                                   style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.red),
                                 ),
                                 onPressed: () {
@@ -186,7 +187,7 @@ class AccountSettingScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Full Name',
+                      AppLocalizations.of(context).full_name,
                       style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w300),
                     ),
                     TextFormField(
@@ -216,7 +217,7 @@ class AccountSettingScreen extends StatelessWidget {
                       height: 20,
                     ),
                     Text(
-                      'Email Address',
+                      AppLocalizations.of(context).email_address,
                       style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w300),
                     ),
                     SizedBox(
@@ -262,7 +263,7 @@ class AccountSettingScreen extends StatelessWidget {
                       height: 20,
                     ),
                     Text(
-                      'Mobile Number',
+                      AppLocalizations.of(context).mobile_number,
                       style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w300),
                     ),
                     SizedBox(
@@ -442,7 +443,7 @@ class AccountSettingScreen extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: Text(
-                'SAVE CHANGES',
+                AppLocalizations.of(context).save_changes,
                 style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,

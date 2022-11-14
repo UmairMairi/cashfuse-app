@@ -6,6 +6,7 @@ import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AmazonPayRedeemScreen extends StatelessWidget {
   final fContactNo = new FocusNode();
@@ -28,7 +29,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
             ),
           ),
           title: Text(
-            'Amazon Pay Redeem',
+            AppLocalizations.of(context).amazon_pay_redeem,
             style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
           ),
         ),
@@ -75,7 +76,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Account Details',
+                            AppLocalizations.of(context).account_details,
                             style: Get.theme.primaryTextTheme.subtitle1.copyWith(fontWeight: FontWeight.w600),
                           ),
                           InkWell(
@@ -97,7 +98,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Text(
-                                            'Add Amazon Account',
+                                            AppLocalizations.of(context).add_amazon_account,
                                             style: Get.theme.primaryTextTheme.headline6.copyWith(fontWeight: FontWeight.w600),
                                           ),
                                           TextFormField(
@@ -155,7 +156,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                               ),
                                               alignment: Alignment.center,
                                               child: Text(
-                                                paymentController.amazonDetails != null ? 'EDIT' : 'ADD +',
+                                                paymentController.amazonDetails != null ? AppLocalizations.of(context).edit.toString().toUpperCase() : '${AppLocalizations.of(context).add.toString().toUpperCase()} +',
                                                 style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                                               ),
                                             ),
@@ -176,7 +177,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                paymentController.amazonDetails != null ? 'EDIT' : 'ADD +',
+                                paymentController.amazonDetails != null ? AppLocalizations.of(context).edit.toString().toUpperCase() : '${AppLocalizations.of(context).add.toString().toUpperCase()} +',
                                 style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                               ),
                             ),
@@ -186,7 +187,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                       paymentController.amazonDetails != null
                           ? RichText(
                               text: TextSpan(
-                                text: "Phone No. ",
+                                text: AppLocalizations.of(context).phone_no,
                                 style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                   letterSpacing: -0.2,
                                   fontWeight: FontWeight.w500,
@@ -226,7 +227,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                   ),
                   alignment: Alignment.center,
                   child: Text(
-                    'Send Withdrawal Request',
+                    AppLocalizations.of(context).send_withdrawal_request,
                     style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                   ),
                 ),

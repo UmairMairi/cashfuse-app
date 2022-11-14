@@ -125,7 +125,7 @@ class HomeController extends GetxController {
     update();
   }
 
-  void updtaeRotate(bool val) {
+  void updtaeRotate(bool val) async {
     isRoted = val;
     update();
   }
@@ -596,6 +596,29 @@ class HomeController extends GetxController {
       }
     } catch (e) {
       print("Exception - HomeController.dart - getClick():" + e.toString());
+    }
+  }
+
+  Future deleteClicks() async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        Get.dialog(CustomLoader(), barrierDismissible: false);
+        await apiHelper.deleteClicks().then((response) {
+          Get.back();
+          if (response.status == "1") {
+            //_recentClickList = response.data;
+            showCustomSnackBar(response.message);
+            getClick();
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+        update();
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+    } catch (e) {
+      print("Exception - HomeController.dart - deleteClicks():" + e.toString());
     }
   }
 

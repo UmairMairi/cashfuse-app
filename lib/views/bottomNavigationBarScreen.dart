@@ -12,6 +12,7 @@ import 'package:cashbackapp/views/searchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BottomNavigationBarScreen extends StatelessWidget {
   BottomNavigationBarScreen() : super();
@@ -26,15 +27,6 @@ class BottomNavigationBarScreen extends StatelessWidget {
     Icon(Icons.person),
   ];
 
-  List<String> tabList = [
-    'Home',
-    'Search',
-    'All in one\n Search',
-    //'Refer & Earn',
-    'Recents Clicks',
-    'Profile',
-  ];
-
   List<Widget> _screens() => [
         HomeScreen(),
         SearchScreen(),
@@ -46,6 +38,13 @@ class BottomNavigationBarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> tabList = [
+      AppLocalizations.of(context).home,
+      AppLocalizations.of(context).search,
+      AppLocalizations.of(context).bottom_allInOne,
+      AppLocalizations.of(context).recents_clicks,
+      AppLocalizations.of(context).profile,
+    ];
     return GetBuilder<BottomNavigationController>(
       builder: (navController) {
         return WillPopScope(

@@ -4,6 +4,7 @@ import 'package:cashbackapp/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AllCategoriesScreen extends StatelessWidget {
   HomeController homeController = Get.find<HomeController>();
@@ -33,7 +34,7 @@ class AllCategoriesScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'All Categories',
+          AppLocalizations.of(context).all_categories,
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
       ),

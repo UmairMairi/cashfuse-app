@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyEarningSceen extends StatelessWidget {
   @override
@@ -24,7 +25,7 @@ class MyEarningSceen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'My Earnings',
+          AppLocalizations.of(context).my_earnings,
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
       ),
@@ -53,7 +54,9 @@ class MyEarningSceen extends StatelessWidget {
                     ListTile(
                       title: Row(
                         children: [
-                          Text('Total Eanings'),
+                          Text(
+                            AppLocalizations.of(context).total_earning,
+                          ),
                           Icon(
                             Icons.help,
                             size: 22,
@@ -102,7 +105,7 @@ class MyEarningSceen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       child: Text(
-                        'Earning will show here within 24 hours of your shopping via ${global.appName}.',
+                        '${AppLocalizations.of(context).my_earnings_subtitile} ${global.appName}.',
                         style: Get.theme.primaryTextTheme.bodyText1.copyWith(
                           color: Colors.grey[600],
                           fontWeight: FontWeight.w400,
@@ -145,7 +148,7 @@ class MyEarningSceen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'My Order Details',
+                              AppLocalizations.of(context).my_order_details,
                               style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -164,7 +167,7 @@ class MyEarningSceen extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  'View More ',
+                                  '${AppLocalizations.of(context).view_more} ',
                                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                     color: Colors.white,
                                   ),
@@ -247,7 +250,7 @@ class MyEarningSceen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Recent Clicks',
+                              AppLocalizations.of(context).recents_clicks,
                               style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -266,7 +269,7 @@ class MyEarningSceen extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  'View More ',
+                                  '${AppLocalizations.of(context).view_more} ',
                                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                     color: Colors.white,
                                   ),
@@ -348,7 +351,7 @@ class MyEarningSceen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Request Paymets',
+                              AppLocalizations.of(context).request_paymets,
                               style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -367,7 +370,7 @@ class MyEarningSceen extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  'View More ',
+                                  '${AppLocalizations.of(context).view_more} ',
                                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                     color: Colors.white,
                                   ),
@@ -448,7 +451,7 @@ class MyEarningSceen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Get Help',
+                              AppLocalizations.of(context).get_help,
                               style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -467,7 +470,7 @@ class MyEarningSceen extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  'View More ',
+                                  '${AppLocalizations.of(context).view_more} ',
                                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                     color: Colors.white,
                                   ),

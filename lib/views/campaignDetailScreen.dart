@@ -10,6 +10,7 @@ import 'package:customizable_space_bar/customizable_space_bar.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CampaignDetailScreen extends StatelessWidget {
   final CampaignModel campaign;
@@ -103,7 +104,7 @@ class CampaignDetailScreen extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Text('Share  '),
+                          Text('${AppLocalizations.of(context).share}  '),
                           CircleAvatar(
                             radius: 12,
                             backgroundColor: Colors.green[700],
@@ -232,7 +233,7 @@ class CampaignDetailScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                campaign.buttonText.isNotEmpty ? campaign.buttonText : 'EARN CASHBACK',
+                                campaign.buttonText.isNotEmpty ? campaign.buttonText : AppLocalizations.of(context).earn_cashback,
                                 style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                               ),
                             ),
@@ -297,7 +298,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Purchase',
+                                        AppLocalizations.of(context).purchase,
                                         style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
                                       ),
                                       Text(
@@ -314,7 +315,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Cashback tracks in',
+                                        AppLocalizations.of(context).cashback_tracks_in,
                                         style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
                                       ),
                                       Text(
@@ -355,7 +356,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                               )),
                                           alignment: Alignment.center,
                                           child: Text(
-                                            'See More Offers  >',
+                                            '${AppLocalizations.of(context).see_more_offers}  >',
                                             style: TextStyle(color: Colors.teal[200], fontSize: 14, fontWeight: FontWeight.w400),
                                           ),
                                         ),

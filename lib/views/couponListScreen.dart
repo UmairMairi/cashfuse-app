@@ -4,6 +4,7 @@ import 'package:cashbackapp/views/offerDetailScreen.dart';
 import 'package:cashbackapp/widget/couponWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CouponListScreen extends StatelessWidget {
   CouponController couponController = Get.find<CouponController>();
@@ -21,7 +22,7 @@ class CouponListScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Coupons of the day'.toUpperCase(),
+          AppLocalizations.of(context).coupons_of_the_day.toUpperCase(),
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
       ),

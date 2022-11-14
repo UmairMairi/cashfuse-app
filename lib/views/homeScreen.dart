@@ -28,6 +28,7 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:slide_countdown/slide_countdown.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
@@ -85,7 +86,7 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Total Earnings',
+                    AppLocalizations.of(context).total_earning,
                     style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white, fontWeight: FontWeight.w300),
                   ),
                   Text('₹0.00'),
@@ -110,6 +111,7 @@ class HomeScreen extends StatelessWidget {
               await homeController2.init();
             },
             child: SingleChildScrollView(
+              padding: EdgeInsets.only(bottom: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -219,7 +221,7 @@ class HomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'TOP CATEGORIES',
+                            AppLocalizations.of(context).top_categories,
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
@@ -232,7 +234,7 @@ class HomeScreen extends StatelessWidget {
                               Get.to(() => AllCategoriesScreen());
                             },
                             child: Text(
-                              'View All >',
+                              '${AppLocalizations.of(context).view_all} >',
                               style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
                             ),
                           )
@@ -261,7 +263,7 @@ class HomeScreen extends StatelessWidget {
                                     margin: EdgeInsets.only(right: 15),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: index == 0 ? Colors.blue[700] : Colors.white,
+                                      color: index == 0 ? Get.theme.primaryColor : Colors.white,
                                     ),
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -321,7 +323,7 @@ class HomeScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Coupons of the day'.toUpperCase(),
+                                  AppLocalizations.of(context).coupons_of_the_day.toUpperCase(),
                                   style: TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
@@ -335,7 +337,7 @@ class HomeScreen extends StatelessWidget {
                                           Get.to(() => CouponListScreen());
                                         },
                                         child: Text(
-                                          'View All >',
+                                          '${AppLocalizations.of(context).view_all} >',
                                           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
                                         ),
                                       )
@@ -417,7 +419,7 @@ class HomeScreen extends StatelessWidget {
                         ? Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 15),
                             child: Text(
-                              'EXCLUSIVE OFFERS FOR YOU',
+                              AppLocalizations.of(context).exclusive_offers,
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
@@ -544,7 +546,7 @@ class HomeScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'TOP CASHBACK STORES',
+                                  AppLocalizations.of(context).top_cashback_stores,
                                   style: TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
@@ -556,12 +558,12 @@ class HomeScreen extends StatelessWidget {
                                   onTap: () {
                                     Get.to(
                                       () => StoreOfferListScreen(
-                                        title: 'TOP CASHBACK STORES',
+                                        title: AppLocalizations.of(context).top_cashback_stores,
                                       ),
                                     );
                                   },
                                   child: Text(
-                                    'View All >',
+                                    '${AppLocalizations.of(context).view_all} >',
                                     style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
                                   ),
                                 )
@@ -649,7 +651,7 @@ class HomeScreen extends StatelessWidget {
                                     Get.to(() => AppWiseOfferShowListScreen());
                                   },
                                   child: Text(
-                                    'View All >',
+                                    '${AppLocalizations.of(context).view_all} >',
                                     style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
                                   ),
                                 )
@@ -771,7 +773,7 @@ class HomeScreen extends StatelessWidget {
                                                 );
                                               },
                                               child: Text(
-                                                'View All >',
+                                                '${AppLocalizations.of(context).view_all} >',
                                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
                                               ),
                                             )
@@ -883,7 +885,7 @@ class HomeScreen extends StatelessWidget {
                   //           Get.to(() => AppWiseOfferShowListScreen());
                   //         },
                   //         child: Text(
-                  //           'View All >',
+                  //           '${AppLocalizations.of(context).view_all} >',
                   //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
                   //         ),
                   //       )
@@ -934,7 +936,7 @@ class HomeScreen extends StatelessWidget {
                   //           Get.to(() => AppWiseOfferShowListScreen());
                   //         },
                   //         child: Text(
-                  //           'View All >',
+                  //           '${AppLocalizations.of(context).view_all} >',
                   //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
                   //         ),
                   //       )
@@ -985,7 +987,7 @@ class HomeScreen extends StatelessWidget {
                   //           Get.to(() => AppWiseOfferShowListScreen());
                   //         },
                   //         child: Text(
-                  //           'View All >',
+                  //           '${AppLocalizations.of(context).view_all} >',
                   //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
                   //         ),
                   //       )
@@ -1036,7 +1038,7 @@ class HomeScreen extends StatelessWidget {
                   //           Get.to(() => AppWiseOfferShowListScreen());
                   //         },
                   //         child: Text(
-                  //           'View All >',
+                  //           '${AppLocalizations.of(context).view_all} >',
                   //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
                   //         ),
                   //       )
@@ -1087,7 +1089,7 @@ class HomeScreen extends StatelessWidget {
                   //           Get.to(() => AppWiseOfferShowListScreen());
                   //         },
                   //         child: Text(
-                  //           'View All >',
+                  //           '${AppLocalizations.of(context).view_all} >',
                   //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
                   //         ),
                   //       )
@@ -1138,7 +1140,7 @@ class HomeScreen extends StatelessWidget {
                   //           Get.to(() => AppWiseOfferShowListScreen());
                   //         },
                   //         child: Text(
-                  //           'View All >',
+                  //           '${AppLocalizations.of(context).view_all} >',
                   //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
                   //         ),
                   //       )
@@ -1180,7 +1182,7 @@ class HomeScreen extends StatelessWidget {
                   // //         style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
                   // //       ),
                   // //       Text(
-                  // //         'View All >',
+                  // //         '${AppLocalizations.of(context).view_all} >',
                   // //         style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
                   // //       )
                   // //     ],
@@ -1197,7 +1199,7 @@ class HomeScreen extends StatelessWidget {
                   // //         style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
                   // //       ),
                   // //       Text(
-                  // //         'View All >',
+                  // //         '${AppLocalizations.of(context).view_all} >',
                   // //         style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
                   // //       )
                   // //     ],
@@ -1223,7 +1225,7 @@ class HomeScreen extends StatelessWidget {
                   //           Get.to(() => AppWiseOfferShowListScreen());
                   //         },
                   //         child: Text(
-                  //           'View All >',
+                  //           '${AppLocalizations.of(context).view_all} >',
                   //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
                   //         ),
                   //       )
@@ -1274,7 +1276,7 @@ class HomeScreen extends StatelessWidget {
                   //           Get.to(() => AppWiseOfferShowListScreen());
                   //         },
                   //         child: Text(
-                  //           'View All >',
+                  //           '${AppLocalizations.of(context).view_all} >',
                   //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
                   //         ),
                   //       )

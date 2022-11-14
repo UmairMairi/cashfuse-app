@@ -4,6 +4,7 @@ import 'package:cashbackapp/controllers/commonController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AboutUsScreen extends StatelessWidget {
   CommonController commonController = Get.find<CommonController>();
@@ -22,7 +23,7 @@ class AboutUsScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'About Us',
+          AppLocalizations.of(context).about_us,
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
       ),

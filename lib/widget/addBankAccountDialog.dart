@@ -3,6 +3,7 @@ import 'package:cashbackapp/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddBankAccountDialog extends StatelessWidget {
   final fName = new FocusNode();
@@ -38,7 +39,7 @@ class AddBankAccountDialog extends StatelessWidget {
           //   height: 20,
           // ),
           Text(
-            'Add Bank Account',
+            AppLocalizations.of(context).add_bank_account,
             style: Get.theme.primaryTextTheme.headline6.copyWith(fontWeight: FontWeight.w600),
           ),
 
@@ -220,7 +221,7 @@ class AddBankAccountDialog extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: Text(
-                'ADD +',
+                '${AppLocalizations.of(context).add.toString().toUpperCase()} +',
                 style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ),

@@ -11,6 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppTabinationScreen extends StatefulWidget {
   AppTabinationScreen() : super();
@@ -139,7 +140,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with TickerPr
                         color: Colors.white,
                       ),
                     ),
-                    hintText: 'All in one search',
+                    hintText: AppLocalizations.of(context).all_in_one_search,
                     hintStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
                     contentPadding: EdgeInsets.only(left: 10),
                   ),
@@ -365,7 +366,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with TickerPr
                                           setState(() {});
                                         } else {
                                           Fluttertoast.showToast(
-                                            msg: 'minimum 5 tabs are reuired.',
+                                            msg: 'Minimum 5 tabs are reuired.',
                                             toastLength: Toast.LENGTH_SHORT,
                                             gravity: ToastGravity.CENTER,
                                             timeInSecForIosWeb: 1,
@@ -395,7 +396,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with TickerPr
                                   onTap: () async {
                                     if (_isDuplicate) {
                                       Fluttertoast.showToast(
-                                        msg: 'duplicate tab no allow',
+                                        msg: 'Duplicate tab not allow',
                                         toastLength: Toast.LENGTH_SHORT,
                                         gravity: ToastGravity.CENTER,
                                         timeInSecForIosWeb: 1,
@@ -405,7 +406,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with TickerPr
                                       );
                                     } else if (searchController.addNewTabList.where((element) => element.id == null).toList().length > 0) {
                                       Fluttertoast.showToast(
-                                        msg: 'empty tab not allow',
+                                        msg: 'Empty tab not allow',
                                         toastLength: Toast.LENGTH_SHORT,
                                         gravity: ToastGravity.CENTER,
                                         timeInSecForIosWeb: 1,
@@ -456,7 +457,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with TickerPr
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      'SAVE',
+                                      AppLocalizations.of(context).save,
                                       style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w400),
                                     ),
                                   ),
@@ -480,7 +481,7 @@ class _AppTabinationScreenState extends State<AppTabinationScreen> with TickerPr
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      'ADD NEW TAB',
+                                      AppLocalizations.of(context).add_new_tab,
                                       style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w400),
                                     ),
                                   ),

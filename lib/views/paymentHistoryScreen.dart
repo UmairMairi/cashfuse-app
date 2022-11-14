@@ -3,6 +3,7 @@ import 'package:cashbackapp/utils/date_converter.dart';
 import 'package:cashbackapp/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaymentHistoryScreen extends StatelessWidget {
   @override
@@ -19,7 +20,7 @@ class PaymentHistoryScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Payment History',
+          AppLocalizations.of(context).payment_history,
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
       ),
@@ -87,7 +88,10 @@ class PaymentHistoryScreen extends StatelessWidget {
                       );
                     },
                   )
-                : Center(child: Text('No data found'))
+                : Center(
+                    child: Text(
+                    AppLocalizations.of(context).no_data_found,
+                  ))
             : Center(
                 child: CircularProgressIndicator(),
               );

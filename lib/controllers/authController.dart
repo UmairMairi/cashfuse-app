@@ -159,6 +159,7 @@ class AuthController extends GetxController {
           verifyOtp(status);
         }).catchError((e) {
           status = 'failed';
+          Get.back();
           verifyOtp(status);
         }).onError((error, stackTrace) {
           showCustomSnackBar(error.toString());

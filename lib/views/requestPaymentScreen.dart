@@ -7,6 +7,7 @@ import 'package:cashbackapp/views/upiRedeemScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RequestPaymentScreen extends StatelessWidget {
   @override
@@ -23,7 +24,7 @@ class RequestPaymentScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Request Payment',
+          AppLocalizations.of(context).request_paymets,
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
       ),
@@ -40,7 +41,7 @@ class RequestPaymentScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Cashback Status',
+                      AppLocalizations.of(context).request_paymets,
                       style: Get.theme.primaryTextTheme.headline6.copyWith(fontSize: 18),
                     ),
                     Padding(
@@ -49,7 +50,7 @@ class RequestPaymentScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Remaining Earning',
+                            AppLocalizations.of(context).remaining_earning,
                             style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w300,
@@ -66,7 +67,7 @@ class RequestPaymentScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Sent for Withdrawal',
+                          AppLocalizations.of(context).send_withdrawal_request,
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w300,
@@ -84,7 +85,7 @@ class RequestPaymentScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Successful Withdrawal',
+                            AppLocalizations.of(context).successful_withdrawal,
                             style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w300,
@@ -101,7 +102,7 @@ class RequestPaymentScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Total Earning',
+                          AppLocalizations.of(context).total_earning,
                           style: Get.theme.primaryTextTheme.subtitle2,
                         ),
                         Text(
@@ -124,7 +125,7 @@ class RequestPaymentScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Redeem',
+                      AppLocalizations.of(context).redeem,
                       style: Get.theme.primaryTextTheme.headline6.copyWith(fontSize: 18),
                     ),
                     SizedBox(
@@ -157,7 +158,7 @@ class RequestPaymentScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  ' Amazon Pay',
+                                  ' ${AppLocalizations.of(context).amazon_pay}',
                                   style: Get.theme.primaryTextTheme.headline6.copyWith(
                                     fontSize: 20,
                                     color: Colors.white,
@@ -221,7 +222,7 @@ class RequestPaymentScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  ' PayTM',
+                                  ' ${AppLocalizations.of(context).payTM}',
                                   style: Get.theme.primaryTextTheme.headline6.copyWith(
                                     fontSize: 20,
                                     color: Colors.white,
@@ -284,7 +285,7 @@ class RequestPaymentScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  ' UPI',
+                                  ' ${AppLocalizations.of(context).upi}',
                                   style: Get.theme.primaryTextTheme.headline6.copyWith(
                                     fontSize: 20,
                                     color: Colors.white,
@@ -348,7 +349,7 @@ class RequestPaymentScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  ' Bank Transfer',
+                                  ' ${AppLocalizations.of(context).bank_transfer}',
                                   style: Get.theme.primaryTextTheme.headline6.copyWith(
                                     fontSize: 20,
                                     color: Colors.white,

@@ -12,6 +12,7 @@ import 'package:cashbackapp/widget/storeOfferWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchController searchController = Get.find<SearchController>();
@@ -60,7 +61,7 @@ class SearchScreen extends StatelessWidget {
       body: GetBuilder<SearchController>(builder: (controller) {
         return searchController.searchData != null
             ? searchController.searchData.advertiserList.isEmpty && searchController.searchData.commonList.isEmpty && searchController.searchData.offerList.isEmpty
-                ? Center(child: Text('No data found.'))
+                ? Center(child: Text(AppLocalizations.of(context).no_data_found))
                 : SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
