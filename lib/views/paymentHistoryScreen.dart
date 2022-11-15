@@ -77,13 +77,6 @@ class PaymentHistoryScreen extends StatelessWidget {
                               style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                             ),
                           ),
-                          // SizedBox(
-                          //   height: 5,
-                          // ),
-                          // CustomImage(
-                          //   image: '${global.appInfo.baseUrls.categoryImageUrl}/${controller.topCategoryList[index].image}',
-                          //   height: 40,
-                          // ),
                         ),
                       );
                     },

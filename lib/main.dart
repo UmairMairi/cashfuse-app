@@ -10,6 +10,7 @@ import 'package:cashbackapp/provider/local_provider.dart';
 import 'package:cashbackapp/theme/nativeTheme.dart';
 import 'package:cashbackapp/utils/binding/networkBinding.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashbackapp/utils/notificationHelper.dart';
 import 'package:cashbackapp/views/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ void main() async {
 
   HttpOverrides.global = new MyHttpOverrides();
   await Firebase.initializeApp();
+   await NotificationHelper.initialize();
   if (Platform.isAndroid) {
     await webview.AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
 

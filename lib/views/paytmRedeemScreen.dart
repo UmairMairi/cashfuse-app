@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/paymentController.dart';
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
@@ -38,15 +40,7 @@ class PaytmRedeemScreen extends StatelessWidget {
               Container(
                 height: 120,
                 width: Get.width,
-                //padding: EdgeInsets.symmetric(horizontal: 70, vertical: 28),
                 decoration: BoxDecoration(
-                  // image: DecorationImage(
-                  //   image: AssetImage(
-                  //     Images.Amazon_pay,
-                  //   ),
-                  //   fit: BoxFit.contain,
-                  //   scale: 20,
-                  // ),
                   borderRadius: BorderRadius.circular(5),
                   gradient: LinearGradient(
                     colors: [

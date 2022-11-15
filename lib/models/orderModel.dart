@@ -44,19 +44,19 @@ class OrderModel {
       id = json["id"];
       cId = json["c_id"];
       logo = json["logo"] != null ? json["logo"] : '';
-      advertisers = json["advertisers"];
+      advertisers = json["advertisers"] != null ? json["advertisers"] : '';
       partnerOrderId = json["partner_order_id"];
       affiliatePartner = json["affiliate_partner"];
       orderAmount = json["order_amount"];
       earningAmount = json["earning_amount"];
       orderStatus = json["order_status"];
       userId = json["user_id"];
-      url = json["url"];
-      referDate = DateTime.parse(json["refer_date"]);
-      eventDate = DateTime.parse(json["event_date"]);
-      lockingDate = DateTime.parse(json["locking_date"]);
-      createdAt = DateTime.parse(json["created_at"]);
-      updatedAt = DateTime.parse(json["updated_at"]);
+      url = json["url"] != null ? json["url"] : '';
+      referDate = json["refer_date"] != null ? DateTime.parse(json["refer_date"]) : null;
+      eventDate = json["event_date"] != null ? DateTime.parse(json["event_date"]) : null;
+      lockingDate = json["locking_date"] != null ? DateTime.parse(json["locking_date"]) : null;
+      createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : null;
+      updatedAt = json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null;
       user = json["user"] != null ? UserModel.fromJson(json["user"]) : null;
     } catch (e) {
       print("Exception - OrderModel.dart - OrderModel.fromJson():" + e.toString());

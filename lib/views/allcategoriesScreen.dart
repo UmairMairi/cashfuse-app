@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/views/categoryScreen.dart';
 import 'package:cashbackapp/widget/customImage.dart';

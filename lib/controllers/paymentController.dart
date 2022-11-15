@@ -18,6 +18,7 @@ class PaymentController extends GetxController {
   BankDetailsModel amazonDetails;
   BankDetailsModel payTMDetails;
   BankDetailsModel upiDetails;
+  BankDetailsModel payPalDetails;
 
   List<PaymentHistoryModel> _paymentHistoryList = [];
   List<PaymentHistoryModel> get paymentHistoryList => _paymentHistoryList;
@@ -49,6 +50,9 @@ class PaymentController extends GetxController {
       }
       if (global.sp.getString('bank') != null) {
         bankDetails = BankDetailsModel.fromJson(json.decode(global.sp.getString("bank")));
+      }
+      if (global.sp.getString('pay_pal') != null) {
+        payPalDetails = BankDetailsModel.fromJson(json.decode(global.sp.getString("pay_pal")));
       }
     } catch (e) {
       print("Exception - PaymentController.dart - init():" + e.toString());
@@ -162,6 +166,28 @@ class PaymentController extends GetxController {
     }
   }
 
+  Future addPayPalDetails(String payPalEmail) async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        Get.dialog(CustomLoader(), barrierDismissible: false);
+        await apiHelper.addPayPalDetails(payPalEmail).then((response) {
+          Get.back();
+          if (response.status == "1") {
+            payPalDetails = response.data;
+            global.sp.setString('pay_pal', json.encode(payPalDetails.toJson()));
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+        update();
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+    } catch (e) {
+      print("Exception - PaymentController.dart - addPayPalDetails():" + e.toString());
+    }
+  }
+
   Future sendWithdrawalRequest(String medium) async {
     try {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
@@ -169,6 +195,7 @@ class PaymentController extends GetxController {
         await apiHelper.sendWithdrawalRequest(medium).then((response) {
           Get.back();
           if (response.status == "1") {
+            showCustomSnackBar(response.data);
           } else if (response.status == "0") {
             showCustomSnackBar(response.data);
           } else {

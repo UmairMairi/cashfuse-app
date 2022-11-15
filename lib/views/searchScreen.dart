@@ -1,18 +1,19 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/controllers/searchController.dart';
-import 'package:cashbackapp/controllers/splashController.dart';
 import 'package:cashbackapp/models/commonModel.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashbackapp/views/adsDetailScreen.dart';
 import 'package:cashbackapp/views/campaignDetailScreen.dart';
 import 'package:cashbackapp/views/categoryScreen.dart';
 import 'package:cashbackapp/views/offerDetailScreen.dart';
-import 'package:cashbackapp/views/adsDetailScreen.dart';
-import 'package:cashbackapp/widget/appWiseoffershowWidget.dart';
-import 'package:cashbackapp/widget/storeOfferWidget.dart';
+import 'package:cashbackapp/widget/adsCampaignWidget.dart';
+import 'package:cashbackapp/widget/offerWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchController searchController = Get.find<SearchController>();
@@ -24,7 +25,6 @@ class SearchScreen extends StatelessWidget {
       appBar: AppBar(
         leading: InkWell(
           onTap: () async {
-            await Get.find<SplashController>().bannerShow();
             Get.find<BottomNavigationController>().setBottomIndex(0);
           },
           child: Icon(
@@ -66,17 +66,6 @@ class SearchScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Padding(
-                        //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 13),
-                        //   child: Text(
-                        //     'Trending Searches:',
-                        //     style: Get.theme.primaryTextTheme.subtitle2,
-                        //   ),
-                        // ),
-                        // Divider(
-                        //   height: 0,
-                        //   color: Colors.grey[400],
-                        // ),
                         searchController.searchData.advertiserList != null && searchController.searchData.advertiserList.length > 0
                             ? Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -105,7 +94,7 @@ class SearchScreen extends StatelessWidget {
                                         padding: const EdgeInsets.only(right: 12),
                                         child: SizedBox(
                                           width: 155,
-                                          child: StoreOfferWidget(
+                                          child: AdsCampaignWidget(
                                             commonModel: CommonModel(
                                               name: searchController.searchData.advertiserList[index].name,
                                               image: '${global.appInfo.baseUrls.partnerImageUrl}/${searchController.searchData.advertiserList[index].image}',
@@ -115,46 +104,6 @@ class SearchScreen extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      // Container(
-                                      //   width: 150,
-                                      //   margin: EdgeInsets.only(right: 15),
-                                      //   decoration: BoxDecoration(
-                                      //     borderRadius: BorderRadius.circular(10),
-                                      //     color: Colors.white,
-                                      //   ),
-                                      //   child: Column(
-                                      //     crossAxisAlignment: CrossAxisAlignment.center,
-                                      //     mainAxisAlignment: MainAxisAlignment.center,
-                                      //     children: [
-                                      //       Padding(
-                                      //         padding: const EdgeInsets.all(5.0),
-                                      //         child: CustomImage(
-                                      //           image: '${global.appInfo.baseUrls.partnerImageUrl}/${searchController.searchData.advertiserList[index].image}',
-                                      //           height: 25,
-                                      //           width: Get.width,
-                                      //           fit: BoxFit.contain,
-                                      //         ),
-                                      //       ),
-                                      //       // Image.asset(
-                                      //       //   Images.amazon,
-                                      //       //   height: 20,
-                                      //       // ),
-                                      //       Divider(
-                                      //         height: 10,
-                                      //         color: Colors.grey[400],
-                                      //       ),
-                                      //       Container(
-                                      //         height: 60,
-                                      //         alignment: Alignment.center,
-                                      //         child: Text(
-                                      //           searchController.searchData.advertiserList[index].name,
-                                      //           textAlign: TextAlign.center,
-                                      //           style: TextStyle(color: Colors.orange[700], fontSize: 12, fontWeight: FontWeight.w400),
-                                      //         ),
-                                      //       ),
-                                      //     ],
-                                      //   ),
-                                      // ),
                                     );
                                   },
                                 ),
@@ -198,7 +147,7 @@ class SearchScreen extends StatelessWidget {
                                         padding: const EdgeInsets.only(right: 15),
                                         child: SizedBox(
                                           width: 155,
-                                          child: StoreOfferWidget(
+                                          child: AdsCampaignWidget(
                                             commonModel: searchController.searchData.commonList[index],
                                           ),
                                         ),
@@ -225,7 +174,7 @@ class SearchScreen extends StatelessWidget {
                                               fromSeeMore: false,
                                             ));
                                       },
-                                      child: AppWiseOfferShowWidget(
+                                      child: OfferWidget(
                                         offer: searchController.searchData.offerList[index],
                                         fromList: false,
                                       ),

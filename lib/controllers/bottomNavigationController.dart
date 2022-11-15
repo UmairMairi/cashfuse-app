@@ -1,8 +1,5 @@
-//flutter
-
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
-//views
 
 class BottomNavigationController extends GetxController {
   var bottomNavIndex = 0.obs;

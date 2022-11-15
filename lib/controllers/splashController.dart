@@ -33,7 +33,7 @@ class SplashController extends GetxController {
 
   void init() {
     try {
-      Timer(Duration(seconds: 5), () async {
+      Timer(Duration.zero, () async {
         global.appDeviceId = await FirebaseMessaging.instance.getToken();
         global.sp = await SharedPreferences.getInstance();
 
@@ -77,12 +77,15 @@ class SplashController extends GetxController {
       if (global.sp.getString('isBannerDate') != null) {
         if (DateConverter.dateTimeToDateOnly(DateTime.now()) == global.sp.getString('isBannerDate')) {
           global.isBannerShow = false;
+          print('+++++ in bannerdate exist');
         } else {
+          print('+++++ in bannerdate exist but not same');
           global.isBannerShow = true;
           global.isBannerDate = DateConverter.dateTimeToDateOnly(DateTime.now());
           global.sp.setString('isBannerDate', global.isBannerDate);
         }
       } else {
+        print('+++++ in bannerdate not exist');
         global.isBannerShow = true;
         global.isBannerDate = DateConverter.dateTimeToDateOnly(DateTime.now());
         global.sp.setString('isBannerDate', global.isBannerDate);

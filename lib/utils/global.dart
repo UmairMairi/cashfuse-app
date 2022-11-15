@@ -47,19 +47,8 @@ Future<Map<String, String>> getApiHeaders(bool authorizationRequired) async {
   return apiHeader;
 }
 
-Future share(String link, String image) async {
+Future share(String link, String image, String title) async {
   try {
-    //await FlutterShare.shareFile(filePath: filePath, title: '$appName', text: url);
-    // var response = await get(Uri.parse(image));
-    // final documentDirectory = (await getExternalStorageDirectory()).path;
-    // File imgFile = new File('$documentDirectory/flutter.png');
-    // imgFile.writeAsBytesSync(response.bodyBytes);
-    // Share.shareXFiles(
-    //   [
-    //     XFile(imgFile.path),
-    //   ],
-    //   subject: link,
-    // );
     if (image.isNotEmpty) {
       final uri = Uri.parse(image);
       final response = await http.get(uri);
@@ -70,14 +59,15 @@ Future share(String link, String image) async {
       await FlutterShare.shareFile(filePath: path, title: '$appName', text: link).then((value) {}).catchError((e) {
         showCustomSnackBar(e.toString());
       });
+    } else if (title.isNotEmpty) {
+      await FlutterShare.share(title: '$appName', text: title, linkUrl: link).then((value) {}).catchError((e) {
+        showCustomSnackBar(e.toString());
+      });
     } else {
-      await FlutterShare.share(title: '$appName', text: link).then((value) {}).catchError((e) {
+      await FlutterShare.share(title: '$appName', linkUrl: link).then((value) {}).catchError((e) {
         showCustomSnackBar(e.toString());
       });
     }
-
-    //await Share.shareXFiles([XFile(path)], text: link);
-
   } catch (e) {
     print("Exception - global.dart - share():" + e.toString());
   }

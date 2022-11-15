@@ -24,7 +24,7 @@ class CustomImage extends StatelessWidget {
     this.height,
     this.width,
     this.fit,
-    this.errorImage = Images.placeholder,
+    this.errorImage = Images.dummyImage,
     this.offer,
     this.campaign,
     this.ads,

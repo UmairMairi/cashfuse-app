@@ -110,7 +110,10 @@
   "bank_transfer": "Bank Transfer",
   "tnc": "Terms & Condition",
   "upi_redeem": "Upi Redeem",
+  "paypal_redeem": "PayPal Redeem",
+  "paypal_email": "PayPal Email:",
   "upi_account_add": "Add Upi Account",
+  "paypal_account_add": "Add PayPal Account",
   "upi_address": "UPI address:",
   "coupon": "Coupon",
   "what_next": "What's Next",
@@ -119,5 +122,6 @@
   "my_account": "My Account",
   "redeem_cashback": "Redeem Cashback",
   "share_the_app": "Share The App",
-  "rate_the_app": "Rate the App"
+  "rate_the_app": "Rate the App",
+  "paypal": "PayPal"
 }

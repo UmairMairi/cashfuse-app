@@ -20,6 +20,7 @@ class CommonController extends GetxController with GetTickerProviderStateMixin {
   var searchString = TextEditingController();
 
   bool isfaqLoaded = false;
+  bool isSearch = false;
 
   @override
   void onInit() async {
@@ -62,6 +63,20 @@ class CommonController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
+  void searchShow(bool val) {
+    try {
+      isSearch = val;
+      update();
+      if (isSearch) {
+        faqLocalSearch();
+      } else {
+        searchString.clear();
+      }
+    } catch (e) {
+      print("Exception - CommonController.dart - searchShow():" + e.toString());
+    }
+  }
+
   void faqLocalSearch() {
     try {
       isfaqLoaded = false;
@@ -70,10 +85,6 @@ class CommonController extends GetxController with GetTickerProviderStateMixin {
         _faqList = List.from(_mainFaqList);
       } else {
         if (_mainFaqList.length > 0) {
-          // List<String> _list = [];
-          // for (var i = 0; i < _mainFaqList.length; i++) {
-          //   _list = _mainFaqList[i].ques.toLowerCase().split(' ').toString().split('?');
-          // }
           _faqList = List.from(
             _mainFaqList
                 .where((e) => ((e.ques.isNotEmpty &&

@@ -24,7 +24,6 @@ import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 
 class APIHelper {
-  //bind you api result using it
   dynamic getDioResult<T>(final response, T recordList) {
     try {
       dynamic result;
@@ -550,6 +549,33 @@ class APIHelper {
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - addUpiDetails():" + e.toString());
+    }
+  }
+
+  Future<dynamic> addPayPalDetails(String payPalEmail) async {
+    try {
+      Response response;
+      var dio = Dio();
+      var data = FormData.fromMap({
+        'user_id': global.currentUser.id,
+        'paypal_email': payPalEmail,
+      });
+      response = await dio.post('${global.baseUrl}${AppConstants.ADD_PAYPAL_DETAILS_URI}',
+          data: data,
+          options: Options(
+            headers: await global.getApiHeaders(true),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = BankDetailsModel.fromJson(response.data['data']);
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_PAYPAL_DETAILS_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - addPayPalDetails():" + e.toString());
     }
   }
 

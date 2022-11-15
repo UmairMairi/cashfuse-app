@@ -1,6 +1,8 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/commonController.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -31,8 +33,8 @@ class PrivacyPolicyScreen extends StatelessWidget {
           height: Get.height,
           margin: EdgeInsets.all(10).copyWith(bottom: 0),
           child: SingleChildScrollView(
-            child: Html(
-              data: commonController.privacyPolicy,
+            child: HtmlWidget(
+              commonController.privacyPolicy,
             ),
           ),
         );

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
 import 'package:cashbackapp/models/couponModel.dart';
@@ -28,24 +30,6 @@ class WebViewScreen extends StatelessWidget {
           body: Stack(
             alignment: Alignment.center,
             children: [
-              // WebView(
-              //   initialUrl: url != null && url.isNotEmpty ? url : 'https://flutter.dev',
-              //   javascriptMode: JavascriptMode.unrestricted,
-              //   debuggingEnabled: true,
-              //   onWebResourceError: (error) {
-              //     homeController.updtaeRotate(false);
-              //     log(error.description);
-              //   },
-              //   onProgress: (val) {
-              //     homeController.updtaeRotate(true);
-              //   },
-              //   onPageStarted: (url) {
-              //     homeController.updtaeRotate(true);
-              //   },
-              //   onPageFinished: (controller) {
-              //     homeController.updtaeRotate(false);
-              //   },
-              // ),
               InAppWebView(
                 initialUrlRequest: URLRequest(url: Uri.parse(urlString)),
                 onLoadStart: (controller, url) {
@@ -54,10 +38,6 @@ class WebViewScreen extends StatelessWidget {
                 onWebViewCreated: (controller) {
                   homeController.updtaeRotate(true);
                 },
-
-                // onLoadStop: (controller, url) {
-                //   homeController.updtaeRotate(false);
-                // },
                 initialOptions: InAppWebViewGroupOptions(
                   android: AndroidInAppWebViewOptions(
                     mixedContentMode: AndroidMixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW,
@@ -67,23 +47,7 @@ class WebViewScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              homeController.isRoted && isCliked == false
-                  ? Image.asset(Images.webview_gif)
-                  // AnimatedContainer(
-                  //     width: 200,
-                  //     height: 50,
-                  //     color: Get.theme.primaryColor,
-                  //     duration: Duration(seconds: 3),
-                  //     child: AnimatedAlign(
-                  //       alignment: homeController.isRoted ? Alignment.centerLeft : Alignment.centerRight,
-                  //       duration: Duration(seconds: 1),
-                  //       child: CircleAvatar(
-                  //         radius: 20,
-                  //         backgroundColor: Colors.yellow,
-                  //       ),
-                  //     ),
-                  //   )
-                  : SizedBox(),
+              homeController.isRoted && isCliked == false ? Image.asset(Images.webview_gif) : SizedBox(),
             ],
           ),
           bottomNavigationBar: Container(

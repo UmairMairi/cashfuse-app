@@ -22,6 +22,7 @@ class _ColorPickerPageState extends State<ColorPickerPage> with SingleTickerProv
 
   List<ColorSwatch> fullMaterialColors = const <ColorSwatch>[
     const ColorSwatch(0xFF000000, {500: Colors.black}),
+    ColorSwatch(0xFF2D3D95, {900: Colors.blue}),
     Colors.red,
     Colors.redAccent,
     Colors.pink,

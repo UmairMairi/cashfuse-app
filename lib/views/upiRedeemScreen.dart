@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/paymentController.dart';
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/widget/customSnackbar.dart';
@@ -101,42 +103,10 @@ class UpiRedeemScreen extends StatelessWidget {
                                     ),
                                     child: Column(
                                       children: [
-                                        // SizedBox(
-                                        //   height: 20,
-                                        // ),
                                         Text(
                                           AppLocalizations.of(context).upi_account_add,
                                           style: Get.theme.primaryTextTheme.headline6.copyWith(fontWeight: FontWeight.w600),
                                         ),
-                                        // TextFormField(
-                                        //   focusNode: fContactNo,
-                                        //   scrollPadding: EdgeInsets.zero,
-                                        //   cursorColor: Get.theme.primaryColor,
-                                        //   decoration: InputDecoration(
-                                        //     contentPadding: EdgeInsets.zero,
-                                        //     hintText: 'Mobile Number',
-                                        //     labelStyle: TextStyle(
-                                        //       color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                                        //     ),
-                                        //     focusColor: Get.theme.primaryColor,
-                                        //     focusedBorder: UnderlineInputBorder(
-                                        //         borderSide: BorderSide(
-                                        //       color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                                        //     )),
-                                        //     border: UnderlineInputBorder(
-                                        //         borderSide: BorderSide(
-                                        //       color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                                        //     )),
-                                        //     enabledBorder: UnderlineInputBorder(
-                                        //         borderSide: BorderSide(
-                                        //       color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                                        //     )),
-                                        //   ),
-                                        //   onTap: () {
-                                        //     //FocusScope.of(context).unfocus(disposition: UnfocusDisposition.previouslyFocusedChild);
-                                        //     FocusScope.of(context).requestFocus(fContactNo);
-                                        //   },
-                                        // ),
                                         TextFormField(
                                           focusNode: fUpiId,
                                           controller: upiId,

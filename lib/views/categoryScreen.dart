@@ -1,8 +1,10 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
 import 'package:cashbackapp/views/adsDetailScreen.dart';
 import 'package:cashbackapp/views/campaignDetailScreen.dart';
-import 'package:cashbackapp/widget/storeOfferWidget.dart';
+import 'package:cashbackapp/widget/adsCampaignWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -95,7 +97,7 @@ class CategoryScreen extends StatelessWidget {
                                   ));
                             }
                           },
-                          child: StoreOfferWidget(
+                          child: AdsCampaignWidget(
                             commonModel: category.commonList[index],
                           ),
                         );

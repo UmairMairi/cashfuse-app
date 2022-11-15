@@ -1,11 +1,12 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/controllers/splashController.dart';
 import 'package:cashbackapp/models/clickModel.dart';
 import 'package:cashbackapp/utils/images.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 
 class RecentClickDialogWidget extends StatelessWidget {
   final ClickModel click;
@@ -55,7 +56,6 @@ class RecentClickDialogWidget extends StatelessWidget {
           ),
           InkWell(
             onTap: () async {
-              await Get.find<SplashController>().bannerShow();
               Get.back();
 
               Get.find<BottomNavigationController>().setBottomIndex(0);

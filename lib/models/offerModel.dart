@@ -82,8 +82,8 @@ class OfferModel {
       buttonText = json["button_text"] != null ? json["button_text"] : '';
       affiliatePartner = json["affiliate_partner"];
       exclusive = json["exclusive"];
-      createdAt = DateTime.parse(json["created_at"]);
-      updatedAt = DateTime.parse(json["updated_at"]);
+      createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : null;
+      updatedAt = json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null;
 
       offers = json["offers"];
       partner = json["partner"] != null ? CategoryModel.fromJson(json["partner"]) : null;

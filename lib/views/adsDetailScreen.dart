@@ -95,6 +95,7 @@ class AdsDetailScreen extends StatelessWidget {
                       global.share(
                         homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
                         ads.image.isNotEmpty ? '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}' : '',
+                        '',
                       );
                     },
                     child: Container(

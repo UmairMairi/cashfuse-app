@@ -1,6 +1,5 @@
 import 'package:cashbackapp/controllers/authController.dart';
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
-import 'package:cashbackapp/controllers/splashController.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/views/aboutUsScreen.dart';
@@ -17,9 +16,9 @@ import 'package:cashbackapp/widget/confirmationDialog.dart';
 import 'package:cashbackapp/widget/customImage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:store_redirect/store_redirect.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfieScreen extends StatelessWidget {
   @override
@@ -32,7 +31,6 @@ class ProfieScreen extends StatelessWidget {
             elevation: 0,
             leading: InkWell(
               onTap: () async {
-                await Get.find<SplashController>().bannerShow();
                 Get.find<BottomNavigationController>().setBottomIndex(0);
               },
               child: Icon(
@@ -102,7 +100,7 @@ class ProfieScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        global.currentUser.earning != null ? '₹${global.currentUser.earning.remEarning}' : '₹0.00',
+                                        global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
                                         style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                                       ),
@@ -128,7 +126,7 @@ class ProfieScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        global.currentUser.earning != null ? '₹${global.currentUser.earning.totalEarnings}' : '₹0.00',
+                                        global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
                                         style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                                       ),
@@ -154,7 +152,7 @@ class ProfieScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        global.currentUser.earning != null ? '₹${global.currentUser.earning.sentForWithdrawal}' : '₹0.00',
+                                        global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
                                         style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                                       ),
@@ -201,7 +199,7 @@ class ProfieScreen extends StatelessWidget {
                       //                 ),
                       //               ),
                       //               Text(
-                      //                 global.currentUser.earning != null ? '₹${global.currentUser.earning.totalEarnings}' : '₹0.00',
+                      //                 global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency}0.00',
                       //                 style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                       //               ),
                       //             ],
@@ -217,7 +215,7 @@ class ProfieScreen extends StatelessWidget {
                       //           //       ),
                       //           //     ),
                       //           //     Text(
-                      //           //       '₹0.00',
+                      //           //       '${global.appInfo.currency}0.00',
                       //           //       style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                       //           //     ),
                       //           //   ],
@@ -238,9 +236,13 @@ class ProfieScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.settings,
-                                color: Get.theme.iconTheme.color,
+                              // Icon(
+                              //   Icons.settings,
+                              //   color: Get.theme.iconTheme.color,
+                              // ),
+                              Image.asset(
+                                Images.settings,
+                                height: 20,
                               ),
                               SizedBox(
                                 width: 20,
@@ -264,9 +266,13 @@ class ProfieScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.currency_rupee,
-                                color: Get.theme.iconTheme.color,
+                              // Icon(
+                              //   Icons.currency_rupee,
+                              //   color: Get.theme.iconTheme.color,
+                              // ),
+                              Image.asset(
+                                Images.earnings,
+                                height: 20,
                               ),
                               SizedBox(
                                 width: 20,
@@ -290,9 +296,9 @@ class ProfieScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.account_balance_wallet_rounded,
-                                color: Get.theme.iconTheme.color,
+                              Image.asset(
+                                Images.payments,
+                                height: 20,
                               ),
                               SizedBox(
                                 width: 20,
@@ -316,9 +322,13 @@ class ProfieScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.history,
-                                color: Get.theme.iconTheme.color,
+                              // Icon(
+                              //   Icons.history,
+                              //   color: Get.theme.iconTheme.color,
+                              // ),
+                              Image.asset(
+                                Images.pay_history,
+                                height: 20,
                               ),
                               SizedBox(
                                 width: 20,
@@ -334,110 +344,7 @@ class ProfieScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // InkWell(
-                      //   onTap: () {
-                      //     Get.to(() => MissingCashbackScreen());
-                      //   },
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      //     child: Row(
-                      //       children: [
-                      //         Icon(
-                      //           Icons.search,
-                      //           color: Get.theme.iconTheme.color,
-                      //         ),
-                      //         SizedBox(
-                      //           width: 20,
-                      //         ),
-                      //         Text(
-                      //           'Missing Cashback',
-                      //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                      //             letterSpacing: 0,
-                      //             color: Colors.black.withOpacity(0.75),
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-                      // InkWell(
-                      //   onTap: () {
-                      //     Get.to(() => AppTabinationScreen());
-                      //   },
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      //     child: Row(
-                      //       children: [
-                      //         Icon(
-                      //           Icons.screen_search_desktop_outlined,
-                      //           color: Get.theme.iconTheme.color,
-                      //         ),
-                      //         SizedBox(
-                      //           width: 20,
-                      //         ),
-                      //         Text(
-                      //           'All in One Search',
-                      //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                      //             letterSpacing: 0,
-                      //             color: Colors.black.withOpacity(0.75),
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-                      // InkWell(
-                      //   onTap: () {
-                      //     Get.find<BottomNavigationController>().setBottomIndex(2);
-                      //   },
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      //     child: Row(
-                      //       children: [
-                      //         Icon(
-                      //           Icons.person_add,
-                      //           color: Get.theme.iconTheme.color,
-                      //         ),
-                      //         SizedBox(
-                      //           width: 20,
-                      //         ),
-                      //         Text(
-                      //           'Refer and Earn',
-                      //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                      //             letterSpacing: 0,
-                      //             color: Colors.black.withOpacity(0.75),
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-                      // InkWell(
-                      //   onTap: () {
-                      //     Get.to(() => ReferralNetworkScreen());
-                      //   },
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      //     child: Row(
-                      //       children: [
-                      //         Icon(
-                      //           Icons.person,
-                      //           color: Get.theme.iconTheme.color,
-                      //         ),
-                      //         SizedBox(
-                      //           width: 20,
-                      //         ),
-                      //         Text(
-                      //           'Referral Network',
-                      //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                      //             letterSpacing: 0,
-                      //             color: Colors.black.withOpacity(0.75),
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
+
                       InkWell(
                         onTap: () {
                           Get.find<BottomNavigationController>().setBottomIndex(3);
@@ -446,9 +353,9 @@ class ProfieScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.ads_click,
-                                color: Get.theme.iconTheme.color,
+                              Image.asset(
+                                Images.recent_clicks,
+                                height: 20,
                               ),
                               SizedBox(
                                 width: 20,
@@ -472,9 +379,13 @@ class ProfieScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.live_help_outlined,
-                                color: Get.theme.iconTheme.color,
+                              // Icon(
+                              //   Icons.live_help_outlined,
+                              //   color: Get.theme.iconTheme.color,
+                              // ),
+                              Image.asset(
+                                Images.gethelp,
+                                height: 20,
                               ),
                               SizedBox(
                                 width: 20,
@@ -498,9 +409,13 @@ class ProfieScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.color_lens,
-                                color: Get.theme.iconTheme.color,
+                              // Icon(
+                              //   Icons.color_lens,
+                              //   color: Get.theme.iconTheme.color,
+                              // ),
+                              Image.asset(
+                                Images.theme_color,
+                                height: 20,
                               ),
                               SizedBox(
                                 width: 20,
@@ -529,7 +444,7 @@ class ProfieScreen extends StatelessWidget {
                               //   color: Get.theme.iconTheme.color,
                               // ),
                               Image.asset(
-                                Images.translation,
+                                Images.languages,
                                 height: 20,
                               ),
                               SizedBox(
@@ -546,36 +461,7 @@ class ProfieScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // InkWell(
-                      //   onTap: () async {
-                      //     if (await canLaunchUrlString('tel:${9999999999}')) {
-                      //       await launchUrlString('tel:${9999999999}');
-                      //     } else {
-                      //       throw 'Could not launch';
-                      //     }
-                      //   },
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      //     child: Row(
-                      //       children: [
-                      //         Icon(
-                      //           Icons.call,
-                      //           color: Get.theme.iconTheme.color,
-                      //         ),
-                      //         SizedBox(
-                      //           width: 20,
-                      //         ),
-                      //         Text(
-                      //           'Call Us',
-                      //           style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                      //             letterSpacing: -0.5,
-                      //             fontWeight: FontWeight.w300,
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
+
                       Divider(
                         height: 0,
                       ),
@@ -590,9 +476,9 @@ class ProfieScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.star,
-                                color: Get.theme.iconTheme.color,
+                              Image.asset(
+                                Images.rateus,
+                                height: 20,
                               ),
                               SizedBox(
                                 width: 20,
@@ -619,9 +505,13 @@ class ProfieScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.info_outline,
-                                color: Get.theme.iconTheme.color,
+                              // Icon(
+                              //   Icons.info_outline,
+                              //   color: Get.theme.iconTheme.color,
+                              // ),
+                              Image.asset(
+                                Images.aboutus,
+                                height: 20,
                               ),
                               SizedBox(
                                 width: 20,
@@ -645,9 +535,13 @@ class ProfieScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.lock_open,
-                                color: Get.theme.iconTheme.color,
+                              // Icon(
+                              //   Icons.lock_open,
+                              //   color: Get.theme.iconTheme.color,
+                              // ),
+                              Image.asset(
+                                Images.privacy_policy,
+                                height: 20,
                               ),
                               SizedBox(
                                 width: 20,

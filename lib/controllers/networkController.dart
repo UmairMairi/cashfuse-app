@@ -1,17 +1,12 @@
-//flutter
-// ignore_for_file: cancel_subscriptions
+// ignore_for_file: cancel_subscriptions, unused_field
 
 import 'dart:async';
-//packages
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
 class NetworkController extends GetxController {
-  //** variables
   var connectionStatus = 0.obs;
-  //** objects
   final Connectivity _connectivity = Connectivity();
-  // ignore: unused_field
   StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override

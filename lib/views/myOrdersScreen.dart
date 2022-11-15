@@ -1,17 +1,18 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 import 'package:cashbackapp/controllers/orderController.dart';
-import 'package:cashbackapp/controllers/splashController.dart';
 import 'package:cashbackapp/utils/date_converter.dart';
+import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/views/bottomNavigationBarScreen.dart';
-import 'package:cashbackapp/views/missingCashbackScreen.dart';
+import 'package:cashbackapp/views/orderComplaintScreen.dart';
 import 'package:cashbackapp/views/webViewScreen.dart';
 import 'package:cashbackapp/widget/customImage.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 
 class MyOrdersScreen extends StatelessWidget {
   OrderController orderController = Get.find<OrderController>();
@@ -62,17 +63,18 @@ class MyOrdersScreen extends StatelessWidget {
                                           color: Colors.grey[400],
                                         ),
                                       ),
-                                      padding: EdgeInsets.all(3),
+                                      padding: EdgeInsets.all(5),
                                       child: CustomImage(
                                         image: global.appInfo.baseUrls.orderImageUrl + '/' + orderController.orderList[index].logo,
                                         fit: BoxFit.contain,
+                                        errorImage: Images.logo,
                                       ),
                                     ),
                                     title: Text(orderController.orderList[index].advertisers),
                                     trailing: InkWell(
                                       onTap: () async {
                                         await orderController.getOrderComplains(orderController.orderList[index].id);
-                                        Get.to(() => MissingCashbackScreen(
+                                        Get.to(() => OrderComplaintScreen(
                                               orderModel: orderController.orderList[index],
                                             ));
                                       },
@@ -290,51 +292,6 @@ class MyOrdersScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          // Container(
-                          //   color: Colors.red,
-                          //   alignment: Alignment.topLeft,
-                          //   child: FixedTimeline.tileBuilder(
-                          //     clipBehavior: Clip.none,
-                          //     mainAxisSize: MainAxisSize.min,
-                          //     theme: TimelineThemeData(
-                          //       indicatorTheme: IndicatorThemeData(color: Get.theme.secondaryHeaderColor),
-                          //       connectorTheme: ConnectorThemeData(color: Colors.black, thickness: 0.5, space: 10),
-                          //       nodeItemOverlap: true,
-                          //     ),
-                          //     builder: TimelineTileBuilder.connectedFromStyle(
-                          //       connectorStyleBuilder: (context, index) {
-                          //         return ConnectorStyle.dashedLine;
-                          //       },
-                          //       contentsBuilder: (context, index) {
-                          //         return SizedBox(
-                          //           child: ListTile(
-                          //             dense: true,
-                          //             title: Text('Click Tracked'),
-                          //             subtitle: Text(
-                          //               '20% off',
-                          //               style: TextStyle(
-                          //                 fontSize: 10,
-                          //                 color: Colors.black54,
-                          //               ),
-                          //             ),
-                          //             trailing: Text(
-                          //               '10:00 pm | 7 Nov 2022',
-                          //               style: TextStyle(fontSize: 10, color: Colors.grey),
-                          //             ),
-                          //           ),
-                          //         );
-                          //       },
-                          //       contentsAlign: ContentsAlign.basic,
-                          //       firstConnectorStyle: ConnectorStyle.transparent,
-                          //       lastConnectorStyle: ConnectorStyle.transparent,
-                          //       indicatorStyleBuilder: (context, index) {
-                          //         return IndicatorStyle.dot;
-                          //       },
-                          //       itemExtent: 70.0,
-                          //       itemCount: 3,
-                          //     ),
-                          //   ),
-                          // )
                         ],
                       );
                     })
@@ -364,7 +321,6 @@ class MyOrdersScreen extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () async {
-                            await Get.find<SplashController>().bannerShow();
                             Get.find<BottomNavigationController>().setBottomIndex(0);
                             Get.to(() => BottomNavigationBarScreen());
                           },

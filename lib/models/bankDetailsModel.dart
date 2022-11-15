@@ -6,6 +6,7 @@ class BankDetailsModel {
   String bankName;
   String ifsc;
   String upi;
+  String payPalEmail;
   String paytmNo;
   String amazonNo;
   DateTime createdAt;
@@ -19,6 +20,7 @@ class BankDetailsModel {
     this.bankName,
     this.ifsc,
     this.upi,
+    this.payPalEmail,
     this.paytmNo,
     this.amazonNo,
     this.createdAt,
@@ -34,10 +36,11 @@ class BankDetailsModel {
       bankName = json["bank_name"] != null ? json["bank_name"] : '';
       ifsc = json["ifsc"] != null ? json["ifsc"] : '';
       upi = json["upi"] != null ? json["upi"] : '';
+      payPalEmail = json["paypal_email"] != null ? json["paypal_email"] : '';
       paytmNo = json["paytm_no"] != null ? json["paytm_no"] : '';
       amazonNo = json["amazon_no"] != null ? json["amazon_no"] : '';
-      createdAt = DateTime.parse(json["created_at"]);
-      updatedAt = DateTime.parse(json["updated_at"]);
+      createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : null;
+      updatedAt = json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null;
     } catch (e) {
       print("Exception - BankDetailsModel.dart - BankDetailsModel.fromJson():" + e.toString());
     }
@@ -51,9 +54,10 @@ class BankDetailsModel {
         "bank_name": bankName,
         "ifsc": ifsc,
         "upi": upi,
+        "paypal_email": payPalEmail,
         "paytm_no": paytmNo,
         "amazon_no": amazonNo,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
+        "created_at": createdAt != null ? createdAt.toIso8601String() : null,
+        "updated_at": updatedAt != null ? updatedAt.toIso8601String() : null,
       };
 }

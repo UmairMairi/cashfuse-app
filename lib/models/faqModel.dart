@@ -23,6 +23,8 @@ class FaqModel {
       image = json["image"] != null ? json["image"] : '';
       createdAt = DateTime.parse(json["created_at"]);
       updatedAt = DateTime.parse(json["updated_at"]);
-    } catch (e) {}
+    } catch (e) {
+      print("Exception - FaqModel.dart - FaqModel.fromJson():" + e.toString());
+    }
   }
 }

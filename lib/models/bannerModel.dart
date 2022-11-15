@@ -34,15 +34,15 @@ class BannerModel {
       id = json["id"];
       name = json["name"];
       image = json["image"] != null ? json["image"] : '';
-      type = json["type"];
-      url = json["url"] == null ? null : json["url"];
-      offerId = json["offer_id"] == null ? null : json["offer_id"];
+      type = json["type"] != null ? json["type"] : '';
+      url = json["url"] != null ? json["url"] : '';
+      offerId = json["offer_id"];
       status = json["status"];
       heading = json["heading"] != null ? json["heading"] : '';
       description = json["description"] != null ? json["description"] : '';
       createdAt = DateTime.parse(json["created_at"]);
       updatedAt = DateTime.parse(json["updated_at"]);
-      cuelinkoffer = json["cuelinkoffer"] == null ? null : OfferModel.fromJson(json["cuelinkoffer"]);
+      cuelinkoffer = json["cuelinkoffer"] != null ? OfferModel.fromJson(json["cuelinkoffer"]) : null;
     } catch (e) {
       print("Exception - BannerModel.dart - BannerModel.fromJson():" + e.toString());
     }

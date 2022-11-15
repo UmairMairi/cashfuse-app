@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/couponModel.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
@@ -41,6 +43,7 @@ class CouponDetailScreen extends StatelessWidget {
               global.share(
                 coupon.url,
                 coupon.bannerImage.isNotEmpty && !coupon.isImageError ? '${global.appInfo.baseUrls.couponBannerImageUrl}/${coupon.bannerImage}' : '',
+                '',
               );
             },
             child: Container(

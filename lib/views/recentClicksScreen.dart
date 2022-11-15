@@ -1,6 +1,7 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
 import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/controllers/splashController.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/widget/confirmationDialog.dart';
@@ -9,8 +10,8 @@ import 'package:cashbackapp/widget/recentClickDialogWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 
 class RecentClickScreen extends StatelessWidget {
   HomeController homeController = Get.find<HomeController>();
@@ -21,7 +22,6 @@ class RecentClickScreen extends StatelessWidget {
       appBar: AppBar(
         leading: InkWell(
           onTap: () async {
-            await Get.find<SplashController>().bannerShow();
             Get.find<BottomNavigationController>().setBottomIndex(0);
           },
           child: Icon(
@@ -33,42 +33,44 @@ class RecentClickScreen extends StatelessWidget {
           style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
         ),
         actions: [
-          InkWell(
-            onTap: () {
-              showConfirmationDialog(
-                context,
-                AppLocalizations.of(context).delete,
-                AppLocalizations.of(context).delete_desc_click,
-                [
-                  CupertinoDialogAction(
-                    child: Text(
-                      AppLocalizations.of(context).yes,
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.red),
+          homeController.recentClickList != null && homeController.recentClickList.length > 0
+              ? InkWell(
+                  onTap: () {
+                    showConfirmationDialog(
+                      context,
+                      AppLocalizations.of(context).delete,
+                      AppLocalizations.of(context).delete_desc_click,
+                      [
+                        CupertinoDialogAction(
+                          child: Text(
+                            AppLocalizations.of(context).yes,
+                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.red),
+                          ),
+                          onPressed: () {
+                            Get.back();
+                            homeController.deleteClicks();
+                          },
+                        ),
+                        CupertinoDialogAction(
+                          child: Text(
+                            AppLocalizations.of(context).no,
+                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.blue),
+                          ),
+                          onPressed: () {
+                            Get.back();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Icon(
+                      Icons.delete,
                     ),
-                    onPressed: () {
-                      Get.back();
-                      homeController.deleteClicks();
-                    },
                   ),
-                  CupertinoDialogAction(
-                    child: Text(
-                      AppLocalizations.of(context).no,
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.blue),
-                    ),
-                    onPressed: () {
-                      Get.back();
-                    },
-                  ),
-                ],
-              );
-            },
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Icon(
-                Icons.delete,
-              ),
-            ),
-          ),
+                )
+              : SizedBox(),
         ],
       ),
       body: GetBuilder<HomeController>(builder: (home) {
@@ -206,7 +208,6 @@ class RecentClickScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () async {
-                          await Get.find<SplashController>().bannerShow();
                           Get.find<BottomNavigationController>().setBottomIndex(0);
                         },
                         child: Container(

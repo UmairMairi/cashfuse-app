@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/offerModel.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
@@ -52,6 +54,7 @@ class OfferDetailScreen extends StatelessWidget {
                   global.share(
                     homeController.createdLink.isNotEmpty ? homeController.createdLink : offer.url,
                     offer.bannerImage.isNotEmpty && !offer.isImageError ? '${global.appInfo.baseUrls.offerImageUrl}/${offer.bannerImage}' : '',
+                    '',
                   );
                 },
                 child: Container(

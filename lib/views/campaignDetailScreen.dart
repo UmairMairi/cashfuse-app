@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/campaignModel.dart';
 import 'package:cashbackapp/utils/global.dart' as global;
@@ -93,6 +95,7 @@ class CampaignDetailScreen extends StatelessWidget {
                       global.share(
                         homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
                         campaign.image.isNotEmpty && !campaign.isImageError ? '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}' : '',
+                        '',
                       );
                     },
                     child: Container(

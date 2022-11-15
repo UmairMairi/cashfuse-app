@@ -48,25 +48,12 @@ class OtpVerificationScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${AppLocalizations.of(context).otp_subtitle} ${authController.contactNo.text}',
+                      '${AppLocalizations.of(context).otp_subtitle} ${authController.coutryCode} ${authController.contactNo.text}',
                       style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                         letterSpacing: -0.2,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    // InkWell(
-                    //   onTap: () {
-                    //     Get.back();
-                    //   },
-                    //   child: Text(
-                    //     'Edit number',
-                    //     style: Get.theme.primaryTextTheme.subtitle2.copyWith(
-                    //       letterSpacing: -0.2,
-                    //       fontWeight: FontWeight.w500,
-                    //       color: Colors.blue[900],
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
@@ -143,21 +130,6 @@ class OtpVerificationScreen extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
-              // InkWell(
-              //   onTap: () {
-              //     Get.to(() => LoginWithEmailScreen());
-              //   },
-              //   child: Center(
-              //     child: Text(
-              //       'Login using email',
-              //       style: Get.theme.primaryTextTheme.subtitle2.copyWith(
-              //         letterSpacing: -0.2,
-              //         fontWeight: FontWeight.w500,
-              //         color: Colors.blue[900],
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),

@@ -1,4 +1,4 @@
-# go_services
+# cashbackapp
 
 A new Flutter project.
 

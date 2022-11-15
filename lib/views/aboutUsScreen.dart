@@ -2,7 +2,7 @@
 
 import 'package:cashbackapp/controllers/commonController.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -33,8 +33,8 @@ class AboutUsScreen extends StatelessWidget {
           height: Get.height,
           margin: EdgeInsets.all(10).copyWith(bottom: 0),
           child: SingleChildScrollView(
-            child: Html(
-              data: commonController.aboutUs,
+            child: HtmlWidget(
+              commonController.aboutUs,
             ),
           ),
         );

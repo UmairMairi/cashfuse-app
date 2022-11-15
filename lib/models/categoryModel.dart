@@ -61,7 +61,7 @@ class CategoryModel {
       cueCatId = json["cue_cat_id"];
       advId = json["adv_id"];
       name = json["name"];
-      image = json["image"];
+      image = json["image"] != null ? json["image"] : '';
       parentId = json["parent_id"];
       position = json["position"];
       status = json["status"];

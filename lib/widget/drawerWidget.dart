@@ -2,7 +2,7 @@ import 'package:cashbackapp/utils/global.dart' as global;
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/views/accountSettingScreen.dart';
 import 'package:cashbackapp/views/allcategoriesScreen.dart';
-import 'package:cashbackapp/views/appTabinationScreen.dart';
+import 'package:cashbackapp/views/allInOneSearchScreen.dart';
 import 'package:cashbackapp/views/getHelpScreen.dart';
 import 'package:cashbackapp/views/getStartedScreen.dart';
 import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
@@ -77,7 +77,7 @@ class DrawerWidget extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  global.currentUser.earning != null ? '₹${global.currentUser.earning.remEarning}' : '₹0.00',
+                                  global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
                                   textAlign: TextAlign.center,
                                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                                 ),
@@ -103,7 +103,7 @@ class DrawerWidget extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  global.currentUser.earning != null ? '₹${global.currentUser.earning.totalEarnings}' : '₹0.00',
+                                  global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency}0.00',
                                   textAlign: TextAlign.center,
                                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                                 ),
@@ -129,7 +129,7 @@ class DrawerWidget extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  global.currentUser.earning != null ? '₹${global.currentUser.earning.sentForWithdrawal}' : '₹0.00',
+                                  global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
                                   textAlign: TextAlign.center,
                                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                                 ),
@@ -253,7 +253,7 @@ class DrawerWidget extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Get.back();
-                    Get.to(() => AppTabinationScreen());
+                    Get.to(() => AllInOneSearchScreen());
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -278,31 +278,7 @@ class DrawerWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                // InkWell(
-                //   onTap: () {},
-                //   child: Padding(
-                //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                //     child: Row(
-                //       children: [
-                //         Icon(
-                //           Icons.countertops_outlined,
-                //           color: Colors.black.withOpacity(0.5),
-                //         ),
-                //         SizedBox(
-                //           width: 20,
-                //         ),
-                //         Text(
-                //           'Missing Cashback',
-                //           style: Get.theme.primaryTextTheme.bodyText1.copyWith(
-                //             letterSpacing: 0,
-                //             fontWeight: FontWeight.w300,
-                //             color: Colors.black.withOpacity(0.6),
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
+
                 InkWell(
                   onTap: () {
                     Get.back();
@@ -337,7 +313,7 @@ class DrawerWidget extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Get.back();
-                    global.share(global.appName, '');
+                    global.share('', '', 'I recently tried CashKaro.com & highly recommend it! You get extra Cashback on top of all retailer discounts.');
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -420,31 +396,6 @@ class DrawerWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                // InkWell(
-                //   onTap: () {},
-                //   child: Padding(
-                //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                //     child: Row(
-                //       children: [
-                //         Icon(
-                //           Icons.power_settings_new_outlined,
-                //           color: Colors.black.withOpacity(0.5),
-                //         ),
-                //         SizedBox(
-                //           width: 20,
-                //         ),
-                //         Text(
-                //           'Logout',
-                //           style: Get.theme.primaryTextTheme.bodyText1.copyWith(
-                //             letterSpacing: 0,
-                //             fontWeight: FontWeight.w300,
-                //             color: Colors.black.withOpacity(0.6),
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
               ],
             )
           : Column(
@@ -494,182 +445,6 @@ class DrawerWidget extends StatelessWidget {
                 ),
               ],
             ),
-      //  Column(
-      //   crossAxisAlignment: CrossAxisAlignment.start,
-      //   children: [
-      //     Container(
-      //       padding: EdgeInsets.only(top: 30),
-      //       color: Get.theme.primaryColor,
-      //       child: ListTile(
-      //         horizontalTitleGap: 0,
-      //         leading: Icon(
-      //           Icons.home_outlined,
-      //           color: Colors.white,
-      //         ),
-      //         title: Text(
-      //           'Home',
-      //           style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
-      //         ),
-      //       ),
-      //     ),
-      //     ListTile(
-      //       onTap: () {
-      //         Get.to(() => CategoryScreen());
-      //       },
-      //       horizontalTitleGap: 0,
-      //       leading: Icon(
-      //         Icons.store_outlined,
-      //         color: Get.theme.iconTheme.color,
-      //       ),
-      //       title: Text(
-      //         'Higest Cashback Stores',
-      //         style: Get.theme.primaryTextTheme.subtitle2.copyWith(letterSpacing: -0.2),
-      //       ),
-      //     ),
-      //     ListTile(
-      //       onTap: () {
-      //         Get.to(() => RetailerCategoryScreen());
-      //       },
-      //       horizontalTitleGap: 0,
-      //       leading: Icon(
-      //         Icons.edit_calendar_sharp,
-      //         color: Get.theme.iconTheme.color,
-      //       ),
-      //       title: Text(
-      //         'Retailers By Category',
-      //         style: Get.theme.primaryTextTheme.subtitle2.copyWith(letterSpacing: -0.2),
-      //       ),
-      //       trailing: Icon(
-      //         Icons.arrow_forward_ios,
-      //         size: 15,
-      //       ),
-      //     ),
-      //     ListTile(
-      //       horizontalTitleGap: 0,
-      //       leading: Icon(
-      //         Icons.volume_down_outlined,
-      //         color: Get.theme.iconTheme.color,
-      //       ),
-      //       title: Text(
-      //         'Top Product Deals',
-      //         style: Get.theme.primaryTextTheme.subtitle2.copyWith(letterSpacing: -0.2),
-      //       ),
-      //       trailing: Icon(
-      //         Icons.arrow_forward_ios,
-      //         size: 15,
-      //       ),
-      //     ),
-      //     Divider(),
-      //     InkWell(
-      //       onTap: () {
-      //         Get.to(() => AppWiseOfferShowListScreen());
-      //       },
-      //       child: Padding(
-      //         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      //         child: Row(
-      //           children: [
-      //             Icon(
-      //               Icons.man,
-      //               color: Colors.black.withOpacity(0.7),
-      //             ),
-      //             SizedBox(
-      //               width: 20,
-      //             ),
-      //             Text(
-      //               'Men Fashion',
-      //               style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-      //                 letterSpacing: -0.5,
-      //                 fontWeight: FontWeight.w300,
-      //                 color: Colors.black.withOpacity(0.7),
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     ),
-      //     InkWell(
-      //       onTap: () {
-      //         Get.to(() => AppWiseOfferShowListScreen());
-      //       },
-      //       child: Padding(
-      //         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      //         child: Row(
-      //           children: [
-      //             Icon(
-      //               Icons.woman_outlined,
-      //               color: Colors.black.withOpacity(0.7),
-      //             ),
-      //             SizedBox(
-      //               width: 20,
-      //             ),
-      //             Text(
-      //               'Women Fashion',
-      //               style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-      //                 letterSpacing: -0.5,
-      //                 fontWeight: FontWeight.w300,
-      //                 color: Colors.black.withOpacity(0.7),
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     ),
-      //     InkWell(
-      //       onTap: () {
-      //         Get.to(() => AppWiseOfferShowListScreen());
-      //       },
-      //       child: Padding(
-      //         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      //         child: Row(
-      //           children: [
-      //             Icon(
-      //               Icons.man,
-      //               color: Colors.black.withOpacity(0.7),
-      //             ),
-      //             SizedBox(
-      //               width: 20,
-      //             ),
-      //             Text(
-      //               'Men Shoes',
-      //               style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-      //                 letterSpacing: -0.5,
-      //                 fontWeight: FontWeight.w300,
-      //                 color: Colors.black.withOpacity(0.7),
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     ),
-      //     InkWell(
-      //       onTap: () {
-      //         Get.to(() => AppWiseOfferShowListScreen());
-      //       },
-      //       child: Padding(
-      //         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      //         child: Row(
-      //           children: [
-      //             Icon(
-      //               Icons.woman_outlined,
-      //               color: Colors.black.withOpacity(0.7),
-      //             ),
-      //             SizedBox(
-      //               width: 20,
-      //             ),
-      //             Text(
-      //               'Women Shoes',
-      //               style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-      //                 letterSpacing: -0.5,
-      //                 fontWeight: FontWeight.w300,
-      //                 color: Colors.black.withOpacity(0.7),
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

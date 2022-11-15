@@ -3,16 +3,15 @@
 import 'dart:async';
 
 import 'package:cashbackapp/controllers/bottomNavigationController.dart';
-import 'package:cashbackapp/controllers/splashController.dart';
-import 'package:cashbackapp/views/appTabinationScreen.dart';
+import 'package:cashbackapp/views/allInOneSearchScreen.dart';
 import 'package:cashbackapp/views/homeScreen.dart';
 import 'package:cashbackapp/views/profileScreen.dart';
 import 'package:cashbackapp/views/recentClicksScreen.dart';
 import 'package:cashbackapp/views/searchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 
 class BottomNavigationBarScreen extends StatelessWidget {
   BottomNavigationBarScreen() : super();
@@ -30,8 +29,7 @@ class BottomNavigationBarScreen extends StatelessWidget {
   List<Widget> _screens() => [
         HomeScreen(),
         SearchScreen(),
-        AppTabinationScreen(),
-        //ReferEarnScreen(),
+        AllInOneSearchScreen(),
         RecentClickScreen(),
         ProfieScreen(),
       ];
@@ -50,7 +48,6 @@ class BottomNavigationBarScreen extends StatelessWidget {
         return WillPopScope(
           onWillPop: () async {
             if (navController.bottomNavIndex.value != 0) {
-              await Get.find<SplashController>().bannerShow();
               navController.setBottomIndex(0);
               return false;
             } else {
@@ -133,14 +130,6 @@ class BottomNavigationBarScreen extends StatelessWidget {
                             color: navController.bottomNavIndex.value == 2 ? Colors.white : Colors.grey[450],
                           ),
                         )),
-                    //    child: CircleAvatar(
-                    // radius: 20,
-                    // backgroundColor: Colors.white,
-                    // child: Image.asset(
-                    //   Images.rupee,
-                    //   height: 25,
-                    // ),
-                    //),
                   ),
                 ),
               ],

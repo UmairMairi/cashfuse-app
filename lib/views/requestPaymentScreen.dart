@@ -2,6 +2,7 @@ import 'package:cashbackapp/controllers/authController.dart';
 import 'package:cashbackapp/utils/images.dart';
 import 'package:cashbackapp/views/addBankDetailScreen.dart';
 import 'package:cashbackapp/views/amazonPayRedeemScreen.dart';
+import 'package:cashbackapp/views/payPalRedeemScreen.dart';
 import 'package:cashbackapp/views/paytmRedeemScreen.dart';
 import 'package:cashbackapp/views/upiRedeemScreen.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class RequestPaymentScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            global.currentUser.earning != null ? '₹${global.currentUser.earning.remEarning}' : '₹0.00',
+                            global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
                             style: Get.theme.primaryTextTheme.subtitle2,
                           ),
                         ],
@@ -74,7 +75,7 @@ class RequestPaymentScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          global.currentUser.earning != null ? '₹${global.currentUser.earning.sentForWithdrawal}' : '₹0.00',
+                          global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.sentForWithdrawal}' : '${global.appInfo.currency}0.00',
                           style: Get.theme.primaryTextTheme.subtitle2,
                         ),
                       ],
@@ -92,7 +93,7 @@ class RequestPaymentScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            global.currentUser.earning != null ? '₹${global.currentUser.earning.withdrawal}' : '₹0.00',
+                            global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
                             style: Get.theme.primaryTextTheme.subtitle2,
                           ),
                         ],
@@ -106,7 +107,7 @@ class RequestPaymentScreen extends StatelessWidget {
                           style: Get.theme.primaryTextTheme.subtitle2,
                         ),
                         Text(
-                          global.currentUser.earning != null ? '₹${global.currentUser.earning.totalEarnings}' : '₹0.00',
+                          global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency}0.00',
                           style: Get.theme.primaryTextTheme.subtitle2,
                         ),
                       ],
@@ -374,6 +375,70 @@ class RequestPaymentScreen extends StatelessWidget {
                             left: -38,
                             child: FloatingActionButton(
                               heroTag: "4",
+                              elevation: 0,
+                              backgroundColor: Colors.white,
+                              onPressed: () {},
+                              shape: _DiamondBorder(),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => PayPalRedeemScreen());
+                      },
+                      child: Stack(
+                        alignment: Alignment.centerLeft,
+                        children: [
+                          Container(
+                            height: 65,
+                            width: Get.width,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: [
+                                  Colors.blue[900],
+                                  Colors.blue[800],
+                                  Colors.blue.withOpacity(0.85),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  ' ${AppLocalizations.of(context).paypal}',
+                                  style: Get.theme.primaryTextTheme.headline6.copyWith(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Card(
+                                  margin: EdgeInsets.zero,
+                                  color: Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      Images.paypal,
+                                      width: 50,
+                                      height: 20,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            left: -38,
+                            child: FloatingActionButton(
+                              heroTag: "3",
                               elevation: 0,
                               backgroundColor: Colors.white,
                               onPressed: () {},

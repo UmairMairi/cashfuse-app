@@ -1,7 +1,6 @@
 import 'package:cashbackapp/controllers/homeController.dart';
 import 'package:cashbackapp/models/categoryModel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 
@@ -59,13 +58,8 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
               //   height: 20,
               // ),
               homeController.isOffer
-                  ? Html(
-                      data: partner.rightTabDesc,
-                      shrinkWrap: true,
-                      // style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                      //   fontWeight: FontWeight.w600,
-                      //   letterSpacing: -0.1,
-                      // ),
+                  ? HtmlWidget(
+                      partner.rightTabDesc,
                     )
                   : Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -73,32 +67,7 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                         partner.leftTabDesc,
                       ),
                     ),
-              // ListView.builder(
-              //   padding: EdgeInsets.zero,
-              //   shrinkWrap: true,
-              //   itemCount: 10,
-              //   physics: NeverScrollableScrollPhysics(),
-              //   itemBuilder: (context, index) {
-              //     return Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         ListTile(
-              //           contentPadding: EdgeInsets.zero,
-              //           horizontalTitleGap: 10,
-              //           minLeadingWidth: 0,
-              //           leading: CircleAvatar(
-              //             radius: 3,
-              //             backgroundColor: Colors.black54,
-              //           ),
-              //           title: Text(
-              //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-              //             style: Get.theme.primaryTextTheme.bodySmall.copyWith(fontWeight: FontWeight.w300),
-              //           ),
-              //         ),
-              //       ],
-              //     );
-              //   },
-              // ),
+
               (partner.leftTab.isEmpty || partner.rightTab.isEmpty)
                   ? SizedBox()
                   : SizedBox(
@@ -140,44 +109,6 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
             ],
           ),
         );
-        // bottomNavigationBar: (partner.leftTab.isNotEmpty || partner.rightTab.isNotEmpty)
-        //     ? SizedBox()
-        //     : SizedBox(
-        //         height: 50,
-        //         child: Card(
-        //           margin: EdgeInsets.zero,
-        //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-        //           color: Get.theme.primaryColor,
-        //           child: Row(
-        //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //             children: [
-        //               InkWell(
-        //                 onTap: () {
-        //                   Get.find<HomeController>().setIsOffer(false);
-        //                 },
-        //                 child: Text(
-        //                   partner.leftTab,
-        //                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
-        //                 ),
-        //               ),
-        //               Icon(
-        //                 Icons.more_vert,
-        //                 size: 22,
-        //                 color: Colors.white.withOpacity(0.3),
-        //               ),
-        //               InkWell(
-        //                 onTap: () {
-        //                   homeController.setIsOffer(true);
-        //                 },
-        //                 child: Text(
-        //                   partner.rightTab,
-        //                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
-        //                 ),
-        //               ),
-        //             ],
-        //           ),
-        //         ),
-        //       ),
       },
     );
   }

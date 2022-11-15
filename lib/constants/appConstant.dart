@@ -25,6 +25,7 @@ class AppConstants {
   static const String ADD_AMAZON_DETAILS_URI = '/add_amazon_detail';
   static const String ADD_PAYTM_DETAILS_URI = '/add_paytm_detail';
   static const String ADD_UPI_DETAILS_URI = '/add_upi_detail';
+  static const String ADD_PAYPAL_DETAILS_URI = '/add_paypal_detail';
   static const String TRACKING_LINK_URI = '/get_tracking_link';
   static const String SEARCH_URI = '/search';
   static const String ADD_CLICK_URI = '/add_click';

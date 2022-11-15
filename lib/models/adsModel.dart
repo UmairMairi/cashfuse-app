@@ -58,18 +58,18 @@ class AdsModel {
       adId = json["ad_id"];
       cId = json["c_id"];
       advId = json["adv_id"];
-      advName = json["adv_name"];
+      advName = json["adv_name"] != null ? json["adv_name"] : '';
 
-      trackingLink = json["tracking_link"];
-      name = json["name"];
+      trackingLink = json["tracking_link"] != null ? json["tracking_link"] : '';
+      name = json["name"] != null ? json["name"] : '';
       categoryId = json["category_id"];
-      categoryIds = json["category_ids"] == null ? null : json["category_ids"];
-      description = json["description"] == null ? null : json["description"];
-      image = json["image"];
-      buttonText = json["button_text"];
+      categoryIds = json["category_ids"] != null ? json["category_ids"] : '';
+      description = json["description"] != null ? json["description"] : '';
+      image = json["image"] != null ? json["image"] : '';
+      buttonText = json["button_text"] != null ? json["button_text"] : '';
       partnerId = json["partner_id"];
       affiliatePartner = json["affiliate_partner"];
-      landingPage = json["landing_page"];
+      landingPage = json["landing_page"] != null ? json["landing_page"] : '';
       type = json["type"];
       status = json["status"];
       createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : null;

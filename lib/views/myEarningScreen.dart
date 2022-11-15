@@ -65,7 +65,7 @@ class MyEarningSceen extends StatelessWidget {
                         ],
                       ),
                       subtitle: Text(
-                        global.currentUser.earning != null ? '₹${global.currentUser.earning.totalEarnings}' : '₹0.00',
+                        global.currentUser.earning != null ? '${global.appInfo.currency} ${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency} 0.00',
                         style: Get.theme.primaryTextTheme.headline5.copyWith(fontWeight: FontWeight.w600),
                       ),
                       trailing: Card(

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cashbackapp/controllers/couponController.dart';
 import 'package:cashbackapp/views/couponDetailScreen.dart';
 import 'package:cashbackapp/views/offerDetailScreen.dart';
