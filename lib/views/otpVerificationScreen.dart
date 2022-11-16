@@ -1,4 +1,4 @@
-import 'package:cashbackapp/controllers/authController.dart';
+import 'package:cashfuse/controllers/authController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';

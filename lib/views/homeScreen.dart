@@ -1,36 +1,36 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cashbackapp/controllers/couponController.dart';
-import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/controllers/splashController.dart';
-import 'package:cashbackapp/models/commonModel.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/utils/images.dart';
-import 'package:cashbackapp/views/adsDetailScreen.dart';
-import 'package:cashbackapp/views/allcategoriesScreen.dart';
-import 'package:cashbackapp/views/offerListScreen.dart';
-import 'package:cashbackapp/views/campaignDetailScreen.dart';
-import 'package:cashbackapp/views/categoryScreen.dart';
-import 'package:cashbackapp/views/couponDetailScreen.dart';
-import 'package:cashbackapp/views/couponListScreen.dart';
-import 'package:cashbackapp/views/getHelpScreen.dart';
-import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
-import 'package:cashbackapp/views/myEarningScreen.dart';
-import 'package:cashbackapp/views/offerDetailScreen.dart';
-import 'package:cashbackapp/views/adsCampaignWidgetListScreen.dart';
-import 'package:cashbackapp/views/webViewScreen.dart';
-import 'package:cashbackapp/widget/offerWidget.dart';
-import 'package:cashbackapp/widget/couponWidget.dart';
-import 'package:cashbackapp/widget/customImage.dart';
-import 'package:cashbackapp/widget/drawerWidget.dart';
-import 'package:cashbackapp/widget/adsCampaignWidget.dart';
+import 'package:cashfuse/controllers/couponController.dart';
+import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/controllers/splashController.dart';
+import 'package:cashfuse/models/commonModel.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/views/adsCampaignWidgetListScreen.dart';
+import 'package:cashfuse/views/adsDetailScreen.dart';
+import 'package:cashfuse/views/allcategoriesScreen.dart';
+import 'package:cashfuse/views/campaignDetailScreen.dart';
+import 'package:cashfuse/views/categoryScreen.dart';
+import 'package:cashfuse/views/couponDetailScreen.dart';
+import 'package:cashfuse/views/couponListScreen.dart';
+import 'package:cashfuse/views/getHelpScreen.dart';
+import 'package:cashfuse/views/loginOrSignUpScreen.dart';
+import 'package:cashfuse/views/myEarningScreen.dart';
+import 'package:cashfuse/views/offerDetailScreen.dart';
+import 'package:cashfuse/views/offerListScreen.dart';
+import 'package:cashfuse/views/webViewScreen.dart';
+import 'package:cashfuse/widget/adsCampaignWidget.dart';
+import 'package:cashfuse/widget/bannerImageWidget.dart';
+import 'package:cashfuse/widget/couponWidget.dart';
+import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
+import 'package:cashfuse/widget/offerWidget.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:slide_countdown/slide_countdown.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
@@ -68,7 +68,7 @@ class HomeScreen extends StatelessWidget {
             ),
             children: <TextSpan>[
               TextSpan(
-                text: 'BACK',
+                text: 'FUSE',
                 style: Get.theme.primaryTextTheme.headline4.copyWith(
                   color: Colors.white,
                   letterSpacing: 0.1,
@@ -84,27 +84,70 @@ class HomeScreen extends StatelessWidget {
               Get.to(() => MyEarningSceen());
             },
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    AppLocalizations.of(context).total_earning,
-                    style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white, fontWeight: FontWeight.w300),
-                  ),
-                  Text(global.currentUser.id != null && global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency}0.00'),
-                ],
-              ),
-            ),
+                padding: const EdgeInsets.all(10.0),
+                child: Image.asset(
+                  Images.wallet_icon,
+                  height: 25,
+                )
+                // Column(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: [
+                //     Text(
+                //       AppLocalizations.of(context).total_earning,
+                //       style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white, fontWeight: FontWeight.w300),
+                //     ),
+                //     Text(global.currentUser.id != null && global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency}0.00'),
+                //   ],
+                // ),
+                ),
           )
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Get.theme.primaryColor,
-        child: Icon(FontAwesomeIcons.commentDots),
-        onPressed: () {
-          Get.to(() => GetHelpScreen());
-        },
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // FloatingActionButton(
+          //   heroTag: '1',
+          //   backgroundColor: Coo,
+          //   child:
+          InkWell(
+            onTap: () async {
+              if (global.currentUser.id != null) {
+                await global.referAndEarn();
+              } else {
+                Get.to(() => LoginOrSignUpScreen());
+              }
+            },
+            child: Image.asset(
+              Images.refer,
+              height: 40,
+            ),
+          ),
+          // onPressed: () {
+          //   //Get.to(() => GetHelpScreen());
+          // },
+          //),
+          SizedBox(
+            height: 10,
+          ),
+          // FloatingActionButton(
+          //   heroTag: '2',
+          //   backgroundColor: Get.theme.primaryColor,
+          //   child:
+          InkWell(
+            onTap: () {
+              Get.to(() => GetHelpScreen());
+            },
+            child: Image.asset(
+              Images.gethelp,
+              height: 40,
+            ),
+          ),
+          //   onPressed: () {
+          //     Get.to(() => GetHelpScreen());
+          //   },
+          // ),
+        ],
       ),
       body: Stack(
         alignment: Alignment.center,
@@ -147,6 +190,7 @@ class HomeScreen extends StatelessWidget {
                                             Get.to(
                                               () => WebViewScreen(
                                                 urlString: homeController2.topBannerList[index].url,
+                                                brandName: homeController2.topBannerList[index].name,
                                               ),
                                             );
                                           } else {
@@ -872,52 +916,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          GetBuilder<SplashController>(builder: (splash) {
-            return global.isBannerShow
-                ? FutureBuilder(
-                    builder: (context, snapshot) {
-                      return SizedBox();
-                    },
-                    future: Future.delayed(Duration.zero).then((value) {
-                      return Get.dialog(
-                        Dialog(
-                          backgroundColor: Colors.transparent,
-                          insetPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                          child: Stack(
-                            alignment: Alignment.topRight,
-                            clipBehavior: Clip.none,
-                            children: [
-                              CustomImage(
-                                image: global.appInfo.baseUrls.notificationBannerImageUrl + '/' + global.bannerImage,
-                                fit: BoxFit.contain,
-                              ),
-                              Positioned(
-                                top: 60,
-                                right: -7,
-                                child: InkWell(
-                                  onTap: () async {
-                                    Get.back();
-                                    await splashController.bannerShow();
-                                  },
-                                  child: CircleAvatar(
-                                    radius: 15,
-                                    child: Icon(
-                                      Icons.close,
-                                      color: Colors.black,
-                                      size: 20,
-                                    ),
-                                    backgroundColor: Colors.grey[400],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        barrierDismissible: false,
-                      );
-                    }))
-                : SizedBox();
-          }),
+          bannerImageWidget(),
         ],
       ),
     );

@@ -1,19 +1,19 @@
-import 'package:cashbackapp/controllers/authController.dart';
-import 'package:cashbackapp/controllers/bottomNavigationController.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/utils/images.dart';
-import 'package:cashbackapp/views/aboutUsScreen.dart';
-import 'package:cashbackapp/views/accountSettingScreen.dart';
-import 'package:cashbackapp/views/colorPicker.dart';
-import 'package:cashbackapp/views/getHelpScreen.dart';
-import 'package:cashbackapp/views/languageScreen.dart';
-import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
-import 'package:cashbackapp/views/myEarningScreen.dart';
-import 'package:cashbackapp/views/paymentHistoryScreen.dart';
-import 'package:cashbackapp/views/paymentScreen.dart';
-import 'package:cashbackapp/views/privacyPolicyScreen.dart';
-import 'package:cashbackapp/widget/confirmationDialog.dart';
-import 'package:cashbackapp/widget/customImage.dart';
+import 'package:cashfuse/controllers/authController.dart';
+import 'package:cashfuse/controllers/bottomNavigationController.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/views/aboutUsScreen.dart';
+import 'package:cashfuse/views/accountSettingScreen.dart';
+import 'package:cashfuse/views/colorPicker.dart';
+import 'package:cashfuse/views/getHelpScreen.dart';
+import 'package:cashfuse/views/languageScreen.dart';
+import 'package:cashfuse/views/loginOrSignUpScreen.dart';
+import 'package:cashfuse/views/myEarningScreen.dart';
+import 'package:cashfuse/views/paymentHistoryScreen.dart';
+import 'package:cashfuse/views/paymentScreen.dart';
+import 'package:cashfuse/views/privacyPolicyScreen.dart';
+import 'package:cashfuse/widget/confirmationDialog.dart';
+import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -469,7 +469,7 @@ class ProfieScreen extends StatelessWidget {
                         onTap: () {
                           //Get.to(() => RateUsScreen());
                           StoreRedirect.redirect(
-                            androidAppId: 'com.cashback.app',
+                            androidAppId: 'com.cashfuse.app',
                           );
                         },
                         child: Padding(

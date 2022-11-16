@@ -1,9 +1,9 @@
-import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/views/adsDetailScreen.dart';
-import 'package:cashbackapp/widget/customImage.dart';
+import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/views/adsDetailScreen.dart';
+import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MoreAdsScreen extends StatelessWidget {

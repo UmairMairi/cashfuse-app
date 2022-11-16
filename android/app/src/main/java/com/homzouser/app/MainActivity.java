@@ -1,4 +1,4 @@
-package com.cashback.app;
+package com.cashfuse.app;
 
 import io.flutter.embedding.android.FlutterActivity;
 

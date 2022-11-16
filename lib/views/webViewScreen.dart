@@ -1,10 +1,10 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/models/categoryModel.dart';
-import 'package:cashbackapp/models/couponModel.dart';
-import 'package:cashbackapp/utils/images.dart';
-import 'package:cashbackapp/widget/webview/seeMoreSheet.dart';
+import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/models/categoryModel.dart';
+import 'package:cashfuse/models/couponModel.dart';
+import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/widget/webview/seeMoreSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
@@ -88,7 +88,7 @@ class WebViewScreen extends StatelessWidget {
                           )),
                       child: RichText(
                         text: TextSpan(
-                          text: "CB",
+                          text: "CF",
                           style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                             letterSpacing: -0.2,
                             color: Get.theme.secondaryHeaderColor,

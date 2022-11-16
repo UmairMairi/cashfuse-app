@@ -1,4 +1,4 @@
-import 'package:cashbackapp/models/offerModel.dart';
+import 'package:cashfuse/models/offerModel.dart';
 
 class Coupon {
   int id;
@@ -17,6 +17,7 @@ class Coupon {
   String url;
   String bannerImage;
   String buttonText;
+  String partnerName;
   bool isImageError = false; //for check image error
 
   Coupon({
@@ -36,6 +37,7 @@ class Coupon {
     this.url,
     this.bannerImage,
     this.buttonText,
+    this.partnerName,
     this.isImageError,
   });
 
@@ -56,6 +58,7 @@ class Coupon {
       offer = json["offers"] != null ? OfferModel.fromJson(json["offers"]) : null;
       url = json["url"] != null ? json["url"] : '';
       bannerImage = json["banner_image"] != null ? json["banner_image"] : '';
+      partnerName = json["partner"] != null ? json["partner"] : '';
       buttonText = json["button_text"] != null ? json["button_text"] : '';
     } catch (e) {
       print("Exception - CouponModel.dart - Coupon.fromJson():" + e.toString());

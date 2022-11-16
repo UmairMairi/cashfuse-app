@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:cashbackapp/controllers/bottomNavigationController.dart';
-import 'package:cashbackapp/controllers/themeController.dart';
-import 'package:cashbackapp/views/bottomNavigationBarScreen.dart';
-import 'package:cashbackapp/widget/customSnackbar.dart';
+import 'package:cashfuse/controllers/bottomNavigationController.dart';
+import 'package:cashfuse/controllers/themeController.dart';
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
+import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'package:get/get.dart';
@@ -141,7 +141,7 @@ class _ColorPickerPageState extends State<ColorPickerPage> with SingleTickerProv
                             // },
                             allowShades: false,
                             onMainColorChange: (color) {
-                              log(Color(color.value).value.toString());
+                              log(Color(color.value).toString());
                               if (Color(color.value).value == themeController.pickSecondaryColor.value) {
                                 showCustomSnackBar('Primary Color & Secondary Should be Different');
                               } else {
@@ -155,7 +155,7 @@ class _ColorPickerPageState extends State<ColorPickerPage> with SingleTickerProv
                               shrinkWrap: false,
                               allowShades: false,
                               onMainColorChange: (color) {
-                                log(Color(color.value).value.toString());
+                                log(Color(color.value).toString());
                                 if (Color(color.value).value == themeController.pickColor.value) {
                                   showCustomSnackBar('Primary Color & Secondary Should be Different');
                                 } else {

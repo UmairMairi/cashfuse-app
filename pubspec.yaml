@@ -1,4 +1,4 @@
-name: cashbackapp
+name: cashfuse
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -51,6 +51,7 @@ dependencies:
   webview_flutter: ^3.0.4
   flutter_inappwebview: ^5.7.1
   flutter_material_color_picker: ^1.1.0+2
+  convex_bottom_bar: ^3.1.0+1
 
   #CONNECTIVITY
   connectivity_plus: ^2.1.0
@@ -62,10 +63,11 @@ dependencies:
   get: ^4.6.1
 
   #FIREBASE
-  firebase_core: ^1.22.0
-  firebase_auth: ^3.9.0
-  firebase_messaging: ^13.0.2
+  firebase_core: ^2.2.0
+  firebase_auth: ^4.1.2
+  firebase_messaging: ^14.1.0
   flutter_local_notifications: ^11.0.1
+  firebase_dynamic_links: ^5.0.5
 
   #LOCAL
   provider: ^6.0.3
@@ -80,7 +82,6 @@ dependencies:
 
   #IMAGE
   image_picker: ^0.8.5+3
-  flutter_image_compress: ^1.1.0
   image_cropper: ^3.0.0
   cached_network_image: ^3.2.1
 

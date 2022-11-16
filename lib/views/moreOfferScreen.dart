@@ -1,7 +1,7 @@
-import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/views/offerDetailScreen.dart';
-import 'package:cashbackapp/widget/customImage.dart';
+import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/views/offerDetailScreen.dart';
+import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

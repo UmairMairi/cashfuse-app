@@ -1,7 +1,7 @@
-import 'package:cashbackapp/controllers/localizationController.dart';
-import 'package:cashbackapp/l10n/l10n.dart';
-import 'package:cashbackapp/provider/local_provider.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashfuse/controllers/localizationController.dart';
+import 'package:cashfuse/l10n/l10n.dart';
+import 'package:cashfuse/provider/local_provider.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';

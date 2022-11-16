@@ -1,13 +1,13 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/models/adsModel.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
-import 'package:cashbackapp/views/moreAdsScreen.dart';
-import 'package:cashbackapp/views/webViewScreen.dart';
-import 'package:cashbackapp/widget/customImage.dart';
-import 'package:cashbackapp/widget/ratesAndOfferTermsSheetWidget.dart';
+import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/models/adsModel.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/views/loginOrSignUpScreen.dart';
+import 'package:cashfuse/views/moreAdsScreen.dart';
+import 'package:cashfuse/views/webViewScreen.dart';
+import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:customizable_space_bar/customizable_space_bar.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';

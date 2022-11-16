@@ -1,4 +1,4 @@
-import 'package:cashbackapp/models/categoryModel.dart';
+import 'package:cashfuse/models/categoryModel.dart';
 
 class CommonModel {
   String adId;

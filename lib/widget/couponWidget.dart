@@ -1,6 +1,6 @@
-import 'package:cashbackapp/models/couponModel.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/widget/customImage.dart';
+import 'package:cashfuse/models/couponModel.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/widget/customImage.dart';
 import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';

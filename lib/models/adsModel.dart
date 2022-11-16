@@ -1,5 +1,5 @@
-import 'package:cashbackapp/models/categoryModel.dart';
-import 'package:cashbackapp/models/couponModel.dart';
+import 'package:cashfuse/models/categoryModel.dart';
+import 'package:cashfuse/models/couponModel.dart';
 
 class AdsModel {
   int id;

@@ -1,9 +1,9 @@
-import 'package:cashbackapp/controllers/paymentController.dart';
-import 'package:cashbackapp/utils/date_converter.dart';
-import 'package:cashbackapp/utils/images.dart';
+import 'package:cashfuse/controllers/paymentController.dart';
+import 'package:cashfuse/utils/date_converter.dart';
+import 'package:cashfuse/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaymentScreen extends StatelessWidget {

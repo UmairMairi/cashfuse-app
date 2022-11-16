@@ -1,8 +1,8 @@
-import 'package:cashbackapp/constants/appConstant.dart';
-import 'package:cashbackapp/controllers/networkController.dart';
-import 'package:cashbackapp/models/faqModel.dart';
-import 'package:cashbackapp/services/apiHelper.dart';
-import 'package:cashbackapp/widget/customSnackbar.dart';
+import 'package:cashfuse/constants/appConstant.dart';
+import 'package:cashfuse/controllers/networkController.dart';
+import 'package:cashfuse/models/faqModel.dart';
+import 'package:cashfuse/services/apiHelper.dart';
+import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

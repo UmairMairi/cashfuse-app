@@ -1,9 +1,9 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashbackapp/controllers/orderController.dart';
-import 'package:cashbackapp/models/orderModel.dart';
-import 'package:cashbackapp/views/addComplaintSceen.dart';
-import 'package:cashbackapp/views/faqSceen.dart';
+import 'package:cashfuse/controllers/orderController.dart';
+import 'package:cashfuse/models/orderModel.dart';
+import 'package:cashfuse/views/addComplaintSceen.dart';
+import 'package:cashfuse/views/faqSceen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

@@ -1,4 +1,4 @@
-import 'package:cashbackapp/models/userModel.dart';
+import 'package:cashfuse/models/userModel.dart';
 
 class PaymentHistoryModel {
   int id;

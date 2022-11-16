@@ -1,4 +1,4 @@
-# cashbackapp
+# cashfuse
 
 A new Flutter project.
 

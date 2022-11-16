@@ -1,13 +1,13 @@
-import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/utils/images.dart';
-import 'package:cashbackapp/views/accountSettingScreen.dart';
-import 'package:cashbackapp/views/allcategoriesScreen.dart';
-import 'package:cashbackapp/views/allInOneSearchScreen.dart';
-import 'package:cashbackapp/views/getHelpScreen.dart';
-import 'package:cashbackapp/views/getStartedScreen.dart';
-import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
-import 'package:cashbackapp/views/requestPaymentScreen.dart';
-import 'package:cashbackapp/widget/customImage.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/views/accountSettingScreen.dart';
+import 'package:cashfuse/views/allcategoriesScreen.dart';
+import 'package:cashfuse/views/allInOneSearchScreen.dart';
+import 'package:cashfuse/views/getHelpScreen.dart';
+import 'package:cashfuse/views/getStartedScreen.dart';
+import 'package:cashfuse/views/loginOrSignUpScreen.dart';
+import 'package:cashfuse/views/requestPaymentScreen.dart';
+import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -313,7 +313,7 @@ class DrawerWidget extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Get.back();
-                    global.share('', '', 'I recently tried CashKaro.com & highly recommend it! You get extra Cashback on top of all retailer discounts.');
+                    global.share('', '', global.appShareContent);
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -342,7 +342,7 @@ class DrawerWidget extends StatelessWidget {
                   onTap: () {
                     Get.back();
                     StoreRedirect.redirect(
-                      androidAppId: 'com.cashback.app',
+                      androidAppId: 'com.cashfuse.app',
                     );
                   },
                   child: Padding(

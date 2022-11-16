@@ -1,9 +1,9 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashbackapp/controllers/bottomNavigationController.dart';
-import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/models/clickModel.dart';
-import 'package:cashbackapp/utils/images.dart';
+import 'package:cashfuse/controllers/bottomNavigationController.dart';
+import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/models/clickModel.dart';
+import 'package:cashfuse/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';

@@ -1,5 +1,5 @@
-import 'package:cashbackapp/controllers/authController.dart';
-import 'package:cashbackapp/widget/codePickerWidget.dart';
+import 'package:cashfuse/controllers/authController.dart';
+import 'package:cashfuse/widget/codePickerWidget.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

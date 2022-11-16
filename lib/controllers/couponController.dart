@@ -1,8 +1,8 @@
-import 'package:cashbackapp/constants/appConstant.dart';
-import 'package:cashbackapp/controllers/networkController.dart';
-import 'package:cashbackapp/models/couponModel.dart';
-import 'package:cashbackapp/services/apiHelper.dart';
-import 'package:cashbackapp/widget/customSnackbar.dart';
+import 'package:cashfuse/constants/appConstant.dart';
+import 'package:cashfuse/controllers/networkController.dart';
+import 'package:cashfuse/models/couponModel.dart';
+import 'package:cashfuse/services/apiHelper.dart';
+import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:get/get.dart';
 
 class CouponController extends GetxController {

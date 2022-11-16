@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-import 'package:cashbackapp/constants/appConstant.dart';
-import 'package:cashbackapp/controllers/networkController.dart';
-import 'package:cashbackapp/models/allInOneSearchDataModel.dart';
-import 'package:cashbackapp/models/commonModel.dart';
-import 'package:cashbackapp/models/searchDataModel.dart';
-import 'package:cashbackapp/services/apiHelper.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/widget/customLoader.dart';
-import 'package:cashbackapp/widget/customSnackbar.dart';
+import 'package:cashfuse/constants/appConstant.dart';
+import 'package:cashfuse/controllers/networkController.dart';
+import 'package:cashfuse/models/allInOneSearchDataModel.dart';
+import 'package:cashfuse/models/commonModel.dart';
+import 'package:cashfuse/models/searchDataModel.dart';
+import 'package:cashfuse/services/apiHelper.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/widget/customLoader.dart';
+import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

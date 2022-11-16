@@ -1,16 +1,16 @@
-import 'package:cashbackapp/controllers/authController.dart';
-import 'package:cashbackapp/controllers/commonController.dart';
-import 'package:cashbackapp/controllers/couponController.dart';
-import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/controllers/imageController.dart';
-import 'package:cashbackapp/controllers/networkController.dart';
-import 'package:cashbackapp/controllers/orderController.dart';
-import 'package:cashbackapp/controllers/paymentController.dart';
-import 'package:cashbackapp/controllers/searchController.dart';
-import 'package:cashbackapp/controllers/splashController.dart';
-import 'package:cashbackapp/controllers/themeController.dart';
+import 'package:cashfuse/controllers/authController.dart';
+import 'package:cashfuse/controllers/commonController.dart';
+import 'package:cashfuse/controllers/couponController.dart';
+import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/controllers/imageController.dart';
+import 'package:cashfuse/controllers/networkController.dart';
+import 'package:cashfuse/controllers/orderController.dart';
+import 'package:cashfuse/controllers/paymentController.dart';
+import 'package:cashfuse/controllers/searchController.dart';
+import 'package:cashfuse/controllers/splashController.dart';
+import 'package:cashfuse/controllers/themeController.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/controllers/bottomNavigationController.dart';
+import 'package:cashfuse/controllers/bottomNavigationController.dart';
 
 class NetworkBinding extends Bindings {
   @override

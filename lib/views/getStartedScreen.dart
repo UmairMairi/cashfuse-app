@@ -1,5 +1,5 @@
-import 'package:cashbackapp/controllers/bottomNavigationController.dart';
-import 'package:cashbackapp/views/loginOrSignUpScreen.dart';
+import 'package:cashfuse/controllers/bottomNavigationController.dart';
+import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -80,7 +80,7 @@ class GetStartedScreen extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: Get.theme.secondaryHeaderColor,
+                          color: Get.theme.primaryColor,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(

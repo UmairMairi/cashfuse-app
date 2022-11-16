@@ -1,6 +1,6 @@
-import 'package:cashbackapp/models/bankDetailsModel.dart';
-import 'package:cashbackapp/models/earningModel.dart';
-import 'package:cashbackapp/models/paymentHistoryModel.dart';
+import 'package:cashfuse/models/bankDetailsModel.dart';
+import 'package:cashfuse/models/earningModel.dart';
+import 'package:cashfuse/models/paymentHistoryModel.dart';
 
 class UserModel {
   int id;

@@ -1,9 +1,9 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashbackapp/controllers/authController.dart';
-import 'package:cashbackapp/controllers/imageController.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/widget/customImage.dart';
+import 'package:cashfuse/controllers/authController.dart';
+import 'package:cashfuse/controllers/imageController.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/widget/customImage.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

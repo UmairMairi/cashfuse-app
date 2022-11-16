@@ -1,4 +1,4 @@
-import 'package:cashbackapp/models/baseUrlsModel.dart';
+import 'package:cashfuse/models/baseUrlsModel.dart';
 
 class AppInfo {
   String businessName;

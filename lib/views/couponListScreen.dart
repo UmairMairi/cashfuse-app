@@ -1,9 +1,9 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashbackapp/controllers/couponController.dart';
-import 'package:cashbackapp/views/couponDetailScreen.dart';
-import 'package:cashbackapp/views/offerDetailScreen.dart';
-import 'package:cashbackapp/widget/couponWidget.dart';
+import 'package:cashfuse/controllers/couponController.dart';
+import 'package:cashfuse/views/couponDetailScreen.dart';
+import 'package:cashfuse/views/offerDetailScreen.dart';
+import 'package:cashfuse/widget/couponWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

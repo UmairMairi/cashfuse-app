@@ -1,11 +1,11 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/views/categoryScreen.dart';
-import 'package:cashbackapp/widget/customImage.dart';
+import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/views/categoryScreen.dart';
+import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AllCategoriesScreen extends StatelessWidget {
@@ -67,7 +67,7 @@ class AllCategoriesScreen extends StatelessWidget {
                       //margin: EdgeInsets.only(right: 15),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: index == 0 ? Colors.blue[700] : Colors.white,
+                        color: index == 0 ? Get.theme.primaryColor : Colors.white,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,

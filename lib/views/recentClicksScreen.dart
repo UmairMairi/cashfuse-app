@@ -1,12 +1,12 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashbackapp/controllers/bottomNavigationController.dart';
-import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/utils/images.dart';
-import 'package:cashbackapp/widget/confirmationDialog.dart';
-import 'package:cashbackapp/widget/customImage.dart';
-import 'package:cashbackapp/widget/recentClickDialogWidget.dart';
+import 'package:cashfuse/controllers/bottomNavigationController.dart';
+import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/widget/confirmationDialog.dart';
+import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/recentClickDialogWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

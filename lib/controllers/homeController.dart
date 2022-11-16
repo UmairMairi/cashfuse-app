@@ -1,19 +1,19 @@
-import 'package:cashbackapp/constants/appConstant.dart';
-import 'package:cashbackapp/controllers/authController.dart';
-import 'package:cashbackapp/controllers/networkController.dart';
-import 'package:cashbackapp/models/adsModel.dart';
-import 'package:cashbackapp/models/bannerModel.dart';
-import 'package:cashbackapp/models/campaignModel.dart';
-import 'package:cashbackapp/models/categoryModel.dart';
-import 'package:cashbackapp/models/clickModel.dart';
-import 'package:cashbackapp/models/commonModel.dart';
-import 'package:cashbackapp/models/offerModel.dart';
-import 'package:cashbackapp/services/apiHelper.dart';
-import 'package:cashbackapp/widget/customLoader.dart';
-import 'package:cashbackapp/widget/customSnackbar.dart';
+import 'package:cashfuse/constants/appConstant.dart';
+import 'package:cashfuse/controllers/authController.dart';
+import 'package:cashfuse/controllers/networkController.dart';
+import 'package:cashfuse/models/adsModel.dart';
+import 'package:cashfuse/models/bannerModel.dart';
+import 'package:cashfuse/models/campaignModel.dart';
+import 'package:cashfuse/models/categoryModel.dart';
+import 'package:cashfuse/models/clickModel.dart';
+import 'package:cashfuse/models/commonModel.dart';
+import 'package:cashfuse/models/offerModel.dart';
+import 'package:cashfuse/services/apiHelper.dart';
+import 'package:cashfuse/widget/customLoader.dart';
+import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashfuse/utils/global.dart' as global;
 
 class HomeController extends GetxController {
   APIHelper apiHelper = new APIHelper();

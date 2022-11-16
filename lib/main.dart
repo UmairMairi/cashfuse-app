@@ -4,15 +4,16 @@
 
 import 'dart:io';
 
-import 'package:cashbackapp/controllers/themeController.dart';
-import 'package:cashbackapp/l10n/l10n.dart';
-import 'package:cashbackapp/provider/local_provider.dart';
-import 'package:cashbackapp/theme/nativeTheme.dart';
-import 'package:cashbackapp/utils/binding/networkBinding.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/utils/notificationHelper.dart';
-import 'package:cashbackapp/views/splashScreen.dart';
+import 'package:cashfuse/controllers/themeController.dart';
+import 'package:cashfuse/l10n/l10n.dart';
+import 'package:cashfuse/provider/local_provider.dart';
+import 'package:cashfuse/theme/nativeTheme.dart';
+import 'package:cashfuse/utils/binding/networkBinding.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/utils/notificationHelper.dart';
+import 'package:cashfuse/views/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart' as webview;
@@ -20,12 +21,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   HttpOverrides.global = new MyHttpOverrides();
   await Firebase.initializeApp();
-   await NotificationHelper.initialize();
+  await NotificationHelper.initialize();
+  await fetchLinkData();
   if (Platform.isAndroid) {
     await webview.AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
 
@@ -46,6 +49,37 @@ void main() async {
   runApp(
     MyApp(),
   );
+}
+
+Future fetchLinkData() async {
+  // FirebaseDynamicLinks.getInitialLInk does a call to firebase to get us the real link because we have shortened it.
+  var link = await FirebaseDynamicLinks.instance.getInitialLink();
+
+  // This link may exist if the app was opened fresh so we'll want to handle it the same way onLink will.
+  handleLinkData(link);
+
+  //This will handle incoming links if the application is already opened
+  dynamicLinks.onLink.listen((dynamicLinkData) {
+    handleLinkData(dynamicLinkData);
+  }).onError((error) {
+    print('onLink error');
+    print(error.message);
+  });
+  // FirebaseDynamicLinks.instance.onLink(onSuccess: (PendingDynamicLinkData dynamicLink) async {
+  //   handleLinkData(dynamicLink);
+  // });
+}
+
+void handleLinkData(PendingDynamicLinkData data) {
+  final Uri uri = data?.link;
+  if (uri != null) {
+    final queryParams = uri.queryParameters;
+    if (queryParams.length > 0) {
+      global.referralUserId = queryParams["userId"];
+      // verify the username is parsed correctly
+      print("My user id is: ${global.referralUserId}");
+    }
+  }
 }
 
 class MyApp extends StatelessWidget {

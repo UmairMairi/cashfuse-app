@@ -2,16 +2,17 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:cashbackapp/models/appInfoModel.dart';
-import 'package:cashbackapp/models/userModel.dart';
-import 'package:cashbackapp/utils/date_converter.dart';
-import 'package:cashbackapp/widget/customSnackbar.dart';
+import 'package:cashfuse/models/appInfoModel.dart';
+import 'package:cashfuse/models/userModel.dart';
+import 'package:cashfuse/utils/date_converter.dart';
+import 'package:cashfuse/widget/customSnackbar.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-String appName = "CashBack";
+String appName = "Cashfuse";
 
 String baseUrl = "https://okaydemo.com/cashback/api";
 
@@ -27,6 +28,9 @@ String isBannerDate = DateConverter.dateTimeToDateOnly(DateTime.now());
 bool isBannerShow = false;
 String bannerImage = '';
 String languageCode = 'en';
+String referralUserId = '';
+String appShareContent = "I recently tried Cashfuse app & highly recommend it! You get extra Cashback on top of all retailer discounts. Download the app from below link.";
+FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 
 //Api Header
 Future<Map<String, String>> getApiHeaders(bool authorizationRequired) async {
@@ -60,7 +64,18 @@ Future share(String link, String image, String title) async {
         showCustomSnackBar(e.toString());
       });
     } else if (title.isNotEmpty) {
-      await FlutterShare.share(title: '$appName', text: title, linkUrl: link).then((value) {}).catchError((e) {
+      final DynamicLinkParameters parameters = DynamicLinkParameters(
+        uriPrefix: 'https://cashfuse.page.link',
+        link: Uri.parse('https://cashfuse.page.link/'),
+        androidParameters: AndroidParameters(
+          packageName: 'com.cashfuse.app',
+          minimumVersion: 1,
+        ),
+      );
+      Uri url;
+      final ShortDynamicLink shortLink = await dynamicLinks.buildShortLink(parameters, shortLinkType: ShortDynamicLinkType.short);
+      url = shortLink.shortUrl;
+      await FlutterShare.share(title: '$appName', text: title, linkUrl: url.toString()).then((value) {}).catchError((e) {
         showCustomSnackBar(e.toString());
       });
     } else {
@@ -70,5 +85,30 @@ Future share(String link, String image, String title) async {
     }
   } catch (e) {
     print("Exception - global.dart - share():" + e.toString());
+  }
+}
+
+Future referAndEarn() async {
+  try {
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      uriPrefix: 'https://cashfuse.page.link',
+      link: Uri.parse('https://cashfuse.page.link/referEarn?userId=${currentUser.id}'),
+      androidParameters: AndroidParameters(
+        packageName: 'com.cashfuse.app',
+        minimumVersion: 1,
+      ),
+    );
+    Uri url;
+    final ShortDynamicLink shortLink = await dynamicLinks.buildShortLink(parameters, shortLinkType: ShortDynamicLinkType.short);
+    url = shortLink.shortUrl;
+    if (url != null) {
+      await FlutterShare.share(title: '$appName', linkUrl: url.toString()).then((value) {
+        if (value) {}
+      }).onError((error, stackTrace) {
+        return error;
+      });
+    }
+  } catch (e) {
+    print("Exception - global.dart - referAndEarn():" + e.toString());
   }
 }

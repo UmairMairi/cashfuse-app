@@ -1,4 +1,4 @@
-import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:intl/intl.dart';
 
 class DateConverter {

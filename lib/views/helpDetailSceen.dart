@@ -1,5 +1,5 @@
-import 'package:cashbackapp/controllers/commonController.dart';
-import 'package:cashbackapp/models/faqModel.dart';
+import 'package:cashfuse/controllers/commonController.dart';
+import 'package:cashfuse/models/faqModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';

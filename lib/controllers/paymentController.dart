@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-import 'package:cashbackapp/constants/appConstant.dart';
-import 'package:cashbackapp/controllers/networkController.dart';
-import 'package:cashbackapp/models/bankDetailsModel.dart';
-import 'package:cashbackapp/models/paymentHistoryModel.dart';
-import 'package:cashbackapp/services/apiHelper.dart';
-import 'package:cashbackapp/widget/customLoader.dart';
-import 'package:cashbackapp/widget/customSnackbar.dart';
+import 'package:cashfuse/constants/appConstant.dart';
+import 'package:cashfuse/controllers/networkController.dart';
+import 'package:cashfuse/models/bankDetailsModel.dart';
+import 'package:cashfuse/models/paymentHistoryModel.dart';
+import 'package:cashfuse/services/apiHelper.dart';
+import 'package:cashfuse/widget/customLoader.dart';
+import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashfuse/utils/global.dart' as global;
 
 class PaymentController extends GetxController {
   APIHelper apiHelper = new APIHelper();

@@ -28,4 +28,6 @@ class Images {
   static const String recent_clicks = "assets/images/recent-clicks.png";
   static const String settings = "assets/images/settings.png";
   static const String theme_color = "assets/images/theme-color.png";
+  static const String refer = "assets/images/refer.png";
+  static const String wallet_icon = "assets/images/wallet-icon.png";
 }

@@ -3,18 +3,18 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:cashbackapp/constants/appConstant.dart';
-import 'package:cashbackapp/controllers/networkController.dart';
-import 'package:cashbackapp/models/userModel.dart';
-import 'package:cashbackapp/services/apiHelper.dart';
-import 'package:cashbackapp/views/bottomNavigationBarScreen.dart';
-import 'package:cashbackapp/views/otpVerificationScreen.dart';
-import 'package:cashbackapp/widget/customLoader.dart';
-import 'package:cashbackapp/widget/customSnackbar.dart';
+import 'package:cashfuse/constants/appConstant.dart';
+import 'package:cashfuse/controllers/networkController.dart';
+import 'package:cashfuse/models/userModel.dart';
+import 'package:cashfuse/services/apiHelper.dart';
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
+import 'package:cashfuse/views/otpVerificationScreen.dart';
+import 'package:cashfuse/widget/customLoader.dart';
+import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashfuse/utils/global.dart' as global;
 
 class AuthController extends GetxController {
   APIHelper apiHelper = new APIHelper();

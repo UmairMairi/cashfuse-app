@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:cashbackapp/controllers/bottomNavigationController.dart';
-import 'package:cashbackapp/controllers/searchController.dart';
-import 'package:cashbackapp/models/allInOneSearchDataModel.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/views/bottomNavigationBarScreen.dart';
-import 'package:cashbackapp/widget/customSnackbar.dart';
+import 'package:cashfuse/controllers/bottomNavigationController.dart';
+import 'package:cashfuse/controllers/searchController.dart';
+import 'package:cashfuse/models/allInOneSearchDataModel.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
+import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';

@@ -1,13 +1,13 @@
-import 'package:cashbackapp/controllers/bottomNavigationController.dart';
-import 'package:cashbackapp/utils/images.dart';
-import 'package:cashbackapp/views/getHelpScreen.dart';
-import 'package:cashbackapp/views/myOrdersScreen.dart';
-import 'package:cashbackapp/views/requestPaymentScreen.dart';
+import 'package:cashfuse/controllers/bottomNavigationController.dart';
+import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/views/getHelpScreen.dart';
+import 'package:cashfuse/views/myOrdersScreen.dart';
+import 'package:cashfuse/views/requestPaymentScreen.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyEarningSceen extends StatelessWidget {

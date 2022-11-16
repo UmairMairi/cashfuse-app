@@ -1,4 +1,4 @@
-import 'package:cashbackapp/utils/images.dart';
+import 'package:cashfuse/utils/images.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {

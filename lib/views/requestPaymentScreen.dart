@@ -1,13 +1,13 @@
-import 'package:cashbackapp/controllers/authController.dart';
-import 'package:cashbackapp/utils/images.dart';
-import 'package:cashbackapp/views/addBankDetailScreen.dart';
-import 'package:cashbackapp/views/amazonPayRedeemScreen.dart';
-import 'package:cashbackapp/views/payPalRedeemScreen.dart';
-import 'package:cashbackapp/views/paytmRedeemScreen.dart';
-import 'package:cashbackapp/views/upiRedeemScreen.dart';
+import 'package:cashfuse/controllers/authController.dart';
+import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/views/addBankDetailScreen.dart';
+import 'package:cashfuse/views/amazonPayRedeemScreen.dart';
+import 'package:cashfuse/views/payPalRedeemScreen.dart';
+import 'package:cashfuse/views/paytmRedeemScreen.dart';
+import 'package:cashfuse/views/upiRedeemScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RequestPaymentScreen extends StatelessWidget {

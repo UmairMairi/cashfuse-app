@@ -1,10 +1,10 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/models/commonModel.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/views/categoryScreen.dart';
-import 'package:cashbackapp/widget/adsCampaignWidget.dart';
+import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/models/commonModel.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/views/categoryScreen.dart';
+import 'package:cashfuse/widget/adsCampaignWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,9 +1,9 @@
-import 'package:cashbackapp/controllers/commonController.dart';
-import 'package:cashbackapp/views/helpDetailSceen.dart';
-import 'package:cashbackapp/widget/customImage.dart';
+import 'package:cashfuse/controllers/commonController.dart';
+import 'package:cashfuse/views/helpDetailSceen.dart';
+import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -103,40 +103,49 @@ class GetHelpScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Card(
-                                      elevation: 5,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(25),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child:
-                                            // ShaderMask(
-                                            //   blendMode: BlendMode.srcIn,
-                                            //   shaderCallback: (Rect bounds) {
-                                            //     return LinearGradient(
-                                            //       colors: [
-                                            //         Color(0xFFBC53E1),
-                                            //         Color(0xFF6285E3),
-                                            //       ],
-                                            //       begin: Alignment.topLeft,
-                                            //       end: Alignment.bottomRight,
-                                            //     ).createShader(bounds);
-                                            //   },
-                                            //   child:
-                                            CustomImage(
-                                          image: '${global.appInfo.baseUrls.faqImageUrl}/${controller.faqList[index].image}',
-                                          height: 25,
-                                          //width: Get.width,
-                                          fit: BoxFit.contain,
-                                        ),
-                                        // Image.asset(
-                                        //   Images.cube,
-                                        //   height: 25,
-                                        // ),
-                                      ),
-                                      //),
+                                    CustomImage(
+                                      image: '${global.appInfo.baseUrls.faqImageUrl}/${controller.faqList[index].image}',
+                                      height: 40,
+                                      //width: Get.width,
+                                      fit: BoxFit.contain,
                                     ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    // Card(
+                                    //   elevation: 5,
+                                    //   shape: RoundedRectangleBorder(
+                                    //     borderRadius: BorderRadius.circular(25),
+                                    //   ),
+                                    //   child: Padding(
+                                    //     padding: const EdgeInsets.all(12.0),
+                                    //     child:
+                                    //         // ShaderMask(
+                                    //         //   blendMode: BlendMode.srcIn,
+                                    //         //   shaderCallback: (Rect bounds) {
+                                    //         //     return LinearGradient(
+                                    //         //       colors: [
+                                    //         //         Color(0xFFBC53E1),
+                                    //         //         Color(0xFF6285E3),
+                                    //         //       ],
+                                    //         //       begin: Alignment.topLeft,
+                                    //         //       end: Alignment.bottomRight,
+                                    //         //     ).createShader(bounds);
+                                    //         //   },
+                                    //         //   child:
+                                    //         CustomImage(
+                                    //       image: '${global.appInfo.baseUrls.faqImageUrl}/${controller.faqList[index].image}',
+                                    //       height: 25,
+                                    //       //width: Get.width,
+                                    //       fit: BoxFit.contain,
+                                    //     ),
+                                    //     // Image.asset(
+                                    //     //   Images.cube,
+                                    //     //   height: 25,
+                                    //     // ),
+                                    //   ),
+                                    //   //),
+                                    // ),
                                     Text(
                                       controller.faqList[index].ques,
                                       textAlign: TextAlign.center,

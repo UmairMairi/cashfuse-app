@@ -1,8 +1,8 @@
-import 'package:cashbackapp/models/adsModel.dart';
-import 'package:cashbackapp/models/campaignModel.dart';
-import 'package:cashbackapp/models/categoryModel.dart';
-import 'package:cashbackapp/models/commonModel.dart';
-import 'package:cashbackapp/models/offerModel.dart';
+import 'package:cashfuse/models/adsModel.dart';
+import 'package:cashfuse/models/campaignModel.dart';
+import 'package:cashfuse/models/categoryModel.dart';
+import 'package:cashfuse/models/commonModel.dart';
+import 'package:cashfuse/models/offerModel.dart';
 
 class SearchDataModel {
   List<CategoryModel> advertiserList;

@@ -1,6 +1,6 @@
-import 'package:cashbackapp/models/adsModel.dart';
-import 'package:cashbackapp/models/campaignModel.dart';
-import 'package:cashbackapp/models/commonModel.dart';
+import 'package:cashfuse/models/adsModel.dart';
+import 'package:cashfuse/models/campaignModel.dart';
+import 'package:cashfuse/models/commonModel.dart';
 
 class CategoryModel {
   int id;

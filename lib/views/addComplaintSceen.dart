@@ -1,8 +1,8 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashbackapp/controllers/orderController.dart';
-import 'package:cashbackapp/models/orderModel.dart';
-import 'package:cashbackapp/widget/customSnackbar.dart';
+import 'package:cashfuse/controllers/orderController.dart';
+import 'package:cashfuse/models/orderModel.dart';
+import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

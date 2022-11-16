@@ -1,8 +1,9 @@
-import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/models/categoryModel.dart';
-import 'package:cashbackapp/models/couponModel.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/widget/customSnackbar.dart';
+import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/models/categoryModel.dart';
+import 'package:cashfuse/models/couponModel.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -37,21 +38,16 @@ class SeeMoreSheet extends StatelessWidget {
               homeController.webBottomIndex == 0
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CircleAvatar(
-                                radius: 15,
-                                backgroundColor: Get.theme.primaryColor,
-                                child: Text(
-                                  'CB',
-                                  style: Get.theme.primaryTextTheme.headline6.copyWith(
-                                    color: Get.theme.secondaryHeaderColor,
-                                  ),
-                                ),
+                              Image.asset(
+                                Images.logo,
+                                height: 30,
                               ),
                               Text(
                                 AppLocalizations.of(context).what_next,
@@ -76,6 +72,7 @@ class SeeMoreSheet extends StatelessWidget {
                           padding: const EdgeInsets.all(10.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -132,7 +129,7 @@ class SeeMoreSheet extends StatelessWidget {
                                     radius: 10,
                                   ),
                                   Text(
-                                    ' ${global.appName} Pays you Rewards',
+                                    ' ${global.appName} Pays you Cashback',
                                     style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -393,7 +390,7 @@ class SeeMoreSheet extends StatelessWidget {
                                 )),
                             child: RichText(
                               text: TextSpan(
-                                text: "CB",
+                                text: "CF",
                                 style: Get.theme.primaryTextTheme.subtitle2.copyWith(
                                   letterSpacing: -0.2,
                                   color: Get.theme.secondaryHeaderColor,

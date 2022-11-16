@@ -1,4 +1,4 @@
-import 'package:cashbackapp/models/offerModel.dart';
+import 'package:cashfuse/models/offerModel.dart';
 
 class BannerModel {
   int id;

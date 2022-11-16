@@ -1,6 +1,6 @@
-import 'package:cashbackapp/models/commonModel.dart';
-import 'package:cashbackapp/utils/images.dart';
-import 'package:cashbackapp/widget/customImage.dart';
+import 'package:cashfuse/models/commonModel.dart';
+import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/widget/customImage.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

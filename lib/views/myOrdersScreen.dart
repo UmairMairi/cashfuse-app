@@ -1,14 +1,14 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashbackapp/controllers/bottomNavigationController.dart';
-import 'package:cashbackapp/controllers/orderController.dart';
-import 'package:cashbackapp/utils/date_converter.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/utils/images.dart';
-import 'package:cashbackapp/views/bottomNavigationBarScreen.dart';
-import 'package:cashbackapp/views/orderComplaintScreen.dart';
-import 'package:cashbackapp/views/webViewScreen.dart';
-import 'package:cashbackapp/widget/customImage.dart';
+import 'package:cashfuse/controllers/bottomNavigationController.dart';
+import 'package:cashfuse/controllers/orderController.dart';
+import 'package:cashfuse/utils/date_converter.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
+import 'package:cashfuse/views/orderComplaintScreen.dart';
+import 'package:cashfuse/views/webViewScreen.dart';
+import 'package:cashfuse/widget/customImage.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

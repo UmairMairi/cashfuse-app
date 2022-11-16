@@ -1,25 +1,25 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:cashbackapp/constants/appConstant.dart';
-import 'package:cashbackapp/models/adsModel.dart';
-import 'package:cashbackapp/models/allInOneSearchDataModel.dart';
-import 'package:cashbackapp/models/appInfoModel.dart';
-import 'package:cashbackapp/models/bankDetailsModel.dart';
-import 'package:cashbackapp/models/bannerModel.dart';
-import 'package:cashbackapp/models/campaignModel.dart';
-import 'package:cashbackapp/models/categoryModel.dart';
-import 'package:cashbackapp/models/clickModel.dart';
-import 'package:cashbackapp/models/complainModel.dart';
-import 'package:cashbackapp/models/couponModel.dart';
-import 'package:cashbackapp/models/faqModel.dart';
-import 'package:cashbackapp/models/offerModel.dart';
-import 'package:cashbackapp/models/orderModel.dart';
-import 'package:cashbackapp/models/paymentHistoryModel.dart';
-import 'package:cashbackapp/models/searchDataModel.dart';
-import 'package:cashbackapp/models/userModel.dart';
-import 'package:cashbackapp/services/dioResult.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashfuse/constants/appConstant.dart';
+import 'package:cashfuse/models/adsModel.dart';
+import 'package:cashfuse/models/allInOneSearchDataModel.dart';
+import 'package:cashfuse/models/appInfoModel.dart';
+import 'package:cashfuse/models/bankDetailsModel.dart';
+import 'package:cashfuse/models/bannerModel.dart';
+import 'package:cashfuse/models/campaignModel.dart';
+import 'package:cashfuse/models/categoryModel.dart';
+import 'package:cashfuse/models/clickModel.dart';
+import 'package:cashfuse/models/complainModel.dart';
+import 'package:cashfuse/models/couponModel.dart';
+import 'package:cashfuse/models/faqModel.dart';
+import 'package:cashfuse/models/offerModel.dart';
+import 'package:cashfuse/models/orderModel.dart';
+import 'package:cashfuse/models/paymentHistoryModel.dart';
+import 'package:cashfuse/models/searchDataModel.dart';
+import 'package:cashfuse/models/userModel.dart';
+import 'package:cashfuse/services/dioResult.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 
@@ -90,6 +90,7 @@ class APIHelper {
         'phone': phone,
         'otp': status,
         'device_id': global.appDeviceId,
+        if (global.referralUserId.isNotEmpty) 'referral_user_id': global.referralUserId,
       });
       response = await dio.post('${global.baseUrl}${AppConstants.VERIFY_OTP}',
           data: formData,

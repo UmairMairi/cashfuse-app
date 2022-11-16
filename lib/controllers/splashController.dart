@@ -2,18 +2,18 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:cashbackapp/constants/appConstant.dart';
-import 'package:cashbackapp/controllers/authController.dart';
-import 'package:cashbackapp/controllers/networkController.dart';
-import 'package:cashbackapp/models/userModel.dart';
-import 'package:cashbackapp/services/apiHelper.dart';
-import 'package:cashbackapp/utils/date_converter.dart';
-import 'package:cashbackapp/views/bottomNavigationBarScreen.dart';
-import 'package:cashbackapp/views/getStartedScreen.dart';
-import 'package:cashbackapp/widget/customSnackbar.dart';
+import 'package:cashfuse/constants/appConstant.dart';
+import 'package:cashfuse/controllers/authController.dart';
+import 'package:cashfuse/controllers/networkController.dart';
+import 'package:cashfuse/models/userModel.dart';
+import 'package:cashfuse/services/apiHelper.dart';
+import 'package:cashfuse/utils/date_converter.dart';
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
+import 'package:cashfuse/views/getStartedScreen.dart';
+import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashController extends GetxController {
@@ -46,9 +46,9 @@ class SplashController extends GetxController {
                 global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
                 await Get.find<AuthController>().getProfile();
 
-                Get.to(() => BottomNavigationBarScreen());
+                Get.off(() => BottomNavigationBarScreen());
               } else {
-                Get.to(() => GetStartedScreen(
+                Get.off(() => GetStartedScreen(
                       fromSplash: true,
                     ));
               }

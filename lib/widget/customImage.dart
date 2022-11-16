@@ -1,11 +1,11 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cashbackapp/models/adsModel.dart';
-import 'package:cashbackapp/models/campaignModel.dart';
-import 'package:cashbackapp/models/couponModel.dart';
-import 'package:cashbackapp/models/offerModel.dart';
-import 'package:cashbackapp/utils/images.dart';
+import 'package:cashfuse/models/adsModel.dart';
+import 'package:cashfuse/models/campaignModel.dart';
+import 'package:cashfuse/models/couponModel.dart';
+import 'package:cashfuse/models/offerModel.dart';
+import 'package:cashfuse/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

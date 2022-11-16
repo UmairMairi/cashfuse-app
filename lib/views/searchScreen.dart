@@ -1,16 +1,16 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashbackapp/controllers/bottomNavigationController.dart';
-import 'package:cashbackapp/controllers/homeController.dart';
-import 'package:cashbackapp/controllers/searchController.dart';
-import 'package:cashbackapp/models/commonModel.dart';
-import 'package:cashbackapp/utils/global.dart' as global;
-import 'package:cashbackapp/views/adsDetailScreen.dart';
-import 'package:cashbackapp/views/campaignDetailScreen.dart';
-import 'package:cashbackapp/views/categoryScreen.dart';
-import 'package:cashbackapp/views/offerDetailScreen.dart';
-import 'package:cashbackapp/widget/adsCampaignWidget.dart';
-import 'package:cashbackapp/widget/offerWidget.dart';
+import 'package:cashfuse/controllers/bottomNavigationController.dart';
+import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/controllers/searchController.dart';
+import 'package:cashfuse/models/commonModel.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/views/adsDetailScreen.dart';
+import 'package:cashfuse/views/campaignDetailScreen.dart';
+import 'package:cashfuse/views/categoryScreen.dart';
+import 'package:cashfuse/views/offerDetailScreen.dart';
+import 'package:cashfuse/widget/adsCampaignWidget.dart';
+import 'package:cashfuse/widget/offerWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
