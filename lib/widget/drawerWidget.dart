@@ -9,6 +9,7 @@ import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/requestPaymentScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:store_redirect/store_redirect.dart';
@@ -311,9 +312,18 @@ class DrawerWidget extends StatelessWidget {
                 ),
                 Divider(),
                 InkWell(
-                  onTap: () {
+                  onTap: () async {
                     Get.back();
-                    global.share('', '', global.appShareContent);
+                    if (global.appShareLink.isNotEmpty) {
+                      await FlutterShare.share(
+                        title: '${global.appName}',
+                        text: 'I recently tried Cashfuse app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
+                      ).then((value) {
+                        if (value) {}
+                      }).onError((error, stackTrace) {
+                        return error;
+                      });
+                    }
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -425,7 +435,9 @@ class DrawerWidget extends StatelessWidget {
                 InkWell(
                   onTap: () async {
                     Get.back();
-                    Get.to(() => LoginOrSignUpScreen());
+                    Get.to(() => LoginOrSignUpScreen(
+                          fromMenu: true,
+                        ));
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,

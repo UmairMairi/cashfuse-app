@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashfuse/controllers/bottomNavigationController.dart';
 import 'package:cashfuse/controllers/orderController.dart';
 import 'package:cashfuse/utils/date_converter.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -321,8 +320,13 @@ class MyOrdersScreen extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () async {
-                            Get.find<BottomNavigationController>().setBottomIndex(0);
-                            Get.to(() => BottomNavigationBarScreen());
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => BottomNavigationBarScreen(
+                                  pageIndex: 0,
+                                ),
+                              ),
+                            );
                           },
                           child: Container(
                             height: 45,

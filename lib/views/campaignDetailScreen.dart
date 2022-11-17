@@ -91,12 +91,18 @@ class CampaignDetailScreen extends StatelessWidget {
                 actions: [
                   InkWell(
                     onTap: () async {
-                      await homeController.getTrackingLink(campaign.url, campaign.affiliatePartner);
-                      global.share(
-                        homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
-                        campaign.image.isNotEmpty && !campaign.isImageError ? '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}' : '',
-                        '',
-                      );
+                      if (global.currentUser.id != null) {
+                        await homeController.getTrackingLink(campaign.url, campaign.affiliatePartner);
+                        global.share(
+                          homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
+                          campaign.image.isNotEmpty && !campaign.isImageError ? '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}' : '',
+                          '',
+                        );
+                      } else {
+                        Get.to(() => LoginOrSignUpScreen(
+                              fromMenu: true,
+                            ));
+                      }
                     },
                     child: Container(
                       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -222,7 +228,9 @@ class CampaignDetailScreen extends StatelessWidget {
                                   }
                                 });
                               } else {
-                                Get.to(() => LoginOrSignUpScreen());
+                                Get.to(() => LoginOrSignUpScreen(
+                                      fromMenu: true,
+                                    ));
                               }
                             },
                             child: Container(

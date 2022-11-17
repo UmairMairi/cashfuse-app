@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cashfuse/controllers/bottomNavigationController.dart';
 import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/models/allInOneSearchDataModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -13,7 +12,8 @@ import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class AllInOneSearchScreen extends StatefulWidget {
-  AllInOneSearchScreen() : super();
+  final Color bgColor;
+  AllInOneSearchScreen({this.bgColor}) : super();
   @override
   _AppTabinationScreenState createState() => new _AppTabinationScreenState();
 }
@@ -47,11 +47,23 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
               webViewController.goBack();
               return false;
             } else {
-              Get.find<BottomNavigationController>().setBottomIndex(0);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => BottomNavigationBarScreen(
+                    pageIndex: 0,
+                  ),
+                ),
+              );
               return true;
             }
           } else {
-            Get.find<BottomNavigationController>().setBottomIndex(0);
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => BottomNavigationBarScreen(
+                  pageIndex: 0,
+                ),
+              ),
+            );
             return true;
           }
         },
@@ -69,12 +81,22 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                     if (await webViewController.canGoBack()) {
                       webViewController.goBack();
                     } else {
-                      Get.find<BottomNavigationController>().setBottomIndex(0);
-                      Get.to(() => BottomNavigationBarScreen());
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => BottomNavigationBarScreen(
+                            pageIndex: 0,
+                          ),
+                        ),
+                      );
                     }
                   } else {
-                    Get.find<BottomNavigationController>().setBottomIndex(0);
-                    Get.to(() => BottomNavigationBarScreen());
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => BottomNavigationBarScreen(
+                          pageIndex: 0,
+                        ),
+                      ),
+                    );
                   }
                   // if (await webViewController.canGoBack()) {
                   //   webViewController.goBack();

@@ -15,15 +15,35 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:video_player/video_player.dart';
 
 class SplashController extends GetxController {
   APIHelper apiHelper = new APIHelper();
   NetworkController networkController = Get.find<NetworkController>();
+  VideoPlayerController videoPlayerController;
 
   @override
   void onInit() async {
     init();
+    videoPlayerController = VideoPlayerController.network(
+      'https://media.istockphoto.com/id/1323271459/video/connected-lines-and-particles-on-black-background.mp4?s=mp4-640x640-is&k=20&c=Jzkaf3VHLlSrBvCZDPqQgHzb0Ph5OdPhuDlMBBkDyFM=',
+    )..initialize().then((_) {
+        videoPlayerController.pause();
+        videoPlayerController.setLooping(true);
+
+        update();
+      });
     super.onInit();
+  }
+
+  void playPauseVideo() {
+    if (videoPlayerController.value.isPlaying) {
+      videoPlayerController.pause();
+      update();
+    } else {
+      videoPlayerController.play();
+      update();
+    }
   }
 
   @override
@@ -46,7 +66,9 @@ class SplashController extends GetxController {
                 global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
                 await Get.find<AuthController>().getProfile();
 
-                Get.off(() => BottomNavigationBarScreen());
+                Get.off(() => BottomNavigationBarScreen(
+                      pageIndex: 0,
+                    ));
               } else {
                 Get.off(() => GetStartedScreen(
                       fromSplash: true,

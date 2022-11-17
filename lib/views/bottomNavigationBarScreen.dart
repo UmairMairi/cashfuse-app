@@ -2,211 +2,168 @@
 
 import 'dart:async';
 
-import 'package:cashfuse/controllers/bottomNavigationController.dart';
 import 'package:cashfuse/views/allInOneSearchScreen.dart';
 import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/views/profileScreen.dart';
 import 'package:cashfuse/views/recentClicksScreen.dart';
 import 'package:cashfuse/views/searchScreen.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
+import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
-class BottomNavigationBarScreen extends StatelessWidget {
-  BottomNavigationBarScreen() : super();
+class BottomNavigationBarScreen extends StatefulWidget {
+  int pageIndex;
+  BottomNavigationBarScreen({this.pageIndex}) : super();
+  @override
+  _BottomNavigationBarScreenState createState() => new _BottomNavigationBarScreenState();
+}
 
+class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   bool _canExit = GetPlatform.isWeb ? true : false;
+  int bottomNavIndex;
 
-  List<Widget> iconList = [
-    Icon(Icons.home),
-    Icon(Icons.search),
-    Icon(Icons.screen_search_desktop_outlined),
-    Icon(Icons.light_mode_outlined),
-    Icon(Icons.person),
+  CircularBottomNavigationController navigationController;
+
+  List<IconData> iconList = [
+    Icons.home,
+    Icons.search,
+    Icons.screen_search_desktop_outlined,
+    Icons.light_mode_outlined,
+    Icons.person,
+  ];
+
+  List<Color> colorList = [
+    Color(0xFF138DF5),
+    Color(0xFFFF9600),
+    Color(0xFFBCCBD9),
+    Color(0xFFFE5030),
+    Color(0xFF00A8D5),
   ];
 
   List<Widget> _screens() => [
-        HomeScreen(),
-        SearchScreen(),
-        AllInOneSearchScreen(),
-        RecentClickScreen(),
-        ProfieScreen(),
+        HomeScreen(
+          bgColor: colorList[bottomNavIndex],
+        ),
+        SearchScreen(
+          bgColor: colorList[bottomNavIndex],
+        ),
+        AllInOneSearchScreen(
+          bgColor: colorList[bottomNavIndex],
+        ),
+        RecentClickScreen(
+          bgColor: colorList[bottomNavIndex],
+        ),
+        ProfileScreen(
+          bgColor: colorList[bottomNavIndex],
+        ),
       ];
 
   @override
+  void initState() {
+    _init();
+    super.initState();
+  }
+
+  Future _init() async {
+    try {
+      if (widget.pageIndex != null) {
+        bottomNavIndex = widget.pageIndex;
+      } else {
+        bottomNavIndex = 0;
+      }
+      setState(() {});
+      navigationController = CircularBottomNavigationController(bottomNavIndex);
+      setState(() {});
+    } catch (e) {
+      print("Exception - BottomNavigationBarScreen.dart - _init():" + e.toString());
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return GetBuilder<BottomNavigationController>(
-      builder: (navController) {
-        return WillPopScope(
-          onWillPop: () async {
-            if (navController.bottomNavIndex.value != 0) {
-              navController.setBottomIndex(0);
-              return false;
-            } else if (navController.bottomNavIndex.value == 0 && Get.isDialogOpen) {
-              return false;
-            } else {
-              if (_canExit) {
-                SystemNavigator.pop();
-                return true;
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text('Back press again to exit from app', style: TextStyle(color: Colors.white)),
-                  behavior: SnackBarBehavior.floating,
-                  backgroundColor: Colors.green,
-                  duration: Duration(seconds: 2),
-                  margin: EdgeInsets.all(10),
-                ));
-                _canExit = true;
+    List<String> tabList = [
+      AppLocalizations.of(context).home,
+      AppLocalizations.of(context).search,
+      AppLocalizations.of(context).bottom_allInOne,
+      AppLocalizations.of(context).recents_clicks,
+      AppLocalizations.of(context).profile,
+    ];
 
-                Timer(Duration(seconds: 2), () {
-                  _canExit = false;
-                });
-                return false;
-              }
-            }
-          },
-          child: Scaffold(
-            bottomNavigationBar: StyleProvider(
-              style: Style(),
-              child: ConvexAppBar(
-                //height: 60,
-                backgroundColor: Get.theme.primaryColor,
-                activeColor: Colors.white,
-                color: Get.theme.secondaryHeaderColor,
-                //top: -10,
-                //curveSize: 70,
-
-                style: TabStyle.fixedCircle,
-
-                items: [
-                  TabItem(
-                    icon: Icon(
-                      Icons.home,
-                      color: navController.bottomNavIndex.value == 0 ? Colors.white : Get.theme.secondaryHeaderColor,
-                    ),
-                    title: AppLocalizations.of(context).home,
-                  ),
-                  TabItem(
-                    icon: Icon(
-                      Icons.search,
-                      color: navController.bottomNavIndex.value == 1 ? Colors.white : Get.theme.secondaryHeaderColor,
-                    ),
-                    title: AppLocalizations.of(context).search,
-                  ),
-                  TabItem(
-                      icon: Icon(
-                        Icons.screen_search_desktop_outlined,
-                        color: Get.theme.primaryColor,
-                      ),
-                      title: AppLocalizations.of(context).bottom_allInOne),
-                  TabItem(
-                      icon: Icon(
-                        Icons.light_mode_outlined,
-                        color: navController.bottomNavIndex.value == 3 ? Colors.white : Get.theme.secondaryHeaderColor,
-                      ),
-                      title: AppLocalizations.of(context).recent_click),
-                  TabItem(
-                      icon: Icon(
-                        Icons.person,
-                        color: navController.bottomNavIndex.value == 4 ? Colors.white : Get.theme.secondaryHeaderColor,
-                      ),
-                      title: AppLocalizations.of(context).profile),
-                ],
-                onTap: (int i) {
-                  navController.setBottomIndex(i);
-                },
+    return WillPopScope(
+      onWillPop: () async {
+        if (bottomNavIndex != 0) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => BottomNavigationBarScreen(
+                pageIndex: 0,
               ),
             ),
-            // Stack(
-            //   alignment: Alignment.topCenter,
-            //   clipBehavior: Clip.none,
-            //   children: [
-            //     SizedBox(
-            //       height: 60,
-            //       child: BottomNavigationBar(
-            //         backgroundColor: Colors.white,
-            //         iconSize: 22,
-            //         type: BottomNavigationBarType.fixed,
-            //         selectedItemColor: Get.theme.secondaryHeaderColor,
-            //         unselectedItemColor: Colors.grey[450],
-            //         currentIndex: navController.bottomNavIndex.value,
-            //         showSelectedLabels: true,
-            //         showUnselectedLabels: true,
-            //         selectedLabelStyle: TextStyle(
-            //           fontSize: 10,
-            //           fontWeight: FontWeight.w400,
-            //           height: 1.3,
-            //           textBaseline: TextBaseline.ideographic,
-            //         ),
-            //         unselectedLabelStyle: TextStyle(
-            //           fontSize: 10,
-            //           fontWeight: FontWeight.w400,
-            //           height: 1.3,
-            //         ),
-            //         items: List.generate(iconList.length, (index) {
-            //           return BottomNavigationBarItem(
-            //             icon: iconList[index],
-            //             label: tabList[index],
-            //           );
-            //         }),
-            //         elevation: 5,
-            //         onTap: (index) {
-            //           navController.setBottomIndex(index);
-            //         },
-            //       ),
-            //     ),
-            //     Positioned(
-            //       bottom: 28,
-            //       child: InkWell(
-            //         onTap: () {
-            //           navController.setBottomIndex(2);
-            //         },
-            //         child: Card(
-            //             elevation: 2,
-            //             color: navController.bottomNavIndex.value == 2 ? Get.theme.secondaryHeaderColor : Colors.white,
-            //             margin: EdgeInsets.only(bottom: 6),
-            //             shape: RoundedRectangleBorder(
-            //               borderRadius: BorderRadius.circular(20),
-            //             ),
-            //             child: Padding(
-            //               padding: const EdgeInsets.all(8.0),
-            //               child: Icon(
-            //                 Icons.screen_search_desktop_outlined,
-            //                 color: navController.bottomNavIndex.value == 2 ? Colors.white : Colors.grey[450],
-            //               ),
-            //             )),
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            body: _screens().elementAt(navController.bottomNavIndex.value),
-          ),
-        );
+          );
+          return false;
+        } else {
+          if (_canExit) {
+            SystemNavigator.pop();
+            return true;
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Back press again to exit from app', style: TextStyle(color: Colors.white)),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.green,
+              duration: Duration(seconds: 2),
+              margin: EdgeInsets.all(10),
+            ));
+            _canExit = true;
+
+            Timer(Duration(seconds: 2), () {
+              _canExit = false;
+            });
+            return false;
+          }
+        }
       },
-    );
-  }
-}
-
-class Style extends StyleHook {
-  @override
-  double get activeIconSize => 40;
-
-  @override
-  double get activeIconMargin => 10;
-
-  @override
-  double get iconSize => 20;
-
-  @override
-  TextStyle textStyle(Color color, String fontFamily) {
-    return TextStyle(
-      fontSize: 11,
-      color: color,
-      fontFamily: fontFamily,
-      textBaseline: TextBaseline.alphabetic,
-      height: 1.8,
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 0,
+          elevation: 0,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: colorList[bottomNavIndex],
+          ),
+        ),
+        bottomNavigationBar: Container(
+          color: Colors.grey[200],
+          child: CircularBottomNavigation(
+            List.generate(iconList.length, (index) {
+              return TabItem(
+                iconList[index],
+                tabList[index],
+                colorList[index],
+                labelStyle: TextStyle(
+                  color: colorList[index],
+                  height: 1.2,
+                  fontSize: 12,
+                ),
+              );
+            }),
+            circleSize: 50,
+            iconsSize: 25,
+            barHeight: 50,
+            normalIconColor: Colors.grey,
+            selectedIconColor: Colors.white,
+            controller: navigationController,
+            selectedPos: bottomNavIndex,
+            barBackgroundColor: Colors.white,
+            animationDuration: Duration(milliseconds: 300),
+            selectedCallback: (int selectedPos) async {
+              bottomNavIndex = selectedPos;
+              setState(() {});
+            },
+          ),
+        ),
+        body: _screens().elementAt(bottomNavIndex),
+      ),
     );
   }
 }

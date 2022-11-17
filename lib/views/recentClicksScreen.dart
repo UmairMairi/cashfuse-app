@@ -1,9 +1,9 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashfuse/controllers/bottomNavigationController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/widget/confirmationDialog.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/recentClickDialogWidget.dart';
@@ -14,23 +14,34 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 class RecentClickScreen extends StatelessWidget {
+  final Color bgColor;
+  RecentClickScreen({this.bgColor});
   HomeController homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.grey[200],
+        elevation: 0,
         leading: InkWell(
           onTap: () async {
-            Get.find<BottomNavigationController>().setBottomIndex(0);
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => BottomNavigationBarScreen(
+                  pageIndex: 0,
+                ),
+              ),
+            );
           },
           child: Icon(
             Icons.arrow_back,
+            color: Colors.black,
           ),
         ),
         title: Text(
           AppLocalizations.of(context).recents_clicks,
-          style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+          style: Get.theme.primaryTextTheme.subtitle2,
         ),
         actions: [
           homeController.recentClickList != null && homeController.recentClickList.length > 0
@@ -67,6 +78,7 @@ class RecentClickScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Icon(
                       Icons.delete,
+                      color: Colors.black,
                     ),
                   ),
                 )
@@ -208,7 +220,13 @@ class RecentClickScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () async {
-                          Get.find<BottomNavigationController>().setBottomIndex(0);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => BottomNavigationBarScreen(
+                                pageIndex: 0,
+                              ),
+                            ),
+                          );
                         },
                         child: Container(
                           height: 45,

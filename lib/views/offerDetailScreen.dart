@@ -50,12 +50,18 @@ class OfferDetailScreen extends StatelessWidget {
             actions: [
               InkWell(
                 onTap: () async {
-                  await homeController.getTrackingLink(offer.url, offer.affiliatePartner);
-                  global.share(
-                    homeController.createdLink.isNotEmpty ? homeController.createdLink : offer.url,
-                    offer.bannerImage.isNotEmpty && !offer.isImageError ? '${global.appInfo.baseUrls.offerImageUrl}/${offer.bannerImage}' : '',
-                    '',
-                  );
+                  if (global.currentUser.id != null) {
+                    await homeController.getTrackingLink(offer.url, offer.affiliatePartner);
+                    global.share(
+                      homeController.createdLink.isNotEmpty ? homeController.createdLink : offer.url,
+                      offer.bannerImage.isNotEmpty && !offer.isImageError ? '${global.appInfo.baseUrls.offerImageUrl}/${offer.bannerImage}' : '',
+                      '',
+                    );
+                  } else {
+                    Get.to(() => LoginOrSignUpScreen(
+                          fromMenu: true,
+                        ));
+                  }
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 12).copyWith(right: 10),
@@ -146,7 +152,9 @@ class OfferDetailScreen extends StatelessWidget {
                                 }
                               });
                             } else {
-                              Get.to(() => LoginOrSignUpScreen());
+                              Get.to(() => LoginOrSignUpScreen(
+                                    fromMenu: true,
+                                  ));
                             }
                           },
                           child: Container(

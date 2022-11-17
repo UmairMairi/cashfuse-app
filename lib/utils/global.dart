@@ -30,7 +30,9 @@ String bannerImage = '';
 String languageCode = 'en';
 String referralUserId = '';
 String appShareContent = "I recently tried Cashfuse app & highly recommend it! You get extra Cashback on top of all retailer discounts. Download the app from below link.";
+String appShareLink = '';
 FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
+int totalJoinedCount = 0;
 
 //Api Header
 Future<Map<String, String>> getApiHeaders(bool authorizationRequired) async {
@@ -101,13 +103,7 @@ Future referAndEarn() async {
     Uri url;
     final ShortDynamicLink shortLink = await dynamicLinks.buildShortLink(parameters, shortLinkType: ShortDynamicLinkType.short);
     url = shortLink.shortUrl;
-    if (url != null) {
-      await FlutterShare.share(title: '$appName', linkUrl: url.toString()).then((value) {
-        if (value) {}
-      }).onError((error, stackTrace) {
-        return error;
-      });
-    }
+    appShareLink = url.toString();
   } catch (e) {
     print("Exception - global.dart - referAndEarn():" + e.toString());
   }

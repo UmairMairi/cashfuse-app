@@ -1,5 +1,5 @@
-import 'package:cashfuse/controllers/bottomNavigationController.dart';
 import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/myOrdersScreen.dart';
 import 'package:cashfuse/views/requestPaymentScreen.dart';
@@ -120,7 +120,7 @@ class MyEarningSceen extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Get.to(MyOrdersScreen());
+              Get.to(() => MyOrdersScreen());
             },
             child: Card(
               margin: EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -222,7 +222,13 @@ class MyEarningSceen extends StatelessWidget {
           InkWell(
             onTap: () {
               Get.back();
-              Get.find<BottomNavigationController>().setBottomIndex(3);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => BottomNavigationBarScreen(
+                    pageIndex: 3,
+                  ),
+                ),
+              );
             },
             child: Card(
               margin: EdgeInsets.only(top: 20, left: 20, right: 20),

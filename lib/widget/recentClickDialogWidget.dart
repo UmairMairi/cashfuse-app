@@ -1,9 +1,9 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashfuse/controllers/bottomNavigationController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/models/clickModel.dart';
 import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
@@ -57,8 +57,13 @@ class RecentClickDialogWidget extends StatelessWidget {
           InkWell(
             onTap: () async {
               Get.back();
-
-              Get.find<BottomNavigationController>().setBottomIndex(0);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => BottomNavigationBarScreen(
+                    pageIndex: 0,
+                  ),
+                ),
+              );
             },
             child: Container(
               width: Get.width / 2,

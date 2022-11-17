@@ -1,13 +1,9 @@
-import 'dart:developer';
-
-import 'package:cashfuse/controllers/bottomNavigationController.dart';
 import 'package:cashfuse/controllers/themeController.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
-import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 
 class ColorPickerPage extends StatefulWidget {
   const ColorPickerPage({Key key, this.themeMode}) : super(key: key);
@@ -20,9 +16,9 @@ class ColorPickerPage extends StatefulWidget {
 class _ColorPickerPageState extends State<ColorPickerPage> with SingleTickerProviderStateMixin {
   TabController tabController;
 
-  List<ColorSwatch> fullMaterialColors = const <ColorSwatch>[
-    const ColorSwatch(0xFF000000, {500: Colors.black}),
-    ColorSwatch(0xFF2D3D95, {900: Colors.blue}),
+  List<Color> fullMaterialColors = [
+    Colors.black,
+    Colors.blue[800],
     Colors.red,
     Colors.redAccent,
     Colors.pink,
@@ -70,8 +66,13 @@ class _ColorPickerPageState extends State<ColorPickerPage> with SingleTickerProv
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: (() async {
-        Get.find<BottomNavigationController>().setBottomIndex(4);
-        Get.to(() => BottomNavigationBarScreen());
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => BottomNavigationBarScreen(
+              pageIndex: 4,
+            ),
+          ),
+        );
         return;
       }),
       child: Scaffold(
@@ -87,8 +88,13 @@ class _ColorPickerPageState extends State<ColorPickerPage> with SingleTickerProv
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () {
-                Get.find<BottomNavigationController>().setBottomIndex(4);
-                Get.to(() => BottomNavigationBarScreen());
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => BottomNavigationBarScreen(
+                      pageIndex: 4,
+                    ),
+                  ),
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.only(left: 20),
@@ -128,39 +134,75 @@ class _ColorPickerPageState extends State<ColorPickerPage> with SingleTickerProv
                       child: TabBarView(
                         controller: tabController,
                         children: [
-                          MaterialColorPicker(
-                            selectedColor: themeController.pickColor,
-                            colors: fullMaterialColors,
-                            shrinkWrap: true,
-                            // onColorChange: (color) {
-                            //   if (color.value == themeController.pickSecondaryColor.value) {
-                            //     showCustomSnackBar('Primary Color & Secondary Should be Different');
-                            //   } else {
-                            //     themeController.setPickColor(color);
-                            //   }
-                            // },
-                            allowShades: false,
-                            onMainColorChange: (color) {
-                              log(Color(color.value).toString());
-                              if (Color(color.value).value == themeController.pickSecondaryColor.value) {
-                                showCustomSnackBar('Primary Color & Secondary Should be Different');
-                              } else {
-                                themeController.setPickColor(Color(color.value));
-                              }
-                            },
-                          ),
-                          MaterialColorPicker(
-                              selectedColor: themeController.pickSecondaryColor,
-                              colors: fullMaterialColors,
-                              shrinkWrap: false,
-                              allowShades: false,
-                              onMainColorChange: (color) {
-                                log(Color(color.value).toString());
-                                if (Color(color.value).value == themeController.pickColor.value) {
-                                  showCustomSnackBar('Primary Color & Secondary Should be Different');
-                                } else {
-                                  themeController.setSecondaryPickColor(Color(color.value));
-                                }
+                          GridView.builder(
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 5,
+                                crossAxisSpacing: 15.0,
+                                mainAxisSpacing: 15.0,
+                              ),
+                              itemCount: fullMaterialColors.length,
+                              shrinkWrap: true,
+                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  onTap: () {
+                                    if (fullMaterialColors[index].value == themeController.pickSecondaryColor.value) {
+                                      showCustomSnackBar('Primary Color & Secondary Should be Different');
+                                    } else {
+                                      themeController.setPickColor(fullMaterialColors[index]);
+                                    }
+                                  },
+                                  child: Stack(
+                                    fit: StackFit.expand,
+                                    alignment: Alignment.center,
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundColor: fullMaterialColors[index],
+                                      ),
+                                      fullMaterialColors[index].value == themeController.pickColor.value
+                                          ? Icon(
+                                              Icons.check,
+                                              color: Colors.white,
+                                            )
+                                          : SizedBox()
+                                    ],
+                                  ),
+                                );
+                              }),
+                          GridView.builder(
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 5,
+                                crossAxisSpacing: 15.0,
+                                mainAxisSpacing: 15.0,
+                              ),
+                              itemCount: fullMaterialColors.length,
+                              shrinkWrap: true,
+                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  onTap: () {
+                                    if (fullMaterialColors[index].value == themeController.pickColor.value) {
+                                      showCustomSnackBar('Primary Color & Secondary Should be Different');
+                                    } else {
+                                      themeController.setSecondaryPickColor(fullMaterialColors[index]);
+                                    }
+                                  },
+                                  child: Stack(
+                                    fit: StackFit.expand,
+                                    alignment: Alignment.center,
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundColor: fullMaterialColors[index],
+                                      ),
+                                      fullMaterialColors[index].value == themeController.pickSecondaryColor.value
+                                          ? Icon(
+                                              Icons.check,
+                                              color: Colors.white,
+                                            )
+                                          : SizedBox()
+                                    ],
+                                  ),
+                                );
                               }),
                         ],
                       ),

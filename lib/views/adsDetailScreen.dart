@@ -91,12 +91,18 @@ class AdsDetailScreen extends StatelessWidget {
                 actions: [
                   InkWell(
                     onTap: () async {
-                      await homeController.getTrackingLink(ads.landingPage, ads.affiliatePartner, cId: ads.cId);
-                      global.share(
-                        homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
-                        ads.image.isNotEmpty ? '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}' : '',
-                        '',
-                      );
+                      if (global.currentUser.id != null) {
+                        await homeController.getTrackingLink(ads.landingPage, ads.affiliatePartner, cId: ads.cId);
+                        global.share(
+                          homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
+                          ads.image.isNotEmpty ? '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}' : '',
+                          '',
+                        );
+                      } else {
+                        Get.to(() => LoginOrSignUpScreen(
+                              fromMenu: true,
+                            ));
+                      }
                     },
                     child: Container(
                       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -222,7 +228,9 @@ class AdsDetailScreen extends StatelessWidget {
                                   }
                                 });
                               } else {
-                                Get.to(() => LoginOrSignUpScreen());
+                                Get.to(() => LoginOrSignUpScreen(
+                                      fromMenu: true,
+                                    ));
                               }
                             },
                             child: Container(

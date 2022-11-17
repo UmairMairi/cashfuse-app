@@ -42,12 +42,18 @@ class CouponDetailScreen extends StatelessWidget {
           actions: [
             InkWell(
               onTap: () async {
-                await homeController.getTrackingLink(coupon.url, coupon.affiliatePartner);
-                global.share(
-                  homeController.createdLink.isNotEmpty ? homeController.createdLink : coupon.url,
-                  coupon.bannerImage.isNotEmpty && !coupon.isImageError ? '${global.appInfo.baseUrls.couponBannerImageUrl}/${coupon.bannerImage}' : '',
-                  '',
-                );
+                if (global.currentUser.id != null) {
+                  await homeController.getTrackingLink(coupon.url, coupon.affiliatePartner);
+                  global.share(
+                    homeController.createdLink.isNotEmpty ? homeController.createdLink : coupon.url,
+                    coupon.bannerImage.isNotEmpty && !coupon.isImageError ? '${global.appInfo.baseUrls.couponBannerImageUrl}/${coupon.bannerImage}' : '',
+                    '',
+                  );
+                } else {
+                  Get.to(() => LoginOrSignUpScreen(
+                        fromMenu: true,
+                      ));
+                }
               },
               child: Container(
                 margin: EdgeInsets.symmetric(vertical: 12).copyWith(right: 10),
@@ -229,7 +235,9 @@ class CouponDetailScreen extends StatelessWidget {
                             }
                           });
                         } else {
-                          Get.to(() => LoginOrSignUpScreen());
+                          Get.to(() => LoginOrSignUpScreen(
+                                fromMenu: true,
+                              ));
                         }
                       },
                       child: Container(

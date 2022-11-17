@@ -16,6 +16,7 @@ import 'package:cashfuse/models/faqModel.dart';
 import 'package:cashfuse/models/offerModel.dart';
 import 'package:cashfuse/models/orderModel.dart';
 import 'package:cashfuse/models/paymentHistoryModel.dart';
+import 'package:cashfuse/models/referralUserModel.dart';
 import 'package:cashfuse/models/searchDataModel.dart';
 import 'package:cashfuse/models/userModel.dart';
 import 'package:cashfuse/services/dioResult.dart';
@@ -990,6 +991,29 @@ class APIHelper {
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - deleteClicks():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getReferralUsers() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.REFERRAL_USERS_URI}?user_id=${global.currentUser.id}',
+          options: Options(
+            headers: await global.getApiHeaders(true),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<ReferralUserModel>.from(response.data['data'].map((x) => ReferralUserModel.fromJson(x)));
+        global.totalJoinedCount = response.data['count'];
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.REFERRAL_USERS_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getReferralUsers():" + e.toString());
     }
   }
 }

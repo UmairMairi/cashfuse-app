@@ -43,4 +43,5 @@ class AppConstants {
   static const String GET_ORDER_COMPLAIN_URI = '/get_order_complain';
   static const String BANNER_NOTIFICATION_URI = '/bannernotification';
   static const String DELETE_CLICK_URI = '/delete_clicks';
+  static const String REFERRAL_USERS_URI = '/referral_users';
 }

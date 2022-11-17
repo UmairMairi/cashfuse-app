@@ -1,11 +1,11 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cashfuse/controllers/bottomNavigationController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/models/commonModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/adsDetailScreen.dart';
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/campaignDetailScreen.dart';
 import 'package:cashfuse/views/categoryScreen.dart';
 import 'package:cashfuse/views/offerDetailScreen.dart';
@@ -16,6 +16,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 class SearchScreen extends StatelessWidget {
+  final Color bgColor;
+  SearchScreen({this.bgColor});
   SearchController searchController = Get.find<SearchController>();
   HomeController homeController = Get.find<HomeController>();
 
@@ -23,18 +25,27 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.grey[200],
+        elevation: 0,
         leading: InkWell(
           onTap: () async {
-            Get.find<BottomNavigationController>().setBottomIndex(0);
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => BottomNavigationBarScreen(
+                  pageIndex: 0,
+                ),
+              ),
+            );
           },
           child: Icon(
             Icons.arrow_back,
+            color: Colors.black,
           ),
         ),
         title: TextFormField(
           controller: searchController.searchString,
           cursorColor: Colors.orange,
-          style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
+          style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.black),
           decoration: InputDecoration(
             suffix: searchController.searchString.text.isNotEmpty
                 ? InkWell(
@@ -45,13 +56,13 @@ class SearchScreen extends StatelessWidget {
                     },
                     child: Icon(
                       Icons.close,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   )
                 : SizedBox(),
             border: InputBorder.none,
             hintText: 'What do you want to buy today?',
-            hintStyle: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white.withOpacity(0.4)),
+            hintStyle: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.black.withOpacity(0.4)),
           ),
           onEditingComplete: () {
             searchController.getSearchData(searchController.searchString.text.trim());

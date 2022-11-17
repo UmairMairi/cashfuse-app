@@ -1,9 +1,9 @@
 import 'package:cashfuse/controllers/authController.dart';
-import 'package:cashfuse/controllers/bottomNavigationController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/aboutUsScreen.dart';
 import 'package:cashfuse/views/accountSettingScreen.dart';
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/colorPicker.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/languageScreen.dart';
@@ -12,6 +12,7 @@ import 'package:cashfuse/views/myEarningScreen.dart';
 import 'package:cashfuse/views/paymentHistoryScreen.dart';
 import 'package:cashfuse/views/paymentScreen.dart';
 import 'package:cashfuse/views/privacyPolicyScreen.dart';
+import 'package:cashfuse/views/referralNetworkScreen.dart';
 import 'package:cashfuse/widget/confirmationDialog.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,18 +21,25 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:store_redirect/store_redirect.dart';
 
-class ProfieScreen extends StatelessWidget {
+class ProfileScreen extends StatelessWidget {
+  final Color bgColor;
+  ProfileScreen({this.bgColor});
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthController>(
       builder: (authController) {
         return Scaffold(
-          backgroundColor: Colors.white,
           appBar: AppBar(
             elevation: 0,
             leading: InkWell(
               onTap: () async {
-                Get.find<BottomNavigationController>().setBottomIndex(0);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => BottomNavigationBarScreen(
+                      pageIndex: 0,
+                    ),
+                  ),
+                );
               },
               child: Icon(
                 Icons.arrow_back,
@@ -347,7 +355,13 @@ class ProfieScreen extends StatelessWidget {
 
                       InkWell(
                         onTap: () {
-                          Get.find<BottomNavigationController>().setBottomIndex(3);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => BottomNavigationBarScreen(
+                                pageIndex: 3,
+                              ),
+                            ),
+                          );
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -362,6 +376,32 @@ class ProfieScreen extends StatelessWidget {
                               ),
                               Text(
                                 AppLocalizations.of(context).recents_clicks,
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => ReferralNetworkScreen());
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                Images.refer,
+                                height: 20,
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                'Referral Network',
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
@@ -637,7 +677,9 @@ class ProfieScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () async {
-                          Get.to(() => LoginOrSignUpScreen());
+                          Get.to(() => LoginOrSignUpScreen(
+                                fromMenu: true,
+                              ));
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width,

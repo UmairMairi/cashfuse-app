@@ -17,6 +17,7 @@ import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/myEarningScreen.dart';
 import 'package:cashfuse/views/offerDetailScreen.dart';
 import 'package:cashfuse/views/offerListScreen.dart';
+import 'package:cashfuse/views/referEarnScreen.dart';
 import 'package:cashfuse/views/webViewScreen.dart';
 import 'package:cashfuse/widget/adsCampaignWidget.dart';
 import 'package:cashfuse/widget/bannerImageWidget.dart';
@@ -34,6 +35,8 @@ import 'package:slide_countdown/slide_countdown.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
+  final bgColor;
+  HomeScreen({this.bgColor});
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   HomeController homeController2 = Get.find<HomeController>();
@@ -48,105 +51,96 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         titleSpacing: 0,
+        //leadingWidth: 20,
+        backgroundColor: Colors.grey[200],
         leading: InkWell(
           onTap: () {
             scaffoldKey.currentState.openDrawer();
           },
-          child: Icon(
-            MdiIcons.sortVariant,
-            size: 30,
-            color: Colors.white,
-          ),
-        ),
-        title: RichText(
-          text: TextSpan(
-            text: "CASH",
-            style: Get.theme.primaryTextTheme.headline4.copyWith(
-              letterSpacing: 0.1,
-              color: Get.theme.secondaryHeaderColor,
-              fontFamily: 'Bebas Neue',
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Icon(
+              MdiIcons.sortVariant,
+              size: 30,
+              color: bgColor,
             ),
-            children: <TextSpan>[
-              TextSpan(
-                text: 'FUSE',
-                style: Get.theme.primaryTextTheme.headline4.copyWith(
-                  color: Colors.white,
-                  letterSpacing: 0.1,
-                  fontFamily: 'Bebas Neue',
-                ),
-              ),
-            ],
           ),
         ),
+        title: Image.asset(
+          Images.cashfuse,
+          height: 35,
+          // width: 100,
+        ),
+        // RichText(
+        //   text: TextSpan(
+        //     text: "CASH",
+        //     style: Get.theme.primaryTextTheme.headline4.copyWith(
+        //       letterSpacing: 0.1,
+        //       color: Get.theme.secondaryHeaderColor,
+        //       fontFamily: 'Bebas Neue',
+        //     ),
+        //     children: <TextSpan>[
+        //       TextSpan(
+        //         text: 'FUSE',
+        //         style: Get.theme.primaryTextTheme.headline4.copyWith(
+        //           color: Colors.white,
+        //           letterSpacing: 0.1,
+        //           fontFamily: 'Bebas Neue',
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
         actions: [
           InkWell(
             onTap: () {
-              Get.to(() => MyEarningSceen());
+              if (global.currentUser.id != null) {
+                Get.to(() => MyEarningSceen());
+              } else {
+                Get.to(() => LoginOrSignUpScreen(
+                      fromMenu: true,
+                    ));
+              }
             },
             child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Image.asset(
-                  Images.wallet_icon,
+                  Images.payments,
                   height: 25,
-                )
-                // Column(
-                //   crossAxisAlignment: CrossAxisAlignment.start,
-                //   children: [
-                //     Text(
-                //       AppLocalizations.of(context).total_earning,
-                //       style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white, fontWeight: FontWeight.w300),
-                //     ),
-                //     Text(global.currentUser.id != null && global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency}0.00'),
-                //   ],
-                // ),
-                ),
+                )),
           )
         ],
       ),
       floatingActionButton: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // FloatingActionButton(
-          //   heroTag: '1',
-          //   backgroundColor: Coo,
-          //   child:
           InkWell(
             onTap: () async {
               if (global.currentUser.id != null) {
-                await global.referAndEarn();
+                Get.to(() => ReferEarnScreen());
               } else {
-                Get.to(() => LoginOrSignUpScreen());
+                Get.to(() => LoginOrSignUpScreen(
+                      fromMenu: true,
+                    ));
               }
             },
             child: Image.asset(
               Images.refer,
-              height: 40,
+              height: 50,
             ),
           ),
-          // onPressed: () {
-          //   //Get.to(() => GetHelpScreen());
-          // },
-          //),
           SizedBox(
             height: 10,
           ),
-          // FloatingActionButton(
-          //   heroTag: '2',
-          //   backgroundColor: Get.theme.primaryColor,
-          //   child:
           InkWell(
             onTap: () {
               Get.to(() => GetHelpScreen());
             },
             child: Image.asset(
               Images.gethelp,
-              height: 40,
+              height: 50,
             ),
           ),
-          //   onPressed: () {
-          //     Get.to(() => GetHelpScreen());
-          //   },
-          // ),
         ],
       ),
       body: Stack(
@@ -194,7 +188,9 @@ class HomeScreen extends StatelessWidget {
                                               ),
                                             );
                                           } else {
-                                            Get.to(() => LoginOrSignUpScreen());
+                                            Get.to(() => LoginOrSignUpScreen(
+                                                  fromMenu: true,
+                                                ));
                                           }
                                         } else {
                                           await homeController2.getOfferDetails(
@@ -496,7 +492,7 @@ class HomeScreen extends StatelessWidget {
                                             ));
                                       },
                                       child: Container(
-                                        width: Get.width - 120,
+                                        width: 240, //Get.width - 120,
                                         margin: EdgeInsets.only(right: 10),
                                         decoration: BoxDecoration(
                                           color: Colors.white,
@@ -573,7 +569,7 @@ class HomeScreen extends StatelessWidget {
                                   return Shimmer(
                                     duration: Duration(seconds: 2),
                                     child: Container(
-                                      width: Get.width - 120,
+                                      width: 240,
                                       height: 165,
                                       margin: EdgeInsets.only(right: 15),
                                       decoration: BoxDecoration(

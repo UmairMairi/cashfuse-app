@@ -1,4 +1,5 @@
 import 'package:cashfuse/controllers/authController.dart';
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/widget/codePickerWidget.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,9 @@ import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginOrSignUpScreen extends StatelessWidget {
+  final bool fromMenu;
+  LoginOrSignUpScreen({this.fromMenu});
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthController>(builder: (authController) {
@@ -174,26 +178,45 @@ class LoginOrSignUpScreen extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: InkWell(
-          onTap: () async {
-            await authController.loginOrRegister();
-            //Get.to(() => OtpVerificationScreen());
-          },
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: 45,
-            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-            padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-            decoration: BoxDecoration(
-              color: Get.theme.secondaryHeaderColor,
-              borderRadius: BorderRadius.circular(10),
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InkWell(
+              onTap: () async {
+                await authController.loginOrRegister();
+                //Get.to(() => OtpVerificationScreen());
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 45,
+                margin: EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 15),
+                padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Get.theme.secondaryHeaderColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  AppLocalizations.of(context).conti,
+                  style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                ),
+              ),
             ),
-            alignment: Alignment.center,
-            child: Text(
-              AppLocalizations.of(context).conti,
-              style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-            ),
-          ),
+            fromMenu
+                ? SizedBox()
+                : InkWell(
+                    onTap: () {
+                      Get.offAll(() => BottomNavigationBarScreen());
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: Text(
+                        'Skip',
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Get.theme.primaryColor, fontSize: 16),
+                      ),
+                    ),
+                  )
+          ],
         ),
       );
     });

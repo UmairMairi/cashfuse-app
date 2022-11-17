@@ -90,7 +90,7 @@
   "pending": "Pending",
   "approved": "Approved",
   "redeemed": "Redeemed",
-  "rate_us": "Rate US",
+  "rate_us": "Rate us",
   "logout": "Logout",
   "logout_desc": "Are you sure you want to logout ?",
   "yes": "Yes",
@@ -124,5 +124,11 @@
   "redeem_cashback": "Redeem Cashback",
   "share_the_app": "Share The App",
   "rate_the_app": "Rate the App",
-  "paypal": "PayPal"
+  "paypal": "PayPal",
+  "refer_earn": "Refer & Earn",
+  "refer_earn_desc": "Invite friends & earn flat 10% of their Cashback amount, EVERYTIME they shop!",
+  "reffral_link": "Your Referal Link",
+  "tap_to_copy": "Tap to Copy",
+  "my_referrals": "My Referrals",
+  "invite_now": "Invite Now"
 }
