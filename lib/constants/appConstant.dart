@@ -3,6 +3,8 @@ class AppConstants {
   static const String LOADING_MESSAGE = " Wait data will be here.";
   static const String NO_INTERNET = "No Internet Available.";
 
+  static const double WEB_MAX_WIDTH = 1500;
+
   static const String APP_INFO_URI = '/app_info';
   static const String LOGIN_RESGISTER = '/auth/login_or_register';
   static const String VERIFY_OTP = '/auth/verify-phone';
@@ -44,4 +46,5 @@ class AppConstants {
   static const String BANNER_NOTIFICATION_URI = '/bannernotification';
   static const String DELETE_CLICK_URI = '/delete_clicks';
   static const String REFERRAL_USERS_URI = '/referral_users';
+  static const String TRENDING_KEYWORD = '/trending_keywords';
 }

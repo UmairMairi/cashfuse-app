@@ -5,13 +5,12 @@ import 'package:cashfuse/models/offerModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/moreOfferScreen.dart';
-import 'package:cashfuse/views/webViewScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 
 class OfferDetailScreen extends StatelessWidget {
   final OfferModel offer;
@@ -136,21 +135,25 @@ class OfferDetailScreen extends StatelessWidget {
                                 homeController.createdLink.isNotEmpty ? homeController.createdLink : offer.url,
                               );
 
-                              Get.to(
-                                () => WebViewScreen(
-                                  urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : offer.url,
-                                  isCliked: global.clickedList.contains(offer.campaignName),
-                                  couponList: offer.couponList,
-                                  partner: offer.partner,
-                                  brandName: offer.campaignName,
-                                ),
-                              ).then((value) {
-                                if (global.clickedList.contains(offer.campaignName)) {
-                                } else {
-                                  global.clickedList.add(offer.campaignName);
-                                  global.sp.setStringList('clickedList', global.clickedList);
-                                }
-                              });
+                              global.launchInBrowser(
+                                homeController.createdLink.isNotEmpty ? homeController.createdLink : offer.url,
+                              );
+
+                              // Get.to(
+                              //   () => WebViewScreen(
+                              //     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : offer.url,
+                              //     isCliked: global.clickedList.contains(offer.campaignName),
+                              //     couponList: offer.couponList,
+                              //     partner: offer.partner,
+                              //     brandName: offer.campaignName,
+                              //   ),
+                              // ).then((value) {
+                              //   if (global.clickedList.contains(offer.campaignName)) {
+                              //   } else {
+                              //     global.clickedList.add(offer.campaignName);
+                              //     global.sp.setStringList('clickedList', global.clickedList);
+                              //   }
+                              // });
                             } else {
                               Get.to(() => LoginOrSignUpScreen(
                                     fromMenu: true,

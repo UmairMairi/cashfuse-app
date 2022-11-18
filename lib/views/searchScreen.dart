@@ -4,16 +4,21 @@ import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/models/commonModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/views/adsCampaignWidgetListScreen.dart';
 import 'package:cashfuse/views/adsDetailScreen.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/campaignDetailScreen.dart';
 import 'package:cashfuse/views/categoryScreen.dart';
 import 'package:cashfuse/views/offerDetailScreen.dart';
 import 'package:cashfuse/widget/adsCampaignWidget.dart';
+import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/offerWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:slide_countdown/slide_countdown.dart';
 
 class SearchScreen extends StatelessWidget {
   final Color bgColor;
@@ -197,7 +202,256 @@ class SearchScreen extends StatelessWidget {
                       ],
                     ),
                   )
-            : SizedBox();
+            : SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Text(
+                          'Trending Keywords',
+                          style: Get.theme.primaryTextTheme.subtitle2,
+                        ),
+                      ),
+                      Wrap(
+                        runSpacing: 0,
+                        spacing: 10,
+                        children: List.generate(searchController.searchKeywordList.length, (index) {
+                          return InkWell(
+                            onTap: () {
+                              searchController.getSearchData(searchController.searchKeywordList[index].name);
+                            },
+                            child: Chip(
+                              label: Text(
+                                searchController.searchKeywordList[index].name,
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
+                      GetBuilder<HomeController>(builder: (hmController) {
+                        return hmController.topCashbackList != null && hmController.topCashbackList.length > 0
+                            ? Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 20),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context).top_cashback_stores,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black.withOpacity(0.79),
+                                        letterSpacing: -0.3,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(
+                                          () => AdsCampaignWidgetListScreen(
+                                            title: AppLocalizations.of(context).top_cashback_stores,
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        '${AppLocalizations.of(context).view_all} >',
+                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            : SizedBox();
+                      }),
+                      GetBuilder<HomeController>(builder: (hmController) {
+                        return hmController.isTopCashbackLoaded
+                            ? hmController.topCashbackList != null && hmController.topCashbackList.length > 0
+                                ? SizedBox(
+                                    height: 155,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: hmController.topCashbackList.length > 6 ? 6 : hmController.topCashbackList.length,
+                                      shrinkWrap: true,
+                                      padding: EdgeInsets.zero,
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                          onTap: () {
+                                            Get.to(() => CategoryScreen(
+                                                  category: hmController.topCashbackList[index],
+                                                ));
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(right: 13),
+                                            child: SizedBox(
+                                              width: 155,
+                                              child: AdsCampaignWidget(
+                                                commonModel: CommonModel(
+                                                  name: hmController.topCashbackList[index].name,
+                                                  image: '${global.appInfo.baseUrls.partnerImageUrl}/${hmController.topCashbackList[index].image}',
+                                                  tagline: hmController.topCashbackList[index].tagline,
+                                                  adId: hmController.topCashbackList[index].id.toString(),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  )
+                                : SizedBox()
+                            : SizedBox(
+                                height: 155,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: 5,
+                                    shrinkWrap: true,
+                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 20),
+                                    itemBuilder: (context, index) {
+                                      return Shimmer(
+                                        duration: Duration(seconds: 2),
+                                        child: Container(
+                                          width: 155,
+                                          margin: EdgeInsets.only(right: 15),
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[300],
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                              );
+                      }),
+                      GetBuilder<HomeController>(builder: (hmCon) {
+                        return hmCon.exclusiveOfferList != null && hmCon.exclusiveOfferList.length > 0
+                            ? Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 15),
+                                child: Text(
+                                  AppLocalizations.of(context).exclusive_offers,
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black.withOpacity(0.79),
+                                    letterSpacing: -0.3,
+                                  ),
+                                ),
+                              )
+                            : SizedBox();
+                      }),
+                      GetBuilder<HomeController>(builder: (hmCon) {
+                        return hmCon.isOfferLoaded
+                            ? hmCon.exclusiveOfferList != null && hmCon.exclusiveOfferList.length > 0
+                                ? SizedBox(
+                                    height: 165,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: hmCon.exclusiveOfferList.length,
+                                      shrinkWrap: true,
+                                      padding: EdgeInsets.zero,
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                          onTap: () async {
+                                            await hmCon.getOfferDetails(hmCon.exclusiveOfferList[index].id.toString());
+                                            Get.to(() => OfferDetailScreen(
+                                                  offer: hmCon.offer,
+                                                  fromSeeMore: false,
+                                                ));
+                                          },
+                                          child: Container(
+                                            width: 240, //Get.width - 120,
+                                            margin: EdgeInsets.only(right: 10),
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            child: Stack(
+                                              alignment: Alignment.bottomLeft,
+                                              children: [
+                                                ClipRRect(
+                                                    borderRadius: BorderRadius.circular(10),
+                                                    child: CustomImage(
+                                                      image: '${global.appInfo.baseUrls.offerImageUrl}/${hmCon.exclusiveOfferList[index].bannerImage}',
+                                                      height: 165,
+                                                      width: Get.width,
+                                                      fit: BoxFit.fill,
+                                                      errorImage: Images.dummyImage,
+                                                    )
+                                                    // Image.asset(
+                                                    //   Images.dummyImage,
+                                                    //   height: 165,
+                                                    //   fit: BoxFit.cover,
+                                                    // ),
+                                                    ),
+                                                Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: Card(
+                                                    color: Colors.white,
+                                                    margin: EdgeInsets.all(10),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.all(2.0),
+                                                      child: CustomImage(
+                                                        image: '${global.appInfo.baseUrls.offerImageUrl}/${hmCon.exclusiveOfferList[index].image}',
+                                                        height: 30,
+                                                        width: 60,
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                hmCon.countTimer(DateTime.now(), hmCon.exclusiveOfferList[index].endDate) != null
+                                                    ? Padding(
+                                                        padding: const EdgeInsets.all(10),
+                                                        child: SlideCountdown(
+                                                          slideDirection: SlideDirection.none,
+                                                          textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
+                                                          decoration: BoxDecoration(
+                                                            color: Colors.red[800],
+                                                            borderRadius: BorderRadius.circular(3),
+                                                          ),
+                                                          duration: Duration(
+                                                            days: hmCon.countTimer(
+                                                              DateTime.now(),
+                                                              hmCon.exclusiveOfferList[index].endDate,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : SizedBox()
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ))
+                                : SizedBox()
+                            : SizedBox(
+                                height: 165,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: 5,
+                                    shrinkWrap: true,
+                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 20),
+                                    itemBuilder: (context, index) {
+                                      return Shimmer(
+                                        duration: Duration(seconds: 2),
+                                        child: Container(
+                                          width: 240,
+                                          height: 165,
+                                          margin: EdgeInsets.only(right: 15),
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[300],
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                              );
+                      }),
+                    ],
+                  ),
+                ),
+              );
       }),
     );
   }

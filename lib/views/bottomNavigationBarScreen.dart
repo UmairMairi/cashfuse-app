@@ -132,36 +132,38 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
             statusBarColor: colorList[bottomNavIndex],
           ),
         ),
-        bottomNavigationBar: Container(
-          color: Colors.grey[200],
-          child: CircularBottomNavigation(
-            List.generate(iconList.length, (index) {
-              return TabItem(
-                iconList[index],
-                tabList[index],
-                colorList[index],
-                labelStyle: TextStyle(
-                  color: colorList[index],
-                  height: 1.2,
-                  fontSize: 12,
+        bottomNavigationBar: GetPlatform.isWeb
+            ? SizedBox()
+            : Container(
+                color: Colors.grey[200],
+                child: CircularBottomNavigation(
+                  List.generate(iconList.length, (index) {
+                    return TabItem(
+                      iconList[index],
+                      tabList[index],
+                      colorList[index],
+                      labelStyle: TextStyle(
+                        color: colorList[index],
+                        height: 1.2,
+                        fontSize: 12,
+                      ),
+                    );
+                  }),
+                  circleSize: 50,
+                  iconsSize: 25,
+                  barHeight: 50,
+                  normalIconColor: Colors.grey,
+                  selectedIconColor: Colors.white,
+                  controller: navigationController,
+                  selectedPos: bottomNavIndex,
+                  barBackgroundColor: Colors.white,
+                  animationDuration: Duration(milliseconds: 300),
+                  selectedCallback: (int selectedPos) async {
+                    bottomNavIndex = selectedPos;
+                    setState(() {});
+                  },
                 ),
-              );
-            }),
-            circleSize: 50,
-            iconsSize: 25,
-            barHeight: 50,
-            normalIconColor: Colors.grey,
-            selectedIconColor: Colors.white,
-            controller: navigationController,
-            selectedPos: bottomNavIndex,
-            barBackgroundColor: Colors.white,
-            animationDuration: Duration(milliseconds: 300),
-            selectedCallback: (int selectedPos) async {
-              bottomNavIndex = selectedPos;
-              setState(() {});
-            },
-          ),
-        ),
+              ),
         body: _screens().elementAt(bottomNavIndex),
       ),
     );

@@ -54,7 +54,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    AppLocalizations.of(context).refer_earn_desc,
+                    "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
                     textAlign: TextAlign.center,
                     style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                       color: Colors.white,

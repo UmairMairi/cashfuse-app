@@ -5,14 +5,13 @@ import 'package:cashfuse/models/adsModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/moreAdsScreen.dart';
-import 'package:cashfuse/views/webViewScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:customizable_space_bar/customizable_space_bar.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 
 class AdsDetailScreen extends StatelessWidget {
   final AdsModel ads;
@@ -213,20 +212,24 @@ class AdsDetailScreen extends StatelessWidget {
                                   homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
                                 );
 
-                                Get.to(
-                                  () => WebViewScreen(
-                                    urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
-                                    isCliked: global.clickedList.contains(ads.advName),
-                                    couponList: ads.couponList,
-                                    partner: ads.partner,
-                                    brandName: ads.advName,
-                                  ),
-                                ).then((value) {
-                                  if (global.clickedList.contains(ads.advName)) {
-                                  } else {
-                                    global.clickedList.add(ads.advName);
-                                  }
-                                });
+                                global.launchInBrowser(
+                                  homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
+                                );
+
+                                // Get.to(
+                                //   () => WebViewScreen(
+                                //     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
+                                //     isCliked: global.clickedList.contains(ads.advName),
+                                //     couponList: ads.couponList,
+                                //     partner: ads.partner,
+                                //     brandName: ads.advName,
+                                //   ),
+                                // ).then((value) {
+                                //   if (global.clickedList.contains(ads.advName)) {
+                                //   } else {
+                                //     global.clickedList.add(ads.advName);
+                                //   }
+                                // });
                               } else {
                                 Get.to(() => LoginOrSignUpScreen(
                                       fromMenu: true,

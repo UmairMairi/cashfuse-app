@@ -8,13 +8,15 @@ import 'package:cashfuse/utils/date_converter.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter_share/flutter_share.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String appName = "Cashfuse";
 
-String baseUrl = "https://okaydemo.com/cashback/api";
+String baseUrl = "https://cf.codefuse.org/admin/api"; //"https://okaydemo.com/cashback/api";
 
 SharedPreferences sp;
 UserModel currentUser = new UserModel();
@@ -33,6 +35,7 @@ String appShareContent = "I recently tried Cashfuse app & highly recommend it! Y
 String appShareLink = '';
 FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 int totalJoinedCount = 0;
+String earningVideoUrl = 'https://media.istockphoto.com/id/1323271459/video/connected-lines-and-particles-on-black-background.mp4?s=mp4-640x640-is&k=20&c=Jzkaf3VHLlSrBvCZDPqQgHzb0Ph5OdPhuDlMBBkDyFM=';
 
 //Api Header
 Future<Map<String, String>> getApiHeaders(bool authorizationRequired) async {
@@ -51,6 +54,25 @@ Future<Map<String, String>> getApiHeaders(bool authorizationRequired) async {
   apiHeader.addAll({"Accept": "*/*"});
   print(apiHeader);
   return apiHeader;
+}
+
+Future<void> launchInBrowser(String url) async {
+  FlutterWebBrowser.openWebPage(
+    url: url,
+    customTabsOptions: CustomTabsOptions(
+      colorScheme: CustomTabsColorScheme.dark,
+      darkColorSchemeParams: CustomTabsColorSchemeParams(
+        toolbarColor: Get.theme.primaryColor,
+        secondaryToolbarColor: Get.theme.primaryColor,
+        navigationBarColor: Get.theme.primaryColor,
+        navigationBarDividerColor: Get.theme.primaryColor,
+      ),
+      shareState: CustomTabsShareState.on,
+      instantAppsEnabled: true,
+      showTitle: true,
+      urlBarHidingEnabled: true,
+    ),
+  );
 }
 
 Future share(String link, String image, String title) async {

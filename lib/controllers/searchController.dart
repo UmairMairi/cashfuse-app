@@ -5,6 +5,7 @@ import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/models/allInOneSearchDataModel.dart';
 import 'package:cashfuse/models/commonModel.dart';
 import 'package:cashfuse/models/searchDataModel.dart';
+import 'package:cashfuse/models/searchKeyWordModel.dart';
 import 'package:cashfuse/services/apiHelper.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/widget/customLoader.dart';
@@ -21,6 +22,9 @@ class SearchController extends GetxController {
   List<AllInOneSearchDataModel> _allInOneList = [];
   List<AllInOneSearchDataModel> get allInOneList => _allInOneList;
 
+  List<SearchKeyWordModel> _searchKeywordList = [];
+  List<SearchKeyWordModel> get searchKeywordList => _searchKeywordList;
+
   List<AllInOneSearchDataModel> addNewTabList2;
   List<AllInOneSearchDataModel> addNewTabList;
 
@@ -30,6 +34,7 @@ class SearchController extends GetxController {
 
   @override
   void onInit() async {
+    await getTrendingKeywords();
     await allInOneSearch();
     super.onInit();
   }
@@ -41,6 +46,7 @@ class SearchController extends GetxController {
 
   Future getSearchData(String keyword) async {
     try {
+      searchString.text = keyword;
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper.search(keyword).then((response) {
@@ -207,6 +213,25 @@ class SearchController extends GetxController {
       global.sp.setString('tabList', jsonEncode(addNewTabList2.map((i) => i.toJson()).toList()).toString());
     } catch (e) {
       print("Exception - SearchController.dart - saveTab():" + e.toString());
+    }
+  }
+
+  Future getTrendingKeywords() async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.getTrendingKeywords().then((response) {
+          if (response.statusCode == 200) {
+            _searchKeywordList = response.data;
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+      update();
+    } catch (e) {
+      print("Exception - SearchController.dart - getTrendingKeywords():" + e.toString());
     }
   }
 }

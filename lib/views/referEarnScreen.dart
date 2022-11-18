@@ -45,7 +45,7 @@ class ReferEarnScreen extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    AppLocalizations.of(context).refer_earn_desc,
+                    "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
                     textAlign: TextAlign.center,
                     style: Get.theme.primaryTextTheme.subtitle2,
                   ),

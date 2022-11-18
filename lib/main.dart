@@ -4,13 +4,19 @@
 
 import 'dart:io';
 
+import 'package:cashfuse/controllers/couponController.dart';
+import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/controllers/networkController.dart';
+import 'package:cashfuse/controllers/splashController.dart';
 import 'package:cashfuse/controllers/themeController.dart';
 import 'package:cashfuse/l10n/l10n.dart';
 import 'package:cashfuse/provider/local_provider.dart';
 import 'package:cashfuse/theme/nativeTheme.dart';
 import 'package:cashfuse/utils/binding/networkBinding.dart';
+import 'package:cashfuse/utils/firebaseoption.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/notificationHelper.dart';
+import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/views/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
@@ -26,10 +32,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   HttpOverrides.global = new MyHttpOverrides();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationHelper.initialize();
-  await fetchLinkData();
-  if (Platform.isAndroid) {
+  if (GetPlatform.isAndroid) {
+    await fetchLinkData();
+  }
+
+  if (GetPlatform.isAndroid) {
     await webview.AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
 
     var swAvailable = await webview.AndroidWebViewFeature.isFeatureSupported(webview.AndroidWebViewFeature.SERVICE_WORKER_BASIC_USAGE);
@@ -86,6 +95,13 @@ class MyApp extends StatelessWidget {
   ThemeController themeController = Get.put(ThemeController());
   @override
   Widget build(BuildContext context) {
+    if (GetPlatform.isWeb) {
+      Get.put(NetworkController());
+      Get.put(SplashController());
+      Get.put(HomeController());
+      Get.put(CouponController());
+      //Get.find<SplashController>().init();
+    }
     return ChangeNotifierProvider(
         create: (context) => LocaleProvider(),
         builder: (context, child) {
@@ -106,7 +122,7 @@ class MyApp extends StatelessWidget {
                 GlobalCupertinoLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
-              home: SplashScreen(),
+              home: GetPlatform.isAndroid ? SplashScreen() : HomeScreen(),
             );
           });
         });

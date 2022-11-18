@@ -5,14 +5,13 @@ import 'package:cashfuse/models/campaignModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/moreCampignScreen.dart';
-import 'package:cashfuse/views/webViewScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:customizable_space_bar/customizable_space_bar.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 
 class CampaignDetailScreen extends StatelessWidget {
   final CampaignModel campaign;
@@ -212,21 +211,24 @@ class CampaignDetailScreen extends StatelessWidget {
                                   global.appInfo.baseUrls.offerImageUrl + '/' + campaign.image,
                                   homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
                                 );
+                                global.launchInBrowser(
+                                  homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
+                                );
 
-                                Get.to(
-                                  () => WebViewScreen(
-                                    urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
-                                    isCliked: global.clickedList.contains(campaign.name),
-                                    couponList: campaign.couponList,
-                                    partner: campaign.partner,
-                                    brandName: campaign.name,
-                                  ),
-                                ).then((value) {
-                                  if (global.clickedList.contains(campaign.name)) {
-                                  } else {
-                                    global.clickedList.add(campaign.name);
-                                  }
-                                });
+                                // Get.to(
+                                //   () => WebViewScreen(
+                                //     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
+                                //     isCliked: global.clickedList.contains(campaign.name),
+                                //     couponList: campaign.couponList,
+                                //     partner: campaign.partner,
+                                //     brandName: campaign.name,
+                                //   ),
+                                // ).then((value) {
+                                //   if (global.clickedList.contains(campaign.name)) {
+                                //   } else {
+                                //     global.clickedList.add(campaign.name);
+                                //   }
+                                // });
                               } else {
                                 Get.to(() => LoginOrSignUpScreen(
                                       fromMenu: true,

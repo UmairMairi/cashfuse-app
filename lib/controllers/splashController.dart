@@ -26,7 +26,7 @@ class SplashController extends GetxController {
   void onInit() async {
     init();
     videoPlayerController = VideoPlayerController.network(
-      'https://media.istockphoto.com/id/1323271459/video/connected-lines-and-particles-on-black-background.mp4?s=mp4-640x640-is&k=20&c=Jzkaf3VHLlSrBvCZDPqQgHzb0Ph5OdPhuDlMBBkDyFM=',
+      global.earningVideoUrl,
     )..initialize().then((_) {
         videoPlayerController.pause();
         videoPlayerController.setLooping(true);
@@ -54,7 +54,7 @@ class SplashController extends GetxController {
   void init() {
     try {
       Timer(Duration.zero, () async {
-        global.appDeviceId = await FirebaseMessaging.instance.getToken();
+        //global.appDeviceId = await FirebaseMessaging.instance.getToken();
         global.sp = await SharedPreferences.getInstance();
 
         log(global.appDeviceId);

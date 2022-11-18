@@ -4,15 +4,14 @@ import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/models/couponModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
-import 'package:cashfuse/views/webViewScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:slide_countdown/slide_countdown.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CouponDetailScreen extends StatelessWidget {
   final Coupon coupon;
@@ -224,16 +223,20 @@ class CouponDetailScreen extends StatelessWidget {
                         if (global.currentUser.id != null) {
                           await homeController.getTrackingLink(coupon.url, coupon.affiliatePartner);
                           await homeController.addClick(coupon.partnerName, '${global.appInfo.baseUrls.partnerImageUrl}/${coupon.image}', coupon.url);
-                          Get.to(() => WebViewScreen(
-                                urlString: coupon.url,
-                                brandName: coupon.partnerName,
-                              )).then((value) {
-                            if (global.clickedList.contains(coupon.partnerName)) {
-                            } else {
-                              global.clickedList.add(coupon.partnerName);
-                              global.sp.setStringList('clickedList', global.clickedList);
-                            }
-                          });
+
+                          global.launchInBrowser(
+                            homeController.createdLink.isNotEmpty ? homeController.createdLink : coupon.url,
+                          );
+                          // Get.to(() => WebViewScreen(
+                          //       urlString: coupon.url,
+                          //       brandName: coupon.partnerName,
+                          //     )).then((value) {
+                          //   if (global.clickedList.contains(coupon.partnerName)) {
+                          //   } else {
+                          //     global.clickedList.add(coupon.partnerName);
+                          //     global.sp.setStringList('clickedList', global.clickedList);
+                          //   }
+                          // });
                         } else {
                           Get.to(() => LoginOrSignUpScreen(
                                 fromMenu: true,

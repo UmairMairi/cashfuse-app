@@ -18,6 +18,7 @@ import 'package:cashfuse/models/orderModel.dart';
 import 'package:cashfuse/models/paymentHistoryModel.dart';
 import 'package:cashfuse/models/referralUserModel.dart';
 import 'package:cashfuse/models/searchDataModel.dart';
+import 'package:cashfuse/models/searchKeyWordModel.dart';
 import 'package:cashfuse/models/userModel.dart';
 import 'package:cashfuse/services/dioResult.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -1014,6 +1015,28 @@ class APIHelper {
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getReferralUsers():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getTrendingKeywords() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.TRENDING_KEYWORD}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<SearchKeyWordModel>.from(response.data['data'].map((x) => SearchKeyWordModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.TRENDING_KEYWORD}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getTrendingKeywords():" + e.toString());
     }
   }
 }
