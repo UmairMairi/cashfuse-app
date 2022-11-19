@@ -89,7 +89,7 @@ class MoreCampignScreen extends StatelessWidget {
                           onTap: () async {
                             Get.back();
                             await homeController.getCampignDetails(homeController.seeMoreCampaignList[index].id.toString());
-                            Get.off(
+                            Get.to(
                               () => CampaignDetailScreen(
                                 campaign: homeController.campaign,
                                 fromSeeMore: true,

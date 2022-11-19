@@ -19,8 +19,9 @@ class NetworkBinding extends Bindings {
     Get.put(ThemeController());
     Get.lazyPut<NetworkController>(() => NetworkController(), fenix: true);
     Get.put(SplashController());
-    Get.lazyPut<AuthController>(() => AuthController(), fenix: true);
     Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
+    Get.lazyPut<AuthController>(() => AuthController(), fenix: true);
+
     Get.lazyPut<CommonController>(() => CommonController(), fenix: true);
     Get.lazyPut<CouponController>(() => CouponController(), fenix: true);
     Get.lazyPut<PaymentController>(() => PaymentController(), fenix: true);

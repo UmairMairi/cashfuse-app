@@ -102,7 +102,7 @@ class MoreOfferScreen extends StatelessWidget {
                             Get.back();
                             await homeController.getOfferDetails(homeController.seeMoreOfferList[index].id.toString());
 
-                            Get.off(
+                            Get.to(
                               () => OfferDetailScreen(
                                 fromSeeMore: true,
                                 offer: homeController.offer,

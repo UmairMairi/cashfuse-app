@@ -87,8 +87,8 @@ class HomeController extends GetxController {
 
   init() async {
     try {
-      await getTopCategories();
       await getTopCashBack(page);
+      await getTopCategories();
       await getTopBanners();
 
       await getExclusiveOffers();
@@ -194,6 +194,8 @@ class HomeController extends GetxController {
         isCategoryLoaded = true;
         update();
       } else {
+        isCategoryLoaded = true;
+        update();
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
     } catch (e) {

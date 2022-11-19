@@ -10,10 +10,10 @@ class NetworkController extends GetxController {
   StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
-  void onInit() {
-    super.onInit();
-    initConnectivity();
+  void onInit() async {
+    await initConnectivity();
     _connectivitySubscription = _connectivity.onConnectivityChanged.listen(updateConnectivity);
+    super.onInit();
   }
 
   Future<void> initConnectivity() async {
@@ -21,7 +21,7 @@ class NetworkController extends GetxController {
     try {
       result = await _connectivity.checkConnectivity();
     } catch (e) {
-      print(e.toString());
+      print("Exception - NetworkController.dart - initConnectivity():" + e.toString());
     }
     return updateConnectivity(result);
   }
@@ -31,8 +31,12 @@ class NetworkController extends GetxController {
       case ConnectivityResult.wifi:
         connectionStatus.value = 1;
         break;
+
       case ConnectivityResult.mobile:
         connectionStatus.value = 2;
+        break;
+      case ConnectivityResult.ethernet:
+        connectionStatus.value = 3;
         break;
       case ConnectivityResult.none:
         connectionStatus.value = 0;

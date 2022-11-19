@@ -100,7 +100,6 @@ class MyApp extends StatelessWidget {
       Get.put(SplashController());
       Get.put(HomeController());
       Get.put(CouponController());
-      //Get.find<SplashController>().init();
     }
     return ChangeNotifierProvider(
         create: (context) => LocaleProvider(),

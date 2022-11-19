@@ -90,7 +90,7 @@ class MoreAdsScreen extends StatelessWidget {
                           onTap: () async {
                             Get.back();
                             await homeController.getAdDetails(homeController.seeMoreAdsList[index].id.toString());
-                            Get.off(
+                            Get.to(
                               () => AdsDetailScreen(
                                 ads: homeController.ads,
                                 fromSeeMore: true,

@@ -26,7 +26,8 @@ import 'package:cashfuse/widget/couponWidget.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/offerWidget.dart';
-import 'package:cashfuse/widget/webTopBarWidget.dart';
+import 'package:cashfuse/widget/web/webTopBarWidget.dart';
+import 'package:cashfuse/widget/web/web_banner_view.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -163,105 +164,107 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       GetBuilder<HomeController>(builder: (controller) {
-                        return homeController2.isBannerLoaded
-                            ? Stack(
-                                alignment: Alignment.bottomCenter,
-                                children: [
-                                  CarouselSlider.builder(
-                                      options: CarouselOptions(
-                                        height: GetPlatform.isWeb ? 250 : 170,
-                                        autoPlay: true,
-                                        enlargeCenterPage: false,
-                                        disableCenter: false,
-                                        autoPlayCurve: Curves.easeIn,
-                                        aspectRatio: 1,
-                                        autoPlayInterval: Duration(seconds: 2),
-                                        onPageChanged: (index, reason) {
-                                          homeController2.setBannerIndex(index);
-                                        },
-                                        viewportFraction: GetPlatform.isWeb ? 0.5 : 1,
-                                        pageSnapping: false,
-                                      ),
-                                      itemCount: homeController2.topBannerList.length,
-                                      itemBuilder: (context, index, _) {
-                                        return InkWell(
-                                          onTap: () async {
-                                            if (homeController2.topBannerList[index].type == 'url') {
-                                              if (global.currentUser.id != null) {
-                                                Get.to(
-                                                  () => WebViewScreen(
-                                                    urlString: homeController2.topBannerList[index].url,
-                                                    brandName: homeController2.topBannerList[index].name,
-                                                  ),
-                                                );
-                                              } else {
-                                                Get.to(() => LoginOrSignUpScreen(
-                                                      fromMenu: true,
-                                                    ));
-                                              }
-                                            } else {
-                                              await homeController2.getOfferDetails(
-                                                homeController2.topBannerList[index].offerId.toString(),
-                                              );
-                                              Get.to(
-                                                () => OfferDetailScreen(
-                                                  offer: homeController2.offer,
-                                                  fromSeeMore: false,
-                                                ),
-                                              );
-                                            }
-                                          },
-                                          child: Container(
-                                            width: GetPlatform.isWeb ? Get.width / 2 : Get.width,
-                                            margin: EdgeInsets.only(right: 0),
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(5),
-                                            ),
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(0),
-                                              child: CustomImage(
-                                                image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController2.topBannerList[index].image}',
-                                                //height: 25,
-                                                width: Get.width,
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
+                        return GetPlatform.isWeb
+                            ? WebBannerView(homeController: homeController2)
+                            : homeController2.isBannerLoaded
+                                ? Stack(
+                                    alignment: Alignment.bottomCenter,
+                                    children: [
+                                      CarouselSlider.builder(
+                                          options: CarouselOptions(
+                                            height: GetPlatform.isWeb ? 250 : 170,
+                                            autoPlay: true,
+                                            enlargeCenterPage: false,
+                                            disableCenter: false,
+                                            autoPlayCurve: Curves.easeIn,
+                                            aspectRatio: 1,
+                                            autoPlayInterval: Duration(seconds: 2),
+                                            onPageChanged: (index, reason) {
+                                              homeController2.setBannerIndex(index);
+                                            },
+                                            viewportFraction: GetPlatform.isWeb ? 0.5 : 1,
+                                            pageSnapping: false,
                                           ),
-                                        );
-                                      }),
-                                  GetBuilder<HomeController>(builder: (controller1) {
-                                    return homeController2.topBannerList != null && homeController2.topBannerList.length > 0
-                                        ? Center(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(top: 6),
-                                              child: DotsIndicator(
-                                                dotsCount: homeController2.topBannerList.length,
-                                                position: homeController2.bannerIndex.toDouble(),
-                                                decorator: DotsDecorator(
-                                                  activeSize: Size(7, 7),
-                                                  size: Size(7, 7),
-                                                  color: Colors.white, // Inactive color
-                                                  activeColor: Colors.orange,
+                                          itemCount: homeController2.topBannerList.length,
+                                          itemBuilder: (context, index, _) {
+                                            return InkWell(
+                                              onTap: () async {
+                                                if (homeController2.topBannerList[index].type == 'url') {
+                                                  if (global.currentUser.id != null) {
+                                                    Get.to(
+                                                      () => WebViewScreen(
+                                                        urlString: homeController2.topBannerList[index].url,
+                                                        brandName: homeController2.topBannerList[index].name,
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    Get.to(() => LoginOrSignUpScreen(
+                                                          fromMenu: true,
+                                                        ));
+                                                  }
+                                                } else {
+                                                  await homeController2.getOfferDetails(
+                                                    homeController2.topBannerList[index].offerId.toString(),
+                                                  );
+                                                  Get.to(
+                                                    () => OfferDetailScreen(
+                                                      offer: homeController2.offer,
+                                                      fromSeeMore: false,
+                                                    ),
+                                                  );
+                                                }
+                                              },
+                                              child: Container(
+                                                width: GetPlatform.isWeb ? Get.width / 2 : Get.width,
+                                                margin: EdgeInsets.only(right: 0),
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(5),
+                                                ),
+                                                child: ClipRRect(
+                                                  borderRadius: BorderRadius.circular(0),
+                                                  child: CustomImage(
+                                                    image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController2.topBannerList[index].image}',
+                                                    //height: 25,
+                                                    width: Get.width,
+                                                    fit: BoxFit.fill,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          )
-                                        : SizedBox();
-                                  }),
-                                ],
-                              )
-                            : Shimmer(
-                                duration: Duration(seconds: 2),
-                                child: Container(
-                                  width: Get.width,
-                                  height: 180,
-                                  margin: EdgeInsets.only(right: 15, left: 15),
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[300],
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                              );
+                                            );
+                                          }),
+                                      GetBuilder<HomeController>(builder: (controller1) {
+                                        return homeController2.topBannerList != null && homeController2.topBannerList.length > 0
+                                            ? Center(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(top: 6),
+                                                  child: DotsIndicator(
+                                                    dotsCount: homeController2.topBannerList.length,
+                                                    position: homeController2.bannerIndex.toDouble(),
+                                                    decorator: DotsDecorator(
+                                                      activeSize: Size(7, 7),
+                                                      size: Size(7, 7),
+                                                      color: Colors.white, // Inactive color
+                                                      activeColor: Colors.orange,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            : SizedBox();
+                                      }),
+                                    ],
+                                  )
+                                : Shimmer(
+                                    duration: Duration(seconds: 2),
+                                    child: Container(
+                                      width: Get.width,
+                                      height: 180,
+                                      margin: EdgeInsets.only(right: 15, left: 15),
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                  );
                       }),
                       GetBuilder<HomeController>(builder: (hm) {
                         return Padding(

@@ -54,7 +54,9 @@ class SplashController extends GetxController {
   void init() {
     try {
       Timer(Duration.zero, () async {
-        //global.appDeviceId = await FirebaseMessaging.instance.getToken();
+        if (!GetPlatform.isWeb) {
+          global.appDeviceId = await FirebaseMessaging.instance.getToken();
+        }
         global.sp = await SharedPreferences.getInstance();
 
         log(global.appDeviceId);
@@ -70,9 +72,15 @@ class SplashController extends GetxController {
                       pageIndex: 0,
                     ));
               } else {
-                Get.off(() => GetStartedScreen(
-                      fromSplash: true,
-                    ));
+                if (GetPlatform.isWeb) {
+                  Get.to(() => BottomNavigationBarScreen(
+                        pageIndex: 0,
+                      ));
+                } else {
+                  Get.off(() => GetStartedScreen(
+                        fromSplash: true,
+                      ));
+                }
               }
 
               await apiHelper.getBannerNotification().then((result) {
