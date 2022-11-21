@@ -19,7 +19,6 @@ import 'package:cashfuse/views/myEarningScreen.dart';
 import 'package:cashfuse/views/offerDetailScreen.dart';
 import 'package:cashfuse/views/offerListScreen.dart';
 import 'package:cashfuse/views/referEarnScreen.dart';
-import 'package:cashfuse/views/webViewScreen.dart';
 import 'package:cashfuse/widget/adsCampaignWidget.dart';
 import 'package:cashfuse/widget/bannerImageWidget.dart';
 import 'package:cashfuse/widget/couponWidget.dart';
@@ -191,11 +190,14 @@ class HomeScreen extends StatelessWidget {
                                               onTap: () async {
                                                 if (homeController2.topBannerList[index].type == 'url') {
                                                   if (global.currentUser.id != null) {
-                                                    Get.to(
-                                                      () => WebViewScreen(
-                                                        urlString: homeController2.topBannerList[index].url,
-                                                        brandName: homeController2.topBannerList[index].name,
-                                                      ),
+                                                    // Get.to(
+                                                    //   () => WebViewScreen(
+                                                    //     urlString: homeController2.topBannerList[index].url,
+                                                    //     brandName: homeController2.topBannerList[index].name,
+                                                    //   ),
+                                                    // );
+                                                    global.launchInBrowser(
+                                                      homeController2.topBannerList[index].url,
                                                     );
                                                   } else {
                                                     Get.to(() => LoginOrSignUpScreen(
@@ -761,7 +763,7 @@ class HomeScreen extends StatelessWidget {
                                           child: Column(
                                             children: [
                                               Container(
-                                                width: Get.width - 60,
+                                                width: 300,
                                                 height: 145,
                                                 decoration: BoxDecoration(
                                                   color: Colors.grey[300],

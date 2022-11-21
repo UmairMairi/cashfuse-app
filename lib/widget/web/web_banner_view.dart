@@ -1,9 +1,8 @@
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
-import 'package:cashfuse/utils/global.dart' as global;
-import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class WebBannerView extends StatelessWidget {

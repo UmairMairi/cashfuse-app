@@ -939,8 +939,10 @@ class APIHelper {
           ));
 
       dynamic recordList;
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 && response.data['status'] == 1) {
         recordList = ComplainModel.fromJson(response.data['data']);
+      } else if (response.statusCode == 200 && response.data['status'] == 0) {
+        recordList = response.data['data'];
       } else {
         recordList = null;
       }

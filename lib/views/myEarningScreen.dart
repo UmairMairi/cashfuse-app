@@ -1,3 +1,4 @@
+import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
@@ -57,10 +58,23 @@ class MyEarningSceen extends StatelessWidget {
                           Text(
                             AppLocalizations.of(context).total_earning,
                           ),
-                          Icon(
-                            Icons.help,
-                            size: 22,
-                            color: Colors.teal.withOpacity(0.5),
+                          InkWell(
+                            onTap: () {
+                              showAlignedDialog(
+                                context: context,
+                                builder: _localDialogBuilder,
+                                followerAnchor: Alignment.topCenter,
+                                targetAnchor: Alignment.topCenter,
+                                barrierColor: Colors.black54,
+                                avoidOverflow: true,
+                                duration: Duration.zero,
+                              );
+                            },
+                            child: Icon(
+                              Icons.help,
+                              size: 22,
+                              color: Colors.teal.withOpacity(0.5),
+                            ),
                           )
                         ],
                       ),
@@ -530,5 +544,96 @@ class MyEarningSceen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  WidgetBuilder get _localDialogBuilder {
+    return (BuildContext context) {
+      return GestureDetector(
+        onTap: () {
+          Navigator.of(context).pop();
+        },
+        child: Container(
+          margin: EdgeInsets.only(top: 130, left: 20, right: 20),
+          child: DefaultTextStyle(
+            style: TextStyle(fontSize: 18, color: Colors.black87),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                    margin: EdgeInsets.only(right: 45),
+                    child: CustomPaint(
+                      painter: TrianglePainter(
+                        strokeColor: Colors.white,
+                        strokeWidth: 20,
+                        paintingStyle: PaintingStyle.fill,
+                      ),
+                      child: Container(
+                        height: 10,
+                        width: 15,
+                      ),
+                    )),
+                Container(
+                  margin: EdgeInsets.only(left: 20),
+                  padding: EdgeInsets.all(8),
+                  color: Colors.white,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: Icon(
+                            Icons.close,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        'Your total eanings and amount includes your Cashback + Rewards + Refferal amount.',
+                        style: Get.theme.primaryTextTheme.bodyText2,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    };
+  }
+}
+
+class TrianglePainter extends CustomPainter {
+  final Color strokeColor;
+  final PaintingStyle paintingStyle;
+  final double strokeWidth;
+
+  TrianglePainter({this.strokeColor = Colors.black, this.strokeWidth = 3, this.paintingStyle = PaintingStyle.stroke});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..color = strokeColor
+      ..strokeWidth = strokeWidth
+      ..style = paintingStyle;
+
+    canvas.drawPath(getTrianglePath(size.width, size.height), paint);
+  }
+
+  Path getTrianglePath(double x, double y) {
+    return Path()
+      ..moveTo(0, y)
+      ..lineTo(x / 2, 0)
+      ..lineTo(x, y)
+      ..lineTo(0, y);
+  }
+
+  @override
+  bool shouldRepaint(TrianglePainter oldDelegate) {
+    return oldDelegate.strokeColor != strokeColor || oldDelegate.paintingStyle != paintingStyle || oldDelegate.strokeWidth != strokeWidth;
   }
 }

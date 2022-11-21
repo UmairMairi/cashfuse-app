@@ -6,7 +6,6 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/orderComplaintScreen.dart';
-import 'package:cashfuse/views/webViewScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
@@ -40,258 +39,285 @@ class MyOrdersScreen extends StatelessWidget {
                 ? ListView.builder(
                     shrinkWrap: true,
                     itemCount: orderController.orderList.length,
+                    padding: EdgeInsets.symmetric(vertical: 10),
                     itemBuilder: (context, index) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Card(
-                            margin: EdgeInsets.only(top: 10, left: 10, right: 10),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ListTile(
-                                    contentPadding: EdgeInsets.zero,
-                                    leading: Container(
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.white,
-                                        border: Border.all(
-                                          color: Colors.grey[400],
-                                        ),
-                                      ),
-                                      padding: EdgeInsets.all(5),
-                                      child: CustomImage(
-                                        image: global.appInfo.baseUrls.orderImageUrl + '/' + orderController.orderList[index].logo,
-                                        fit: BoxFit.contain,
-                                        errorImage: Images.logo,
-                                      ),
-                                    ),
-                                    title: Text(orderController.orderList[index].advertisers),
-                                    trailing: InkWell(
-                                      onTap: () async {
-                                        await orderController.getOrderComplains(orderController.orderList[index].id);
-                                        Get.to(() => OrderComplaintScreen(
-                                              orderModel: orderController.orderList[index],
-                                            ));
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Card(
+                              margin: EdgeInsets.symmetric(horizontal: 10),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ListTile(
+                                      contentPadding: EdgeInsets.zero,
+                                      leading: Container(
+                                        width: 50,
                                         decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
                                           color: Colors.white,
-                                          borderRadius: BorderRadius.circular(3),
                                           border: Border.all(
-                                            color: Get.theme.primaryColor,
+                                            color: Colors.grey[400],
                                           ),
                                         ),
-                                        child: Text(
-                                          AppLocalizations.of(context).raise_complaint,
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            color: Get.theme.primaryColor,
-                                          ),
+                                        padding: EdgeInsets.all(5),
+                                        child: CustomImage(
+                                          image: global.appInfo.baseUrls.partnerImageUrl + '/' + orderController.orderList[index].logo,
+                                          fit: BoxFit.contain,
+                                          errorImage: Images.logo,
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  Divider(),
-                                  // Text(
-                                  //   'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                                  //   style: TextStyle(
-                                  //     fontSize: 12,
-                                  //   ),
-                                  // ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 10),
-                                    child: Row(
-                                      children: [
-                                        Container(
+                                      title: Text(orderController.orderList[index].advertisers),
+                                      trailing: InkWell(
+                                        onTap: () async {
+                                          await orderController.getOrderComplains(orderController.orderList[index].id);
+                                          Get.to(() => OrderComplaintScreen(
+                                                orderModel: orderController.orderList[index],
+                                              ));
+                                        },
+                                        child: Container(
                                           padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
                                           decoration: BoxDecoration(
-                                            color: orderController.orderList[index].orderStatus == 0.toString() ? Get.theme.secondaryHeaderColor.withOpacity(0.2) : Colors.green.withOpacity(0.2),
-                                            borderRadius: BorderRadius.circular(15),
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(3),
+                                            border: Border.all(
+                                              color: Get.theme.primaryColor,
+                                            ),
                                           ),
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                Icons.check_circle,
-                                                color: orderController.orderList[index].orderStatus == 0.toString() ? Get.theme.secondaryHeaderColor : Colors.green,
-                                                size: 20,
-                                              ),
-                                              Text(
-                                                orderController.orderList[index].orderStatus == 0.toString() ? 'Clicked Tracked' : 'Cashback Received',
-                                                style: TextStyle(
-                                                  fontSize: 10,
-                                                  color: orderController.orderList[index].orderStatus == 0.toString() ? Get.theme.secondaryHeaderColor : Colors.green,
-                                                ),
-                                              ),
-                                            ],
+                                          child: Text(
+                                            AppLocalizations.of(context).raise_complaint,
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              color: Get.theme.primaryColor,
+                                            ),
                                           ),
                                         ),
-                                        orderController.orderList[index].url.isNotEmpty
-                                            ? InkWell(
-                                                onTap: () {
-                                                  Get.to(() => WebViewScreen(
-                                                        brandName: orderController.orderList[index].advertisers,
-                                                        urlString: orderController.orderList[index].url,
-                                                      ));
-                                                },
-                                                child: Container(
-                                                  margin: EdgeInsets.only(left: 10),
-                                                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.grey[200],
-                                                    borderRadius: BorderRadius.circular(15),
-                                                  ),
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(
-                                                        Icons.local_offer,
-                                                        textDirection: TextDirection.rtl,
-                                                        color: Colors.black54,
-                                                        size: 20,
-                                                      ),
-                                                      Text(
-                                                        AppLocalizations.of(context).shopping,
-                                                        style: TextStyle(
-                                                          fontSize: 10,
-                                                          color: Colors.black54,
-                                                        ),
-                                                      ),
-                                                    ],
+                                      ),
+                                    ),
+                                    Divider(),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+                                            decoration: BoxDecoration(
+                                              color: orderController.orderList[index].orderStatus == 0.toString()
+                                                  ? Get.theme.primaryColor.withOpacity(0.2)
+                                                  : orderController.orderList[index].orderStatus == 1.toString()
+                                                      ? Colors.green.withOpacity(0.2)
+                                                      : Colors.red.withOpacity(0.2),
+                                              borderRadius: BorderRadius.circular(15),
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.check_circle,
+                                                  color: orderController.orderList[index].orderStatus == 0.toString()
+                                                      ? Get.theme.primaryColor
+                                                      : orderController.orderList[index].orderStatus == 1.toString()
+                                                          ? Colors.green
+                                                          : Colors.red,
+                                                  size: 20,
+                                                ),
+                                                Text(
+                                                  orderController.orderList[index].orderStatus == 0.toString()
+                                                      ? 'Purchase Tracked'
+                                                      : orderController.orderList[index].orderStatus == 1.toString()
+                                                          ? 'Cashback Received'
+                                                          : 'Cashback Reject',
+                                                  style: TextStyle(
+                                                    fontSize: 10,
+                                                    color: orderController.orderList[index].orderStatus == 0.toString()
+                                                        ? Get.theme.primaryColor
+                                                        : orderController.orderList[index].orderStatus == 1.toString()
+                                                            ? Colors.green
+                                                            : Colors.red,
                                                   ),
                                                 ),
-                                              )
-                                            : SizedBox(),
-                                      ],
-                                    ),
+                                              ],
+                                            ),
+                                          ),
+                                          // orderController.orderList[index].url.isNotEmpty
+                                          //     ? InkWell(
+                                          //         onTap: () {
+                                          //           Get.to(() => WebViewScreen(
+                                          //                 brandName: orderController.orderList[index].advertisers,
+                                          //                 urlString: orderController.orderList[index].url,
+                                          //               ));
+                                          //         },
+                                          //         child: Container(
+                                          //           margin: EdgeInsets.only(left: 10),
+                                          //           padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+                                          //           decoration: BoxDecoration(
+                                          //             color: Colors.grey[200],
+                                          //             borderRadius: BorderRadius.circular(15),
+                                          //           ),
+                                          //           child: Row(
+                                          //             children: [
+                                          //               Icon(
+                                          //                 Icons.local_offer,
+                                          //                 textDirection: TextDirection.rtl,
+                                          //                 color: Colors.black54,
+                                          //                 size: 20,
+                                          //               ),
+                                          //               Text(
+                                          //                 AppLocalizations.of(context).shopping,
+                                          //                 style: TextStyle(
+                                          //                   fontSize: 10,
+                                          //                   color: Colors.black54,
+                                          //                 ),
+                                          //               ),
+                                          //             ],
+                                          //           ),
+                                          //         ),
+                                          //       )
+                                          //     : SizedBox(),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              color: Colors.white,
+                              margin: EdgeInsets.symmetric(horizontal: 15),
+                              padding: EdgeInsets.all(10).copyWith(top: 20),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                // mainAxisAlignment: MainAxisAlignment.start,
+                                // crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.check_circle,
+                                        size: 20,
+                                        color: orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString() ? Get.theme.secondaryHeaderColor : Colors.grey,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 10),
+                                        child: Text(
+                                          'Clicked Tracked',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 12,
+                                            color: orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString() ? Colors.black : Colors.grey,
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(child: SizedBox()),
+                                      orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString()
+                                          ? Text(
+                                              DateConverter.formatDate(
+                                                orderController.orderList[index].eventDate,
+                                              ),
+                                              style: TextStyle(fontSize: 10, color: Colors.grey),
+                                            )
+                                          : SizedBox(),
+                                    ],
+                                  ),
+                                  Stack(
+                                    alignment: Alignment.centerLeft,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 10),
+                                        child: DottedLine(
+                                          lineLength: 125,
+                                          direction: Axis.vertical,
+                                          dashColor: Colors.grey,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Card(
+                                            margin: EdgeInsets.zero,
+                                            elevation: 0,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            child: Icon(
+                                              Icons.check_circle,
+                                              size: 20,
+                                              color: orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString() ? Get.theme.primaryColor : Colors.grey,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 10),
+                                            child: Text(
+                                              'Purchase Tracked',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 12,
+                                                color: orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString() ? Colors.black : Colors.grey,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(child: SizedBox()),
+                                          orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString()
+                                              ? Text(
+                                                  DateConverter.formatDate(
+                                                    orderController.orderList[index].eventDate,
+                                                  ),
+                                                  style: TextStyle(fontSize: 10, color: Colors.grey),
+                                                )
+                                              : SizedBox(),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      orderController.orderList[index].orderStatus == 2.toString()
+                                          ? Padding(
+                                              padding: const EdgeInsets.only(left: 2),
+                                              child: CircleAvatar(
+                                                radius: 9,
+                                                child: Icon(
+                                                  Icons.close,
+                                                  color: Colors.white,
+                                                  size: 14,
+                                                ),
+                                                backgroundColor: Colors.red,
+                                              ),
+                                            )
+                                          : Icon(
+                                              Icons.check_circle,
+                                              size: 20,
+                                              color: orderController.orderList[index].orderStatus == 1.toString() ? Colors.green : Colors.grey,
+                                            ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 10),
+                                        child: Text(
+                                          orderController.orderList[index].orderStatus == 2.toString() ? 'Cashback Rejected' : 'Cashback Received',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 12,
+                                            color: orderController.orderList[index].orderStatus == 1.toString() ? Colors.black : Colors.grey,
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(child: SizedBox()),
+                                      orderController.orderList[index].orderStatus == 1.toString()
+                                          ? Text(
+                                              DateConverter.formatDate(
+                                                orderController.orderList[index].updatedAt,
+                                              ),
+                                              style: TextStyle(fontSize: 10, color: Colors.grey),
+                                            )
+                                          : SizedBox(),
+                                    ],
                                   )
                                 ],
                               ),
                             ),
-                          ),
-                          Container(
-                            color: Colors.white,
-                            margin: EdgeInsets.symmetric(horizontal: 15),
-                            padding: EdgeInsets.all(10).copyWith(top: 20),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              // mainAxisAlignment: MainAxisAlignment.start,
-                              // crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.check_circle,
-                                      size: 20,
-                                      color: orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() ? Get.theme.secondaryHeaderColor : Colors.grey,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Text(
-                                        'Clicked Tracked',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 12,
-                                          color: orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() ? Colors.black : Colors.grey,
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(child: SizedBox()),
-                                    orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString()
-                                        ? Text(
-                                            DateConverter.formatDate(
-                                              orderController.orderList[index].referDate,
-                                            ),
-                                            style: TextStyle(fontSize: 10, color: Colors.grey),
-                                          )
-                                        : SizedBox(),
-                                  ],
-                                ),
-                                Stack(
-                                  alignment: Alignment.centerLeft,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: DottedLine(
-                                        lineLength: 125,
-                                        direction: Axis.vertical,
-                                        dashColor: Colors.grey,
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Card(
-                                          margin: EdgeInsets.zero,
-                                          elevation: 0,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                          child: Icon(
-                                            Icons.check_circle,
-                                            size: 20,
-                                            color: orderController.orderList[index].orderStatus == 1.toString() ? Get.theme.primaryColor : Colors.grey,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 10),
-                                          child: Text(
-                                            'Sale Tracked',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 12,
-                                              color: orderController.orderList[index].orderStatus == 1.toString() ? Colors.black : Colors.grey,
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(child: SizedBox()),
-                                        orderController.orderList[index].orderStatus == 1.toString()
-                                            ? Text(
-                                                DateConverter.formatDate(
-                                                  orderController.orderList[index].createdAt,
-                                                ),
-                                                style: TextStyle(fontSize: 10, color: Colors.grey),
-                                              )
-                                            : SizedBox(),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.check_circle,
-                                      size: 20,
-                                      color: orderController.orderList[index].orderStatus == 1.toString() ? Colors.green : Colors.grey,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Text(
-                                        'Cashback Received',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 12,
-                                          color: orderController.orderList[index].orderStatus == 1.toString() ? Colors.black : Colors.grey,
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(child: SizedBox()),
-                                    orderController.orderList[index].orderStatus == 1.toString()
-                                        ? Text(
-                                            DateConverter.formatDate(
-                                              orderController.orderList[index].createdAt,
-                                            ),
-                                            style: TextStyle(fontSize: 10, color: Colors.grey),
-                                          )
-                                        : SizedBox(),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       );
                     })
                 : Center(

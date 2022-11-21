@@ -85,6 +85,8 @@ class OrderController extends GetxController {
             getOrderComplains(orderId);
             Get.back();
             complain.clear();
+          } else if (response.status == "0") {
+            showCustomSnackBar(response.data);
           } else {
             showCustomSnackBar(response.message);
           }

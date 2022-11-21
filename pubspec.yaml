@@ -55,6 +55,7 @@ dependencies:
   universal_html: ^2.0.8
   chrome_launcher: ^2.1.0
   flutter_web_browser: ^0.17.1
+  aligned_dialog: ^0.0.6
 
   #CONNECTIVITY
   connectivity_plus: ^2.1.0

@@ -108,7 +108,7 @@ class ProfileScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
+                                        global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.pendingEarning}' : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
                                         style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                                       ),
@@ -134,7 +134,7 @@ class ProfileScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency}0.00',
+                                        global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
                                         style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                                       ),
@@ -165,7 +165,33 @@ class ProfileScreen extends StatelessWidget {
                                         style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                                       ),
                                     ],
-                                  )
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    child: VerticalDivider(
+                                      // width: 2,
+                                      // thickness: 2,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        AppLocalizations.of(context).total_rewards,
+                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                          color: Colors.white,
+                                          letterSpacing: 0,
+                                          fontSize: 11,
+                                        ),
+                                      ),
+                                      Text(
+                                        global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.rewardEarning}' : '${global.appInfo.currency}0.00',
+                                        textAlign: TextAlign.center,
+                                        style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ],

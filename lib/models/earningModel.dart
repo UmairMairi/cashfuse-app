@@ -6,6 +6,8 @@ class EarningModel {
   int remEarning;
   int sentForWithdrawal;
   int referralEarning;
+  int rewardEarning;
+  int pendingEarning;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -17,6 +19,8 @@ class EarningModel {
     this.remEarning,
     this.sentForWithdrawal,
     this.referralEarning,
+    this.rewardEarning,
+    this.pendingEarning,
     this.createdAt,
     this.updatedAt,
   });
@@ -30,6 +34,8 @@ class EarningModel {
       remEarning = json["rem_earning"] != null ? json["rem_earning"] : 0;
       sentForWithdrawal = json["sent_for_withdrawal"] != null ? json["sent_for_withdrawal"] : 0;
       referralEarning = json["referral_earning"] != null ? json["referral_earning"] : 0;
+      rewardEarning = json["reward_earning"] != null ? json["reward_earning"] : 0;
+      pendingEarning = json["pending_earnings"] != null ? json["pending_earnings"] : 0;
       createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : null;
       updatedAt = json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null;
     } catch (e) {
@@ -45,6 +51,8 @@ class EarningModel {
         "rem_earning": remEarning,
         "sent_for_withdrawal": sentForWithdrawal,
         "referral_earning": referralEarning,
+        "reward_earning": rewardEarning,
+        "pending_earnings": pendingEarning,
         "created_at": createdAt != null ? createdAt.toIso8601String() : null,
         "updated_at": updatedAt != null ? updatedAt.toIso8601String() : null,
       };
