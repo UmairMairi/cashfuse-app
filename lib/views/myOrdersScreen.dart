@@ -11,6 +11,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 
 class MyOrdersScreen extends StatelessWidget {
   OrderController orderController = Get.find<OrderController>();
@@ -55,22 +56,25 @@ class MyOrdersScreen extends StatelessWidget {
                                   children: [
                                     ListTile(
                                       contentPadding: EdgeInsets.zero,
-                                      leading: Container(
+                                      leading:
+                                          // Container(
+                                          //   width: 50,
+                                          //   decoration: BoxDecoration(
+                                          //     shape: BoxShape.circle,
+                                          //     color: Colors.white,
+                                          //     border: Border.all(
+                                          //       color: Colors.grey[400],
+                                          //     ),
+                                          //   ),
+                                          //   padding: EdgeInsets.all(2),
+                                          //   child:
+                                          CustomImage(
+                                        image: global.appInfo.baseUrls.partnerImageUrl + '/' + orderController.orderList[index].logo,
+                                        fit: BoxFit.contain,
+                                        errorImage: Images.logo,
                                         width: 50,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.white,
-                                          border: Border.all(
-                                            color: Colors.grey[400],
-                                          ),
-                                        ),
-                                        padding: EdgeInsets.all(5),
-                                        child: CustomImage(
-                                          image: global.appInfo.baseUrls.partnerImageUrl + '/' + orderController.orderList[index].logo,
-                                          fit: BoxFit.contain,
-                                          errorImage: Images.logo,
-                                        ),
                                       ),
+                                      //),
                                       title: Text(orderController.orderList[index].advertisers),
                                       trailing: InkWell(
                                         onTap: () async {
@@ -214,9 +218,9 @@ class MyOrdersScreen extends StatelessWidget {
                                       Expanded(child: SizedBox()),
                                       orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString()
                                           ? Text(
-                                              DateConverter.formatDate(
-                                                orderController.orderList[index].eventDate,
-                                              ),
+                                              DateConverter.dateTimeStringToDateTime(
+                                                orderController.orderList[index].eventDate.toString(),
+                                              ).toString(),
                                               style: TextStyle(fontSize: 10, color: Colors.grey),
                                             )
                                           : SizedBox(),
@@ -261,9 +265,9 @@ class MyOrdersScreen extends StatelessWidget {
                                           Expanded(child: SizedBox()),
                                           orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString()
                                               ? Text(
-                                                  DateConverter.formatDate(
-                                                    orderController.orderList[index].eventDate,
-                                                  ),
+                                                  DateConverter.dateTimeStringToDateTime(
+                                                    orderController.orderList[index].eventDate.toString(),
+                                                  ).toString(),
                                                   style: TextStyle(fontSize: 10, color: Colors.grey),
                                                 )
                                               : SizedBox(),
@@ -305,9 +309,9 @@ class MyOrdersScreen extends StatelessWidget {
                                       Expanded(child: SizedBox()),
                                       orderController.orderList[index].orderStatus == 1.toString()
                                           ? Text(
-                                              DateConverter.formatDate(
-                                                orderController.orderList[index].updatedAt,
-                                              ),
+                                              DateConverter.dateTimeStringToDateTime(
+                                                orderController.orderList[index].updatedAt.toString(),
+                                              ).toString(),
                                               style: TextStyle(fontSize: 10, color: Colors.grey),
                                             )
                                           : SizedBox(),
@@ -373,8 +377,35 @@ class MyOrdersScreen extends StatelessWidget {
                       ],
                     ),
                   )
-            : Center(
-                child: CircularProgressIndicator(),
+            : ListView.builder(
+                shrinkWrap: true,
+                itemCount: 3,
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Shimmer(
+                      duration: Duration(seconds: 2),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
+                          Container(
+                            height: 150,
+                            color: Colors.grey[300],
+                            margin: EdgeInsets.symmetric(horizontal: 15),
+                            padding: EdgeInsets.all(10).copyWith(top: 20),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
               );
       }),
     );

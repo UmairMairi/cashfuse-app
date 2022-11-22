@@ -178,7 +178,7 @@ class ProfileScreen extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        AppLocalizations.of(context).total_rewards,
+                                        AppLocalizations.of(context).rewards,
                                         style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                           color: Colors.white,
                                           letterSpacing: 0,

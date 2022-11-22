@@ -1,13 +1,13 @@
 class EarningModel {
   int id;
   int userId;
-  int totalEarnings;
-  int withdrawal;
-  int remEarning;
-  int sentForWithdrawal;
-  int referralEarning;
-  int rewardEarning;
-  int pendingEarning;
+  String totalEarnings;
+  String withdrawal;
+  String remEarning;
+  String sentForWithdrawal;
+  String referralEarning;
+  String rewardEarning;
+  String pendingEarning;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -29,13 +29,13 @@ class EarningModel {
     try {
       id = json["id"];
       userId = json["user_id"];
-      totalEarnings = json["total_earnings"] != null ? json["total_earnings"] : 0;
-      withdrawal = json["withdrawal"] != null ? json["withdrawal"] : 0;
-      remEarning = json["rem_earning"] != null ? json["rem_earning"] : 0;
-      sentForWithdrawal = json["sent_for_withdrawal"] != null ? json["sent_for_withdrawal"] : 0;
-      referralEarning = json["referral_earning"] != null ? json["referral_earning"] : 0;
-      rewardEarning = json["reward_earning"] != null ? json["reward_earning"] : 0;
-      pendingEarning = json["pending_earnings"] != null ? json["pending_earnings"] : 0;
+      totalEarnings = json["total_earnings"] != null ? json["total_earnings"].toString() : '';
+      withdrawal = json["withdrawal"] != null ? json["withdrawal"].toString() : '';
+      remEarning = json["rem_earning"] != null ? json["rem_earning"].toString() : '';
+      sentForWithdrawal = json["sent_for_withdrawal"] != null ? json["sent_for_withdrawal"].toString() : '';
+      referralEarning = json["referral_earning"] != null ? json["referral_earning"].toString() : '';
+      rewardEarning = json["reward_earning"] != null ? json["reward_earning"].toString() : '';
+      pendingEarning = json["pending_earnings"] != null ? json["pending_earnings"].toString() : '';
       createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : null;
       updatedAt = json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null;
     } catch (e) {

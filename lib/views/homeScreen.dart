@@ -14,6 +14,7 @@ import 'package:cashfuse/views/categoryScreen.dart';
 import 'package:cashfuse/views/couponDetailScreen.dart';
 import 'package:cashfuse/views/couponListScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
+import 'package:cashfuse/views/imageRotateWidget.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/myEarningScreen.dart';
 import 'package:cashfuse/views/offerDetailScreen.dart';
@@ -119,20 +120,21 @@ class HomeScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           InkWell(
-            onTap: () async {
-              if (global.currentUser.id != null) {
-                Get.to(() => ReferEarnScreen());
-              } else {
-                Get.to(() => LoginOrSignUpScreen(
-                      fromMenu: true,
-                    ));
-              }
-            },
-            child: Image.asset(
-              Images.refer,
-              height: 50,
-            ),
-          ),
+              onTap: () async {
+                if (global.currentUser.id != null) {
+                  Get.to(() => ReferEarnScreen());
+                } else {
+                  Get.to(() => LoginOrSignUpScreen(
+                        fromMenu: true,
+                      ));
+                }
+              },
+              child: ImageRotate()
+              // Image.asset(
+              //   Images.refer,
+              //   height: 50,
+              // ),
+              ),
           SizedBox(
             height: 10,
           ),

@@ -10,6 +10,7 @@ import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 
 class ReferralNetworkScreen extends StatelessWidget {
   ReferEarnController referEarnController = Get.find<ReferEarnController>();
@@ -198,8 +199,23 @@ class ReferralNetworkScreen extends StatelessWidget {
                             ),
                           ],
                         )
-                  : Center(
-                      child: CircularProgressIndicator(),
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: 7,
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      itemBuilder: (context, index) {
+                        return Shimmer(
+                          duration: Duration(seconds: 2),
+                          child: Container(
+                            height: 75,
+                            margin: EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        );
+                      },
                     ),
             ),
           ],

@@ -21,7 +21,7 @@ String baseUrl = "https://cf.codefuse.org/admin/api"; //"https://okaydemo.com/ca
 SharedPreferences sp;
 UserModel currentUser = new UserModel();
 AppInfo appInfo = new AppInfo();
-String timeFormat = '24';
+String timeFormat = '12';
 String appDeviceId;
 bool isRTL = false;
 List<String> clickedList = [];

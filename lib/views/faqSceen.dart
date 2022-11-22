@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 import '../controllers/commonController.dart';
 
 class FaqScreen extends StatelessWidget {
@@ -103,8 +104,23 @@ class FaqScreen extends StatelessWidget {
                 : Center(
                     child: Text(AppLocalizations.of(context).no_data_found),
                   )
-            : Center(
-                child: CircularProgressIndicator(),
+            : ListView.builder(
+                shrinkWrap: true,
+                itemCount: 10,
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                itemBuilder: (context, index) {
+                  return Shimmer(
+                    duration: Duration(seconds: 2),
+                    child: Container(
+                      height: 65,
+                      margin: EdgeInsets.only(bottom: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  );
+                },
               ),
       );
     });
