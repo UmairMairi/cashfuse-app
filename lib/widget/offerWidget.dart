@@ -22,7 +22,7 @@ class OfferWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 260,
+      width: GetPlatform.isWeb ? 330 : 260,
       height: fromList ? 250 : 200,
       margin: fromList ? EdgeInsets.only(top: 15) : EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
@@ -42,7 +42,11 @@ class OfferWidget extends StatelessWidget {
                       ),
                       child: CustomImage(
                         image: '${global.appInfo.baseUrls.offerImageUrl}/${commonModel.image}',
-                        height: fromList ? 180 : 145,
+                        height: fromList
+                            ? 180
+                            : GetPlatform.isWeb
+                                ? 170
+                                : 145,
                         width: Get.width,
                         fit: BoxFit.fill,
                         errorImage: Images.dummyImage,
@@ -97,7 +101,11 @@ class OfferWidget extends StatelessWidget {
                           ),
                           child: CustomImage(
                             image: '${global.appInfo.baseUrls.offerImageUrl}/${offer.bannerImage}',
-                            height: fromList ? 180 : 145,
+                            height: fromList
+                                ? 180
+                                : GetPlatform.isWeb
+                                    ? 170
+                                    : 145,
                             width: Get.width,
                             fit: BoxFit.fill,
                             errorImage: Images.dummyImage,

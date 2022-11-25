@@ -55,7 +55,7 @@ class WebBannerView extends StatelessWidget {
                                           borderRadius: BorderRadius.circular(10),
                                           child: CustomImage(
                                             image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[index2].image}',
-                                            fit: BoxFit.cover,
+                                            fit: BoxFit.fill,
                                             height: 220,
                                           ),
                                         ),

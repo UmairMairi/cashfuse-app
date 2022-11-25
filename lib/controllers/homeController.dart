@@ -87,18 +87,19 @@ class HomeController extends GetxController {
 
   init() async {
     try {
-      await getTopCashBack(page);
-      await getTopCategories();
+      await getHomeAdv();
       await getTopBanners();
+      await getTopCategories();
+      await getTopCashBack(page);
 
       await getExclusiveOffers();
 
       await getNewFlashOffers();
-      await getHomeAdv();
+
       getAllAdv();
       if (global.currentUser.id != null) {
         getClick();
-        Get.find<AuthController>().getProfile();
+        await Get.find<AuthController>().getProfile();
       }
     } catch (e) {
       print("Exception - HomeController.dart - _init():" + e.toString());

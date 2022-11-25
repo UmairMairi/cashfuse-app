@@ -1,6 +1,7 @@
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/myEarningScreen.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,9 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  WebTopBarWidget({this.scaffoldKey});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +26,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
           children: [
             InkWell(
               onTap: () {
-                //scaffoldKey.currentState.openDrawer();
+                scaffoldKey.currentState.openDrawer();
               },
               child: Padding(
                 padding: const EdgeInsets.only(left: 10),
@@ -33,10 +37,15 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
             ),
-            Image.asset(
-              Images.cashfuse,
-              height: 35,
-              // width: 100,
+            InkWell(
+              onTap: () {
+                Get.to(() => HomeScreen());
+              },
+              child: Image.asset(
+                Images.cashfuse,
+                height: 35,
+                // width: 100,
+              ),
             ),
             Expanded(
               flex: 2,
@@ -81,9 +90,20 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 if (global.currentUser.id != null) {
                   Get.to(() => MyEarningSceen());
                 } else {
-                  Get.to(() => LoginOrSignUpScreen(
-                        fromMenu: true,
-                      ));
+                  if (GetPlatform.isWeb) {
+                    Get.dialog(Dialog(
+                      child: SizedBox(
+                        width: Get.width / 3,
+                        child: LoginOrSignUpScreen(
+                          fromMenu: true,
+                        ),
+                      ),
+                    ));
+                  } else {
+                    Get.to(() => LoginOrSignUpScreen(
+                          fromMenu: true,
+                        ));
+                  }
                 }
               },
               child: Padding(

@@ -20,7 +20,7 @@ class DrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      width: Get.width - 80,
+      width: GetPlatform.isWeb ? Get.width / 5 : Get.width - 80,
       child: global.currentUser.id != null
           ? Column(
               children: [
@@ -474,9 +474,20 @@ class DrawerWidget extends StatelessWidget {
                 InkWell(
                   onTap: () async {
                     Get.back();
-                    Get.to(() => LoginOrSignUpScreen(
-                          fromMenu: true,
-                        ));
+                    if (GetPlatform.isWeb) {
+                      Get.dialog(Dialog(
+                        child: SizedBox(
+                          width: Get.width / 3,
+                          child: LoginOrSignUpScreen(
+                            fromMenu: true,
+                          ),
+                        ),
+                      ));
+                    } else {
+                      Get.to(() => LoginOrSignUpScreen(
+                            fromMenu: true,
+                          ));
+                    }
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,

@@ -93,6 +93,7 @@ void handleLinkData(PendingDynamicLinkData data) {
 
 class MyApp extends StatelessWidget {
   ThemeController themeController = Get.put(ThemeController());
+
   @override
   Widget build(BuildContext context) {
     if (GetPlatform.isWeb) {

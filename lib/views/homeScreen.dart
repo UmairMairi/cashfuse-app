@@ -26,6 +26,8 @@ import 'package:cashfuse/widget/couponWidget.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/offerWidget.dart';
+import 'package:cashfuse/widget/web/homeWebCategoryView.dart';
+import 'package:cashfuse/widget/web/homeWebTopCashbackView.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:cashfuse/widget/web/web_banner_view.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -52,7 +54,9 @@ class HomeScreen extends StatelessWidget {
       key: scaffoldKey,
       drawer: DrawerWidget(),
       appBar: GetPlatform.isWeb
-          ? WebTopBarWidget()
+          ? WebTopBarWidget(
+              scaffoldKey: scaffoldKey,
+            )
           : AppBar(
               elevation: 0,
               titleSpacing: 0,
@@ -279,7 +283,7 @@ class HomeScreen extends StatelessWidget {
                               Text(
                                 AppLocalizations.of(context).top_categories,
                                 style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: GetPlatform.isWeb ? 16 : 13,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black.withOpacity(0.79),
                                   letterSpacing: -0.3,
@@ -291,86 +295,88 @@ class HomeScreen extends StatelessWidget {
                                 },
                                 child: Text(
                                   '${AppLocalizations.of(context).view_all} >',
-                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: GetPlatform.isWeb ? 16 : null),
                                 ),
                               )
                             ],
                           ),
                         );
                       }),
-                      GetBuilder<HomeController>(builder: (hm) {
-                        return SizedBox(
-                          height: 80,
-                          child: hm.isCategoryLoaded
-                              ? ListView.builder(
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: hm.topCategoryList.length > 10 ? 10 : hm.topCategoryList.length,
-                                  padding: const EdgeInsets.symmetric(horizontal: 6),
-                                  itemBuilder: (context, index) {
-                                    return InkWell(
-                                      onTap: () {
-                                        Get.to(() => CategoryScreen(
-                                              category: hm.topCategoryList[index],
-                                            ));
-                                      },
-                                      child: Container(
-                                        width: 95,
-                                        margin: EdgeInsets.only(right: 15),
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: index == 0 ? Get.theme.primaryColor : Colors.white,
-                                        ),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              hm.topCategoryList[index].name.toUpperCase(),
-                                              textAlign: TextAlign.center,
-                                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                                fontSize: 10,
-                                                fontWeight: FontWeight.w500,
-                                                color: index == 0 ? Colors.white : Colors.black,
+                      GetPlatform.isWeb
+                          ? HomeWebCategoryView()
+                          : GetBuilder<HomeController>(builder: (hm) {
+                              return SizedBox(
+                                height: 80,
+                                child: hm.isCategoryLoaded
+                                    ? ListView.builder(
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: hm.topCategoryList.length > 10 ? 10 : hm.topCategoryList.length,
+                                        padding: const EdgeInsets.symmetric(horizontal: 6),
+                                        itemBuilder: (context, index) {
+                                          return InkWell(
+                                            onTap: () {
+                                              Get.to(() => CategoryScreen(
+                                                    category: hm.topCategoryList[index],
+                                                  ));
+                                            },
+                                            child: Container(
+                                              width: 95,
+                                              margin: EdgeInsets.only(right: 15),
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(10),
+                                                color: index == 0 ? Get.theme.primaryColor : Colors.white,
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    hm.topCategoryList[index].name.toUpperCase(),
+                                                    textAlign: TextAlign.center,
+                                                    style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                                      fontSize: 10,
+                                                      fontWeight: FontWeight.w500,
+                                                      color: index == 0 ? Colors.white : Colors.black,
+                                                    ),
+                                                  ),
+                                                  // SizedBox(
+                                                  //   height: 10,
+                                                  // ),
+                                                  CustomImage(
+                                                    image: '${global.appInfo.baseUrls.categoryImageUrl}/${hm.topCategoryList[index].image}',
+                                                    height: 40,
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                            // SizedBox(
-                                            //   height: 10,
-                                            // ),
-                                            CustomImage(
-                                              image: '${global.appInfo.baseUrls.categoryImageUrl}/${hm.topCategoryList[index].image}',
-                                              height: 40,
+                                          );
+                                        },
+                                      )
+                                    : ListView.builder(
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: 5,
+                                        padding: const EdgeInsets.symmetric(horizontal: 6),
+                                        itemBuilder: (context, index) {
+                                          return SizedBox(
+                                            height: 75,
+                                            child: Shimmer(
+                                              duration: Duration(seconds: 2),
+                                              child: Container(
+                                                width: 95,
+                                                margin: EdgeInsets.only(right: 15),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey[300],
+                                                  borderRadius: BorderRadius.circular(10),
+                                                ),
+                                              ),
                                             ),
-                                          ],
-                                        ),
+                                          );
+                                        },
                                       ),
-                                    );
-                                  },
-                                )
-                              : ListView.builder(
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: 5,
-                                  padding: const EdgeInsets.symmetric(horizontal: 6),
-                                  itemBuilder: (context, index) {
-                                    return SizedBox(
-                                      height: 75,
-                                      child: Shimmer(
-                                        duration: Duration(seconds: 2),
-                                        child: Container(
-                                          width: 95,
-                                          margin: EdgeInsets.only(right: 15),
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey[300],
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                        );
-                      }),
+                              );
+                            }),
                       GetBuilder<CouponController>(builder: (couponController) {
                         return couponController.couponList != null && couponController.couponList.length > 0
                             ? Padding(
@@ -381,7 +387,7 @@ class HomeScreen extends StatelessWidget {
                                     Text(
                                       AppLocalizations.of(context).coupons_of_the_day.toUpperCase(),
                                       style: TextStyle(
-                                        fontSize: 13,
+                                        fontSize: GetPlatform.isWeb ? 16 : 13,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black.withOpacity(0.79),
                                         letterSpacing: -0.3,
@@ -394,7 +400,7 @@ class HomeScreen extends StatelessWidget {
                                             },
                                             child: Text(
                                               '${AppLocalizations.of(context).view_all} >',
-                                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+                                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: GetPlatform.isWeb ? 16 : null),
                                             ),
                                           )
                                         : SizedBox(),
@@ -477,7 +483,7 @@ class HomeScreen extends StatelessWidget {
                                 child: Text(
                                   AppLocalizations.of(context).exclusive_offers,
                                   style: TextStyle(
-                                    fontSize: 13,
+                                    fontSize: GetPlatform.isWeb ? 16 : 13,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.black.withOpacity(0.79),
                                     letterSpacing: -0.3,
@@ -490,7 +496,7 @@ class HomeScreen extends StatelessWidget {
                         return hmCon.isOfferLoaded
                             ? hmCon.exclusiveOfferList != null && hmCon.exclusiveOfferList.length > 0
                                 ? SizedBox(
-                                    height: 165,
+                                    height: GetPlatform.isWeb ? 170 : 165,
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       itemCount: hmCon.exclusiveOfferList.length,
@@ -506,7 +512,7 @@ class HomeScreen extends StatelessWidget {
                                                 ));
                                           },
                                           child: Container(
-                                            width: 240, //Get.width - 120,
+                                            width: GetPlatform.isWeb ? 270 : 240, //Get.width - 120,
                                             margin: EdgeInsets.only(right: 10),
                                             decoration: BoxDecoration(
                                               color: Colors.white,
@@ -519,7 +525,7 @@ class HomeScreen extends StatelessWidget {
                                                     borderRadius: BorderRadius.circular(10),
                                                     child: CustomImage(
                                                       image: '${global.appInfo.baseUrls.offerImageUrl}/${hmCon.exclusiveOfferList[index].bannerImage}',
-                                                      height: 165,
+                                                      height: 170,
                                                       width: Get.width,
                                                       fit: BoxFit.fill,
                                                       errorImage: Images.dummyImage,
@@ -605,7 +611,7 @@ class HomeScreen extends StatelessWidget {
                                     Text(
                                       AppLocalizations.of(context).top_cashback_stores,
                                       style: TextStyle(
-                                        fontSize: 13,
+                                        fontSize: GetPlatform.isWeb ? 16 : 13,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black.withOpacity(0.79),
                                         letterSpacing: -0.3,
@@ -621,7 +627,7 @@ class HomeScreen extends StatelessWidget {
                                       },
                                       child: Text(
                                         '${AppLocalizations.of(context).view_all} >',
-                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: GetPlatform.isWeb ? 16 : null),
                                       ),
                                     )
                                   ],
@@ -629,64 +635,66 @@ class HomeScreen extends StatelessWidget {
                               )
                             : SizedBox();
                       }),
-                      GetBuilder<HomeController>(builder: (hmController) {
-                        return hmController.isTopCashbackLoaded
-                            ? hmController.topCashbackList != null && hmController.topCashbackList.length > 0
-                                ? SizedBox(
-                                    height: 155,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: hmController.topCashbackList.length > 6 ? 6 : hmController.topCashbackList.length,
-                                      shrinkWrap: true,
-                                      padding: const EdgeInsets.symmetric(horizontal: 6),
-                                      itemBuilder: (context, index) {
-                                        return InkWell(
-                                          onTap: () {
-                                            Get.to(() => CategoryScreen(
-                                                  category: hmController.topCashbackList[index],
-                                                ));
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(right: 13),
-                                            child: SizedBox(
-                                              width: 155,
-                                              child: AdsCampaignWidget(
-                                                commonModel: CommonModel(
-                                                  name: hmController.topCashbackList[index].name,
-                                                  image: '${global.appInfo.baseUrls.partnerImageUrl}/${hmController.topCashbackList[index].image}',
-                                                  tagline: hmController.topCashbackList[index].tagline,
-                                                  adId: hmController.topCashbackList[index].id.toString(),
+                      GetPlatform.isWeb
+                          ? HomeWebTopCashbackView()
+                          : GetBuilder<HomeController>(builder: (hmController) {
+                              return hmController.isTopCashbackLoaded
+                                  ? hmController.topCashbackList != null && hmController.topCashbackList.length > 0
+                                      ? SizedBox(
+                                          height: 155,
+                                          child: ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: hmController.topCashbackList.length > 6 ? 6 : hmController.topCashbackList.length,
+                                            shrinkWrap: true,
+                                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                                            itemBuilder: (context, index) {
+                                              return InkWell(
+                                                onTap: () {
+                                                  Get.to(() => CategoryScreen(
+                                                        category: hmController.topCashbackList[index],
+                                                      ));
+                                                },
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(right: 13),
+                                                  child: SizedBox(
+                                                    width: 155,
+                                                    child: AdsCampaignWidget(
+                                                      commonModel: CommonModel(
+                                                        name: hmController.topCashbackList[index].name,
+                                                        image: '${global.appInfo.baseUrls.partnerImageUrl}/${hmController.topCashbackList[index].image}',
+                                                        tagline: hmController.topCashbackList[index].tagline,
+                                                        adId: hmController.topCashbackList[index].id.toString(),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        )
+                                      : SizedBox()
+                                  : SizedBox(
+                                      height: 155,
+                                      child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount: 5,
+                                          shrinkWrap: true,
+                                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 20),
+                                          itemBuilder: (context, index) {
+                                            return Shimmer(
+                                              duration: Duration(seconds: 2),
+                                              child: Container(
+                                                width: 155,
+                                                margin: EdgeInsets.only(right: 15),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey[300],
+                                                  borderRadius: BorderRadius.circular(10),
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  )
-                                : SizedBox()
-                            : SizedBox(
-                                height: 155,
-                                child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: 5,
-                                    shrinkWrap: true,
-                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 20),
-                                    itemBuilder: (context, index) {
-                                      return Shimmer(
-                                        duration: Duration(seconds: 2),
-                                        child: Container(
-                                          width: 155,
-                                          margin: EdgeInsets.only(right: 15),
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey[300],
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                              );
-                      }),
+                                            );
+                                          }),
+                                    );
+                            }),
                       GetBuilder<HomeController>(builder: (home) {
                         return home.newFlashOfferList != null && home.newFlashOfferList.length > 0
                             ? Padding(
@@ -697,7 +705,7 @@ class HomeScreen extends StatelessWidget {
                                     Text(
                                       'NEW FLASH DEALS - LIVE NOW',
                                       style: TextStyle(
-                                        fontSize: 13,
+                                        fontSize: GetPlatform.isWeb ? 16 : 13,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black.withOpacity(0.79),
                                         letterSpacing: -0.3,
@@ -709,7 +717,7 @@ class HomeScreen extends StatelessWidget {
                                       },
                                       child: Text(
                                         '${AppLocalizations.of(context).view_all} >',
-                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: GetPlatform.isWeb ? 16 : null),
                                       ),
                                     )
                                   ],
@@ -721,7 +729,7 @@ class HomeScreen extends StatelessWidget {
                         return home.isFlashOffersLoaded
                             ? home.newFlashOfferList != null && home.newFlashOfferList.length > 0
                                 ? SizedBox(
-                                    height: 200,
+                                    height: GetPlatform.isWeb ? 230 : 200,
                                     child: ListView.builder(
                                       itemCount: home.newFlashOfferList.length,
                                       shrinkWrap: true,
@@ -814,7 +822,7 @@ class HomeScreen extends StatelessWidget {
                                                 Text(
                                                   home1.homeAdvList[index].name.toUpperCase(),
                                                   style: TextStyle(
-                                                    fontSize: 13,
+                                                    fontSize: GetPlatform.isWeb ? 16 : 13,
                                                     fontWeight: FontWeight.w600,
                                                     color: Colors.black.withOpacity(0.79),
                                                     letterSpacing: -0.3,
@@ -830,14 +838,14 @@ class HomeScreen extends StatelessWidget {
                                                   },
                                                   child: Text(
                                                     '${AppLocalizations.of(context).view_all} >',
-                                                    style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
+                                                    style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: GetPlatform.isWeb ? 16 : null),
                                                   ),
                                                 )
                                               ],
                                             ),
                                           ),
                                           SizedBox(
-                                            height: 200,
+                                            height: GetPlatform.isWeb ? 230 : 200,
                                             child: ListView.builder(
                                                 itemCount: home1.homeAdvList[index].commonList.length,
                                                 shrinkWrap: true,
