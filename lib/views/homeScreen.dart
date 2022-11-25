@@ -934,7 +934,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              bannerImageWidget(),
+              GetPlatform.isWeb ? SizedBox() : bannerImageWidget(),
             ],
           ),
         ),

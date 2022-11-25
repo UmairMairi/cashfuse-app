@@ -111,6 +111,7 @@ class CategoryScreen extends StatelessWidget {
                               },
                               child: GetPlatform.isWeb
                                   ? WebAdsCampaignWidget(
+                                      fromWebHome: false,
                                       commonModel: category.commonList[index],
                                     )
                                   : AdsCampaignWidget(

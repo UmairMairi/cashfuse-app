@@ -3,6 +3,7 @@ import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class WebBannerView extends StatelessWidget {
@@ -21,47 +22,61 @@ class WebBannerView extends StatelessWidget {
           child: homeController.topBannerList != null
               ? Stack(
                   clipBehavior: Clip.none,
-                  fit: StackFit.expand,
                   children: [
                     PageView.builder(
                       controller: _pageController,
-                      itemCount: (homeController.topBannerList.length / 2).ceil(),
+                      itemCount: (homeController.topBannerList.length / 3).ceil(),
                       itemBuilder: (context, index) {
-                        int index1 = index * 2;
-                        int index2 = (index * 2) + 1;
-                        bool _hasSecond = index2 < homeController.topBannerList.length;
+                        // int index1 = index * 3;
+                        // int index2 = (index * 3) + 1;
+                        // bool _hasSecond = index2 < homeController.topBannerList.length;
 
-                        return Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15),
-                          child: Row(children: [
-                            Expanded(
-                                child: InkWell(
+                        return Row(
+                          children: [
+                            InkWell(
                               onTap: () => {},
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: CustomImage(
-                                  image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[index1].image}',
-                                  fit: BoxFit.cover,
+                                  image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[index * 3].image}',
+                                  fit: BoxFit.fill,
                                   height: 220,
+                                  width: Get.width / 4,
                                 ),
                               ),
-                            )),
-                            SizedBox(width: 20),
-                            Expanded(
-                                child: _hasSecond
-                                    ? InkWell(
-                                        onTap: () => {},
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
-                                          child: CustomImage(
-                                            image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[index2].image}',
-                                            fit: BoxFit.fill,
-                                            height: 220,
-                                          ),
+                            ),
+                            ((index * 3) + 1) < homeController.topBannerList.length
+                                ? Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                                    child: InkWell(
+                                      onTap: () => {},
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: CustomImage(
+                                          image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[(index * 3) + 1].image}',
+                                          fit: BoxFit.fill,
+                                          height: 220,
+                                          width: Get.width / 4,
                                         ),
-                                      )
-                                    : SizedBox()),
-                          ]),
+                                      ),
+                                    ),
+                                  )
+                                : SizedBox(),
+                            ((index * 3) + 2) < homeController.topBannerList.length
+                                ? InkWell(
+                                    onTap: () => {},
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: CustomImage(
+                                        image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[(index * 3) + 2].image}',
+                                        fit: BoxFit.fill,
+                                        height: 220,
+                                        width: Get.width / 4,
+                                      ),
+                                    ),
+                                  )
+                                : SizedBox(),
+                          ],
                         );
                       },
                       onPageChanged: (int index) => homeController.setBannerIndex(index),

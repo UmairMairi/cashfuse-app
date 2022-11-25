@@ -7,7 +7,8 @@ import 'package:get/get.dart';
 
 class WebAdsCampaignWidget extends StatelessWidget {
   final CommonModel commonModel;
-  WebAdsCampaignWidget({this.commonModel});
+  final bool fromWebHome;
+  WebAdsCampaignWidget({this.commonModel, this.fromWebHome});
 
   @override
   Widget build(BuildContext context) {
@@ -53,17 +54,17 @@ class WebAdsCampaignWidget extends StatelessWidget {
                   ),
                 )
               : SizedBox(),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 0),
-            child: CustomImage(
-              image: commonModel.image,
-              //height: 32,
-              height: 150,
+          SizedBox(
+            height: 20,
+          ),
+          CustomImage(
+            image: commonModel.image,
+            //height: 32,
+            height: fromWebHome ? 100 : 150,
 
-              //width: 100,
-              fit: BoxFit.contain,
-              errorImage: Images.dummyImage,
-            ),
+            //width: 100,
+            fit: BoxFit.contain,
+            errorImage: Images.dummyImage,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),

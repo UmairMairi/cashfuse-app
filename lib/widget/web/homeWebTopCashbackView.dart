@@ -32,6 +32,7 @@ class HomeWebTopCashbackView extends StatelessWidget {
                           child: SizedBox(
                             width: 195,
                             child: WebAdsCampaignWidget(
+                              fromWebHome: true,
                               commonModel: CommonModel(
                                 name: hmController.topCashbackList[index].name,
                                 image: '${global.appInfo.baseUrls.partnerImageUrl}/${hmController.topCashbackList[index].image}',

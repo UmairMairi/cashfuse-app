@@ -122,7 +122,7 @@ class MyApp extends StatelessWidget {
                 GlobalCupertinoLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
-              home: GetPlatform.isAndroid ? SplashScreen() : HomeScreen(),
+              home: GetPlatform.isWeb ? HomeScreen() : SplashScreen(),
             );
           });
         });
