@@ -1,18 +1,32 @@
+import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cashfuse/constants/appConstant.dart';
+import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/searchController.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/views/aboutUsScreen.dart';
+import 'package:cashfuse/views/accountSettingScreen.dart';
+import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/myEarningScreen.dart';
+import 'package:cashfuse/views/paymentHistoryScreen.dart';
+import 'package:cashfuse/views/paymentScreen.dart';
+import 'package:cashfuse/views/privacyPolicyScreen.dart';
+import 'package:cashfuse/views/recentClicksScreen.dart';
+import 'package:cashfuse/views/referralNetworkScreen.dart';
+import 'package:cashfuse/widget/confirmationDialog.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:cashfuse/utils/global.dart' as global;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   WebTopBarWidget({this.scaffoldKey});
+
+  AuthController authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -87,24 +101,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
             Expanded(child: SizedBox()),
             InkWell(
               onTap: () {
-                if (global.currentUser.id != null) {
-                  Get.to(() => MyEarningSceen());
-                } else {
-                  if (GetPlatform.isWeb) {
-                    Get.dialog(Dialog(
-                      child: SizedBox(
-                        width: Get.width / 3,
-                        child: LoginOrSignUpScreen(
-                          fromMenu: true,
-                        ),
-                      ),
-                    ));
-                  } else {
-                    Get.to(() => LoginOrSignUpScreen(
-                          fromMenu: true,
-                        ));
-                  }
-                }
+                Get.to(() => GetHelpScreen());
               },
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -118,20 +115,33 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
             global.currentUser.id != null
                 ? InkWell(
                     onTap: () {
-                      Get.to(() => LoginOrSignUpScreen(
-                            fromMenu: true,
-                          ));
+                      showAlignedDialog(
+                        context: context,
+                        builder: _localDialogBuilder,
+                        followerAnchor: Alignment.topRight,
+                        targetAnchor: Alignment.topRight,
+                        barrierColor: Colors.black54,
+                        avoidOverflow: true,
+                        duration: Duration.zero,
+                      );
                     },
                     child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Image.asset(
-                          Images.payments,
-                          height: 25,
-                        )),
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        'My Account',
+                      ),
+                    ),
                   )
                 : InkWell(
                     onTap: () {
-                      Get.to(() => MyEarningSceen());
+                      Get.dialog(Dialog(
+                        child: SizedBox(
+                          width: Get.width / 3,
+                          child: LoginOrSignUpScreen(
+                            fromMenu: true,
+                          ),
+                        ),
+                      ));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -142,6 +152,188 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
     );
+  }
+
+  WidgetBuilder get _localDialogBuilder {
+    return (BuildContext context) {
+      return GestureDetector(
+        onTap: () {
+          Navigator.of(context).pop();
+        },
+        child: Card(
+          margin: EdgeInsets.only(top: 70, right: 170),
+          child: SizedBox(
+            width: 150,
+            child: DefaultTextStyle(
+              style: Get.theme.primaryTextTheme.subtitle2,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => AccountSettingScreen());
+                      },
+                      child: Text(
+                        AppLocalizations.of(context).account_settings,
+                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                          letterSpacing: 0,
+                          color: Colors.black.withOpacity(0.75),
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => MyEarningSceen());
+                      },
+                      child: Text(
+                        AppLocalizations.of(context).my_earnings,
+                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                          letterSpacing: 0,
+                          color: Colors.black.withOpacity(0.75),
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => PaymentScreen());
+                      },
+                      child: Text(
+                        AppLocalizations.of(context).payments,
+                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                          letterSpacing: 0,
+                          color: Colors.black.withOpacity(0.75),
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => PaymentHistoryScreen());
+                      },
+                      child: Text(
+                        AppLocalizations.of(context).payment_history,
+                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                          letterSpacing: 0,
+                          color: Colors.black.withOpacity(0.75),
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => RecentClickScreen());
+                      },
+                      child: Text(
+                        AppLocalizations.of(context).recents_clicks,
+                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                          letterSpacing: 0,
+                          color: Colors.black.withOpacity(0.75),
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => ReferralNetworkScreen());
+                      },
+                      child: Text(
+                        'Referral Network',
+                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                          letterSpacing: 0,
+                          color: Colors.black.withOpacity(0.75),
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => GetHelpScreen());
+                      },
+                      child: Text(
+                        AppLocalizations.of(context).get_help,
+                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                          letterSpacing: 0,
+                          color: Colors.black.withOpacity(0.75),
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => AboutUsScreen());
+                      },
+                      child: Text(
+                        AppLocalizations.of(context).about_us,
+                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                          letterSpacing: 0,
+                          color: Colors.black.withOpacity(0.75),
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => PrivacyPolicyScreen());
+                      },
+                      child: Text(
+                        AppLocalizations.of(context).privacy_policy,
+                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                          letterSpacing: 0,
+                          color: Colors.black.withOpacity(0.75),
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    InkWell(
+                      onTap: () {
+                        showConfirmationDialog(
+                          context,
+                          AppLocalizations.of(context).logout,
+                          AppLocalizations.of(context).logout_desc,
+                          [
+                            CupertinoDialogAction(
+                              child: Text(
+                                AppLocalizations.of(context).yes,
+                                style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.red),
+                              ),
+                              onPressed: () {
+                                authController.logout();
+                                Get.back();
+                              },
+                            ),
+                            CupertinoDialogAction(
+                              child: Text(
+                                AppLocalizations.of(context).no,
+                                style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.blue),
+                              ),
+                              onPressed: () {
+                                Get.back();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                      child: Text(
+                        AppLocalizations.of(context).logout,
+                        style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                          letterSpacing: -0.5,
+                          color: Colors.red,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    };
   }
 
   @override

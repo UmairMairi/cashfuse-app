@@ -91,9 +91,14 @@ class AuthController extends GetxController {
         Get.back();
         ConfirmationResult confirmationResult = await auth.signInWithPhoneNumber(coutryCode + contactNo.text);
         if (confirmationResult.verificationId != null) {
-          Get.to(() => OtpVerificationScreen(
+          Get.dialog(Dialog(
+            child: SizedBox(
+              width: Get.width / 3,
+              child: OtpVerificationScreen(
                 verificationCode: confirmationResult.verificationId,
-              ));
+              ),
+            ),
+          ));
         }
       } else {
         await FirebaseAuth.instance.verifyPhoneNumber(
@@ -110,6 +115,7 @@ class AuthController extends GetxController {
           codeSent: (String verificationId, int resendToken) async {
             Get.back();
             startTimer();
+
             Get.to(() => OtpVerificationScreen(
                   verificationCode: verificationId,
                 ));
@@ -178,14 +184,18 @@ class AuthController extends GetxController {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper.verifyOtp(coutryCode + contactNo.text, status).then((response) async {
           Get.back();
-          if (response.statusCode == 200) {
-            global.currentUser = response.data;
+          if (response != null) {
+            if (response.statusCode == 200) {
+              global.currentUser = response.data;
 
-            global.sp.setString('currentUser', json.encode(global.currentUser.toJson()));
-            Get.to(() => BottomNavigationBarScreen());
-            await getProfile();
+              global.sp.setString('currentUser', json.encode(global.currentUser.toJson()));
+              Get.to(() => BottomNavigationBarScreen());
+              await getProfile();
+            } else {
+              showCustomSnackBar(response.message);
+            }
           } else {
-            showCustomSnackBar(response.message);
+            showCustomSnackBar('Something went Wrong.');
           }
         });
       } else {
@@ -212,9 +222,13 @@ class AuthController extends GetxController {
         },
         codeSent: (String verificationId, [int forceResendingToken]) async {
           startTimer();
-          Get.to(() => OtpVerificationScreen(
+          Navigator.of(Get.context).push(
+            MaterialPageRoute(
+              builder: (context) => OtpVerificationScreen(
                 verificationCode: verificationId,
-              ));
+              ),
+            ),
+          );
         },
         codeAutoRetrievalTimeout: (String verificationId) {
           verificationId = verificationId;

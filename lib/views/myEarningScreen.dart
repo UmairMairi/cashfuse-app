@@ -7,7 +7,6 @@ import 'package:cashfuse/views/myOrdersScreen.dart';
 import 'package:cashfuse/views/requestPaymentScreen.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
-import 'package:firebase_core_web/firebase_core_web_interop.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -575,53 +574,55 @@ class MyEarningSceen extends StatelessWidget {
         onTap: () {
           Navigator.of(context).pop();
         },
-        child: Container(
+        child: Card(
           margin: EdgeInsets.only(top: 130, left: 20, right: 20),
-          child: DefaultTextStyle(
-            style: TextStyle(fontSize: 18, color: Colors.black87),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                    margin: EdgeInsets.only(right: 45),
-                    child: CustomPaint(
-                      painter: TrianglePainter(
-                        strokeColor: Colors.white,
-                        strokeWidth: 20,
-                        paintingStyle: PaintingStyle.fill,
-                      ),
-                      child: Container(
-                        height: 10,
-                        width: 15,
-                      ),
-                    )),
-                Container(
-                  margin: EdgeInsets.only(left: 20),
-                  padding: EdgeInsets.all(8),
-                  color: Colors.white,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: Icon(
-                            Icons.close,
-                            size: 20,
+          child: Container(
+            child: DefaultTextStyle(
+              style: TextStyle(fontSize: 18, color: Colors.black87),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(right: 45),
+                      child: CustomPaint(
+                        painter: TrianglePainter(
+                          strokeColor: Colors.red,
+                          strokeWidth: 20,
+                          paintingStyle: PaintingStyle.fill,
+                        ),
+                        child: Container(
+                          height: 10,
+                          width: 15,
+                        ),
+                      )),
+                  Container(
+                    margin: EdgeInsets.only(left: 20),
+                    padding: EdgeInsets.all(8),
+                    color: Colors.white,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: Icon(
+                              Icons.close,
+                              size: 20,
+                            ),
                           ),
                         ),
-                      ),
-                      Text(
-                        'Your total eanings and amount includes your Cashback + Rewards + Refferal amount.',
-                        style: Get.theme.primaryTextTheme.bodyText2,
-                      ),
-                    ],
+                        Text(
+                          'Your total eanings and amount includes your Cashback + Rewards + Refferal amount.',
+                          style: Get.theme.primaryTextTheme.bodyText2,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

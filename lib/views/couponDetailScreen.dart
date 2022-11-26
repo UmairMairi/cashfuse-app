@@ -49,9 +49,20 @@ class CouponDetailScreen extends StatelessWidget {
                     '',
                   );
                 } else {
-                  Get.to(() => LoginOrSignUpScreen(
-                        fromMenu: true,
-                      ));
+                  if (GetPlatform.isWeb) {
+                    Get.dialog(Dialog(
+                      child: SizedBox(
+                        width: Get.width / 3,
+                        child: LoginOrSignUpScreen(
+                          fromMenu: true,
+                        ),
+                      ),
+                    ));
+                  } else {
+                    Get.to(() => LoginOrSignUpScreen(
+                          fromMenu: true,
+                        ));
+                  }
                 }
               },
               child: Container(
@@ -238,9 +249,20 @@ class CouponDetailScreen extends StatelessWidget {
                           //   }
                           // });
                         } else {
-                          Get.to(() => LoginOrSignUpScreen(
-                                fromMenu: true,
-                              ));
+                          if (GetPlatform.isWeb) {
+                            Get.dialog(Dialog(
+                              child: SizedBox(
+                                width: Get.width / 3,
+                                child: LoginOrSignUpScreen(
+                                  fromMenu: true,
+                                ),
+                              ),
+                            ));
+                          } else {
+                            Get.to(() => LoginOrSignUpScreen(
+                                  fromMenu: true,
+                                ));
+                          }
                         }
                       },
                       child: Container(

@@ -43,7 +43,10 @@ class CustomImage extends StatelessWidget {
         imageBuilder: (context, imageProvider) => Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(0),
-                image: DecorationImage(image: imageProvider, fit: fit, alignment: Alignment.topCenter),
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: fit,
+                ),
               ),
             ),
         placeholder: (context, url) => Center(

@@ -106,9 +106,20 @@ class HomeScreen extends StatelessWidget {
                     if (global.currentUser.id != null) {
                       Get.to(() => MyEarningSceen());
                     } else {
-                      Get.to(() => LoginOrSignUpScreen(
-                            fromMenu: true,
-                          ));
+                      if (GetPlatform.isWeb) {
+                        Get.dialog(Dialog(
+                          child: SizedBox(
+                            width: Get.width / 3,
+                            child: LoginOrSignUpScreen(
+                              fromMenu: true,
+                            ),
+                          ),
+                        ));
+                      } else {
+                        Get.to(() => LoginOrSignUpScreen(
+                              fromMenu: true,
+                            ));
+                      }
                     }
                   },
                   child: Padding(
@@ -128,9 +139,20 @@ class HomeScreen extends StatelessWidget {
                 if (global.currentUser.id != null) {
                   Get.to(() => ReferEarnScreen());
                 } else {
-                  Get.to(() => LoginOrSignUpScreen(
-                        fromMenu: true,
-                      ));
+                  if (GetPlatform.isWeb) {
+                    Get.dialog(Dialog(
+                      child: SizedBox(
+                        width: Get.width / 3,
+                        child: LoginOrSignUpScreen(
+                          fromMenu: true,
+                        ),
+                      ),
+                    ));
+                  } else {
+                    Get.to(() => LoginOrSignUpScreen(
+                          fromMenu: true,
+                        ));
+                  }
                 }
               },
               child: ImageRotate()
@@ -206,9 +228,20 @@ class HomeScreen extends StatelessWidget {
                                                       homeController2.topBannerList[index].url,
                                                     );
                                                   } else {
-                                                    Get.to(() => LoginOrSignUpScreen(
-                                                          fromMenu: true,
-                                                        ));
+                                                    if (GetPlatform.isWeb) {
+                                                      Get.dialog(Dialog(
+                                                        child: SizedBox(
+                                                          width: Get.width / 3,
+                                                          child: LoginOrSignUpScreen(
+                                                            fromMenu: true,
+                                                          ),
+                                                        ),
+                                                      ));
+                                                    } else {
+                                                      Get.to(() => LoginOrSignUpScreen(
+                                                            fromMenu: true,
+                                                          ));
+                                                    }
                                                   }
                                                 } else {
                                                   await homeController2.getOfferDetails(

@@ -58,7 +58,7 @@ class OtpVerificationScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20, left: 20, bottom: 10, right: 20),
+                padding: GetPlatform.isWeb ? EdgeInsets.symmetric(horizontal: 30) : const EdgeInsets.only(top: 20, left: 20, bottom: 10, right: 20),
                 child: SizedBox(
                   child: PinCodeTextField(
                     enablePinAutofill: true,

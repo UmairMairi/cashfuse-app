@@ -148,8 +148,13 @@ class CampaignDetailScreen extends StatelessWidget {
                                   );
                                 } else {
                                   if (GetPlatform.isWeb) {
-                                    Get.dialog(LoginOrSignUpScreen(
-                                      fromMenu: true,
+                                    Get.dialog(Dialog(
+                                      child: SizedBox(
+                                        width: Get.width / 3,
+                                        child: LoginOrSignUpScreen(
+                                          fromMenu: true,
+                                        ),
+                                      ),
                                     ));
                                   } else {
                                     Get.to(() => LoginOrSignUpScreen(

@@ -703,9 +703,20 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () async {
-                          Get.to(() => LoginOrSignUpScreen(
-                                fromMenu: true,
-                              ));
+                          if (GetPlatform.isWeb) {
+                            Get.dialog(Dialog(
+                              child: SizedBox(
+                                width: Get.width / 3,
+                                child: LoginOrSignUpScreen(
+                                  fromMenu: true,
+                                ),
+                              ),
+                            ));
+                          } else {
+                            Get.to(() => LoginOrSignUpScreen(
+                                  fromMenu: true,
+                                ));
+                          }
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width,

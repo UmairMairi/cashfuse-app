@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/models/clickModel.dart';
 import 'package:cashfuse/utils/images.dart';
@@ -17,8 +18,8 @@ class RecentClickDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 460,
-      width: Get.width,
+      height: GetPlatform.isWeb ? 500 : 460,
+      width: GetPlatform.isWeb ? AppConstants.WEB_MAX_WIDTH / 3 : Get.width,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -66,7 +67,7 @@ class RecentClickDialogWidget extends StatelessWidget {
               );
             },
             child: Container(
-              width: Get.width / 2,
+              width: GetPlatform.isWeb ? Get.width / 5 : Get.width / 2,
               height: 45,
               margin: EdgeInsets.only(top: 10, bottom: 10),
               padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),

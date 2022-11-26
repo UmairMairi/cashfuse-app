@@ -21,12 +21,19 @@ class AdsDetailScreen extends StatelessWidget {
   AdsDetailScreen({this.ads, this.fromSeeMore});
   HomeController homeController = Get.find<HomeController>();
 
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (homeController1) {
       return SafeArea(
         child: Scaffold(
-          appBar: GetPlatform.isWeb ? WebTopBarWidget() : null,
+          key: scaffoldKey,
+          appBar: GetPlatform.isWeb
+              ? WebTopBarWidget(
+                  scaffoldKey: scaffoldKey,
+                )
+              : null,
           body: Center(
             child: SizedBox(
               width: AppConstants.WEB_MAX_WIDTH,
@@ -147,9 +154,20 @@ class AdsDetailScreen extends StatelessWidget {
                                     '',
                                   );
                                 } else {
-                                  Get.to(() => LoginOrSignUpScreen(
-                                        fromMenu: true,
-                                      ));
+                                  if (GetPlatform.isWeb) {
+                                    Get.dialog(Dialog(
+                                      child: SizedBox(
+                                        width: Get.width / 3,
+                                        child: LoginOrSignUpScreen(
+                                          fromMenu: true,
+                                        ),
+                                      ),
+                                    ));
+                                  } else {
+                                    Get.to(() => LoginOrSignUpScreen(
+                                          fromMenu: true,
+                                        ));
+                                  }
                                 }
                               },
                               child: Container(
@@ -280,9 +298,20 @@ class AdsDetailScreen extends StatelessWidget {
                                     //   }
                                     // });
                                   } else {
-                                    Get.to(() => LoginOrSignUpScreen(
-                                          fromMenu: true,
-                                        ));
+                                    if (GetPlatform.isWeb) {
+                                      Get.dialog(Dialog(
+                                        child: SizedBox(
+                                          width: Get.width / 3,
+                                          child: LoginOrSignUpScreen(
+                                            fromMenu: true,
+                                          ),
+                                        ),
+                                      ));
+                                    } else {
+                                      Get.to(() => LoginOrSignUpScreen(
+                                            fromMenu: true,
+                                          ));
+                                    }
                                   }
                                 },
                                 child: Container(
