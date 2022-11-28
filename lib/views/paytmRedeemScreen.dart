@@ -88,6 +88,7 @@ class PaytmRedeemScreen extends StatelessWidget {
                                 Dialog(
                                   child: Container(
                                     height: 200,
+                                    width: GetPlatform.isWeb ? 400 : null,
                                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                                     decoration: BoxDecoration(
                                       color: Colors.white,

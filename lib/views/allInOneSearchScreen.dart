@@ -309,6 +309,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
               ),
         body: TabBarView(
           controller: _tabController,
+          physics: NeverScrollableScrollPhysics(),
           children: List.generate(searchController.addNewTabList2.length, (index) {
             return searchController.addNewTabList2[index].name == '+Add Tab'
                 ? Container(

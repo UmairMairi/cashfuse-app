@@ -69,14 +69,14 @@ class AdsCampaignWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Text(
               commonModel.name,
-              style: Get.theme.primaryTextTheme.subtitle2,
+              style: Get.theme.primaryTextTheme.bodySmall,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 5),
+            margin: EdgeInsets.only(top: 10),
             padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
             decoration: BoxDecoration(
               color: Get.theme.secondaryHeaderColor,

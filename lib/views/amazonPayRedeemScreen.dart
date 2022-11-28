@@ -18,21 +18,23 @@ class AmazonPayRedeemScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<PaymentController>(builder: (controller) {
       return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back,
-            ),
-          ),
-          title: Text(
-            AppLocalizations.of(context).amazon_pay_redeem,
-            style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
-          ),
-        ),
+        appBar: GetPlatform.isWeb
+            ? null
+            : AppBar(
+                elevation: 0,
+                leading: InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                  ),
+                ),
+                title: Text(
+                  AppLocalizations.of(context).amazon_pay_redeem,
+                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                ),
+              ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(15.0),
@@ -89,6 +91,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                 Dialog(
                                   child: StatefulBuilder(
                                     builder: (BuildContext context, StateSetter setState) => Container(
+                                      width: GetPlatform.isWeb ? 400 : null,
                                       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                                       decoration: BoxDecoration(
                                         color: Colors.white,

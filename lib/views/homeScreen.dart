@@ -131,47 +131,57 @@ class HomeScreen extends StatelessWidget {
                 )
               ],
             ),
-      floatingActionButton: Column(
-        mainAxisSize: MainAxisSize.min,
+      floatingActionButton: Stack(
         children: [
-          InkWell(
-              onTap: () async {
-                if (global.currentUser.id != null) {
-                  Get.to(() => ReferEarnScreen());
-                } else {
-                  if (GetPlatform.isWeb) {
-                    Get.dialog(Dialog(
-                      child: SizedBox(
-                        width: Get.width / 3,
-                        child: LoginOrSignUpScreen(
-                          fromMenu: true,
-                        ),
-                      ),
-                    ));
-                  } else {
-                    Get.to(() => LoginOrSignUpScreen(
-                          fromMenu: true,
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              InkWell(
+                  onTap: () async {
+                    if (global.currentUser.id != null) {
+                      Get.to(() => ReferEarnScreen());
+                    } else {
+                      if (GetPlatform.isWeb) {
+                        Get.dialog(Dialog(
+                          child: SizedBox(
+                            width: Get.width / 3,
+                            child: LoginOrSignUpScreen(
+                              fromMenu: true,
+                            ),
+                          ),
                         ));
-                  }
-                }
-              },
-              child: ImageRotate()
-              // Image.asset(
-              //   Images.refer,
-              //   height: 50,
-              // ),
+                      } else {
+                        Get.to(() => LoginOrSignUpScreen(
+                              fromMenu: true,
+                            ));
+                      }
+                    }
+                  },
+                  child: ImageRotate()
+                  // Image.asset(
+                  //   Images.refer,
+                  //   height: 50,
+                  // ),
+                  ),
+              SizedBox(
+                height: 10,
               ),
-          SizedBox(
-            height: 10,
+              InkWell(
+                onTap: () {
+                  Get.to(() => GetHelpScreen());
+                },
+                child: Image.asset(
+                  Images.gethelp,
+                  height: 50,
+                ),
+              ),
+            ],
           ),
-          InkWell(
-            onTap: () {
-              Get.to(() => GetHelpScreen());
-            },
-            child: Image.asset(
-              Images.gethelp,
-              height: 50,
-            ),
+          CustomImage(
+            image: global.appInfo.baseUrls.notificationBannerImageUrl + '/' + global.bannerImage,
+            fit: BoxFit.contain,
+            height: 500,
+            width: 600,
           ),
         ],
       ),

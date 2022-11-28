@@ -245,7 +245,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                         orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString()
                                                             ? Text(
                                                                 DateConverter.dateTimeStringToDateTime(
-                                                                  orderController.orderList[index].eventDate.toString(),
+                                                                  orderController.orderList[index].createdAt.toString(),
                                                                 ).toString(),
                                                                 style: TextStyle(fontSize: 10, color: Colors.grey),
                                                               )
@@ -292,7 +292,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                             orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString()
                                                                 ? Text(
                                                                     DateConverter.dateTimeStringToDateTime(
-                                                                      orderController.orderList[index].eventDate.toString(),
+                                                                      orderController.orderList[index].createdAt.toString(),
                                                                     ).toString(),
                                                                     style: TextStyle(fontSize: 10, color: Colors.grey),
                                                                   )
@@ -536,7 +536,7 @@ class MyOrdersScreen extends StatelessWidget {
                                               orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString()
                                                   ? Text(
                                                       DateConverter.dateTimeStringToDateTime(
-                                                        orderController.orderList[index].eventDate.toString(),
+                                                        orderController.orderList[index].createdAt.toString(),
                                                       ).toString(),
                                                       style: TextStyle(fontSize: 10, color: Colors.grey),
                                                     )
@@ -583,7 +583,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                   orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString()
                                                       ? Text(
                                                           DateConverter.dateTimeStringToDateTime(
-                                                            orderController.orderList[index].eventDate.toString(),
+                                                            orderController.orderList[index].createdAt.toString(),
                                                           ).toString(),
                                                           style: TextStyle(fontSize: 10, color: Colors.grey),
                                                         )

@@ -8,7 +8,7 @@ SplashController splashController = Get.find<SplashController>();
 
 Widget bannerImageWidget() {
   return GetBuilder<SplashController>(builder: (splash) {
-    return global.isBannerShow
+    return !global.isBannerShow
         ? WillPopScope(
             onWillPop: () async {
               return false;

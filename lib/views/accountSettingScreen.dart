@@ -206,6 +206,7 @@ class AccountSettingScreen extends StatelessWidget {
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.zero,
                             hintText: 'Test User',
+                            hintStyle: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.grey[400]),
                             focusColor: Get.theme.primaryColor,
                             focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
@@ -239,6 +240,7 @@ class AccountSettingScreen extends StatelessWidget {
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.zero,
                             hintText: 'test@gmail.com',
+                            hintStyle: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.grey[400]),
                             focusColor: Get.theme.primaryColor,
                             focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(

@@ -41,9 +41,9 @@ class CouponWidget extends StatelessWidget {
                   children: [
                     CustomImage(
                       image: '${global.appInfo.baseUrls.partnerImageUrl}/${coupon.image}',
-                      //width: 70,
-                      height: 30,
-                      fit: BoxFit.cover,
+                      height: 35,
+                      width: 70,
+                      fit: BoxFit.contain,
                     ),
                     // Image.asset(
                     //   Images.amazon,

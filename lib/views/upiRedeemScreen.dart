@@ -96,6 +96,7 @@ class UpiRedeemScreen extends StatelessWidget {
                                 Dialog(
                                   child: Container(
                                     height: 210,
+                                    width: GetPlatform.isWeb ? 400 : null,
                                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                                     decoration: BoxDecoration(
                                       color: Colors.white,

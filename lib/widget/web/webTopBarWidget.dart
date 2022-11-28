@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';

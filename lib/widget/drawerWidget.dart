@@ -24,163 +24,345 @@ class DrawerWidget extends StatelessWidget {
       child: global.currentUser.id != null
           ? Column(
               children: [
-                Container(
-                    padding: EdgeInsets.only(top: 30, left: 10, right: 10),
-                    color: Get.theme.primaryColor,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          leading: CircleAvatar(
-                            radius: 25,
-                            backgroundColor: Colors.white,
-                            child: global.currentUser.userImage.isNotEmpty
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(25),
-                                    child: CustomImage(
-                                      image: global.appInfo.baseUrls.userImageUrl + '/' + global.currentUser.userImage,
-                                      // height: 30,
-                                      // width: 30,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
-                                : ClipRRect(
-                                    borderRadius: BorderRadius.circular(25),
-                                    child: Image.asset(
-                                      Images.user,
-                                      //height: 30,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                          ),
-                          title: Text(
-                            global.currentUser.name,
-                            style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.white),
-                          ),
-                          subtitle: Text(
-                            global.currentUser.email.isNotEmpty ? global.currentUser.email : global.currentUser.phone,
-                            style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                GetPlatform.isWeb
+                    ? Container(
+                        padding: EdgeInsets.only(top: 30, left: 10, right: 10),
+                        color: Get.theme.primaryColor,
+                        width: Get.width,
+                        height: 300,
+                        child: Column(
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  AppLocalizations.of(context).pending,
-                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                    color: Colors.white,
-                                    fontSize: 11,
-                                    letterSpacing: 0,
-                                  ),
-                                ),
-                                Text(
-                                  global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.pendingEarning}' : '${global.appInfo.currency}0.00',
-                                  textAlign: TextAlign.center,
-                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
+                            CircleAvatar(
+                              radius: 60,
+                              backgroundColor: Colors.white,
+                              child: global.currentUser.userImage.isNotEmpty
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(60),
+                                      child: CustomImage(
+                                        image: global.appInfo.baseUrls.userImageUrl + '/' + global.currentUser.userImage,
+                                        // height: 30,
+                                        // width: 30,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : ClipRRect(
+                                      borderRadius: BorderRadius.circular(60),
+                                      child: Image.asset(
+                                        Images.user,
+                                        //height: 30,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
                             ),
                             SizedBox(
-                              height: 50,
-                              child: VerticalDivider(
-                                // width: 2,
-                                // thickness: 2,
-                                color: Colors.white,
-                              ),
+                              height: 20,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                            global.currentUser.name.isNotEmpty
+                                ? Text(
+                                    global.currentUser.name,
+                                    style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.white),
+                                  )
+                                : SizedBox(),
+                            Text(
+                              global.currentUser.email.isNotEmpty ? global.currentUser.email : global.currentUser.phone,
+                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
+                            ),
+                            Expanded(child: SizedBox()),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  AppLocalizations.of(context).approved,
-                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context).pending,
+                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 11,
+                                        letterSpacing: 0,
+                                      ),
+                                    ),
+                                    Text(
+                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.pendingEarning}' : '${global.appInfo.currency}0.00',
+                                      textAlign: TextAlign.center,
+                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                  child: VerticalDivider(
+                                    // width: 2,
+                                    // thickness: 2,
                                     color: Colors.white,
-                                    letterSpacing: 0,
-                                    fontSize: 11,
                                   ),
                                 ),
-                                Text(
-                                  global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
-                                  textAlign: TextAlign.center,
-                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context).approved,
+                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        color: Colors.white,
+                                        letterSpacing: 0,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                    Text(
+                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
+                                      textAlign: TextAlign.center,
+                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                  child: VerticalDivider(
+                                    // width: 2,
+                                    // thickness: 2,
                                     color: Colors.white,
-                                    fontSize: 12,
                                   ),
                                 ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 50,
-                              child: VerticalDivider(
-                                // width: 2,
-                                // thickness: 2,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  AppLocalizations.of(context).redeemed,
-                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context).redeemed,
+                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        color: Colors.white,
+                                        letterSpacing: 0,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                    Text(
+                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
+                                      textAlign: TextAlign.center,
+                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                  child: VerticalDivider(
+                                    // width: 2,
+                                    // thickness: 2,
                                     color: Colors.white,
-                                    letterSpacing: 0,
-                                    fontSize: 11,
                                   ),
                                 ),
-                                Text(
-                                  global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
-                                  textAlign: TextAlign.center,
-                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 50,
-                              child: VerticalDivider(
-                                // width: 2,
-                                // thickness: 2,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  AppLocalizations.of(context).rewards,
-                                  textAlign: TextAlign.center,
-                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                    color: Colors.white,
-                                    letterSpacing: 0,
-                                    fontSize: 11,
-                                  ),
-                                ),
-                                Text(
-                                  global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.rewardEarning}' : '${global.appInfo.currency}0.00',
-                                  textAlign: TextAlign.center,
-                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                  ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context).rewards,
+                                      textAlign: TextAlign.center,
+                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        color: Colors.white,
+                                        letterSpacing: 0,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                    Text(
+                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.rewardEarning}' : '${global.appInfo.currency}0.00',
+                                      textAlign: TextAlign.center,
+                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ],
                         ),
-                      ],
-                    )
-                    //: Text('Welcome!'),
-                    ),
+                      )
+                    : Container(
+                        padding: EdgeInsets.only(top: 30, left: 10, right: 10),
+                        color: Get.theme.primaryColor,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              dense: true,
+                              leading: CircleAvatar(
+                                radius: 25,
+                                backgroundColor: Colors.white,
+                                child: global.currentUser.userImage.isNotEmpty
+                                    ? ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: CustomImage(
+                                          image: global.appInfo.baseUrls.userImageUrl + '/' + global.currentUser.userImage,
+                                          // height: 30,
+                                          // width: 30,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+                                    : ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Image.asset(
+                                          Images.user,
+                                          //height: 30,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                              ),
+                              title: global.currentUser.name.isNotEmpty
+                                  ? Text(
+                                      global.currentUser.name,
+                                      style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.white),
+                                    )
+                                  : global.currentUser.phone.isNotEmpty
+                                      ? Text(
+                                          global.currentUser.phone,
+                                          style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
+                                        )
+                                      : SizedBox(),
+                              subtitle: global.currentUser.name.isEmpty
+                                  ? SizedBox()
+                                  : Text(
+                                      global.currentUser.email.isNotEmpty ? global.currentUser.email : global.currentUser.phone,
+                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
+                                    ),
+                              trailing: global.currentUser.name.isNotEmpty
+                                  ? SizedBox()
+                                  : InkWell(
+                                      onTap: () {
+                                        Get.to(() => AccountSettingScreen());
+                                      },
+                                      child: Icon(
+                                        Icons.edit,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context).pending,
+                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 11,
+                                        letterSpacing: 0,
+                                      ),
+                                    ),
+                                    Text(
+                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.pendingEarning}' : '${global.appInfo.currency}0.00',
+                                      textAlign: TextAlign.center,
+                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                  child: VerticalDivider(
+                                    // width: 2,
+                                    // thickness: 2,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context).approved,
+                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        color: Colors.white,
+                                        letterSpacing: 0,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                    Text(
+                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
+                                      textAlign: TextAlign.center,
+                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                  child: VerticalDivider(
+                                    // width: 2,
+                                    // thickness: 2,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context).redeemed,
+                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        color: Colors.white,
+                                        letterSpacing: 0,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                    Text(
+                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
+                                      textAlign: TextAlign.center,
+                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                  child: VerticalDivider(
+                                    // width: 2,
+                                    // thickness: 2,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context).rewards,
+                                      textAlign: TextAlign.center,
+                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        color: Colors.white,
+                                        letterSpacing: 0,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                    Text(
+                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.rewardEarning}' : '${global.appInfo.currency}0.00',
+                                      textAlign: TextAlign.center,
+                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                        //: Text('Welcome!'),
+                        ),
                 // InkWell(
                 //   onTap: () {},
                 //   child: Padding(
@@ -212,7 +394,10 @@ class DrawerWidget extends StatelessWidget {
                     Get.to(() => AccountSettingScreen());
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: GetPlatform.isWeb ? 25 : 20,
+                      vertical: GetPlatform.isWeb ? 20 : 10,
+                    ),
                     child: Row(
                       children: [
                         Icon(
@@ -240,7 +425,10 @@ class DrawerWidget extends StatelessWidget {
                     Get.to(() => AllCategoriesScreen());
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: GetPlatform.isWeb ? 25 : 20,
+                      vertical: GetPlatform.isWeb ? 20 : 10,
+                    ),
                     child: Row(
                       children: [
                         Icon(
@@ -268,7 +456,10 @@ class DrawerWidget extends StatelessWidget {
                     Get.to(() => RequestPaymentScreen());
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: GetPlatform.isWeb ? 25 : 20,
+                      vertical: GetPlatform.isWeb ? 20 : 10,
+                    ),
                     child: Row(
                       children: [
                         Icon(
@@ -296,7 +487,10 @@ class DrawerWidget extends StatelessWidget {
                     Get.to(() => AllInOneSearchScreen());
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: GetPlatform.isWeb ? 25 : 20,
+                      vertical: GetPlatform.isWeb ? 20 : 10,
+                    ),
                     child: Row(
                       children: [
                         Icon(
@@ -327,7 +521,10 @@ class DrawerWidget extends StatelessWidget {
                         ));
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: GetPlatform.isWeb ? 25 : 20,
+                      vertical: GetPlatform.isWeb ? 20 : 10,
+                    ),
                     child: Row(
                       children: [
                         Icon(
@@ -350,80 +547,93 @@ class DrawerWidget extends StatelessWidget {
                   ),
                 ),
                 Divider(),
-                InkWell(
-                  onTap: () async {
-                    Get.back();
-                    if (global.appShareLink.isNotEmpty) {
-                      await FlutterShare.share(
-                        title: '${global.appName}',
-                        text: 'I recently tried Cashfuse app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
-                      ).then((value) {
-                        if (value) {}
-                      }).onError((error, stackTrace) {
-                        return error;
-                      });
-                    }
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.share_outlined,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          AppLocalizations.of(context).share_the_app,
-                          style: Get.theme.primaryTextTheme.bodyText1.copyWith(
-                            letterSpacing: 0,
-                            fontWeight: FontWeight.w300,
-                            color: Colors.black.withOpacity(0.6),
+                !GetPlatform.isWeb
+                    ? InkWell(
+                        onTap: () async {
+                          Get.back();
+                          if (global.appShareLink.isNotEmpty) {
+                            await FlutterShare.share(
+                              title: '${global.appName}',
+                              text: 'I recently tried Cashfuse app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
+                            ).then((value) {
+                              if (value) {}
+                            }).onError((error, stackTrace) {
+                              return error;
+                            });
+                          }
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: GetPlatform.isWeb ? 25 : 20,
+                            vertical: GetPlatform.isWeb ? 20 : 10,
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.share_outlined,
+                                color: Colors.black.withOpacity(0.5),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                AppLocalizations.of(context).share_the_app,
+                                style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                                  letterSpacing: 0,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.black.withOpacity(0.6),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Get.back();
-                    StoreRedirect.redirect(
-                      androidAppId: 'com.cashfuse.app',
-                    );
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.star_outline_outlined,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          AppLocalizations.of(context).rate_the_app,
-                          style: Get.theme.primaryTextTheme.bodyText1.copyWith(
-                            letterSpacing: 0,
-                            fontWeight: FontWeight.w300,
-                            color: Colors.black.withOpacity(0.6),
+                      )
+                    : SizedBox(),
+                !GetPlatform.isWeb
+                    ? InkWell(
+                        onTap: () {
+                          Get.back();
+                          StoreRedirect.redirect(
+                            androidAppId: 'com.cashfuse.app',
+                          );
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: GetPlatform.isWeb ? 25 : 20,
+                            vertical: GetPlatform.isWeb ? 20 : 10,
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.star_outline_outlined,
+                                color: Colors.black.withOpacity(0.5),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                AppLocalizations.of(context).rate_the_app,
+                                style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                                  letterSpacing: 0,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.black.withOpacity(0.6),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
+                      )
+                    : SizedBox(),
                 InkWell(
                   onTap: () {
                     Get.back();
                     Get.to(() => GetHelpScreen());
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: GetPlatform.isWeb ? 25 : 20,
+                      vertical: GetPlatform.isWeb ? 20 : 10,
+                    ),
                     child: Row(
                       children: [
                         Icon(
