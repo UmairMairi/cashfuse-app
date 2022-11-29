@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 
 class AboutUsScreen extends StatelessWidget {
   CommonController commonController = Get.find<CommonController>();
@@ -14,7 +15,7 @@ class AboutUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GetPlatform.isWeb
+      appBar: global.getPlatFrom()
           ? WebTopBarWidget()
           : AppBar(
               elevation: 0,
@@ -34,11 +35,11 @@ class AboutUsScreen extends StatelessWidget {
       body: GetBuilder<CommonController>(builder: (controller) {
         return Center(
           child: Container(
-            padding: GetPlatform.isWeb ? EdgeInsets.all(15) : EdgeInsets.zero,
-            width: GetPlatform.isWeb ? AppConstants.WEB_MAX_WIDTH / 2 : AppConstants.WEB_MAX_WIDTH,
+            padding: global.getPlatFrom() ? EdgeInsets.all(15) : EdgeInsets.zero,
+            width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 2 : AppConstants.WEB_MAX_WIDTH,
             color: Colors.white,
             height: Get.height,
-            margin: GetPlatform.isWeb ? EdgeInsets.zero : EdgeInsets.all(10).copyWith(bottom: 0),
+            margin: global.getPlatFrom() ? EdgeInsets.zero : EdgeInsets.all(10).copyWith(bottom: 0),
             child: SingleChildScrollView(
               child: HtmlWidget(
                 commonController.aboutUs,

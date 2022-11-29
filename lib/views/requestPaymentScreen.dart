@@ -16,7 +16,7 @@ class RequestPaymentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GetPlatform.isWeb
+      appBar: global.getPlatFrom()
           ? WebTopBarWidget()
           : AppBar(
               elevation: 0,
@@ -40,8 +40,8 @@ class RequestPaymentScreen extends StatelessWidget {
             return Column(
               children: [
                 SizedBox(
-                  width: GetPlatform.isWeb ? AppConstants.WEB_MAX_WIDTH / 3 : Get.width,
-                  height: GetPlatform.isWeb ? Get.height / 3 : null,
+                  width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 3 : Get.width,
+                  height: global.getPlatFrom() ? Get.height / 3 : null,
                   child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -56,10 +56,10 @@ class RequestPaymentScreen extends StatelessWidget {
                             style: Get.theme.primaryTextTheme.headline6.copyWith(fontSize: 18),
                           ),
                           SizedBox(
-                            height: GetPlatform.isWeb ? 30 : 0,
+                            height: global.getPlatFrom() ? 30 : 0,
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(vertical: GetPlatform.isWeb ? 15 : 5),
+                            padding: EdgeInsets.symmetric(vertical: global.getPlatFrom() ? 15 : 5),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -94,7 +94,7 @@ class RequestPaymentScreen extends StatelessWidget {
                             ],
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(vertical: GetPlatform.isWeb ? 15 : 5),
+                            padding: EdgeInsets.symmetric(vertical: global.getPlatFrom() ? 15 : 5),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -148,7 +148,7 @@ class RequestPaymentScreen extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
-                            if (GetPlatform.isWeb) {
+                            if (global.getPlatFrom()) {
                               Get.dialog(Dialog(
                                 child: SizedBox(
                                   width: 400,
@@ -222,7 +222,7 @@ class RequestPaymentScreen extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
-                            if (GetPlatform.isWeb) {
+                            if (global.getPlatFrom()) {
                               Get.dialog(Dialog(
                                 child: SizedBox(
                                   width: 400,
@@ -295,7 +295,7 @@ class RequestPaymentScreen extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
-                            if (GetPlatform.isWeb) {
+                            if (global.getPlatFrom()) {
                               Get.dialog(Dialog(
                                 child: SizedBox(
                                   width: 400,
@@ -369,7 +369,7 @@ class RequestPaymentScreen extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
-                            if (GetPlatform.isWeb) {
+                            if (global.getPlatFrom()) {
                               Get.dialog(Dialog(
                                 child: SizedBox(
                                   width: 400,
@@ -443,7 +443,7 @@ class RequestPaymentScreen extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
-                            if (GetPlatform.isWeb) {
+                            if (global.getPlatFrom()) {
                               Get.dialog(Dialog(
                                 child: SizedBox(
                                   width: 400,

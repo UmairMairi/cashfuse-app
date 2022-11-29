@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import '../controllers/commonController.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 
 class FaqScreen extends StatelessWidget {
   CommonController commonController = Get.find<CommonController>();
@@ -18,7 +19,7 @@ class FaqScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CommonController>(builder: (controller) {
       return Scaffold(
-        appBar: GetPlatform.isWeb
+        appBar: global.getPlatFrom()
             ? WebTopBarWidget()
             : AppBar(
                 elevation: 0,
@@ -78,7 +79,7 @@ class FaqScreen extends StatelessWidget {
               Expanded(
                 child: Container(
                   color: Colors.white,
-                  width: GetPlatform.isWeb ? AppConstants.WEB_MAX_WIDTH / 2 : Get.width,
+                  width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 2 : Get.width,
                   child: commonController.isfaqLoaded
                       ? commonController.faqList != null && commonController.faqList.length > 0
                           ? ListView.builder(

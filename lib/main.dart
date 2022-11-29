@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:cashfuse/controllers/couponController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
+import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/controllers/splashController.dart';
 import 'package:cashfuse/controllers/themeController.dart';
 import 'package:cashfuse/l10n/l10n.dart';
@@ -96,11 +97,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (GetPlatform.isWeb) {
+    if (global.getPlatFrom()) {
       Get.put(NetworkController());
       Get.put(SplashController());
       Get.put(HomeController());
       Get.put(CouponController());
+      Get.put(SearchController());
     }
     return ChangeNotifierProvider(
         create: (context) => LocaleProvider(),
@@ -122,7 +124,7 @@ class MyApp extends StatelessWidget {
                 GlobalCupertinoLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
-              home: GetPlatform.isWeb ? HomeScreen() : SplashScreen(),
+              home: global.getPlatFrom() ? HomeScreen() : SplashScreen(),
             );
           });
         });

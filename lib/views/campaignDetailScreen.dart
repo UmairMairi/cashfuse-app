@@ -26,13 +26,13 @@ class CampaignDetailScreen extends StatelessWidget {
     return GetBuilder<HomeController>(builder: (homeController1) {
       return SafeArea(
         child: Scaffold(
-          appBar: GetPlatform.isWeb ? WebTopBarWidget() : null,
+          appBar: global.getPlatFrom() ? WebTopBarWidget() : null,
           body: Center(
             child: SizedBox(
               width: AppConstants.WEB_MAX_WIDTH,
               child: CustomScrollView(
                 slivers: [
-                  GetPlatform.isWeb
+                  global.getPlatFrom()
                       ? SliverToBoxAdapter(
                           child: Stack(
                             alignment: Alignment.bottomCenter,
@@ -147,7 +147,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                     '',
                                   );
                                 } else {
-                                  if (GetPlatform.isWeb) {
+                                  if (global.getPlatFrom()) {
                                     Get.dialog(Dialog(
                                       child: SizedBox(
                                         width: Get.width / 3,
@@ -290,7 +290,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                     //   }
                                     // });
                                   } else {
-                                    if (GetPlatform.isWeb) {
+                                    if (global.getPlatFrom()) {
                                       Get.dialog(Dialog(
                                         child: SizedBox(
                                           width: Get.width / 3,
@@ -312,7 +312,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                   alignment: Alignment.center,
                                   child: Container(
                                     height: 45,
-                                    width: GetPlatform.isWeb ? Get.width / 3 : Get.width,
+                                    width: global.getPlatFrom() ? Get.width / 3 : Get.width,
                                     margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                                     padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
                                     decoration: BoxDecoration(
@@ -422,7 +422,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                         ? InkWell(
                                             onTap: () async {
                                               //await homeController.getMoreCampaign(campaign.id.toString());
-                                              GetPlatform.isWeb
+                                              global.getPlatFrom()
                                                   ? Get.dialog(
                                                       Dialog(
                                                         child: SizedBox(
@@ -447,7 +447,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                               alignment: Alignment.center,
                                               color: Colors.white,
                                               child: Container(
-                                                width: GetPlatform.isWeb ? Get.width / 3 : Get.width,
+                                                width: global.getPlatFrom() ? Get.width / 3 : Get.width,
                                                 height: 45,
                                                 margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                                                 padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),

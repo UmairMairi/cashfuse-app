@@ -8,6 +8,7 @@ import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 
 class RecentClickDialogWidget extends StatelessWidget {
   final ClickModel click;
@@ -18,8 +19,8 @@ class RecentClickDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: GetPlatform.isWeb ? 500 : 460,
-      width: GetPlatform.isWeb ? AppConstants.WEB_MAX_WIDTH / 3 : Get.width,
+      height: global.getPlatFrom() ? 500 : 460,
+      width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 3 : Get.width,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -67,7 +68,7 @@ class RecentClickDialogWidget extends StatelessWidget {
               );
             },
             child: Container(
-              width: GetPlatform.isWeb ? Get.width / 5 : Get.width / 2,
+              width: global.getPlatFrom() ? Get.width / 5 : Get.width / 2,
               height: 45,
               margin: EdgeInsets.only(top: 10, bottom: 10),
               padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),

@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_html/html.dart' as html;
 
 String appName = "Cashfuse";
 
@@ -57,22 +58,29 @@ Future<Map<String, String>> getApiHeaders(bool authorizationRequired) async {
 }
 
 Future<void> launchInBrowser(String url) async {
-  FlutterWebBrowser.openWebPage(
-    url: url,
-    customTabsOptions: CustomTabsOptions(
-      colorScheme: CustomTabsColorScheme.dark,
-      darkColorSchemeParams: CustomTabsColorSchemeParams(
-        toolbarColor: Get.theme.primaryColor,
-        secondaryToolbarColor: Get.theme.primaryColor,
-        navigationBarColor: Get.theme.primaryColor,
-        navigationBarDividerColor: Get.theme.primaryColor,
+  if (GetPlatform.isWeb) {
+    html.window.open(
+      url,
+      'name',
+    );
+  } else {
+    FlutterWebBrowser.openWebPage(
+      url: url,
+      customTabsOptions: CustomTabsOptions(
+        colorScheme: CustomTabsColorScheme.dark,
+        darkColorSchemeParams: CustomTabsColorSchemeParams(
+          toolbarColor: Get.theme.primaryColor,
+          secondaryToolbarColor: Get.theme.primaryColor,
+          navigationBarColor: Get.theme.primaryColor,
+          navigationBarDividerColor: Get.theme.primaryColor,
+        ),
+        shareState: CustomTabsShareState.on,
+        instantAppsEnabled: true,
+        showTitle: true,
+        urlBarHidingEnabled: true,
       ),
-      shareState: CustomTabsShareState.on,
-      instantAppsEnabled: true,
-      showTitle: true,
-      urlBarHidingEnabled: true,
-    ),
-  );
+    );
+  }
 }
 
 Future share(String link, String image, String title) async {
@@ -109,6 +117,26 @@ Future share(String link, String image, String title) async {
     }
   } catch (e) {
     print("Exception - global.dart - share():" + e.toString());
+  }
+}
+
+bool getPlatFrom() {
+  if (GetPlatform.isWeb) {
+    if (Get.width > 650) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    if (Platform.isAndroid || Platform.isIOS) {
+      return false;
+    } else {
+      if (Get.width > 650) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 }
 

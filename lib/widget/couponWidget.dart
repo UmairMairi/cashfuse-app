@@ -22,9 +22,9 @@ class CouponWidget extends StatelessWidget {
           ),
           color: Colors.white,
           child: Container(
-            width: Get.width - 40,
+            width: global.getPlatFrom() ? 280 : Get.width - 40,
             //width: 310,
-            height: 100,
+            height: 105,
             decoration: DottedDecoration(
               borderRadius: BorderRadius.circular(9),
               color: Colors.grey[400],
@@ -57,7 +57,7 @@ class CouponWidget extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 180,
+                      width: 160,
                       child: Text(
                         coupon.heading,
                         style: Get.theme.primaryTextTheme.bodyText1.copyWith(

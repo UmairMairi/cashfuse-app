@@ -29,7 +29,7 @@ class AdsDetailScreen extends StatelessWidget {
       return SafeArea(
         child: Scaffold(
           key: scaffoldKey,
-          appBar: GetPlatform.isWeb
+          appBar: global.getPlatFrom()
               ? WebTopBarWidget(
                   scaffoldKey: scaffoldKey,
                 )
@@ -39,7 +39,7 @@ class AdsDetailScreen extends StatelessWidget {
               width: AppConstants.WEB_MAX_WIDTH,
               child: CustomScrollView(
                 slivers: [
-                  GetPlatform.isWeb
+                  global.getPlatFrom()
                       ? SliverToBoxAdapter(
                           child: Stack(
                             alignment: Alignment.bottomCenter,
@@ -154,7 +154,7 @@ class AdsDetailScreen extends StatelessWidget {
                                     '',
                                   );
                                 } else {
-                                  if (GetPlatform.isWeb) {
+                                  if (global.getPlatFrom()) {
                                     Get.dialog(Dialog(
                                       child: SizedBox(
                                         width: Get.width / 3,
@@ -298,7 +298,7 @@ class AdsDetailScreen extends StatelessWidget {
                                     //   }
                                     // });
                                   } else {
-                                    if (GetPlatform.isWeb) {
+                                    if (global.getPlatFrom()) {
                                       Get.dialog(Dialog(
                                         child: SizedBox(
                                           width: Get.width / 3,
@@ -319,7 +319,7 @@ class AdsDetailScreen extends StatelessWidget {
                                   width: Get.width,
                                   alignment: Alignment.center,
                                   child: Container(
-                                    width: GetPlatform.isWeb ? Get.width / 3 : Get.width,
+                                    width: global.getPlatFrom() ? Get.width / 3 : Get.width,
                                     height: 45,
                                     margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                                     padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
@@ -439,7 +439,7 @@ class AdsDetailScreen extends StatelessWidget {
                                           );
                                         },
                                         child: Container(
-                                          width: Get.width,
+                                          width: global.getPlatFrom() ? Get.width / 3 : Get.width,
                                           height: 45,
                                           margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                                           padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),

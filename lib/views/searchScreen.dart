@@ -175,7 +175,7 @@ class SearchScreen extends StatelessWidget {
                             : SizedBox(),
                         searchController.searchData.offerList != null && searchController.searchData.offerList.length > 0
                             ? SizedBox(
-                                height: 230,
+                                height: global.getPlatFrom() ? 260 : 230,
                                 child: ListView.builder(
                                   itemCount: searchController.searchData.offerList.length,
                                   shrinkWrap: true,

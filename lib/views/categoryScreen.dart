@@ -10,6 +10,7 @@ import 'package:cashfuse/widget/web/webAdsCampaignWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 
 class CategoryScreen extends StatelessWidget {
   final String title;
@@ -23,7 +24,7 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: GetPlatform.isWeb
+      appBar: global.getPlatFrom()
           ? WebTopBarWidget(
               scaffoldKey: scaffoldKey,
             )
@@ -84,9 +85,9 @@ class CategoryScreen extends StatelessWidget {
                     ? GetBuilder<HomeController>(builder: (controller) {
                         return GridView.builder(
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: GetPlatform.isWeb ? 4 : 2,
-                            crossAxisSpacing: GetPlatform.isWeb ? 25 : 15.0,
-                            mainAxisSpacing: GetPlatform.isWeb ? 25 : 15.0,
+                            crossAxisCount: global.getPlatFrom() ? 4 : 2,
+                            crossAxisSpacing: global.getPlatFrom() ? 25 : 15.0,
+                            mainAxisSpacing: global.getPlatFrom() ? 25 : 15.0,
                           ),
                           itemCount: category.commonList.length,
                           physics: NeverScrollableScrollPhysics(),
@@ -109,7 +110,7 @@ class CategoryScreen extends StatelessWidget {
                                       ));
                                 }
                               },
-                              child: GetPlatform.isWeb
+                              child: global.getPlatFrom()
                                   ? WebAdsCampaignWidget(
                                       fromWebHome: false,
                                       commonModel: category.commonList[index],

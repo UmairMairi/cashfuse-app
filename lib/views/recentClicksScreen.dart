@@ -23,7 +23,7 @@ class RecentClickScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GetPlatform.isWeb
+      appBar: global.getPlatFrom()
           ? WebTopBarWidget()
           : AppBar(
               backgroundColor: Colors.grey[200],
@@ -98,7 +98,7 @@ class RecentClickScreen extends StatelessWidget {
                 await homeController.getClick();
               },
               child: homeController.recentClickList != null && homeController.recentClickList.length > 0
-                  ? GetPlatform.isWeb
+                  ? global.getPlatFrom()
                       ? Column(
                           children: [
                             Expanded(

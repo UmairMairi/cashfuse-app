@@ -5,6 +5,7 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 
 class HelpDetailSceen extends StatelessWidget {
   final FaqModel faq;
@@ -13,7 +14,7 @@ class HelpDetailSceen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GetPlatform.isWeb
+      appBar: global.getPlatFrom()
           ? WebTopBarWidget()
           : AppBar(
               leading: InkWell(
@@ -32,14 +33,14 @@ class HelpDetailSceen extends StatelessWidget {
       body: GetBuilder<CommonController>(builder: (controller) {
         return Center(
           child: Container(
-            width: GetPlatform.isWeb ? AppConstants.WEB_MAX_WIDTH / 3 : AppConstants.WEB_MAX_WIDTH,
+            width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 3 : AppConstants.WEB_MAX_WIDTH,
             color: Colors.white,
             height: Get.height,
-            margin: GetPlatform.isWeb ? EdgeInsets.zero : EdgeInsets.all(10).copyWith(bottom: 0),
+            margin: global.getPlatFrom() ? EdgeInsets.zero : EdgeInsets.all(10).copyWith(bottom: 0),
             child: SingleChildScrollView(
               child: HtmlWidget(
                 faq.ans,
-                textStyle: GetPlatform.isWeb ? Get.theme.primaryTextTheme.subtitle2 : null,
+                textStyle: global.getPlatFrom() ? Get.theme.primaryTextTheme.subtitle2 : null,
               ),
             ),
           ),

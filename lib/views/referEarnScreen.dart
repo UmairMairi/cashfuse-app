@@ -15,7 +15,7 @@ class ReferEarnScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ReferEarnController>(builder: (controller) {
       return Scaffold(
-        appBar: GetPlatform.isWeb
+        appBar: global.getPlatFrom()
             ? WebTopBarWidget()
             : AppBar(
                 leading: InkWell(
@@ -31,7 +31,7 @@ class ReferEarnScreen extends StatelessWidget {
                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                 ),
               ),
-        body: GetPlatform.isWeb
+        body: global.getPlatFrom()
             ? Column(
                 children: [
                   Stack(

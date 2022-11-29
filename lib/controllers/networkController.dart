@@ -3,9 +3,10 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 
 class NetworkController extends GetxController {
-  var connectionStatus = 0.obs;
+  var connectionStatus = global.getPlatFrom() ? 1.obs : 0.obs;
   final Connectivity _connectivity = Connectivity();
   StreamSubscription<ConnectivityResult> _connectivitySubscription;
 

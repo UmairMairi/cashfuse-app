@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 
 class AmazonPayRedeemScreen extends StatelessWidget {
   final fContactNo = new FocusNode();
@@ -18,7 +19,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<PaymentController>(builder: (controller) {
       return Scaffold(
-        appBar: GetPlatform.isWeb
+        appBar: global.getPlatFrom()
             ? null
             : AppBar(
                 elevation: 0,
@@ -91,7 +92,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                 Dialog(
                                   child: StatefulBuilder(
                                     builder: (BuildContext context, StateSetter setState) => Container(
-                                      width: GetPlatform.isWeb ? 400 : null,
+                                      width: global.getPlatFrom() ? 400 : null,
                                       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                                       decoration: BoxDecoration(
                                         color: Colors.white,

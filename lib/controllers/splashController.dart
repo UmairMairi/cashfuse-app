@@ -54,7 +54,7 @@ class SplashController extends GetxController {
   void init() {
     try {
       Timer(Duration.zero, () async {
-        //if (!GetPlatform.isWeb) {
+        //if (!global.getPlatFrom()) {
         global.appDeviceId = await FirebaseMessaging.instance.getToken();
         //}
         global.sp = await SharedPreferences.getInstance();
@@ -72,7 +72,7 @@ class SplashController extends GetxController {
                       pageIndex: 0,
                     ));
               } else {
-                if (GetPlatform.isWeb) {
+                if (global.getPlatFrom()) {
                   Get.to(() => BottomNavigationBarScreen(
                         pageIndex: 0,
                       ));

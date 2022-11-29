@@ -28,6 +28,7 @@ import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/offerWidget.dart';
 import 'package:cashfuse/widget/web/homeWebCategoryView.dart';
 import 'package:cashfuse/widget/web/homeWebTopCashbackView.dart';
+import 'package:cashfuse/widget/web/webFooterWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:cashfuse/widget/web/web_banner_view.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -53,7 +54,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       drawer: DrawerWidget(),
-      appBar: GetPlatform.isWeb
+      appBar: global.getPlatFrom()
           ? WebTopBarWidget(
               scaffoldKey: scaffoldKey,
             )
@@ -106,7 +107,7 @@ class HomeScreen extends StatelessWidget {
                     if (global.currentUser.id != null) {
                       Get.to(() => MyEarningSceen());
                     } else {
-                      if (GetPlatform.isWeb) {
+                      if (global.getPlatFrom()) {
                         Get.dialog(Dialog(
                           child: SizedBox(
                             width: Get.width / 3,
@@ -132,6 +133,8 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
       floatingActionButton: Stack(
+        alignment: Alignment.bottomRight,
+        clipBehavior: Clip.none,
         children: [
           Column(
             mainAxisSize: MainAxisSize.min,
@@ -141,7 +144,7 @@ class HomeScreen extends StatelessWidget {
                     if (global.currentUser.id != null) {
                       Get.to(() => ReferEarnScreen());
                     } else {
-                      if (GetPlatform.isWeb) {
+                      if (global.getPlatFrom()) {
                         Get.dialog(Dialog(
                           child: SizedBox(
                             width: Get.width / 3,
@@ -177,12 +180,31 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          CustomImage(
-            image: global.appInfo.baseUrls.notificationBannerImageUrl + '/' + global.bannerImage,
-            fit: BoxFit.contain,
-            height: 500,
-            width: 600,
-          ),
+          // CustomImage(
+          //   image: global.appInfo.baseUrls.notificationBannerImageUrl + '/' + global.bannerImage,
+          //   fit: BoxFit.contain,
+          //   height: 500,
+          //   //width: 600,
+          // ),
+          // Positioned(
+          //   top: 60,
+          //   right: -7,
+          //   child: InkWell(
+          //     onTap: () async {
+          //       //Get.back();
+          //       await splashController.bannerShow();
+          //     },
+          //     child: CircleAvatar(
+          //       radius: 15,
+          //       child: Icon(
+          //         Icons.close,
+          //         color: Colors.black,
+          //         size: 20,
+          //       ),
+          //       backgroundColor: Colors.grey[400],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
       body: Center(
@@ -196,12 +218,12 @@ class HomeScreen extends StatelessWidget {
                   await homeController2.init();
                 },
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.only(bottom: 20),
+                  padding: !global.getPlatFrom() ? EdgeInsets.only(bottom: 20) : null,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       GetBuilder<HomeController>(builder: (controller) {
-                        return GetPlatform.isWeb
+                        return global.getPlatFrom()
                             ? WebBannerView(homeController: homeController2)
                             : homeController2.isBannerLoaded
                                 ? Stack(
@@ -209,7 +231,7 @@ class HomeScreen extends StatelessWidget {
                                     children: [
                                       CarouselSlider.builder(
                                           options: CarouselOptions(
-                                            height: GetPlatform.isWeb ? 250 : 170,
+                                            height: global.getPlatFrom() ? 250 : 170,
                                             autoPlay: true,
                                             enlargeCenterPage: false,
                                             disableCenter: false,
@@ -219,7 +241,7 @@ class HomeScreen extends StatelessWidget {
                                             onPageChanged: (index, reason) {
                                               homeController2.setBannerIndex(index);
                                             },
-                                            viewportFraction: GetPlatform.isWeb ? 0.5 : 1,
+                                            viewportFraction: global.getPlatFrom() ? 0.5 : 1,
                                             pageSnapping: false,
                                           ),
                                           itemCount: homeController2.topBannerList.length,
@@ -238,7 +260,7 @@ class HomeScreen extends StatelessWidget {
                                                       homeController2.topBannerList[index].url,
                                                     );
                                                   } else {
-                                                    if (GetPlatform.isWeb) {
+                                                    if (global.getPlatFrom()) {
                                                       Get.dialog(Dialog(
                                                         child: SizedBox(
                                                           width: Get.width / 3,
@@ -266,7 +288,7 @@ class HomeScreen extends StatelessWidget {
                                                 }
                                               },
                                               child: Container(
-                                                width: GetPlatform.isWeb ? Get.width / 2 : Get.width,
+                                                width: global.getPlatFrom() ? Get.width / 2 : Get.width,
                                                 margin: EdgeInsets.only(right: 0),
                                                 decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(5),
@@ -326,7 +348,7 @@ class HomeScreen extends StatelessWidget {
                               Text(
                                 AppLocalizations.of(context).top_categories,
                                 style: TextStyle(
-                                  fontSize: GetPlatform.isWeb ? 16 : 13,
+                                  fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black.withOpacity(0.79),
                                   letterSpacing: -0.3,
@@ -338,14 +360,14 @@ class HomeScreen extends StatelessWidget {
                                 },
                                 child: Text(
                                   '${AppLocalizations.of(context).view_all} >',
-                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: GetPlatform.isWeb ? 16 : null),
+                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: global.getPlatFrom() ? 16 : null),
                                 ),
                               )
                             ],
                           ),
                         );
                       }),
-                      GetPlatform.isWeb
+                      global.getPlatFrom()
                           ? HomeWebCategoryView()
                           : GetBuilder<HomeController>(builder: (hm) {
                               return SizedBox(
@@ -430,7 +452,7 @@ class HomeScreen extends StatelessWidget {
                                     Text(
                                       AppLocalizations.of(context).coupons_of_the_day.toUpperCase(),
                                       style: TextStyle(
-                                        fontSize: GetPlatform.isWeb ? 16 : 13,
+                                        fontSize: global.getPlatFrom() ? 16 : 13,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black.withOpacity(0.79),
                                         letterSpacing: -0.3,
@@ -443,7 +465,7 @@ class HomeScreen extends StatelessWidget {
                                             },
                                             child: Text(
                                               '${AppLocalizations.of(context).view_all} >',
-                                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: GetPlatform.isWeb ? 16 : null),
+                                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: global.getPlatFrom() ? 16 : null),
                                             ),
                                           )
                                         : SizedBox(),
@@ -453,42 +475,88 @@ class HomeScreen extends StatelessWidget {
                             : SizedBox();
                       }),
                       GetBuilder<CouponController>(builder: (couponController) {
+                        final scrollController = new ScrollController();
                         return couponController.isDataLoaded
                             ? couponController.couponList != null && couponController.couponList.length > 0
-                                ? SizedBox(
-                                    height: 100,
-                                    child: ListView.builder(
-                                      padding: const EdgeInsets.symmetric(horizontal: 6),
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: couponC.couponList.length >= 5 ? 5 : couponC.couponList.length,
-                                      shrinkWrap: true,
-                                      itemBuilder: (context, index) {
-                                        return InkWell(
-                                          onTap: () {
-                                            if (couponC.couponList[index].offer != null) {
-                                              Get.to(
-                                                () => OfferDetailScreen(
-                                                  offer: couponC.couponList[index].offer,
-                                                  fromSeeMore: false,
+                                ? Row(
+                                    children: [
+                                      global.getPlatFrom()
+                                          ? InkWell(
+                                              onTap: () => scrollController.animateTo(scrollController.initialScrollOffset, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                              child: Container(
+                                                width: 30,
+                                                height: 80,
+                                                margin: EdgeInsets.only(left: 5),
+                                                alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.rectangle,
+                                                  color: Get.theme.secondaryHeaderColor,
+                                                ),
+                                                child: Icon(
+                                                  Icons.arrow_back,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            )
+                                          : SizedBox(),
+                                      Expanded(
+                                        child: SizedBox(
+                                          height: global.getPlatFrom() ? 105 : 100,
+                                          child: ListView.builder(
+                                            controller: scrollController,
+                                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: couponC.couponList.length >= 5 ? 5 : couponC.couponList.length,
+                                            shrinkWrap: true,
+                                            itemBuilder: (context, index) {
+                                              return InkWell(
+                                                onTap: () {
+                                                  if (couponC.couponList[index].offer != null) {
+                                                    Get.to(
+                                                      () => OfferDetailScreen(
+                                                        offer: couponC.couponList[index].offer,
+                                                        fromSeeMore: false,
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    Get.to(
+                                                      () => CouponDetailScreen(
+                                                        coupon: couponC.couponList[index],
+                                                      ),
+                                                    );
+                                                  }
+                                                },
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(right: 10),
+                                                  child: CouponWidget(
+                                                    coupon: couponC.couponList[index],
+                                                  ),
                                                 ),
                                               );
-                                            } else {
-                                              Get.to(
-                                                () => CouponDetailScreen(
-                                                  coupon: couponC.couponList[index],
-                                                ),
-                                              );
-                                            }
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(right: 10),
-                                            child: CouponWidget(
-                                              coupon: couponC.couponList[index],
-                                            ),
+                                            },
                                           ),
-                                        );
-                                      },
-                                    ),
+                                        ),
+                                      ),
+                                      global.getPlatFrom()
+                                          ? InkWell(
+                                              onTap: () => scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                              child: Container(
+                                                width: 30,
+                                                height: 80,
+                                                margin: EdgeInsets.only(left: 5),
+                                                alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.rectangle,
+                                                  color: Get.theme.secondaryHeaderColor,
+                                                ),
+                                                child: Icon(
+                                                  Icons.arrow_forward,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            )
+                                          : SizedBox(),
+                                    ],
                                   )
                                 : SizedBox()
                             : SizedBox(
@@ -526,7 +594,7 @@ class HomeScreen extends StatelessWidget {
                                 child: Text(
                                   AppLocalizations.of(context).exclusive_offers,
                                   style: TextStyle(
-                                    fontSize: GetPlatform.isWeb ? 16 : 13,
+                                    fontSize: global.getPlatFrom() ? 16 : 13,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.black.withOpacity(0.79),
                                     letterSpacing: -0.3,
@@ -539,7 +607,7 @@ class HomeScreen extends StatelessWidget {
                         return hmCon.isOfferLoaded
                             ? hmCon.exclusiveOfferList != null && hmCon.exclusiveOfferList.length > 0
                                 ? SizedBox(
-                                    height: GetPlatform.isWeb ? 170 : 165,
+                                    height: global.getPlatFrom() ? 170 : 165,
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       itemCount: hmCon.exclusiveOfferList.length,
@@ -555,7 +623,7 @@ class HomeScreen extends StatelessWidget {
                                                 ));
                                           },
                                           child: Container(
-                                            width: GetPlatform.isWeb ? 270 : 240, //Get.width - 120,
+                                            width: global.getPlatFrom() ? 270 : 240, //Get.width - 120,
                                             margin: EdgeInsets.only(right: 10),
                                             decoration: BoxDecoration(
                                               color: Colors.white,
@@ -654,7 +722,7 @@ class HomeScreen extends StatelessWidget {
                                     Text(
                                       AppLocalizations.of(context).top_cashback_stores,
                                       style: TextStyle(
-                                        fontSize: GetPlatform.isWeb ? 16 : 13,
+                                        fontSize: global.getPlatFrom() ? 16 : 13,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black.withOpacity(0.79),
                                         letterSpacing: -0.3,
@@ -670,7 +738,7 @@ class HomeScreen extends StatelessWidget {
                                       },
                                       child: Text(
                                         '${AppLocalizations.of(context).view_all} >',
-                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: GetPlatform.isWeb ? 16 : null),
+                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: global.getPlatFrom() ? 16 : null),
                                       ),
                                     )
                                   ],
@@ -678,7 +746,7 @@ class HomeScreen extends StatelessWidget {
                               )
                             : SizedBox();
                       }),
-                      GetPlatform.isWeb
+                      global.getPlatFrom()
                           ? HomeWebTopCashbackView()
                           : GetBuilder<HomeController>(builder: (hmController) {
                               return hmController.isTopCashbackLoaded
@@ -748,7 +816,7 @@ class HomeScreen extends StatelessWidget {
                                     Text(
                                       'NEW FLASH DEALS - LIVE NOW',
                                       style: TextStyle(
-                                        fontSize: GetPlatform.isWeb ? 16 : 13,
+                                        fontSize: global.getPlatFrom() ? 16 : 13,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black.withOpacity(0.79),
                                         letterSpacing: -0.3,
@@ -760,7 +828,7 @@ class HomeScreen extends StatelessWidget {
                                       },
                                       child: Text(
                                         '${AppLocalizations.of(context).view_all} >',
-                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: GetPlatform.isWeb ? 16 : null),
+                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: global.getPlatFrom() ? 16 : null),
                                       ),
                                     )
                                   ],
@@ -769,31 +837,78 @@ class HomeScreen extends StatelessWidget {
                             : SizedBox();
                       }),
                       GetBuilder<HomeController>(builder: (home) {
+                        final scrollController = new ScrollController();
                         return home.isFlashOffersLoaded
                             ? home.newFlashOfferList != null && home.newFlashOfferList.length > 0
-                                ? SizedBox(
-                                    height: GetPlatform.isWeb ? 230 : 200,
-                                    child: ListView.builder(
-                                      itemCount: home.newFlashOfferList.length,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      padding: const EdgeInsets.symmetric(horizontal: 6),
-                                      itemBuilder: (context, index) {
-                                        return InkWell(
-                                          onTap: () async {
-                                            await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
-                                            Get.to(() => OfferDetailScreen(
-                                                  offer: home.offer,
-                                                  fromSeeMore: false,
-                                                ));
-                                          },
-                                          child: OfferWidget(
-                                            offer: home.newFlashOfferList[index],
-                                            fromList: false,
+                                ? Row(
+                                    children: [
+                                      global.getPlatFrom()
+                                          ? InkWell(
+                                              onTap: () => scrollController.animateTo(scrollController.initialScrollOffset, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                              child: Container(
+                                                width: 30,
+                                                height: 80,
+                                                margin: EdgeInsets.only(left: 5),
+                                                alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.rectangle,
+                                                  color: Get.theme.secondaryHeaderColor,
+                                                ),
+                                                child: Icon(
+                                                  Icons.arrow_back,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            )
+                                          : SizedBox(),
+                                      Expanded(
+                                        child: SizedBox(
+                                          height: global.getPlatFrom() ? 230 : 200,
+                                          child: ListView.builder(
+                                            itemCount: home.newFlashOfferList.length,
+                                            shrinkWrap: true,
+                                            controller: scrollController,
+                                            scrollDirection: Axis.horizontal,
+                                            physics: AlwaysScrollableScrollPhysics(),
+                                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                                            itemBuilder: (context, index) {
+                                              return InkWell(
+                                                onTap: () async {
+                                                  await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
+                                                  Get.to(() => OfferDetailScreen(
+                                                        offer: home.offer,
+                                                        fromSeeMore: false,
+                                                      ));
+                                                },
+                                                child: OfferWidget(
+                                                  offer: home.newFlashOfferList[index],
+                                                  fromList: false,
+                                                ),
+                                              );
+                                            },
                                           ),
-                                        );
-                                      },
-                                    ),
+                                        ),
+                                      ),
+                                      global.getPlatFrom()
+                                          ? InkWell(
+                                              onTap: () => scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                              child: Container(
+                                                width: 30,
+                                                height: 80,
+                                                margin: EdgeInsets.only(right: 5),
+                                                alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.rectangle,
+                                                  color: Get.theme.secondaryHeaderColor,
+                                                ),
+                                                child: Icon(
+                                                  Icons.arrow_forward,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            )
+                                          : SizedBox(),
+                                    ],
                                   )
                                 : SizedBox()
                             : SizedBox(
@@ -865,7 +980,7 @@ class HomeScreen extends StatelessWidget {
                                                 Text(
                                                   home1.homeAdvList[index].name.toUpperCase(),
                                                   style: TextStyle(
-                                                    fontSize: GetPlatform.isWeb ? 16 : 13,
+                                                    fontSize: global.getPlatFrom() ? 16 : 13,
                                                     fontWeight: FontWeight.w600,
                                                     color: Colors.black.withOpacity(0.79),
                                                     letterSpacing: -0.3,
@@ -881,43 +996,46 @@ class HomeScreen extends StatelessWidget {
                                                   },
                                                   child: Text(
                                                     '${AppLocalizations.of(context).view_all} >',
-                                                    style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: GetPlatform.isWeb ? 16 : null),
+                                                    style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: global.getPlatFrom() ? 16 : null),
                                                   ),
                                                 )
                                               ],
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: GetPlatform.isWeb ? 230 : 200,
-                                            child: ListView.builder(
-                                                itemCount: home1.homeAdvList[index].commonList.length,
-                                                shrinkWrap: true,
-                                                padding: const EdgeInsets.symmetric(horizontal: 6),
-                                                scrollDirection: Axis.horizontal,
-                                                itemBuilder: (context, i) {
-                                                  return InkWell(
-                                                    onTap: () async {
-                                                      if (home1.homeAdvList[index].commonList[i].adId != null && home1.homeAdvList[index].commonList[i].adId.isNotEmpty) {
-                                                        await home1.getAdDetails(home1.homeAdvList[index].commonList[i].adId);
-                                                        Get.to(() => AdsDetailScreen(
-                                                              ads: home1.ads,
-                                                              fromSeeMore: false,
-                                                            ));
-                                                      } else {
-                                                        await home1.getCampignDetails(home1.homeAdvList[index].commonList[i].campaignId.toString());
-                                                        Get.to(() => CampaignDetailScreen(
-                                                              campaign: home1.campaign,
-                                                              fromSeeMore: false,
-                                                            ));
-                                                      }
-                                                    },
-                                                    child: OfferWidget(
-                                                      commonModel: home1.homeAdvList[index].commonList[i],
-                                                      domainImage: home1.homeAdvList[index].image,
-                                                      fromList: false,
-                                                    ),
-                                                  );
-                                                }),
+                                          Padding(
+                                            padding: EdgeInsets.only(bottom: (global.getPlatFrom() && (home1.homeAdvList[index].commonList.length - 1) != null) ? 20 : 0),
+                                            child: SizedBox(
+                                              height: global.getPlatFrom() ? 230 : 200,
+                                              child: ListView.builder(
+                                                  itemCount: home1.homeAdvList[index].commonList.length,
+                                                  shrinkWrap: true,
+                                                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                                                  scrollDirection: Axis.horizontal,
+                                                  itemBuilder: (context, i) {
+                                                    return InkWell(
+                                                      onTap: () async {
+                                                        if (home1.homeAdvList[index].commonList[i].adId != null && home1.homeAdvList[index].commonList[i].adId.isNotEmpty) {
+                                                          await home1.getAdDetails(home1.homeAdvList[index].commonList[i].adId);
+                                                          Get.to(() => AdsDetailScreen(
+                                                                ads: home1.ads,
+                                                                fromSeeMore: false,
+                                                              ));
+                                                        } else {
+                                                          await home1.getCampignDetails(home1.homeAdvList[index].commonList[i].campaignId.toString());
+                                                          Get.to(() => CampaignDetailScreen(
+                                                                campaign: home1.campaign,
+                                                                fromSeeMore: false,
+                                                              ));
+                                                        }
+                                                      },
+                                                      child: OfferWidget(
+                                                        commonModel: home1.homeAdvList[index].commonList[i],
+                                                        domainImage: home1.homeAdvList[index].image,
+                                                        fromList: false,
+                                                      ),
+                                                    );
+                                                  }),
+                                            ),
                                           ),
                                         ],
                                       )
@@ -973,11 +1091,12 @@ class HomeScreen extends StatelessWidget {
                           },
                         );
                       }),
+                      global.getPlatFrom() ? WebFooterWidget() : SizedBox(),
                     ],
                   ),
                 ),
               ),
-              GetPlatform.isWeb ? SizedBox() : bannerImageWidget(),
+              global.getPlatFrom() ? SizedBox() : bannerImageWidget(),
             ],
           ),
         ),

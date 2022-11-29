@@ -86,7 +86,7 @@ class AuthController extends GetxController {
   Future sendOTP() async {
     try {
       otp.clear();
-      if (GetPlatform.isWeb) {
+      if (global.getPlatFrom()) {
         FirebaseAuth auth = FirebaseAuth.instance;
         Get.back();
         ConfirmationResult confirmationResult = await auth.signInWithPhoneNumber(coutryCode + contactNo.text);

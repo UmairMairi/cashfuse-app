@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 
 class AddBankAccountDialog extends StatelessWidget {
   final fName = new FocusNode();
@@ -30,7 +31,7 @@ class AddBankAccountDialog extends StatelessWidget {
     }
     return Container(
       height: 410,
-      width: GetPlatform.isWeb ? 400 : null,
+      width: global.getPlatFrom() ? 400 : null,
       padding: EdgeInsets.symmetric(vertical: 20),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -216,7 +217,7 @@ class AddBankAccountDialog extends StatelessWidget {
             child: Container(
               height: 45,
               width: Get.width / 3,
-              margin: GetPlatform.isWeb ? EdgeInsets.symmetric(horizontal: 15) : EdgeInsets.zero,
+              margin: global.getPlatFrom() ? EdgeInsets.symmetric(horizontal: 15) : EdgeInsets.zero,
               padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
               decoration: BoxDecoration(
                 color: Get.theme.secondaryHeaderColor,

@@ -703,7 +703,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () async {
-                          if (GetPlatform.isWeb) {
+                          if (global.getPlatFrom()) {
                             Get.dialog(Dialog(
                               child: SizedBox(
                                 width: Get.width / 3,

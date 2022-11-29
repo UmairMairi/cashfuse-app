@@ -17,6 +17,7 @@ import 'package:cashfuse/views/paymentScreen.dart';
 import 'package:cashfuse/views/privacyPolicyScreen.dart';
 import 'package:cashfuse/views/recentClicksScreen.dart';
 import 'package:cashfuse/views/referralNetworkScreen.dart';
+import 'package:cashfuse/views/searchScreen.dart';
 import 'package:cashfuse/widget/confirmationDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -81,6 +82,16 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       hintText: 'What do you want to buy today?',
                       border: InputBorder.none,
                     ),
+                    onTap: () {
+                      Get.dialog(
+                          Dialog(
+                            child: SizedBox(
+                              width: AppConstants.WEB_MAX_WIDTH,
+                              child: SearchScreen(),
+                            ),
+                          ),
+                          barrierDismissible: false);
+                    },
                     onFieldSubmitted: (text) {
                       //   _actionSearch(searchController, true);
                       //   showDialog(
@@ -129,8 +140,13 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        'My Account',
+                      child: Row(
+                        children: [
+                          Icon(Icons.person),
+                          Text(
+                            '  My Account',
+                          ),
+                        ],
                       ),
                     ),
                   )
@@ -150,6 +166,19 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       child: Text(AppLocalizations.of(context).login),
                     ),
                   ),
+            global.currentUser.id != null
+                ? InkWell(
+                    onTap: () {
+                      Get.to(() => MyEarningSceen());
+                    },
+                    child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Image.asset(
+                          Images.payments,
+                          height: 25,
+                        )),
+                  )
+                : SizedBox()
           ],
         ),
       ),

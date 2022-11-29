@@ -19,6 +19,7 @@ class MoreOfferScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
             ),
+            padding: global.getPlatFrom() ? EdgeInsets.only(bottom: 15) : EdgeInsets.zero,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,

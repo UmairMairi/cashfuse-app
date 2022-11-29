@@ -6,12 +6,13 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 
 class PaymentHistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GetPlatform.isWeb
+      appBar: global.getPlatFrom()
           ? WebTopBarWidget()
           : AppBar(
               elevation: 0,
@@ -35,7 +36,7 @@ class PaymentHistoryScreen extends StatelessWidget {
           child: GetBuilder<PaymentController>(builder: (controller) {
             return controller.isPaymentHistoryLoaded
                 ? controller.paymentHistoryList != null && controller.paymentHistoryList.length > 0
-                    ? GetPlatform.isWeb
+                    ? global.getPlatFrom()
                         ? Column(
                             children: [
                               Expanded(

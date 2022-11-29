@@ -21,7 +21,7 @@ class MyOrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GetPlatform.isWeb
+      appBar: global.getPlatFrom()
           ? WebTopBarWidget()
           : AppBar(
               elevation: 0,
@@ -44,7 +44,7 @@ class MyOrdersScreen extends StatelessWidget {
           child: GetBuilder<OrderController>(builder: (controller) {
             return orderController.isDataLoaded
                 ? orderController.orderList != null && orderController.orderList.length > 0
-                    ? GetPlatform.isWeb
+                    ? global.getPlatFrom()
                         ? Column(
                             children: [
                               Expanded(

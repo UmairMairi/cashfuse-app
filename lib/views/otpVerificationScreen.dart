@@ -2,6 +2,7 @@ import 'package:cashfuse/controllers/authController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OtpVerificationScreen extends StatelessWidget {
@@ -58,7 +59,7 @@ class OtpVerificationScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: GetPlatform.isWeb ? EdgeInsets.symmetric(horizontal: 30) : const EdgeInsets.only(top: 20, left: 20, bottom: 10, right: 20),
+                padding: global.getPlatFrom() ? EdgeInsets.symmetric(horizontal: 30) : const EdgeInsets.only(top: 20, left: 20, bottom: 10, right: 20),
                 child: SizedBox(
                   child: PinCodeTextField(
                     enablePinAutofill: true,

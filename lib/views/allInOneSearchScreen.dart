@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/models/allInOneSearchDataModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -9,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+
+import 'package:webviewx/webviewx.dart';
 
 class AllInOneSearchScreen extends StatefulWidget {
   final Color bgColor;
@@ -24,7 +26,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
   bool _isDataLoaded = false;
   bool _isWebLoaded = false;
 
-  WebViewController webViewController;
+  WebViewXController webViewController;
   TextEditingController _cSearch = new TextEditingController();
   var _fDismiss = new FocusNode();
   var searchNode = new FocusNode();
@@ -143,9 +145,9 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                         FocusScope.of(context).requestFocus(searchNode);
                         setState(() {});
                         if (_cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && searchController.addNewTabList2[_currentIndex].searchUrl != null && searchController.addNewTabList2[_currentIndex].searchUrl.isNotEmpty) {
-                          await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].searchUrl + _cSearch.text.trim()).then((value) {
-                            FocusScope.of(context).requestFocus(_fDismiss);
-                          });
+                          // await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].searchUrl + _cSearch.text.trim()).then((value) {
+                          //   FocusScope.of(context).requestFocus(_fDismiss);
+                          // });
                           _isWebLoaded = false;
                           setState(() {});
                         } else {}
@@ -160,9 +162,9 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                     contentPadding: EdgeInsets.only(left: 10),
                   ),
                   onFieldSubmitted: (String val) async {
-                    _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && searchController.addNewTabList2[_currentIndex].searchUrl != null && searchController.addNewTabList2[_currentIndex].searchUrl.isNotEmpty
-                        ? await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].searchUrl + _cSearch.text.trim())
-                        : await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].trackingUrl);
+                    // _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && searchController.addNewTabList2[_currentIndex].searchUrl != null && searchController.addNewTabList2[_currentIndex].searchUrl.isNotEmpty
+                    //     ? await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].searchUrl + _cSearch.text.trim())
+                    //     : await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].trackingUrl);
                     _isWebLoaded = false;
                     setState(() {});
                   },
@@ -175,28 +177,33 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
               //   ),
               // ],
             ),
-            body: Column(
-              children: [
-                _isDataLoaded
-                    ? searchController.addNewTabList2 != null && searchController.addNewTabList2.length > 0
-                        ? Expanded(
-                            child: SizedBox(
-                              child: tabCreate(),
-                            ),
-                          )
+            body: Center(
+              child: SizedBox(
+                width: AppConstants.WEB_MAX_WIDTH,
+                child: Column(
+                  children: [
+                    _isDataLoaded
+                        ? searchController.addNewTabList2 != null && searchController.addNewTabList2.length > 0
+                            ? Expanded(
+                                child: SizedBox(
+                                  child: tabCreate(),
+                                ),
+                              )
+                            : Expanded(
+                                child: Center(
+                                  child: Text(
+                                    'No data found.',
+                                  ),
+                                ),
+                              )
                         : Expanded(
                             child: Center(
-                              child: Text(
-                                'No data found.',
-                              ),
+                              child: CircularProgressIndicator(),
                             ),
-                          )
-                    : Expanded(
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      ),
-              ],
+                          ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
@@ -513,10 +520,11 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                     alignment: Alignment.center,
                     children: [
                       searchController.addNewTabList2[index].searchUrl != null && searchController.addNewTabList2[index].searchUrl.isNotEmpty && _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty
-                          ? WebView(
-                              initialUrl: searchController.addNewTabList2[index].searchUrl + _cSearch.text.trim(),
-                              javascriptMode: JavascriptMode.unrestricted,
-                              allowsInlineMediaPlayback: true,
+                          ? WebViewX(
+                              width: 500,
+                              height: 500,
+                              initialContent: searchController.addNewTabList2[index].searchUrl + _cSearch.text.trim(),
+                              //javascriptMode: JavascriptMode.unrestricted,
                               onWebViewCreated: (controller) {
                                 webViewController = controller;
                                 setState(() {});
@@ -524,28 +532,34 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                               onWebResourceError: (error) {
                                 showCustomSnackBar(error.description);
                               },
-                              onProgress: (_) {
-                                setState(() {});
-                              },
+                              // onProgress: (_) {
+                              //   setState(() {});
+                              // },
                               onPageFinished: (val) {
                                 _isWebLoaded = true;
                                 setState(() {});
                               },
                             )
-                          : WebView(
-                              initialUrl: searchController.addNewTabList2[index].trackingUrl,
+                          : WebViewX(
+                              width: 500,
+                              height: 500,
                               javascriptMode: JavascriptMode.unrestricted,
-                              allowsInlineMediaPlayback: true,
-                              onWebViewCreated: (controller) {
-                                webViewController = controller;
-                                setState(() {});
-                              },
+                              initialSourceType: SourceType.url,
+                              initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.alwaysAllow,
+
+                              initialContent: searchController.addNewTabList2[index].trackingUrl,
+                              // javascriptMode: JavascriptMode.unrestricted,
+                              // allowsInlineMediaPlayback: true,
+                              // onWebViewCreated: (controller) {
+                              //   webViewController = controller;
+                              //   setState(() {});
+                              // },
                               onWebResourceError: (error) {
                                 showCustomSnackBar(error.description);
                               },
-                              onProgress: (_) {
-                                setState(() {});
-                              },
+                              // onProgress: (_) {
+                              //   setState(() {});
+                              // },
                               onPageFinished: (val) {
                                 _isWebLoaded = true;
                                 setState(() {});

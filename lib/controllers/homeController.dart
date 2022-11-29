@@ -17,7 +17,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 
 class HomeController extends GetxController {
   APIHelper apiHelper = new APIHelper();
-  NetworkController networkController = Get.find<NetworkController>();
+  NetworkController networkController = Get.put(NetworkController());
   List<CategoryModel> _topCategoryList = [];
   List<CategoryModel> get topCategoryList => _topCategoryList;
 
@@ -89,6 +89,7 @@ class HomeController extends GetxController {
     try {
       await getHomeAdv();
       await getTopBanners();
+
       await getTopCategories();
       await getTopCashBack(page);
 

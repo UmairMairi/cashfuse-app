@@ -30,7 +30,7 @@ class AccountSettingScreen extends StatelessWidget {
       return GetBuilder<ImageControlller>(builder: (imageControlller) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
-          appBar: GetPlatform.isWeb
+          appBar: global.getPlatFrom()
               ? WebTopBarWidget()
               : AppBar(
                   elevation: 0,
@@ -49,8 +49,8 @@ class AccountSettingScreen extends StatelessWidget {
                 ),
           body: Center(
             child: Container(
-              color: GetPlatform.isWeb ? Colors.white : Colors.transparent,
-              width: GetPlatform.isWeb ? AppConstants.WEB_MAX_WIDTH / 2 : AppConstants.WEB_MAX_WIDTH,
+              color: global.getPlatFrom() ? Colors.white : Colors.transparent,
+              width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 2 : AppConstants.WEB_MAX_WIDTH,
               child: Column(
                 children: [
                   // Container(
@@ -450,7 +450,7 @@ class AccountSettingScreen extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     height: 40,
-                    width: GetPlatform.isWeb ? AppConstants.WEB_MAX_WIDTH / 2 : Get.width,
+                    width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 2 : Get.width,
                     decoration: BoxDecoration(
                       color: Get.theme.secondaryHeaderColor,
                       borderRadius: BorderRadius.only(

@@ -17,8 +17,8 @@ class MyEarningSceen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: GetPlatform.isWeb ? Colors.white : Colors.grey[200],
-      appBar: GetPlatform.isWeb
+      backgroundColor: global.getPlatFrom() ? Colors.white : Colors.grey[200],
+      appBar: global.getPlatFrom()
           ? WebTopBarWidget()
           : AppBar(
               elevation: 0,
@@ -41,7 +41,7 @@ class MyEarningSceen extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               Container(
-                height: GetPlatform.isWeb ? 120 : 80,
+                height: global.getPlatFrom() ? 120 : 80,
                 width: Get.width,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(

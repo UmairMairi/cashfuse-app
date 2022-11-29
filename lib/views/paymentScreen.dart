@@ -12,7 +12,7 @@ class PaymentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GetPlatform.isWeb
+      appBar: global.getPlatFrom()
           ? WebTopBarWidget()
           : AppBar(
               elevation: 0,
@@ -35,7 +35,7 @@ class PaymentScreen extends StatelessWidget {
           width: AppConstants.WEB_MAX_WIDTH,
           child: GetBuilder<PaymentController>(builder: (controller) {
             return global.currentUser.withdrawalRequest.length > 0
-                ? GetPlatform.isWeb
+                ? global.getPlatFrom()
                     ? Column(
                         children: [
                           Expanded(

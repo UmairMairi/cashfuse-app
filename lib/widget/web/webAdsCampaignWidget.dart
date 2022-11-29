@@ -54,13 +54,17 @@ class WebAdsCampaignWidget extends StatelessWidget {
                   ),
                 )
               : SizedBox(),
-          SizedBox(
-            height: 20,
-          ),
+          // SizedBox(
+          //   height: 20,
+          // ),
           CustomImage(
             image: commonModel.image,
             //height: 32,
-            height: fromWebHome ? 100 : 150,
+            height: fromWebHome
+                ? commonModel.tagline != null && commonModel.tagline.isNotEmpty
+                    ? 80
+                    : 100
+                : 150,
 
             //width: 100,
             fit: BoxFit.contain,
@@ -77,7 +81,7 @@ class WebAdsCampaignWidget extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 15),
+            margin: EdgeInsets.only(top: 15, bottom: 5),
             padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
             decoration: BoxDecoration(
               color: Get.theme.secondaryHeaderColor,

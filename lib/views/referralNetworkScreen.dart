@@ -21,7 +21,7 @@ class ReferralNetworkScreen extends StatelessWidget {
     return GetBuilder<ReferEarnController>(builder: (controller) {
       return Scaffold(
         backgroundColor: Colors.white,
-        appBar: GetPlatform.isWeb
+        appBar: global.getPlatFrom()
             ? WebTopBarWidget()
             : AppBar(
                 elevation: 0,
@@ -55,10 +55,10 @@ class ReferralNetworkScreen extends StatelessWidget {
                 Container(
                   width: Get.width,
                   color: Color(0xFF1A8FB9),
-                  height: GetPlatform.isWeb ? 160 : 140,
+                  height: global.getPlatFrom() ? 160 : 140,
                   alignment: Alignment.center,
                   child: SizedBox(
-                    width: GetPlatform.isWeb ? AppConstants.WEB_MAX_WIDTH / 2 : Get.width,
+                    width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 2 : Get.width,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -142,7 +142,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                 Expanded(
                   child: referEarnController.isDataLoaded
                       ? referEarnController.referralUserList != null && referEarnController.referralUserList.length > 0
-                          ? GetPlatform.isWeb
+                          ? global.getPlatFrom()
                               ? Container(
                                   color: Colors.white,
                                   child: GridView.builder(

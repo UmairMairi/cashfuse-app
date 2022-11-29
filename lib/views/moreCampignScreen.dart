@@ -60,8 +60,8 @@ class MoreCampignScreen extends StatelessWidget {
                           children: [
                             CustomImage(
                               image: '${global.appInfo.baseUrls.offerImageUrl}/${homeController.seeMoreCampaignList[index].image}',
-                              height: GetPlatform.isWeb ? 50 : 50,
-                              width: GetPlatform.isWeb ? 100 : 50,
+                              height: global.getPlatFrom() ? 50 : 50,
+                              width: global.getPlatFrom() ? 100 : 50,
                               fit: BoxFit.fill,
                             ),
                             Padding(

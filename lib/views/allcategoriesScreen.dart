@@ -27,7 +27,7 @@ class AllCategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     paginateTask();
     return Scaffold(
-      appBar: GetPlatform.isWeb
+      appBar: global.getPlatFrom()
           ? WebTopBarWidget()
           : AppBar(
               elevation: 0,
@@ -51,7 +51,7 @@ class AllCategoriesScreen extends StatelessWidget {
             return GridView.builder(
               controller: controller.scrollController,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: GetPlatform.isWeb ? 6 : 3,
+                crossAxisCount: global.getPlatFrom() ? 6 : 3,
                 crossAxisSpacing: 15.0,
                 mainAxisSpacing: 15.0,
               ),
@@ -84,17 +84,17 @@ class AllCategoriesScreen extends StatelessWidget {
                                 controller.topCategoryList[index].name.toUpperCase(),
                                 textAlign: TextAlign.center,
                                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                  fontSize: GetPlatform.isWeb ? 16 : 10,
+                                  fontSize: global.getPlatFrom() ? 16 : 10,
                                   fontWeight: FontWeight.w500,
                                   color: index == 0 ? Colors.white : Colors.black,
                                 ),
                               ),
                               SizedBox(
-                                height: GetPlatform.isWeb ? 15 : 5,
+                                height: global.getPlatFrom() ? 15 : 5,
                               ),
                               CustomImage(
                                 image: '${global.appInfo.baseUrls.categoryImageUrl}/${controller.topCategoryList[index].image}',
-                                height: GetPlatform.isWeb ? 80 : 40,
+                                height: global.getPlatFrom() ? 80 : 40,
                               ),
                             ],
                           ),

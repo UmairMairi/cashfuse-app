@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 
 class OrderComplaintScreen extends StatelessWidget {
   bool isSHow = false;
@@ -24,7 +25,7 @@ class OrderComplaintScreen extends StatelessWidget {
     return GetBuilder<OrderController>(builder: (controller) {
       return SafeArea(
         child: Scaffold(
-          appBar: GetPlatform.isWeb
+          appBar: global.getPlatFrom()
               ? WebTopBarWidget()
               : AppBar(
                   leading: InkWell(
@@ -50,7 +51,7 @@ class OrderComplaintScreen extends StatelessWidget {
             },
           ),
           body: orderController.complainList != null && orderController.complainList.length > 0
-              ? GetPlatform.isWeb
+              ? global.getPlatFrom()
                   ? Align(
                       alignment: Alignment.topCenter,
                       child: SizedBox(
@@ -138,9 +139,21 @@ class OrderComplaintScreen extends StatelessWidget {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      Get.to(() => AddComplaintSceen(
-                                            orderModel: orderModel,
-                                          ));
+                                      if (global.getPlatFrom()) {
+                                        Get.dialog(Dialog(
+                                          child: SizedBox(
+                                            width: 500,
+                                            height: 500,
+                                            child: AddComplaintSceen(
+                                              orderModel: orderModel,
+                                            ),
+                                          ),
+                                        ));
+                                      } else {
+                                        Get.to(() => AddComplaintSceen(
+                                              orderModel: orderModel,
+                                            ));
+                                      }
                                     },
                                     child: CircleAvatar(
                                       radius: 30,
@@ -148,9 +161,21 @@ class OrderComplaintScreen extends StatelessWidget {
                                       child: orderController.complainList != null && orderController.complainList.length > 0
                                           ? InkWell(
                                               onTap: () {
-                                                Get.to(() => AddComplaintSceen(
-                                                      orderModel: orderModel,
-                                                    ));
+                                                if (global.getPlatFrom()) {
+                                                  Get.dialog(Dialog(
+                                                    child: SizedBox(
+                                                      width: 500,
+                                                      height: 500,
+                                                      child: AddComplaintSceen(
+                                                        orderModel: orderModel,
+                                                      ),
+                                                    ),
+                                                  ));
+                                                } else {
+                                                  Get.to(() => AddComplaintSceen(
+                                                        orderModel: orderModel,
+                                                      ));
+                                                }
                                               },
                                               child: Icon(
                                                 Icons.add,
@@ -267,9 +292,21 @@ class OrderComplaintScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(() => AddComplaintSceen(
-                                orderModel: orderModel,
-                              ));
+                          if (global.getPlatFrom()) {
+                            Get.dialog(Dialog(
+                              child: SizedBox(
+                                width: 500,
+                                height: 500,
+                                child: AddComplaintSceen(
+                                  orderModel: orderModel,
+                                ),
+                              ),
+                            ));
+                          } else {
+                            Get.to(() => AddComplaintSceen(
+                                  orderModel: orderModel,
+                                ));
+                          }
                         },
                         child: Container(
                           height: 40,
@@ -288,12 +325,24 @@ class OrderComplaintScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-          bottomNavigationBar: !GetPlatform.isWeb && orderController.complainList != null && orderController.complainList.length > 0
+          bottomNavigationBar: !global.getPlatFrom() && orderController.complainList != null && orderController.complainList.length > 0
               ? InkWell(
                   onTap: () {
-                    Get.to(() => AddComplaintSceen(
-                          orderModel: orderModel,
-                        ));
+                    if (global.getPlatFrom()) {
+                      Get.dialog(Dialog(
+                        child: SizedBox(
+                          width: 500,
+                          height: 500,
+                          child: AddComplaintSceen(
+                            orderModel: orderModel,
+                          ),
+                        ),
+                      ));
+                    } else {
+                      Get.to(() => AddComplaintSceen(
+                            orderModel: orderModel,
+                          ));
+                    }
                   },
                   child: Container(
                     height: 50,

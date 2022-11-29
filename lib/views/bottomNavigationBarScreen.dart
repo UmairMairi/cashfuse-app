@@ -12,7 +12,7 @@ import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 
 class BottomNavigationBarScreen extends StatefulWidget {
   int pageIndex;
@@ -22,7 +22,7 @@ class BottomNavigationBarScreen extends StatefulWidget {
 }
 
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
-  bool _canExit = GetPlatform.isWeb ? true : false;
+  bool _canExit = global.getPlatFrom() ? true : false;
   int bottomNavIndex;
 
   CircularBottomNavigationController navigationController;
@@ -132,7 +132,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
             statusBarColor: colorList[bottomNavIndex],
           ),
         ),
-        bottomNavigationBar: GetPlatform.isWeb
+        bottomNavigationBar: global.getPlatFrom()
             ? SizedBox()
             : Container(
                 color: Colors.grey[200],

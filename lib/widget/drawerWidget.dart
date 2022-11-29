@@ -20,11 +20,11 @@ class DrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      width: GetPlatform.isWeb ? Get.width / 5 : Get.width - 80,
+      width: global.getPlatFrom() ? Get.width / 5 : Get.width - 80,
       child: global.currentUser.id != null
           ? Column(
               children: [
-                GetPlatform.isWeb
+                global.getPlatFrom()
                     ? Container(
                         padding: EdgeInsets.only(top: 30, left: 10, right: 10),
                         color: Get.theme.primaryColor,
@@ -395,8 +395,8 @@ class DrawerWidget extends StatelessWidget {
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: GetPlatform.isWeb ? 25 : 20,
-                      vertical: GetPlatform.isWeb ? 20 : 10,
+                      horizontal: global.getPlatFrom() ? 25 : 20,
+                      vertical: global.getPlatFrom() ? 20 : 10,
                     ),
                     child: Row(
                       children: [
@@ -426,8 +426,8 @@ class DrawerWidget extends StatelessWidget {
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: GetPlatform.isWeb ? 25 : 20,
-                      vertical: GetPlatform.isWeb ? 20 : 10,
+                      horizontal: global.getPlatFrom() ? 25 : 20,
+                      vertical: global.getPlatFrom() ? 20 : 10,
                     ),
                     child: Row(
                       children: [
@@ -457,8 +457,8 @@ class DrawerWidget extends StatelessWidget {
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: GetPlatform.isWeb ? 25 : 20,
-                      vertical: GetPlatform.isWeb ? 20 : 10,
+                      horizontal: global.getPlatFrom() ? 25 : 20,
+                      vertical: global.getPlatFrom() ? 20 : 10,
                     ),
                     child: Row(
                       children: [
@@ -488,8 +488,8 @@ class DrawerWidget extends StatelessWidget {
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: GetPlatform.isWeb ? 25 : 20,
-                      vertical: GetPlatform.isWeb ? 20 : 10,
+                      horizontal: global.getPlatFrom() ? 25 : 20,
+                      vertical: global.getPlatFrom() ? 20 : 10,
                     ),
                     child: Row(
                       children: [
@@ -522,8 +522,8 @@ class DrawerWidget extends StatelessWidget {
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: GetPlatform.isWeb ? 25 : 20,
-                      vertical: GetPlatform.isWeb ? 20 : 10,
+                      horizontal: global.getPlatFrom() ? 25 : 20,
+                      vertical: global.getPlatFrom() ? 20 : 10,
                     ),
                     child: Row(
                       children: [
@@ -547,7 +547,7 @@ class DrawerWidget extends StatelessWidget {
                   ),
                 ),
                 Divider(),
-                !GetPlatform.isWeb
+                !global.getPlatFrom()
                     ? InkWell(
                         onTap: () async {
                           Get.back();
@@ -564,8 +564,8 @@ class DrawerWidget extends StatelessWidget {
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: GetPlatform.isWeb ? 25 : 20,
-                            vertical: GetPlatform.isWeb ? 20 : 10,
+                            horizontal: global.getPlatFrom() ? 25 : 20,
+                            vertical: global.getPlatFrom() ? 20 : 10,
                           ),
                           child: Row(
                             children: [
@@ -589,7 +589,7 @@ class DrawerWidget extends StatelessWidget {
                         ),
                       )
                     : SizedBox(),
-                !GetPlatform.isWeb
+                !global.getPlatFrom()
                     ? InkWell(
                         onTap: () {
                           Get.back();
@@ -599,8 +599,8 @@ class DrawerWidget extends StatelessWidget {
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: GetPlatform.isWeb ? 25 : 20,
-                            vertical: GetPlatform.isWeb ? 20 : 10,
+                            horizontal: global.getPlatFrom() ? 25 : 20,
+                            vertical: global.getPlatFrom() ? 20 : 10,
                           ),
                           child: Row(
                             children: [
@@ -631,8 +631,8 @@ class DrawerWidget extends StatelessWidget {
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: GetPlatform.isWeb ? 25 : 20,
-                      vertical: GetPlatform.isWeb ? 20 : 10,
+                      horizontal: global.getPlatFrom() ? 25 : 20,
+                      vertical: global.getPlatFrom() ? 20 : 10,
                     ),
                     child: Row(
                       children: [
@@ -684,7 +684,7 @@ class DrawerWidget extends StatelessWidget {
                 InkWell(
                   onTap: () async {
                     Get.back();
-                    if (GetPlatform.isWeb) {
+                    if (global.getPlatFrom()) {
                       Get.dialog(Dialog(
                         child: SizedBox(
                           width: Get.width / 3,
@@ -694,7 +694,7 @@ class DrawerWidget extends StatelessWidget {
                         ),
                       ));
                     } else {
-                      if (GetPlatform.isWeb) {
+                      if (global.getPlatFrom()) {
                         Get.dialog(Dialog(
                           child: SizedBox(
                             width: Get.width / 3,

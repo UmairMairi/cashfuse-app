@@ -16,7 +16,7 @@ class GetHelpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: GetPlatform.isWeb
+      appBar: global.getPlatFrom()
           ? WebTopBarWidget()
           : AppBar(
               leading: InkWell(
@@ -84,7 +84,7 @@ class GetHelpScreen extends StatelessWidget {
                       ? controller.faqList != null && controller.faqList.length > 0
                           ? GridView.builder(
                               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: GetPlatform.isWeb ? 5 : 2,
+                                crossAxisCount: global.getPlatFrom() ? 5 : 2,
                                 crossAxisSpacing: 15.0,
                                 mainAxisSpacing: 15.0,
                                 childAspectRatio: 1.3,
@@ -112,7 +112,7 @@ class GetHelpScreen extends StatelessWidget {
                                       children: [
                                         CustomImage(
                                           image: '${global.appInfo.baseUrls.faqImageUrl}/${controller.faqList[index].image}',
-                                          height: GetPlatform.isWeb ? 80 : 40,
+                                          height: global.getPlatFrom() ? 80 : 40,
                                           //width: Get.width,
                                           fit: BoxFit.contain,
                                         ),
@@ -156,7 +156,7 @@ class GetHelpScreen extends StatelessWidget {
                                         Text(
                                           controller.faqList[index].ques,
                                           textAlign: TextAlign.center,
-                                          style: GetPlatform.isWeb ? Get.theme.primaryTextTheme.subtitle1 : Get.theme.primaryTextTheme.subtitle2,
+                                          style: global.getPlatFrom() ? Get.theme.primaryTextTheme.subtitle1 : Get.theme.primaryTextTheme.subtitle2,
                                         ),
                                       ],
                                     ),

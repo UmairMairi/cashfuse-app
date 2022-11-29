@@ -6,6 +6,7 @@ import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 
 class PayPalRedeemScreen extends StatelessWidget {
   final fPayPalId = new FocusNode();
@@ -87,7 +88,7 @@ class PayPalRedeemScreen extends StatelessWidget {
                                 Dialog(
                                   child: Container(
                                     height: 210,
-                                    width: GetPlatform.isWeb ? 400 : null,
+                                    width: global.getPlatFrom() ? 400 : null,
                                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
