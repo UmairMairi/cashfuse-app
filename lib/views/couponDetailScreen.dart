@@ -19,13 +19,17 @@ class CouponDetailScreen extends StatelessWidget {
   final Coupon coupon;
   CouponDetailScreen({this.coupon});
   HomeController homeController = Get.find<HomeController>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (controller) {
       return Scaffold(
+        key: scaffoldKey,
         appBar: global.getPlatFrom()
-            ? WebTopBarWidget()
+            ? WebTopBarWidget(
+                scaffoldKey: scaffoldKey,
+              )
             : AppBar(
                 elevation: 0,
                 backgroundColor: Get.theme.primaryColor,

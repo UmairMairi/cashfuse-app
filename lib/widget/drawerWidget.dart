@@ -481,37 +481,37 @@ class DrawerWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    Get.back();
-                    Get.to(() => AllInOneSearchScreen());
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: global.getPlatFrom() ? 25 : 20,
-                      vertical: global.getPlatFrom() ? 20 : 10,
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.search_rounded,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          AppLocalizations.of(context).all_in_one_search,
-                          style: Get.theme.primaryTextTheme.bodyText1.copyWith(
-                            letterSpacing: 0,
-                            fontWeight: FontWeight.w300,
-                            color: Colors.black.withOpacity(0.6),
+                 InkWell(
+                        onTap: () {
+                          Get.back();
+                          Get.to(() => AllInOneSearchScreen());
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: global.getPlatFrom() ? 25 : 20,
+                            vertical: global.getPlatFrom() ? 20 : 10,
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.search_rounded,
+                                color: Colors.black.withOpacity(0.5),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                AppLocalizations.of(context).all_in_one_search,
+                                style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                                  letterSpacing: 0,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.black.withOpacity(0.6),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
+                      ),
 
                 InkWell(
                   onTap: () {

@@ -1,6 +1,8 @@
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/views/loginOrSignUpScreen.dart';
+import 'package:cashfuse/views/offerDetailScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,7 +36,40 @@ class WebBannerView extends StatelessWidget {
                         return Row(
                           children: [
                             InkWell(
-                              onTap: () => {},
+                              onTap: () async {
+                                if (homeController.topBannerList[index * 3].type == 'url') {
+                                  if (global.currentUser.id != null) {
+                                    // Get.to(
+                                    //   () => WebViewScreen(
+                                    //     urlString: homeController.topBannerList[index].url,
+                                    //     brandName: homeController.topBannerList[index].name,
+                                    //   ),
+                                    // );
+                                    global.launchInBrowser(
+                                      homeController.topBannerList[index * 3].url,
+                                    );
+                                  } else {
+                                    Get.dialog(Dialog(
+                                      child: SizedBox(
+                                        width: Get.width / 3,
+                                        child: LoginOrSignUpScreen(
+                                          fromMenu: true,
+                                        ),
+                                      ),
+                                    ));
+                                  }
+                                } else {
+                                  await homeController.getOfferDetails(
+                                    homeController.topBannerList[index * 3].offerId.toString(),
+                                  );
+                                  Get.to(
+                                    () => OfferDetailScreen(
+                                      offer: homeController.offer,
+                                      fromSeeMore: false,
+                                    ),
+                                  );
+                                }
+                              },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: CustomImage(
@@ -49,7 +84,40 @@ class WebBannerView extends StatelessWidget {
                                 ? Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 10),
                                     child: InkWell(
-                                      onTap: () => {},
+                                      onTap: () async {
+                                        if (homeController.topBannerList[(index * 3) + 1].type == 'url') {
+                                          if (global.currentUser.id != null) {
+                                            // Get.to(
+                                            //   () => WebViewScreen(
+                                            //     urlString: homeController.topBannerList[index].url,
+                                            //     brandName: homeController.topBannerList[index].name,
+                                            //   ),
+                                            // );
+                                            global.launchInBrowser(
+                                              homeController.topBannerList[(index * 3) + 1].url,
+                                            );
+                                          } else {
+                                            Get.dialog(Dialog(
+                                              child: SizedBox(
+                                                width: Get.width / 3,
+                                                child: LoginOrSignUpScreen(
+                                                  fromMenu: true,
+                                                ),
+                                              ),
+                                            ));
+                                          }
+                                        } else {
+                                          await homeController.getOfferDetails(
+                                            homeController.topBannerList[(index * 3) + 1].offerId.toString(),
+                                          );
+                                          Get.to(
+                                            () => OfferDetailScreen(
+                                              offer: homeController.offer,
+                                              fromSeeMore: false,
+                                            ),
+                                          );
+                                        }
+                                      },
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
                                         child: CustomImage(
@@ -64,7 +132,40 @@ class WebBannerView extends StatelessWidget {
                                 : SizedBox(),
                             ((index * 3) + 2) < homeController.topBannerList.length
                                 ? InkWell(
-                                    onTap: () => {},
+                                    onTap: () async {
+                                      if (homeController.topBannerList[(index * 3) + 2].type == 'url') {
+                                        if (global.currentUser.id != null) {
+                                          // Get.to(
+                                          //   () => WebViewScreen(
+                                          //     urlString: homeController.topBannerList[index].url,
+                                          //     brandName: homeController.topBannerList[index].name,
+                                          //   ),
+                                          // );
+                                          global.launchInBrowser(
+                                            homeController.topBannerList[(index * 3) + 2].url,
+                                          );
+                                        } else {
+                                          Get.dialog(Dialog(
+                                            child: SizedBox(
+                                              width: Get.width / 3,
+                                              child: LoginOrSignUpScreen(
+                                                fromMenu: true,
+                                              ),
+                                            ),
+                                          ));
+                                        }
+                                      } else {
+                                        await homeController.getOfferDetails(
+                                          homeController.topBannerList[(index * 3) + 2].offerId.toString(),
+                                        );
+                                        Get.to(
+                                          () => OfferDetailScreen(
+                                            offer: homeController.offer,
+                                            fromSeeMore: false,
+                                          ),
+                                        );
+                                      }
+                                    },
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
                                       child: CustomImage(

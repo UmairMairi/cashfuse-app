@@ -5,6 +5,7 @@ import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/myOrdersScreen.dart';
 import 'package:cashfuse/views/requestPaymentScreen.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
@@ -14,12 +15,17 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyEarningSceen extends StatelessWidget {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: global.getPlatFrom() ? Colors.white : Colors.grey[200],
+      drawer: global.getPlatFrom() ? DrawerWidget() : null,
       appBar: global.getPlatFrom()
-          ? WebTopBarWidget()
+          ? WebTopBarWidget(
+              scaffoldKey: scaffoldKey,
+            )
           : AppBar(
               elevation: 0,
               leading: InkWell(

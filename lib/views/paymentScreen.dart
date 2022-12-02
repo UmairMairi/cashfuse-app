@@ -2,6 +2,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/date_converter.dart';
 import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,11 +10,16 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaymentScreen extends StatelessWidget {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
+      drawer: global.getPlatFrom() ? DrawerWidget() : null,
       appBar: global.getPlatFrom()
-          ? WebTopBarWidget()
+          ? WebTopBarWidget(
+              scaffoldKey: scaffoldKey,
+            )
           : AppBar(
               elevation: 0,
               leading: InkWell(

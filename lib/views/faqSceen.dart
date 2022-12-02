@@ -2,6 +2,7 @@
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/views/helpDetailSceen.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,13 +15,18 @@ import 'package:cashfuse/utils/global.dart' as global;
 class FaqScreen extends StatelessWidget {
   CommonController commonController = Get.find<CommonController>();
   final fSeachNode = new FocusNode();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CommonController>(builder: (controller) {
       return Scaffold(
+        key: scaffoldKey,
+        drawer: global.getPlatFrom() ? DrawerWidget() : null,
         appBar: global.getPlatFrom()
-            ? WebTopBarWidget()
+            ? WebTopBarWidget(
+                scaffoldKey: scaffoldKey,
+              )
             : AppBar(
                 elevation: 0,
                 leading: InkWell(

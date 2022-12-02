@@ -7,12 +7,14 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/moreCampignScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:customizable_space_bar/customizable_space_bar.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 
 class CampaignDetailScreen extends StatelessWidget {
@@ -20,13 +22,20 @@ class CampaignDetailScreen extends StatelessWidget {
   final bool fromSeeMore;
   CampaignDetailScreen({this.campaign, this.fromSeeMore});
   HomeController homeController = Get.find<HomeController>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (homeController1) {
       return SafeArea(
         child: Scaffold(
-          appBar: global.getPlatFrom() ? WebTopBarWidget() : null,
+          key: scaffoldKey,
+          drawer: global.getPlatFrom() ? DrawerWidget() : null,
+          appBar: global.getPlatFrom()
+              ? WebTopBarWidget(
+                  scaffoldKey: scaffoldKey,
+                )
+              : null,
           body: Center(
             child: SizedBox(
               width: AppConstants.WEB_MAX_WIDTH,
@@ -208,9 +217,9 @@ class CampaignDetailScreen extends StatelessWidget {
                               SizedBox(
                                 height: 15,
                               ),
-                              Text(
+                              HtmlWidget(
                                 campaign.description,
-                                textAlign: TextAlign.center,
+                                //textAlign: TextAlign.center,
                               ),
                               // Text(
                               //   offer.terms,

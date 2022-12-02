@@ -132,81 +132,52 @@ class HomeScreen extends StatelessWidget {
                 )
               ],
             ),
-      floatingActionButton: Stack(
-        alignment: Alignment.bottomRight,
-        clipBehavior: Clip.none,
-        children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              InkWell(
-                  onTap: () async {
-                    if (global.currentUser.id != null) {
-                      Get.to(() => ReferEarnScreen());
-                    } else {
-                      if (global.getPlatFrom()) {
-                        Get.dialog(Dialog(
-                          child: SizedBox(
-                            width: Get.width / 3,
-                            child: LoginOrSignUpScreen(
-                              fromMenu: true,
-                            ),
+      floatingActionButton: GetBuilder<SplashController>(builder: (splash) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InkWell(
+                onTap: () async {
+                  if (global.currentUser.id != null) {
+                    Get.to(() => ReferEarnScreen());
+                  } else {
+                    if (global.getPlatFrom()) {
+                      Get.dialog(Dialog(
+                        child: SizedBox(
+                          width: Get.width / 3,
+                          child: LoginOrSignUpScreen(
+                            fromMenu: true,
                           ),
-                        ));
-                      } else {
-                        Get.to(() => LoginOrSignUpScreen(
-                              fromMenu: true,
-                            ));
-                      }
+                        ),
+                      ));
+                    } else {
+                      Get.to(() => LoginOrSignUpScreen(
+                            fromMenu: true,
+                          ));
                     }
-                  },
-                  child: ImageRotate()
-                  // Image.asset(
-                  //   Images.refer,
-                  //   height: 50,
-                  // ),
-                  ),
-              SizedBox(
-                height: 10,
-              ),
-              InkWell(
-                onTap: () {
-                  Get.to(() => GetHelpScreen());
+                  }
                 },
-                child: Image.asset(
-                  Images.gethelp,
-                  height: 50,
+                child: ImageRotate()
+                // Image.asset(
+                //   Images.refer,
+                //   height: 50,
+                // ),
                 ),
+            SizedBox(
+              height: 10,
+            ),
+            InkWell(
+              onTap: () {
+                Get.to(() => GetHelpScreen());
+              },
+              child: Image.asset(
+                Images.gethelp,
+                height: 50,
               ),
-            ],
-          ),
-          // CustomImage(
-          //   image: global.appInfo.baseUrls.notificationBannerImageUrl + '/' + global.bannerImage,
-          //   fit: BoxFit.contain,
-          //   height: 500,
-          //   //width: 600,
-          // ),
-          // Positioned(
-          //   top: 60,
-          //   right: -7,
-          //   child: InkWell(
-          //     onTap: () async {
-          //       //Get.back();
-          //       await splashController.bannerShow();
-          //     },
-          //     child: CircleAvatar(
-          //       radius: 15,
-          //       child: Icon(
-          //         Icons.close,
-          //         color: Colors.black,
-          //         size: 20,
-          //       ),
-          //       backgroundColor: Colors.grey[400],
-          //     ),
-          //   ),
-          // ),
-        ],
-      ),
+            ),
+          ],
+        );
+      }),
       body: Center(
         child: SizedBox(
           width: AppConstants.WEB_MAX_WIDTH,
@@ -1096,7 +1067,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              global.getPlatFrom() ? SizedBox() : bannerImageWidget(),
+              bannerImageWidget(),
             ],
           ),
         ),

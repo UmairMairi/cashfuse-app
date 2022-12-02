@@ -8,6 +8,7 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/faqSceen.dart';
 import 'package:cashfuse/views/referEarnScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -16,13 +17,18 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 
 class ReferralNetworkScreen extends StatelessWidget {
   ReferEarnController referEarnController = Get.find<ReferEarnController>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ReferEarnController>(builder: (controller) {
       return Scaffold(
+        key: scaffoldKey,
+        drawer: global.getPlatFrom() ? DrawerWidget() : null,
         backgroundColor: Colors.white,
         appBar: global.getPlatFrom()
-            ? WebTopBarWidget()
+            ? WebTopBarWidget(
+                scaffoldKey: scaffoldKey,
+              )
             : AppBar(
                 elevation: 0,
                 leading: InkWell(

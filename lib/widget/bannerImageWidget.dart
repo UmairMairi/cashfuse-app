@@ -1,3 +1,4 @@
+import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/splashController.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,7 @@ SplashController splashController = Get.find<SplashController>();
 
 Widget bannerImageWidget() {
   return GetBuilder<SplashController>(builder: (splash) {
-    return !global.isBannerShow
+    return global.isBannerShow
         ? WillPopScope(
             onWillPop: () async {
               return false;
@@ -29,9 +30,10 @@ Widget bannerImageWidget() {
                           CustomImage(
                             image: global.appInfo.baseUrls.notificationBannerImageUrl + '/' + global.bannerImage,
                             fit: BoxFit.contain,
+                            width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 3 : null,
                           ),
                           Positioned(
-                            top: 60,
+                            top: !global.getPlatFrom() ? 60 : 10,
                             right: -7,
                             child: InkWell(
                               onTap: () async {

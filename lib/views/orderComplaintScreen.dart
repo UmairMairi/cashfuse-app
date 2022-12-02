@@ -5,6 +5,7 @@ import 'package:cashfuse/controllers/orderController.dart';
 import 'package:cashfuse/models/orderModel.dart';
 import 'package:cashfuse/views/addComplaintSceen.dart';
 import 'package:cashfuse/views/faqSceen.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,14 +20,19 @@ class OrderComplaintScreen extends StatelessWidget {
   OrderComplaintScreen({this.orderModel});
 
   OrderController orderController = Get.find<OrderController>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OrderController>(builder: (controller) {
       return SafeArea(
         child: Scaffold(
+          key: scaffoldKey,
+          drawer: global.getPlatFrom() ? DrawerWidget() : null,
           appBar: global.getPlatFrom()
-              ? WebTopBarWidget()
+              ? WebTopBarWidget(
+                  scaffoldKey: scaffoldKey,
+                )
               : AppBar(
                   leading: InkWell(
                     onTap: () {

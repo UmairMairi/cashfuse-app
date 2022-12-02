@@ -4,12 +4,17 @@ import 'dart:developer';
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
+import 'package:cashfuse/controllers/couponController.dart';
+import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
+import 'package:cashfuse/controllers/referEarnController.dart';
+import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/models/userModel.dart';
 import 'package:cashfuse/services/apiHelper.dart';
 import 'package:cashfuse/utils/date_converter.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
+import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
@@ -24,7 +29,16 @@ class SplashController extends GetxController {
 
   @override
   void onInit() async {
-    init();
+    if (global.getPlatFrom()) {
+      Get.put(HomeController());
+      Get.put(CouponController());
+      Get.put(SearchController());
+      Get.put(ReferEarnController());
+      await webInit();
+    } else {
+      await init();
+    }
+
     videoPlayerController = VideoPlayerController.network(
       global.earningVideoUrl,
     )..initialize().then((_) {
@@ -51,7 +65,44 @@ class SplashController extends GetxController {
     super.onClose();
   }
 
-  void init() {
+  Future webInit() async {
+    try {
+      global.appDeviceId = await FirebaseMessaging.instance.getToken();
+      global.sp = await SharedPreferences.getInstance();
+
+      log(global.appDeviceId);
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.getAppInfo().then((response) async {
+          if (response.statusCode == 200) {
+            global.appInfo = response.data;
+            if (global.sp.getString('currentUser') != null) {
+              global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
+              await Get.find<AuthController>().getProfile();
+
+              Get.off(() => HomeScreen());
+            } else {
+              Get.off(() => HomeScreen());
+            }
+
+            await apiHelper.getBannerNotification().then((result) {
+              if (result.statusCode == 200) {
+                global.bannerImage = result.data['image'];
+              }
+            });
+            await bannerShow();
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+    } catch (e) {
+      print("Exception - SplashController.dart - webInit():" + e.toString());
+    }
+  }
+
+  Future init() async {
     try {
       Timer(Duration.zero, () async {
         //if (!global.getPlatFrom()) {

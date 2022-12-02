@@ -4,10 +4,7 @@
 
 import 'dart:io';
 
-import 'package:cashfuse/controllers/couponController.dart';
-import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
-import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/controllers/splashController.dart';
 import 'package:cashfuse/controllers/themeController.dart';
 import 'package:cashfuse/l10n/l10n.dart';
@@ -17,21 +14,23 @@ import 'package:cashfuse/utils/binding/networkBinding.dart';
 import 'package:cashfuse/utils/firebaseoption.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/notificationHelper.dart';
+import 'package:cashfuse/utils/register_web_webview_stub.dart' if (dart.library.html) 'package:cashfuse/utils/register_web_webview.dart';
 import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/views/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart' as webview;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 void main() async {
+  registerWebViewWebImplementation();
   WidgetsFlutterBinding.ensureInitialized();
-
+  setPathUrlStrategy();
   HttpOverrides.global = new MyHttpOverrides();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationHelper.initialize();
@@ -39,23 +38,10 @@ void main() async {
     await fetchLinkData();
   }
 
-  if (GetPlatform.isAndroid) {
-    await webview.AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
+  // if (GetPlatform.isWeb) {
 
-    var swAvailable = await webview.AndroidWebViewFeature.isFeatureSupported(webview.AndroidWebViewFeature.SERVICE_WORKER_BASIC_USAGE);
-    var swInterceptAvailable = await webview.AndroidWebViewFeature.isFeatureSupported(webview.AndroidWebViewFeature.SERVICE_WORKER_SHOULD_INTERCEPT_REQUEST);
+  // }
 
-    if (swAvailable && swInterceptAvailable) {
-      webview.AndroidServiceWorkerController serviceWorkerController = webview.AndroidServiceWorkerController.instance();
-
-      await serviceWorkerController.setServiceWorkerClient(webview.AndroidServiceWorkerClient(
-        shouldInterceptRequest: (request) async {
-          print(request);
-          return null;
-        },
-      ));
-    }
-  }
   runApp(
     MyApp(),
   );
@@ -97,12 +83,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (global.getPlatFrom()) {
+    if (GetPlatform.isWeb) {
       Get.put(NetworkController());
       Get.put(SplashController());
-      Get.put(HomeController());
-      Get.put(CouponController());
-      Get.put(SearchController());
     }
     return ChangeNotifierProvider(
         create: (context) => LocaleProvider(),
@@ -124,7 +107,7 @@ class MyApp extends StatelessWidget {
                 GlobalCupertinoLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
-              home: global.getPlatFrom() ? HomeScreen() : SplashScreen(),
+              home: GetPlatform.isWeb && global.appInfo.baseUrls != null ? HomeScreen() : SplashScreen(),
             );
           });
         });

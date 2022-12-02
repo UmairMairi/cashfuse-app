@@ -4,6 +4,7 @@ import 'package:cashfuse/models/categoryModel.dart';
 import 'package:cashfuse/views/adsDetailScreen.dart';
 import 'package:cashfuse/views/campaignDetailScreen.dart';
 import 'package:cashfuse/views/offerDetailScreen.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/offerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -14,12 +15,18 @@ class OfferListScreen extends StatelessWidget {
   final CategoryModel categoryModel;
   OfferListScreen({this.categoryModel});
 
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (homeController) {
       return Scaffold(
+        key: scaffoldKey,
+        drawer: global.getPlatFrom() ? DrawerWidget() : null,
         appBar: global.getPlatFrom()
-            ? WebTopBarWidget()
+            ? WebTopBarWidget(
+                scaffoldKey: scaffoldKey,
+              )
             : AppBar(
                 leading: InkWell(
                   onTap: () {

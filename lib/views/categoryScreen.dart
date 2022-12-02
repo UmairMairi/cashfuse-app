@@ -6,6 +6,7 @@ import 'package:cashfuse/models/categoryModel.dart';
 import 'package:cashfuse/views/adsDetailScreen.dart';
 import 'package:cashfuse/views/campaignDetailScreen.dart';
 import 'package:cashfuse/widget/adsCampaignWidget.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webAdsCampaignWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      drawer: global.getPlatFrom() ? DrawerWidget() : null,
       appBar: global.getPlatFrom()
           ? WebTopBarWidget(
               scaffoldKey: scaffoldKey,

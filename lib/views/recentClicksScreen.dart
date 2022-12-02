@@ -7,6 +7,7 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/widget/confirmationDialog.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/recentClickDialogWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -19,12 +20,17 @@ class RecentClickScreen extends StatelessWidget {
   final Color bgColor;
   RecentClickScreen({this.bgColor});
   HomeController homeController = Get.find<HomeController>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
+      drawer: global.getPlatFrom() ? DrawerWidget() : null,
       appBar: global.getPlatFrom()
-          ? WebTopBarWidget()
+          ? WebTopBarWidget(
+              scaffoldKey: scaffoldKey,
+            )
           : AppBar(
               backgroundColor: Colors.grey[200],
               elevation: 0,

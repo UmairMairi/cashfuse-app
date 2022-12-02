@@ -2,6 +2,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/commonController.dart';
 import 'package:cashfuse/views/helpDetailSceen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,13 +12,18 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GetHelpScreen extends StatelessWidget {
   final fSeachNode = new FocusNode();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       resizeToAvoidBottomInset: false,
+      drawer: global.getPlatFrom() ? DrawerWidget() : null,
       appBar: global.getPlatFrom()
-          ? WebTopBarWidget()
+          ? WebTopBarWidget(
+              scaffoldKey: scaffoldKey,
+            )
           : AppBar(
               leading: InkWell(
                 onTap: () {

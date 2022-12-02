@@ -48,15 +48,14 @@ dependencies:
   dotted_border: ^2.0.0+2
   video_player: ^2.4.7
   custom_clippers: ^2.0.0
-  # webview_flutter: ^3.0.4
-  flutter_inappwebview: ^5.7.1
+  webview_flutter: ^3.0.4
   circular_bottom_navigation: ^2.3.0
   url_launcher: ^6.1.6
   universal_html: ^2.0.8
   chrome_launcher: ^2.1.0
   flutter_web_browser: ^0.17.1
   aligned_dialog: ^0.0.6
-  webviewx: ^0.2.1
+  url_strategy: ^0.2.0
 
   #CONNECTIVITY
   connectivity_plus: ^2.1.0
@@ -85,6 +84,8 @@ dependencies:
   flutter_share: ^2.0.0
   path_provider: ^2.0.11
   store_redirect: ^2.0.1
+  share_plus: ^6.3.0
+  webview_flutter_web: ^0.1.0+4
 
   #IMAGE
   image_picker: ^0.8.5+3

@@ -8,6 +8,7 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/orderComplaintScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +18,17 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 
 class MyOrdersScreen extends StatelessWidget {
   OrderController orderController = Get.find<OrderController>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
+      drawer: global.getPlatFrom() ? DrawerWidget() : null,
       appBar: global.getPlatFrom()
-          ? WebTopBarWidget()
+          ? WebTopBarWidget(
+              scaffoldKey: scaffoldKey,
+            )
           : AppBar(
               elevation: 0,
               leading: InkWell(

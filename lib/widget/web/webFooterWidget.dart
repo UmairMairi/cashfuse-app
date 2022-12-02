@@ -69,7 +69,7 @@ class WebFooterWidget extends StatelessWidget {
                           },
                           behavior: HitTestBehavior.opaque,
                           child: Text(
-                            'Contact Us',
+                            'Get Help',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),

@@ -2,6 +2,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/referEarnController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,14 +10,20 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ReferEarnScreen extends StatelessWidget {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ReferEarnController>(builder: (controller) {
       return Scaffold(
+        key: scaffoldKey,
+        drawer: global.getPlatFrom() ? DrawerWidget() : null,
         appBar: global.getPlatFrom()
-            ? WebTopBarWidget()
+            ? WebTopBarWidget(
+                scaffoldKey: scaffoldKey,
+              )
             : AppBar(
                 leading: InkWell(
                   onTap: () {
@@ -160,6 +167,61 @@ class ReferEarnScreen extends StatelessWidget {
                       )
                     ],
                   ),
+                  FutureBuilder(
+                      builder: (context1, snapshot) {
+                        return SizedBox();
+                      },
+                      future: Future.delayed(Duration.zero).then((value) {
+                        return Get.dialog(
+                          Dialog(
+                            backgroundColor: Colors.white,
+                            insetPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                            child: SizedBox(
+                              width: AppConstants.WEB_MAX_WIDTH / 3,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Image.asset(Images.access),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 20),
+                                    child: Text(
+                                      'To access this feature, download the app',
+                                      style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.red, fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      launchUrl(
+                                        Uri.parse("https://play.google.com/store/apps/details?id=com.cashfuse.app"),
+                                        webOnlyWindowName: 'blank',
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 40,
+                                      margin: EdgeInsets.all(15),
+                                      width: AppConstants.WEB_MAX_WIDTH / 4,
+                                      color: Get.theme.secondaryHeaderColor,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'Download The App',
+                                        style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          useSafeArea: true,
+                          barrierDismissible: false,
+                        );
+                      }))
                 ],
               )
             : Column(

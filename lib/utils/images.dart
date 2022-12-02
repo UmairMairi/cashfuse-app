@@ -31,4 +31,5 @@ class Images {
   static const String theme_color = "assets/images/theme-color.png";
   static const String refer = "assets/images/refer.png";
   static const String wallet_icon = "assets/images/wallet-icon.png";
+  static const String access = "assets/images/access.png";
 }

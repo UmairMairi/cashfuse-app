@@ -6,6 +6,7 @@ import 'package:cashfuse/models/commonModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/categoryScreen.dart';
 import 'package:cashfuse/widget/adsCampaignWidget.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webAdsCampaignWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
   AdsCampaignWidgetListScreen({this.title});
 
   HomeController homeController = Get.find<HomeController>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   void paginateTask() {
     homeController.scrollController.addListener(() async {
@@ -32,8 +34,12 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
     paginateTask();
     return GetBuilder<HomeController>(builder: (homeController1) {
       return Scaffold(
+        key: scaffoldKey,
+        drawer: global.getPlatFrom() ? DrawerWidget() : null,
         appBar: global.getPlatFrom()
-            ? WebTopBarWidget()
+            ? WebTopBarWidget(
+                scaffoldKey: scaffoldKey,
+              )
             : AppBar(
                 leading: InkWell(
                   onTap: () {

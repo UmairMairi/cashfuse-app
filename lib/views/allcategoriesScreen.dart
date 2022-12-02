@@ -4,6 +4,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/views/categoryScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AllCategoriesScreen extends StatelessWidget {
   HomeController homeController = Get.find<HomeController>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   void paginateTask() {
     homeController.scrollController.addListener(() async {
@@ -27,8 +29,12 @@ class AllCategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     paginateTask();
     return Scaffold(
+      key: scaffoldKey,
+      drawer: global.getPlatFrom() ? DrawerWidget() : null,
       appBar: global.getPlatFrom()
-          ? WebTopBarWidget()
+          ? WebTopBarWidget(
+              scaffoldKey: scaffoldKey,
+            )
           : AppBar(
               elevation: 0,
               leading: InkWell(

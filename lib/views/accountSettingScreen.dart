@@ -5,6 +5,7 @@ import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/imageController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,6 +22,7 @@ class AccountSettingScreen extends StatelessWidget {
   final conPasswordFocus = new FocusNode();
 
   AuthController authController = Get.find<AuthController>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +31,13 @@ class AccountSettingScreen extends StatelessWidget {
       authController.email.text = global.currentUser.email;
       return GetBuilder<ImageControlller>(builder: (imageControlller) {
         return Scaffold(
+          key: scaffoldKey,
           resizeToAvoidBottomInset: false,
+          drawer: global.getPlatFrom() ? DrawerWidget() : null,
           appBar: global.getPlatFrom()
-              ? WebTopBarWidget()
+              ? WebTopBarWidget(
+                  scaffoldKey: scaffoldKey,
+                )
               : AppBar(
                   elevation: 0,
                   leading: InkWell(
