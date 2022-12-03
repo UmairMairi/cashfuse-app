@@ -7,7 +7,6 @@ import 'package:cashfuse/models/allInOneSearchDataModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
-import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -48,10 +47,10 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
     return GetBuilder<SearchController>(builder: (controller) {
       return WillPopScope(
         onWillPop: () async {
-          if (global.getPlatFrom()) {
+          if (GetPlatform.isWeb) {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => HomeScreen(),
+                builder: (context) => BottomNavigationBarScreen(),
               ),
             );
             return false;
@@ -194,82 +193,84 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                   ),
             body: Column(
               children: [
-                AppBar(
-                  elevation: 0,
-                  bottomOpacity: 0.0,
-                  shape: RoundedRectangleBorder(side: BorderSide.none),
-                  backgroundColor: searchController.addNewTabList2[_currentIndex].tabColor != null && searchController.addNewTabList2[_currentIndex].tabColor.isNotEmpty ? _getColorFromHex(searchController.addNewTabList2[_currentIndex].tabColor) : Get.theme.primaryColor,
-                  automaticallyImplyLeading: false,
+                global.getPlatFrom()
+                    ? AppBar(
+                        elevation: 0,
+                        bottomOpacity: 0.0,
+                        shape: RoundedRectangleBorder(side: BorderSide.none),
+                        backgroundColor: searchController.addNewTabList2[_currentIndex].tabColor != null && searchController.addNewTabList2[_currentIndex].tabColor.isNotEmpty ? _getColorFromHex(searchController.addNewTabList2[_currentIndex].tabColor) : Get.theme.primaryColor,
+                        automaticallyImplyLeading: false,
 
-                  titleSpacing: 0,
-                  title: Center(
-                    child: Container(
-                      margin: EdgeInsets.only(right: 10),
-                      height: global.getPlatFrom() ? 40 : 37,
-                      width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 2 : AppConstants.WEB_MAX_WIDTH,
-                      decoration: global.getPlatFrom() ? BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)) : null,
-                      child: TextFormField(
-                        controller: _cSearch,
-                        cursorColor: global.getPlatFrom() ? Colors.black : Colors.white,
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.search,
-                        style: TextStyle(color: global.getPlatFrom() ? Colors.black : Colors.white, fontWeight: FontWeight.w300),
-                        focusNode: searchNode,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          suffixIcon:
-                              // _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty
-                              //     ? InkWell(
-                              //         onTap: () async {
-                              //           FocusScope.of(context).requestFocus(_fDismiss);
-                              //           _cSearch.clear();
-                              //           await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].trackingUrl);
-                              //           setState(() {});
-                              //         },
-                              //         child: Icon(
-                              //           Icons.close,
-                              //           color: Colors.white,
-                              //         ),
-                              //       )
-                              //     :
-                              InkWell(
-                            onTap: () async {
-                              FocusScope.of(context).requestFocus(searchNode);
-                              setState(() {});
-                              if (_cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && searchController.addNewTabList2[_currentIndex].searchUrl != null && searchController.addNewTabList2[_currentIndex].searchUrl.isNotEmpty) {
-                                await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].searchUrl + _cSearch.text.trim()).then((value) {
-                                  FocusScope.of(context).requestFocus(_fDismiss);
-                                });
+                        titleSpacing: 0,
+                        title: Center(
+                          child: Container(
+                            margin: EdgeInsets.only(right: 10),
+                            height: global.getPlatFrom() ? 40 : 37,
+                            width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 2 : AppConstants.WEB_MAX_WIDTH,
+                            decoration: global.getPlatFrom() ? BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)) : null,
+                            child: TextFormField(
+                              controller: _cSearch,
+                              cursorColor: global.getPlatFrom() ? Colors.black : Colors.white,
+                              keyboardType: TextInputType.text,
+                              textInputAction: TextInputAction.search,
+                              style: TextStyle(color: global.getPlatFrom() ? Colors.black : Colors.white, fontWeight: FontWeight.w300),
+                              focusNode: searchNode,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                suffixIcon:
+                                    // _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty
+                                    //     ? InkWell(
+                                    //         onTap: () async {
+                                    //           FocusScope.of(context).requestFocus(_fDismiss);
+                                    //           _cSearch.clear();
+                                    //           await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].trackingUrl);
+                                    //           setState(() {});
+                                    //         },
+                                    //         child: Icon(
+                                    //           Icons.close,
+                                    //           color: Colors.white,
+                                    //         ),
+                                    //       )
+                                    //     :
+                                    InkWell(
+                                  onTap: () async {
+                                    FocusScope.of(context).requestFocus(searchNode);
+                                    setState(() {});
+                                    if (_cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && searchController.addNewTabList2[_currentIndex].searchUrl != null && searchController.addNewTabList2[_currentIndex].searchUrl.isNotEmpty) {
+                                      await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].searchUrl + _cSearch.text.trim()).then((value) {
+                                        FocusScope.of(context).requestFocus(_fDismiss);
+                                      });
+                                      _isWebLoaded = false;
+                                      setState(() {});
+                                    } else {}
+                                  },
+                                  child: Icon(
+                                    Icons.search,
+                                    color: global.getPlatFrom() ? Colors.black : Colors.white,
+                                  ),
+                                ),
+                                hintText: AppLocalizations.of(context).all_in_one_search,
+                                hintStyle: TextStyle(color: global.getPlatFrom() ? Colors.black : Colors.white, fontWeight: FontWeight.w300),
+                                contentPadding: EdgeInsets.only(left: 10, top: global.getPlatFrom() ? 10 : 0),
+                              ),
+                              onFieldSubmitted: (String val) async {
+                                _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && searchController.addNewTabList2[_currentIndex].searchUrl != null && searchController.addNewTabList2[_currentIndex].searchUrl.isNotEmpty
+                                    ? await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].searchUrl + _cSearch.text.trim())
+                                    : await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].trackingUrl);
                                 _isWebLoaded = false;
                                 setState(() {});
-                              } else {}
-                            },
-                            child: Icon(
-                              Icons.search,
-                              color: global.getPlatFrom() ? Colors.black : Colors.white,
+                              },
                             ),
                           ),
-                          hintText: AppLocalizations.of(context).all_in_one_search,
-                          hintStyle: TextStyle(color: global.getPlatFrom() ? Colors.black : Colors.white, fontWeight: FontWeight.w300),
-                          contentPadding: EdgeInsets.only(left: 10, top: global.getPlatFrom() ? 10 : 0),
                         ),
-                        onFieldSubmitted: (String val) async {
-                          _cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && searchController.addNewTabList2[_currentIndex].searchUrl != null && searchController.addNewTabList2[_currentIndex].searchUrl.isNotEmpty
-                              ? await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].searchUrl + _cSearch.text.trim())
-                              : await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].trackingUrl);
-                          _isWebLoaded = false;
-                          setState(() {});
-                        },
-                      ),
-                    ),
-                  ),
-                  // actions: [
-                  //   Icon(
-                  //     Icons.more_vert,
-                  //     color: Colors.white,
-                  //   ),
-                  // ],
-                ),
+                        // actions: [
+                        //   Icon(
+                        //     Icons.more_vert,
+                        //     color: Colors.white,
+                        //   ),
+                        // ],
+                      )
+                    : SizedBox(),
                 _isDataLoaded
                     ? searchController.addNewTabList2 != null && searchController.addNewTabList2.length > 0
                         ? Expanded(
@@ -405,7 +406,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                 preferredSize: Size.zero,
                 child: SizedBox(),
               ),
-        body: global.getPlatFrom()
+        body: GetPlatform.isWeb
             ? FutureBuilder(
                 builder: (context1, snapshot) {
                   return SizedBox();
@@ -425,9 +426,10 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                             ),
                             Image.asset(Images.access),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                               child: Text(
                                 'To access this feature, download the app',
+                                textAlign: TextAlign.center,
                                 style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.red, fontWeight: FontWeight.w600),
                               ),
                             ),

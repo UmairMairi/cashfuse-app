@@ -40,6 +40,7 @@ class ImageControlller extends GetxController {
               activeControlsWidgetColor: Colors.blue[200],
               cropFrameColor: Colors.blue[200],
             ),
+            WebUiSettings(context: Get.context)
           ],
         );
 

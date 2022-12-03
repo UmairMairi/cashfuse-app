@@ -224,127 +224,189 @@ class ReferEarnScreen extends StatelessWidget {
                       }))
                 ],
               )
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+            : Stack(
                 children: [
-                  Container(
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 20,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        color: Colors.white,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Image.asset(
+                              Images.refer,
+                              height: 120,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
+                              textAlign: TextAlign.center,
+                              style: Get.theme.primaryTextTheme.subtitle2,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                          ],
                         ),
-                        Image.asset(
-                          Images.refer,
-                          height: 120,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        AppLocalizations.of(context).reffral_link,
+                        textAlign: TextAlign.center,
+                        style: Get.theme.primaryTextTheme.subtitle2,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Make your friends join ${global.appName} via your referral link below - No referral code needed',
+                        textAlign: TextAlign.center,
+                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(fontWeight: FontWeight.w300),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        color: Colors.white,
+                        height: 50,
+                        width: Get.width - 50,
+                        alignment: Alignment.centerLeft,
+                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        child: Text(
+                          global.appShareLink.isNotEmpty ? global.appShareLink : 'Link Url',
+                          style: Get.theme.primaryTextTheme.bodySmall.copyWith(fontWeight: FontWeight.w300),
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
-                          textAlign: TextAlign.center,
-                          style: Get.theme.primaryTextTheme.subtitle2,
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    AppLocalizations.of(context).reffral_link,
-                    textAlign: TextAlign.center,
-                    style: Get.theme.primaryTextTheme.subtitle2,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    'Make your friends join ${global.appName} via your referral link below - No referral code needed',
-                    textAlign: TextAlign.center,
-                    style: Get.theme.primaryTextTheme.bodySmall.copyWith(fontWeight: FontWeight.w300),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    color: Colors.white,
-                    height: 50,
-                    width: Get.width - 50,
-                    alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.symmetric(horizontal: 5),
-                    child: Text(
-                      global.appShareLink.isNotEmpty ? global.appShareLink : 'Link Url',
-                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(fontWeight: FontWeight.w300),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      if (global.appShareLink.isNotEmpty) {
-                        Clipboard.setData(ClipboardData(text: global.appShareLink)).then((value) {
-                          Fluttertoast.showToast(
-                            msg: 'Link Copied',
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.black,
-                            textColor: Colors.white,
-                            fontSize: 16.0,
-                          );
-                        });
-                      }
-                    },
-                    child: Text(
-                      AppLocalizations.of(context).tap_to_copy,
-                      textAlign: TextAlign.center,
-                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(fontWeight: FontWeight.w300),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Expanded(
-                    child: Container(
-                      color: Colors.white,
-                      alignment: Alignment.topCenter,
-                      child: InkWell(
-                        onTap: () async {
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        onTap: () {
                           if (global.appShareLink.isNotEmpty) {
-                            await FlutterShare.share(
-                              title: '${global.appName}',
-                              text: 'I recently tried Cashfuse app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
-                            ).then((value) {
-                              if (value) {}
-                            }).onError((error, stackTrace) {
-                              return error;
+                            Clipboard.setData(ClipboardData(text: global.appShareLink)).then((value) {
+                              Fluttertoast.showToast(
+                                msg: 'Link Copied',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.black,
+                                textColor: Colors.white,
+                                fontSize: 16.0,
+                              );
                             });
                           }
                         },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 45,
-                          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                          //padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-                          decoration: BoxDecoration(
-                            color: Get.theme.secondaryHeaderColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            AppLocalizations.of(context).invite_now,
-                            style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                          ),
+                        child: Text(
+                          AppLocalizations.of(context).tap_to_copy,
+                          textAlign: TextAlign.center,
+                          style: Get.theme.primaryTextTheme.bodySmall.copyWith(fontWeight: FontWeight.w300),
                         ),
                       ),
-                    ),
-                  )
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Expanded(
+                        child: Container(
+                          color: Colors.white,
+                          alignment: Alignment.topCenter,
+                          child: InkWell(
+                            onTap: () async {
+                              if (global.appShareLink.isNotEmpty) {
+                                await FlutterShare.share(
+                                  title: '${global.appName}',
+                                  text: 'I recently tried Cashfuse app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
+                                ).then((value) {
+                                  if (value) {}
+                                }).onError((error, stackTrace) {
+                                  return error;
+                                });
+                              }
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 45,
+                              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                              //padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                              decoration: BoxDecoration(
+                                color: Get.theme.secondaryHeaderColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                AppLocalizations.of(context).invite_now,
+                                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  GetPlatform.isWeb
+                      ? FutureBuilder(
+                          builder: (context1, snapshot) {
+                            return SizedBox();
+                          },
+                          future: Future.delayed(Duration.zero).then((value) {
+                            return Get.dialog(
+                              Dialog(
+                                backgroundColor: Colors.white,
+                                insetPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                                child: SizedBox(
+                                  width: AppConstants.WEB_MAX_WIDTH / 3,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Image.asset(Images.access),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                                        child: Text(
+                                          'To access this feature, download the app',
+                                          textAlign: TextAlign.center,
+                                          style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.red, fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          launchUrl(
+                                            Uri.parse("https://play.google.com/store/apps/details?id=com.cashfuse.app"),
+                                            webOnlyWindowName: 'blank',
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 40,
+                                          margin: EdgeInsets.all(15),
+                                          width: AppConstants.WEB_MAX_WIDTH / 4,
+                                          color: Get.theme.secondaryHeaderColor,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'Download The App',
+                                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              useSafeArea: true,
+                              barrierDismissible: false,
+                            );
+                          }))
+                      : SizedBox()
                 ],
               ),
       );

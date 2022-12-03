@@ -12,13 +12,12 @@ import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/models/userModel.dart';
 import 'package:cashfuse/services/apiHelper.dart';
 import 'package:cashfuse/utils/date_converter.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
-import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
-import 'package:cashfuse/utils/global.dart' as global;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 
@@ -29,7 +28,7 @@ class SplashController extends GetxController {
 
   @override
   void onInit() async {
-    if (global.getPlatFrom()) {
+    if (GetPlatform.isWeb) {
       Get.put(HomeController());
       Get.put(CouponController());
       Get.put(SearchController());
@@ -79,9 +78,9 @@ class SplashController extends GetxController {
               global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
               await Get.find<AuthController>().getProfile();
 
-              Get.off(() => HomeScreen());
+              Get.off(() => BottomNavigationBarScreen());
             } else {
-              Get.off(() => HomeScreen());
+              Get.off(() => BottomNavigationBarScreen());
             }
 
             await apiHelper.getBannerNotification().then((result) {

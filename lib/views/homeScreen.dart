@@ -472,7 +472,7 @@ class HomeScreen extends StatelessWidget {
                                           : SizedBox(),
                                       Expanded(
                                         child: SizedBox(
-                                          height: global.getPlatFrom() ? 105 : 100,
+                                          height: GetPlatform.isWeb ? 106 : 100,
                                           child: ListView.builder(
                                             controller: scrollController,
                                             padding: const EdgeInsets.symmetric(horizontal: 6),

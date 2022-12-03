@@ -50,7 +50,8 @@ class AllCategoriesScreen extends StatelessWidget {
                 style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
               ),
             ),
-      body: Center(
+      body: Align(
+        alignment: Alignment.topCenter,
         child: SizedBox(
           width: AppConstants.WEB_MAX_WIDTH,
           child: GetBuilder<HomeController>(builder: (controller) {

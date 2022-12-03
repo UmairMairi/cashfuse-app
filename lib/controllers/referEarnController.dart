@@ -17,7 +17,10 @@ class ReferEarnController extends GetxController {
 
   @override
   void onInit() async {
-    await global.referAndEarn();
+    if (!GetPlatform.isWeb) {
+      await global.referAndEarn();
+    }
+
     await getReferralUsers();
     super.onInit();
   }

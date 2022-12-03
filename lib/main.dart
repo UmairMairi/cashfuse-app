@@ -14,7 +14,6 @@ import 'package:cashfuse/utils/binding/networkBinding.dart';
 import 'package:cashfuse/utils/firebaseoption.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/notificationHelper.dart';
-import 'package:cashfuse/utils/register_web_webview_stub.dart' if (dart.library.html) 'package:cashfuse/utils/register_web_webview.dart';
 import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/views/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -28,13 +27,12 @@ import 'package:url_strategy/url_strategy.dart';
 
 FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 void main() async {
-  registerWebViewWebImplementation();
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
   HttpOverrides.global = new MyHttpOverrides();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationHelper.initialize();
-  if (GetPlatform.isAndroid) {
+  if (!GetPlatform.isWeb) {
     await fetchLinkData();
   }
 

@@ -23,6 +23,7 @@ import 'package:cashfuse/models/userModel.dart';
 import 'package:cashfuse/services/dioResult.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:dio/dio.dart';
+import 'package:get/get.dart' as getx;
 import 'package:http_parser/http_parser.dart';
 
 class APIHelper {
@@ -694,10 +695,12 @@ class APIHelper {
         'phone': phone,
         'email': email,
         if (userImage != null && userImage.path.isNotEmpty)
-          "user_profile": await MultipartFile.fromFile(
-            userImage.path,
-            contentType: new MediaType("image", "jpeg"),
-          ),
+          "user_profile": getx.GetPlatform.isWeb
+              ? MultipartFile.fromString(userImage.path)
+              : await MultipartFile.fromFile(
+                  userImage.path,
+                  contentType: new MediaType("image", "jpeg"),
+                ),
       });
       response = await dio.post(
         '${global.baseUrl}${AppConstants.UPDATE_PROFILE_URI}',

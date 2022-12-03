@@ -7,6 +7,7 @@ import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WebFooterWidget extends StatelessWidget {
   @override
@@ -105,9 +106,7 @@ class WebFooterWidget extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  // if (Get.find<SplashController>().configModel.appUrlAndroid != null) {
-                                  //   _launchURL('${Get.find<SplashController>().configModel.appUrlAndroid}');
-                                  // }
+                                  launchUrl(Uri.parse('https://play.google.com/store/apps/details?id=com.cashfuse.app'));
                                 },
                                 behavior: HitTestBehavior.opaque,
                                 child: Container(
@@ -147,9 +146,7 @@ class WebFooterWidget extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  // if (Get.find<SplashController>().configModel.appUrlIos != null) {
-                                  //   _launchURL('${Get.find<SplashController>().configModel.appUrlIos}');
-                                  // }
+                                  launchUrl(Uri.parse('https://apps.apple.com/in/app/cashfuse/id'));
                                 },
                                 behavior: HitTestBehavior.opaque,
                                 child: Container(
@@ -236,7 +233,7 @@ class WebFooterWidget extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5.0),
                                   child: Text(
-                                    'appking@gmail.com',
+                                    'support@codefuse.org',
                                     style: TextStyle(fontSize: 16, color: Colors.white),
                                   ),
                                 ),
@@ -299,7 +296,7 @@ class WebFooterWidget extends StatelessWidget {
                         )
                       ],
                     ),
-                    Text('OkayStartUp @ Copyright 2021', style: TextStyle(fontSize: 16, color: Colors.white))
+                    Text('Copyright @ Codefuse', style: TextStyle(fontSize: 16, color: Colors.white))
                   ],
                 )
               ],

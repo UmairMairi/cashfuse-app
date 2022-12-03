@@ -531,35 +531,37 @@ class ProfileScreen extends StatelessWidget {
                       Divider(
                         height: 0,
                       ),
-                      InkWell(
-                        onTap: () {
-                          //Get.to(() => RateUsScreen());
-                          StoreRedirect.redirect(
-                            androidAppId: 'com.cashfuse.app',
-                          );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                Images.rateus,
-                                height: 20,
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                AppLocalizations.of(context).rate_us,
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                  letterSpacing: 0,
-                                  color: Colors.black.withOpacity(0.75),
+                      !GetPlatform.isWeb
+                          ? InkWell(
+                              onTap: () {
+                                //Get.to(() => RateUsScreen());
+                                StoreRedirect.redirect(
+                                  androidAppId: 'com.cashfuse.app',
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    Image.asset(
+                                      Images.rateus,
+                                      height: 20,
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Text(
+                                      AppLocalizations.of(context).rate_us,
+                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        letterSpacing: 0,
+                                        color: Colors.black.withOpacity(0.75),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
+                            )
+                          : SizedBox(),
                       Divider(
                         height: 0,
                       ),

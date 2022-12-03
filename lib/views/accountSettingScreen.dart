@@ -99,12 +99,14 @@ class AccountSettingScreen extends StatelessWidget {
                           child: imageControlller.imageFile != null && imageControlller.imageFile.path.isNotEmpty
                               ? ClipRRect(
                                   borderRadius: BorderRadius.circular(100),
-                                  child: Image.file(
-                                    imageControlller.imageFile,
-                                    fit: BoxFit.cover,
-                                    // height: 100,
-                                    // width: 120,
-                                  ),
+                                  child: GetPlatform.isWeb
+                                      ? Image.network(imageControlller.imageFile.path)
+                                      : Image.file(
+                                          imageControlller.imageFile,
+                                          fit: BoxFit.cover,
+                                          // height: 100,
+                                          // width: 120,
+                                        ),
                                 )
                               : global.currentUser.userImage.isNotEmpty
                                   ? ClipRRect(

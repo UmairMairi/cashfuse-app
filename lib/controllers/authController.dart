@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
+import 'package:dio/dio.dart' as dio;
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/models/userModel.dart';
@@ -245,6 +245,8 @@ class AuthController extends GetxController {
 
   Future updateProfile(File userImage) async {
     try {
+      dio.MultipartFile.fromString(userImage.path);
+
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         if (email.text.trim().isNotEmpty) {
           Get.dialog(CustomLoader(), barrierDismissible: false);

@@ -49,7 +49,7 @@ class GetStartedScreen extends StatelessWidget {
                   style: Get.theme.primaryTextTheme.headline5.copyWith(
                     letterSpacing: -1.5,
                     fontWeight: FontWeight.w400,
-                    color: global.getPlatFrom() ? Colors.black : Colors.white,
+                    color: GetPlatform.isWeb ? Colors.black : Colors.white,
                   ),
                 ),
               ),
@@ -63,7 +63,7 @@ class GetStartedScreen extends StatelessWidget {
                   style: Get.theme.primaryTextTheme.displaySmall.copyWith(
                     letterSpacing: -2,
                     fontWeight: FontWeight.w500,
-                    color: global.getPlatFrom() ? Colors.black : Colors.white,
+                    color: GetPlatform.isWeb ? Colors.black : Colors.white,
                   ),
                 ),
               ),
