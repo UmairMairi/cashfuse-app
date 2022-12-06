@@ -178,7 +178,7 @@ class GetHelpScreen extends StatelessWidget {
                             )))
                       : GridView.builder(
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
+                            crossAxisCount: global.getPlatFrom() ? 5 : 2,
                             crossAxisSpacing: 15.0,
                             mainAxisSpacing: 15.0,
                             childAspectRatio: 1.3,

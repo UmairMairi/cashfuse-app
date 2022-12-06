@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:get/get.dart';
 
 class BottomNavigationBarScreen extends StatefulWidget {
   int pageIndex;
@@ -108,13 +109,15 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
             SystemNavigator.pop();
             return true;
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text('Back press again to exit from app', style: TextStyle(color: Colors.white)),
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: Colors.green,
-              duration: Duration(seconds: 2),
-              margin: EdgeInsets.all(10),
-            ));
+            !GetPlatform.isWeb
+                ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text('Back press again to exit from app', style: TextStyle(color: Colors.white)),
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.green,
+                    duration: Duration(seconds: 2),
+                    margin: EdgeInsets.all(10),
+                  ))
+                : SizedBox();
             _canExit = true;
 
             Timer(Duration(seconds: 2), () {

@@ -47,55 +47,57 @@ class CouponDetailScreen extends StatelessWidget {
                   style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
                 ),
                 actions: [
-                  InkWell(
-                    onTap: () async {
-                      if (global.currentUser.id != null) {
-                        await homeController.getTrackingLink(coupon.url, coupon.affiliatePartner);
-                        global.share(
-                          homeController.createdLink.isNotEmpty ? homeController.createdLink : coupon.url,
-                          coupon.bannerImage.isNotEmpty && !coupon.isImageError ? '${global.appInfo.baseUrls.couponBannerImageUrl}/${coupon.bannerImage}' : '',
-                          '',
-                        );
-                      } else {
-                        if (global.getPlatFrom()) {
-                          Get.dialog(Dialog(
-                            child: SizedBox(
-                              width: Get.width / 3,
-                              child: LoginOrSignUpScreen(
-                                fromMenu: true,
-                              ),
+                  !GetPlatform.isWeb
+                      ? InkWell(
+                          onTap: () async {
+                            if (global.currentUser.id != null) {
+                              await homeController.getTrackingLink(coupon.url, coupon.affiliatePartner);
+                              global.share(
+                                homeController.createdLink.isNotEmpty ? homeController.createdLink : coupon.url,
+                                coupon.bannerImage.isNotEmpty && !coupon.isImageError ? '${global.appInfo.baseUrls.couponBannerImageUrl}/${coupon.bannerImage}' : '',
+                                '',
+                              );
+                            } else {
+                              if (global.getPlatFrom()) {
+                                Get.dialog(Dialog(
+                                  child: SizedBox(
+                                    width: Get.width / 3,
+                                    child: LoginOrSignUpScreen(
+                                      fromMenu: true,
+                                    ),
+                                  ),
+                                ));
+                              } else {
+                                Get.to(() => LoginOrSignUpScreen(
+                                      fromMenu: true,
+                                    ));
+                              }
+                            }
+                          },
+                          child: Container(
+                            margin: EdgeInsets.symmetric(vertical: 12).copyWith(right: 10),
+                            padding: EdgeInsets.only(left: 10, right: 3),
+                            decoration: BoxDecoration(
+                              color: Colors.green[500],
+                              borderRadius: BorderRadius.circular(15),
                             ),
-                          ));
-                        } else {
-                          Get.to(() => LoginOrSignUpScreen(
-                                fromMenu: true,
-                              ));
-                        }
-                      }
-                    },
-                    child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 12).copyWith(right: 10),
-                      padding: EdgeInsets.only(left: 10, right: 3),
-                      decoration: BoxDecoration(
-                        color: Colors.green[500],
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Row(
-                        children: [
-                          Text('${AppLocalizations.of(context).share}  '),
-                          CircleAvatar(
-                            radius: 12,
-                            backgroundColor: Colors.green[700],
-                            child: Icon(
-                              Icons.share_outlined,
-                              color: Colors.white,
-                              size: 15,
+                            child: Row(
+                              children: [
+                                Text('${AppLocalizations.of(context).share}  '),
+                                CircleAvatar(
+                                  radius: 12,
+                                  backgroundColor: Colors.green[700],
+                                  child: Icon(
+                                    Icons.share_outlined,
+                                    color: Colors.white,
+                                    size: 15,
+                                  ),
+                                )
+                              ],
                             ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
+                          ),
+                        )
+                      : SizedBox()
                 ],
               ),
         body: SingleChildScrollView(
