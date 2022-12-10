@@ -38,6 +38,7 @@ class WebHomeScreen extends StatelessWidget {
     return GetBuilder<HomeController>(builder: (controller) {
       return GetBuilder<CouponController>(builder: (controller) {
         return SingleChildScrollView(
+          physics: ClampingScrollPhysics(),
           child: Center(
             child: SizedBox(
               width: AppConstants.WEB_MAX_WIDTH,
