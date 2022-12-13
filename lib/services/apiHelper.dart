@@ -1044,4 +1044,26 @@ class APIHelper {
       print("Exception -  apiHelper.dart - getTrendingKeywords():" + e.toString());
     }
   }
+
+  Future<dynamic> removeUserfromDb() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.REMOVE_USER_FROM_DB_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(true, userId: global.currentUser.id.toString()),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = response.data['data'];
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.REMOVE_USER_FROM_DB_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - removeUserfromDb():" + e.toString());
+    }
+  }
 }

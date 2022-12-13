@@ -33,7 +33,7 @@ class HomeWebCategoryView extends StatelessWidget {
           Expanded(
             child: SizedBox(
               height: 140,
-              child: hm.isCategoryLoaded
+              child: global.appInfo.baseUrls != null && hm.isCategoryLoaded
                   ? Stack(
                       children: [
                         StatefulBuilder(
@@ -95,7 +95,7 @@ class HomeWebCategoryView extends StatelessWidget {
                   : ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      itemCount: 5,
+                      itemCount: 10,
                       padding: const EdgeInsets.symmetric(horizontal: 6),
                       itemBuilder: (context, index) {
                         return SizedBox(
@@ -103,7 +103,7 @@ class HomeWebCategoryView extends StatelessWidget {
                           child: Shimmer(
                             duration: Duration(seconds: 2),
                             child: Container(
-                              width: 95,
+                              width: 195,
                               margin: EdgeInsets.only(right: 15),
                               decoration: BoxDecoration(
                                 color: Colors.grey[300],

@@ -12,7 +12,7 @@ class HomeWebTopCashbackView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (hmController) {
-      return hmController.isTopCashbackLoaded
+      return global.appInfo.baseUrls != null && hmController.isTopCashbackLoaded
           ? hmController.topCashbackList != null && hmController.topCashbackList.length > 0
               ? Row(
                   children: [

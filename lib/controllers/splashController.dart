@@ -4,8 +4,6 @@ import 'dart:developer';
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
-import 'package:cashfuse/controllers/couponController.dart';
-import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/controllers/referEarnController.dart';
 import 'package:cashfuse/controllers/searchController.dart';
@@ -28,12 +26,10 @@ class SplashController extends GetxController {
 
   @override
   void onInit() async {
-    if (GetPlatform.isWeb) {
-      Get.put(HomeController());
-      Get.put(CouponController());
+    if (global.getPlatFrom()) {
+      await webInit();
       Get.put(SearchController());
       Get.put(ReferEarnController());
-      await webInit();
     } else {
       await init();
     }
@@ -122,7 +118,7 @@ class SplashController extends GetxController {
                       pageIndex: 0,
                     ));
               } else {
-                if (global.getPlatFrom()) {
+                if (!global.getPlatFrom()) {
                   Get.to(() => BottomNavigationBarScreen(
                         pageIndex: 0,
                       ));

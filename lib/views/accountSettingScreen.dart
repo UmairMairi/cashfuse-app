@@ -4,6 +4,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/imageController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/widget/confirmationDialog.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
@@ -108,7 +109,7 @@ class AccountSettingScreen extends StatelessWidget {
                                           // width: 120,
                                         ),
                                 )
-                              : global.currentUser.userImage.isNotEmpty
+                              : global.currentUser.userImage != null && global.currentUser.userImage.isNotEmpty
                                   ? ClipRRect(
                                       borderRadius: BorderRadius.circular(100),
                                       child: CustomImage(
@@ -322,7 +323,59 @@ class AccountSettingScreen extends StatelessWidget {
                         // ),
                       ],
                     ),
-                  )
+                  ),
+                  InkWell(
+                    onTap: () {
+                      showConfirmationDialog(
+                        context,
+                        'Delete My Account',
+                        'Are you sure you want to delete Account ?',
+                        [
+                          CupertinoDialogAction(
+                            child: Text(
+                              AppLocalizations.of(context).yes,
+                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.red),
+                            ),
+                            onPressed: () {
+                              authController.removeUserfromDb();
+                            },
+                          ),
+                          CupertinoDialogAction(
+                            child: Text(
+                              AppLocalizations.of(context).no,
+                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.blue),
+                            ),
+                            onPressed: () {
+                              Get.back();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Text(
+                            'Delete My Account',
+                            style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                              letterSpacing: -0.5,
+                              color: Colors.red,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   // : SizedBox(),
                   // StatefulBuilder(
                   //     builder: (BuildContext context, StateSetter setState) => Padding(

@@ -4,6 +4,8 @@
 
 import 'dart:io';
 
+import 'package:cashfuse/controllers/couponController.dart';
+import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/controllers/splashController.dart';
 import 'package:cashfuse/controllers/themeController.dart';
@@ -34,6 +36,14 @@ void main() async {
   await NotificationHelper.initialize();
   if (!GetPlatform.isWeb) {
     await fetchLinkData();
+  }
+
+  if (GetPlatform.isWeb) {
+    Get.put(NetworkController());
+    Get.put(SplashController());
+    Get.put(HomeController());
+
+    Get.put(CouponController());
   }
 
   // if (GetPlatform.isWeb) {
@@ -81,10 +91,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (GetPlatform.isWeb) {
-      Get.put(NetworkController());
-      Get.put(SplashController());
-    }
     return ChangeNotifierProvider(
         create: (context) => LocaleProvider(),
         builder: (context, child) {
@@ -105,7 +111,7 @@ class MyApp extends StatelessWidget {
                 GlobalCupertinoLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
-              home: GetPlatform.isWeb && global.appInfo.baseUrls != null ? HomeScreen() : SplashScreen(),
+              home: GetPlatform.isWeb ? HomeScreen() : SplashScreen(),
             );
           });
         });

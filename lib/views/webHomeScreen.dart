@@ -38,7 +38,7 @@ class WebHomeScreen extends StatelessWidget {
     return GetBuilder<HomeController>(builder: (controller) {
       return GetBuilder<CouponController>(builder: (controller) {
         return SingleChildScrollView(
-          physics: ClampingScrollPhysics(),
+          primary: true,
           child: Center(
             child: SizedBox(
               width: AppConstants.WEB_MAX_WIDTH,
@@ -49,34 +49,32 @@ class WebHomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       WebBannerView(homeController: homeController),
-                      GetBuilder<HomeController>(builder: (hm) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                AppLocalizations.of(context).top_categories,
-                                style: TextStyle(
-                                  fontSize: global.getPlatFrom() ? 16 : 13,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black.withOpacity(0.79),
-                                  letterSpacing: -0.3,
-                                ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context).top_categories,
+                              style: TextStyle(
+                                fontSize: global.getPlatFrom() ? 16 : 13,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black.withOpacity(0.79),
+                                letterSpacing: -0.3,
                               ),
-                              InkWell(
-                                onTap: () {
-                                  Get.to(() => AllCategoriesScreen());
-                                },
-                                child: Text(
-                                  '${AppLocalizations.of(context).view_all} >',
-                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: global.getPlatFrom() ? 16 : null),
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      }),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.to(() => AllCategoriesScreen());
+                              },
+                              child: Text(
+                                '${AppLocalizations.of(context).view_all} >',
+                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: global.getPlatFrom() ? 16 : null),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                       HomeWebCategoryView(),
                       couponController.couponList != null && couponController.couponList.length > 0
                           ? Padding(
@@ -108,7 +106,7 @@ class WebHomeScreen extends StatelessWidget {
                               ),
                             )
                           : SizedBox(),
-                      couponController.isDataLoaded
+                      global.appInfo.baseUrls != null && couponController.isDataLoaded
                           ? couponController.couponList != null && couponController.couponList.length > 0
                               ? Row(
                                   children: [
@@ -190,7 +188,7 @@ class WebHomeScreen extends StatelessWidget {
                                 )
                               : SizedBox()
                           : SizedBox(
-                              height: 100,
+                              height: 150,
                               child: ListView.builder(
                                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 20),
                                 scrollDirection: Axis.horizontal,
@@ -205,7 +203,7 @@ class WebHomeScreen extends StatelessWidget {
                                           borderRadius: BorderRadius.circular(9),
                                           color: Colors.grey[300],
                                         ),
-                                        width: Get.width - 60,
+                                        width: 280,
                                         // child:
                                         // CouponWidget(
                                         //   coupon: couponC.couponList[index],
@@ -230,7 +228,7 @@ class WebHomeScreen extends StatelessWidget {
                               ),
                             )
                           : SizedBox(),
-                      homeController.isOfferLoaded
+                      global.appInfo.baseUrls != null && homeController.isOfferLoaded
                           ? homeController.exclusiveOfferList != null && homeController.exclusiveOfferList.length > 0
                               ? SizedBox(
                                   height: global.getPlatFrom() ? 170 : 165,
@@ -398,136 +396,134 @@ class WebHomeScreen extends StatelessWidget {
                               ),
                             )
                           : SizedBox(),
-                      GetBuilder<HomeController>(builder: (home) {
-                        return home.isFlashOffersLoaded
-                            ? home.newFlashOfferList != null && home.newFlashOfferList.length > 0
-                                ? Row(
-                                    children: [
-                                      global.getPlatFrom()
-                                          ? InkWell(
-                                              onTap: () => offerScrollController.animateTo(offerScrollController.initialScrollOffset, duration: Duration(seconds: 1), curve: Curves.easeInOut),
-                                              child: Container(
-                                                width: 30,
-                                                height: 80,
-                                                margin: EdgeInsets.only(left: 5),
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                  color: Get.theme.secondaryHeaderColor,
-                                                ),
-                                                child: Icon(
-                                                  Icons.arrow_back,
-                                                  color: Colors.white,
-                                                ),
+                      global.appInfo.baseUrls != null && homeController.isFlashOffersLoaded
+                          ? homeController.newFlashOfferList != null && homeController.newFlashOfferList.length > 0
+                              ? Row(
+                                  children: [
+                                    global.getPlatFrom()
+                                        ? InkWell(
+                                            onTap: () => offerScrollController.animateTo(offerScrollController.initialScrollOffset, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                            child: Container(
+                                              width: 30,
+                                              height: 80,
+                                              margin: EdgeInsets.only(left: 5),
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.rectangle,
+                                                color: Get.theme.secondaryHeaderColor,
                                               ),
-                                            )
-                                          : SizedBox(),
-                                      Expanded(
-                                        child: SizedBox(
-                                          height: global.getPlatFrom() ? 230 : 200,
-                                          child: ListView.builder(
-                                            itemCount: home.newFlashOfferList.length,
-                                            shrinkWrap: true,
-                                            controller: offerScrollController,
-                                            scrollDirection: Axis.horizontal,
-                                            physics: AlwaysScrollableScrollPhysics(),
-                                            padding: const EdgeInsets.symmetric(horizontal: 6),
-                                            itemBuilder: (context, index) {
-                                              return InkWell(
-                                                onTap: () async {
-                                                  await home.getOfferDetails(home.newFlashOfferList[index].id.toString());
-                                                  Get.to(() => OfferDetailScreen(
-                                                        offer: home.offer,
-                                                        fromSeeMore: false,
-                                                      ));
-                                                },
-                                                child: OfferWidget(
-                                                  offer: home.newFlashOfferList[index],
-                                                  fromList: false,
-                                                ),
-                                              );
-                                            },
-                                          ),
+                                              child: Icon(
+                                                Icons.arrow_back,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          )
+                                        : SizedBox(),
+                                    Expanded(
+                                      child: SizedBox(
+                                        height: global.getPlatFrom() ? 230 : 200,
+                                        child: ListView.builder(
+                                          itemCount: homeController.newFlashOfferList.length,
+                                          shrinkWrap: true,
+                                          controller: offerScrollController,
+                                          scrollDirection: Axis.horizontal,
+                                          physics: AlwaysScrollableScrollPhysics(),
+                                          padding: const EdgeInsets.symmetric(horizontal: 6),
+                                          itemBuilder: (context, index) {
+                                            return InkWell(
+                                              onTap: () async {
+                                                await homeController.getOfferDetails(homeController.newFlashOfferList[index].id.toString());
+                                                Get.to(() => OfferDetailScreen(
+                                                      offer: homeController.offer,
+                                                      fromSeeMore: false,
+                                                    ));
+                                              },
+                                              child: OfferWidget(
+                                                offer: homeController.newFlashOfferList[index],
+                                                fromList: false,
+                                              ),
+                                            );
+                                          },
                                         ),
                                       ),
-                                      global.getPlatFrom()
-                                          ? InkWell(
-                                              onTap: () => offerScrollController.animateTo(offerScrollController.position.maxScrollExtent, duration: Duration(seconds: 1), curve: Curves.easeInOut),
-                                              child: Container(
-                                                width: 30,
-                                                height: 80,
-                                                margin: EdgeInsets.only(right: 5),
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                  color: Get.theme.secondaryHeaderColor,
-                                                ),
-                                                child: Icon(
-                                                  Icons.arrow_forward,
-                                                  color: Colors.white,
+                                    ),
+                                    global.getPlatFrom()
+                                        ? InkWell(
+                                            onTap: () => offerScrollController.animateTo(offerScrollController.position.maxScrollExtent, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                            child: Container(
+                                              width: 30,
+                                              height: 80,
+                                              margin: EdgeInsets.only(right: 5),
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.rectangle,
+                                                color: Get.theme.secondaryHeaderColor,
+                                              ),
+                                              child: Icon(
+                                                Icons.arrow_forward,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          )
+                                        : SizedBox(),
+                                  ],
+                                )
+                              : SizedBox()
+                          : SizedBox(
+                              height: 200,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: 5,
+                                  shrinkWrap: true,
+                                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                                  itemBuilder: (context, index) {
+                                    return Shimmer(
+                                      duration: Duration(seconds: 2),
+                                      child: Container(
+                                        width: 330,
+                                        margin: EdgeInsets.only(right: 15),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              width: 300,
+                                              height: 145,
+                                              decoration: BoxDecoration(
+                                                color: Colors.grey[300],
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(11),
+                                                  topRight: Radius.circular(11),
                                                 ),
                                               ),
-                                            )
-                                          : SizedBox(),
-                                    ],
-                                  )
-                                : SizedBox()
-                            : SizedBox(
-                                height: 200,
-                                child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: 5,
-                                    shrinkWrap: true,
-                                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                                    itemBuilder: (context, index) {
-                                      return Shimmer(
-                                        duration: Duration(seconds: 2),
-                                        child: Container(
-                                          width: 330,
-                                          margin: EdgeInsets.only(right: 15),
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                width: 300,
-                                                height: 145,
+                                            ),
+                                            Align(
+                                              alignment: Alignment.centerRight,
+                                              child: Container(
+                                                height: 35,
+                                                width: 80,
+                                                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                                                 decoration: BoxDecoration(
                                                   color: Colors.grey[300],
-                                                  borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(11),
-                                                    topRight: Radius.circular(11),
-                                                  ),
+                                                  borderRadius: BorderRadius.circular(2),
                                                 ),
                                               ),
-                                              Align(
-                                                alignment: Alignment.centerRight,
-                                                child: Container(
-                                                  height: 35,
-                                                  width: 80,
-                                                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.grey[300],
-                                                    borderRadius: BorderRadius.circular(2),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
-                                      );
-                                    }),
-                              );
-                      }),
+                                      ),
+                                    );
+                                  }),
+                            ),
                       ListView.builder(
                         itemCount: homeController.homeAdvList.length,
                         shrinkWrap: true,
                         padding: const EdgeInsets.symmetric(horizontal: 6),
                         physics: NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
-                          return homeController.isHomeAdvLoaded
+                          return global.appInfo.baseUrls != null && homeController.isHomeAdvLoaded
                               ? homeController.homeAdvList[index].commonList != null && homeController.homeAdvList[index].commonList.length > 0
                                   ? Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,

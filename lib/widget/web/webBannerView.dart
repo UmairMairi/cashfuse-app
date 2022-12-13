@@ -21,7 +21,7 @@ class WebBannerView extends StatelessWidget {
       child: SizedBox(
           width: AppConstants.WEB_MAX_WIDTH,
           height: 220,
-          child: homeController.topBannerList != null
+          child: global.appInfo.baseUrls != null && homeController.isBannerLoaded
               ? Stack(
                   clipBehavior: Clip.none,
                   children: [

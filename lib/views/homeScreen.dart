@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({this.bgColor});
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  HomeController homeController = global.getPlatFrom() ? Get.put(HomeController()) : Get.find<HomeController>();
+  HomeController homeController = Get.find<HomeController>();
   CouponController couponController = Get.find<CouponController>();
   SplashController splashController = Get.find<SplashController>();
   final couponScrollController = new ScrollController();
@@ -189,6 +189,7 @@ class HomeScreen extends StatelessWidget {
                             await homeController.init();
                           },
                           child: SingleChildScrollView(
+                            primary: true,
                             padding: EdgeInsets.only(bottom: 20),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

@@ -298,4 +298,28 @@ class AuthController extends GetxController {
       print("Exception - authController.dart - getProfile():" + e.toString());
     }
   }
+
+  Future removeUserfromDb() async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.removeUserfromDb().then((response) async {
+          if (response.statusCode == 200) {
+            Get.to(() => BottomNavigationBarScreen(
+                  pageIndex: 4,
+                ));
+            await logout();
+            showCustomSnackBar(response.data);
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+
+      update();
+    } catch (e) {
+      print("Exception - authController.dart - removeUserfromDb():" + e.toString());
+    }
+  }
 }

@@ -47,4 +47,5 @@ class AppConstants {
   static const String DELETE_CLICK_URI = '/delete_clicks';
   static const String REFERRAL_USERS_URI = '/referral_users';
   static const String TRENDING_KEYWORD = '/trending_keywords';
+  static const String REMOVE_USER_FROM_DB_URI = '/remove_user_from_db';
 }

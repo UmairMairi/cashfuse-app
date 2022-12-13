@@ -9,11 +9,11 @@ import 'package:cashfuse/models/clickModel.dart';
 import 'package:cashfuse/models/commonModel.dart';
 import 'package:cashfuse/models/offerModel.dart';
 import 'package:cashfuse/services/apiHelper.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/widget/customLoader.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cashfuse/utils/global.dart' as global;
 
 class HomeController extends GetxController {
   APIHelper apiHelper = new APIHelper();
@@ -87,7 +87,9 @@ class HomeController extends GetxController {
 
   init() async {
     try {
-      await getHomeAdv();
+      if (global.appInfo.baseUrls == null) {
+        await apiHelper.getAppInfo();
+      }
       await getTopBanners();
 
       await getTopCategories();
@@ -96,6 +98,7 @@ class HomeController extends GetxController {
       await getExclusiveOffers();
 
       await getNewFlashOffers();
+      await getHomeAdv();
 
       getAllAdv();
       if (global.currentUser.id != null) {

@@ -39,7 +39,7 @@ int totalJoinedCount = 0;
 String earningVideoUrl = 'https://media.istockphoto.com/id/1323271459/video/connected-lines-and-particles-on-black-background.mp4?s=mp4-640x640-is&k=20&c=Jzkaf3VHLlSrBvCZDPqQgHzb0Ph5OdPhuDlMBBkDyFM=';
 
 //Api Header
-Future<Map<String, String>> getApiHeaders(bool authorizationRequired) async {
+Future<Map<String, String>> getApiHeaders(bool authorizationRequired, {String userId}) async {
   Map<String, String> apiHeader = new Map<String, String>();
 
   if (authorizationRequired) {
@@ -48,6 +48,9 @@ Future<Map<String, String>> getApiHeaders(bool authorizationRequired) async {
       UserModel currentUser = UserModel.fromJson(json.decode(sp.getString("currentUser")));
       log("Token  == Bearer " + currentUser.token + 'id -- ' + currentUser.id.toString());
       apiHeader.addAll({"Authorization": "Bearer " + currentUser.token});
+      if (userId != null && userId.isNotEmpty) {
+        apiHeader.addAll({"userId": userId});
+      }
     }
   }
 
