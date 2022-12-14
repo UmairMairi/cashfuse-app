@@ -6,6 +6,7 @@ import 'package:cashfuse/views/accountSettingScreen.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/colorPicker.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
+import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/views/languageScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/myEarningScreen.dart';
@@ -639,6 +640,7 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                                 onPressed: () {
                                   authController.logout();
+
                                   Get.back();
                                 },
                               ),

@@ -304,9 +304,14 @@ class AuthController extends GetxController {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         await apiHelper.removeUserfromDb().then((response) async {
           if (response.statusCode == 200) {
-            Get.to(() => BottomNavigationBarScreen(
-                  pageIndex: 4,
-                ));
+            if (global.getPlatFrom()) {
+              Get.offAll(() => BottomNavigationBarScreen());
+            } else {
+              Get.to(() => BottomNavigationBarScreen(
+                    pageIndex: 4,
+                  ));
+            }
+
             await logout();
             showCustomSnackBar(response.data);
           } else {

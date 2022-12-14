@@ -8,6 +8,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/aboutUsScreen.dart';
 import 'package:cashfuse/views/accountSettingScreen.dart';
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
@@ -332,8 +333,12 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                                 style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.red),
                               ),
                               onPressed: () {
-                                authController.logout();
                                 Get.back();
+                                authController.logout();
+                                Get.offAll(
+                                  () => BottomNavigationBarScreen(),
+                                  //preventDuplicates: false,
+                                );
                               },
                             ),
                             CupertinoDialogAction(
