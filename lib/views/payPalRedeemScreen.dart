@@ -16,53 +16,53 @@ class PayPalRedeemScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            Get.back();
-          },
-          child: Icon(
-            Icons.arrow_back,
+    return GetBuilder<PaymentController>(builder: (controller) {
+      return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          leading: InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(
+              Icons.arrow_back,
+            ),
+          ),
+          title: Text(
+            AppLocalizations.of(context).paypal_redeem,
+            style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
           ),
         ),
-        title: Text(
-          AppLocalizations.of(context).paypal_redeem,
-          style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            children: [
-              Container(
-                height: 120,
-                width: Get.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.blue[900],
-                      Colors.blue[800],
-                      Colors.blue.withOpacity(0.85),
-                    ],
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              children: [
+                Container(
+                  height: 120,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.blue[900],
+                        Colors.blue[800],
+                        Colors.blue.withOpacity(0.85),
+                      ],
+                    ),
                   ),
-                ),
-                child: Card(
-                  margin: EdgeInsets.symmetric(horizontal: 90, vertical: 30),
-                  semanticContainer: false,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Image.asset(
-                      Images.paypal,
+                  child: Card(
+                    margin: EdgeInsets.symmetric(horizontal: 90, vertical: 30),
+                    semanticContainer: false,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Image.asset(
+                        Images.paypal,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              GetBuilder<PaymentController>(builder: (controller) {
-                return Container(
+                Container(
                   margin: EdgeInsets.symmetric(vertical: 20),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -200,34 +200,34 @@ class PayPalRedeemScreen extends StatelessWidget {
                           : SizedBox(),
                     ],
                   ),
-                );
-              }),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: paymentController.payPalDetails != null
-          ? InkWell(
-              onTap: () {
-                paymentController.sendWithdrawalRequest('paypal');
-              },
-              child: Container(
-                width: Get.width,
-                height: 45,
-                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Get.theme.secondaryHeaderColor,
-                  borderRadius: BorderRadius.circular(5),
+        bottomNavigationBar: paymentController.payPalDetails != null
+            ? InkWell(
+                onTap: () {
+                  paymentController.sendWithdrawalRequest('paypal');
+                },
+                child: Container(
+                  width: Get.width,
+                  height: 45,
+                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Get.theme.secondaryHeaderColor,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    AppLocalizations.of(context).send_withdrawal_request,
+                    style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                  ),
                 ),
-                alignment: Alignment.center,
-                child: Text(
-                  AppLocalizations.of(context).send_withdrawal_request,
-                  style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                ),
-              ),
-            )
-          : SizedBox(),
-    );
+              )
+            : SizedBox(),
+      );
+    });
   }
 }

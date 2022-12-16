@@ -71,7 +71,13 @@ class PaymentScreen extends StatelessWidget {
                                               ? Images.upi
                                               : global.currentUser.withdrawalRequest[index].medium == 'Bank'
                                                   ? Images.bank
-                                                  : Images.amazon,
+                                                  : global.currentUser.withdrawalRequest[index].medium == 'Amazon'
+                                                      ? Images.Amazon_pay
+                                                      : global.currentUser.withdrawalRequest[index].medium == 'Paytm'
+                                                          ? Images.paytm
+                                                          : global.currentUser.withdrawalRequest[index].medium == 'Paypal'
+                                                              ? Images.paypal
+                                                              : Images.logo,
                                           height: 40,
                                           width: 40,
                                         ),
@@ -86,6 +92,7 @@ class PaymentScreen extends StatelessWidget {
                                           DateConverter.formatDate(
                                             global.currentUser.withdrawalRequest[index].createdAt,
                                           ),
+                                          style: Get.theme.primaryTextTheme.bodySmall,
                                         ),
                                         trailing: Container(
                                           width: 80,
@@ -128,7 +135,11 @@ class PaymentScreen extends StatelessWidget {
                                     ? Images.upi
                                     : global.currentUser.withdrawalRequest[index].medium == 'Bank'
                                         ? Images.bank
-                                        : Images.amazon,
+                                        : global.currentUser.withdrawalRequest[index].medium == 'Amazon'
+                                            ? Images.Amazon_pay
+                                            : global.currentUser.withdrawalRequest[index].medium == 'PayTM'
+                                                ? Images.paytm
+                                                : Images.paypal,
                                 height: 40,
                                 width: 40,
                               ),
@@ -143,6 +154,7 @@ class PaymentScreen extends StatelessWidget {
                                 DateConverter.formatDate(
                                   global.currentUser.withdrawalRequest[index].createdAt,
                                 ),
+                                style: Get.theme.primaryTextTheme.bodySmall,
                               ),
                               trailing: Container(
                                 width: 80,

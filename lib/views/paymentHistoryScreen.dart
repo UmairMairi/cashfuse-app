@@ -66,7 +66,13 @@ class PaymentHistoryScreen extends StatelessWidget {
                                                   ? Images.upi
                                                   : controller.paymentHistoryList[index].medium == 'Bank'
                                                       ? Images.bank
-                                                      : Images.amazon,
+                                                      : controller.paymentHistoryList[index].medium == 'Amazon'
+                                                          ? Images.Amazon_pay
+                                                          : controller.paymentHistoryList[index].medium == 'Paytm'
+                                                              ? Images.paytm
+                                                              : controller.paymentHistoryList[index].medium == 'Paypal'
+                                                                  ? Images.paypal
+                                                                  : Images.logo,
                                               height: 40,
                                               width: 40,
                                             ),
@@ -123,7 +129,13 @@ class PaymentHistoryScreen extends StatelessWidget {
                                         ? Images.upi
                                         : controller.paymentHistoryList[index].medium == 'Bank'
                                             ? Images.bank
-                                            : Images.amazon,
+                                            : controller.paymentHistoryList[index].medium == 'Amazon'
+                                                ? Images.Amazon_pay
+                                                : controller.paymentHistoryList[index].medium == 'Paytm'
+                                                    ? Images.paytm
+                                                    : controller.paymentHistoryList[index].medium == 'Paypal'
+                                                        ? Images.paypal
+                                                        : Images.logo,
                                     height: 40,
                                     width: 40,
                                   ),

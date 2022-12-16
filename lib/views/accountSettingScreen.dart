@@ -324,58 +324,60 @@ class AccountSettingScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      showConfirmationDialog(
-                        context,
-                        'Delete My Account',
-                        'Are you sure you want to delete Account ?',
-                        [
-                          CupertinoDialogAction(
-                            child: Text(
-                              AppLocalizations.of(context).yes,
-                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.red),
+                  !GetPlatform.isWeb
+                      ? InkWell(
+                          onTap: () {
+                            showConfirmationDialog(
+                              context,
+                              'Delete My Account',
+                              'Are you sure you want to delete Account ?',
+                              [
+                                CupertinoDialogAction(
+                                  child: Text(
+                                    AppLocalizations.of(context).yes,
+                                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.red),
+                                  ),
+                                  onPressed: () {
+                                    authController.removeUserfromDb();
+                                  },
+                                ),
+                                CupertinoDialogAction(
+                                  child: Text(
+                                    AppLocalizations.of(context).no,
+                                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.blue),
+                                  ),
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  'Delete My Account',
+                                  style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                                    letterSpacing: -0.5,
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
                             ),
-                            onPressed: () {
-                              authController.removeUserfromDb();
-                            },
                           ),
-                          CupertinoDialogAction(
-                            child: Text(
-                              AppLocalizations.of(context).no,
-                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.blue),
-                            ),
-                            onPressed: () {
-                              Get.back();
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                          ),
-                          SizedBox(
-                            width: 4,
-                          ),
-                          Text(
-                            'Delete My Account',
-                            style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                              letterSpacing: -0.5,
-                              color: Colors.red,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                        )
+                      : SizedBox(),
                   // : SizedBox(),
                   // StatefulBuilder(
                   //     builder: (BuildContext context, StateSetter setState) => Padding(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cashfuse/constants/appConstant.dart';
+import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/models/bankDetailsModel.dart';
 import 'package:cashfuse/models/paymentHistoryModel.dart';
@@ -54,6 +55,7 @@ class PaymentController extends GetxController {
       if (global.sp.getString('pay_pal') != null) {
         payPalDetails = BankDetailsModel.fromJson(json.decode(global.sp.getString("pay_pal")));
       }
+      update();
     } catch (e) {
       print("Exception - PaymentController.dart - init():" + e.toString());
     }
@@ -192,11 +194,13 @@ class PaymentController extends GetxController {
     try {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
-        await apiHelper.sendWithdrawalRequest(medium).then((response) {
+        await apiHelper.sendWithdrawalRequest(medium).then((response) async {
           Get.back();
           if (response.status == "1") {
+            await Get.find<AuthController>().getProfile();
             showCustomSnackBar(response.data);
           } else if (response.status == "0") {
+            await Get.find<AuthController>().getProfile();
             showCustomSnackBar(response.data);
           } else {
             showCustomSnackBar(response.message);
