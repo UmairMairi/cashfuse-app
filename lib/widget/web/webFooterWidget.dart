@@ -16,6 +16,7 @@ class WebFooterWidget extends StatelessWidget {
       children: [
         Container(
             color: Color(0xFF333333),
+            margin: EdgeInsets.only(top: 30),
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             child: Column(
               children: [

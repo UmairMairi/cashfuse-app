@@ -79,7 +79,7 @@ class OfferWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(2),
                         ),
                         child: Text(
-                          commonModel.buttonText,
+                          commonModel.buttonText.isNotEmpty ? commonModel.buttonText : 'Grab Now',
                           style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
                         ),
                       ),

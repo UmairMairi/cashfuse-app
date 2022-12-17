@@ -62,7 +62,14 @@ class SplashController extends GetxController {
 
   Future webInit() async {
     try {
-      global.appDeviceId = await FirebaseMessaging.instance.getToken();
+      if (GetPlatform.isWeb) {
+        global.appDeviceId = await FirebaseMessaging.instance.getToken(
+          vapidKey: "BGPWwFL-u-5K7CdmI7bW1Qav23aJxTUFtksG5SDigWG3M2J1-pqgwY-qB1fMQlRJepzlqq9Qv8rDUqk4v9Ph584",
+        );
+      } else {
+        global.appDeviceId = await FirebaseMessaging.instance.getToken();
+      }
+
       global.sp = await SharedPreferences.getInstance();
 
       log(global.appDeviceId);

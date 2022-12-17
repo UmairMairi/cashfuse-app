@@ -88,7 +88,12 @@ class HomeController extends GetxController {
   init() async {
     try {
       if (global.appInfo.baseUrls == null) {
-        await apiHelper.getAppInfo();
+        await apiHelper.getAppInfo().then((response) {
+          if (response.statusCode == 200) {
+            global.appInfo = response.data;
+            update();
+          }
+        });
       }
       await getTopBanners();
 
@@ -100,7 +105,7 @@ class HomeController extends GetxController {
       await getNewFlashOffers();
       await getHomeAdv();
 
-      getAllAdv();
+      await getAllAdv();
       if (global.currentUser.id != null) {
         getClick();
         await Get.find<AuthController>().getProfile();
