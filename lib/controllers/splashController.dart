@@ -26,6 +26,17 @@ class SplashController extends GetxController {
 
   @override
   void onInit() async {
+    try {
+      if (GetPlatform.isWeb) {
+        global.appDeviceId = await FirebaseMessaging.instance.getToken(
+          vapidKey: global.webConfigurationKey,
+        );
+      } else {
+        global.appDeviceId = await FirebaseMessaging.instance.getToken();
+      }
+    } catch (e) {
+      print("Exception - SplashController.dart - onInit():" + e.toString());
+    }
     if (global.getPlatFrom()) {
       await webInit();
       Get.put(SearchController());
@@ -62,14 +73,6 @@ class SplashController extends GetxController {
 
   Future webInit() async {
     try {
-      if (GetPlatform.isWeb) {
-        global.appDeviceId = await FirebaseMessaging.instance.getToken(
-          vapidKey: "BGPWwFL-u-5K7CdmI7bW1Qav23aJxTUFtksG5SDigWG3M2J1-pqgwY-qB1fMQlRJepzlqq9Qv8rDUqk4v9Ph584",
-        );
-      } else {
-        global.appDeviceId = await FirebaseMessaging.instance.getToken();
-      }
-
       global.sp = await SharedPreferences.getInstance();
 
       log(global.appDeviceId);
@@ -107,9 +110,6 @@ class SplashController extends GetxController {
   Future init() async {
     try {
       Timer(Duration.zero, () async {
-        //if (!global.getPlatFrom()) {
-        global.appDeviceId = await FirebaseMessaging.instance.getToken();
-        //}
         global.sp = await SharedPreferences.getInstance();
 
         log(global.appDeviceId);

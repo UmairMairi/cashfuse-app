@@ -19,6 +19,8 @@ String appName = "Cashfuse";
 
 String baseUrl = "https://cf.codefuse.org/admin/api"; //"https://okaydemo.com/cashback/api";
 
+String webConfigurationKey = "BGPWwFL-u-5K7CdmI7bW1Qav23aJxTUFtksG5SDigWG3M2J1-pqgwY-qB1fMQlRJepzlqq9Qv8rDUqk4v9Ph584";
+
 SharedPreferences sp;
 UserModel currentUser = new UserModel();
 AppInfo appInfo = new AppInfo();
