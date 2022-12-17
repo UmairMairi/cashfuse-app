@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cashfuse/controllers/couponController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
@@ -203,15 +205,18 @@ class HomeScreen extends StatelessWidget {
                                                 height: 170,
                                                 autoPlay: true,
                                                 enlargeCenterPage: false,
-                                                disableCenter: false,
-                                                autoPlayCurve: Curves.easeIn,
+                                                disableCenter: true,
+                                                pauseAutoPlayOnManualNavigate: true,
                                                 aspectRatio: 1,
+                                                onScrolled: (value) {
+                                                  log(value.toString());
+                                                },
                                                 autoPlayInterval: Duration(seconds: 2),
                                                 onPageChanged: (index, reason) {
                                                   homeController.setBannerIndex(index);
                                                 },
                                                 viewportFraction: 1,
-                                                pageSnapping: false,
+                                                pageSnapping: true,
                                               ),
                                               itemCount: homeController.topBannerList.length,
                                               itemBuilder: (context, index, _) {
