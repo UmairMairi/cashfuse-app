@@ -183,7 +183,7 @@ class LoginOrSignUpScreen extends StatelessWidget {
           children: [
             InkWell(
               onTap: () async {
-                await authController.loginOrRegister();
+                await authController.loginOrRegister(fromMenu);
                 //Get.to(() => OtpVerificationScreen());
               },
               child: Container(

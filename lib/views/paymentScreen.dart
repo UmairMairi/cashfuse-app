@@ -137,9 +137,11 @@ class PaymentScreen extends StatelessWidget {
                                         ? Images.bank
                                         : global.currentUser.withdrawalRequest[index].medium == 'Amazon'
                                             ? Images.Amazon_pay
-                                            : global.currentUser.withdrawalRequest[index].medium == 'PayTM'
+                                            : global.currentUser.withdrawalRequest[index].medium == 'Paytm'
                                                 ? Images.paytm
-                                                : Images.paypal,
+                                                : global.currentUser.withdrawalRequest[index].medium == 'Paypal'
+                                                    ? Images.paypal
+                                                    : Images.logo,
                                 height: 40,
                                 width: 40,
                               ),

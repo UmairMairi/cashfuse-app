@@ -142,7 +142,7 @@ class PaymentHistoryScreen extends StatelessWidget {
                                   title: Row(
                                     children: [
                                       Text(
-                                        controller.paymentHistoryList[index].amount.toString(),
+                                        global.appInfo.currency + controller.paymentHistoryList[index].amount.toString(),
                                       ),
                                     ],
                                   ),
@@ -150,6 +150,7 @@ class PaymentHistoryScreen extends StatelessWidget {
                                     DateConverter.formatDate(
                                       controller.paymentHistoryList[index].createdAt,
                                     ),
+                                    style: Get.theme.primaryTextTheme.bodySmall,
                                   ),
                                   trailing: Container(
                                     width: 80,

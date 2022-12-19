@@ -75,6 +75,7 @@ class HomeController extends GetxController {
   int page = 1;
   var isMoreDataAvailable = true.obs;
   var isAllDataLoaded = false.obs;
+  var isClickDataLoaded = false.obs;
 
   String createdLink = '';
   ScrollController scrollController = ScrollController();
@@ -107,7 +108,7 @@ class HomeController extends GetxController {
 
       await getAllAdv();
       if (global.currentUser.id != null) {
-        getClick();
+        await getClick();
         await Get.find<AuthController>().getProfile();
       }
     } catch (e) {
@@ -594,6 +595,7 @@ class HomeController extends GetxController {
   Future getClick() async {
     try {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        isClickDataLoaded.value = false;
         await apiHelper.getClick().then((response) {
           if (response.status == "1") {
             _recentClickList = response.data;
@@ -602,6 +604,7 @@ class HomeController extends GetxController {
             showCustomSnackBar(response.message);
           }
         });
+        isClickDataLoaded.value = true;
         update();
       } else {
         showCustomSnackBar(AppConstants.NO_INTERNET);

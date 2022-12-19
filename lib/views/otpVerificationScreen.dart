@@ -7,8 +7,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OtpVerificationScreen extends StatelessWidget {
   final String verificationCode;
+  final bool fromMenu;
 
-  OtpVerificationScreen({this.verificationCode});
+  OtpVerificationScreen({this.verificationCode, this.fromMenu});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +70,7 @@ class OtpVerificationScreen extends StatelessWidget {
                     onChanged: (code) async {
                       if (code.length == 6) {
                         FocusScope.of(context).requestFocus(FocusNode());
-                        await authController.checkOTP(verificationCode);
+                        await authController.checkOTP(verificationCode, fromMenu);
                       }
                     },
                     scrollPadding: EdgeInsets.zero,
@@ -136,7 +137,7 @@ class OtpVerificationScreen extends StatelessWidget {
         ),
         bottomNavigationBar: InkWell(
           onTap: () async {
-            await authController.checkOTP(verificationCode);
+            await authController.checkOTP(verificationCode, fromMenu);
           },
           child: Container(
             width: Get.width,

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+import 'package:cashfuse/controllers/homeController.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/networkController.dart';
@@ -52,7 +53,7 @@ class AuthController extends GetxController {
     }
   }
 
-  Future loginOrRegister() async {
+  Future loginOrRegister(bool fromMenu) async {
     try {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         if (contactNo.text.isNotEmpty) {
@@ -60,7 +61,7 @@ class AuthController extends GetxController {
             Get.dialog(CustomLoader(), barrierDismissible: false);
             await apiHelper.loginOrRegister(coutryCode + contactNo.text).then((response) async {
               if (response.statusCode == 200) {
-                await sendOTP();
+                await sendOTP(fromMenu);
               } else {
                 Get.back();
                 showCustomSnackBar(response.message);
@@ -83,7 +84,7 @@ class AuthController extends GetxController {
     }
   }
 
-  Future sendOTP() async {
+  Future sendOTP(bool fromMenu) async {
     try {
       otp.clear();
       if (global.getPlatFrom()) {
@@ -96,6 +97,7 @@ class AuthController extends GetxController {
               width: Get.width / 3,
               child: OtpVerificationScreen(
                 verificationCode: confirmationResult.verificationId,
+                fromMenu: fromMenu,
               ),
             ),
           ));
@@ -118,6 +120,7 @@ class AuthController extends GetxController {
 
             Get.to(() => OtpVerificationScreen(
                   verificationCode: verificationId,
+                  fromMenu: fromMenu,
                 ));
           },
           codeAutoRetrievalTimeout: (String verificationId) {},
@@ -153,7 +156,7 @@ class AuthController extends GetxController {
     update();
   }
 
-  Future checkOTP(String verificationCode) async {
+  Future checkOTP(String verificationCode, bool fromMenu) async {
     try {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         FirebaseAuth auth = FirebaseAuth.instance;
@@ -162,11 +165,11 @@ class AuthController extends GetxController {
         await auth.signInWithCredential(_credential).then((result) {
           Get.back();
           status = 'success';
-          verifyOtp(status);
+          verifyOtp(status, fromMenu);
         }).catchError((e) {
           status = 'failed';
           Get.back();
-          verifyOtp(status);
+          verifyOtp(status, fromMenu);
         }).onError((error, stackTrace) {
           showCustomSnackBar(error.toString());
         });
@@ -178,7 +181,7 @@ class AuthController extends GetxController {
     }
   }
 
-  Future verifyOtp(String status) async {
+  Future verifyOtp(String status, bool fromMenu) async {
     try {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
@@ -191,6 +194,9 @@ class AuthController extends GetxController {
               global.sp.setString('currentUser', json.encode(global.currentUser.toJson()));
               Get.to(() => BottomNavigationBarScreen());
               await getProfile();
+              if (fromMenu) {
+                await Get.find<HomeController>().init();
+              }
             } else {
               showCustomSnackBar(response.message);
             }
