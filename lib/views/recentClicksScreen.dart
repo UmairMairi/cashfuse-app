@@ -97,7 +97,8 @@ class RecentClickScreen extends StatelessWidget {
                       : SizedBox(),
                 ],
               ),
-        body: Center(
+        body: Align(
+          alignment: Alignment.topCenter,
           child: SizedBox(
             width: AppConstants.WEB_MAX_WIDTH,
             child: RefreshIndicator(

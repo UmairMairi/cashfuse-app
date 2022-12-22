@@ -33,6 +33,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:slide_countdown/slide_countdown.dart';
@@ -129,6 +130,19 @@ class HomeScreen extends StatelessWidget {
                           Images.payments,
                           height: 25,
                         )),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      homeController.showRewardedAd();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Icon(
+                        Icons.card_giftcard,
+                        color: bgColor,
+                        size: 30,
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -138,6 +152,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               InkWell(
                   onTap: () async {
+                    homeController.showInterstitialAd();
                     if (global.currentUser.id != null) {
                       Get.to(() => ReferEarnScreen());
                     } else {
@@ -396,6 +411,17 @@ class HomeScreen extends StatelessWidget {
                                           },
                                         ),
                                 ),
+                                homeController.isAdLoaed
+                                    ? SizedBox(
+                                        //height: 100,
+                                        height: homeController.bannerAd.size.height.toDouble(),
+                                        //width: 200,
+                                        width: homeController.bannerAd.size.width.toDouble(),
+                                        child: AdWidget(
+                                          ad: homeController.bannerAd,
+                                        ),
+                                      )
+                                    : SizedBox(),
                                 couponController.couponList != null && couponController.couponList.length > 0
                                     ? Padding(
                                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 15),

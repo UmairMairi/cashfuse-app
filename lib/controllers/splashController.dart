@@ -34,6 +34,7 @@ class SplashController extends GetxController {
       } else {
         global.appDeviceId = await FirebaseMessaging.instance.getToken();
       }
+      await getAdmobSettings();
     } catch (e) {
       print("Exception - SplashController.dart - onInit():" + e.toString());
     }
@@ -69,6 +70,25 @@ class SplashController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+  }
+
+  Future getAdmobSettings() async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.getAdmobSettings().then((response) async {
+          if (response.statusCode == 200) {
+            global.admobSetting = response.data;
+            update();
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+    } catch (e) {
+      print("Exception - SplashController.dart - getAdmobSettings():" + e.toString());
+    }
   }
 
   Future webInit() async {

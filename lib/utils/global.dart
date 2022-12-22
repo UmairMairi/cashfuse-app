@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:cashfuse/models/adMobsKeyModel.dart';
+import 'package:cashfuse/models/admobSettingModel.dart';
 import 'package:cashfuse/models/appInfoModel.dart';
 import 'package:cashfuse/models/userModel.dart';
 import 'package:cashfuse/utils/date_converter.dart';
@@ -24,6 +26,7 @@ String webConfigurationKey = "BGPWwFL-u-5K7CdmI7bW1Qav23aJxTUFtksG5SDigWG3M2J1-p
 SharedPreferences sp;
 UserModel currentUser = new UserModel();
 AppInfo appInfo = new AppInfo();
+AdmobSettingModel admobSetting = new AdmobSettingModel();
 String timeFormat = '12';
 String appDeviceId;
 bool isRTL = false;

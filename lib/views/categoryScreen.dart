@@ -46,7 +46,8 @@ class CategoryScreen extends StatelessWidget {
               ),
             ),
       body: SingleChildScrollView(
-        child: Center(
+        child: Align(
+          alignment: Alignment.topCenter,
           child: SizedBox(
             width: AppConstants.WEB_MAX_WIDTH,
             child: Column(

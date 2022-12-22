@@ -6,6 +6,7 @@ class AppConstants {
   static const double WEB_MAX_WIDTH = 1500;
 
   static const String APP_INFO_URI = '/app_info';
+  static const String ADMOB_SETTING_URI = '/adnetwork/admob_settings';
   static const String LOGIN_RESGISTER = '/auth/login_or_register';
   static const String VERIFY_OTP = '/auth/verify-phone';
   static const String CAEGORY_URI = '/getcategory';

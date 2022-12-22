@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cashfuse/constants/appConstant.dart';
+import 'package:cashfuse/models/adMobsKeyModel.dart';
+import 'package:cashfuse/models/admobSettingModel.dart';
 import 'package:cashfuse/models/adsModel.dart';
 import 'package:cashfuse/models/allInOneSearchDataModel.dart';
 import 'package:cashfuse/models/appInfoModel.dart';
@@ -59,6 +61,28 @@ class APIHelper {
     }
   }
 
+  Future<dynamic> getAdmobSettings() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.ADMOB_SETTING_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = AdmobSettingModel.fromJson(response.data);
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADMOB_SETTING_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getAdmobSettings():" + e.toString());
+    }
+  }
+
   Future<dynamic> loginOrRegister(String phone) async {
     try {
       Response response;
@@ -89,6 +113,7 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
+
       var formData = FormData.fromMap({
         'phone': phone,
         'otp': status,

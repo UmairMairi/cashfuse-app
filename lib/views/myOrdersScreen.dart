@@ -45,7 +45,7 @@ class MyOrdersScreen extends StatelessWidget {
               ),
             ),
       body: Align(
-        alignment: Alignment.topLeft,
+        alignment: Alignment.topCenter,
         child: SizedBox(
           width: AppConstants.WEB_MAX_WIDTH,
           child: GetBuilder<OrderController>(builder: (controller) {

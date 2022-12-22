@@ -22,6 +22,12 @@ class _ImageRotateState extends State<ImageRotate> with SingleTickerProviderStat
   }
 
   @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new AnimatedBuilder(
       animation: animationController,

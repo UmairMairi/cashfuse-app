@@ -24,6 +24,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -33,7 +34,9 @@ void main() async {
   setPathUrlStrategy();
   HttpOverrides.global = new MyHttpOverrides();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   await NotificationHelper.initialize();
+  MobileAds.instance.initialize();
   if (!GetPlatform.isWeb) {
     await fetchLinkData();
   }
