@@ -1,6 +1,8 @@
 import 'package:cashfuse/models/baseUrlsModel.dart';
 
 class AppInfo {
+  String admob;
+  String facebookAd;
   String businessName;
   String logo;
   String currency;
@@ -9,6 +11,8 @@ class AppInfo {
   BaseUrls baseUrls;
 
   AppInfo({
+    this.admob,
+    this.facebookAd,
     this.businessName,
     this.logo,
     this.currency,
@@ -19,6 +23,8 @@ class AppInfo {
 
   AppInfo.fromJson(Map<String, dynamic> json) {
     try {
+      admob = json['admob'];
+      facebookAd = json['facebook_ad'];
       businessName = json["business_name"] != null ? json["business_name"] : '';
       logo = json["logo"] != null ? json["logo"] : '';
       currency = json["currency"] != null ? json["currency"] : '';

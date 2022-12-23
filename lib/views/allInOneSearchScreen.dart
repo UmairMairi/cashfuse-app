@@ -372,6 +372,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                     labelColor: Theme.of(context).primaryColor,
                     unselectedLabelColor: Theme.of(context).primaryColorLight,
                     onTap: (int index) async {
+                      global.showInterstitialAd();
                       _tabController.animateTo(index, curve: Curves.slowMiddle);
                       setState(() {
                         _isWebLoaded = false;

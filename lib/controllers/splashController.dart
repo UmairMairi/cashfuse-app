@@ -34,7 +34,6 @@ class SplashController extends GetxController {
       } else {
         global.appDeviceId = await FirebaseMessaging.instance.getToken();
       }
-      await getAdmobSettings();
     } catch (e) {
       print("Exception - SplashController.dart - onInit():" + e.toString());
     }
@@ -54,6 +53,9 @@ class SplashController extends GetxController {
 
         update();
       });
+
+    await getAdmobSettings();
+    await getFaceBookAdSetting();
     super.onInit();
   }
 
@@ -88,6 +90,25 @@ class SplashController extends GetxController {
       }
     } catch (e) {
       print("Exception - SplashController.dart - getAdmobSettings():" + e.toString());
+    }
+  }
+
+  Future getFaceBookAdSetting() async {
+    try {
+      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        await apiHelper.getFaceBookAdSetting().then((response) async {
+          if (response.statusCode == 200) {
+            global.facebookAdSetting = response.data;
+            update();
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+    } catch (e) {
+      print("Exception - SplashController.dart - getFaceBookAdSetting():" + e.toString());
     }
   }
 

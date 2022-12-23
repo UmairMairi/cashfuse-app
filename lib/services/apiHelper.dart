@@ -72,7 +72,7 @@ class APIHelper {
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = AdmobSettingModel.fromJson(response.data);
+        recordList = AdmobSettingModel.fromJson(response.data['data']);
       } else {
         recordList = null;
       }
@@ -80,6 +80,28 @@ class APIHelper {
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getAdmobSettings():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getFaceBookAdSetting() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get('${global.baseUrl}${AppConstants.FACEBOOK_ADS_SETTING_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = AdmobSettingModel.fromJson(response.data['data']);
+      } else {
+        recordList = null;
+      }
+      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.FACEBOOK_ADS_SETTING_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getFaceBookAdSetting():" + e.toString());
     }
   }
 

@@ -2,12 +2,14 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/models/adMobsKeyModel.dart';
 import 'package:cashfuse/models/admobSettingModel.dart';
 import 'package:cashfuse/models/appInfoModel.dart';
 import 'package:cashfuse/models/userModel.dart';
 import 'package:cashfuse/utils/date_converter.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
@@ -27,6 +29,7 @@ SharedPreferences sp;
 UserModel currentUser = new UserModel();
 AppInfo appInfo = new AppInfo();
 AdmobSettingModel admobSetting = new AdmobSettingModel();
+AdmobSettingModel facebookAdSetting = new AdmobSettingModel();
 String timeFormat = '12';
 String appDeviceId;
 bool isRTL = false;
@@ -42,6 +45,7 @@ String appShareLink = '';
 FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 int totalJoinedCount = 0;
 String earningVideoUrl = 'https://media.istockphoto.com/id/1323271459/video/connected-lines-and-particles-on-black-background.mp4?s=mp4-640x640-is&k=20&c=Jzkaf3VHLlSrBvCZDPqQgHzb0Ph5OdPhuDlMBBkDyFM=';
+int clickCount = 0;
 
 //Api Header
 Future<Map<String, String>> getApiHeaders(bool authorizationRequired, {String userId}) async {
@@ -63,6 +67,19 @@ Future<Map<String, String>> getApiHeaders(bool authorizationRequired, {String us
   apiHeader.addAll({"Accept": "*/*"});
   print(apiHeader);
   return apiHeader;
+}
+
+void showInterstitialAd() async {
+  try {
+    clickCount++;
+
+    if (clickCount == admobSetting.interstitialAdList[0].clicks) {
+      Get.find<HomeController>().showInterstitialAd();
+      FacebookInterstitialAd.showInterstitialAd();
+    }
+  } catch (e) {
+    print("Exception - global.dart - showInterstitialAd():" + e.toString());
+  }
 }
 
 Future<void> launchInBrowser(String url) async {

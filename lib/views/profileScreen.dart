@@ -264,6 +264,7 @@ class ProfileScreen extends StatelessWidget {
                       // ),
                       InkWell(
                         onTap: () {
+                          global.showInterstitialAd();
                           Get.to(() => AccountSettingScreen());
                         },
                         child: Padding(
@@ -294,6 +295,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
+                          global.showInterstitialAd();
                           Get.to(() => MyEarningSceen());
                         },
                         child: Padding(
@@ -324,6 +326,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
+                          global.showInterstitialAd();
                           Get.to(() => PaymentScreen());
                         },
                         child: Padding(
@@ -350,6 +353,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
+                          global.showInterstitialAd();
                           Get.to(() => PaymentHistoryScreen());
                         },
                         child: Padding(
@@ -381,6 +385,7 @@ class ProfileScreen extends StatelessWidget {
 
                       InkWell(
                         onTap: () {
+                          global.showInterstitialAd();
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => BottomNavigationBarScreen(
@@ -413,6 +418,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
+                          global.showInterstitialAd();
                           Get.to(() => ReferralNetworkScreen());
                         },
                         child: Padding(
@@ -439,6 +445,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
+                          global.showInterstitialAd();
                           Get.to(() => GetHelpScreen());
                         },
                         child: Padding(
@@ -469,6 +476,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
+                          global.showInterstitialAd();
                           Get.to(() => ColorPickerPage());
                         },
                         child: Padding(
@@ -499,6 +507,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
+                          global.showInterstitialAd();
                           Get.to(() => LanguageScreen());
                         },
                         child: Padding(
@@ -567,6 +576,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
+                          global.showInterstitialAd();
                           Get.to(() => AboutUsScreen());
                         },
                         child: Padding(
@@ -597,6 +607,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
+                          global.showInterstitialAd();
                           Get.to(() => PrivacyPolicyScreen());
                         },
                         child: Padding(

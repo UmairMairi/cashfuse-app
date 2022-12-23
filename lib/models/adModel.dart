@@ -1,6 +1,7 @@
 class AdModel {
   int id;
   String adId;
+  String placementId;
   String adType;
   int status;
   int location;
@@ -12,6 +13,7 @@ class AdModel {
   AdModel({
     this.id,
     this.adId,
+    this.placementId,
     this.adType,
     this.status,
     this.location,
@@ -24,7 +26,8 @@ class AdModel {
   AdModel.fromJson(Map<String, dynamic> json) {
     try {
       id = json["id"];
-      adId = json["ad_id"];
+      adId = json["ad_id"] != null ? json["ad_id"] : '';
+      placementId = json["placement_id"] != null ? json["placement_id"] : '';
       adType = json["ad_type"] != null ? json["ad_type"] : '';
       status = json["status"];
       location = json["location"];

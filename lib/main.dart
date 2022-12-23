@@ -18,6 +18,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/notificationHelper.dart';
 import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/views/splashScreen.dart';
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,7 @@ void main() async {
 
   await NotificationHelper.initialize();
   MobileAds.instance.initialize();
+
   if (!GetPlatform.isWeb) {
     await fetchLinkData();
   }
