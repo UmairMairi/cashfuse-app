@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:cashfuse/controllers/adController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/controllers/splashController.dart';
 import 'package:cashfuse/models/adMobsKeyModel.dart';
 import 'package:cashfuse/models/admobSettingModel.dart';
 import 'package:cashfuse/models/appInfoModel.dart';
@@ -74,7 +76,7 @@ void showInterstitialAd() async {
     clickCount++;
 
     if (clickCount == admobSetting.interstitialAdList[0].clicks) {
-      Get.find<HomeController>().showInterstitialAd();
+      Get.find<AdController>().showInterstitialAd();
       FacebookInterstitialAd.showInterstitialAd();
     }
   } catch (e) {

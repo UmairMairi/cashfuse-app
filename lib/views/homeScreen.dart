@@ -1,7 +1,7 @@
-import 'dart:async';
 import 'dart:developer';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cashfuse/controllers/adController.dart';
 import 'package:cashfuse/controllers/couponController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/splashController.dart';
@@ -19,6 +19,7 @@ import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/imageRotateWidget.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/myEarningScreen.dart';
+import 'package:cashfuse/views/nativeAdWidget.dart';
 import 'package:cashfuse/views/offerDetailScreen.dart';
 import 'package:cashfuse/views/offerListScreen.dart';
 import 'package:cashfuse/views/referEarnScreen.dart';
@@ -34,6 +35,8 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_native_admob/flutter_native_admob.dart';
+import 'package:flutter_native_admob/native_admob_options.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -49,16 +52,91 @@ class HomeScreen extends StatelessWidget {
   HomeController homeController = Get.find<HomeController>();
   CouponController couponController = Get.find<CouponController>();
   SplashController splashController = Get.find<SplashController>();
+  AdController adController = Get.find<AdController>();
   final couponScrollController = new ScrollController();
   final offerScrollController = new ScrollController();
+
+  // Widget _faceNativeBannerAd() {
+  //   return FacebookNativeAd(
+  //     // placementId: "YOUR_PLACEMENT_ID",
+  //     placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964953543583512",
+  //     adType: NativeAdType.NATIVE_BANNER_AD,
+  //     bannerAdSize: NativeBannerAdSize.HEIGHT_100,
+  //     width: double.infinity,
+  //     backgroundColor: Colors.blue,
+  //     titleColor: Colors.white,
+  //     descriptionColor: Colors.white,
+  //     buttonColor: Colors.deepPurple,
+  //     buttonTitleColor: Colors.white,
+  //     buttonBorderColor: Colors.white,
+  //     listener: (result, value) {
+  //       print("Native Banner Ad: $result --> $value");
+  //     },
+  //   );
+  // }
+
+  // Widget _faceBookBannerAd() {
+  //   return FacebookBannerAd(
+  //     // placementId: "YOUR_PLACEMENT_ID",
+  //     placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964944860251047", //testid
+  //     bannerSize: BannerSize.STANDARD,
+  //     keepAlive: true,
+  //     listener: (result, value) {
+  //       print("Banner Ad: $result -->  $value");
+  //     },
+  //   );
+  // }
+
+  // Widget _nativeAd() {
+  //   return FacebookNativeAd(
+  //     placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964952163583650",
+  //     adType: NativeAdType.NATIVE_AD_VERTICAL,
+  //     width: double.infinity,
+  //     height: 300,
+  //     backgroundColor: Colors.blue,
+  //     titleColor: Colors.white,
+  //     descriptionColor: Colors.white,
+  //     buttonColor: Colors.deepPurple,
+  //     buttonTitleColor: Colors.white,
+  //     buttonBorderColor: Colors.white,
+  //     listener: (result, value) {
+  //       print("Native Ad: $result --> $value");
+  //     },
+  //     keepExpandedWhileLoading: true,
+  //     expandAnimationDuraion: 1000,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
     try {
-      FacebookAudienceNetwork.init(iOSAdvertiserTrackingEnabled: false);
+      FacebookAudienceNetwork.init(
+        //testingId: '468FD9C0CF496815189B2FE63C8EFA31',
+        iOSAdvertiserTrackingEnabled: false,
+      );
+
+      //AdSettings.addTestDevice("328404cebf50ec1fdb05795c0007a8a7");
     } catch (e) {
       print("Exception - main.dart - main():" + e.toString());
     }
+
+    final NativeAd myNative = NativeAd(
+      adUnitId: 'ca-app-pub-3940256099942544/2247696110',
+      factoryId: 'adFactoryExample',
+      request: AdRequest(),
+      listener: NativeAdListener(),
+    );
+
+    myNative.load();
+    // FacebookAudienceNetwork.init(
+    //   testingId: '468FD9C0CF496815189B2FE63C8EFA31',
+    //   iOSAdvertiserTrackingEnabled: false,
+    // );
+    // try {
+    //   FacebookAudienceNetwork.init(iOSAdvertiserTrackingEnabled: false);
+    // } catch (e) {
+    //   print("Exception - main.dart - main():" + e.toString());
+    // }
     return Scaffold(
         key: scaffoldKey,
         drawer: DrawerWidget(),
@@ -206,9 +284,10 @@ class HomeScreen extends StatelessWidget {
             : Stack(
                 alignment: Alignment.center,
                 children: [
-                  GetBuilder<HomeController>(builder: (controller) {
-                    controller.loadFacebookInterstitialAd();
-                    return Builder(builder: (context) {
+                  GetBuilder<AdController>(builder: (adsCont) {
+                    //controller.loadFacebookInterstitialAd();
+                    return GetBuilder<HomeController>(builder: (controller) {
+                      //controller.loadFacebookInterstitialAd();
                       return GetBuilder<CouponController>(builder: (cont) {
                         return RefreshIndicator(
                           onRefresh: () async {
@@ -274,41 +353,43 @@ class HomeScreen extends StatelessWidget {
                                                       );
                                                     }
                                                   },
-                                                  child: homeController.topBannerList[index].name == 'Ad'
-                                                      ? FacebookNativeAd(
-                                                          keepAlive: true,
-                                                          placementId: "CAROUSEL_IMG_SQUARE_LINK#536153035214384_536880055141682",
-                                                          adType: NativeAdType.NATIVE_AD_VERTICAL,
-                                                          width: Get.width,
-                                                          height: 300,
-                                                          backgroundColor: Colors.blue,
-                                                          titleColor: Colors.white,
-                                                          descriptionColor: Colors.white,
-                                                          buttonColor: Colors.deepPurple,
-                                                          buttonTitleColor: Colors.white,
-                                                          buttonBorderColor: Colors.white,
-                                                          listener: (result, value) {
-                                                            print("Native Ad: $result --> $value");
-                                                          },
-                                                          keepExpandedWhileLoading: true,
-                                                          expandAnimationDuraion: 1000,
-                                                        )
-                                                      : Container(
-                                                          width: Get.width,
-                                                          margin: EdgeInsets.only(right: 0),
-                                                          decoration: BoxDecoration(
-                                                            borderRadius: BorderRadius.circular(5),
-                                                          ),
-                                                          child: ClipRRect(
-                                                            borderRadius: BorderRadius.circular(0),
-                                                            child: CustomImage(
-                                                              image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[index].image}',
-                                                              //height: 25,
-                                                              width: Get.width,
-                                                              fit: BoxFit.fill,
-                                                            ),
-                                                          ),
-                                                        ),
+                                                  child:
+                                                      // homeController.topBannerList[index].name == 'Ad'
+                                                      //     ? FacebookNativeAd(
+                                                      //         keepAlive: true,
+                                                      //         placementId: "CAROUSEL_IMG_SQUARE_LINK#536153035214384_536880055141682",
+                                                      //         adType: NativeAdType.NATIVE_AD_VERTICAL,
+                                                      //         width: Get.width,
+                                                      //         height: 300,
+                                                      //         backgroundColor: Colors.blue,
+                                                      //         titleColor: Colors.white,
+                                                      //         descriptionColor: Colors.white,
+                                                      //         buttonColor: Colors.deepPurple,
+                                                      //         buttonTitleColor: Colors.white,
+                                                      //         buttonBorderColor: Colors.white,
+                                                      //         listener: (result, value) {
+                                                      //           print("Native Ad: $result --> $value");
+                                                      //         },
+                                                      //         keepExpandedWhileLoading: true,
+                                                      //         expandAnimationDuraion: 1000,
+                                                      //       )
+                                                      //     :
+                                                      Container(
+                                                    width: Get.width,
+                                                    margin: EdgeInsets.only(right: 0),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(5),
+                                                    ),
+                                                    child: ClipRRect(
+                                                      borderRadius: BorderRadius.circular(0),
+                                                      child: CustomImage(
+                                                        image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[index].image}',
+                                                        //height: 25,
+                                                        width: Get.width,
+                                                        fit: BoxFit.fill,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 );
                                               }),
                                           homeController.topBannerList != null && homeController.topBannerList.length > 0
@@ -360,24 +441,42 @@ class HomeScreen extends StatelessWidget {
                                 //     ),
                                 //   ),
                                 // ),
-                                FacebookNativeAd(
-                                  placementId: "VID_HD_16_9_46S_APP_INSTALL#536153035214384_536880055141682",
-                                  adType: NativeAdType.NATIVE_AD_HORIZONTAL,
-                                  width: double.infinity,
-                                  height: 300,
-                                  keepAlive: true,
-                                  backgroundColor: Colors.blue,
-                                  titleColor: Colors.white,
-                                  descriptionColor: Colors.white,
-                                  buttonColor: Colors.deepPurple,
-                                  buttonTitleColor: Colors.white,
-                                  buttonBorderColor: Colors.white,
-                                  listener: (result, value) {
-                                    print("Native Ad: $result --> $value");
-                                  },
-                                  keepExpandedWhileLoading: true,
-                                  expandAnimationDuraion: 1000,
-                                ),
+                                // _faceNativeBannerAd(),
+                                // FacebookNativeAd(
+                                //   // placementId: "YOUR_PLACEMENT_ID",
+                                //   placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964953543583512",
+                                //   adType: NativeAdType.NATIVE_AD,
+                                //   bannerAdSize: NativeBannerAdSize.HEIGHT_100,
+                                //   width: double.infinity,
+                                //   backgroundColor: Colors.blue,
+                                //   titleColor: Colors.white,
+                                //   descriptionColor: Colors.white,
+                                //   buttonColor: Colors.deepPurple,
+                                //   buttonTitleColor: Colors.white,
+                                //   buttonBorderColor: Colors.white,
+
+                                //   listener: (result, value) {
+                                //     print("Native Banner Ad: $result --> $value");
+                                //   },
+                                // ),
+                                // FacebookNativeAd(
+                                //   placementId: "VID_HD_16_9_46S_APP_INSTALL#536153035214384_536880055141682",
+                                //   adType: NativeAdType.NATIVE_AD_HORIZONTAL,
+                                //   width: double.infinity,
+                                //   height: 300,
+                                //   keepAlive: true,
+                                //   backgroundColor: Colors.blue,
+                                //   titleColor: Colors.white,
+                                //   descriptionColor: Colors.white,
+                                //   buttonColor: Colors.deepPurple,
+                                //   buttonTitleColor: Colors.white,
+                                //   buttonBorderColor: Colors.white,
+                                //   listener: (result, value) {
+                                //     print("Native Ad: $result --> $value");
+                                //   },
+                                //   keepExpandedWhileLoading: true,
+                                //   expandAnimationDuraion: 1000,
+                                // ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 15),
                                   child: Row(
@@ -477,26 +576,98 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                 ),
 
-                                homeController.isAdLoaed && global.admobSetting.bannerAdList[0].status == 1
+                                adController.isAdmobBannerAdLoaed && global.admobSetting.bannerAdList[0].status == 1
                                     ? Align(
                                         alignment: Alignment.center,
+                                        //height: 100,
+
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 15),
+                                          padding: const EdgeInsets.only(top: 15),
                                           child: SizedBox(
-                                            height: homeController.bannerAdList[0].size.height.toDouble(),
-                                            width: homeController.bannerAdList[0].size.width.toDouble(),
+                                            height: adController.bannerAdList[0].size.height.toDouble(),
+                                            // //width: 200,
+                                            width: adController.bannerAdList[0].size.width.toDouble(),
                                             child: AdWidget(
                                               key: Key('0'),
-                                              ad: homeController.bannerAdList[0],
+                                              ad: adController.bannerAdList[0],
                                             ),
                                           ),
                                         ),
                                       )
-                                    : SizedBox(
-                                        height: 25,
-                                      ),
+                                    : SizedBox(),
+
+                                FacebookBannerAd(
+                                  // placementId: "YOUR_PLACEMENT_ID",
+                                  placementId: "IMG_16_9_LINK#536153035214384_536898305139857", //testid
+                                  bannerSize: BannerSize.STANDARD,
+
+                                  keepAlive: true,
+                                  listener: (result, value) {
+                                    print("Banner Ad: $result -->  $value");
+                                  },
+                                ),
+
+                                Container(
+                                    height: 300,
+                                    child: AdWidget(
+                                      ad: myNative,
+                                    )),
+
+                                // Container(
+                                //   height: adController.adheight,
+                                //   padding: EdgeInsets.all(10),
+                                //   margin: EdgeInsets.only(bottom: 20.0),
+                                //   child: NativeAdmob(
+                                //     type: NativeAdmobType.banner,
+                                //     // Your ad unit id
+                                //     adUnitID: 'ca-app-pub-3940256099942544/2247696110',
+                                //     controller: adController.nativeAdController,
+
+                                //     // Don't show loading widget when in loading state
+                                //     loading: Container(
+                                //       height: adController.adheight,
+                                //       width: adController.adheight,
+                                //       color: Colors.red,
+                                //     ),
+                                //   ),
+                                // ),
+
+                                // splashController.isAdLoaed && global.admobSetting.bannerAdList[0].status == 1
+                                //     ?
+                                // Align(
+                                //   alignment: Alignment.center,
+                                //   child: Padding(
+                                //     padding: const EdgeInsets.symmetric(vertical: 15),
+                                //     child: SizedBox(
+                                //       // height: homeController.bannerAdList[0].size.height.toDouble(),
+                                //       // width: homeController.bannerAdList[0].size.width.toDouble(),
+                                //       child: AdWidget(
+                                //         key: Key('0'),
+                                //         ad: BannerAd(
+                                //           adUnitId: "ca-app-pub-3940256099942544/6300978111", //"ca-app-pub-3940256099942544/6300978111",
+                                //           size: AdSize.banner,
+                                //           request: AdRequest(),
+                                //           listener: BannerAdListener(
+                                //             onAdLoaded: (_) {
+                                //               // isAdLoaed = true;
+                                //               // update();
+                                //             },
+                                //             onAdFailedToLoad: (ad, error) {
+                                //               ad.dispose();
+                                //             },
+                                //           ),
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
+                                // : SizedBox(
+                                //     height: 25,
+                                //   ),
                                 // global.facebookAdSetting.bannerAdList != null && global.facebookAdSetting.bannerAdList.length > 0 && global.facebookAdSetting.bannerAdList[0] != null
                                 //     ?
+
+                                // _faceBookBannerAd(),
                                 FacebookBannerAd(
                                   placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
                                   bannerSize: BannerSize.STANDARD,
@@ -942,45 +1113,64 @@ class HomeScreen extends StatelessWidget {
                                               );
                                             }),
                                       ),
-                                homeController.isAdLoaed && global.admobSetting.bannerAdList[1].status == 1
+                                adController.isAdmobBannerAdLoaed && global.admobSetting.bannerAdList[1].status == 1
                                     ? Align(
                                         alignment: Alignment.center,
+                                        //height: 100,
+
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 15),
+                                          padding: const EdgeInsets.only(top: 15),
                                           child: SizedBox(
-                                            height: homeController.bannerAdList[1].size.height.toDouble(),
-                                            width: homeController.bannerAdList[1].size.width.toDouble(),
+                                            height: adController.bannerAdList[1].size.height.toDouble(),
+                                            // //width: 200,
+                                            width: adController.bannerAdList[1].size.width.toDouble(),
                                             child: AdWidget(
                                               key: Key('1'),
-                                              ad: homeController.bannerAdList[1],
+                                              ad: adController.bannerAdList[1],
                                             ),
                                           ),
                                         ),
                                       )
-                                    : SizedBox(
-                                        height: 25,
-                                      ),
-                                FacebookBannerAd(
-                                  placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
-                                  bannerSize: BannerSize.STANDARD,
-                                  keepAlive: true,
-                                  listener: (result, value) {
-                                    switch (result) {
-                                      case BannerAdResult.ERROR:
-                                        print("Error: $value");
-                                        break;
-                                      case BannerAdResult.LOADED:
-                                        print("Loaded: $value");
-                                        break;
-                                      case BannerAdResult.CLICKED:
-                                        print("Clicked: $value");
-                                        break;
-                                      case BannerAdResult.LOGGING_IMPRESSION:
-                                        print("Logging Impression: $value");
-                                        break;
-                                    }
-                                  },
-                                ),
+                                    : SizedBox(),
+                                // homeController.isAdLoaed && global.admobSetting.bannerAdList[1].status == 1
+                                //     ? Align(
+                                //         alignment: Alignment.center,
+                                //         child: Padding(
+                                //           padding: const EdgeInsets.symmetric(vertical: 15),
+                                //           child: SizedBox(
+                                //             height: homeController.bannerAdList[1].size.height.toDouble(),
+                                //             width: homeController.bannerAdList[1].size.width.toDouble(),
+                                //             child: AdWidget(
+                                //               key: Key('1'),
+                                //               ad: homeController.bannerAdList[1],
+                                //             ),
+                                //           ),
+                                //         ),
+                                //       )
+                                //     : SizedBox(
+                                //         height: 25,
+                                //       ),
+                                // FacebookBannerAd(
+                                //   placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
+                                //   bannerSize: BannerSize.STANDARD,
+                                //   keepAlive: true,
+                                //   listener: (result, value) {
+                                //     switch (result) {
+                                //       case BannerAdResult.ERROR:
+                                //         print("Error: $value");
+                                //         break;
+                                //       case BannerAdResult.LOADED:
+                                //         print("Loaded: $value");
+                                //         break;
+                                //       case BannerAdResult.CLICKED:
+                                //         print("Clicked: $value");
+                                //         break;
+                                //       case BannerAdResult.LOGGING_IMPRESSION:
+                                //         print("Logging Impression: $value");
+                                //         break;
+                                //     }
+                                //   },
+                                // ),
                                 //homeController.facebookBannerAdList[1],
                                 ListView.builder(
                                   itemCount: homeController.homeAdvList.length,
@@ -1111,17 +1301,17 @@ class HomeScreen extends StatelessWidget {
                                           );
                                   },
                                 ),
-                                homeController.isAdLoaed && global.admobSetting.bannerAdList[2].status == 1
+                                adController.isAdmobBannerAdLoaed && global.admobSetting.bannerAdList[2].status == 1
                                     ? Align(
                                         alignment: Alignment.center,
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(vertical: 15),
                                           child: SizedBox(
-                                            height: homeController.bannerAdList[2].size.height.toDouble(),
-                                            width: homeController.bannerAdList[2].size.width.toDouble(),
+                                            height: adController.bannerAdList[2].size.height.toDouble(),
+                                            width: adController.bannerAdList[2].size.width.toDouble(),
                                             child: AdWidget(
                                               key: Key('2'),
-                                              ad: homeController.bannerAdList[2],
+                                              ad: adController.bannerAdList[2],
                                             ),
                                           ),
                                         ),
@@ -1129,26 +1319,26 @@ class HomeScreen extends StatelessWidget {
                                     : SizedBox(
                                         height: 25,
                                       ),
-                                FacebookBannerAd(
-                                  placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
-                                  bannerSize: BannerSize.STANDARD,
-                                  listener: (result, value) {
-                                    switch (result) {
-                                      case BannerAdResult.ERROR:
-                                        print("Error: $value");
-                                        break;
-                                      case BannerAdResult.LOADED:
-                                        print("Loaded: $value");
-                                        break;
-                                      case BannerAdResult.CLICKED:
-                                        print("Clicked: $value");
-                                        break;
-                                      case BannerAdResult.LOGGING_IMPRESSION:
-                                        print("Logging Impression: $value");
-                                        break;
-                                    }
-                                  },
-                                ),
+                                // FacebookBannerAd(
+                                //   placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
+                                //   bannerSize: BannerSize.STANDARD,
+                                //   listener: (result, value) {
+                                //     switch (result) {
+                                //       case BannerAdResult.ERROR:
+                                //         print("Error: $value");
+                                //         break;
+                                //       case BannerAdResult.LOADED:
+                                //         print("Loaded: $value");
+                                //         break;
+                                //       case BannerAdResult.CLICKED:
+                                //         print("Clicked: $value");
+                                //         break;
+                                //       case BannerAdResult.LOGGING_IMPRESSION:
+                                //         print("Logging Impression: $value");
+                                //         break;
+                                //     }
+                                //   },
+                                // ),
                                 // StatefulBuilder(
                                 //   builder: (BuildContext context, StateSetter setState) => FutureBuilder(
                                 //     future: Future.delayed(Duration(minutes: 1)).then((value) {

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
@@ -15,12 +14,8 @@ import 'package:cashfuse/services/apiHelper.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/widget/customLoader.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
-import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_admob/native_admob_controller.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class HomeController extends GetxController {
   APIHelper apiHelper = new APIHelper();
@@ -86,266 +81,12 @@ class HomeController extends GetxController {
 
   String createdLink = '';
   ScrollController scrollController = ScrollController();
-  List<BannerAd> bannerAdList = [];
-  List<FacebookBannerAd> facebookBannerAdList = [];
-  bool isAdLoaed = false;
-  InterstitialAd _interstitialAd;
-  int _numInterstitialLoadAttempts = 0;
-  int maxFailedLoadAttempts = 3;
-
-  RewardedAd _rewardedAd;
-  int _numRewardedLoadAttempts = 0;
-
-  NativeAd nativeAd;
-  StreamSubscription _subscription;
-  double adheight = 0.0;
-  final nativeAdController = NativeAdmobController();
 
   @override
   void onInit() async {
-    _subscription = nativeAdController.stateChanged.listen(_onStateChanged);
-    try {
-      FacebookAudienceNetwork.init(iOSAdvertiserTrackingEnabled: false);
-    } catch (e) {
-      print("Exception - main.dart - main():" + e.toString());
-    }
-    await createBannerAd();
-    await createInterstitialAd();
-    //createFaceBookBannerAd();
-    loadFacebookInterstitialAd();
     init();
 
     super.onInit();
-  }
-
-  void _onStateChanged(AdLoadState state) {
-    switch (state) {
-      case AdLoadState.loading:
-        adheight = 0.0;
-        update();
-        break;
-
-      case AdLoadState.loadCompleted:
-        adheight = 330;
-        update();
-        break;
-
-      default:
-        break;
-    }
-  }
-
-  Future createBannerAd() async {
-    try {
-      BannerAd _bannerAd;
-      for (var i = 0; i < global.admobSetting.bannerAdList.length; i++) {
-        _bannerAd = BannerAd(
-          adUnitId: "ca-app-pub-3940256099942544/6300978111", //"ca-app-pub-3940256099942544/6300978111",
-          size: AdSize.banner,
-          request: AdRequest(),
-          listener: BannerAdListener(
-            onAdLoaded: (_) {
-              isAdLoaed = true;
-              update();
-            },
-            onAdFailedToLoad: (ad, error) {
-              ad.dispose();
-            },
-          ),
-        );
-        bannerAdList.add(_bannerAd);
-        bannerAdList[i].load();
-      }
-    } catch (e) {
-      print("Exception - HomeController.dart - createBannerAd():" + e.toString());
-    }
-  }
-
-  Future createFaceBookBannerAd() async {
-    try {
-      FacebookBannerAd _facebookBannerAd;
-      for (var i = 0; i < global.facebookAdSetting.bannerAdList.length; i++) {
-        _facebookBannerAd = FacebookBannerAd(
-          placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
-          bannerSize: BannerSize.STANDARD,
-          keepAlive: true,
-          listener: (result, value) {
-            switch (result) {
-              case BannerAdResult.ERROR:
-                print("Error: $value");
-                break;
-              case BannerAdResult.LOADED:
-                print("Loaded: $value");
-                break;
-              case BannerAdResult.CLICKED:
-                print("Clicked: $value");
-                break;
-              case BannerAdResult.LOGGING_IMPRESSION:
-                print("Logging Impression: $value");
-                break;
-            }
-          },
-        );
-        facebookBannerAdList.add(_facebookBannerAd);
-      }
-      update();
-    } catch (e) {
-      print("Exception - HomeController.dart - createFaceBookBannerAd():" + e.toString());
-    }
-  }
-
-  Future createInterstitialAd() async {
-    try {
-      InterstitialAd.load(
-          adUnitId: "ca-app-pub-3940256099942544/1033173712",
-          request: AdRequest(),
-          adLoadCallback: InterstitialAdLoadCallback(
-            onAdLoaded: (InterstitialAd ad) {
-              print('$ad loaded');
-              _interstitialAd = ad;
-              _numInterstitialLoadAttempts = 0;
-              _interstitialAd.setImmersiveMode(true);
-            },
-            onAdFailedToLoad: (LoadAdError error) {
-              print('InterstitialAd failed to load: $error.');
-              _numInterstitialLoadAttempts += 1;
-              _interstitialAd = null;
-              if (_numInterstitialLoadAttempts <= maxFailedLoadAttempts) {
-                createInterstitialAd();
-              }
-            },
-          ));
-    } catch (e) {
-      print("Exception - HomeController.dart - createInterstitialAd():" + e.toString());
-    }
-  }
-
-  void showInterstitialAd() {
-    try {
-      if (_interstitialAd == null) {
-        print('Warning: attempt to show interstitial before loaded.');
-        return;
-      }
-      _interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
-        onAdShowedFullScreenContent: (InterstitialAd ad) => print('ad onAdShowedFullScreenContent.'),
-        onAdDismissedFullScreenContent: (InterstitialAd ad) {
-          print('$ad onAdDismissedFullScreenContent.');
-          ad.dispose();
-          createInterstitialAd();
-          global.clickCount = 0;
-          update();
-        },
-        onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-          print('$ad onAdFailedToShowFullScreenContent: $error');
-          ad.dispose();
-          createInterstitialAd();
-        },
-        onAdClicked: (ad) {
-          log(ad.adUnitId);
-        },
-      );
-      _interstitialAd.show();
-    } catch (e) {
-      print("Exception - HomeController.dart - showInterstitialAd():" + e.toString());
-    }
-
-    //_interstitialAd = null;
-  }
-
-  void createRewardedAd() {
-    RewardedAd.load(
-        adUnitId: 'ca-app-pub-3940256099942544/5224354917',
-        request: AdRequest(),
-        rewardedAdLoadCallback: RewardedAdLoadCallback(
-          onAdLoaded: (RewardedAd ad) {
-            print('$ad loaded.');
-            _rewardedAd = ad;
-            _numRewardedLoadAttempts = 0;
-          },
-          onAdFailedToLoad: (LoadAdError error) {
-            print('RewardedAd failed to load: $error');
-            _rewardedAd = null;
-            _numRewardedLoadAttempts += 1;
-            if (_numRewardedLoadAttempts < maxFailedLoadAttempts) {
-              createRewardedAd();
-            }
-          },
-        ));
-  }
-
-  void loadFacebookInterstitialAd() {
-    FacebookInterstitialAd.loadInterstitialAd(
-      // placementId: "YOUR_PLACEMENT_ID",
-      placementId: "IMG_16_9_APP_INSTALL#536153035214384_536898488473172",
-      listener: (result, value) {
-        print(">> FAN > Interstitial Ad: $result --> $value");
-        if (result == InterstitialAdResult.LOADED)
-
-        /// Once an Interstitial Ad has been dismissed and becomes invalidated,
-        /// load a fresh Ad by calling this function.
-        if (result == InterstitialAdResult.DISMISSED) {
-          loadFacebookInterstitialAd();
-        }
-        if (result == InterstitialAdResult.ERROR) {
-          loadFacebookInterstitialAd();
-        }
-      },
-    );
-  }
-
-  void showRewardedAd() {
-    if (_rewardedAd == null) {
-      print('Warning: attempt to show rewarded before loaded.');
-      return;
-    }
-    _rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (RewardedAd ad) => print('ad onAdShowedFullScreenContent.'),
-      onAdDismissedFullScreenContent: (RewardedAd ad) {
-        print('$ad onAdDismissedFullScreenContent.');
-        ad.dispose();
-        createRewardedAd();
-      },
-      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
-        print('$ad onAdFailedToShowFullScreenContent: $error');
-        ad.dispose();
-        createRewardedAd();
-      },
-    );
-
-    _rewardedAd.setImmersiveMode(true);
-    _rewardedAd.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
-      print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
-    });
-    _rewardedAd = null;
-  }
-
-  Future createNativeAd() async {
-    try {
-      nativeAd = NativeAd(
-        adUnitId: 'ca-app-pub-3940256099942544/2247696110',
-        factoryId: 'com.cashfuse.app',
-        request: AdRequest(),
-        nativeAdOptions: NativeAdOptions(
-          mediaAspectRatio: MediaAspectRatio.portrait,
-          adChoicesPlacement: AdChoicesPlacement.topLeftCorner,
-          shouldRequestMultipleImages: true,
-          videoOptions: VideoOptions(),
-        ),
-        listener: NativeAdListener(
-          onAdLoaded: (_) {
-            isAdLoaed = true;
-            update();
-          },
-          onAdFailedToLoad: (ad, error) {
-            ad.dispose();
-          },
-        ),
-      );
-
-      nativeAd.load();
-    } catch (e) {
-      print("Exception - HomeController.dart - createNativeAd():" + e.toString());
-    }
   }
 
   init() async {
@@ -746,16 +487,16 @@ class HomeController extends GetxController {
           if (response.status == "1") {
             _topBannerList = response.data;
 
-            if (_topBannerList.length > 0) {
-              for (var i = 0; i < _topBannerList.length; i++) {
-                //if (i == _topBannerList.length / 3) {
-                _topBannerList.insert(
-                  (i * 3) + 3,
-                  BannerModel(name: 'Ad'),
-                );
-                //}
-              }
-            }
+            // if (_topBannerList.length > 0) {
+            //   for (var i = 0; i < _topBannerList.length; i++) {
+            //     //if (i == _topBannerList.length / 3) {
+            //     _topBannerList.insert(
+            //       (i * 3) + 3,
+            //       BannerModel(name: 'Ad'),
+            //     );
+            //     //}
+            //   }
+            // }
             update();
           } else {
             showCustomSnackBar(response.message);

@@ -37,7 +37,13 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   await NotificationHelper.initialize();
-  MobileAds.instance.initialize();
+  //MobileAds.instance.initialize();
+
+  MobileAds.instance
+    ..initialize()
+    ..updateRequestConfiguration(
+      RequestConfiguration(testDeviceIds: ['468FD9C0CF496815189B2FE63C8EFA31']),
+    );
 
   if (!GetPlatform.isWeb) {
     await fetchLinkData();

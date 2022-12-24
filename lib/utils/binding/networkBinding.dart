@@ -1,3 +1,4 @@
+import 'package:cashfuse/controllers/adController.dart';
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/commonController.dart';
 import 'package:cashfuse/controllers/couponController.dart';
@@ -30,5 +31,6 @@ class NetworkBinding extends Bindings {
     Get.lazyPut<OrderController>(() => OrderController(), fenix: true);
     Get.lazyPut<ReferEarnController>(() => ReferEarnController(), fenix: true);
     Get.lazyPut<LocalizationController>(() => LocalizationController(), fenix: true);
+    Get.lazyPut<AdController>(() => AdController(), fenix: true);
   }
 }
