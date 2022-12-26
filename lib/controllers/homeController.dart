@@ -82,11 +82,18 @@ class HomeController extends GetxController {
   String createdLink = '';
   ScrollController scrollController = ScrollController();
 
+  int catPageListIndex = 0;
+
   @override
   void onInit() async {
     init();
 
     super.onInit();
+  }
+
+  void setcatListIndex(int val) {
+    catPageListIndex = val;
+    update();
   }
 
   init() async {

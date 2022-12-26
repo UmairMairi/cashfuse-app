@@ -12,7 +12,7 @@ public class MainActivity extends FlutterActivity {
     flutterEngine.getPlugins().add(new GoogleMobileAdsPlugin());
    super.configureFlutterEngine(flutterEngine);
 
-    GoogleMobileAdsPlugin.registerNativeAdFactory(flutterEngine, "adFactoryExample", NativeAdFactoryExample());
+    GoogleMobileAdsPlugin.registerNativeAdFactory(flutterEngine, "adFactoryExample", new NativeAdFactoryExample(getApplicationContext()));
   }
 
   @Override

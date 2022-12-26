@@ -25,6 +25,17 @@ class AdController extends GetxController {
   StreamSubscription _subscription;
   double adheight = 0;
 
+  bool admobNativeAdLoaded = false;
+  NativeAd myNative;
+
+  bool fbBannerAdLoaded = false;
+  FacebookBannerAd fbBannerAd;
+
+  void setNativeAdLoaded(bool val) {
+    admobNativeAdLoaded = val;
+    update();
+  }
+
   @override
   void onInit() async {
     _subscription = nativeAdController.stateChanged.listen(_onStateChanged);
@@ -40,12 +51,80 @@ class AdController extends GetxController {
     }
     await getAdmobSettings();
     await getFaceBookAdSetting();
+    await loadNativeAd();
+    await loadfbBannerAd();
 
     await createAdmobBannerAd();
     await createInterstitialAd();
     await loadFacebookInterstitialAd();
 
     super.onInit();
+  }
+
+  Future loadNativeAd() async {
+    try {
+      final NativeAdListener listener = NativeAdListener(
+        // Called when an ad is successfully received.
+        onAdLoaded: (Ad ad) => print('+++++++++++++++++++Ad loaded.'),
+        // Called when an ad request failed.
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          // Dispose the ad here to free resources.
+          ad.dispose();
+          print('Ad failed to load:++++++++ $error');
+        },
+        // Called when an ad opens an overlay that covers the screen.
+        onAdOpened: (Ad ad) => print('+++++++++++++++++++Ad opened.'),
+        // Called when an ad removes an overlay that covers the screen.
+        onAdClosed: (Ad ad) => print('+++++++++++++++++Ad closed.'),
+        // Called when an impression occurs on the ad.
+        onAdImpression: (Ad ad) {
+          setNativeAdLoaded(true);
+        },
+        // Called when a click is recorded for a NativeAd.
+        onAdClicked: (Ad ad) => print('+++++++++++++Ad clicked.'),
+      );
+
+      myNative = NativeAd(
+        adUnitId: 'ca-app-pub-3940256099942544/2247696110',
+        factoryId: 'adFactoryExample',
+        request: AdRequest(),
+        listener: listener,
+      );
+      update();
+      myNative.load();
+      update();
+    } catch (e) {
+      print("Exception - HomeScreen.dart - _loadNativeAd():" + e.toString());
+    }
+  }
+
+  Future loadfbBannerAd() async {
+    try {
+      fbBannerAd = FacebookBannerAd(
+        placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
+        bannerSize: BannerSize.STANDARD,
+        listener: (result, value) {
+          switch (result) {
+            case BannerAdResult.ERROR:
+              print("-----------------------Error: $value");
+              break;
+            case BannerAdResult.LOADED:
+              print("------------------Loaded: $value");
+              break;
+            case BannerAdResult.CLICKED:
+              print("---------------Clicked: $value");
+              break;
+            case BannerAdResult.LOGGING_IMPRESSION:
+              print("------------------Logging Impression: $value");
+              fbBannerAdLoaded = true;
+              update();
+              break;
+          }
+        },
+      );
+    } catch (e) {
+      print("Exception - AdController.dart - loadfbBannerAd():" + e.toString());
+    }
   }
 
   void _onStateChanged(AdLoadState state) {

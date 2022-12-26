@@ -39,11 +39,7 @@ void main() async {
   await NotificationHelper.initialize();
   //MobileAds.instance.initialize();
 
-  MobileAds.instance
-    ..initialize()
-    ..updateRequestConfiguration(
-      RequestConfiguration(testDeviceIds: ['468FD9C0CF496815189B2FE63C8EFA31']),
-    );
+  MobileAds.instance.initialize();
 
   if (!GetPlatform.isWeb) {
     await fetchLinkData();

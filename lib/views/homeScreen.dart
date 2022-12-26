@@ -52,7 +52,8 @@ class HomeScreen extends StatelessWidget {
   HomeController homeController = Get.find<HomeController>();
   CouponController couponController = Get.find<CouponController>();
   SplashController splashController = Get.find<SplashController>();
-  AdController adController = Get.find<AdController>();
+  //AdController adController = Get.find<AdController>();
+  AdController adController = Get.put(AdController());
   final couponScrollController = new ScrollController();
   final offerScrollController = new ScrollController();
 
@@ -117,17 +118,9 @@ class HomeScreen extends StatelessWidget {
 
       //AdSettings.addTestDevice("328404cebf50ec1fdb05795c0007a8a7");
     } catch (e) {
-      print("Exception - main.dart - main():" + e.toString());
+      print("Exception - HomeScreen.dart - build():" + e.toString());
     }
 
-    final NativeAd myNative = NativeAd(
-      adUnitId: 'ca-app-pub-3940256099942544/2247696110',
-      factoryId: 'adFactoryExample',
-      request: AdRequest(),
-      listener: NativeAdListener(),
-    );
-
-    myNative.load();
     // FacebookAudienceNetwork.init(
     //   testingId: '468FD9C0CF496815189B2FE63C8EFA31',
     //   iOSAdvertiserTrackingEnabled: false,
@@ -423,6 +416,15 @@ class HomeScreen extends StatelessWidget {
                                           ),
                                         ),
                                       ),
+
+                                adController.isAdmobBannerAdLoaed
+                                    ? Container(
+                                        height: 100,
+                                        child: AdWidget(
+                                          key: Key('native'),
+                                          ad: adController.myNative,
+                                        ))
+                                    : SizedBox(),
                                 // Container(
                                 //   height: homeController.adheight,
                                 //   padding: EdgeInsets.all(10),
@@ -515,6 +517,23 @@ class HomeScreen extends StatelessWidget {
                                             return InkWell(
                                               onTap: () {
                                                 global.showInterstitialAd();
+                                                try {
+                                                  homeController.topCategoryList[index].commonList.removeWhere((element) => element.name == 'Ad');
+                                                  //if (homeController.topCategoryList[index].commonList.length > 4) {
+                                                  for (var i = 0; i < homeController.topCategoryList[index].commonList.length; i++) {
+                                                    homeController.topCategoryList[index].commonList.insert(
+                                                      (i * 4) + 4,
+                                                      CommonModel(name: 'Ad'),
+                                                    );
+                                                  }
+                                                  //}
+                                                } catch (e) {
+                                                  print("Exception - authController.dart - loginOrRegister():" + e.toString());
+                                                }
+                                                // homeController.topCategoryList[index].commonList.insert(
+                                                //   (index * 4) + 4,
+                                                //   CommonModel(name: 'Ad'),
+                                                // );
                                                 Get.to(() => CategoryScreen(
                                                       category: homeController.topCategoryList[index],
                                                     ));
@@ -596,22 +615,16 @@ class HomeScreen extends StatelessWidget {
                                       )
                                     : SizedBox(),
 
-                                FacebookBannerAd(
-                                  // placementId: "YOUR_PLACEMENT_ID",
-                                  placementId: "IMG_16_9_LINK#536153035214384_536898305139857", //testid
-                                  bannerSize: BannerSize.STANDARD,
+                                // FacebookBannerAd(
+                                //   // placementId: "YOUR_PLACEMENT_ID",
+                                //   placementId: "IMG_16_9_LINK#536153035214384_536898305139857", //testid
+                                //   bannerSize: BannerSize.STANDARD,
 
-                                  keepAlive: true,
-                                  listener: (result, value) {
-                                    print("Banner Ad: $result -->  $value");
-                                  },
-                                ),
-
-                                Container(
-                                    height: 300,
-                                    child: AdWidget(
-                                      ad: myNative,
-                                    )),
+                                //   keepAlive: true,
+                                //   listener: (result, value) {
+                                //     print("Banner Ad: $result -->  $value");
+                                //   },
+                                // ),
 
                                 // Container(
                                 //   height: adController.adheight,
@@ -668,27 +681,50 @@ class HomeScreen extends StatelessWidget {
                                 //     ?
 
                                 // _faceBookBannerAd(),
-                                FacebookBannerAd(
-                                  placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
-                                  bannerSize: BannerSize.STANDARD,
-                                  keepAlive: true,
-                                  listener: (result, value) {
-                                    switch (result) {
-                                      case BannerAdResult.ERROR:
-                                        print("Error: $value");
-                                        break;
-                                      case BannerAdResult.LOADED:
-                                        print("Loaded: $value");
-                                        break;
-                                      case BannerAdResult.CLICKED:
-                                        print("Clicked: $value");
-                                        break;
-                                      case BannerAdResult.LOGGING_IMPRESSION:
-                                        print("Logging Impression: $value");
-                                        break;
-                                    }
-                                  },
-                                ),
+                                adController.fbBannerAdLoaded
+                                    ? FacebookBannerAd(
+                                        placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
+                                        bannerSize: BannerSize.STANDARD,
+                                        keepAlive: true,
+                                        listener: (result, value) {
+                                          switch (result) {
+                                            case BannerAdResult.ERROR:
+                                              print("Error: $value");
+                                              break;
+                                            case BannerAdResult.LOADED:
+                                              print("Loaded: $value");
+                                              break;
+                                            case BannerAdResult.CLICKED:
+                                              print("Clicked: $value");
+                                              break;
+                                            case BannerAdResult.LOGGING_IMPRESSION:
+                                              print("Logging Impression: $value");
+                                              break;
+                                          }
+                                        },
+                                      )
+                                    : SizedBox(),
+                                // FacebookBannerAd(
+                                //   placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
+                                //   bannerSize: BannerSize.STANDARD,
+                                //   keepAlive: true,
+                                //   listener: (result, value) {
+                                //     switch (result) {
+                                //       case BannerAdResult.ERROR:
+                                //         print("Error: $value");
+                                //         break;
+                                //       case BannerAdResult.LOADED:
+                                //         print("Loaded: $value");
+                                //         break;
+                                //       case BannerAdResult.CLICKED:
+                                //         print("Clicked: $value");
+                                //         break;
+                                //       case BannerAdResult.LOGGING_IMPRESSION:
+                                //         print("Logging Impression: $value");
+                                //         break;
+                                //     }
+                                //   },
+                                // ),
                                 //: SizedBox(),
                                 // homeController.isAdLoaed && global.admobSetting.bannerAdList[0].status == 1
                                 //     ? SizedBox(
@@ -1150,27 +1186,27 @@ class HomeScreen extends StatelessWidget {
                                 //     : SizedBox(
                                 //         height: 25,
                                 //       ),
-                                // FacebookBannerAd(
-                                //   placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
-                                //   bannerSize: BannerSize.STANDARD,
-                                //   keepAlive: true,
-                                //   listener: (result, value) {
-                                //     switch (result) {
-                                //       case BannerAdResult.ERROR:
-                                //         print("Error: $value");
-                                //         break;
-                                //       case BannerAdResult.LOADED:
-                                //         print("Loaded: $value");
-                                //         break;
-                                //       case BannerAdResult.CLICKED:
-                                //         print("Clicked: $value");
-                                //         break;
-                                //       case BannerAdResult.LOGGING_IMPRESSION:
-                                //         print("Logging Impression: $value");
-                                //         break;
-                                //     }
-                                //   },
-                                // ),
+                                FacebookBannerAd(
+                                  placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
+                                  bannerSize: BannerSize.STANDARD,
+                                  keepAlive: true,
+                                  listener: (result, value) {
+                                    switch (result) {
+                                      case BannerAdResult.ERROR:
+                                        print("Error: $value");
+                                        break;
+                                      case BannerAdResult.LOADED:
+                                        print("Loaded: $value");
+                                        break;
+                                      case BannerAdResult.CLICKED:
+                                        print("Clicked: $value");
+                                        break;
+                                      case BannerAdResult.LOGGING_IMPRESSION:
+                                        print("Logging Impression: $value");
+                                        break;
+                                    }
+                                  },
+                                ),
                                 //homeController.facebookBannerAdList[1],
                                 ListView.builder(
                                   itemCount: homeController.homeAdvList.length,
@@ -1319,26 +1355,26 @@ class HomeScreen extends StatelessWidget {
                                     : SizedBox(
                                         height: 25,
                                       ),
-                                // FacebookBannerAd(
-                                //   placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
-                                //   bannerSize: BannerSize.STANDARD,
-                                //   listener: (result, value) {
-                                //     switch (result) {
-                                //       case BannerAdResult.ERROR:
-                                //         print("Error: $value");
-                                //         break;
-                                //       case BannerAdResult.LOADED:
-                                //         print("Loaded: $value");
-                                //         break;
-                                //       case BannerAdResult.CLICKED:
-                                //         print("Clicked: $value");
-                                //         break;
-                                //       case BannerAdResult.LOGGING_IMPRESSION:
-                                //         print("Logging Impression: $value");
-                                //         break;
-                                //     }
-                                //   },
-                                // ),
+                                FacebookBannerAd(
+                                  placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
+                                  bannerSize: BannerSize.STANDARD,
+                                  listener: (result, value) {
+                                    switch (result) {
+                                      case BannerAdResult.ERROR:
+                                        print("Error: $value");
+                                        break;
+                                      case BannerAdResult.LOADED:
+                                        print("Loaded: $value");
+                                        break;
+                                      case BannerAdResult.CLICKED:
+                                        print("Clicked: $value");
+                                        break;
+                                      case BannerAdResult.LOGGING_IMPRESSION:
+                                        print("Logging Impression: $value");
+                                        break;
+                                    }
+                                  },
+                                ),
                                 // StatefulBuilder(
                                 //   builder: (BuildContext context, StateSetter setState) => FutureBuilder(
                                 //     future: Future.delayed(Duration(minutes: 1)).then((value) {
