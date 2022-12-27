@@ -6,6 +6,8 @@ import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/services/apiHelper.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_admob/native_admob_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -31,6 +33,9 @@ class AdController extends GetxController {
   bool fbBannerAdLoaded = false;
   FacebookBannerAd fbBannerAd;
 
+  FacebookNativeAd facebookNativeAd;
+  bool isFbNativeAdLoaded = false;
+
   void setNativeAdLoaded(bool val) {
     admobNativeAdLoaded = val;
     update();
@@ -53,6 +58,7 @@ class AdController extends GetxController {
     await getFaceBookAdSetting();
     await loadNativeAd();
     await loadfbBannerAd();
+    await loadFaceBookNativeAd();
 
     await createAdmobBannerAd();
     await createInterstitialAd();
@@ -70,31 +76,85 @@ class AdController extends GetxController {
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
           // Dispose the ad here to free resources.
           ad.dispose();
+          update();
           print('Ad failed to load:++++++++ $error');
         },
+        onAdWillDismissScreen: (ad) {
+          ad.dispose();
+          admobNativeAdLoaded = false;
+          update();
+        },
         // Called when an ad opens an overlay that covers the screen.
-        onAdOpened: (Ad ad) => print('+++++++++++++++++++Ad opened.'),
+        onAdOpened: (Ad ad) {
+          print('+++++++++++++++++++Ad opened.');
+          admobNativeAdLoaded = true;
+          update();
+        },
         // Called when an ad removes an overlay that covers the screen.
         onAdClosed: (Ad ad) => print('+++++++++++++++++Ad closed.'),
         // Called when an impression occurs on the ad.
         onAdImpression: (Ad ad) {
-          setNativeAdLoaded(true);
+          //setNativeAdLoaded(true);
+          admobNativeAdLoaded = true;
+          update();
         },
         // Called when a click is recorded for a NativeAd.
         onAdClicked: (Ad ad) => print('+++++++++++++Ad clicked.'),
       );
 
-      myNative = NativeAd(
-        adUnitId: 'ca-app-pub-3940256099942544/2247696110',
-        factoryId: 'adFactoryExample',
-        request: AdRequest(),
-        listener: listener,
+      const String viewType = '<platform-view-type>';
+      // Pass parameters to the platform side.
+      final Map<String, dynamic> creationParams = <String, dynamic>{};
+
+      AndroidView(
+        viewType: viewType,
+        layoutDirection: TextDirection.ltr,
+        creationParams: creationParams,
+        creationParamsCodec: const StandardMessageCodec(),
       );
+
+      myNative = new NativeAd(
+          adUnitId: 'ca-app-pub-3940256099942544/2247696110',
+          factoryId: 'adFactoryExample',
+          request: AdRequest(),
+          listener: listener,
+          nativeAdOptions: NativeAdOptions(
+            shouldRequestMultipleImages: true,
+          ))
+        ..load();
       update();
       myNative.load();
       update();
     } catch (e) {
       print("Exception - HomeScreen.dart - _loadNativeAd():" + e.toString());
+    }
+  }
+
+  Future loadFaceBookNativeAd() async {
+    try {
+      facebookNativeAd = new FacebookNativeAd(
+        keepAlive: true,
+        placementId: "VID_HD_16_9_46S_APP_INSTALL#536153035214384_536880055141682",
+        adType: NativeAdType.NATIVE_AD,
+        // width: Get.width,
+        // height: 300,
+        backgroundColor: Colors.blue,
+        titleColor: Colors.white,
+        descriptionColor: Colors.white,
+        buttonColor: Colors.deepPurple,
+        buttonTitleColor: Colors.white,
+        buttonBorderColor: Colors.white,
+        listener: (result, value) {
+          if (result == NativeAdResult.LOGGING_IMPRESSION) {
+            isFbNativeAdLoaded = true;
+          }
+        },
+        keepExpandedWhileLoading: true,
+        // expandAnimationDuraion: 1000,
+      );
+      update();
+    } catch (e) {
+      print("Exception - HomeScreen.dart - loadFaceBookNativeAd():" + e.toString());
     }
   }
 
@@ -186,6 +246,7 @@ class AdController extends GetxController {
   void dispose() {
     _subscription.cancel();
     nativeAdController.dispose();
+    myNative.dispose();
     super.dispose();
   }
 

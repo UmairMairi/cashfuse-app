@@ -19,7 +19,6 @@ import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/imageRotateWidget.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/myEarningScreen.dart';
-import 'package:cashfuse/views/nativeAdWidget.dart';
 import 'package:cashfuse/views/offerDetailScreen.dart';
 import 'package:cashfuse/views/offerListScreen.dart';
 import 'package:cashfuse/views/referEarnScreen.dart';
@@ -35,8 +34,6 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_native_admob/flutter_native_admob.dart';
-import 'package:flutter_native_admob/native_admob_options.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -417,9 +414,10 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                       ),
 
-                                adController.isAdmobBannerAdLoaed
+                                adController.admobNativeAdLoaded
                                     ? Container(
                                         height: 100,
+                                        margin: EdgeInsets.symmetric(vertical: 10),
                                         child: AdWidget(
                                           key: Key('native'),
                                           ad: adController.myNative,
@@ -515,25 +513,9 @@ class HomeScreen extends StatelessWidget {
                                           padding: const EdgeInsets.symmetric(horizontal: 6),
                                           itemBuilder: (context, index) {
                                             return InkWell(
-                                              onTap: () {
+                                              onTap: () async {
                                                 global.showInterstitialAd();
-                                                try {
-                                                  homeController.topCategoryList[index].commonList.removeWhere((element) => element.name == 'Ad');
-                                                  //if (homeController.topCategoryList[index].commonList.length > 4) {
-                                                  for (var i = 0; i < homeController.topCategoryList[index].commonList.length; i++) {
-                                                    homeController.topCategoryList[index].commonList.insert(
-                                                      (i * 4) + 4,
-                                                      CommonModel(name: 'Ad'),
-                                                    );
-                                                  }
-                                                  //}
-                                                } catch (e) {
-                                                  print("Exception - authController.dart - loginOrRegister():" + e.toString());
-                                                }
-                                                // homeController.topCategoryList[index].commonList.insert(
-                                                //   (index * 4) + 4,
-                                                //   CommonModel(name: 'Ad'),
-                                                // );
+                                                //await homeController.addAdCategory(index);
                                                 Get.to(() => CategoryScreen(
                                                       category: homeController.topCategoryList[index],
                                                     ));
@@ -682,26 +664,29 @@ class HomeScreen extends StatelessWidget {
 
                                 // _faceBookBannerAd(),
                                 adController.fbBannerAdLoaded
-                                    ? FacebookBannerAd(
-                                        placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
-                                        bannerSize: BannerSize.STANDARD,
-                                        keepAlive: true,
-                                        listener: (result, value) {
-                                          switch (result) {
-                                            case BannerAdResult.ERROR:
-                                              print("Error: $value");
-                                              break;
-                                            case BannerAdResult.LOADED:
-                                              print("Loaded: $value");
-                                              break;
-                                            case BannerAdResult.CLICKED:
-                                              print("Clicked: $value");
-                                              break;
-                                            case BannerAdResult.LOGGING_IMPRESSION:
-                                              print("Logging Impression: $value");
-                                              break;
-                                          }
-                                        },
+                                    ? Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 10),
+                                        child: FacebookBannerAd(
+                                          placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
+                                          bannerSize: BannerSize.STANDARD,
+                                          keepAlive: true,
+                                          listener: (result, value) {
+                                            switch (result) {
+                                              case BannerAdResult.ERROR:
+                                                print("Error: $value");
+                                                break;
+                                              case BannerAdResult.LOADED:
+                                                print("Loaded: $value");
+                                                break;
+                                              case BannerAdResult.CLICKED:
+                                                print("Clicked: $value");
+                                                break;
+                                              case BannerAdResult.LOGGING_IMPRESSION:
+                                                print("Logging Impression: $value");
+                                                break;
+                                            }
+                                          },
+                                        ),
                                       )
                                     : SizedBox(),
                                 // FacebookBannerAd(
@@ -1186,26 +1171,29 @@ class HomeScreen extends StatelessWidget {
                                 //     : SizedBox(
                                 //         height: 25,
                                 //       ),
-                                FacebookBannerAd(
-                                  placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
-                                  bannerSize: BannerSize.STANDARD,
-                                  keepAlive: true,
-                                  listener: (result, value) {
-                                    switch (result) {
-                                      case BannerAdResult.ERROR:
-                                        print("Error: $value");
-                                        break;
-                                      case BannerAdResult.LOADED:
-                                        print("Loaded: $value");
-                                        break;
-                                      case BannerAdResult.CLICKED:
-                                        print("Clicked: $value");
-                                        break;
-                                      case BannerAdResult.LOGGING_IMPRESSION:
-                                        print("Logging Impression: $value");
-                                        break;
-                                    }
-                                  },
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                  child: FacebookBannerAd(
+                                    placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
+                                    bannerSize: BannerSize.STANDARD,
+                                    keepAlive: true,
+                                    listener: (result, value) {
+                                      switch (result) {
+                                        case BannerAdResult.ERROR:
+                                          print("Error: $value");
+                                          break;
+                                        case BannerAdResult.LOADED:
+                                          print("Loaded: $value");
+                                          break;
+                                        case BannerAdResult.CLICKED:
+                                          print("Clicked: $value");
+                                          break;
+                                        case BannerAdResult.LOGGING_IMPRESSION:
+                                          print("Logging Impression: $value");
+                                          break;
+                                      }
+                                    },
+                                  ),
                                 ),
                                 //homeController.facebookBannerAdList[1],
                                 ListView.builder(
@@ -1355,25 +1343,28 @@ class HomeScreen extends StatelessWidget {
                                     : SizedBox(
                                         height: 25,
                                       ),
-                                FacebookBannerAd(
-                                  placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
-                                  bannerSize: BannerSize.STANDARD,
-                                  listener: (result, value) {
-                                    switch (result) {
-                                      case BannerAdResult.ERROR:
-                                        print("Error: $value");
-                                        break;
-                                      case BannerAdResult.LOADED:
-                                        print("Loaded: $value");
-                                        break;
-                                      case BannerAdResult.CLICKED:
-                                        print("Clicked: $value");
-                                        break;
-                                      case BannerAdResult.LOGGING_IMPRESSION:
-                                        print("Logging Impression: $value");
-                                        break;
-                                    }
-                                  },
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                  child: FacebookBannerAd(
+                                    placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
+                                    bannerSize: BannerSize.STANDARD,
+                                    listener: (result, value) {
+                                      switch (result) {
+                                        case BannerAdResult.ERROR:
+                                          print("Error: $value");
+                                          break;
+                                        case BannerAdResult.LOADED:
+                                          print("Loaded: $value");
+                                          break;
+                                        case BannerAdResult.CLICKED:
+                                          print("Clicked: $value");
+                                          break;
+                                        case BannerAdResult.LOGGING_IMPRESSION:
+                                          print("Logging Impression: $value");
+                                          break;
+                                      }
+                                    },
+                                  ),
                                 ),
                                 // StatefulBuilder(
                                 //   builder: (BuildContext context, StateSetter setState) => FutureBuilder(

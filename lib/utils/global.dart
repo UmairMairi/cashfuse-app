@@ -3,9 +3,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cashfuse/controllers/adController.dart';
-import 'package:cashfuse/controllers/homeController.dart';
-import 'package:cashfuse/controllers/splashController.dart';
-import 'package:cashfuse/models/adMobsKeyModel.dart';
 import 'package:cashfuse/models/admobSettingModel.dart';
 import 'package:cashfuse/models/appInfoModel.dart';
 import 'package:cashfuse/models/userModel.dart';

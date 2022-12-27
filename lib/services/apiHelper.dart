@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cashfuse/constants/appConstant.dart';
-import 'package:cashfuse/models/adMobsKeyModel.dart';
 import 'package:cashfuse/models/admobSettingModel.dart';
 import 'package:cashfuse/models/adsModel.dart';
 import 'package:cashfuse/models/allInOneSearchDataModel.dart';

@@ -19,4 +19,6 @@ public class MainActivity extends FlutterActivity {
   public void cleanUpFlutterEngine(FlutterEngine flutterEngine) {
     GoogleMobileAdsPlugin.unregisterNativeAdFactory(flutterEngine, "adFactoryExample");
   }
+
+
 }

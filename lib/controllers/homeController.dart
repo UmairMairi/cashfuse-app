@@ -96,6 +96,31 @@ class HomeController extends GetxController {
     update();
   }
 
+  bool isExist = false;
+
+  // void setValue(bool val) {
+  //   isExist = val;
+  //   update();
+  // }
+
+  Future addAdCategory(int index) async {
+    try {
+      topCategoryList[index].commonList.removeWhere((element) => element.name == 'Ad');
+
+      for (var i = 0; i < topCategoryList[index].commonList.length; i++) {
+        if (((i * 4) + 4) < topCategoryList[index].commonList.length) {
+          topCategoryList[index].commonList.insert(
+                (i * 4) + 4,
+                CommonModel(name: 'Ad', isExist: true),
+              );
+        }
+      }
+      update();
+    } catch (e) {
+      print("Exception - HomeController.dart - addAdCategory():" + e.toString());
+    }
+  }
+
   init() async {
     try {
       if (global.appInfo.baseUrls == null) {

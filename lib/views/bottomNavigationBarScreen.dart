@@ -2,7 +2,7 @@
 
 import 'dart:async';
 
-import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/allInOneSearchScreen.dart';
 import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/views/profileScreen.dart';
@@ -13,7 +13,6 @@ import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:cashfuse/utils/global.dart' as global;
 import 'package:get/get.dart';
 
 class BottomNavigationBarScreen extends StatefulWidget {
