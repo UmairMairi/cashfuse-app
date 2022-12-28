@@ -117,7 +117,7 @@ class AllCategoriesScreen extends StatelessWidget {
                               );
                       },
                     ),
-                    adController.isAdmobBannerAdLoaed
+                    global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList[1].status == 1 && adController.isAdmobBannerAdLoaed
                         ? Container(
                             height: 100,
                             margin: EdgeInsets.symmetric(vertical: 10),

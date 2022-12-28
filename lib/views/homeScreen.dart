@@ -414,12 +414,13 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                       ),
 
-                                adController.admobNativeAdLoaded
+                                // NativeAdWidget(),
+                                global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList[1].status == 1 && adController.isAdmobBannerAdLoaed
                                     ? Container(
                                         height: 100,
                                         margin: EdgeInsets.symmetric(vertical: 10),
                                         child: AdWidget(
-                                          key: Key('native'),
+                                          key: Key('admob'),
                                           ad: adController.myNative,
                                         ))
                                     : SizedBox(),
@@ -577,7 +578,7 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                 ),
 
-                                adController.isAdmobBannerAdLoaed && global.admobSetting.bannerAdList[0].status == 1
+                                global.admobSetting.bannerAdList != null && global.admobSetting.bannerAdList[0].status == 1 && adController.isAdmobBannerAdLoaed
                                     ? Align(
                                         alignment: Alignment.center,
                                         //height: 100,
@@ -663,7 +664,7 @@ class HomeScreen extends StatelessWidget {
                                 //     ?
 
                                 // _faceBookBannerAd(),
-                                adController.fbBannerAdLoaded
+                                global.facebookAdSetting.bannerAdList != null && global.facebookAdSetting.bannerAdList[0].status == 1 && adController.fbBannerAdLoaded
                                     ? Padding(
                                         padding: const EdgeInsets.symmetric(vertical: 10),
                                         child: FacebookBannerAd(
@@ -1134,7 +1135,7 @@ class HomeScreen extends StatelessWidget {
                                               );
                                             }),
                                       ),
-                                adController.isAdmobBannerAdLoaed && global.admobSetting.bannerAdList[1].status == 1
+                                global.admobSetting.bannerAdList != null && global.admobSetting.bannerAdList[1].status == 1 && adController.isAdmobBannerAdLoaed
                                     ? Align(
                                         alignment: Alignment.center,
                                         //height: 100,
@@ -1171,30 +1172,33 @@ class HomeScreen extends StatelessWidget {
                                 //     : SizedBox(
                                 //         height: 25,
                                 //       ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 10),
-                                  child: FacebookBannerAd(
-                                    placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
-                                    bannerSize: BannerSize.STANDARD,
-                                    keepAlive: true,
-                                    listener: (result, value) {
-                                      switch (result) {
-                                        case BannerAdResult.ERROR:
-                                          print("Error: $value");
-                                          break;
-                                        case BannerAdResult.LOADED:
-                                          print("Loaded: $value");
-                                          break;
-                                        case BannerAdResult.CLICKED:
-                                          print("Clicked: $value");
-                                          break;
-                                        case BannerAdResult.LOGGING_IMPRESSION:
-                                          print("Logging Impression: $value");
-                                          break;
-                                      }
-                                    },
-                                  ),
-                                ),
+
+                                global.facebookAdSetting.bannerAdList != null && global.facebookAdSetting.bannerAdList[1].status == 1
+                                    ? Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 10),
+                                        child: FacebookBannerAd(
+                                          placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
+                                          bannerSize: BannerSize.STANDARD,
+                                          keepAlive: true,
+                                          listener: (result, value) {
+                                            switch (result) {
+                                              case BannerAdResult.ERROR:
+                                                print("Error: $value");
+                                                break;
+                                              case BannerAdResult.LOADED:
+                                                print("Loaded: $value");
+                                                break;
+                                              case BannerAdResult.CLICKED:
+                                                print("Clicked: $value");
+                                                break;
+                                              case BannerAdResult.LOGGING_IMPRESSION:
+                                                print("Logging Impression: $value");
+                                                break;
+                                            }
+                                          },
+                                        ),
+                                      )
+                                    : SizedBox(),
                                 //homeController.facebookBannerAdList[1],
                                 ListView.builder(
                                   itemCount: homeController.homeAdvList.length,
@@ -1325,7 +1329,7 @@ class HomeScreen extends StatelessWidget {
                                           );
                                   },
                                 ),
-                                adController.isAdmobBannerAdLoaed && global.admobSetting.bannerAdList[2].status == 1
+                                global.admobSetting.bannerAdList != null && global.admobSetting.bannerAdList[2].status == 1 && adController.isAdmobBannerAdLoaed
                                     ? Align(
                                         alignment: Alignment.center,
                                         child: Padding(
@@ -1343,29 +1347,31 @@ class HomeScreen extends StatelessWidget {
                                     : SizedBox(
                                         height: 25,
                                       ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 10),
-                                  child: FacebookBannerAd(
-                                    placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
-                                    bannerSize: BannerSize.STANDARD,
-                                    listener: (result, value) {
-                                      switch (result) {
-                                        case BannerAdResult.ERROR:
-                                          print("Error: $value");
-                                          break;
-                                        case BannerAdResult.LOADED:
-                                          print("Loaded: $value");
-                                          break;
-                                        case BannerAdResult.CLICKED:
-                                          print("Clicked: $value");
-                                          break;
-                                        case BannerAdResult.LOGGING_IMPRESSION:
-                                          print("Logging Impression: $value");
-                                          break;
-                                      }
-                                    },
-                                  ),
-                                ),
+                                global.facebookAdSetting.bannerAdList != null && global.facebookAdSetting.bannerAdList[2].status == 1
+                                    ? Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 10),
+                                        child: FacebookBannerAd(
+                                          placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
+                                          bannerSize: BannerSize.STANDARD,
+                                          listener: (result, value) {
+                                            switch (result) {
+                                              case BannerAdResult.ERROR:
+                                                print("Error: $value");
+                                                break;
+                                              case BannerAdResult.LOADED:
+                                                print("Loaded: $value");
+                                                break;
+                                              case BannerAdResult.CLICKED:
+                                                print("Clicked: $value");
+                                                break;
+                                              case BannerAdResult.LOGGING_IMPRESSION:
+                                                print("Logging Impression: $value");
+                                                break;
+                                            }
+                                          },
+                                        ),
+                                      )
+                                    : SizedBox(),
                                 // StatefulBuilder(
                                 //   builder: (BuildContext context, StateSetter setState) => FutureBuilder(
                                 //     future: Future.delayed(Duration(minutes: 1)).then((value) {

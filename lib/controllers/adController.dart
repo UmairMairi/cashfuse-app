@@ -4,14 +4,13 @@ import 'dart:developer';
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/services/apiHelper.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_native_admob/native_admob_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:cashfuse/utils/global.dart' as global;
 
 class AdController extends GetxController {
   APIHelper apiHelper = new APIHelper();
@@ -54,15 +53,18 @@ class AdController extends GetxController {
     } catch (e) {
       print("Exception - main.dart - main():" + e.toString());
     }
-    await getAdmobSettings();
-    await getFaceBookAdSetting();
-    await loadNativeAd();
-    await loadfbBannerAd();
-    await loadFaceBookNativeAd();
-
-    await createAdmobBannerAd();
-    await createInterstitialAd();
-    await loadFacebookInterstitialAd();
+    if (global.appInfo.admob == "1") {
+      await getAdmobSettings();
+      await loadNativeAd();
+      await createAdmobBannerAd();
+      await createInterstitialAd();
+    }
+    if (global.appInfo.facebookAd == "1") {
+      await getFaceBookAdSetting();
+      await loadfbBannerAd();
+      await loadFaceBookNativeAd();
+      await loadFacebookInterstitialAd();
+    }
 
     super.onInit();
   }
@@ -102,16 +104,16 @@ class AdController extends GetxController {
         onAdClicked: (Ad ad) => print('+++++++++++++Ad clicked.'),
       );
 
-      const String viewType = '<platform-view-type>';
-      // Pass parameters to the platform side.
-      final Map<String, dynamic> creationParams = <String, dynamic>{};
+      // const String viewType = '<platform-view-type>';
+      // // Pass parameters to the platform side.
+      // final Map<String, dynamic> creationParams = <String, dynamic>{};
 
-      AndroidView(
-        viewType: viewType,
-        layoutDirection: TextDirection.ltr,
-        creationParams: creationParams,
-        creationParamsCodec: const StandardMessageCodec(),
-      );
+      // AndroidView(
+      //   viewType: viewType,
+      //   layoutDirection: TextDirection.ltr,
+      //   creationParams: creationParams,
+      //   creationParamsCodec: const StandardMessageCodec(),
+      // );
 
       myNative = new NativeAd(
           adUnitId: 'ca-app-pub-3940256099942544/2247696110',

@@ -74,6 +74,8 @@ void showInterstitialAd() async {
 
     if (clickCount == admobSetting.interstitialAdList[0].clicks) {
       Get.find<AdController>().showInterstitialAd();
+    }
+    if (clickCount == facebookAdSetting.interstitialAdList[0].clicks) {
       FacebookInterstitialAd.showInterstitialAd();
     }
   } catch (e) {
