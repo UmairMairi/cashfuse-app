@@ -54,6 +54,10 @@ class HomeScreen extends StatelessWidget {
   final couponScrollController = new ScrollController();
   final offerScrollController = new ScrollController();
 
+  // bool _isBannerAdLoaded1 = true;
+  // bool _isBannerAdLoaded2 = false;
+  // bool _isBannerAdLoaded3 = false;
+
   // Widget _faceNativeBannerAd() {
   //   return FacebookNativeAd(
   //     // placementId: "YOUR_PLACEMENT_ID",
@@ -109,7 +113,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     try {
       FacebookAudienceNetwork.init(
-        //testingId: '468FD9C0CF496815189B2FE63C8EFA31',
+        testingId: '468FD9C0CF496815189B2FE63C8EFA31',
         iOSAdvertiserTrackingEnabled: false,
       );
 
@@ -415,15 +419,15 @@ class HomeScreen extends StatelessWidget {
                                       ),
 
                                 // NativeAdWidget(),
-                                global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList[1].status == 1 && adController.isAdmobBannerAdLoaed
-                                    ? Container(
-                                        height: 100,
-                                        margin: EdgeInsets.symmetric(vertical: 10),
-                                        child: AdWidget(
-                                          key: Key('admob'),
-                                          ad: adController.myNative,
-                                        ))
-                                    : SizedBox(),
+                                // global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList[1].status == 1 && adController.isAdmobBannerAdLoaed
+                                //     ? Container(
+                                //         height: 100,
+                                //         margin: EdgeInsets.symmetric(vertical: 10),
+                                //         child: AdWidget(
+                                //           key: Key('admob'),
+                                //           ad: adController.myNative,
+                                //         ))
+                                //     : SizedBox(),
                                 // Container(
                                 //   height: homeController.adheight,
                                 //   padding: EdgeInsets.all(10),
@@ -578,20 +582,51 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                 ),
 
-                                global.admobSetting.bannerAdList != null && global.admobSetting.bannerAdList[0].status == 1 && adController.isAdmobBannerAdLoaed
-                                    ? Align(
-                                        alignment: Alignment.center,
-                                        //height: 100,
+                                global.admobSetting.bannerAdList != null && global.admobSetting.bannerAdList[0].status == 1
+                                    ? StatefulBuilder(
+                                        builder: (BuildContext context, StateSetter setState) => Align(
+                                          alignment: Alignment.center,
+                                          //height: 100,
 
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(top: 15),
-                                          child: SizedBox(
-                                            height: adController.bannerAdList[0].size.height.toDouble(),
-                                            // //width: 200,
-                                            width: adController.bannerAdList[0].size.width.toDouble(),
-                                            child: AdWidget(
-                                              key: Key('0'),
-                                              ad: adController.bannerAdList[0],
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(top: 15),
+                                            child: SizedBox(
+                                              height: adController.bannerAdList[0].size.height.toDouble(),
+                                              // //width: 200,
+                                              width: adController.bannerAdList[0].size.width.toDouble(),
+                                              child: AdWidget(
+                                                  key: Key('0'),
+                                                  ad: new BannerAd(
+                                                    adUnitId: "ca-app-pub-3940256099942544/6300978111", //"ca-app-pub-3940256099942544/6300978111",
+                                                    size: AdSize.banner,
+
+                                                    request: AdRequest(),
+                                                    listener: BannerAdListener(
+                                                      onAdLoaded: (_) {
+                                                        // _isBannerAdLoaded1 = true;
+                                                        // setState(() {});
+                                                        log("+++++++Ad loaded");
+                                                        // update();
+                                                      },
+                                                      onAdImpression: (ad) {
+                                                        // _isBannerAdLoaded1 = true;
+                                                        // setState(() {});
+                                                        log("+++++++Ad show");
+                                                      },
+                                                      onAdFailedToLoad: (ad, error) {
+                                                        ad.dispose();
+                                                        // _isBannerAdLoaded1 = true;
+                                                        // setState(() {});
+                                                        log("+++++++Ad failed${error.toString()}");
+                                                      },
+                                                      onAdClosed: (ad) {
+                                                        //_isBannerAdLoaded1 = true;
+                                                        setState(() {});
+                                                      },
+                                                    ),
+                                                  )..load()
+                                                  //adController.bannerAdList[0],
+                                                  ),
                                             ),
                                           ),
                                         ),
@@ -664,7 +699,7 @@ class HomeScreen extends StatelessWidget {
                                 //     ?
 
                                 // _faceBookBannerAd(),
-                                global.facebookAdSetting.bannerAdList != null && global.facebookAdSetting.bannerAdList[0].status == 1 && adController.fbBannerAdLoaded
+                                global.facebookAdSetting.bannerAdList != null && global.facebookAdSetting.bannerAdList[0].status == 1
                                     ? Padding(
                                         padding: const EdgeInsets.symmetric(vertical: 10),
                                         child: FacebookBannerAd(
@@ -1135,7 +1170,7 @@ class HomeScreen extends StatelessWidget {
                                               );
                                             }),
                                       ),
-                                global.admobSetting.bannerAdList != null && global.admobSetting.bannerAdList[1].status == 1 && adController.isAdmobBannerAdLoaed
+                                global.admobSetting.bannerAdList != null && global.admobSetting.bannerAdList[1].status == 1
                                     ? Align(
                                         alignment: Alignment.center,
                                         //height: 100,
@@ -1147,9 +1182,24 @@ class HomeScreen extends StatelessWidget {
                                             // //width: 200,
                                             width: adController.bannerAdList[1].size.width.toDouble(),
                                             child: AdWidget(
-                                              key: Key('1'),
-                                              ad: adController.bannerAdList[1],
-                                            ),
+                                                key: Key('1'),
+                                                ad: new BannerAd(
+                                                  adUnitId: "ca-app-pub-3940256099942544/6300978111", //"ca-app-pub-3940256099942544/6300978111",
+                                                  size: AdSize.banner,
+                                                  request: AdRequest(),
+                                                  listener: BannerAdListener(
+                                                    onAdLoaded: (_) {
+                                                      // isAdmobBannerAdLoaed = true;
+                                                      // update();
+                                                    },
+                                                    onAdFailedToLoad: (ad, error) {
+                                                      ad.dispose();
+                                                    },
+                                                  ),
+                                                )..load()
+                                                //adController.bannerAdList[0],
+                                                ),
+                                            //adController.bannerAdList[1],
                                           ),
                                         ),
                                       )
@@ -1329,7 +1379,7 @@ class HomeScreen extends StatelessWidget {
                                           );
                                   },
                                 ),
-                                global.admobSetting.bannerAdList != null && global.admobSetting.bannerAdList[2].status == 1 && adController.isAdmobBannerAdLoaed
+                                global.admobSetting.bannerAdList != null && global.admobSetting.bannerAdList[2].status == 1
                                     ? Align(
                                         alignment: Alignment.center,
                                         child: Padding(
@@ -1338,9 +1388,23 @@ class HomeScreen extends StatelessWidget {
                                             height: adController.bannerAdList[2].size.height.toDouble(),
                                             width: adController.bannerAdList[2].size.width.toDouble(),
                                             child: AdWidget(
-                                              key: Key('2'),
-                                              ad: adController.bannerAdList[2],
-                                            ),
+                                                key: Key('2'),
+                                                ad: new BannerAd(
+                                                  adUnitId: "ca-app-pub-3940256099942544/6300978111", //"ca-app-pub-3940256099942544/6300978111",
+                                                  size: AdSize.banner,
+                                                  request: AdRequest(),
+                                                  listener: BannerAdListener(
+                                                    onAdLoaded: (_) {
+                                                      // isAdmobBannerAdLoaed = true;
+                                                      // update();
+                                                    },
+                                                    onAdFailedToLoad: (ad, error) {
+                                                      ad.dispose();
+                                                    },
+                                                  ),
+                                                )..load()
+                                                //adController.bannerAdList[2],
+                                                ),
                                           ),
                                         ),
                                       )

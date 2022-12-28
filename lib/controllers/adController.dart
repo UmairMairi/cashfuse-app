@@ -8,7 +8,6 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_admob/native_admob_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -22,7 +21,6 @@ class AdController extends GetxController {
   int _numInterstitialLoadAttempts = 0;
   int maxFailedLoadAttempts = 3;
 
-  final nativeAdController = NativeAdmobController();
   StreamSubscription _subscription;
   double adheight = 0;
 
@@ -42,7 +40,6 @@ class AdController extends GetxController {
 
   @override
   void onInit() async {
-    _subscription = nativeAdController.stateChanged.listen(_onStateChanged);
     try {
       FacebookAudienceNetwork.init(
         //testingId: '468FD9C0CF496815189B2FE63C8EFA31',
@@ -189,23 +186,6 @@ class AdController extends GetxController {
     }
   }
 
-  void _onStateChanged(AdLoadState state) {
-    switch (state) {
-      case AdLoadState.loading:
-        adheight = 0.0;
-        update();
-        break;
-
-      case AdLoadState.loadCompleted:
-        adheight = 330;
-        update();
-        break;
-
-      default:
-        break;
-    }
-  }
-
   Future getAdmobSettings() async {
     try {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
@@ -247,7 +227,6 @@ class AdController extends GetxController {
   @override
   void dispose() {
     _subscription.cancel();
-    nativeAdController.dispose();
     myNative.dispose();
     super.dispose();
   }
@@ -261,7 +240,7 @@ class AdController extends GetxController {
     try {
       BannerAd _bannerAd;
       for (var i = 0; i < global.admobSetting.bannerAdList.length; i++) {
-        _bannerAd = BannerAd(
+        _bannerAd = new BannerAd(
           adUnitId: "ca-app-pub-3940256099942544/6300978111", //"ca-app-pub-3940256099942544/6300978111",
           size: AdSize.banner,
           request: AdRequest(),
@@ -319,18 +298,25 @@ class AdController extends GetxController {
         onAdShowedFullScreenContent: (InterstitialAd ad) => print('ad onAdShowedFullScreenContent.'),
         onAdDismissedFullScreenContent: (InterstitialAd ad) {
           print('$ad onAdDismissedFullScreenContent.');
-          ad.dispose();
+          //ad.dispose();
           createInterstitialAd();
-          global.clickCount = 0;
+          global.admobclickCount = 0;
+          update();
+        },
+        onAdImpression: (ad) {
+          createInterstitialAd();
+          global.admobclickCount = 0;
           update();
         },
         onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
           print('$ad onAdFailedToShowFullScreenContent: $error');
           ad.dispose();
           createInterstitialAd();
+          global.admobclickCount = 0;
+          update();
         },
         onAdClicked: (ad) {
-          log(ad.adUnitId);
+          log("#####################" + ad.adUnitId);
         },
       );
       interstitialAd.show();
@@ -353,6 +339,13 @@ class AdController extends GetxController {
         /// load a fresh Ad by calling this function.
         if (result == InterstitialAdResult.DISMISSED) {
           loadFacebookInterstitialAd();
+          global.fbclickCount = 0;
+          update();
+        }
+        if (result == InterstitialAdResult.LOGGING_IMPRESSION) {
+          loadFacebookInterstitialAd();
+          global.fbclickCount = 0;
+          update();
         }
         if (result == InterstitialAdResult.ERROR) {
           //loadFacebookInterstitialAd();

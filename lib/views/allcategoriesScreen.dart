@@ -7,6 +7,7 @@ import 'package:cashfuse/views/categoryScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -117,7 +118,29 @@ class AllCategoriesScreen extends StatelessWidget {
                               );
                       },
                     ),
-                    global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList[1].status == 1 && adController.isAdmobBannerAdLoaed
+                    global.facebookAdSetting.nativeAdList != null && global.facebookAdSetting.nativeAdList[0].status == 1
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: FacebookNativeAd(
+                              placementId: "VID_HD_16_9_46S_APP_INSTALL#536153035214384_536880055141682",
+                              adType: NativeAdType.NATIVE_AD,
+                              width: double.infinity,
+                              height: 300,
+                              keepAlive: true,
+                              backgroundColor: Colors.blue,
+                              titleColor: Colors.white,
+                              descriptionColor: Colors.white,
+                              buttonColor: Colors.deepPurple,
+                              buttonTitleColor: Colors.white,
+                              buttonBorderColor: Colors.white,
+                              listener: (result, value) {
+                                print("Native Ad: $result --> $value");
+                              },
+                              keepExpandedWhileLoading: false,
+                            ),
+                          )
+                        : SizedBox(),
+                    global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList[0].status == 1 && adController.isAdmobBannerAdLoaed
                         ? Container(
                             height: 100,
                             margin: EdgeInsets.symmetric(vertical: 10),

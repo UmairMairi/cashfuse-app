@@ -44,7 +44,8 @@ String appShareLink = '';
 FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 int totalJoinedCount = 0;
 String earningVideoUrl = 'https://media.istockphoto.com/id/1323271459/video/connected-lines-and-particles-on-black-background.mp4?s=mp4-640x640-is&k=20&c=Jzkaf3VHLlSrBvCZDPqQgHzb0Ph5OdPhuDlMBBkDyFM=';
-int clickCount = 0;
+int admobclickCount = 0;
+int fbclickCount = 0;
 
 //Api Header
 Future<Map<String, String>> getApiHeaders(bool authorizationRequired, {String userId}) async {
@@ -70,12 +71,18 @@ Future<Map<String, String>> getApiHeaders(bool authorizationRequired, {String us
 
 void showInterstitialAd() async {
   try {
-    clickCount++;
-
-    if (clickCount == admobSetting.interstitialAdList[0].clicks) {
+    admobclickCount++;
+    fbclickCount++;
+    if (admobclickCount > admobSetting.interstitialAdList[0].clicks) {
+      admobclickCount = 0;
+    }
+    if (fbclickCount > facebookAdSetting.interstitialAdList[0].clicks) {
+      fbclickCount = 0;
+    }
+    if (admobclickCount == admobSetting.interstitialAdList[0].clicks) {
       Get.find<AdController>().showInterstitialAd();
     }
-    if (clickCount == facebookAdSetting.interstitialAdList[0].clicks) {
+    if (fbclickCount == facebookAdSetting.interstitialAdList[0].clicks) {
       FacebookInterstitialAd.showInterstitialAd();
     }
   } catch (e) {

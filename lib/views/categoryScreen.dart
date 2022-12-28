@@ -59,7 +59,7 @@ class CategoryScreen extends StatelessWidget {
               width: AppConstants.WEB_MAX_WIDTH,
               child: Column(
                 children: [
-                  global.facebookAdSetting.nativeAdList != null && global.facebookAdSetting.nativeAdList[0].status == 1
+                  global.facebookAdSetting.nativeAdList != null && global.facebookAdSetting.nativeAdList[1].status == 1
                       ? Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: FacebookNativeAd(
