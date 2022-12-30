@@ -26,9 +26,47 @@ class CategoryScreen extends StatelessWidget {
   HomeController homeController = Get.find<HomeController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  NativeAd _myNativeAd;
+
+  Future loadNativeAd() async {
+    try {
+      if (global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList.length > 0 && global.admobSetting.nativeAdList[1] != null && global.admobSetting.nativeAdList[1].status == 1) {
+        final NativeAdListener listener = NativeAdListener(
+          // Called when an ad is successfully received.
+          onAdLoaded: (Ad ad) => print('+++++++++++++++++++Ad loaded.'),
+          // Called when an ad request failed.
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            // Dispose the ad here to free resources.
+            ad.dispose();
+            print('Ad failed to load:++++++++ $error');
+          },
+
+          onAdImpression: (Ad ad) {
+            // //setNativeAdLoaded(true);
+            // admobNativeAdLoaded = true;
+            // update();
+          },
+        );
+
+        _myNativeAd = new NativeAd(
+            adUnitId: 'ca-app-pub-3940256099942544/2247696110',
+            factoryId: 'adFactoryExample',
+            request: AdRequest(),
+            listener: listener,
+            nativeAdOptions: NativeAdOptions(
+              shouldRequestMultipleImages: true,
+            ))
+          ..load();
+      }
+    } catch (e) {
+      print("Exception - AllCategoriesScreen.dart - loadNativeAd():" + e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     log("@@@@@@@@@@@@@@@@@@@@@@@@@@@${homeController.catPageListIndex.toString()}");
+    loadNativeAd();
     return Scaffold(
       key: scaffoldKey,
       drawer: global.getPlatFrom() ? DrawerWidget() : null,
@@ -59,7 +97,7 @@ class CategoryScreen extends StatelessWidget {
               width: AppConstants.WEB_MAX_WIDTH,
               child: Column(
                 children: [
-                  global.facebookAdSetting.nativeAdList != null && global.facebookAdSetting.nativeAdList[1].status == 1
+                  !GetPlatform.isWeb && global.facebookAdSetting.nativeAdList != null && global.facebookAdSetting.nativeAdList[1].status == 1
                       ? Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: FacebookNativeAd(
@@ -81,13 +119,15 @@ class CategoryScreen extends StatelessWidget {
                           ),
                         )
                       : SizedBox(),
-                  global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList[1].status == 1 && adController.admobNativeAdLoaded
+                  // global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList[1].status == 1 && adController.admobNativeAdLoaded
+                  //     ?
+                  !GetPlatform.isWeb
                       ? Container(
                           height: 100,
                           margin: EdgeInsets.symmetric(vertical: 10),
                           child: AdWidget(
                             key: Key('nativeAd'),
-                            ad: adController.myNative..load(),
+                            ad: _myNativeAd,
                           ))
                       : SizedBox(),
                   // category.ads != []

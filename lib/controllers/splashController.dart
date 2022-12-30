@@ -377,7 +377,7 @@ class SplashController extends GetxController {
                       pageIndex: 0,
                     ));
               } else {
-                if (!global.getPlatFrom()) {
+                if (GetPlatform.isWeb) {
                   Get.to(() => BottomNavigationBarScreen(
                         pageIndex: 0,
                       ));

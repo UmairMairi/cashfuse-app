@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/networkController.dart';
@@ -14,8 +13,16 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 class AdController extends GetxController {
   APIHelper apiHelper = new APIHelper();
   NetworkController networkController = Get.find<NetworkController>();
+
+  FacebookBannerAd fbBannerAd1;
+  FacebookBannerAd fbBannerAd2;
+  FacebookBannerAd fbBannerAd3;
+
+  bool isfbBannerAdLoaed1 = false;
+  bool isfbBannerAdLoaed2 = false;
+  bool isfbBannerAdLoaed3 = false;
+
   List<BannerAd> bannerAdList = [];
-  bool isAdmobBannerAdLoaed = false;
 
   InterstitialAd interstitialAd;
   int _numInterstitialLoadAttempts = 0;
@@ -40,30 +47,108 @@ class AdController extends GetxController {
 
   @override
   void onInit() async {
-    try {
-      FacebookAudienceNetwork.init(
-        //testingId: '468FD9C0CF496815189B2FE63C8EFA31',
-        iOSAdvertiserTrackingEnabled: false,
-      );
+    if (!GetPlatform.isWeb) {
+      try {
+        FacebookAudienceNetwork.init(
+          //testingId: '468FD9C0CF496815189B2FE63C8EFA31',
+          iOSAdvertiserTrackingEnabled: false,
+        );
 
-      //AdSettings.addTestDevice("328404cebf50ec1fdb05795c0007a8a7");
-    } catch (e) {
-      print("Exception - main.dart - main():" + e.toString());
-    }
-    if (global.appInfo.admob == "1") {
-      await getAdmobSettings();
-      await loadNativeAd();
-      await createAdmobBannerAd();
-      await createInterstitialAd();
-    }
-    if (global.appInfo.facebookAd == "1") {
-      await getFaceBookAdSetting();
-      await loadfbBannerAd();
-      await loadFaceBookNativeAd();
-      await loadFacebookInterstitialAd();
+        //AdSettings.addTestDevice("328404cebf50ec1fdb05795c0007a8a7");
+      } catch (e) {
+        print("Exception - main.dart - main():" + e.toString());
+      }
+      if (global.appInfo.admob == "1") {
+        await getAdmobSettings();
+
+        //await createAdmobBannerAd();
+        //await loadNativeAd();
+        await createInterstitialAd();
+      }
+      if (global.appInfo.facebookAd == "1") {
+        await getFaceBookAdSetting();
+        await createFbBannerAd();
+        // await loadfbBannerAd();
+        // await loadFaceBookNativeAd();
+        await loadFacebookInterstitialAd();
+      }
     }
 
     super.onInit();
+  }
+
+  Future createFbBannerAd() async {
+    try {
+      if (global.facebookAdSetting.bannerAdList != null && global.facebookAdSetting.bannerAdList.length > 0) {
+        if (global.facebookAdSetting.bannerAdList[0] != null && global.facebookAdSetting.bannerAdList[0].status == 1) {
+          fbBannerAd1 = new FacebookBannerAd(
+            placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
+            bannerSize: BannerSize.STANDARD,
+            keepAlive: true,
+            listener: (result, value) {
+              if (result == BannerAdResult.ERROR) {
+                isfbBannerAdLoaed1 = false;
+                update();
+              }
+              if (result == BannerAdResult.LOGGING_IMPRESSION) {
+                isfbBannerAdLoaed1 = true;
+                update();
+              }
+              if (result == BannerAdResult.LOADED) {
+                isfbBannerAdLoaed1 = true;
+                update();
+              }
+            },
+          );
+        }
+
+        if (global.facebookAdSetting.bannerAdList[1] != null && global.facebookAdSetting.bannerAdList[1].status == 1) {
+          fbBannerAd2 = new FacebookBannerAd(
+            placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
+            bannerSize: BannerSize.STANDARD,
+            keepAlive: true,
+            listener: (result, value) {
+              if (result == BannerAdResult.ERROR) {
+                isfbBannerAdLoaed2 = false;
+                update();
+              }
+              if (result == BannerAdResult.LOGGING_IMPRESSION) {
+                isfbBannerAdLoaed2 = true;
+                update();
+              }
+              if (result == BannerAdResult.LOADED) {
+                isfbBannerAdLoaed2 = true;
+                update();
+              }
+            },
+          );
+        }
+
+        if (global.facebookAdSetting.bannerAdList[2] != null && global.facebookAdSetting.bannerAdList[2].status == 1) {
+          fbBannerAd3 = new FacebookBannerAd(
+            placementId: 'IMG_16_9_LINK#536153035214384_536898305139857',
+            bannerSize: BannerSize.STANDARD,
+            keepAlive: true,
+            listener: (result, value) {
+              if (result == BannerAdResult.ERROR) {
+                isfbBannerAdLoaed3 = false;
+                update();
+              }
+              if (result == BannerAdResult.LOGGING_IMPRESSION) {
+                isfbBannerAdLoaed3 = true;
+                update();
+              }
+              if (result == BannerAdResult.LOADED) {
+                isfbBannerAdLoaed3 = true;
+                update();
+              }
+            },
+          );
+        }
+      }
+    } catch (e) {
+      print("Exception - HomeScreen.dart - createFbBannerAd():" + e.toString());
+    }
   }
 
   Future loadNativeAd() async {
@@ -236,31 +321,87 @@ class AdController extends GetxController {
     super.onClose();
   }
 
-  Future createAdmobBannerAd() async {
-    try {
-      BannerAd _bannerAd;
-      for (var i = 0; i < global.admobSetting.bannerAdList.length; i++) {
-        _bannerAd = new BannerAd(
-          adUnitId: "ca-app-pub-3940256099942544/6300978111", //"ca-app-pub-3940256099942544/6300978111",
-          size: AdSize.banner,
-          request: AdRequest(),
-          listener: BannerAdListener(
-            onAdLoaded: (_) {
-              isAdmobBannerAdLoaed = true;
-              update();
-            },
-            onAdFailedToLoad: (ad, error) {
-              ad.dispose();
-            },
-          ),
-        );
-        bannerAdList.add(_bannerAd);
-        bannerAdList[i].load();
-      }
-    } catch (e) {
-      print("Exception - AdController.dart - createAdmobBannerAd():" + e.toString());
-    }
-  }
+  // Future createAdmobBannerAd() async {
+  //   try {
+  //     if (global.admobSetting.bannerAdList != null && global.admobSetting.bannerAdList.length > 0) {
+  //       if (global.admobSetting.bannerAdList[0] != null && global.admobSetting.bannerAdList[0].status == 1) {
+  //         admobBannerAd1 = new BannerAd(
+  //           adUnitId: "ca-app-pub-3940256099942544/6300978111", //"ca-app-pub-3940256099942544/6300978111",
+  //           size: AdSize.banner,
+  //           request: AdRequest(),
+  //           listener: BannerAdListener(
+  //             onAdLoaded: (_) {
+  //               isAdmobBannerAdLoaed1 = true;
+  //               update();
+  //               log("+++++++++++++++++++++++@onAdLoaded");
+  //             },
+  //             onAdFailedToLoad: (ad, error) {
+  //               ad.dispose();
+  //               log("+++++++++++++++++++++++@onAdFailedToLoad");
+  //             },
+  //             onAdImpression: (ad) {
+  //               log("+++++++++++++++++++++++@onAdImpression");
+  //             },
+  //           ),
+  //         )..load();
+  //       }
+
+  //       if (global.admobSetting.bannerAdList[1] != null && global.admobSetting.bannerAdList[1].status == 1) {
+  //         admobBannerAd2 = new BannerAd(
+  //           adUnitId: "ca-app-pub-3940256099942544/6300978111", //"ca-app-pub-3940256099942544/6300978111",
+  //           size: AdSize.banner,
+  //           request: AdRequest(),
+  //           listener: BannerAdListener(
+  //             onAdLoaded: (_) {
+  //               isAdmobBannerAdLoaed2 = true;
+  //               update();
+  //             },
+  //             onAdFailedToLoad: (ad, error) {
+  //               ad.dispose();
+  //             },
+  //           ),
+  //         )..load();
+  //       }
+
+  //       if (global.admobSetting.bannerAdList[2] != null && global.admobSetting.bannerAdList[2].status == 1) {
+  //         admobBannerAd3 = new BannerAd(
+  //           adUnitId: "ca-app-pub-3940256099942544/6300978111", //"ca-app-pub-3940256099942544/6300978111",
+  //           size: AdSize.banner,
+  //           request: AdRequest(),
+  //           listener: BannerAdListener(
+  //             onAdLoaded: (_) {
+  //               isAdmobBannerAdLoaed3 = true;
+  //               update();
+  //             },
+  //             onAdFailedToLoad: (ad, error) {
+  //               ad.dispose();
+  //             },
+  //           ),
+  //         )..load();
+  //       }
+  //     }
+  // for (var i = 0; i < global.admobSetting.bannerAdList.length; i++) {
+  //   _bannerAd = new BannerAd(
+  //     adUnitId: "ca-app-pub-3940256099942544/6300978111", //"ca-app-pub-3940256099942544/6300978111",
+  //     size: AdSize.banner,
+  //     request: AdRequest(),
+  //     listener: BannerAdListener(
+  //       onAdLoaded: (_) {
+  //         isAdmobBannerAdLoaed = true;
+  //         update();
+  //       },
+  //       onAdFailedToLoad: (ad, error) {
+  //         ad.dispose();
+  //       },
+  //     ),
+  //   );
+  //   bannerAdList.add(_bannerAd);
+  //   bannerAdList[i].load();
+  //}
+  //   } catch (e) {
+  //     print("Exception - AdController.dart - createAdmobBannerAd():" + e.toString());
+  //   }
+  // }
 
   Future createInterstitialAd() async {
     try {
@@ -290,33 +431,19 @@ class AdController extends GetxController {
 
   void showInterstitialAd() {
     try {
-      if (interstitialAd == null) {
-        print('Warning: attempt to show interstitial before loaded.');
-        return;
-      }
       interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
         onAdShowedFullScreenContent: (InterstitialAd ad) => print('ad onAdShowedFullScreenContent.'),
         onAdDismissedFullScreenContent: (InterstitialAd ad) {
-          print('$ad onAdDismissedFullScreenContent.');
-          //ad.dispose();
-          createInterstitialAd();
-          global.admobclickCount = 0;
-          update();
-        },
-        onAdImpression: (ad) {
-          createInterstitialAd();
-          global.admobclickCount = 0;
-          update();
-        },
-        onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-          print('$ad onAdFailedToShowFullScreenContent: $error');
           ad.dispose();
           createInterstitialAd();
           global.admobclickCount = 0;
           update();
         },
-        onAdClicked: (ad) {
-          log("#####################" + ad.adUnitId);
+        onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+          ad.dispose();
+          createInterstitialAd();
+          global.admobclickCount = 0;
+          update();
         },
       );
       interstitialAd.show();
@@ -329,14 +456,9 @@ class AdController extends GetxController {
 
   Future loadFacebookInterstitialAd() async {
     FacebookInterstitialAd.loadInterstitialAd(
-      // placementId: "YOUR_PLACEMENT_ID",
       placementId: "IMG_16_9_APP_INSTALL#536153035214384_536898488473172",
       listener: (result, value) {
-        print(">> FAN > Interstitial Ad: $result --> $value");
-        if (result == InterstitialAdResult.LOADED)
-
-        /// Once an Interstitial Ad has been dismissed and becomes invalidated,
-        /// load a fresh Ad by calling this function.
+        if (result == InterstitialAdResult.LOADED) {}
         if (result == InterstitialAdResult.DISMISSED) {
           loadFacebookInterstitialAd();
           global.fbclickCount = 0;
@@ -348,7 +470,8 @@ class AdController extends GetxController {
           update();
         }
         if (result == InterstitialAdResult.ERROR) {
-          //loadFacebookInterstitialAd();
+          global.fbclickCount = 0;
+          update();
         }
       },
     );

@@ -3,24 +3,26 @@
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/adController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/categoryScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:cashfuse/utils/global.dart' as global;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AllCategoriesScreen extends StatelessWidget {
   HomeController homeController = Get.find<HomeController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  NativeAd _myNativeAd;
+
   void paginateTask() {
-    homeController.scrollController.addListener(() async {
-      if (homeController.scrollController.position.pixels == homeController.scrollController.position.maxScrollExtent) {
+    homeController.catScrollController.addListener(() async {
+      if (homeController.catScrollController.position.pixels == homeController.catScrollController.position.maxScrollExtent) {
         homeController.isMoreDataAvailable.value = true;
         print('Reached end');
         await homeController.getTopCategories();
@@ -28,9 +30,45 @@ class AllCategoriesScreen extends StatelessWidget {
     });
   }
 
+  Future loadNativeAd() async {
+    try {
+      if (global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList.length > 0 && global.admobSetting.nativeAdList[0] != null && global.admobSetting.nativeAdList[0].status == 1) {
+        final NativeAdListener listener = NativeAdListener(
+          // Called when an ad is successfully received.
+          onAdLoaded: (Ad ad) => print('+++++++++++++++++++Ad loaded.'),
+          // Called when an ad request failed.
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            // Dispose the ad here to free resources.
+            ad.dispose();
+            print('Ad failed to load:++++++++ $error');
+          },
+
+          onAdImpression: (Ad ad) {
+            // //setNativeAdLoaded(true);
+            // admobNativeAdLoaded = true;
+            //  update();
+          },
+        );
+
+        _myNativeAd = new NativeAd(
+            adUnitId: 'ca-app-pub-3940256099942544/2247696110',
+            factoryId: 'adFactoryExample',
+            request: AdRequest(),
+            listener: listener,
+            nativeAdOptions: NativeAdOptions(
+              shouldRequestMultipleImages: true,
+            ))
+          ..load();
+      }
+    } catch (e) {
+      print("Exception - AllCategoriesScreen.dart - loadNativeAd():" + e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     paginateTask();
+    loadNativeAd();
     return Scaffold(
       key: scaffoldKey,
       drawer: global.getPlatFrom() ? DrawerWidget() : null,
@@ -60,7 +98,7 @@ class AllCategoriesScreen extends StatelessWidget {
             child: SizedBox(
               width: AppConstants.WEB_MAX_WIDTH,
               child: SingleChildScrollView(
-                controller: controller.scrollController,
+                controller: controller.catScrollController,
                 child: Column(
                   children: [
                     GridView.builder(
@@ -118,7 +156,7 @@ class AllCategoriesScreen extends StatelessWidget {
                               );
                       },
                     ),
-                    global.facebookAdSetting.nativeAdList != null && global.facebookAdSetting.nativeAdList[0].status == 1
+                    !GetPlatform.isWeb && global.facebookAdSetting.nativeAdList != null && global.facebookAdSetting.nativeAdList[0].status == 1
                         ? Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: FacebookNativeAd(
@@ -140,13 +178,15 @@ class AllCategoriesScreen extends StatelessWidget {
                             ),
                           )
                         : SizedBox(),
-                    global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList[0].status == 1 && adController.isAdmobBannerAdLoaed
+                    // global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList[0].status == 1 && adController.isAdmobBannerAdLoaed
+                    //     ?
+                    !GetPlatform.isWeb
                         ? Container(
                             height: 100,
                             margin: EdgeInsets.symmetric(vertical: 10),
                             child: AdWidget(
                               key: Key('admob'),
-                              ad: adController.myNative,
+                              ad: _myNativeAd,
                             ))
                         : SizedBox(),
                   ],

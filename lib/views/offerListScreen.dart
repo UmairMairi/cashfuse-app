@@ -51,7 +51,7 @@ class OfferListScreen extends StatelessWidget {
                   child: categoryModel != null
                       ? global.getPlatFrom()
                           ? GridView.builder(
-                              controller: homeController.scrollController,
+                              //controller: homeController.scrollController,
                               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 4,
                                 crossAxisSpacing: 15.0,
@@ -117,7 +117,7 @@ class OfferListScreen extends StatelessWidget {
                             )
                       : global.getPlatFrom()
                           ? GridView.builder(
-                              controller: homeController.scrollController,
+                              //controller: homeController.scrollController,
                               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 4,
                                 crossAxisSpacing: 15.0,

@@ -80,7 +80,8 @@ class HomeController extends GetxController {
   var isClickDataLoaded = false.obs;
 
   String createdLink = '';
-  ScrollController scrollController = ScrollController();
+  ScrollController catScrollController = ScrollController();
+  ScrollController topCashBackScrollController = ScrollController();
 
   int catPageListIndex = 0;
 

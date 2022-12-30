@@ -20,8 +20,8 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   void paginateTask() {
-    homeController.scrollController.addListener(() async {
-      if (homeController.scrollController.position.pixels == homeController.scrollController.position.maxScrollExtent) {
+    homeController.topCashBackScrollController.addListener(() async {
+      if (homeController.topCashBackScrollController.position.pixels == homeController.topCashBackScrollController.position.maxScrollExtent) {
         homeController.isMoreDataAvailable.value = true;
         print('Reached end');
         await homeController.getAllAdv();
@@ -59,7 +59,7 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
           child: SizedBox(
             width: AppConstants.WEB_MAX_WIDTH,
             child: GridView.builder(
-              controller: homeController.scrollController,
+              controller: homeController.topCashBackScrollController,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: global.getPlatFrom() ? 5 : 2,
                 crossAxisSpacing: global.getPlatFrom() ? 25 : 15.0,

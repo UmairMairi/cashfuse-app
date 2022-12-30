@@ -71,19 +71,26 @@ Future<Map<String, String>> getApiHeaders(bool authorizationRequired, {String us
 
 void showInterstitialAd() async {
   try {
-    admobclickCount++;
-    fbclickCount++;
-    if (admobclickCount > admobSetting.interstitialAdList[0].clicks) {
-      admobclickCount = 0;
+    if (admobSetting.interstitialAdList != null && admobSetting.interstitialAdList.length > 0) {
+      admobclickCount++;
+      if (admobclickCount > admobSetting.interstitialAdList[0].clicks) {
+        admobclickCount = 0;
+      }
+      if (admobclickCount == admobSetting.interstitialAdList[0].clicks) {
+        Get.find<AdController>().showInterstitialAd();
+      }
     }
-    if (fbclickCount > facebookAdSetting.interstitialAdList[0].clicks) {
-      fbclickCount = 0;
-    }
-    if (admobclickCount == admobSetting.interstitialAdList[0].clicks) {
-      Get.find<AdController>().showInterstitialAd();
-    }
-    if (fbclickCount == facebookAdSetting.interstitialAdList[0].clicks) {
-      FacebookInterstitialAd.showInterstitialAd();
+
+    if (facebookAdSetting.interstitialAdList != null && facebookAdSetting.interstitialAdList.length > 0) {
+      fbclickCount++;
+
+      if (fbclickCount > facebookAdSetting.interstitialAdList[0].clicks) {
+        fbclickCount = 0;
+      }
+
+      if (fbclickCount == facebookAdSetting.interstitialAdList[0].clicks) {
+        FacebookInterstitialAd.showInterstitialAd();
+      }
     }
   } catch (e) {
     print("Exception - global.dart - showInterstitialAd():" + e.toString());
