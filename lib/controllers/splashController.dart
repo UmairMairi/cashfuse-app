@@ -78,6 +78,12 @@ class SplashController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void dispose() {
+    //videoPlayerController.dispose();
+    super.dispose();
+  }
+
   // void _onStateChanged(AdLoadState state) {
   //   switch (state) {
   //     case AdLoadState.loading:

@@ -180,7 +180,7 @@ class AllCategoriesScreen extends StatelessWidget {
                         : SizedBox(),
                     // global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList[0].status == 1 && adController.isAdmobBannerAdLoaed
                     //     ?
-                    !GetPlatform.isWeb
+                    !GetPlatform.isWeb && _myNativeAd != null
                         ? Container(
                             height: 100,
                             margin: EdgeInsets.symmetric(vertical: 10),
