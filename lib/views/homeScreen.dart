@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
   CouponController couponController = Get.find<CouponController>();
   SplashController splashController = Get.find<SplashController>();
   //AdController adController = Get.find<AdController>();
-  AdController adController = Get.find<AdController>();
+  AdController adController = GetPlatform.isWeb ? Get.put(AdController()) : Get.find<AdController>();
   final couponScrollController = new ScrollController();
   final offerScrollController = new ScrollController();
 
@@ -193,7 +193,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    createAdmobBannerAd();
+    if (!GetPlatform.isWeb) {
+      createAdmobBannerAd();
+    }
+
     // FacebookAudienceNetwork.init(
     //   testingId: '468FD9C0CF496815189B2FE63C8EFA31',
     //   iOSAdvertiserTrackingEnabled: false,

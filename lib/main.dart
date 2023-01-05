@@ -35,10 +35,12 @@ void main() async {
   HttpOverrides.global = new MyHttpOverrides();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  await NotificationHelper.initialize();
-  //MobileAds.instance.initialize();
+  if (!GetPlatform.isWeb) {
+    await NotificationHelper.initialize();
+    //MobileAds.instance.initialize();
 
-  MobileAds.instance.initialize();
+    MobileAds.instance.initialize();
+  }
 
   if (!GetPlatform.isWeb) {
     await fetchLinkData();
