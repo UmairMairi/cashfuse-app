@@ -102,9 +102,12 @@ class SearchScreen extends StatelessWidget {
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                       onTap: () {
-                                        Get.to(() => CategoryScreen(
-                                              category: searchController.searchData.advertiserList[index],
-                                            ));
+                                        Get.to(
+                                          () => CategoryScreen(
+                                            category: searchController.searchData.advertiserList[index],
+                                          ),
+                                          routeName: 'category',
+                                        );
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.only(right: 12),
@@ -147,16 +150,22 @@ class SearchScreen extends StatelessWidget {
                                       onTap: () async {
                                         if (searchController.searchData.commonList[index].adId != null && searchController.searchData.commonList[index].adId.isNotEmpty) {
                                           await homeController.getAdDetails(searchController.searchData.commonList[index].adId);
-                                          Get.to(() => AdsDetailScreen(
-                                                ads: homeController.ads,
-                                                fromSeeMore: false,
-                                              ));
+                                          Get.to(
+                                            () => AdsDetailScreen(
+                                              ads: homeController.ads,
+                                              fromSeeMore: false,
+                                            ),
+                                            routeName: 'detail',
+                                          );
                                         } else {
                                           await homeController.getCampignDetails(searchController.searchData.commonList[index].campaignId.toString());
-                                          Get.to(() => CampaignDetailScreen(
-                                                campaign: homeController.campaign,
-                                                fromSeeMore: false,
-                                              ));
+                                          Get.to(
+                                            () => CampaignDetailScreen(
+                                              campaign: homeController.campaign,
+                                              fromSeeMore: false,
+                                            ),
+                                            routeName: 'detail',
+                                          );
                                         }
                                       },
                                       child: Padding(
@@ -185,10 +194,13 @@ class SearchScreen extends StatelessWidget {
                                     return InkWell(
                                       onTap: () async {
                                         await homeController.getOfferDetails(searchController.searchData.offerList[index].id.toString());
-                                        Get.to(() => OfferDetailScreen(
-                                              offer: homeController.offer,
-                                              fromSeeMore: false,
-                                            ));
+                                        Get.to(
+                                          () => OfferDetailScreen(
+                                            offer: homeController.offer,
+                                            fromSeeMore: false,
+                                          ),
+                                          routeName: 'offer',
+                                        );
                                       },
                                       child: OfferWidget(
                                         offer: searchController.searchData.offerList[index],
@@ -253,6 +265,7 @@ class SearchScreen extends StatelessWidget {
                                           () => AdsCampaignWidgetListScreen(
                                             title: AppLocalizations.of(context).top_cashback_stores,
                                           ),
+                                          routeName: 'all',
                                         );
                                       },
                                       child: Text(
@@ -278,9 +291,12 @@ class SearchScreen extends StatelessWidget {
                                       itemBuilder: (context, index) {
                                         return InkWell(
                                           onTap: () {
-                                            Get.to(() => CategoryScreen(
-                                                  category: hmController.topCashbackList[index],
-                                                ));
+                                            Get.to(
+                                              () => CategoryScreen(
+                                                category: hmController.topCashbackList[index],
+                                              ),
+                                              routeName: 'category',
+                                            );
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.only(right: 13),
@@ -353,10 +369,13 @@ class SearchScreen extends StatelessWidget {
                                         return InkWell(
                                           onTap: () async {
                                             await hmCon.getOfferDetails(hmCon.exclusiveOfferList[index].id.toString());
-                                            Get.to(() => OfferDetailScreen(
-                                                  offer: hmCon.offer,
-                                                  fromSeeMore: false,
-                                                ));
+                                            Get.to(
+                                              () => OfferDetailScreen(
+                                                offer: hmCon.offer,
+                                                fromSeeMore: false,
+                                              ),
+                                              routeName: 'offer',
+                                            );
                                           },
                                           child: Container(
                                             width: 240, //Get.width - 120,

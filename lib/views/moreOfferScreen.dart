@@ -113,6 +113,7 @@ class MoreOfferScreen extends StatelessWidget {
                                   offer: homeController.offer,
                                 ),
                                 preventDuplicates: false,
+                                routeName: 'offer',
                               );
                             },
                             child: Container(

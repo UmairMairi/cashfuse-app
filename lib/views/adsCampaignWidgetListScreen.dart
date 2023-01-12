@@ -75,9 +75,12 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
                       )
                     : InkWell(
                         onTap: () {
-                          Get.to(() => CategoryScreen(
-                                category: homeController.allAdvList[index],
-                              ));
+                          Get.to(
+                            () => CategoryScreen(
+                              category: homeController.allAdvList[index],
+                            ),
+                            routeName: 'category',
+                          );
                         },
                         child: global.getPlatFrom()
                             ? WebAdsCampaignWidget(

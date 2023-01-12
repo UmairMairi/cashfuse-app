@@ -48,12 +48,14 @@ class CouponListScreen extends StatelessWidget {
                     offer: couponController.couponList[index].offer,
                     fromSeeMore: false,
                   ),
+                  routeName: 'offer',
                 );
               } else {
                 Get.to(
                   () => CouponDetailScreen(
                     coupon: couponController.couponList[index],
                   ),
+                  routeName: 'coupon',
                 );
               }
             },

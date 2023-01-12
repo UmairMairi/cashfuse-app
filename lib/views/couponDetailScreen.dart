@@ -68,9 +68,12 @@ class CouponDetailScreen extends StatelessWidget {
                                   ),
                                 ));
                               } else {
-                                Get.to(() => LoginOrSignUpScreen(
-                                      fromMenu: true,
-                                    ));
+                                Get.to(
+                                  () => LoginOrSignUpScreen(
+                                    fromMenu: true,
+                                  ),
+                                  routeName: 'login',
+                                );
                               }
                             }
                           },
@@ -274,9 +277,12 @@ class CouponDetailScreen extends StatelessWidget {
                                   ),
                                 ));
                               } else {
-                                Get.to(() => LoginOrSignUpScreen(
-                                      fromMenu: true,
-                                    ));
+                                Get.to(
+                                  () => LoginOrSignUpScreen(
+                                    fromMenu: true,
+                                  ),
+                                  routeName: 'login',
+                                );
                               }
                             }
                           },

@@ -68,6 +68,7 @@ class WebBannerView extends StatelessWidget {
                                       offer: homeController.offer,
                                       fromSeeMore: false,
                                     ),
+                                    routeName: 'offer',
                                   );
                                 }
                               },
@@ -118,6 +119,7 @@ class WebBannerView extends StatelessWidget {
                                               offer: homeController.offer,
                                               fromSeeMore: false,
                                             ),
+                                            routeName: 'offer',
                                           );
                                         }
                                       },
@@ -168,6 +170,7 @@ class WebBannerView extends StatelessWidget {
                                             offer: homeController.offer,
                                             fromSeeMore: false,
                                           ),
+                                          routeName: 'offer',
                                         );
                                       }
                                     },

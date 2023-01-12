@@ -167,9 +167,12 @@ class CampaignDetailScreen extends StatelessWidget {
                                             ),
                                           ));
                                         } else {
-                                          Get.to(() => LoginOrSignUpScreen(
-                                                fromMenu: true,
-                                              ));
+                                          Get.to(
+                                            () => LoginOrSignUpScreen(
+                                              fromMenu: true,
+                                            ),
+                                            routeName: 'login',
+                                          );
                                         }
                                       }
                                     },
@@ -311,9 +314,12 @@ class CampaignDetailScreen extends StatelessWidget {
                                         ),
                                       ));
                                     } else {
-                                      Get.to(() => LoginOrSignUpScreen(
-                                            fromMenu: true,
-                                          ));
+                                      Get.to(
+                                        () => LoginOrSignUpScreen(
+                                          fromMenu: true,
+                                        ),
+                                        routeName: 'login',
+                                      );
                                     }
                                   }
                                 },

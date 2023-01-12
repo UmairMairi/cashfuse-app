@@ -66,16 +66,22 @@ class OfferListScreen extends StatelessWidget {
                                   onTap: () async {
                                     if (categoryModel.commonList[index].adId != null && categoryModel.commonList[index].adId.isNotEmpty) {
                                       await homeController.getAdDetails(categoryModel.commonList[index].adId);
-                                      Get.to(() => AdsDetailScreen(
-                                            ads: homeController.ads,
-                                            fromSeeMore: false,
-                                          ));
+                                      Get.to(
+                                        () => AdsDetailScreen(
+                                          ads: homeController.ads,
+                                          fromSeeMore: false,
+                                        ),
+                                        routeName: 'detail',
+                                      );
                                     } else {
                                       await homeController.getCampignDetails(categoryModel.commonList[index].campaignId.toString());
-                                      Get.to(() => CampaignDetailScreen(
-                                            campaign: homeController.campaign,
-                                            fromSeeMore: false,
-                                          ));
+                                      Get.to(
+                                        () => CampaignDetailScreen(
+                                          campaign: homeController.campaign,
+                                          fromSeeMore: false,
+                                        ),
+                                        routeName: 'detail',
+                                      );
                                     }
                                   },
                                   child: OfferWidget(
@@ -95,16 +101,22 @@ class OfferListScreen extends StatelessWidget {
                                   onTap: () async {
                                     if (categoryModel.commonList[index].adId != null && categoryModel.commonList[index].adId.isNotEmpty) {
                                       await homeController.getAdDetails(categoryModel.commonList[index].adId);
-                                      Get.to(() => AdsDetailScreen(
-                                            ads: homeController.ads,
-                                            fromSeeMore: false,
-                                          ));
+                                      Get.to(
+                                        () => AdsDetailScreen(
+                                          ads: homeController.ads,
+                                          fromSeeMore: false,
+                                        ),
+                                        routeName: 'detail',
+                                      );
                                     } else {
                                       await homeController.getCampignDetails(categoryModel.commonList[index].campaignId.toString());
-                                      Get.to(() => CampaignDetailScreen(
-                                            campaign: homeController.campaign,
-                                            fromSeeMore: false,
-                                          ));
+                                      Get.to(
+                                        () => CampaignDetailScreen(
+                                          campaign: homeController.campaign,
+                                          fromSeeMore: false,
+                                        ),
+                                        routeName: 'detail',
+                                      );
                                     }
                                   },
                                   child: OfferWidget(
@@ -133,10 +145,13 @@ class OfferListScreen extends StatelessWidget {
                                     await homeController.getOfferDetails(
                                       homeController.newFlashOfferList[index].id.toString(),
                                     );
-                                    Get.to(() => OfferDetailScreen(
-                                          offer: homeController.offer,
-                                          fromSeeMore: false,
-                                        ));
+                                    Get.to(
+                                      () => OfferDetailScreen(
+                                        offer: homeController.offer,
+                                        fromSeeMore: false,
+                                      ),
+                                      routeName: 'offer',
+                                    );
                                   },
                                   child: OfferWidget(
                                     offer: homeController.newFlashOfferList[index],
@@ -155,10 +170,13 @@ class OfferListScreen extends StatelessWidget {
                                     await homeController.getOfferDetails(
                                       homeController.newFlashOfferList[index].id.toString(),
                                     );
-                                    Get.to(() => OfferDetailScreen(
-                                          offer: homeController.offer,
-                                          fromSeeMore: false,
-                                        ));
+                                    Get.to(
+                                      () => OfferDetailScreen(
+                                        offer: homeController.offer,
+                                        fromSeeMore: false,
+                                      ),
+                                      routeName: 'offer',
+                                    );
                                   },
                                   child: OfferWidget(
                                     offer: homeController.newFlashOfferList[index],

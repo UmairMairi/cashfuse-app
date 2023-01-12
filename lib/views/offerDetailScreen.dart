@@ -81,9 +81,12 @@ class OfferDetailScreen extends StatelessWidget {
                                     ),
                                   ));
                                 } else {
-                                  Get.to(() => LoginOrSignUpScreen(
-                                        fromMenu: true,
-                                      ));
+                                  Get.to(
+                                    () => LoginOrSignUpScreen(
+                                      fromMenu: true,
+                                    ),
+                                    routeName: 'login',
+                                  );
                                 }
                               }
                             },
@@ -195,9 +198,12 @@ class OfferDetailScreen extends StatelessWidget {
                                       ),
                                     ));
                                   } else {
-                                    Get.to(() => LoginOrSignUpScreen(
-                                          fromMenu: true,
-                                        ));
+                                    Get.to(
+                                      () => LoginOrSignUpScreen(
+                                        fromMenu: true,
+                                      ),
+                                      routeName: 'login',
+                                    );
                                   }
                                 }
                               },

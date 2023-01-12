@@ -113,6 +113,8 @@ class MyApp extends StatelessWidget {
               title: global.appName,
               locale: provider.locale,
               supportedLocales: L10n.all,
+              // getPages: getPages,
+              // initialRoute: Routes.homeRoute,
               localizationsDelegates: [
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,

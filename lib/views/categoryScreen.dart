@@ -21,6 +21,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 class CategoryScreen extends StatelessWidget {
   final String title;
   final CategoryModel category;
+  // CategoryModel category = Get.arguments;
   CategoryScreen({this.category, this.title});
 
   HomeController homeController = Get.find<HomeController>();
@@ -65,6 +66,9 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //CategoryModel category = Get.arguments;
+    // log(Get.arguments.toString());
+    // log(category.toString());
     log("@@@@@@@@@@@@@@@@@@@@@@@@@@@${homeController.catPageListIndex.toString()}");
     loadNativeAd();
     return Scaffold(
@@ -179,16 +183,21 @@ class CategoryScreen extends StatelessWidget {
                                 onTap: () async {
                                   if (category.commonList[index].adId != null && category.commonList[index].adId.isNotEmpty) {
                                     await homeController.getAdDetails(category.commonList[index].adId);
-                                    Get.to(() => AdsDetailScreen(
-                                          ads: homeController.ads,
-                                          fromSeeMore: false,
-                                        ));
+                                    Get.to(
+                                      () => AdsDetailScreen(
+                                        ads: homeController.ads,
+                                        fromSeeMore: false,
+                                      ),
+                                      routeName: 'detail',
+                                    );
                                   } else {
                                     await homeController.getCampignDetails(category.commonList[index].campaignId.toString());
-                                    Get.to(() => CampaignDetailScreen(
-                                          campaign: homeController.campaign,
-                                          fromSeeMore: false,
-                                        ));
+                                    Get.to(
+                                        () => CampaignDetailScreen(
+                                              campaign: homeController.campaign,
+                                              fromSeeMore: false,
+                                            ),
+                                        routeName: 'detail');
                                   }
                                 },
                                 child: global.getPlatFrom()

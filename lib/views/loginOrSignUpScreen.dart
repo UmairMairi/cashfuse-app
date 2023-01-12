@@ -206,7 +206,10 @@ class LoginOrSignUpScreen extends StatelessWidget {
                 ? SizedBox()
                 : InkWell(
                     onTap: () {
-                      Get.offAll(() => BottomNavigationBarScreen());
+                      Get.offAll(
+                        () => BottomNavigationBarScreen(),
+                        routeName: 'home',
+                      );
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 15),

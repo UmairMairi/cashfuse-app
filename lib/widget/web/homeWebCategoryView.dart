@@ -1,10 +1,10 @@
 import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/categoryScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
-import 'package:cashfuse/utils/global.dart' as global;
 
 class HomeWebCategoryView extends StatelessWidget {
   final scrollController = new ScrollController();
@@ -46,9 +46,13 @@ class HomeWebCategoryView extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
-                                  Get.to(() => CategoryScreen(
-                                        category: hm.topCategoryList[index],
-                                      ));
+                                  //Get.toNamed(Routes.categoryRoute, arguments: hm.topCategoryList[index]);
+                                  Get.to(
+                                    () => CategoryScreen(
+                                      category: hm.topCategoryList[index],
+                                    ),
+                                    routeName: 'category',
+                                  );
                                 },
                                 child: Container(
                                   width: 195,

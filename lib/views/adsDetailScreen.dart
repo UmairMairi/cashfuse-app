@@ -168,9 +168,12 @@ class AdsDetailScreen extends StatelessWidget {
                                             ),
                                           ));
                                         } else {
-                                          Get.to(() => LoginOrSignUpScreen(
-                                                fromMenu: true,
-                                              ));
+                                          Get.to(
+                                            () => LoginOrSignUpScreen(
+                                              fromMenu: true,
+                                            ),
+                                            routeName: 'login',
+                                          );
                                         }
                                       }
                                     },
@@ -318,9 +321,12 @@ class AdsDetailScreen extends StatelessWidget {
                                         ),
                                       ));
                                     } else {
-                                      Get.to(() => LoginOrSignUpScreen(
-                                            fromMenu: true,
-                                          ));
+                                      Get.to(
+                                        () => LoginOrSignUpScreen(
+                                          fromMenu: true,
+                                        ),
+                                        routeName: 'login',
+                                      );
                                     }
                                   }
                                 },

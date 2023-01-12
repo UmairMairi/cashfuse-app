@@ -118,10 +118,13 @@ class AuthController extends GetxController {
             Get.back();
             startTimer();
 
-            Get.to(() => OtpVerificationScreen(
-                  verificationCode: verificationId,
-                  fromMenu: fromMenu,
-                ));
+            Get.to(
+              () => OtpVerificationScreen(
+                verificationCode: verificationId,
+                fromMenu: fromMenu,
+              ),
+              routeName: 'verifyOtp',
+            );
           },
           codeAutoRetrievalTimeout: (String verificationId) {},
         );
@@ -192,7 +195,7 @@ class AuthController extends GetxController {
               global.currentUser = response.data;
 
               global.sp.setString('currentUser', json.encode(global.currentUser.toJson()));
-              Get.to(() => BottomNavigationBarScreen());
+              Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
               await getProfile();
               if (fromMenu) {
                 await Get.find<HomeController>().init();
@@ -311,11 +314,17 @@ class AuthController extends GetxController {
         await apiHelper.removeUserfromDb().then((response) async {
           if (response.statusCode == 200) {
             if (global.getPlatFrom()) {
-              Get.offAll(() => BottomNavigationBarScreen());
+              Get.offAll(
+                () => BottomNavigationBarScreen(),
+                routeName: 'home',
+              );
             } else {
-              Get.to(() => BottomNavigationBarScreen(
-                    pageIndex: 4,
-                  ));
+              Get.to(
+                () => BottomNavigationBarScreen(
+                  pageIndex: 4,
+                ),
+                routeName: 'profile',
+              );
             }
 
             await logout();

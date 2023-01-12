@@ -111,9 +111,12 @@ class MyOrdersScreen extends StatelessWidget {
                                                         trailing: InkWell(
                                                           onTap: () async {
                                                             await orderController.getOrderComplains(orderController.orderList[index].id);
-                                                            Get.to(() => OrderComplaintScreen(
-                                                                  orderModel: orderController.orderList[index],
-                                                                ));
+                                                            Get.to(
+                                                              () => OrderComplaintScreen(
+                                                                orderModel: orderController.orderList[index],
+                                                              ),
+                                                              routeName: 'order-complaint',
+                                                            );
                                                           },
                                                           child: Container(
                                                             padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
@@ -403,9 +406,12 @@ class MyOrdersScreen extends StatelessWidget {
                                               trailing: InkWell(
                                                 onTap: () async {
                                                   await orderController.getOrderComplains(orderController.orderList[index].id);
-                                                  Get.to(() => OrderComplaintScreen(
-                                                        orderModel: orderController.orderList[index],
-                                                      ));
+                                                  Get.to(
+                                                    () => OrderComplaintScreen(
+                                                      orderModel: orderController.orderList[index],
+                                                    ),
+                                                    routeName: 'order-complaint',
+                                                  );
                                                 },
                                                 child: Container(
                                                   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),

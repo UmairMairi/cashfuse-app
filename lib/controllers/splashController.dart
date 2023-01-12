@@ -13,6 +13,7 @@ import 'package:cashfuse/utils/date_converter.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
+import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
@@ -58,7 +59,7 @@ class SplashController extends GetxController {
     // await createInterstitialAd();
     // //createFaceBookBannerAd();
     // loadFacebookInterstitialAd();
-    if (global.getPlatFrom()) {
+    if (GetPlatform.isWeb) {
       await webInit();
       Get.put(SearchController());
       Get.put(ReferEarnController());
@@ -342,9 +343,10 @@ class SplashController extends GetxController {
               global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
               await Get.find<AuthController>().getProfile();
 
-              Get.off(() => BottomNavigationBarScreen());
+              Get.to(HomeScreen(), routeName: 'home');
+              //Get.toNamed(Routes.homeRoute,);
             } else {
-              Get.off(() => BottomNavigationBarScreen());
+              Get.to(HomeScreen(), routeName: 'home');
             }
 
             await apiHelper.getBannerNotification().then((result) {
@@ -379,18 +381,27 @@ class SplashController extends GetxController {
                 global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
                 await Get.find<AuthController>().getProfile();
 
-                Get.off(() => BottomNavigationBarScreen(
-                      pageIndex: 0,
-                    ));
+                Get.off(
+                  () => BottomNavigationBarScreen(
+                    pageIndex: 0,
+                  ),
+                  routeName: 'home',
+                );
               } else {
                 if (GetPlatform.isWeb) {
-                  Get.to(() => BottomNavigationBarScreen(
-                        pageIndex: 0,
-                      ));
+                  Get.to(
+                    () => BottomNavigationBarScreen(
+                      pageIndex: 0,
+                    ),
+                    routeName: 'home',
+                  );
                 } else {
-                  Get.off(() => GetStartedScreen(
-                        fromSplash: true,
-                      ));
+                  Get.off(
+                    () => GetStartedScreen(
+                      fromSplash: true,
+                    ),
+                    routeName: 'get-started',
+                  );
                 }
               }
 

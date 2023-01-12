@@ -86,9 +86,12 @@ class GetStartedScreen extends StatelessWidget {
                 ? InkWell(
                     onTap: () async {
                       await splashController.videoPlayerController.dispose();
-                      Get.to(() => LoginOrSignUpScreen(
-                            fromMenu: false,
-                          ));
+                      Get.to(
+                        () => LoginOrSignUpScreen(
+                          fromMenu: false,
+                        ),
+                        routeName: 'login',
+                      );
                     },
                     child: Container(
                       height: 50,

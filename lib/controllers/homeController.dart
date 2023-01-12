@@ -204,6 +204,7 @@ class HomeController extends GetxController {
 
             if (_topCategoryList != []) {
               for (var i = 0; i < _topCategoryList.length; i++) {
+                _topCategoryList[i].commonList = [];
                 if (_topCategoryList[i].ads != []) {
                   for (var j = 0; j < _topCategoryList[i].ads.length; j++) {
                     _topCategoryList[i].commonList.add(
@@ -225,6 +226,7 @@ class HomeController extends GetxController {
                 // }
               }
               for (var n = 0; n < _topCategoryList.length; n++) {
+                _topCategoryList[n].commonList = [];
                 if (_topCategoryList[n].cuecampaigns != []) {
                   for (var k = 0; k < _topCategoryList[n].cuecampaigns.length; k++) {
                     _topCategoryList[n].commonList.add(
@@ -282,6 +284,7 @@ class HomeController extends GetxController {
             update();
             if (_topCashbackList != []) {
               for (var i = 0; i < _topCashbackList.length; i++) {
+                _topCashbackList[i].commonList = [];
                 if (_topCashbackList[i].ads != []) {
                   for (var j = 0; j < _topCashbackList[i].ads.length; j++) {
                     _topCashbackList[i].commonList.add(
@@ -303,6 +306,7 @@ class HomeController extends GetxController {
                 // }
               }
               for (var n = 0; n < _topCashbackList.length; n++) {
+                _topCashbackList[n].commonList = [];
                 if (_topCashbackList[n].cuecampaigns != []) {
                   for (var k = 0; k < _topCashbackList[n].cuecampaigns.length; k++) {
                     _topCashbackList[n].commonList.add(
@@ -423,6 +427,7 @@ class HomeController extends GetxController {
             update();
             if (_allAdvList != []) {
               for (var i = 0; i < _allAdvList.length; i++) {
+                _allAdvList[i].commonList = [];
                 if (_allAdvList[i].ads != []) {
                   for (var j = 0; j < _allAdvList[i].ads.length; j++) {
                     _allAdvList[i].commonList.add(
@@ -438,6 +443,7 @@ class HomeController extends GetxController {
                 }
               }
               for (var n = 0; n < _allAdvList.length; n++) {
+                _allAdvList[n].commonList = [];
                 if (_allAdvList[n].cuecampaigns != []) {
                   for (var k = 0; k < _allAdvList[n].cuecampaigns.length; k++) {
                     _allAdvList[n].commonList.add(

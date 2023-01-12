@@ -163,7 +163,10 @@ class RequestPaymentScreen extends StatelessWidget {
                                 ),
                               ));
                             } else {
-                              Get.to(() => AmazonPayRedeemScreen());
+                              Get.to(
+                                () => AmazonPayRedeemScreen(),
+                                routeName: 'amazon',
+                              );
                             }
                           },
                           child: Stack(
@@ -237,7 +240,10 @@ class RequestPaymentScreen extends StatelessWidget {
                                 ),
                               ));
                             } else {
-                              Get.to(() => PaytmRedeemScreen());
+                              Get.to(
+                                () => PaytmRedeemScreen(),
+                                routeName: 'paytm',
+                              );
                             }
                           },
                           child: Stack(
@@ -310,7 +316,10 @@ class RequestPaymentScreen extends StatelessWidget {
                                 ),
                               ));
                             } else {
-                              Get.to(() => UpiRedeemScreen());
+                              Get.to(
+                                () => UpiRedeemScreen(),
+                                routeName: 'upi',
+                              );
                             }
                           },
                           child: Stack(
@@ -384,7 +393,10 @@ class RequestPaymentScreen extends StatelessWidget {
                                 ),
                               ));
                             } else {
-                              Get.to(() => AddPaymentDetailScreen());
+                              Get.to(
+                                () => AddPaymentDetailScreen(),
+                                routeName: 'add-payment',
+                              );
                             }
                           },
                           child: Stack(
@@ -458,7 +470,10 @@ class RequestPaymentScreen extends StatelessWidget {
                                 ),
                               ));
                             } else {
-                              Get.to(() => PayPalRedeemScreen());
+                              Get.to(
+                                () => PayPalRedeemScreen(),
+                                routeName: 'paypal',
+                              );
                             }
                           },
                           child: Stack(

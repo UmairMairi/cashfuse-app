@@ -105,6 +105,7 @@ class GetHelpScreen extends StatelessWidget {
                                       () => HelpDetailSceen(
                                         faq: controller.faqList[index],
                                       ),
+                                      routeName: 'detail',
                                     );
                                   },
                                   child: Container(

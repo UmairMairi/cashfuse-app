@@ -57,7 +57,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
             ),
             InkWell(
               onTap: () {
-                Get.to(() => HomeScreen());
+                Get.to(
+                  () => HomeScreen(),
+                  routeName: 'home',
+                );
               },
               child: Image.asset(
                 Images.cashfuse,
@@ -115,7 +118,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
             Expanded(child: SizedBox()),
             InkWell(
               onTap: () {
-                Get.to(() => GetHelpScreen());
+                Get.to(
+                  () => GetHelpScreen(),
+                  routeName: 'faq',
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -170,7 +176,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
             global.currentUser.id != null
                 ? InkWell(
                     onTap: () {
-                      Get.to(() => MyEarningSceen());
+                      Get.to(
+                        () => MyEarningSceen(),
+                        routeName: 'earning',
+                      );
                     },
                     child: Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -205,7 +214,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        Get.to(() => AccountSettingScreen());
+                        Get.to(
+                          () => AccountSettingScreen(),
+                          routeName: 'account',
+                        );
                       },
                       child: Text(
                         AppLocalizations.of(context).account_settings,
@@ -218,7 +230,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     Divider(),
                     InkWell(
                       onTap: () {
-                        Get.to(() => MyEarningSceen());
+                        Get.to(
+                          () => MyEarningSceen(),
+                          routeName: 'earning',
+                        );
                       },
                       child: Text(
                         AppLocalizations.of(context).my_earnings,
@@ -231,7 +246,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     Divider(),
                     InkWell(
                       onTap: () {
-                        Get.to(() => PaymentScreen());
+                        Get.to(
+                          () => PaymentScreen(),
+                          routeName: 'payment',
+                        );
                       },
                       child: Text(
                         AppLocalizations.of(context).payments,
@@ -244,7 +262,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     Divider(),
                     InkWell(
                       onTap: () {
-                        Get.to(() => PaymentHistoryScreen());
+                        Get.to(
+                          () => PaymentHistoryScreen(),
+                          routeName: 'payment-history',
+                        );
                       },
                       child: Text(
                         AppLocalizations.of(context).payment_history,
@@ -257,7 +278,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     Divider(),
                     InkWell(
                       onTap: () {
-                        Get.to(() => RecentClickScreen());
+                        Get.to(
+                          () => RecentClickScreen(),
+                          routeName: 'recent-clicks',
+                        );
                       },
                       child: Text(
                         AppLocalizations.of(context).recents_clicks,
@@ -270,7 +294,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     Divider(),
                     InkWell(
                       onTap: () {
-                        Get.to(() => ReferralNetworkScreen());
+                        Get.to(
+                          () => ReferralNetworkScreen(),
+                          routeName: 'referral-network',
+                        );
                       },
                       child: Text(
                         'Referral Network',
@@ -283,7 +310,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     Divider(),
                     InkWell(
                       onTap: () {
-                        Get.to(() => GetHelpScreen());
+                        Get.to(
+                          () => GetHelpScreen(),
+                          routeName: 'faq',
+                        );
                       },
                       child: Text(
                         AppLocalizations.of(context).get_help,
@@ -296,7 +326,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     Divider(),
                     InkWell(
                       onTap: () {
-                        Get.to(() => AboutUsScreen());
+                        Get.to(
+                          () => AboutUsScreen(),
+                          routeName: 'about',
+                        );
                       },
                       child: Text(
                         AppLocalizations.of(context).about_us,
@@ -309,7 +342,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     Divider(),
                     InkWell(
                       onTap: () {
-                        Get.to(() => PrivacyPolicyScreen());
+                        Get.to(
+                          () => PrivacyPolicyScreen(),
+                          routeName: 'privacy',
+                        );
                       },
                       child: Text(
                         AppLocalizations.of(context).privacy_policy,
@@ -338,6 +374,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                                 Get.offAll(
                                   () => BottomNavigationBarScreen(),
                                   //preventDuplicates: false,
+                                  routeName: 'home',
                                 );
                               },
                             ),

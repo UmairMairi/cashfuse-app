@@ -96,6 +96,7 @@ class MoreAdsScreen extends StatelessWidget {
                                 fromSeeMore: true,
                               ),
                               preventDuplicates: false,
+                              routeName: 'detail',
                             );
                           },
                           child: Container(

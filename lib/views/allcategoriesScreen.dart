@@ -119,9 +119,12 @@ class AllCategoriesScreen extends StatelessWidget {
                               )
                             : InkWell(
                                 onTap: () async {
-                                  Get.to(() => CategoryScreen(
-                                        category: controller.topCategoryList[index],
-                                      ));
+                                  Get.to(
+                                    () => CategoryScreen(
+                                      category: controller.topCategoryList[index],
+                                    ),
+                                    routeName: 'category',
+                                  );
                                 },
                                 child: Container(
                                   //width: 95,

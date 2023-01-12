@@ -158,7 +158,10 @@ class MyEarningSceen extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      Get.to(() => MyOrdersScreen());
+                      Get.to(
+                        () => MyOrdersScreen(),
+                        routeName: 'myorders',
+                      );
                     },
                     child: Card(
                       margin: EdgeInsets.only(top: 40, left: 20, right: 20),
@@ -367,7 +370,7 @@ class MyEarningSceen extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to(() => RequestPaymentScreen());
+                      Get.to(() => RequestPaymentScreen(), routeName: 'request-payment');
                     },
                     child: Card(
                       margin: EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -467,7 +470,10 @@ class MyEarningSceen extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to(() => GetHelpScreen());
+                      Get.to(
+                        () => GetHelpScreen(),
+                        routeName: 'faq',
+                      );
                     },
                     child: Card(
                       margin: EdgeInsets.only(top: 20, left: 20, right: 20),

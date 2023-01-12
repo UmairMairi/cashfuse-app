@@ -93,6 +93,7 @@ class MoreCampignScreen extends StatelessWidget {
                                 fromSeeMore: true,
                               ),
                               preventDuplicates: false,
+                              routeName: 'detail',
                             );
                           },
                           child: Container(

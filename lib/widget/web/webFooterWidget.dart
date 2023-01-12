@@ -54,7 +54,10 @@ class WebFooterWidget extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(() => AboutUsScreen());
+                            Get.to(
+                              () => AboutUsScreen(),
+                              routeName: 'about',
+                            );
                           },
                           behavior: HitTestBehavior.opaque,
                           child: Text(
@@ -67,7 +70,10 @@ class WebFooterWidget extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(() => GetHelpScreen());
+                            Get.to(
+                              () => GetHelpScreen(),
+                              routeName: 'faq',
+                            );
                           },
                           behavior: HitTestBehavior.opaque,
                           child: Text(
@@ -80,7 +86,10 @@ class WebFooterWidget extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(() => PrivacyPolicyScreen());
+                            Get.to(
+                              () => PrivacyPolicyScreen(),
+                              routeName: 'privacy',
+                            );
                           },
                           behavior: HitTestBehavior.opaque,
                           child: Text(

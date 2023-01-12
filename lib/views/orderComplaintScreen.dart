@@ -53,7 +53,10 @@ class OrderComplaintScreen extends StatelessWidget {
             backgroundColor: Get.theme.primaryColor,
             child: Icon(FontAwesomeIcons.commentDots),
             onPressed: () {
-              Get.to(() => FaqScreen());
+              Get.to(
+                () => FaqScreen(),
+                routeName: 'faq',
+              );
             },
           ),
           body: orderController.complainList != null && orderController.complainList.length > 0
@@ -156,9 +159,12 @@ class OrderComplaintScreen extends StatelessWidget {
                                           ),
                                         ));
                                       } else {
-                                        Get.to(() => AddComplaintSceen(
-                                              orderModel: orderModel,
-                                            ));
+                                        Get.to(
+                                          () => AddComplaintSceen(
+                                            orderModel: orderModel,
+                                          ),
+                                          routeName: 'add-complaint',
+                                        );
                                       }
                                     },
                                     child: CircleAvatar(
@@ -178,9 +184,12 @@ class OrderComplaintScreen extends StatelessWidget {
                                                     ),
                                                   ));
                                                 } else {
-                                                  Get.to(() => AddComplaintSceen(
-                                                        orderModel: orderModel,
-                                                      ));
+                                                  Get.to(
+                                                    () => AddComplaintSceen(
+                                                      orderModel: orderModel,
+                                                    ),
+                                                    routeName: 'add-complaint',
+                                                  );
                                                 }
                                               },
                                               child: Icon(
@@ -309,9 +318,12 @@ class OrderComplaintScreen extends StatelessWidget {
                               ),
                             ));
                           } else {
-                            Get.to(() => AddComplaintSceen(
-                                  orderModel: orderModel,
-                                ));
+                            Get.to(
+                              () => AddComplaintSceen(
+                                orderModel: orderModel,
+                              ),
+                              routeName: 'add-complaint',
+                            );
                           }
                         },
                         child: Container(
@@ -345,9 +357,12 @@ class OrderComplaintScreen extends StatelessWidget {
                         ),
                       ));
                     } else {
-                      Get.to(() => AddComplaintSceen(
-                            orderModel: orderModel,
-                          ));
+                      Get.to(
+                        () => AddComplaintSceen(
+                          orderModel: orderModel,
+                        ),
+                        routeName: 'add-complaint',
+                      );
                     }
                   },
                   child: Container(

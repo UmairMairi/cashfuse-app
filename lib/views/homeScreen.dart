@@ -260,7 +260,10 @@ class HomeScreen extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       if (global.currentUser.id != null) {
-                        Get.to(() => MyEarningSceen());
+                        Get.to(
+                          () => MyEarningSceen(),
+                          routeName: 'earning',
+                        );
                       } else {
                         if (global.getPlatFrom()) {
                           Get.dialog(Dialog(
@@ -272,9 +275,12 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ));
                         } else {
-                          Get.to(() => LoginOrSignUpScreen(
-                                fromMenu: true,
-                              ));
+                          Get.to(
+                            () => LoginOrSignUpScreen(
+                              fromMenu: true,
+                            ),
+                            routeName: 'login',
+                          );
                         }
                       }
                     },
@@ -309,7 +315,10 @@ class HomeScreen extends StatelessWidget {
                     global.showInterstitialAd();
 
                     if (global.currentUser.id != null) {
-                      Get.to(() => ReferEarnScreen());
+                      Get.to(
+                        () => ReferEarnScreen(),
+                        routeName: 'referearn',
+                      );
                     } else {
                       if (global.getPlatFrom()) {
                         Get.dialog(Dialog(
@@ -321,9 +330,12 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ));
                       } else {
-                        Get.to(() => LoginOrSignUpScreen(
-                              fromMenu: true,
-                            ));
+                        Get.to(
+                          () => LoginOrSignUpScreen(
+                            fromMenu: true,
+                          ),
+                          routeName: 'login',
+                        );
                       }
                     }
                   },
@@ -338,7 +350,10 @@ class HomeScreen extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Get.to(() => GetHelpScreen());
+                  Get.to(
+                    () => GetHelpScreen(),
+                    routeName: 'faq',
+                  );
                 },
                 child: Image.asset(
                   Images.gethelp,
@@ -404,9 +419,12 @@ class HomeScreen extends StatelessWidget {
                                                           homeController.topBannerList[index].url,
                                                         );
                                                       } else {
-                                                        Get.to(() => LoginOrSignUpScreen(
-                                                              fromMenu: true,
-                                                            ));
+                                                        Get.to(
+                                                          () => LoginOrSignUpScreen(
+                                                            fromMenu: true,
+                                                          ),
+                                                          routeName: 'login',
+                                                        );
                                                       }
                                                     } else {
                                                       await homeController.getOfferDetails(
@@ -417,6 +435,7 @@ class HomeScreen extends StatelessWidget {
                                                           offer: homeController.offer,
                                                           fromSeeMore: false,
                                                         ),
+                                                        routeName: 'offer',
                                                       );
                                                     }
                                                   },
@@ -571,7 +590,10 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          Get.to(() => AllCategoriesScreen());
+                                          Get.to(
+                                            () => AllCategoriesScreen(),
+                                            routeName: 'allCategory',
+                                          );
                                         },
                                         child: Text(
                                           '${AppLocalizations.of(context).view_all} >',
@@ -594,9 +616,12 @@ class HomeScreen extends StatelessWidget {
                                               onTap: () async {
                                                 global.showInterstitialAd();
                                                 //await homeController.addAdCategory(index);
-                                                Get.to(() => CategoryScreen(
-                                                      category: homeController.topCategoryList[index],
-                                                    ));
+                                                Get.to(
+                                                  () => CategoryScreen(
+                                                    category: homeController.topCategoryList[index],
+                                                  ),
+                                                  routeName: 'category',
+                                                );
                                               },
                                               child: Container(
                                                 width: 95,
@@ -873,7 +898,10 @@ class HomeScreen extends StatelessWidget {
                                             couponController.couponList.length > 6
                                                 ? InkWell(
                                                     onTap: () {
-                                                      Get.to(() => CouponListScreen());
+                                                      Get.to(
+                                                        () => CouponListScreen(),
+                                                        routeName: 'coupons',
+                                                      );
                                                     },
                                                     child: Text(
                                                       '${AppLocalizations.of(context).view_all} >',
@@ -905,12 +933,14 @@ class HomeScreen extends StatelessWidget {
                                                           offer: couponController.couponList[index].offer,
                                                           fromSeeMore: false,
                                                         ),
+                                                        routeName: 'offer',
                                                       );
                                                     } else {
                                                       Get.to(
                                                         () => CouponDetailScreen(
                                                           coupon: couponController.couponList[index],
                                                         ),
+                                                        routeName: 'detail',
                                                       );
                                                     }
                                                   },
@@ -979,10 +1009,13 @@ class HomeScreen extends StatelessWidget {
                                                 return InkWell(
                                                   onTap: () async {
                                                     await homeController.getOfferDetails(homeController.exclusiveOfferList[index].id.toString());
-                                                    Get.to(() => OfferDetailScreen(
-                                                          offer: homeController.offer,
-                                                          fromSeeMore: false,
-                                                        ));
+                                                    Get.to(
+                                                      () => OfferDetailScreen(
+                                                        offer: homeController.offer,
+                                                        fromSeeMore: false,
+                                                      ),
+                                                      routeName: 'offer',
+                                                    );
                                                   },
                                                   child: Container(
                                                     width: global.getPlatFrom() ? 270 : 240, //Get.width - 120,
@@ -1094,6 +1127,7 @@ class HomeScreen extends StatelessWidget {
                                                   () => AdsCampaignWidgetListScreen(
                                                     title: AppLocalizations.of(context).top_cashback_stores,
                                                   ),
+                                                  routeName: 'all',
                                                 );
                                               },
                                               child: Text(
@@ -1117,9 +1151,12 @@ class HomeScreen extends StatelessWidget {
                                               itemBuilder: (context, index) {
                                                 return InkWell(
                                                   onTap: () {
-                                                    Get.to(() => CategoryScreen(
-                                                          category: homeController.topCashbackList[index],
-                                                        ));
+                                                    Get.to(
+                                                      () => CategoryScreen(
+                                                        category: homeController.topCashbackList[index],
+                                                      ),
+                                                      routeName: 'category',
+                                                    );
                                                   },
                                                   child: Padding(
                                                     padding: const EdgeInsets.only(right: 13),
@@ -1178,7 +1215,10 @@ class HomeScreen extends StatelessWidget {
                                             ),
                                             InkWell(
                                               onTap: () {
-                                                Get.to(() => OfferListScreen());
+                                                Get.to(
+                                                  () => OfferListScreen(),
+                                                  routeName: 'all',
+                                                );
                                               },
                                               child: Text(
                                                 '${AppLocalizations.of(context).view_all} >',
@@ -1204,10 +1244,13 @@ class HomeScreen extends StatelessWidget {
                                                 return InkWell(
                                                   onTap: () async {
                                                     await homeController.getOfferDetails(homeController.newFlashOfferList[index].id.toString());
-                                                    Get.to(() => OfferDetailScreen(
-                                                          offer: homeController.offer,
-                                                          fromSeeMore: false,
-                                                        ));
+                                                    Get.to(
+                                                      () => OfferDetailScreen(
+                                                        offer: homeController.offer,
+                                                        fromSeeMore: false,
+                                                      ),
+                                                      routeName: 'offer',
+                                                    );
                                                   },
                                                   child: OfferWidget(
                                                     offer: homeController.newFlashOfferList[index],
@@ -1401,6 +1444,7 @@ class HomeScreen extends StatelessWidget {
                                                               () => OfferListScreen(
                                                                 categoryModel: homeController.homeAdvList[index],
                                                               ),
+                                                              routeName: 'all',
                                                             );
                                                           },
                                                           child: Text(
@@ -1425,16 +1469,22 @@ class HomeScreen extends StatelessWidget {
                                                               onTap: () async {
                                                                 if (homeController.homeAdvList[index].commonList[i].adId != null && homeController.homeAdvList[index].commonList[i].adId.isNotEmpty) {
                                                                   await homeController.getAdDetails(homeController.homeAdvList[index].commonList[i].adId);
-                                                                  Get.to(() => AdsDetailScreen(
-                                                                        ads: homeController.ads,
-                                                                        fromSeeMore: false,
-                                                                      ));
+                                                                  Get.to(
+                                                                    () => AdsDetailScreen(
+                                                                      ads: homeController.ads,
+                                                                      fromSeeMore: false,
+                                                                    ),
+                                                                    routeName: 'detail',
+                                                                  );
                                                                 } else {
                                                                   await homeController.getCampignDetails(homeController.homeAdvList[index].commonList[i].campaignId.toString());
-                                                                  Get.to(() => CampaignDetailScreen(
-                                                                        campaign: homeController.campaign,
-                                                                        fromSeeMore: false,
-                                                                      ));
+                                                                  Get.to(
+                                                                    () => CampaignDetailScreen(
+                                                                      campaign: homeController.campaign,
+                                                                      fromSeeMore: false,
+                                                                    ),
+                                                                    routeName: 'detail',
+                                                                  );
                                                                 }
                                                               },
                                                               child: OfferWidget(

@@ -46,7 +46,10 @@ class ReferralNetworkScreen extends StatelessWidget {
               ),
         floatingActionButton: InkWell(
           onTap: () {
-            Get.to(() => FaqScreen());
+            Get.to(
+              () => FaqScreen(),
+              routeName: 'faq',
+            );
           },
           child: Image.asset(
             Images.gethelp,
@@ -295,7 +298,10 @@ class ReferralNetworkScreen extends StatelessWidget {
         bottomNavigationBar: InkWell(
           onTap: () {
             Get.back();
-            Get.to(() => ReferEarnScreen());
+            Get.to(
+              () => ReferEarnScreen(),
+              routeName: 'refer',
+            );
           },
           child: Container(
             height: 40,

@@ -237,7 +237,10 @@ class DrawerWidget extends StatelessWidget {
                                   ? SizedBox()
                                   : InkWell(
                                       onTap: () {
-                                        Get.to(() => AccountSettingScreen());
+                                        Get.to(
+                                          () => AccountSettingScreen(),
+                                          routeName: 'account',
+                                        );
                                       },
                                       child: Icon(
                                         Icons.edit,
@@ -391,7 +394,10 @@ class DrawerWidget extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Get.back();
-                    Get.to(() => AccountSettingScreen());
+                    Get.to(
+                      () => AccountSettingScreen(),
+                      routeName: 'account',
+                    );
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -422,7 +428,10 @@ class DrawerWidget extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Get.back();
-                    Get.to(() => AllCategoriesScreen());
+                    Get.to(
+                      () => AllCategoriesScreen(),
+                      routeName: 'allcategory',
+                    );
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -453,7 +462,10 @@ class DrawerWidget extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Get.back();
-                    Get.to(() => RequestPaymentScreen());
+                    Get.to(
+                      () => RequestPaymentScreen(),
+                      routeName: 'request-payment',
+                    );
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -484,7 +496,10 @@ class DrawerWidget extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Get.back();
-                    Get.to(() => AllInOneSearchScreen());
+                    Get.to(
+                      () => AllInOneSearchScreen(),
+                      routeName: 'allinone',
+                    );
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -516,9 +531,12 @@ class DrawerWidget extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Get.back();
-                    Get.to(() => GetStartedScreen(
-                          fromSplash: false,
-                        ));
+                    Get.to(
+                      () => GetStartedScreen(
+                        fromSplash: false,
+                      ),
+                      routeName: 'get-started',
+                    );
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -627,7 +645,10 @@ class DrawerWidget extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Get.back();
-                    Get.to(() => GetHelpScreen());
+                    Get.to(
+                      () => GetHelpScreen(),
+                      routeName: 'faq',
+                    );
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -704,9 +725,12 @@ class DrawerWidget extends StatelessWidget {
                           ),
                         ));
                       } else {
-                        Get.to(() => LoginOrSignUpScreen(
-                              fromMenu: true,
-                            ));
+                        Get.to(
+                          () => LoginOrSignUpScreen(
+                            fromMenu: true,
+                          ),
+                          routeName: 'login',
+                        );
                       }
                     }
                   },

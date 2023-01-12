@@ -99,6 +99,7 @@ class FaqScreen extends StatelessWidget {
                                       () => HelpDetailSceen(
                                         faq: commonController.faqList[index],
                                       ),
+                                      routeName: 'faq',
                                     );
                                   },
                                   child: Column(

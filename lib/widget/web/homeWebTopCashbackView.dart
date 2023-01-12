@@ -46,9 +46,12 @@ class HomeWebTopCashbackView extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
-                                Get.to(() => CategoryScreen(
-                                      category: hmController.topCashbackList[index],
-                                    ));
+                                Get.to(
+                                  () => CategoryScreen(
+                                    category: hmController.topCashbackList[index],
+                                  ),
+                                  routeName: 'category',
+                                );
                               },
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 13),

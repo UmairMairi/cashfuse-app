@@ -265,7 +265,10 @@ class ProfileScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           global.showInterstitialAd();
-                          Get.to(() => AccountSettingScreen());
+                          Get.to(
+                            () => AccountSettingScreen(),
+                            routeName: 'account',
+                          );
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -296,7 +299,10 @@ class ProfileScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           global.showInterstitialAd();
-                          Get.to(() => MyEarningSceen());
+                          Get.to(
+                            () => MyEarningSceen(),
+                            routeName: 'earning',
+                          );
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -327,7 +333,10 @@ class ProfileScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           global.showInterstitialAd();
-                          Get.to(() => PaymentScreen());
+                          Get.to(
+                            () => PaymentScreen(),
+                            routeName: 'payment',
+                          );
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -354,7 +363,10 @@ class ProfileScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           global.showInterstitialAd();
-                          Get.to(() => PaymentHistoryScreen());
+                          Get.to(
+                            () => PaymentHistoryScreen(),
+                            routeName: 'payment-history',
+                          );
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -419,7 +431,10 @@ class ProfileScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           global.showInterstitialAd();
-                          Get.to(() => ReferralNetworkScreen());
+                          Get.to(
+                            () => ReferralNetworkScreen(),
+                            routeName: 'referral-network',
+                          );
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -446,7 +461,10 @@ class ProfileScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           global.showInterstitialAd();
-                          Get.to(() => GetHelpScreen());
+                          Get.to(
+                            () => GetHelpScreen(),
+                            routeName: 'faq',
+                          );
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -477,7 +495,10 @@ class ProfileScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           global.showInterstitialAd();
-                          Get.to(() => ColorPickerPage());
+                          Get.to(
+                            () => ColorPickerPage(),
+                            routeName: 'theme',
+                          );
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -508,7 +529,10 @@ class ProfileScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           global.showInterstitialAd();
-                          Get.to(() => LanguageScreen());
+                          Get.to(
+                            () => LanguageScreen(),
+                            routeName: 'language',
+                          );
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -577,7 +601,10 @@ class ProfileScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           global.showInterstitialAd();
-                          Get.to(() => AboutUsScreen());
+                          Get.to(
+                            () => AboutUsScreen(),
+                            routeName: 'about',
+                          );
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -608,7 +635,10 @@ class ProfileScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           global.showInterstitialAd();
-                          Get.to(() => PrivacyPolicyScreen());
+                          Get.to(
+                            () => PrivacyPolicyScreen(),
+                            routeName: 'privacy',
+                          );
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -727,9 +757,12 @@ class ProfileScreen extends StatelessWidget {
                               ),
                             ));
                           } else {
-                            Get.to(() => LoginOrSignUpScreen(
-                                  fromMenu: true,
-                                ));
+                            Get.to(
+                              () => LoginOrSignUpScreen(
+                                fromMenu: true,
+                              ),
+                              routeName: 'login',
+                            );
                           }
                         },
                         child: Container(
