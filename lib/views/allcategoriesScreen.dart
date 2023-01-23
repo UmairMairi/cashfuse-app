@@ -30,28 +30,29 @@ class AllCategoriesScreen extends StatelessWidget {
     });
   }
 
+  String currentPlatform() {
+    if (GetPlatform.isAndroid) {
+      return 'android';
+    } else if (GetPlatform.isIOS) {
+      return 'ios';
+    }
+    return '';
+  }
+
   Future loadNativeAd() async {
     try {
-      if (global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList.length > 0 && global.admobSetting.nativeAdList[0] != null && global.admobSetting.nativeAdList[0].status == 1) {
+      if (global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList.length > 0 && global.admobSetting.nativeAdList[0] != null && global.admobSetting.nativeAdList[0].status == 1 && global.admobSetting.bannerAdList[0].platform == currentPlatform()) {
         final NativeAdListener listener = NativeAdListener(
-          // Called when an ad is successfully received.
-          onAdLoaded: (Ad ad) => print('+++++++++++++++++++Ad loaded.'),
-          // Called when an ad request failed.
+          onAdLoaded: (Ad ad) => print('Ad loaded.'),
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
-            // Dispose the ad here to free resources.
             ad.dispose();
-            print('Ad failed to load:++++++++ $error');
+            print('Ad failed to load$error');
           },
-
-          onAdImpression: (Ad ad) {
-            // //setNativeAdLoaded(true);
-            // admobNativeAdLoaded = true;
-            //  update();
-          },
+          onAdImpression: (Ad ad) {},
         );
 
         _myNativeAd = new NativeAd(
-            adUnitId: 'ca-app-pub-3940256099942544/2247696110',
+            adUnitId: global.admobSetting.nativeAdList[0].adId, //'ca-app-pub-3940256099942544/2247696110',
             factoryId: 'adFactoryExample',
             request: AdRequest(),
             listener: listener,
@@ -159,11 +160,11 @@ class AllCategoriesScreen extends StatelessWidget {
                               );
                       },
                     ),
-                    !GetPlatform.isWeb && global.facebookAdSetting.nativeAdList != null && global.facebookAdSetting.nativeAdList[0].status == 1
+                    !GetPlatform.isWeb && global.facebookAdSetting.nativeAdList != null && global.facebookAdSetting.nativeAdList[0].status == 1 && global.facebookAdSetting.nativeAdList[0].platform == currentPlatform()
                         ? Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: FacebookNativeAd(
-                              placementId: "VID_HD_16_9_46S_APP_INSTALL#536153035214384_536880055141682",
+                              placementId: global.facebookAdSetting.nativeAdList[0].placementId, //"VID_HD_16_9_46S_APP_INSTALL#536153035214384_536880055141682",
                               adType: NativeAdType.NATIVE_AD,
                               width: double.infinity,
                               height: 300,
@@ -181,8 +182,6 @@ class AllCategoriesScreen extends StatelessWidget {
                             ),
                           )
                         : SizedBox(),
-                    // global.admobSetting.nativeAdList != null && global.admobSetting.nativeAdList[0].status == 1 && adController.isAdmobBannerAdLoaed
-                    //     ?
                     !GetPlatform.isWeb && _myNativeAd != null
                         ? Container(
                             height: 100,

@@ -63,7 +63,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 );
               },
               child: Image.asset(
-                Images.cashfuse,
+                Images.text_logo,
                 height: 35,
                 // width: 100,
               ),

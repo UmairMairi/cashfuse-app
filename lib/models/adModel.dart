@@ -7,6 +7,7 @@ class AdModel {
   int location;
   int clicks;
   int rewards;
+  String platform;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -19,6 +20,7 @@ class AdModel {
     this.location,
     this.clicks,
     this.rewards,
+    this.platform,
     this.createdAt,
     this.updatedAt,
   });
@@ -33,6 +35,7 @@ class AdModel {
       location = json["location"];
       clicks = json["clicks"];
       rewards = json["rewards"];
+      platform = json["platform"];
       createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : null;
       updatedAt = json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null;
     } catch (e) {

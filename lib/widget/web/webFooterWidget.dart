@@ -1,10 +1,9 @@
 import 'package:cashfuse/constants/appConstant.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/aboutUsScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/privacyPolicyScreen.dart';
-import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/utils/global.dart' as global;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -124,12 +123,10 @@ class WebFooterWidget extends StatelessWidget {
                                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                                   child: Row(
                                     children: [
-                                      CustomImage(
+                                      Image.asset(
+                                        Images.playStore,
                                         height: 30,
                                         width: 30,
-                                        fit: BoxFit.cover,
-                                        image: 'assets/image/play-store.png',
-                                        errorImage: Images.logo,
                                       ),
                                       SizedBox(
                                         width: 5,
@@ -164,12 +161,10 @@ class WebFooterWidget extends StatelessWidget {
                                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                                   child: Row(
                                     children: [
-                                      CustomImage(
+                                      Image.asset(
+                                        Images.appleLogo,
                                         height: 30,
                                         width: 30,
-                                        fit: BoxFit.cover,
-                                        image: 'assets/image/apple_logo.png',
-                                        errorImage: Images.logo,
                                       ),
                                       SizedBox(
                                         width: 5,
@@ -275,40 +270,40 @@ class WebFooterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                //_launchURL('https://www.facebook.com/');
-                              },
-                              behavior: HitTestBehavior.opaque,
-                              child: ClipOval(
-                                  child: CustomImage(
-                                height: 45,
-                                width: 45,
-                                fit: BoxFit.cover,
-                                image: 'assets/image/facebook.jpg',
-                                errorImage: Images.logo,
-                              )),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                    Text('Copyright @ Codefuse', style: TextStyle(fontSize: 16, color: Colors.white))
-                  ],
-                )
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Row(
+                //       mainAxisSize: MainAxisSize.min,
+                //       children: [
+                //         Row(
+                //           mainAxisAlignment: MainAxisAlignment.start,
+                //           mainAxisSize: MainAxisSize.min,
+                //           children: [
+                //             GestureDetector(
+                //               onTap: () {
+                //                 //_launchURL('https://www.facebook.com/');
+                //               },
+                //               behavior: HitTestBehavior.opaque,
+                //               child: ClipOval(
+                //                   child: CustomImage(
+                //                 height: 45,
+                //                 width: 45,
+                //                 fit: BoxFit.cover,
+                //                 image: 'assets/image/facebook.jpg',
+                //                 errorImage: Images.logo,
+                //               )),
+                //             ),
+                //             SizedBox(
+                //               width: 5,
+                //             ),
+                //           ],
+                //         )
+                //       ],
+                //     ),
+                //     Text('Copyright @ Codefuse', style: TextStyle(fontSize: 16, color: Colors.white))
+                //   ],
+                // )
               ],
             )),
         Container(

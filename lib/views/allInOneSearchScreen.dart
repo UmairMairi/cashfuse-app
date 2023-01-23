@@ -89,7 +89,9 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                     elevation: 0,
                     bottomOpacity: 0.0,
                     shape: RoundedRectangleBorder(side: BorderSide.none),
-                    backgroundColor: searchController.addNewTabList2[_currentIndex].tabColor != null && searchController.addNewTabList2[_currentIndex].tabColor.isNotEmpty ? _getColorFromHex(searchController.addNewTabList2[_currentIndex].tabColor) : Get.theme.primaryColor,
+                    backgroundColor: searchController.addNewTabList2 != null && searchController.addNewTabList2.length > 0 && searchController.addNewTabList2[_currentIndex].tabColor != null && searchController.addNewTabList2[_currentIndex].tabColor.isNotEmpty
+                        ? _getColorFromHex(searchController.addNewTabList2[_currentIndex].tabColor)
+                        : Get.theme.primaryColor,
                     automaticallyImplyLeading: false,
                     leading: InkWell(
                       onTap: () async {
@@ -114,12 +116,6 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                             ),
                           );
                         }
-                        // if (await webViewController.canGoBack()) {
-                        //   webViewController.goBack();
-                        // } else {
-                        //   Get.find<BottomNavigationController>().setBottomIndex(0);
-                        //   Get.to(() => BottomNavigationBarScreen());
-                        // }
                       },
                       child: Icon(
                         Icons.arrow_back,
@@ -129,7 +125,6 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                     title: Container(
                       margin: EdgeInsets.only(right: 10),
                       height: 37,
-                      //decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(22)),
                       child: TextFormField(
                         controller: _cSearch,
                         cursorColor: Colors.white,
@@ -154,23 +149,25 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                               //         ),
                               //       )
                               //     :
-                              InkWell(
-                            onTap: () async {
-                              FocusScope.of(context).requestFocus(searchNode);
-                              setState(() {});
-                              if (_cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && searchController.addNewTabList2[_currentIndex].searchUrl != null && searchController.addNewTabList2[_currentIndex].searchUrl.isNotEmpty) {
-                                await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].searchUrl + _cSearch.text.trim()).then((value) {
-                                  FocusScope.of(context).requestFocus(_fDismiss);
-                                });
-                                _isWebLoaded = false;
-                                setState(() {});
-                              } else {}
-                            },
-                            child: Icon(
-                              Icons.search,
-                              color: Colors.white,
-                            ),
-                          ),
+                              searchController.addNewTabList2 != null && searchController.addNewTabList2.length > 0
+                                  ? InkWell(
+                                      onTap: () async {
+                                        FocusScope.of(context).requestFocus(searchNode);
+                                        setState(() {});
+                                        if (_cSearch.text.trim() != null && _cSearch.text.trim().isNotEmpty && searchController.addNewTabList2[_currentIndex].searchUrl != null && searchController.addNewTabList2[_currentIndex].searchUrl.isNotEmpty) {
+                                          await webViewController.loadUrl(searchController.addNewTabList2[_currentIndex].searchUrl + _cSearch.text.trim()).then((value) {
+                                            FocusScope.of(context).requestFocus(_fDismiss);
+                                          });
+                                          _isWebLoaded = false;
+                                          setState(() {});
+                                        } else {}
+                                      },
+                                      child: Icon(
+                                        Icons.search,
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  : SizedBox(),
                           hintText: AppLocalizations.of(context).all_in_one_search,
                           hintStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
                           contentPadding: EdgeInsets.only(left: 10),
@@ -198,7 +195,9 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                         elevation: 0,
                         bottomOpacity: 0.0,
                         shape: RoundedRectangleBorder(side: BorderSide.none),
-                        backgroundColor: searchController.addNewTabList2[_currentIndex].tabColor != null && searchController.addNewTabList2[_currentIndex].tabColor.isNotEmpty ? _getColorFromHex(searchController.addNewTabList2[_currentIndex].tabColor) : Get.theme.primaryColor,
+                        backgroundColor: searchController.addNewTabList2 != null && searchController.addNewTabList2.length > 0 && searchController.addNewTabList2[_currentIndex].tabColor != null && searchController.addNewTabList2[_currentIndex].tabColor.isNotEmpty
+                            ? _getColorFromHex(searchController.addNewTabList2[_currentIndex].tabColor)
+                            : Get.theme.primaryColor,
                         automaticallyImplyLeading: false,
 
                         titleSpacing: 0,

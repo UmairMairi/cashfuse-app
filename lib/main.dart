@@ -54,32 +54,22 @@ void main() async {
     Get.put(CouponController());
   }
 
-  // if (GetPlatform.isWeb) {
-
-  // }
-
   runApp(
     MyApp(),
   );
 }
 
 Future fetchLinkData() async {
-  // FirebaseDynamicLinks.getInitialLInk does a call to firebase to get us the real link because we have shortened it.
   var link = await FirebaseDynamicLinks.instance.getInitialLink();
 
-  // This link may exist if the app was opened fresh so we'll want to handle it the same way onLink will.
   handleLinkData(link);
 
-  //This will handle incoming links if the application is already opened
   dynamicLinks.onLink.listen((dynamicLinkData) {
     handleLinkData(dynamicLinkData);
   }).onError((error) {
     print('onLink error');
     print(error.message);
   });
-  // FirebaseDynamicLinks.instance.onLink(onSuccess: (PendingDynamicLinkData dynamicLink) async {
-  //   handleLinkData(dynamicLink);
-  // });
 }
 
 void handleLinkData(PendingDynamicLinkData data) {
@@ -88,7 +78,6 @@ void handleLinkData(PendingDynamicLinkData data) {
     final queryParams = uri.queryParameters;
     if (queryParams.length > 0) {
       global.referralUserId = queryParams["userId"];
-      // verify the username is parsed correctly
       print("My user id is: ${global.referralUserId}");
     }
   }
@@ -113,8 +102,6 @@ class MyApp extends StatelessWidget {
               title: global.appName,
               locale: provider.locale,
               supportedLocales: L10n.all,
-              // getPages: getPages,
-              // initialRoute: Routes.homeRoute,
               localizationsDelegates: [
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,

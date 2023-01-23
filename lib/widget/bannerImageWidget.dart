@@ -8,9 +8,9 @@ import 'package:cashfuse/utils/global.dart' as global;
 SplashController splashController = Get.find<SplashController>();
 
 Widget bannerImageWidget() {
-  return GetBuilder<SplashController>(builder: (splash) {
-    return global.isBannerShow
-        ? WillPopScope(
+  return global.isBannerShow && global.bannerImage.isNotEmpty
+      ? GetBuilder<SplashController>(builder: (splash) {
+          return WillPopScope(
             onWillPop: () async {
               return false;
             },
@@ -57,7 +57,7 @@ Widget bannerImageWidget() {
                     barrierDismissible: false,
                   );
                 })),
-          )
-        : SizedBox();
-  });
+          );
+        })
+      : SizedBox();
 }

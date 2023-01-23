@@ -19,221 +19,223 @@ class WebBannerView extends StatelessWidget {
       padding: EdgeInsets.all(10),
       alignment: Alignment.center,
       child: global.appInfo.baseUrls != null && homeController.isBannerLoaded
-          ? SizedBox(
-              width: AppConstants.WEB_MAX_WIDTH,
-              height: 220,
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  PageView.builder(
-                    controller: _pageController,
-                    itemCount: (homeController.topBannerList.length / 3).ceil(),
-                    itemBuilder: (context, index) {
-                      // int index1 = index * 3;
-                      // int index2 = (index * 3) + 1;
-                      // bool _hasSecond = index2 < homeController.topBannerList.length;
+          ? homeController.topBannerList != null && homeController.topBannerList.length > 0
+              ? SizedBox(
+                  width: AppConstants.WEB_MAX_WIDTH,
+                  height: 220,
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      PageView.builder(
+                        controller: _pageController,
+                        itemCount: (homeController.topBannerList.length / 3).ceil(),
+                        itemBuilder: (context, index) {
+                          // int index1 = index * 3;
+                          // int index2 = (index * 3) + 1;
+                          // bool _hasSecond = index2 < homeController.topBannerList.length;
 
-                      return Row(
-                        children: [
-                          Expanded(
-                            child: InkWell(
-                              onTap: () async {
-                                if (homeController.topBannerList[index * 3].type == 'url') {
-                                  if (global.currentUser.id != null) {
-                                    // Get.to(
-                                    //   () => WebViewScreen(
-                                    //     urlString: homeController.topBannerList[index].url,
-                                    //     brandName: homeController.topBannerList[index].name,
-                                    //   ),
-                                    // );
-                                    global.launchInBrowser(
-                                      homeController.topBannerList[index * 3].url,
-                                    );
-                                  } else {
-                                    Get.dialog(Dialog(
-                                      child: SizedBox(
-                                        width: Get.width / 3,
-                                        child: LoginOrSignUpScreen(
-                                          fromMenu: true,
+                          return Row(
+                            children: [
+                              Expanded(
+                                child: InkWell(
+                                  onTap: () async {
+                                    if (homeController.topBannerList[index * 3].type == 'url') {
+                                      if (global.currentUser.id != null) {
+                                        // Get.to(
+                                        //   () => WebViewScreen(
+                                        //     urlString: homeController.topBannerList[index].url,
+                                        //     brandName: homeController.topBannerList[index].name,
+                                        //   ),
+                                        // );
+                                        global.launchInBrowser(
+                                          homeController.topBannerList[index * 3].url,
+                                        );
+                                      } else {
+                                        Get.dialog(Dialog(
+                                          child: SizedBox(
+                                            width: Get.width / 3,
+                                            child: LoginOrSignUpScreen(
+                                              fromMenu: true,
+                                            ),
+                                          ),
+                                        ));
+                                      }
+                                    } else {
+                                      await homeController.getOfferDetails(
+                                        homeController.topBannerList[index * 3].offerId.toString(),
+                                      );
+                                      Get.to(
+                                        () => OfferDetailScreen(
+                                          offer: homeController.offer,
+                                          fromSeeMore: false,
                                         ),
-                                      ),
-                                    ));
-                                  }
-                                } else {
-                                  await homeController.getOfferDetails(
-                                    homeController.topBannerList[index * 3].offerId.toString(),
-                                  );
-                                  Get.to(
-                                    () => OfferDetailScreen(
-                                      offer: homeController.offer,
-                                      fromSeeMore: false,
+                                        routeName: 'offer',
+                                      );
+                                    }
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: CustomImage(
+                                      image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[index * 3].image}',
+                                      fit: BoxFit.fill,
+                                      height: 220,
+                                      //width: AppConstants.WEB_MAX_WIDTH / 4,
                                     ),
-                                    routeName: 'offer',
-                                  );
-                                }
-                              },
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: CustomImage(
-                                  image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[index * 3].image}',
-                                  fit: BoxFit.fill,
-                                  height: 220,
-                                  //width: AppConstants.WEB_MAX_WIDTH / 4,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                          ((index * 3) + 1) < homeController.topBannerList.length
-                              ? Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        if (homeController.topBannerList[(index * 3) + 1].type == 'url') {
-                                          if (global.currentUser.id != null) {
-                                            // Get.to(
-                                            //   () => WebViewScreen(
-                                            //     urlString: homeController.topBannerList[index].url,
-                                            //     brandName: homeController.topBannerList[index].name,
-                                            //   ),
-                                            // );
-                                            global.launchInBrowser(
-                                              homeController.topBannerList[(index * 3) + 1].url,
-                                            );
-                                          } else {
-                                            Get.dialog(Dialog(
-                                              child: SizedBox(
-                                                width: Get.width / 3,
-                                                child: LoginOrSignUpScreen(
-                                                  fromMenu: true,
+                              ((index * 3) + 1) < homeController.topBannerList.length
+                                  ? Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                                        child: InkWell(
+                                          onTap: () async {
+                                            if (homeController.topBannerList[(index * 3) + 1].type == 'url') {
+                                              if (global.currentUser.id != null) {
+                                                // Get.to(
+                                                //   () => WebViewScreen(
+                                                //     urlString: homeController.topBannerList[index].url,
+                                                //     brandName: homeController.topBannerList[index].name,
+                                                //   ),
+                                                // );
+                                                global.launchInBrowser(
+                                                  homeController.topBannerList[(index * 3) + 1].url,
+                                                );
+                                              } else {
+                                                Get.dialog(Dialog(
+                                                  child: SizedBox(
+                                                    width: Get.width / 3,
+                                                    child: LoginOrSignUpScreen(
+                                                      fromMenu: true,
+                                                    ),
+                                                  ),
+                                                ));
+                                              }
+                                            } else {
+                                              await homeController.getOfferDetails(
+                                                homeController.topBannerList[(index * 3) + 1].offerId.toString(),
+                                              );
+                                              Get.to(
+                                                () => OfferDetailScreen(
+                                                  offer: homeController.offer,
+                                                  fromSeeMore: false,
                                                 ),
-                                              ),
-                                            ));
-                                          }
-                                        } else {
-                                          await homeController.getOfferDetails(
-                                            homeController.topBannerList[(index * 3) + 1].offerId.toString(),
-                                          );
-                                          Get.to(
-                                            () => OfferDetailScreen(
-                                              offer: homeController.offer,
-                                              fromSeeMore: false,
+                                                routeName: 'offer',
+                                              );
+                                            }
+                                          },
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(10),
+                                            child: CustomImage(
+                                              image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[(index * 3) + 1].image}',
+                                              fit: BoxFit.fill,
+                                              height: 220,
+                                              //width: AppConstants.WEB_MAX_WIDTH / 4,
                                             ),
-                                            routeName: 'offer',
-                                          );
-                                        }
-                                      },
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: CustomImage(
-                                          image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[(index * 3) + 1].image}',
-                                          fit: BoxFit.fill,
-                                          height: 220,
-                                          //width: AppConstants.WEB_MAX_WIDTH / 4,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                )
-                              : Expanded(child: SizedBox()),
-                          ((index * 3) + 2) < homeController.topBannerList.length
-                              ? Expanded(
-                                  child: InkWell(
-                                    onTap: () async {
-                                      if (homeController.topBannerList[(index * 3) + 2].type == 'url') {
-                                        if (global.currentUser.id != null) {
-                                          // Get.to(
-                                          //   () => WebViewScreen(
-                                          //     urlString: homeController.topBannerList[index].url,
-                                          //     brandName: homeController.topBannerList[index].name,
-                                          //   ),
-                                          // );
-                                          global.launchInBrowser(
-                                            homeController.topBannerList[(index * 3) + 2].url,
-                                          );
-                                        } else {
-                                          Get.dialog(Dialog(
-                                            child: SizedBox(
-                                              width: Get.width / 3,
-                                              child: LoginOrSignUpScreen(
-                                                fromMenu: true,
+                                    )
+                                  : Expanded(child: SizedBox()),
+                              ((index * 3) + 2) < homeController.topBannerList.length
+                                  ? Expanded(
+                                      child: InkWell(
+                                        onTap: () async {
+                                          if (homeController.topBannerList[(index * 3) + 2].type == 'url') {
+                                            if (global.currentUser.id != null) {
+                                              // Get.to(
+                                              //   () => WebViewScreen(
+                                              //     urlString: homeController.topBannerList[index].url,
+                                              //     brandName: homeController.topBannerList[index].name,
+                                              //   ),
+                                              // );
+                                              global.launchInBrowser(
+                                                homeController.topBannerList[(index * 3) + 2].url,
+                                              );
+                                            } else {
+                                              Get.dialog(Dialog(
+                                                child: SizedBox(
+                                                  width: Get.width / 3,
+                                                  child: LoginOrSignUpScreen(
+                                                    fromMenu: true,
+                                                  ),
+                                                ),
+                                              ));
+                                            }
+                                          } else {
+                                            await homeController.getOfferDetails(
+                                              homeController.topBannerList[(index * 3) + 2].offerId.toString(),
+                                            );
+                                            Get.to(
+                                              () => OfferDetailScreen(
+                                                offer: homeController.offer,
+                                                fromSeeMore: false,
                                               ),
-                                            ),
-                                          ));
-                                        }
-                                      } else {
-                                        await homeController.getOfferDetails(
-                                          homeController.topBannerList[(index * 3) + 2].offerId.toString(),
-                                        );
-                                        Get.to(
-                                          () => OfferDetailScreen(
-                                            offer: homeController.offer,
-                                            fromSeeMore: false,
+                                              routeName: 'offer',
+                                            );
+                                          }
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(10),
+                                          child: CustomImage(
+                                            image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[(index * 3) + 2].image}',
+                                            fit: BoxFit.fill,
+                                            height: 220,
+                                            //width: AppConstants.WEB_MAX_WIDTH / 4,
                                           ),
-                                          routeName: 'offer',
-                                        );
-                                      }
-                                    },
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: CustomImage(
-                                        image: '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[(index * 3) + 2].image}',
-                                        fit: BoxFit.fill,
-                                        height: 220,
-                                        //width: AppConstants.WEB_MAX_WIDTH / 4,
+                                        ),
                                       ),
-                                    ),
+                                    )
+                                  : Expanded(child: SizedBox()),
+                            ],
+                          );
+                        },
+                        onPageChanged: (int index) => homeController.setBannerIndex(index),
+                      ),
+                      homeController.bannerIndex != 0
+                          ? Positioned(
+                              top: 0,
+                              bottom: 0,
+                              left: 0,
+                              child: InkWell(
+                                onTap: () => _pageController.previousPage(duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                child: Container(
+                                  height: 40,
+                                  width: 40,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Theme.of(context).cardColor,
                                   ),
-                                )
-                              : Expanded(child: SizedBox()),
-                        ],
-                      );
-                    },
-                    onPageChanged: (int index) => homeController.setBannerIndex(index),
+                                  child: Icon(Icons.arrow_back),
+                                ),
+                              ),
+                            )
+                          : SizedBox(),
+                      homeController.bannerIndex != ((homeController.topBannerList.length / 2).ceil() - 1)
+                          ? Positioned(
+                              top: 0,
+                              bottom: 0,
+                              right: 0,
+                              child: InkWell(
+                                onTap: () => _pageController.nextPage(duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                child: Container(
+                                  height: 40,
+                                  width: 40,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Theme.of(context).cardColor,
+                                  ),
+                                  child: Icon(Icons.arrow_forward),
+                                ),
+                              ),
+                            )
+                          : SizedBox(),
+                    ],
                   ),
-                  homeController.bannerIndex != 0
-                      ? Positioned(
-                          top: 0,
-                          bottom: 0,
-                          left: 0,
-                          child: InkWell(
-                            onTap: () => _pageController.previousPage(duration: Duration(seconds: 1), curve: Curves.easeInOut),
-                            child: Container(
-                              height: 40,
-                              width: 40,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Theme.of(context).cardColor,
-                              ),
-                              child: Icon(Icons.arrow_back),
-                            ),
-                          ),
-                        )
-                      : SizedBox(),
-                  homeController.bannerIndex != ((homeController.topBannerList.length / 2).ceil() - 1)
-                      ? Positioned(
-                          top: 0,
-                          bottom: 0,
-                          right: 0,
-                          child: InkWell(
-                            onTap: () => _pageController.nextPage(duration: Duration(seconds: 1), curve: Curves.easeInOut),
-                            child: Container(
-                              height: 40,
-                              width: 40,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Theme.of(context).cardColor,
-                              ),
-                              child: Icon(Icons.arrow_forward),
-                            ),
-                          ),
-                        )
-                      : SizedBox(),
-                ],
-              ),
-            )
+                )
+              : SizedBox()
           : WebBannerShimmer(),
     );
   }
