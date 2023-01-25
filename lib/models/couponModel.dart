@@ -19,6 +19,7 @@ class Coupon {
   String buttonText;
   String partnerName;
   bool isImageError = false; //for check image error
+  int dayDifference; //for coupon timer
 
   Coupon({
     this.id,
@@ -39,6 +40,7 @@ class Coupon {
     this.buttonText,
     this.partnerName,
     this.isImageError,
+    this.dayDifference,
   });
 
   Coupon.fromJson(Map<String, dynamic> json) {

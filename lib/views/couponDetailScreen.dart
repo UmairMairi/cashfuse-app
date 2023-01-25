@@ -118,7 +118,7 @@ class CouponDetailScreen extends StatelessWidget {
                     AppLocalizations.of(context).deal_ends_in,
                     style: Get.theme.primaryTextTheme.subtitle2,
                   ),
-                  homeController.countTimer(DateTime.now(), coupon.endDate) != null
+                  coupon.dayDifference != null && coupon.dayDifference > 0
                       ? Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: SlideCountdownSeparated(
@@ -136,7 +136,7 @@ class CouponDetailScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(3),
                             ),
                             duration: Duration(
-                              days: homeController.countTimer(DateTime.now(), coupon.endDate),
+                              days: coupon.dayDifference,
                             ),
                           ),
                         )

@@ -296,7 +296,7 @@ class WebHomeScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          homeController.countTimer(DateTime.now(), homeController.exclusiveOfferList[index].endDate) != null
+                                          homeController.exclusiveOfferList[index].dayDifference != null && homeController.exclusiveOfferList[index].dayDifference > 0
                                               ? Padding(
                                                   padding: const EdgeInsets.all(10),
                                                   child: SlideCountdown(
@@ -307,10 +307,7 @@ class WebHomeScreen extends StatelessWidget {
                                                       borderRadius: BorderRadius.circular(3),
                                                     ),
                                                     duration: Duration(
-                                                      days: homeController.countTimer(
-                                                        DateTime.now(),
-                                                        homeController.exclusiveOfferList[index].endDate,
-                                                      ),
+                                                      days: homeController.exclusiveOfferList[index].dayDifference,
                                                     ),
                                                   ),
                                                 )

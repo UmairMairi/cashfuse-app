@@ -20,7 +20,6 @@ class GetStartedScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         fromSplash ? SystemNavigator.pop() : Get.back();
-        await splashController.videoPlayerController.dispose();
         return true;
       },
       child: Scaffold(
@@ -85,7 +84,6 @@ class GetStartedScreen extends StatelessWidget {
             fromSplash
                 ? InkWell(
                     onTap: () async {
-                      await splashController.videoPlayerController.dispose();
                       Get.to(
                         () => LoginOrSignUpScreen(
                           fromMenu: false,

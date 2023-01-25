@@ -479,6 +479,16 @@ class HomeController extends GetxController {
         await apiHelper.getExclusiveOffers().then((response) {
           if (response.status == "1") {
             _exclusiveOfferList = response.data;
+            if (_exclusiveOfferList != null && _exclusiveOfferList.length > 0) {
+              for (var i = 0; i < _exclusiveOfferList.length; i++) {
+                int diff;
+                if (_exclusiveOfferList[i].endDate != null) {
+                  diff = _exclusiveOfferList[i].endDate.difference(DateTime.now()).inDays;
+                  print(diff);
+                  _exclusiveOfferList[i].dayDifference = diff;
+                }
+              }
+            }
           } else {
             showCustomSnackBar(response.message);
           }
@@ -502,6 +512,16 @@ class HomeController extends GetxController {
         await apiHelper.getNewFlashOffers().then((response) {
           if (response.status == "1") {
             _newFlashOfferList = response.data;
+            if (_newFlashOfferList != null && _newFlashOfferList.length > 0) {
+              for (var i = 0; i < _newFlashOfferList.length; i++) {
+                int diff;
+                if (_newFlashOfferList[i].endDate != null) {
+                  diff = _newFlashOfferList[i].endDate.difference(DateTime.now()).inDays;
+                  print(diff);
+                  _newFlashOfferList[i].dayDifference = diff;
+                }
+              }
+            }
           } else {
             showCustomSnackBar(response.message);
           }
@@ -553,19 +573,19 @@ class HomeController extends GetxController {
     }
   }
 
-  int countTimer(DateTime startTime, DateTime endTime) {
-    try {
-      int diff;
-      if (startTime != null && endTime != null) {
-        diff = endTime.difference(startTime).inDays;
-        print(diff);
-      }
-      return diff > 0 ? diff : null;
-    } catch (e) {
-      print("Exception - HomeController.dart - countTimer():" + e.toString());
-      return null;
-    }
-  }
+  // int countTimer(DateTime startTime, DateTime endTime) {
+  //   try {
+  //     int diff;
+  //     if (startTime != null && endTime != null) {
+  //       diff = endTime.difference(startTime).inDays;
+  //       print(diff);
+  //     }
+  //     return diff > 0 ? diff : null;
+  //   } catch (e) {
+  //     print("Exception - HomeController.dart - countTimer():" + e.toString());
+  //     return null;
+  //   }
+  // }
 
   Future getOfferDetails(String offerId) async {
     try {

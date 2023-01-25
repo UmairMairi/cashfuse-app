@@ -418,7 +418,7 @@ class SearchScreen extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
-                                                hmCon.countTimer(DateTime.now(), hmCon.exclusiveOfferList[index].endDate) != null
+                                                hmCon.exclusiveOfferList[index].dayDifference != null && hmCon.exclusiveOfferList[index].dayDifference > 0
                                                     ? Padding(
                                                         padding: const EdgeInsets.all(10),
                                                         child: SlideCountdown(
@@ -429,10 +429,7 @@ class SearchScreen extends StatelessWidget {
                                                             borderRadius: BorderRadius.circular(3),
                                                           ),
                                                           duration: Duration(
-                                                            days: hmCon.countTimer(
-                                                              DateTime.now(),
-                                                              hmCon.exclusiveOfferList[index].endDate,
-                                                            ),
+                                                            days: hmCon.exclusiveOfferList[index].dayDifference,
                                                           ),
                                                         ),
                                                       )

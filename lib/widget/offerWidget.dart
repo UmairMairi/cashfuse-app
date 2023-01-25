@@ -133,7 +133,7 @@ class OfferWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            homeController.countTimer(DateTime.now(), offer.endDate) != null
+                            offer.dayDifference != null && offer.dayDifference > 0
                                 ? SlideCountdown(
                                     slideDirection: SlideDirection.none,
                                     textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
@@ -141,7 +141,7 @@ class OfferWidget extends StatelessWidget {
                                       color: Colors.red[800],
                                       borderRadius: BorderRadius.circular(3),
                                     ),
-                                    duration: Duration(days: homeController.countTimer(DateTime.now(), offer.endDate)),
+                                    duration: Duration(days: offer.dayDifference),
                                   )
                                 : SizedBox(),
                             Container(

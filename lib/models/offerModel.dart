@@ -30,6 +30,8 @@ class OfferModel {
   List<Coupon> couponList;
   bool isImageError = false; //for check image error
 
+  int dayDifference; //for exclusive offer timer
+
   OfferModel({
     this.id,
     this.campaignName,
@@ -58,6 +60,7 @@ class OfferModel {
     this.isCliked,
     this.couponList,
     this.isImageError,
+    this.dayDifference,
   });
 
   OfferModel.fromJson(Map<String, dynamic> json) {

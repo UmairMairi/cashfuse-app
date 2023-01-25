@@ -2,12 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:cashfuse/controllers/homeController.dart';
-import 'package:dio/dio.dart' as dio;
+
 import 'package:cashfuse/constants/appConstant.dart';
+import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/models/userModel.dart';
 import 'package:cashfuse/services/apiHelper.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/otpVerificationScreen.dart';
 import 'package:cashfuse/widget/customLoader.dart';
@@ -15,7 +16,6 @@ import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cashfuse/utils/global.dart' as global;
 
 class AuthController extends GetxController {
   APIHelper apiHelper = new APIHelper();
@@ -254,8 +254,6 @@ class AuthController extends GetxController {
 
   Future updateProfile(File userImage) async {
     try {
-      dio.MultipartFile.fromString(userImage.path);
-
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         if (email.text.trim().isNotEmpty) {
           Get.dialog(CustomLoader(), barrierDismissible: false);

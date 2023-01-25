@@ -31,6 +31,16 @@ class CouponController extends GetxController {
         await apiHelper.getCoupons().then((response) {
           if (response.status == "1") {
             _couponList = response.data;
+            if (_couponList != null && _couponList.length > 0) {
+              for (var i = 0; i < _couponList.length; i++) {
+                int diff;
+                if (_couponList[i].endDate != null) {
+                  diff = _couponList[i].endDate.difference(DateTime.now()).inDays;
+                  print(diff);
+                  _couponList[i].dayDifference = diff;
+                }
+              }
+            }
           } else {
             showCustomSnackBar(response.message);
           }
