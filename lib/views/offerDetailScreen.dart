@@ -439,6 +439,7 @@ class OfferDetailScreen extends StatelessWidget {
                                   partner: offer.partner,
                                 ),
                               ),
+                              isScrollControlled: true,
                             );
                           },
                           child: Text(

@@ -43,12 +43,101 @@ class RequestPaymentScreen extends StatelessWidget {
         child: SizedBox(
           width: AppConstants.WEB_MAX_WIDTH / 2,
           child: GetBuilder<AuthController>(builder: (controller) {
-            return Column(
-              children: [
-                SizedBox(
-                  width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 3 : Get.width,
-                  height: global.getPlatFrom() ? Get.height / 3 : null,
-                  child: Card(
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 3 : Get.width,
+                    height: global.getPlatFrom() ? Get.height / 3 : null,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      margin: EdgeInsets.all(15),
+                      child: Padding(
+                        padding: EdgeInsets.all(15),
+                        child: Column(
+                          children: [
+                            Text(
+                              AppLocalizations.of(context).request_paymets,
+                              style: Get.theme.primaryTextTheme.headline6.copyWith(fontSize: 18),
+                            ),
+                            SizedBox(
+                              height: global.getPlatFrom() ? 30 : 0,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: global.getPlatFrom() ? 15 : 5),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    AppLocalizations.of(context).remaining_earning,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  Text(
+                                    global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
+                                    style: Get.theme.primaryTextTheme.subtitle2,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context).send_withdrawal_request,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                                Text(
+                                  global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.sentForWithdrawal}' : '${global.appInfo.currency}0.00',
+                                  style: Get.theme.primaryTextTheme.subtitle2,
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: global.getPlatFrom() ? 15 : 5),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    AppLocalizations.of(context).successful_withdrawal,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  Text(
+                                    global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
+                                    style: Get.theme.primaryTextTheme.subtitle2,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context).total_earning,
+                                  style: Get.theme.primaryTextTheme.subtitle2,
+                                ),
+                                Text(
+                                  global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency}0.00',
+                                  style: Get.theme.primaryTextTheme.subtitle2,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -58,486 +147,399 @@ class RequestPaymentScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            AppLocalizations.of(context).request_paymets,
+                            AppLocalizations.of(context).redeem,
                             style: Get.theme.primaryTextTheme.headline6.copyWith(fontSize: 18),
                           ),
                           SizedBox(
-                            height: global.getPlatFrom() ? 30 : 0,
+                            height: 10,
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: global.getPlatFrom() ? 15 : 5),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          InkWell(
+                            onTap: () {
+                              if (global.getPlatFrom()) {
+                                Get.dialog(Dialog(
+                                  child: SizedBox(
+                                    width: 400,
+                                    height: 400,
+                                    child: AmazonPayRedeemScreen(),
+                                  ),
+                                ));
+                              } else {
+                                Get.to(
+                                  () => AmazonPayRedeemScreen(),
+                                  routeName: 'amazon',
+                                );
+                              }
+                            },
+                            child: Stack(
+                              alignment: Alignment.centerLeft,
                               children: [
-                                Text(
-                                  AppLocalizations.of(context).remaining_earning,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w300,
+                                Container(
+                                  height: 65,
+                                  width: Get.width,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                      colors: [
+                                        Colors.green[800],
+                                        Colors.green[800],
+                                        Colors.green.withOpacity(0.85),
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        ' ${AppLocalizations.of(context).amazon_pay}',
+                                        style: Get.theme.primaryTextTheme.headline6.copyWith(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Card(
+                                        margin: EdgeInsets.zero,
+                                        color: Colors.white,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Image.asset(
+                                            Images.Amazon_pay,
+                                            height: 20,
+                                            width: 50,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Text(
-                                  global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
-                                  style: Get.theme.primaryTextTheme.subtitle2,
-                                ),
+                                Positioned(
+                                  left: -38,
+                                  child: FloatingActionButton(
+                                    heroTag: "1",
+                                    elevation: 0,
+                                    backgroundColor: Colors.white,
+                                    onPressed: () {},
+                                    shape: _DiamondBorder(),
+                                  ),
+                                )
                               ],
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                AppLocalizations.of(context).send_withdrawal_request,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                              ),
-                              Text(
-                                global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.sentForWithdrawal}' : '${global.appInfo.currency}0.00',
-                                style: Get.theme.primaryTextTheme.subtitle2,
-                              ),
-                            ],
+                          SizedBox(
+                            height: 10,
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: global.getPlatFrom() ? 15 : 5),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          InkWell(
+                            onTap: () {
+                              if (global.getPlatFrom()) {
+                                Get.dialog(Dialog(
+                                  child: SizedBox(
+                                    width: 400,
+                                    height: 400,
+                                    child: PaytmRedeemScreen(),
+                                  ),
+                                ));
+                              } else {
+                                Get.to(
+                                  () => PaytmRedeemScreen(),
+                                  routeName: 'paytm',
+                                );
+                              }
+                            },
+                            child: Stack(
+                              alignment: Alignment.centerLeft,
                               children: [
-                                Text(
-                                  AppLocalizations.of(context).successful_withdrawal,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w300,
+                                Container(
+                                  height: 65,
+                                  width: Get.width,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                      colors: [
+                                        Colors.blue[800],
+                                        Colors.blue[800],
+                                        Colors.blue.withOpacity(0.85),
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        ' ${AppLocalizations.of(context).payTM}',
+                                        style: Get.theme.primaryTextTheme.headline6.copyWith(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Card(
+                                        margin: EdgeInsets.zero,
+                                        color: Colors.white,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Image.asset(
+                                            Images.paytm,
+                                            width: 50,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Text(
-                                  global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
-                                  style: Get.theme.primaryTextTheme.subtitle2,
-                                ),
+                                Positioned(
+                                  left: -38,
+                                  child: FloatingActionButton(
+                                    heroTag: "2",
+                                    elevation: 0,
+                                    backgroundColor: Colors.white,
+                                    onPressed: () {},
+                                    shape: _DiamondBorder(),
+                                  ),
+                                )
                               ],
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                AppLocalizations.of(context).total_earning,
-                                style: Get.theme.primaryTextTheme.subtitle2,
-                              ),
-                              Text(
-                                global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency}0.00',
-                                style: Get.theme.primaryTextTheme.subtitle2,
-                              ),
-                            ],
-                          )
+                          SizedBox(
+                            height: 10,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              if (global.getPlatFrom()) {
+                                Get.dialog(Dialog(
+                                  child: SizedBox(
+                                    width: 400,
+                                    height: 400,
+                                    child: UpiRedeemScreen(),
+                                  ),
+                                ));
+                              } else {
+                                Get.to(
+                                  () => UpiRedeemScreen(),
+                                  routeName: 'upi',
+                                );
+                              }
+                            },
+                            child: Stack(
+                              alignment: Alignment.centerLeft,
+                              children: [
+                                Container(
+                                  height: 65,
+                                  width: Get.width,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                      colors: [
+                                        Colors.orange[800],
+                                        Colors.orange[800],
+                                        Colors.orange.withOpacity(0.85),
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        ' ${AppLocalizations.of(context).upi}',
+                                        style: Get.theme.primaryTextTheme.headline6.copyWith(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Card(
+                                        margin: EdgeInsets.zero,
+                                        color: Colors.white,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Image.asset(
+                                            Images.upi,
+                                            width: 50,
+                                            height: 20,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Positioned(
+                                  left: -38,
+                                  child: FloatingActionButton(
+                                    heroTag: "3",
+                                    elevation: 0,
+                                    backgroundColor: Colors.white,
+                                    onPressed: () {},
+                                    shape: _DiamondBorder(),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              if (global.getPlatFrom()) {
+                                Get.dialog(Dialog(
+                                  child: SizedBox(
+                                    width: 400,
+                                    height: 500,
+                                    child: AddPaymentDetailScreen(),
+                                  ),
+                                ));
+                              } else {
+                                Get.to(
+                                  () => AddPaymentDetailScreen(),
+                                  routeName: 'add-payment',
+                                );
+                              }
+                            },
+                            child: Stack(
+                              alignment: Alignment.centerLeft,
+                              children: [
+                                Container(
+                                  height: 65,
+                                  width: Get.width,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                      colors: [
+                                        Colors.purple[800],
+                                        Colors.purple[800],
+                                        Colors.purple.withOpacity(0.85),
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        ' ${AppLocalizations.of(context).bank_transfer}',
+                                        style: Get.theme.primaryTextTheme.headline6.copyWith(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Card(
+                                        margin: EdgeInsets.zero,
+                                        color: Colors.white,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Image.asset(
+                                            Images.bank,
+                                            height: 20,
+                                            width: 50,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Positioned(
+                                  left: -38,
+                                  child: FloatingActionButton(
+                                    heroTag: "4",
+                                    elevation: 0,
+                                    backgroundColor: Colors.white,
+                                    onPressed: () {},
+                                    shape: _DiamondBorder(),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              if (global.getPlatFrom()) {
+                                Get.dialog(Dialog(
+                                  child: SizedBox(
+                                    width: 400,
+                                    height: 400,
+                                    child: PayPalRedeemScreen(),
+                                  ),
+                                ));
+                              } else {
+                                Get.to(
+                                  () => PayPalRedeemScreen(),
+                                  routeName: 'paypal',
+                                );
+                              }
+                            },
+                            child: Stack(
+                              alignment: Alignment.centerLeft,
+                              children: [
+                                Container(
+                                  height: 65,
+                                  width: Get.width,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                      colors: [
+                                        Colors.blue[900],
+                                        Colors.blue[800],
+                                        Colors.blue.withOpacity(0.85),
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        ' ${AppLocalizations.of(context).paypal}',
+                                        style: Get.theme.primaryTextTheme.headline6.copyWith(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Card(
+                                        margin: EdgeInsets.zero,
+                                        color: Colors.white,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Image.asset(
+                                            Images.paypal,
+                                            width: 50,
+                                            height: 20,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Positioned(
+                                  left: -38,
+                                  child: FloatingActionButton(
+                                    heroTag: "3",
+                                    elevation: 0,
+                                    backgroundColor: Colors.white,
+                                    onPressed: () {},
+                                    shape: _DiamondBorder(),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ),
-                ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  margin: EdgeInsets.all(15),
-                  child: Padding(
-                    padding: EdgeInsets.all(15),
-                    child: Column(
-                      children: [
-                        Text(
-                          AppLocalizations.of(context).redeem,
-                          style: Get.theme.primaryTextTheme.headline6.copyWith(fontSize: 18),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            if (global.getPlatFrom()) {
-                              Get.dialog(Dialog(
-                                child: SizedBox(
-                                  width: 400,
-                                  height: 400,
-                                  child: AmazonPayRedeemScreen(),
-                                ),
-                              ));
-                            } else {
-                              Get.to(
-                                () => AmazonPayRedeemScreen(),
-                                routeName: 'amazon',
-                              );
-                            }
-                          },
-                          child: Stack(
-                            alignment: Alignment.centerLeft,
-                            children: [
-                              Container(
-                                height: 65,
-                                width: Get.width,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    colors: [
-                                      Colors.green[800],
-                                      Colors.green[800],
-                                      Colors.green.withOpacity(0.85),
-                                    ],
-                                  ),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                padding: EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      ' ${AppLocalizations.of(context).amazon_pay}',
-                                      style: Get.theme.primaryTextTheme.headline6.copyWith(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Card(
-                                      margin: EdgeInsets.zero,
-                                      color: Colors.white,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Image.asset(
-                                          Images.Amazon_pay,
-                                          height: 20,
-                                          width: 50,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Positioned(
-                                left: -38,
-                                child: FloatingActionButton(
-                                  heroTag: "1",
-                                  elevation: 0,
-                                  backgroundColor: Colors.white,
-                                  onPressed: () {},
-                                  shape: _DiamondBorder(),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            if (global.getPlatFrom()) {
-                              Get.dialog(Dialog(
-                                child: SizedBox(
-                                  width: 400,
-                                  height: 400,
-                                  child: PaytmRedeemScreen(),
-                                ),
-                              ));
-                            } else {
-                              Get.to(
-                                () => PaytmRedeemScreen(),
-                                routeName: 'paytm',
-                              );
-                            }
-                          },
-                          child: Stack(
-                            alignment: Alignment.centerLeft,
-                            children: [
-                              Container(
-                                height: 65,
-                                width: Get.width,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    colors: [
-                                      Colors.blue[800],
-                                      Colors.blue[800],
-                                      Colors.blue.withOpacity(0.85),
-                                    ],
-                                  ),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                padding: EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      ' ${AppLocalizations.of(context).payTM}',
-                                      style: Get.theme.primaryTextTheme.headline6.copyWith(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Card(
-                                      margin: EdgeInsets.zero,
-                                      color: Colors.white,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Image.asset(
-                                          Images.paytm,
-                                          width: 50,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Positioned(
-                                left: -38,
-                                child: FloatingActionButton(
-                                  heroTag: "2",
-                                  elevation: 0,
-                                  backgroundColor: Colors.white,
-                                  onPressed: () {},
-                                  shape: _DiamondBorder(),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            if (global.getPlatFrom()) {
-                              Get.dialog(Dialog(
-                                child: SizedBox(
-                                  width: 400,
-                                  height: 400,
-                                  child: UpiRedeemScreen(),
-                                ),
-                              ));
-                            } else {
-                              Get.to(
-                                () => UpiRedeemScreen(),
-                                routeName: 'upi',
-                              );
-                            }
-                          },
-                          child: Stack(
-                            alignment: Alignment.centerLeft,
-                            children: [
-                              Container(
-                                height: 65,
-                                width: Get.width,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    colors: [
-                                      Colors.orange[800],
-                                      Colors.orange[800],
-                                      Colors.orange.withOpacity(0.85),
-                                    ],
-                                  ),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                padding: EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      ' ${AppLocalizations.of(context).upi}',
-                                      style: Get.theme.primaryTextTheme.headline6.copyWith(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Card(
-                                      margin: EdgeInsets.zero,
-                                      color: Colors.white,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Image.asset(
-                                          Images.upi,
-                                          width: 50,
-                                          height: 20,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Positioned(
-                                left: -38,
-                                child: FloatingActionButton(
-                                  heroTag: "3",
-                                  elevation: 0,
-                                  backgroundColor: Colors.white,
-                                  onPressed: () {},
-                                  shape: _DiamondBorder(),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            if (global.getPlatFrom()) {
-                              Get.dialog(Dialog(
-                                child: SizedBox(
-                                  width: 400,
-                                  height: 500,
-                                  child: AddPaymentDetailScreen(),
-                                ),
-                              ));
-                            } else {
-                              Get.to(
-                                () => AddPaymentDetailScreen(),
-                                routeName: 'add-payment',
-                              );
-                            }
-                          },
-                          child: Stack(
-                            alignment: Alignment.centerLeft,
-                            children: [
-                              Container(
-                                height: 65,
-                                width: Get.width,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    colors: [
-                                      Colors.purple[800],
-                                      Colors.purple[800],
-                                      Colors.purple.withOpacity(0.85),
-                                    ],
-                                  ),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                padding: EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      ' ${AppLocalizations.of(context).bank_transfer}',
-                                      style: Get.theme.primaryTextTheme.headline6.copyWith(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Card(
-                                      margin: EdgeInsets.zero,
-                                      color: Colors.white,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Image.asset(
-                                          Images.bank,
-                                          height: 20,
-                                          width: 50,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Positioned(
-                                left: -38,
-                                child: FloatingActionButton(
-                                  heroTag: "4",
-                                  elevation: 0,
-                                  backgroundColor: Colors.white,
-                                  onPressed: () {},
-                                  shape: _DiamondBorder(),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            if (global.getPlatFrom()) {
-                              Get.dialog(Dialog(
-                                child: SizedBox(
-                                  width: 400,
-                                  height: 400,
-                                  child: PayPalRedeemScreen(),
-                                ),
-                              ));
-                            } else {
-                              Get.to(
-                                () => PayPalRedeemScreen(),
-                                routeName: 'paypal',
-                              );
-                            }
-                          },
-                          child: Stack(
-                            alignment: Alignment.centerLeft,
-                            children: [
-                              Container(
-                                height: 65,
-                                width: Get.width,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    colors: [
-                                      Colors.blue[900],
-                                      Colors.blue[800],
-                                      Colors.blue.withOpacity(0.85),
-                                    ],
-                                  ),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                padding: EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      ' ${AppLocalizations.of(context).paypal}',
-                                      style: Get.theme.primaryTextTheme.headline6.copyWith(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Card(
-                                      margin: EdgeInsets.zero,
-                                      color: Colors.white,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Image.asset(
-                                          Images.paypal,
-                                          width: 50,
-                                          height: 20,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Positioned(
-                                left: -38,
-                                child: FloatingActionButton(
-                                  heroTag: "3",
-                                  elevation: 0,
-                                  backgroundColor: Colors.white,
-                                  onPressed: () {},
-                                  shape: _DiamondBorder(),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             );
           }),
         ),
