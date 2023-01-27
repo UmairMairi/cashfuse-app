@@ -462,7 +462,7 @@ class WebHomeScreen extends StatelessWidget {
                                 ),
                                 global.getPlatFrom()
                                     ? InkWell(
-                                        onTap: () => offerScrollController.animateTo(offerScrollController.position.maxScrollExtent, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                        onTap: () => offerScrollController.animateTo(offerScrollController.position.viewportDimension, duration: Duration(seconds: 1), curve: Curves.easeInOut),
                                         child: Container(
                                           width: 30,
                                           height: 80,

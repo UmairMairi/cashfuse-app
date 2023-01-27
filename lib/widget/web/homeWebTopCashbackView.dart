@@ -74,7 +74,7 @@ class HomeWebTopCashbackView extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: () => scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                      onTap: () => scrollController.animateTo(scrollController.position.viewportDimension, duration: Duration(seconds: 1), curve: Curves.easeInOut),
                       child: Container(
                         width: 30,
                         height: 80,

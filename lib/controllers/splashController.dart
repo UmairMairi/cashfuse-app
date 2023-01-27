@@ -91,15 +91,23 @@ class SplashController extends GetxController {
             if (global.sp.getString('currentUser') != null) {
               global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
               await Get.find<AuthController>().getProfile();
-
-              Get.to(() => HomeScreen(), routeName: 'home');
+              if (global.getPlatFrom()) {
+                Get.to(() => HomeScreen(), routeName: 'home');
+              } else {
+                Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
+              }
             } else {
-              Get.to(() => HomeScreen(), routeName: 'home');
+              if (global.getPlatFrom()) {
+                Get.to(() => HomeScreen(), routeName: 'home');
+              } else {
+                Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
+              }
             }
-
             await apiHelper.getBannerNotification().then((result) {
               if (result.statusCode == 200) {
-                global.bannerImage = result.data['image'];
+                if (result.data != null) {
+                  global.bannerImage = result.data['image'];
+                }
               }
             });
             await bannerShow();

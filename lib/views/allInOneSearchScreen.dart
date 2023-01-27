@@ -55,7 +55,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
             );
             return false;
           } else {
-            if (searchController.addNewTabList2[_currentIndex].name != '+Add Tab') {
+            if (searchController.addNewTabList2 != null && searchController.addNewTabList2.length > 0 && searchController.addNewTabList2[_currentIndex].name != '+Add Tab') {
               if (await webViewController.canGoBack()) {
                 webViewController.goBack();
                 return false;
@@ -95,7 +95,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                     automaticallyImplyLeading: false,
                     leading: InkWell(
                       onTap: () async {
-                        if (searchController.addNewTabList2[_currentIndex].name != '+Add Tab') {
+                        if (searchController.addNewTabList2 != null && searchController.addNewTabList2.length > 0 && searchController.addNewTabList2[_currentIndex].name != '+Add Tab') {
                           if (await webViewController.canGoBack()) {
                             webViewController.goBack();
                           } else {
