@@ -16,6 +16,7 @@ import 'package:cashfuse/utils/binding/networkBinding.dart';
 import 'package:cashfuse/utils/firebaseoption.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/notificationHelper.dart';
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/views/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -108,7 +109,11 @@ class MyApp extends StatelessWidget {
                 GlobalCupertinoLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
-              home: GetPlatform.isWeb ? HomeScreen() : SplashScreen(),
+              home: global.getPlatFrom()
+                  ? BottomNavigationBarScreen()
+                  : GetPlatform.isWeb
+                      ? HomeScreen()
+                      : SplashScreen(),
             );
           });
         });

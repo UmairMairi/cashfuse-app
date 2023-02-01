@@ -41,8 +41,6 @@ class CouponController extends GetxController {
                 }
               }
             }
-          } else {
-            showCustomSnackBar(response.message);
           }
         });
       } else {

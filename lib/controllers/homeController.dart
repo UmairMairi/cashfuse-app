@@ -489,8 +489,6 @@ class HomeController extends GetxController {
                 }
               }
             }
-          } else {
-            showCustomSnackBar(response.message);
           }
         });
       } else {
@@ -522,8 +520,6 @@ class HomeController extends GetxController {
                 }
               }
             }
-          } else {
-            showCustomSnackBar(response.message);
           }
         });
       } else {

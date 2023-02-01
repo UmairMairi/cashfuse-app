@@ -94,13 +94,13 @@ class SplashController extends GetxController {
               if (global.getPlatFrom()) {
                 Get.to(() => HomeScreen(), routeName: 'home');
               } else {
-                Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
+                Get.to(() => BottomNavigationBarScreen(), routeName: 'initial');
               }
             } else {
               if (global.getPlatFrom()) {
                 Get.to(() => HomeScreen(), routeName: 'home');
               } else {
-                Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
+                Get.to(() => BottomNavigationBarScreen(), routeName: 'initial');
               }
             }
             await apiHelper.getBannerNotification().then((result) {
