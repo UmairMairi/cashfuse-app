@@ -60,7 +60,7 @@ class DrawerWidget extends StatelessWidget {
                             global.currentUser.name.isNotEmpty
                                 ? Text(
                                     global.currentUser.name,
-                                    style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.white),
+                                    style: Get.theme.primaryTextTheme.titleMedium.copyWith(color: Colors.white),
                                   )
                                 : SizedBox(),
                             Text(
@@ -85,7 +85,7 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.pendingEarning}' : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -114,7 +114,7 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -143,7 +143,7 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -173,7 +173,7 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.rewardEarning}' : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -219,7 +219,7 @@ class DrawerWidget extends StatelessWidget {
                               title: global.currentUser.name.isNotEmpty
                                   ? Text(
                                       global.currentUser.name,
-                                      style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.white),
+                                      style: Get.theme.primaryTextTheme.titleMedium.copyWith(color: Colors.white),
                                     )
                                   : global.currentUser.phone.isNotEmpty
                                       ? Text(
@@ -265,7 +265,7 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.pendingEarning}' : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -294,7 +294,7 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -323,7 +323,7 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -353,7 +353,7 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.rewardEarning}' : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -381,7 +381,7 @@ class DrawerWidget extends StatelessWidget {
                 //         ),
                 //         Text(
                 //           'Home',
-                //           style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                //           style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                 //             letterSpacing: 0,
                 //             fontWeight: FontWeight.w300,
                 //             color: Colors.black.withOpacity(0.6),
@@ -415,7 +415,7 @@ class DrawerWidget extends StatelessWidget {
                         ),
                         Text(
                           AppLocalizations.of(context).my_account,
-                          style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                          style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
@@ -449,7 +449,7 @@ class DrawerWidget extends StatelessWidget {
                         ),
                         Text(
                           AppLocalizations.of(context).all_categories,
-                          style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                          style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
@@ -483,7 +483,7 @@ class DrawerWidget extends StatelessWidget {
                         ),
                         Text(
                           AppLocalizations.of(context).redeem_cashback,
-                          style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                          style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
@@ -517,7 +517,7 @@ class DrawerWidget extends StatelessWidget {
                         ),
                         Text(
                           AppLocalizations.of(context).all_in_one_search,
-                          style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                          style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
@@ -554,7 +554,7 @@ class DrawerWidget extends StatelessWidget {
                         ),
                         Text(
                           'How ${global.appName} works?',
-                          style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                          style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
@@ -596,7 +596,7 @@ class DrawerWidget extends StatelessWidget {
                               ),
                               Text(
                                 AppLocalizations.of(context).share_the_app,
-                                style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                                style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                                   letterSpacing: 0,
                                   fontWeight: FontWeight.w300,
                                   color: Colors.black.withOpacity(0.6),
@@ -631,7 +631,7 @@ class DrawerWidget extends StatelessWidget {
                               ),
                               Text(
                                 AppLocalizations.of(context).rate_the_app,
-                                style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                                style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                                   letterSpacing: 0,
                                   fontWeight: FontWeight.w300,
                                   color: Colors.black.withOpacity(0.6),
@@ -666,7 +666,7 @@ class DrawerWidget extends StatelessWidget {
                         ),
                         Text(
                           AppLocalizations.of(context).get_help,
-                          style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                          style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
@@ -685,7 +685,7 @@ class DrawerWidget extends StatelessWidget {
                 Text(
                   AppLocalizations.of(context).login,
                   textAlign: TextAlign.center,
-                  style: Get.theme.primaryTextTheme.headline5.copyWith(
+                  style: Get.theme.primaryTextTheme.headlineSmall.copyWith(
                     letterSpacing: -1,
                     height: 0.99,
                     fontWeight: FontWeight.w700,
@@ -696,7 +696,7 @@ class DrawerWidget extends StatelessWidget {
                   child: Text(
                     AppLocalizations.of(context).login_subtitle,
                     textAlign: TextAlign.center,
-                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                       letterSpacing: -0.2,
                       fontWeight: FontWeight.w600,
                     ),

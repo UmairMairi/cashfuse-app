@@ -51,7 +51,7 @@ class CouponWidget extends StatelessWidget {
                     // ),
                     Text(
                       coupon.name,
-                      style: Get.theme.primaryTextTheme.subtitle1.copyWith(
+                      style: Get.theme.primaryTextTheme.titleMedium.copyWith(
                         fontWeight: FontWeight.w600,
                         color: Get.theme.primaryColor,
                       ),
@@ -60,7 +60,7 @@ class CouponWidget extends StatelessWidget {
                       width: 160,
                       child: Text(
                         coupon.heading,
-                        style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                        style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                           color: Colors.grey[500],
                         ),
                         maxLines: 1,
@@ -94,7 +94,7 @@ class CouponWidget extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Text(
                           'See code',
-                          style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                         ),
                       ),
                     ),

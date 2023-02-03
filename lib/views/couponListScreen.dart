@@ -25,7 +25,7 @@ class CouponListScreen extends StatelessWidget {
         ),
         title: Text(
           AppLocalizations.of(context).coupons_of_the_day.toUpperCase(),
-          style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+          style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
         ),
       ),
       body: GridView.builder(

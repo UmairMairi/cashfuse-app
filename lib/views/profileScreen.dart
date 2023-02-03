@@ -47,7 +47,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             title: Text(
               global.currentUser.id != null ? AppLocalizations.of(context).profile : '',
-              style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+              style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
             ),
           ),
           body: global.currentUser.id != null
@@ -86,7 +86,7 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                                 title: Text(
                                   global.currentUser.name,
-                                  style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.white),
+                                  style: Get.theme.primaryTextTheme.titleMedium.copyWith(color: Colors.white),
                                 ),
                                 subtitle: Text(
                                   global.currentUser.email.isNotEmpty ? global.currentUser.email : global.currentUser.phone,
@@ -110,7 +110,7 @@ class ProfileScreen extends StatelessWidget {
                                       Text(
                                         global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.pendingEarning}' : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
-                                        style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                                        style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                                       ),
                                     ],
                                   ),
@@ -136,7 +136,7 @@ class ProfileScreen extends StatelessWidget {
                                       Text(
                                         global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
-                                        style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                                        style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                                       ),
                                     ],
                                   ),
@@ -162,7 +162,7 @@ class ProfileScreen extends StatelessWidget {
                                       Text(
                                         global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
-                                        style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                                        style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                                       ),
                                     ],
                                   ),
@@ -188,7 +188,7 @@ class ProfileScreen extends StatelessWidget {
                                       Text(
                                         global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.rewardEarning}' : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
-                                        style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                                        style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                                       ),
                                     ],
                                   ),
@@ -206,7 +206,7 @@ class ProfileScreen extends StatelessWidget {
                       //     children: [
                       //       Text(
                       //         'Hello ' + global.currentUser.name,
-                      //         style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                      //         style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                       //       ),
                       //       SizedBox(
                       //         height: 10,
@@ -234,7 +234,7 @@ class ProfileScreen extends StatelessWidget {
                       //               ),
                       //               Text(
                       //                 global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency}0.00',
-                      //                 style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                      //                 style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                       //               ),
                       //             ],
                       //           ),
@@ -250,7 +250,7 @@ class ProfileScreen extends StatelessWidget {
                       //           //     ),
                       //           //     Text(
                       //           //       '${global.appInfo.currency}0.00',
-                      //           //       style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                      //           //       style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                       //           //     ),
                       //           //   ],
                       //           // )
@@ -676,7 +676,7 @@ class ProfileScreen extends StatelessWidget {
                               CupertinoDialogAction(
                                 child: Text(
                                   AppLocalizations.of(context).yes,
-                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.red),
+                                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.red),
                                 ),
                                 onPressed: () {
                                   authController.logout();
@@ -687,7 +687,7 @@ class ProfileScreen extends StatelessWidget {
                               CupertinoDialogAction(
                                 child: Text(
                                   AppLocalizations.of(context).no,
-                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.blue),
+                                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.blue),
                                 ),
                                 onPressed: () {
                                   Get.back();
@@ -739,7 +739,7 @@ class ProfileScreen extends StatelessWidget {
                         child: Text(
                           AppLocalizations.of(context).profile_desc,
                           textAlign: TextAlign.center,
-                          style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                             letterSpacing: -0.2,
                             fontWeight: FontWeight.w600,
                           ),

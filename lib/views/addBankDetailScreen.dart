@@ -26,7 +26,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
           ),
           title: Text(
             AppLocalizations.of(context).bank_transfer_redeem,
-            style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+            style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
           ),
         ),
         body: SingleChildScrollView(
@@ -80,7 +80,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                         children: [
                           Text(
                             AppLocalizations.of(context).account_details,
-                            style: Get.theme.primaryTextTheme.subtitle1.copyWith(fontWeight: FontWeight.w600),
+                            style: Get.theme.primaryTextTheme.titleMedium.copyWith(fontWeight: FontWeight.w600),
                           ),
                           InkWell(
                             onTap: () {
@@ -115,7 +115,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                 RichText(
                                   text: TextSpan(
                                     text: AppLocalizations.of(context).holder_name,
-                                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -133,7 +133,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                 RichText(
                                   text: TextSpan(
                                     text: AppLocalizations.of(context).account_no,
-                                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -151,7 +151,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                 RichText(
                                   text: TextSpan(
                                     text: AppLocalizations.of(context).bank_name,
-                                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -169,7 +169,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                 RichText(
                                   text: TextSpan(
                                     text: AppLocalizations.of(context).ifsc_code,
-                                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
                                     ),

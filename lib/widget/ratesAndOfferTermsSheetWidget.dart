@@ -39,7 +39,7 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                       children: [
                         Text(
                           homeController.isOffer ? partner.rightTab : partner.leftTab,
-                          style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                             fontWeight: FontWeight.w600,
                             letterSpacing: -0.1,
                           ),
@@ -91,7 +91,7 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                                   },
                                   child: Text(
                                     partner.leftTab,
-                                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
                                   ),
                                 ),
                                 Icon(
@@ -105,7 +105,7 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                                   },
                                   child: Text(
                                     partner.rightTab,
-                                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
                                   ),
                                 ),
                               ],

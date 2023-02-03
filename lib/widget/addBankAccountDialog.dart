@@ -44,7 +44,7 @@ class AddBankAccountDialog extends StatelessWidget {
           // ),
           Text(
             AppLocalizations.of(context).add_bank_account,
-            style: Get.theme.primaryTextTheme.headline6.copyWith(fontWeight: FontWeight.w600),
+            style: Get.theme.primaryTextTheme.titleLarge.copyWith(fontWeight: FontWeight.w600),
           ),
 
           StatefulBuilder(

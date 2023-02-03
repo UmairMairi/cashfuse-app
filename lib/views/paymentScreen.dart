@@ -32,7 +32,7 @@ class PaymentScreen extends StatelessWidget {
               ),
               title: Text(
                 AppLocalizations.of(context).payments,
-                style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
               ),
             ),
       body: Align(
@@ -113,7 +113,7 @@ class PaymentScreen extends StatelessWidget {
                                                     : global.currentUser.withdrawalRequest[index].approved == 0
                                                         ? 'Pending'
                                                         : '',
-                                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                                           ),
                                         ),
                                       ),
@@ -177,7 +177,7 @@ class PaymentScreen extends StatelessWidget {
                                           : global.currentUser.withdrawalRequest[index].approved == 0
                                               ? 'Pending'
                                               : '',
-                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                                 ),
                               ),
                             ),

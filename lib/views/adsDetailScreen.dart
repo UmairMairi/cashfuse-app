@@ -104,7 +104,7 @@ class AdsDetailScreen extends StatelessWidget {
                           ),
                           title: Text(
                             ads.partner.name,
-                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                           ),
                           flexibleSpace: CustomizableSpaceBar(builder: (context, scrollingRate) {
                             return (scrollingRate != 1.0)
@@ -255,7 +255,7 @@ class AdsDetailScreen extends StatelessWidget {
                               //           children: [
                               //             Text(
                               //               'Just for You',
-                              //               style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                              //               style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                               //                 color: Colors.red,
                               //               ),
                               //             ),
@@ -511,7 +511,7 @@ class AdsDetailScreen extends StatelessWidget {
                           },
                           child: Text(
                             ads.partner.leftTab,
-                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
                           ),
                         ),
                         (ads.partner.leftTab.isNotEmpty && ads.partner.rightTab.isNotEmpty)
@@ -538,7 +538,7 @@ class AdsDetailScreen extends StatelessWidget {
                           },
                           child: Text(
                             ads.partner.rightTab,
-                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
                           ),
                         ),
                       ],

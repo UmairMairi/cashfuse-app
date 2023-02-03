@@ -35,7 +35,7 @@ class GetHelpScreen extends StatelessWidget {
               ),
               title: Text(
                 AppLocalizations.of(context).get_help,
-                style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
               ),
             ),
       body: Center(
@@ -73,7 +73,7 @@ class GetHelpScreen extends StatelessWidget {
                           contentPadding: EdgeInsets.only(bottom: 5),
                           border: InputBorder.none,
                           hintText: 'What are you looking for?',
-                          hintStyle: Get.theme.primaryTextTheme.caption.copyWith(color: Colors.black54, fontSize: 11),
+                          hintStyle: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.black54, fontSize: 11),
                           prefixIcon: Icon(
                             Icons.search,
                             color: fSeachNode.hasFocus ? Get.theme.primaryColor : Colors.grey,
@@ -163,7 +163,7 @@ class GetHelpScreen extends StatelessWidget {
                                         Text(
                                           controller.faqList[index].ques,
                                           textAlign: TextAlign.center,
-                                          style: global.getPlatFrom() ? Get.theme.primaryTextTheme.subtitle1 : Get.theme.primaryTextTheme.subtitle2,
+                                          style: global.getPlatFrom() ? Get.theme.primaryTextTheme.titleMedium : Get.theme.primaryTextTheme.titleSmall,
                                         ),
                                       ],
                                     ),

@@ -38,7 +38,7 @@ class MyEarningSceen extends StatelessWidget {
               ),
               title: Text(
                 AppLocalizations.of(context).my_earnings,
-                style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
               ),
             ),
       body: Column(
@@ -96,7 +96,7 @@ class MyEarningSceen extends StatelessWidget {
                           ),
                           subtitle: Text(
                             global.currentUser.earning != null ? '${global.appInfo.currency} ${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency} 0.00',
-                            style: Get.theme.primaryTextTheme.headline5.copyWith(fontWeight: FontWeight.w600),
+                            style: Get.theme.primaryTextTheme.headlineSmall.copyWith(fontWeight: FontWeight.w600),
                           ),
                           trailing: Card(
                             elevation: 5,
@@ -136,7 +136,7 @@ class MyEarningSceen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                           child: Text(
                             '${AppLocalizations.of(context).my_earnings_subtitile} ${global.appName}.',
-                            style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                            style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                               color: Colors.grey[600],
                               fontWeight: FontWeight.w400,
                               letterSpacing: -0.5,
@@ -192,7 +192,7 @@ class MyEarningSceen extends StatelessWidget {
                                       children: [
                                         Text(
                                           AppLocalizations.of(context).my_order_details,
-                                          style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
@@ -211,7 +211,7 @@ class MyEarningSceen extends StatelessWidget {
                                           children: [
                                             Text(
                                               '${AppLocalizations.of(context).view_more} ',
-                                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                              style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                                 color: Colors.white,
                                               ),
                                             ),
@@ -300,7 +300,7 @@ class MyEarningSceen extends StatelessWidget {
                                       children: [
                                         Text(
                                           AppLocalizations.of(context).recents_clicks,
-                                          style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
@@ -319,7 +319,7 @@ class MyEarningSceen extends StatelessWidget {
                                           children: [
                                             Text(
                                               '${AppLocalizations.of(context).view_more} ',
-                                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                              style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                                 color: Colors.white,
                                               ),
                                             ),
@@ -401,7 +401,7 @@ class MyEarningSceen extends StatelessWidget {
                                       children: [
                                         Text(
                                           AppLocalizations.of(context).request_paymets,
-                                          style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
@@ -420,7 +420,7 @@ class MyEarningSceen extends StatelessWidget {
                                           children: [
                                             Text(
                                               '${AppLocalizations.of(context).view_more} ',
-                                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                              style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                                 color: Colors.white,
                                               ),
                                             ),
@@ -504,7 +504,7 @@ class MyEarningSceen extends StatelessWidget {
                                       children: [
                                         Text(
                                           AppLocalizations.of(context).get_help,
-                                          style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
@@ -523,7 +523,7 @@ class MyEarningSceen extends StatelessWidget {
                                           children: [
                                             Text(
                                               '${AppLocalizations.of(context).view_more} ',
-                                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                              style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                                 color: Colors.white,
                                               ),
                                             ),
@@ -631,7 +631,7 @@ class MyEarningSceen extends StatelessWidget {
                       ),
                       Text(
                         'Your total eanings and amount includes your Cashback + Rewards + Refferal amount.',
-                        style: Get.theme.primaryTextTheme.bodyText2,
+                        style: Get.theme.primaryTextTheme.bodyMedium,
                       ),
                     ],
                   ),

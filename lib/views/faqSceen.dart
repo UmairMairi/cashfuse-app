@@ -48,7 +48,7 @@ class FaqScreen extends StatelessWidget {
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'What are you looking for?',
-                          hintStyle: Get.theme.primaryTextTheme.caption.copyWith(color: Colors.grey, fontSize: 11),
+                          hintStyle: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.grey, fontSize: 11),
                         ),
                         onFieldSubmitted: (value) {
                           commonController.faqLocalSearch();
@@ -56,7 +56,7 @@ class FaqScreen extends StatelessWidget {
                       )
                     : Text(
                         AppLocalizations.of(context).faqs,
-                        style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.white),
+                        style: Get.theme.primaryTextTheme.titleLarge.copyWith(color: Colors.white),
                       ),
                 actions: [
                   InkWell(
@@ -109,7 +109,7 @@ class FaqScreen extends StatelessWidget {
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
                                           commonController.faqList[index].ques,
-                                          style: Get.theme.primaryTextTheme.bodyText2.copyWith(color: Colors.grey[600]),
+                                          style: Get.theme.primaryTextTheme.bodyMedium.copyWith(color: Colors.grey[600]),
                                         ),
                                       ),
                                       Divider(

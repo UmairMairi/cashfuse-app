@@ -33,7 +33,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                 ),
                 title: Text(
                   AppLocalizations.of(context).amazon_pay_redeem,
-                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                 ),
               ),
         body: SingleChildScrollView(
@@ -80,7 +80,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                         children: [
                           Text(
                             AppLocalizations.of(context).account_details,
-                            style: Get.theme.primaryTextTheme.subtitle1.copyWith(fontWeight: FontWeight.w600),
+                            style: Get.theme.primaryTextTheme.titleMedium.copyWith(fontWeight: FontWeight.w600),
                           ),
                           InkWell(
                             onTap: () {
@@ -103,7 +103,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                         children: [
                                           Text(
                                             AppLocalizations.of(context).add_amazon_account,
-                                            style: Get.theme.primaryTextTheme.headline6.copyWith(fontWeight: FontWeight.w600),
+                                            style: Get.theme.primaryTextTheme.titleLarge.copyWith(fontWeight: FontWeight.w600),
                                           ),
                                           TextFormField(
                                             controller: contactNo,
@@ -192,7 +192,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                           ? RichText(
                               text: TextSpan(
                                 text: AppLocalizations.of(context).phone_no,
-                                style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                   letterSpacing: -0.2,
                                   fontWeight: FontWeight.w500,
                                 ),

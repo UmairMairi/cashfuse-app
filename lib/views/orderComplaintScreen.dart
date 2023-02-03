@@ -45,7 +45,7 @@ class OrderComplaintScreen extends StatelessWidget {
                   ),
                   title: Text(
                     AppLocalizations.of(context).order_complaints,
-                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                   ),
                 ),
           backgroundColor: Colors.grey[200],
@@ -95,14 +95,14 @@ class OrderComplaintScreen extends StatelessWidget {
                                                     child: RichText(
                                                       text: TextSpan(
                                                         text: "${AppLocalizations.of(context).complaint} : ",
-                                                        style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                                        style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                                           letterSpacing: -0.2,
                                                           fontWeight: FontWeight.w500,
                                                         ),
                                                         children: <TextSpan>[
                                                           TextSpan(
                                                             text: orderController.complainList[index].complain,
-                                                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                                               letterSpacing: -0.2,
                                                               fontWeight: FontWeight.w300,
                                                             ),
@@ -116,14 +116,14 @@ class OrderComplaintScreen extends StatelessWidget {
                                                     child: RichText(
                                                       text: TextSpan(
                                                         text: "${AppLocalizations.of(context).reply} : ",
-                                                        style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                                        style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                                           letterSpacing: -0.2,
                                                           fontWeight: FontWeight.w500,
                                                         ),
                                                         children: <TextSpan>[
                                                           TextSpan(
                                                             text: orderController.complainList[index].reply.isNotEmpty ? orderController.complainList[index].reply : 'Waiting for reply....',
-                                                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                                               letterSpacing: -0.2,
                                                               fontWeight: FontWeight.w300,
                                                             ),
@@ -205,7 +205,7 @@ class OrderComplaintScreen extends StatelessWidget {
                                   ),
                                   Text(
                                     AppLocalizations.of(context).add_complaint,
-                                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -232,14 +232,14 @@ class OrderComplaintScreen extends StatelessWidget {
                                   child: RichText(
                                     text: TextSpan(
                                       text: "${AppLocalizations.of(context).complaint} : ",
-                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                         letterSpacing: -0.2,
                                         fontWeight: FontWeight.w500,
                                       ),
                                       children: <TextSpan>[
                                         TextSpan(
                                           text: orderController.complainList[index].complain,
-                                          style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                             letterSpacing: -0.2,
                                             fontWeight: FontWeight.w300,
                                           ),
@@ -253,14 +253,14 @@ class OrderComplaintScreen extends StatelessWidget {
                                   child: RichText(
                                     text: TextSpan(
                                       text: "${AppLocalizations.of(context).reply} : ",
-                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                         letterSpacing: -0.2,
                                         fontWeight: FontWeight.w500,
                                       ),
                                       children: <TextSpan>[
                                         TextSpan(
                                           text: orderController.complainList[index].reply.isNotEmpty ? orderController.complainList[index].reply : 'Waiting for reply....',
-                                          style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                             letterSpacing: -0.2,
                                             fontWeight: FontWeight.w300,
                                           ),
@@ -293,7 +293,7 @@ class OrderComplaintScreen extends StatelessWidget {
                       ),
                       Text(
                         AppLocalizations.of(context).add_complaint_title,
-                        style: Get.theme.primaryTextTheme.bodyText1.copyWith(fontWeight: FontWeight.w300),
+                        style: Get.theme.primaryTextTheme.bodyLarge.copyWith(fontWeight: FontWeight.w300),
                       ),
                       SizedBox(
                         height: 30,
@@ -333,7 +333,7 @@ class OrderComplaintScreen extends StatelessWidget {
                           alignment: Alignment.center,
                           child: Text(
                             AppLocalizations.of(context).add_complaint,
-                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
                             ),
@@ -372,7 +372,7 @@ class OrderComplaintScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       AppLocalizations.of(context).add_complaint,
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),

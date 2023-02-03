@@ -41,7 +41,7 @@ class MyOrdersScreen extends StatelessWidget {
               ),
               title: Text(
                 AppLocalizations.of(context).my_orders,
-                style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
               ),
             ),
       body: Align(
@@ -667,7 +667,7 @@ class MyOrdersScreen extends StatelessWidget {
                               padding: const EdgeInsets.only(top: 10),
                               child: Text(
                                 AppLocalizations.of(context).orders_title,
-                                style: Get.theme.primaryTextTheme.subtitle1.copyWith(fontWeight: FontWeight.w500),
+                                style: Get.theme.primaryTextTheme.titleMedium.copyWith(fontWeight: FontWeight.w500),
                               ),
                             ),
                             Padding(
@@ -675,7 +675,7 @@ class MyOrdersScreen extends StatelessWidget {
                               child: Text(
                                 "Once you shop via ${global.appName}, your order details will appear here within 72 hours.",
                                 textAlign: TextAlign.center,
-                                //style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w500),
+                                //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
                               ),
                             ),
                             InkWell(

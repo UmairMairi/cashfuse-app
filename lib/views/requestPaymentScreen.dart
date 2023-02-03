@@ -36,7 +36,7 @@ class RequestPaymentScreen extends StatelessWidget {
               ),
               title: Text(
                 AppLocalizations.of(context).request_paymets,
-                style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
               ),
             ),
       body: Center(
@@ -60,7 +60,7 @@ class RequestPaymentScreen extends StatelessWidget {
                           children: [
                             Text(
                               AppLocalizations.of(context).request_paymets,
-                              style: Get.theme.primaryTextTheme.headline6.copyWith(fontSize: 18),
+                              style: Get.theme.primaryTextTheme.titleLarge.copyWith(fontSize: 18),
                             ),
                             SizedBox(
                               height: global.getPlatFrom() ? 30 : 0,
@@ -79,7 +79,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                   ),
                                   Text(
                                     global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
-                                    style: Get.theme.primaryTextTheme.subtitle2,
+                                    style: Get.theme.primaryTextTheme.titleSmall,
                                   ),
                                 ],
                               ),
@@ -96,7 +96,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.sentForWithdrawal}' : '${global.appInfo.currency}0.00',
-                                  style: Get.theme.primaryTextTheme.subtitle2,
+                                  style: Get.theme.primaryTextTheme.titleSmall,
                                 ),
                               ],
                             ),
@@ -114,7 +114,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                   ),
                                   Text(
                                     global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
-                                    style: Get.theme.primaryTextTheme.subtitle2,
+                                    style: Get.theme.primaryTextTheme.titleSmall,
                                   ),
                                 ],
                               ),
@@ -124,11 +124,11 @@ class RequestPaymentScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   AppLocalizations.of(context).total_earning,
-                                  style: Get.theme.primaryTextTheme.subtitle2,
+                                  style: Get.theme.primaryTextTheme.titleSmall,
                                 ),
                                 Text(
                                   global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency}0.00',
-                                  style: Get.theme.primaryTextTheme.subtitle2,
+                                  style: Get.theme.primaryTextTheme.titleSmall,
                                 ),
                               ],
                             )
@@ -148,7 +148,7 @@ class RequestPaymentScreen extends StatelessWidget {
                         children: [
                           Text(
                             AppLocalizations.of(context).redeem,
-                            style: Get.theme.primaryTextTheme.headline6.copyWith(fontSize: 18),
+                            style: Get.theme.primaryTextTheme.titleLarge.copyWith(fontSize: 18),
                           ),
                           SizedBox(
                             height: 10,
@@ -194,7 +194,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                     children: [
                                       Text(
                                         ' ${AppLocalizations.of(context).amazon_pay}',
-                                        style: Get.theme.primaryTextTheme.headline6.copyWith(
+                                        style: Get.theme.primaryTextTheme.titleLarge.copyWith(
                                           fontSize: 20,
                                           color: Colors.white,
                                         ),
@@ -271,7 +271,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                     children: [
                                       Text(
                                         ' ${AppLocalizations.of(context).payTM}',
-                                        style: Get.theme.primaryTextTheme.headline6.copyWith(
+                                        style: Get.theme.primaryTextTheme.titleLarge.copyWith(
                                           fontSize: 20,
                                           color: Colors.white,
                                         ),
@@ -347,7 +347,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                     children: [
                                       Text(
                                         ' ${AppLocalizations.of(context).upi}',
-                                        style: Get.theme.primaryTextTheme.headline6.copyWith(
+                                        style: Get.theme.primaryTextTheme.titleLarge.copyWith(
                                           fontSize: 20,
                                           color: Colors.white,
                                         ),
@@ -424,7 +424,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                     children: [
                                       Text(
                                         ' ${AppLocalizations.of(context).bank_transfer}',
-                                        style: Get.theme.primaryTextTheme.headline6.copyWith(
+                                        style: Get.theme.primaryTextTheme.titleLarge.copyWith(
                                           fontSize: 20,
                                           color: Colors.white,
                                         ),
@@ -501,7 +501,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                     children: [
                                       Text(
                                         ' ${AppLocalizations.of(context).paypal}',
-                                        style: Get.theme.primaryTextTheme.headline6.copyWith(
+                                        style: Get.theme.primaryTextTheme.titleLarge.copyWith(
                                           fontSize: 20,
                                           color: Colors.white,
                                         ),

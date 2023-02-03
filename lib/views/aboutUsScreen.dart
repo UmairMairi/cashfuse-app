@@ -35,7 +35,7 @@ class AboutUsScreen extends StatelessWidget {
               ),
               title: Text(
                 AppLocalizations.of(context).about_us,
-                style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
               ),
             ),
       body: GetBuilder<CommonController>(builder: (controller) {

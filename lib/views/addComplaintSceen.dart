@@ -27,7 +27,7 @@ class AddComplaintSceen extends StatelessWidget {
         ),
         title: Text(
           AppLocalizations.of(context).add_complaint,
-          style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+          style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(
@@ -66,7 +66,7 @@ class AddComplaintSceen extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             AppLocalizations.of(context).submit,
-            style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+            style: Get.theme.primaryTextTheme.titleSmall.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w600,
             ),

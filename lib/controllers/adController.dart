@@ -39,18 +39,27 @@ class AdController extends GetxController {
   FacebookNativeAd facebookNativeAd;
   bool isFbNativeAdLoaded = false;
 
+  bool isAdmobBannerAd1Exist = false;
+  bool isAdmobBannerAd2Exist = false;
+  bool isAdmobBannerAd3Exist = false;
+
+  bool isFbBannerAd1Exist = false;
+  bool isFbBannerAd2Exist = false;
+  bool isFbBannerAd3Exist = false;
+
+  bool isAdmobNativeAd1Exist = false;
+  bool isAdmobNativeAd2Exist = false;
+
+  bool isfbNativeAd1Exist = false;
+  bool isfbNativeAd2Exist = false;
+
+  bool isAdmobInterstitialAdExist = false;
+
+  bool isFbInterstitialAdExist = false;
+
   void setNativeAdLoaded(bool val) {
     admobNativeAdLoaded = val;
     update();
-  }
-
-  String currentPlatform() {
-    if (GetPlatform.isAndroid) {
-      return 'android';
-    } else if (GetPlatform.isIOS) {
-      return 'ios';
-    }
-    return '';
   }
 
   @override
@@ -58,7 +67,8 @@ class AdController extends GetxController {
     if (!GetPlatform.isWeb) {
       try {
         FacebookAudienceNetwork.init(
-          iOSAdvertiserTrackingEnabled: false,
+          //testingId: '468FD9C0CF496815189B2FE63C8EFA31',
+          iOSAdvertiserTrackingEnabled: true,
         );
       } catch (e) {
         print("Exception - main.dart - main():" + e.toString());
@@ -70,7 +80,6 @@ class AdController extends GetxController {
       }
       if (global.appInfo.facebookAd == "1") {
         await getFaceBookAdSetting();
-        await createFbBannerAd();
 
         await loadFacebookInterstitialAd();
       }
@@ -79,78 +88,13 @@ class AdController extends GetxController {
     super.onInit();
   }
 
-  Future createFbBannerAd() async {
-    try {
-      if (global.facebookAdSetting.bannerAdList != null && global.facebookAdSetting.bannerAdList.length > 0) {
-        if (global.facebookAdSetting.bannerAdList[0] != null && global.facebookAdSetting.bannerAdList[0].status == 1 && global.admobSetting.bannerAdList[0].platform == currentPlatform()) {
-          fbBannerAd1 = new FacebookBannerAd(
-            placementId: global.facebookAdSetting.bannerAdList[0].placementId,
-            bannerSize: BannerSize.STANDARD,
-            keepAlive: true,
-            listener: (result, value) {
-              if (result == BannerAdResult.ERROR) {
-                isfbBannerAdLoaed1 = false;
-                update();
-              }
-              if (result == BannerAdResult.LOGGING_IMPRESSION) {
-                isfbBannerAdLoaed1 = true;
-                update();
-              }
-              if (result == BannerAdResult.LOADED) {
-                isfbBannerAdLoaed1 = true;
-                update();
-              }
-            },
-          );
-        }
-
-        if (global.facebookAdSetting.bannerAdList[1] != null && global.facebookAdSetting.bannerAdList[1].status == 1 && global.admobSetting.bannerAdList[1].platform == currentPlatform()) {
-          fbBannerAd2 = new FacebookBannerAd(
-            placementId: global.facebookAdSetting.bannerAdList[1].placementId,
-            bannerSize: BannerSize.STANDARD,
-            keepAlive: true,
-            listener: (result, value) {
-              if (result == BannerAdResult.ERROR) {
-                isfbBannerAdLoaed2 = false;
-                update();
-              }
-              if (result == BannerAdResult.LOGGING_IMPRESSION) {
-                isfbBannerAdLoaed2 = true;
-                update();
-              }
-              if (result == BannerAdResult.LOADED) {
-                isfbBannerAdLoaed2 = true;
-                update();
-              }
-            },
-          );
-        }
-
-        if (global.facebookAdSetting.bannerAdList[2] != null && global.facebookAdSetting.bannerAdList[2].status == 1 && global.admobSetting.bannerAdList[2].platform == currentPlatform()) {
-          fbBannerAd3 = new FacebookBannerAd(
-            placementId: global.facebookAdSetting.bannerAdList[2].placementId,
-            bannerSize: BannerSize.STANDARD,
-            keepAlive: true,
-            listener: (result, value) {
-              if (result == BannerAdResult.ERROR) {
-                isfbBannerAdLoaed3 = false;
-                update();
-              }
-              if (result == BannerAdResult.LOGGING_IMPRESSION) {
-                isfbBannerAdLoaed3 = true;
-                update();
-              }
-              if (result == BannerAdResult.LOADED) {
-                isfbBannerAdLoaed3 = true;
-                update();
-              }
-            },
-          );
-        }
-      }
-    } catch (e) {
-      print("Exception - HomeScreen.dart - createFbBannerAd():" + e.toString());
+  String currentPlatform() {
+    if (GetPlatform.isAndroid) {
+      return 'android';
+    } else if (GetPlatform.isIOS) {
+      return 'ios';
     }
+    return '';
   }
 
   Future getAdmobSettings() async {
@@ -159,6 +103,29 @@ class AdController extends GetxController {
         await apiHelper.getAdmobSettings().then((response) async {
           if (response.statusCode == 200) {
             global.admobSetting = response.data;
+
+            if (!GetPlatform.isWeb && global.admobSetting.bannerAdList != null && global.admobSetting.bannerAdList.length > 0) {
+              if (global.admobSetting.bannerAdList[0] != null && global.admobSetting.bannerAdList[0].status == 1 && global.admobSetting.bannerAdList[0].platform == currentPlatform()) {
+                isAdmobBannerAd1Exist = true;
+              }
+              if (global.admobSetting.bannerAdList[1] != null && global.admobSetting.bannerAdList[1].status == 1 && global.admobSetting.bannerAdList[1].platform == currentPlatform()) {
+                isAdmobBannerAd2Exist = true;
+              }
+              if (global.admobSetting.bannerAdList[2] != null && global.admobSetting.bannerAdList[2].status == 1 && global.admobSetting.bannerAdList[2].platform == currentPlatform()) {
+                isAdmobBannerAd3Exist = true;
+              }
+              if (global.admobSetting.nativeAdList[0] != null && global.admobSetting.nativeAdList[0].status == 1 && global.admobSetting.nativeAdList[0].platform == currentPlatform()) {
+                isAdmobNativeAd1Exist = true;
+              }
+
+              if (global.admobSetting.nativeAdList[1] != null && global.admobSetting.nativeAdList[1].status == 1 && global.admobSetting.nativeAdList[1].platform == currentPlatform()) {
+                isAdmobNativeAd2Exist = true;
+              }
+              if (global.admobSetting.interstitialAdList[0] != null && global.admobSetting.interstitialAdList[0].status == 1 && global.admobSetting.interstitialAdList[0].platform == currentPlatform()) {
+                isAdmobInterstitialAdExist = true;
+              }
+            }
+
             update();
           } else {
             showCustomSnackBar(response.message);
@@ -178,6 +145,28 @@ class AdController extends GetxController {
         await apiHelper.getFaceBookAdSetting().then((response) async {
           if (response.statusCode == 200) {
             global.facebookAdSetting = response.data;
+
+            if (!GetPlatform.isWeb && global.facebookAdSetting.bannerAdList != null && global.facebookAdSetting.bannerAdList.length > 0) {
+              if (global.facebookAdSetting.bannerAdList[0] != null && global.facebookAdSetting.bannerAdList[0].status == 1 && global.facebookAdSetting.bannerAdList[0].platform == currentPlatform()) {
+                isfbBannerAdLoaed1 = true;
+              }
+              if (global.facebookAdSetting.bannerAdList[1] != null && global.facebookAdSetting.bannerAdList[1].status == 1 && global.facebookAdSetting.bannerAdList[1].platform == currentPlatform()) {
+                isfbBannerAdLoaed2 = true;
+              }
+              if (global.facebookAdSetting.bannerAdList[2] != null && global.facebookAdSetting.bannerAdList[2].status == 1 && global.facebookAdSetting.bannerAdList[2].platform == currentPlatform()) {
+                isfbBannerAdLoaed3 = true;
+              }
+              if (global.facebookAdSetting.nativeAdList[0] != null && global.facebookAdSetting.nativeAdList[0].status == 1 && global.facebookAdSetting.nativeAdList[0].platform == currentPlatform()) {
+                isfbNativeAd1Exist = true;
+              }
+
+              if (global.facebookAdSetting.nativeAdList[1] != null && global.facebookAdSetting.nativeAdList[1].status == 1 && global.facebookAdSetting.nativeAdList[1].platform == currentPlatform()) {
+                isfbNativeAd2Exist = true;
+              }
+              if (global.facebookAdSetting.interstitialAdList[0] != null && global.facebookAdSetting.interstitialAdList[0].status == 1 && global.facebookAdSetting.interstitialAdList[0].platform == currentPlatform()) {
+                isFbInterstitialAdExist = true;
+              }
+            }
             update();
           } else {
             showCustomSnackBar(response.message);
@@ -205,9 +194,9 @@ class AdController extends GetxController {
 
   Future createInterstitialAd() async {
     try {
-      if (global.admobSetting.interstitialAdList[0] != null && global.admobSetting.interstitialAdList[0].status == 1 && global.admobSetting.interstitialAdList[0].platform == currentPlatform()) {
+      if (isAdmobInterstitialAdExist) {
         InterstitialAd.load(
-            adUnitId: global.admobSetting.interstitialAdList[0].adId,
+            adUnitId: "ca-app-pub-3940256099942544/1033173712",
             request: AdRequest(),
             adLoadCallback: InterstitialAdLoadCallback(
               onAdLoaded: (InterstitialAd ad) {
@@ -233,31 +222,33 @@ class AdController extends GetxController {
 
   void showInterstitialAd() {
     try {
-      interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
-        onAdShowedFullScreenContent: (InterstitialAd ad) => print('ad onAdShowedFullScreenContent.'),
-        onAdDismissedFullScreenContent: (InterstitialAd ad) {
-          ad.dispose();
-          createInterstitialAd();
-          global.admobclickCount = 0;
-          update();
-        },
-        onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-          ad.dispose();
-          createInterstitialAd();
-          global.admobclickCount = 0;
-          update();
-        },
-      );
-      interstitialAd.show();
+      if (interstitialAd != null) {
+        interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
+          onAdShowedFullScreenContent: (InterstitialAd ad) => print('ad onAdShowedFullScreenContent.'),
+          onAdDismissedFullScreenContent: (InterstitialAd ad) {
+            ad.dispose();
+            createInterstitialAd();
+            global.admobclickCount = 0;
+            update();
+          },
+          onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+            ad.dispose();
+            createInterstitialAd();
+            global.admobclickCount = 0;
+            update();
+          },
+        );
+        interstitialAd.show();
+      }
     } catch (e) {
       print("Exception - AdController.dart - showInterstitialAd():" + e.toString());
     }
   }
 
   Future loadFacebookInterstitialAd() async {
-    if (global.facebookAdSetting.interstitialAdList[0] != null && global.facebookAdSetting.interstitialAdList[0].status == 1 && global.facebookAdSetting.interstitialAdList[0].platform == currentPlatform()) {
+    if (isFbInterstitialAdExist) {
       FacebookInterstitialAd.loadInterstitialAd(
-        placementId: global.facebookAdSetting.interstitialAdList[0].placementId,
+        placementId: "IMG_16_9_APP_INSTALL#536153035214384_536898488473172",
         listener: (result, value) {
           if (result == InterstitialAdResult.LOADED) {}
           if (result == InterstitialAdResult.DISMISSED) {

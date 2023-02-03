@@ -51,7 +51,7 @@ class SeeMoreSheet extends StatelessWidget {
                               ),
                               Text(
                                 AppLocalizations.of(context).what_next,
-                                style: Get.theme.primaryTextTheme.subtitle1.copyWith(
+                                style: Get.theme.primaryTextTheme.titleMedium.copyWith(
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -83,7 +83,7 @@ class SeeMoreSheet extends StatelessWidget {
                                   ),
                                   Text(
                                     ' Shop at $brandName',
-                                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                       fontWeight: FontWeight.w600,
                                     ),
                                   )
@@ -107,7 +107,7 @@ class SeeMoreSheet extends StatelessWidget {
                                     child: Text(
                                       ' $brandName pays commison to ${global.appName}',
                                       maxLines: 2,
-                                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
@@ -130,7 +130,7 @@ class SeeMoreSheet extends StatelessWidget {
                                   ),
                                   Text(
                                     ' ${global.appName} Pays you Cashback',
-                                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                       fontWeight: FontWeight.w600,
                                     ),
                                   )
@@ -179,7 +179,7 @@ class SeeMoreSheet extends StatelessWidget {
                                 children: [
                                   Text(
                                     partner.leftTab,
-                                    style: Get.theme.primaryTextTheme.subtitle1.copyWith(
+                                    style: Get.theme.primaryTextTheme.titleMedium.copyWith(
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
@@ -216,7 +216,7 @@ class SeeMoreSheet extends StatelessWidget {
                             //             child: RichText(
                             //               text: TextSpan(
                             //                 text: '6%',
-                            //                 style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                            //                 style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                             //                   color: Get.theme.secondaryHeaderColor,
                             //                 ),
                             //                 children: <TextSpan>[
@@ -249,7 +249,7 @@ class SeeMoreSheet extends StatelessWidget {
                                     children: [
                                       Text(
                                         AppLocalizations.of(context).coupon,
-                                        style: Get.theme.primaryTextTheme.subtitle1.copyWith(
+                                        style: Get.theme.primaryTextTheme.titleMedium.copyWith(
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
@@ -280,7 +280,7 @@ class SeeMoreSheet extends StatelessWidget {
                                               color: Get.theme.secondaryHeaderColor,
                                               child: Text(
                                                 couponList[index].code,
-                                                style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                                style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                                   color: Get.theme.secondaryHeaderColor,
                                                 ),
                                               ),
@@ -305,7 +305,7 @@ class SeeMoreSheet extends StatelessWidget {
                                               },
                                               child: Text(
                                                 AppLocalizations.of(context).copy_code,
-                                                style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                                                style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                                                   decoration: TextDecoration.underline,
                                                   color: Get.theme.secondaryHeaderColor,
                                                 ),
@@ -335,7 +335,7 @@ class SeeMoreSheet extends StatelessWidget {
                                     children: [
                                       Text(
                                         partner.rightTab,
-                                        style: Get.theme.primaryTextTheme.subtitle1.copyWith(
+                                        style: Get.theme.primaryTextTheme.titleMedium.copyWith(
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
@@ -391,7 +391,7 @@ class SeeMoreSheet extends StatelessWidget {
                             child: RichText(
                               text: TextSpan(
                                 text: "CF",
-                                style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                   letterSpacing: -0.2,
                                   color: Get.theme.secondaryHeaderColor,
                                   fontWeight: FontWeight.w600,
@@ -495,7 +495,7 @@ class SeeMoreSheet extends StatelessWidget {
                   //           child: RichText(
                   //             text: TextSpan(
                   //               text: "CK",
-                  //               style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                  //               style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                   //                 letterSpacing: -0.2,
                   //                 color: Get.theme.secondaryHeaderColor,
                   //                 fontWeight: FontWeight.w600,

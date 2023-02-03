@@ -65,7 +65,7 @@ class GetStartedScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 70),
                   child: Text(
                     AppLocalizations.of(context).see_how_to,
-                    style: Get.theme.primaryTextTheme.headline5.copyWith(
+                    style: Get.theme.primaryTextTheme.headlineSmall.copyWith(
                       letterSpacing: -1.5,
                       fontWeight: FontWeight.w400,
                       color: GetPlatform.isWeb ? Colors.black : Colors.white,
@@ -121,7 +121,7 @@ class GetStartedScreen extends StatelessWidget {
                         ),
                         child: Text(
                           AppLocalizations.of(context).login_or_signup,
-                          style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                          style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.w500,
                           ),

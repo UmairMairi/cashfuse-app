@@ -74,7 +74,7 @@ class WebAdsCampaignWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Text(
               commonModel.name,
-              style: Get.theme.primaryTextTheme.subtitle1,
+              style: Get.theme.primaryTextTheme.titleMedium,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,

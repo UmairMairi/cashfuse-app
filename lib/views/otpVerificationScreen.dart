@@ -51,7 +51,7 @@ class OtpVerificationScreen extends StatelessWidget {
                   children: [
                     Text(
                       '${AppLocalizations.of(context).otp_subtitle} ${authController.coutryCode} ${authController.contactNo.text}',
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                         letterSpacing: -0.2,
                         fontWeight: FontWeight.w500,
                       ),
@@ -111,14 +111,14 @@ class OtpVerificationScreen extends StatelessWidget {
                         child: RichText(
                           text: TextSpan(
                             text: AppLocalizations.of(context).otp_not_receive,
-                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                               letterSpacing: -0.2,
                               fontWeight: FontWeight.w600,
                             ),
                             children: <TextSpan>[
                               TextSpan(
                                 text: ' ${AppLocalizations.of(context).resend}',
-                                style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                   letterSpacing: -0.2,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.blue[900],

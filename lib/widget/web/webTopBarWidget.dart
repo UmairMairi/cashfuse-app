@@ -206,7 +206,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
           child: SizedBox(
             width: 150,
             child: DefaultTextStyle(
-              style: Get.theme.primaryTextTheme.subtitle2,
+              style: Get.theme.primaryTextTheme.titleSmall,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 child: Column(
@@ -366,7 +366,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                             CupertinoDialogAction(
                               child: Text(
                                 AppLocalizations.of(context).yes,
-                                style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.red),
+                                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.red),
                               ),
                               onPressed: () {
                                 Get.back();
@@ -381,7 +381,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                             CupertinoDialogAction(
                               child: Text(
                                 AppLocalizations.of(context).no,
-                                style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.blue),
+                                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.blue),
                               ),
                               onPressed: () {
                                 Get.back();

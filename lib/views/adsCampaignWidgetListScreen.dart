@@ -51,7 +51,7 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
                 ),
                 title: Text(
                   title,
-                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                 ),
               ),
         body: Align(

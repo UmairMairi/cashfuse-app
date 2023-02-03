@@ -44,7 +44,7 @@ class CouponDetailScreen extends StatelessWidget {
                 ),
                 title: Text(
                   coupon.name,
-                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                 ),
                 actions: [
                   !GetPlatform.isWeb
@@ -116,7 +116,7 @@ class CouponDetailScreen extends StatelessWidget {
                   ),
                   Text(
                     AppLocalizations.of(context).deal_ends_in,
-                    style: Get.theme.primaryTextTheme.subtitle2,
+                    style: Get.theme.primaryTextTheme.titleSmall,
                   ),
                   coupon.dayDifference != null && coupon.dayDifference > 0
                       ? Padding(
@@ -207,7 +207,7 @@ class CouponDetailScreen extends StatelessWidget {
                           children: [
                             Text(
                               AppLocalizations.of(context).use_code,
-                              style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                              style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w300,
                               ),
@@ -219,7 +219,7 @@ class CouponDetailScreen extends StatelessWidget {
                                 color: Get.theme.secondaryHeaderColor,
                                 child: Text(
                                   coupon.code,
-                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                     color: Get.theme.secondaryHeaderColor,
                                   ),
                                 ),
@@ -239,7 +239,7 @@ class CouponDetailScreen extends StatelessWidget {
                               },
                               child: Text(
                                 AppLocalizations.of(context).copy_code,
-                                style: Get.theme.primaryTextTheme.bodyText1.copyWith(
+                                style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                                   color: Colors.teal,
                                   fontWeight: FontWeight.w300,
                                 ),
@@ -319,16 +319,16 @@ class CouponDetailScreen extends StatelessWidget {
                         children: [
                           Text(
                             AppLocalizations.of(context).about_this_coupon,
-                            style: global.getPlatFrom() ? Get.theme.primaryTextTheme.subtitle1.copyWith(fontWeight: FontWeight.w600) : Get.theme.primaryTextTheme.subtitle2,
+                            style: global.getPlatFrom() ? Get.theme.primaryTextTheme.titleMedium.copyWith(fontWeight: FontWeight.w600) : Get.theme.primaryTextTheme.titleSmall,
                           ),
                           Divider(),
                           Text(
                             coupon.heading,
-                            style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w500),
+                            style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w500),
                           ),
                           Text(
                             coupon.description,
-                            style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+                            style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
                           ),
                         ],
                       ),
@@ -343,7 +343,7 @@ class CouponDetailScreen extends StatelessWidget {
                   //       children: [
                   //         Text(
                   //           'Important Information',
-                  //           style: Get.theme.primaryTextTheme.subtitle2,
+                  //           style: Get.theme.primaryTextTheme.titleSmall,
                   //         ),
                   //         Divider(),
                   //         ListTile(
@@ -356,7 +356,7 @@ class CouponDetailScreen extends StatelessWidget {
                   //           ),
                   //           title: Text(
                   //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
                   //           ),
                   //         ),
                   //         ListTile(
@@ -369,7 +369,7 @@ class CouponDetailScreen extends StatelessWidget {
                   //           ),
                   //           title: Text(
                   //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
                   //           ),
                   //         ),
                   //       ],
@@ -388,7 +388,7 @@ class CouponDetailScreen extends StatelessWidget {
                   //       children: [
                   //         Text(
                   //           '${global.appName} Rewards Details',
-                  //           style: Get.theme.primaryTextTheme.subtitle2,
+                  //           style: Get.theme.primaryTextTheme.titleSmall,
                   //         ),
                   //         Divider(),
                   //         ListTile(
@@ -401,7 +401,7 @@ class CouponDetailScreen extends StatelessWidget {
                   //           ),
                   //           title: Text(
                   //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
                   //           ),
                   //         ),
                   //         ListTile(
@@ -414,7 +414,7 @@ class CouponDetailScreen extends StatelessWidget {
                   //           ),
                   //           title: Text(
                   //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
                   //           ),
                   //         ),
                   //         ListTile(
@@ -427,7 +427,7 @@ class CouponDetailScreen extends StatelessWidget {
                   //           ),
                   //           title: Text(
                   //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
                   //           ),
                   //         )
                   //       ],
@@ -446,7 +446,7 @@ class CouponDetailScreen extends StatelessWidget {
                   //       children: [
                   //         Text(
                   //           'How to get this offer',
-                  //           style: Get.theme.primaryTextTheme.subtitle2,
+                  //           style: Get.theme.primaryTextTheme.titleSmall,
                   //         ),
                   //         Divider(),
                   //         ListTile(
@@ -459,7 +459,7 @@ class CouponDetailScreen extends StatelessWidget {
                   //           ),
                   //           title: Text(
                   //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
                   //           ),
                   //         ),
                   //         ListTile(
@@ -472,7 +472,7 @@ class CouponDetailScreen extends StatelessWidget {
                   //           ),
                   //           title: Text(
                   //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
                   //           ),
                   //         ),
                   //         ListTile(
@@ -485,7 +485,7 @@ class CouponDetailScreen extends StatelessWidget {
                   //           ),
                   //           title: Text(
                   //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
                   //           ),
                   //         )
                   //       ],

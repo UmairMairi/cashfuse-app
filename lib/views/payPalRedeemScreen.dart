@@ -30,7 +30,7 @@ class PayPalRedeemScreen extends StatelessWidget {
           ),
           title: Text(
             AppLocalizations.of(context).paypal_redeem,
-            style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+            style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
           ),
         ),
         body: SingleChildScrollView(
@@ -77,7 +77,7 @@ class PayPalRedeemScreen extends StatelessWidget {
                         children: [
                           Text(
                             AppLocalizations.of(context).account_details,
-                            style: Get.theme.primaryTextTheme.subtitle1.copyWith(fontWeight: FontWeight.w600),
+                            style: Get.theme.primaryTextTheme.titleMedium.copyWith(fontWeight: FontWeight.w600),
                           ),
                           InkWell(
                             onTap: () {
@@ -98,7 +98,7 @@ class PayPalRedeemScreen extends StatelessWidget {
                                       children: [
                                         Text(
                                           AppLocalizations.of(context).paypal_account_add,
-                                          style: Get.theme.primaryTextTheme.headline6.copyWith(fontWeight: FontWeight.w600),
+                                          style: Get.theme.primaryTextTheme.titleLarge.copyWith(fontWeight: FontWeight.w600),
                                         ),
                                         TextFormField(
                                           focusNode: fPayPalId,
@@ -182,7 +182,7 @@ class PayPalRedeemScreen extends StatelessWidget {
                           ? RichText(
                               text: TextSpan(
                                 text: "${AppLocalizations.of(context).paypal_email} ",
-                                style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                   letterSpacing: -0.2,
                                   fontWeight: FontWeight.w500,
                                 ),

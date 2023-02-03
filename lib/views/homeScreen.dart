@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cashfuse/controllers/adController.dart';
 import 'package:cashfuse/controllers/couponController.dart';
@@ -23,32 +21,30 @@ import 'package:cashfuse/views/offerDetailScreen.dart';
 import 'package:cashfuse/views/offerListScreen.dart';
 import 'package:cashfuse/views/referEarnScreen.dart';
 import 'package:cashfuse/views/webHomeScreen.dart';
+import 'package:cashfuse/widget/admobBannerAdWidget.dart';
 import 'package:cashfuse/widget/adsCampaignWidget.dart';
 import 'package:cashfuse/widget/bannerImageWidget.dart';
 import 'package:cashfuse/widget/couponWidget.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
+import 'package:cashfuse/widget/fbBannerAdWidget.dart';
 import 'package:cashfuse/widget/offerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
 // ignore: must_be_immutable
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   final bgColor;
   HomeScreen({this.bgColor});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
+  AdController _adController = GetPlatform.isWeb ? Get.put(AdController()) : Get.find<AdController>();
 
-class _HomeScreenState extends State<HomeScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   HomeController homeController = Get.find<HomeController>();
@@ -60,123 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final couponScrollController = new ScrollController();
 
   final offerScrollController = new ScrollController();
-
-  BannerAd admobBannerAd1;
-
-  BannerAd admobBannerAd2;
-
-  BannerAd admobBannerAd3;
-
-  bool isAdmobBannerAdLoaed1 = false;
-
-  bool isAdmobBannerAdLoaed2 = false;
-
-  bool isAdmobBannerAdLoaed3 = false;
-
-  final Completer<BannerAd> bannerCompleter = Completer<BannerAd>();
-
-  String currentPlatform() {
-    if (GetPlatform.isAndroid) {
-      return 'android';
-    } else if (GetPlatform.isIOS) {
-      return 'ios';
-    }
-    return '';
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    createAdmobBannerAd();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    admobBannerAd1.dispose();
-    admobBannerAd2.dispose();
-    admobBannerAd3.dispose();
-  }
-
-  Future createAdmobBannerAd() async {
-    try {
-      if (global.admobSetting.bannerAdList != null && global.admobSetting.bannerAdList.length > 0) {
-        if (global.admobSetting.bannerAdList[0] != null && global.admobSetting.bannerAdList[0].status == 1 && global.admobSetting.bannerAdList[0].platform == currentPlatform()) {
-          admobBannerAd1 = new BannerAd(
-            adUnitId: "ca-app-pub-3940256099942544/6300978111", // this is testing Id please add your Ad Id
-            request: AdRequest(),
-            size: AdSize.banner,
-            listener: BannerAdListener(
-              onAdLoaded: (Ad ad) {
-                print('$BannerAd loaded.');
-                bannerCompleter.complete(ad as BannerAd);
-                setState(() {});
-              },
-              onAdFailedToLoad: (Ad ad, LoadAdError error) {
-                ad.dispose();
-                print('$BannerAd failedToLoad: $error');
-                bannerCompleter.completeError(error);
-                setState(() {});
-              },
-              onAdOpened: (Ad ad) => print('$BannerAd onAdOpened.'),
-              onAdClosed: (Ad ad) => print('$BannerAd onAdClosed.'),
-            ),
-          );
-          await admobBannerAd1.load();
-        }
-
-        if (global.admobSetting.bannerAdList[1] != null && global.admobSetting.bannerAdList[1].status == 1 && global.admobSetting.bannerAdList[1].platform == currentPlatform()) {
-          admobBannerAd2 = new BannerAd(
-            adUnitId: "ca-app-pub-3940256099942544/6300978111", // this is testing Id please add your Ad Id
-            request: AdRequest(),
-            size: AdSize.banner,
-            listener: BannerAdListener(
-              onAdLoaded: (Ad ad) {
-                print('$BannerAd loaded.');
-                bannerCompleter.complete(ad as BannerAd);
-                setState(() {});
-              },
-              onAdFailedToLoad: (Ad ad, LoadAdError error) {
-                ad.dispose();
-                print('$BannerAd failedToLoad: $error');
-                bannerCompleter.completeError(error);
-                setState(() {});
-              },
-              onAdOpened: (Ad ad) => print('$BannerAd onAdOpened.'),
-              onAdClosed: (Ad ad) => print('$BannerAd onAdClosed.'),
-            ),
-          );
-          await admobBannerAd2.load();
-        }
-
-        if (global.admobSetting.bannerAdList[2] != null && global.admobSetting.bannerAdList[2].status == 1 && global.admobSetting.bannerAdList[2].platform == currentPlatform()) {
-          admobBannerAd3 = new BannerAd(
-            adUnitId: "ca-app-pub-3940256099942544/6300978111", // this is testing Id please add your Ad Id
-            request: AdRequest(),
-            size: AdSize.banner,
-            listener: BannerAdListener(
-              onAdLoaded: (Ad ad) {
-                print('$BannerAd loaded.');
-                bannerCompleter.complete(ad as BannerAd);
-                setState(() {});
-              },
-              onAdFailedToLoad: (Ad ad, LoadAdError error) {
-                ad.dispose();
-                print('$BannerAd failedToLoad: $error');
-                bannerCompleter.completeError(error);
-                setState(() {});
-              },
-              onAdOpened: (Ad ad) => print('$BannerAd onAdOpened.'),
-              onAdClosed: (Ad ad) => print('$BannerAd onAdClosed.'),
-            ),
-          );
-          await admobBannerAd3.load();
-        }
-      }
-    } catch (e) {
-      print("Exception - HomeScreen.dart - createAdmobBannerAd():" + e.toString());
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -201,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Icon(
                       MdiIcons.sortVariant,
                       size: 30,
-                      color: widget.bgColor,
+                      color: bgColor,
                     ),
                   ),
                 ),
@@ -538,28 +417,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                         },
                                       ),
                               ),
-                              !GetPlatform.isWeb && admobBannerAd1 != null && bannerCompleter.isCompleted
-                                  ? Align(
-                                      alignment: Alignment.center,
-                                      child: Container(
-                                        margin: const EdgeInsets.only(top: 15),
-                                        width: admobBannerAd1.size.width.toDouble(),
-                                        height: admobBannerAd1.size.height.toDouble(),
-                                        child: AdWidget(ad: admobBannerAd1),
-                                      ),
-                                    )
-                                  : SizedBox(),
-                              GetBuilder<AdController>(builder: (adCont) {
-                                return !GetPlatform.isWeb && adCont.fbBannerAd1 != null && adCont.isfbBannerAdLoaed1
-                                    ? Align(
-                                        alignment: Alignment.center,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 10),
-                                          child: adCont.fbBannerAd1,
-                                        ),
-                                      )
-                                    : SizedBox();
-                              }),
+                              GetBuilder<AdController>(
+                                builder: (adController) {
+                                  return _adController.isAdmobBannerAd1Exist
+                                      ? AdmobBannerAdWidget(
+                                          adId: "ca-app-pub-3940256099942544/6300978111",
+                                        )
+                                      : SizedBox();
+                                },
+                              ),
+                              GetBuilder<AdController>(
+                                builder: (adController) {
+                                  return _adController.isFbBannerAd1Exist
+                                      ? FbBannerAdWidget(
+                                          adId: 'IMG_16_9_APP_INSTALL#536153035214384_536898305139857',
+                                        )
+                                      : SizedBox();
+                                },
+                              ),
                               couponController.couponList != null && couponController.couponList.length > 0
                                   ? Padding(
                                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 15),
@@ -750,25 +625,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               ),
                                                             )
                                                           : SizedBox()
-                                                      // homeController.countTimer(DateTime.now(), homeController.exclusiveOfferList[index].endDate) != null
-                                                      //     ? Padding(
-                                                      //         padding: const EdgeInsets.all(10),
-                                                      //         child: SlideCountdown(
-                                                      //           slideDirection: SlideDirection.none,
-                                                      //           textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
-                                                      //           decoration: BoxDecoration(
-                                                      //             color: Colors.red[800],
-                                                      //             borderRadius: BorderRadius.circular(3),
-                                                      //           ),
-                                                      //           duration: Duration(
-                                                      //             days: homeController.countTimer(
-                                                      //               DateTime.now(),
-                                                      //               homeController.exclusiveOfferList[index].endDate,
-                                                      //             ),
-                                                      //           ),
-                                                      //         ),
-                                                      //       )
-                                                      //     : SizedBox()
                                                     ],
                                                   ),
                                                 ),
@@ -973,7 +829,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 child: Column(
                                                   children: [
                                                     Container(
-                                                      width: 300,
                                                       height: 145,
                                                       decoration: BoxDecoration(
                                                         color: Colors.grey[300],
@@ -1001,28 +856,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                             );
                                           }),
                                     ),
-                              !GetPlatform.isWeb && admobBannerAd2 != null && bannerCompleter.isCompleted
-                                  ? Align(
-                                      alignment: Alignment.center,
-                                      child: Container(
-                                        margin: const EdgeInsets.only(top: 15),
-                                        width: admobBannerAd2.size.width.toDouble(),
-                                        height: admobBannerAd2.size.height.toDouble(),
-                                        child: AdWidget(ad: admobBannerAd2),
-                                      ),
-                                    )
-                                  : SizedBox(),
-                              GetBuilder<AdController>(builder: (adCont) {
-                                return !GetPlatform.isWeb && adCont.fbBannerAd2 != null && adCont.isfbBannerAdLoaed2
-                                    ? Align(
-                                        alignment: Alignment.center,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 10),
-                                          child: adCont.fbBannerAd2,
-                                        ),
-                                      )
-                                    : SizedBox();
-                              }),
+                              GetBuilder<AdController>(
+                                builder: (adController) {
+                                  return _adController.isAdmobBannerAd2Exist
+                                      ? AdmobBannerAdWidget(
+                                          adId: "ca-app-pub-3940256099942544/6300978111",
+                                        )
+                                      : SizedBox();
+                                },
+                              ),
+                              GetBuilder<AdController>(
+                                builder: (adController) {
+                                  return _adController.isFbBannerAd2Exist
+                                      ? FbBannerAdWidget(
+                                          adId: 'IMG_16_9_APP_INSTALL#536153035214384_536898305139857',
+                                        )
+                                      : SizedBox();
+                                },
+                              ),
                               ListView.builder(
                                 itemCount: homeController.homeAdvList.length,
                                 shrinkWrap: true,
@@ -1159,28 +1010,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                         );
                                 },
                               ),
-                              !GetPlatform.isWeb && admobBannerAd3 != null && bannerCompleter.isCompleted
-                                  ? Align(
-                                      alignment: Alignment.center,
-                                      child: Container(
-                                        margin: const EdgeInsets.only(top: 15),
-                                        width: admobBannerAd3.size.width.toDouble(),
-                                        height: admobBannerAd3.size.height.toDouble(),
-                                        child: AdWidget(ad: admobBannerAd3),
-                                      ),
-                                    )
-                                  : SizedBox(),
-                              GetBuilder<AdController>(builder: (adCont) {
-                                return !GetPlatform.isWeb && adCont.fbBannerAd3 != null && adCont.isfbBannerAdLoaed3
-                                    ? Align(
-                                        alignment: Alignment.center,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 10),
-                                          child: adCont.fbBannerAd3,
-                                        ),
-                                      )
-                                    : SizedBox();
-                              }),
+                              GetBuilder<AdController>(
+                                builder: (adController) {
+                                  return _adController.isAdmobBannerAd3Exist
+                                      ? AdmobBannerAdWidget(
+                                          adId: "ca-app-pub-3940256099942544/6300978111",
+                                        )
+                                      : SizedBox();
+                                },
+                              ),
+                              GetBuilder<AdController>(
+                                builder: (adController) {
+                                  return _adController.isFbBannerAd3Exist
+                                      ? FbBannerAdWidget(
+                                          adId: 'IMG_16_9_APP_INSTALL#536153035214384_536898305139857',
+                                        )
+                                      : SizedBox();
+                                },
+                              ),
                             ],
                           ),
                         ),

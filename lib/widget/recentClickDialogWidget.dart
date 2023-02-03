@@ -47,7 +47,7 @@ class RecentClickDialogWidget extends StatelessWidget {
           ),
           Text(
             'All is well!',
-            style: Get.theme.primaryTextTheme.headline6,
+            style: Get.theme.primaryTextTheme.titleLarge,
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),

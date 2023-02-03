@@ -41,7 +41,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                 ),
                 title: Text(
                   AppLocalizations.of(context).my_referrals,
-                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                 ),
               ),
         floatingActionButton: InkWell(
@@ -257,7 +257,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                                 Text(
                                   'There is no Refferal Earnings',
                                   textAlign: TextAlign.center,
-                                  style: Get.theme.primaryTextTheme.bodyText2,
+                                  style: Get.theme.primaryTextTheme.bodyMedium,
                                 ),
                                 SizedBox(
                                   height: 5,
@@ -267,7 +267,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                                   child: Text(
                                     "You are now entited to 10% Extra Referral Earnings everytime your friend shops via us! You can earn more if you refer us to more people in your network.",
                                     textAlign: TextAlign.center,
-                                    style: Get.theme.primaryTextTheme.caption.copyWith(fontSize: 11, color: Colors.black54),
+                                    style: Get.theme.primaryTextTheme.bodySmall.copyWith(fontSize: 11, color: Colors.black54),
                                   ),
                                 ),
                               ],
@@ -310,7 +310,7 @@ class ReferralNetworkScreen extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               'REFER & EARN NOW',
-              style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+              style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w600,
               ),

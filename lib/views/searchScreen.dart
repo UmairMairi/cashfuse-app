@@ -87,7 +87,7 @@ class SearchScreen extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                                 child: Text(
                                   'in Stores',
-                                  style: Get.theme.primaryTextTheme.subtitle2,
+                                  style: Get.theme.primaryTextTheme.titleSmall,
                                 ),
                               )
                             : SizedBox(),
@@ -133,7 +133,7 @@ class SearchScreen extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                                 child: Text(
                                   'in Offers & Deals',
-                                  style: Get.theme.primaryTextTheme.subtitle2,
+                                  style: Get.theme.primaryTextTheme.titleSmall,
                                 ),
                               )
                             : SizedBox(),
@@ -224,7 +224,7 @@ class SearchScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Text(
                           'Trending Keywords',
-                          style: Get.theme.primaryTextTheme.subtitle2,
+                          style: Get.theme.primaryTextTheme.titleSmall,
                         ),
                       ),
                       Wrap(

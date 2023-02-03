@@ -24,7 +24,7 @@ class MoreCampignScreen extends StatelessWidget {
                   children: [
                     Text(
                       AppLocalizations.of(context).see_more_offers,
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.1,
                       ),
@@ -72,7 +72,7 @@ class MoreCampignScreen extends StatelessWidget {
                                   Text(
                                     homeController.seeMoreCampaignList[index].name,
                                     textAlign: TextAlign.start,
-                                    style: Get.theme.primaryTextTheme.subtitle2,
+                                    style: Get.theme.primaryTextTheme.titleSmall,
                                   ),
                                   Text(
                                     homeController.seeMoreCampaignList[index].description,

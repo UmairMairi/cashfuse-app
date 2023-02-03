@@ -430,7 +430,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                               child: Text(
                                 'To access this feature, download the app',
                                 textAlign: TextAlign.center,
-                                style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.red, fontWeight: FontWeight.w600),
+                                style: Get.theme.primaryTextTheme.titleLarge.copyWith(color: Colors.red, fontWeight: FontWeight.w600),
                               ),
                             ),
                             InkWell(
@@ -448,7 +448,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                                 alignment: Alignment.center,
                                 child: Text(
                                   'Download The App',
-                                  style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -484,7 +484,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                                         children: [
                                           Text(
                                             'TAB ${i + 1}',
-                                            style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.black54),
+                                            style: Get.theme.primaryTextTheme.titleMedium.copyWith(color: Colors.black54),
                                           ),
                                           DropdownButton(
                                             items: searchController.allInOneList.map<DropdownMenuItem<AllInOneSearchDataModel>>((AllInOneSearchDataModel value) {
@@ -494,7 +494,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                                                   children: [
                                                     Text(
                                                       value.name,
-                                                      style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.black54),
+                                                      style: Get.theme.primaryTextTheme.titleMedium.copyWith(color: Colors.black54),
                                                     ),
                                                     Divider(
                                                       color: Colors.grey,
@@ -522,7 +522,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen> with TickerP
                                             iconDisabledColor: Get.theme.primaryColor,
                                             hint: Text(
                                               searchController.addNewTabList[i].name,
-                                              style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.black54),
+                                              style: Get.theme.primaryTextTheme.titleMedium.copyWith(color: Colors.black54),
                                             ),
                                           ),
                                           InkWell(

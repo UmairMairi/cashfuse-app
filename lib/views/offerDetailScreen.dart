@@ -57,7 +57,7 @@ class OfferDetailScreen extends StatelessWidget {
                   ),
                   title: Text(
                     offer.name,
-                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                   ),
                   actions: [
                     !GetPlatform.isWeb
@@ -239,11 +239,11 @@ class OfferDetailScreen extends StatelessWidget {
                             children: [
                               Text(
                                 offer.name,
-                                style: Get.theme.primaryTextTheme.subtitle2,
+                                style: Get.theme.primaryTextTheme.titleSmall,
                               ),
                               HtmlWidget(
                                 offer.description,
-                                //style: Get.theme.primaryTextTheme.bodyText2.copyWith(fontWeight: FontWeight.w300),
+                                //style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -416,7 +416,7 @@ class OfferDetailScreen extends StatelessWidget {
                           },
                           child: Text(
                             offer.partner.leftTab,
-                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
                           ),
                         ),
                         (offer.partner.leftTab.isNotEmpty && offer.partner.rightTab.isNotEmpty)
@@ -444,7 +444,7 @@ class OfferDetailScreen extends StatelessWidget {
                           },
                           child: Text(
                             offer.partner.rightTab,
-                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
                           ),
                         ),
                       ],

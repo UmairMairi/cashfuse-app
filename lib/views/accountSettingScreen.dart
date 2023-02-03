@@ -51,7 +51,7 @@ class AccountSettingScreen extends StatelessWidget {
                   ),
                   title: Text(
                     AppLocalizations.of(context).account_settings,
-                    style: Get.theme.primaryTextTheme.headline6.copyWith(color: Colors.white),
+                    style: Get.theme.primaryTextTheme.titleLarge.copyWith(color: Colors.white),
                   ),
                 ),
           body: Center(
@@ -137,7 +137,7 @@ class AccountSettingScreen extends StatelessWidget {
                                 CupertinoActionSheet(
                                   title: Text(
                                     AppLocalizations.of(context).select,
-                                    style: Get.theme.primaryTextTheme.headline6.copyWith(
+                                    style: Get.theme.primaryTextTheme.titleLarge.copyWith(
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -152,7 +152,7 @@ class AccountSettingScreen extends StatelessWidget {
                                         padding: EdgeInsets.all(15),
                                         child: Text(
                                           AppLocalizations.of(context).take_picture,
-                                          style: Get.theme.primaryTextTheme.subtitle1,
+                                          style: Get.theme.primaryTextTheme.titleMedium,
                                         ),
                                       ),
                                     ),
@@ -166,7 +166,7 @@ class AccountSettingScreen extends StatelessWidget {
                                         padding: EdgeInsets.all(15),
                                         child: Text(
                                           AppLocalizations.of(context).image_from_gallery,
-                                          style: Get.theme.primaryTextTheme.subtitle1,
+                                          style: Get.theme.primaryTextTheme.titleMedium,
                                         ),
                                       ),
                                     ),
@@ -174,7 +174,7 @@ class AccountSettingScreen extends StatelessWidget {
                                   cancelButton: TextButton(
                                     child: Text(
                                       AppLocalizations.of(context).cancel,
-                                      style: Get.theme.primaryTextTheme.subtitle1.copyWith(color: Colors.red),
+                                      style: Get.theme.primaryTextTheme.titleMedium.copyWith(color: Colors.red),
                                     ),
                                     onPressed: () {
                                       Get.back();
@@ -335,7 +335,7 @@ class AccountSettingScreen extends StatelessWidget {
                                 CupertinoDialogAction(
                                   child: Text(
                                     AppLocalizations.of(context).yes,
-                                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.red),
+                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.red),
                                   ),
                                   onPressed: () {
                                     authController.removeUserfromDb();
@@ -344,7 +344,7 @@ class AccountSettingScreen extends StatelessWidget {
                                 CupertinoDialogAction(
                                   child: Text(
                                     AppLocalizations.of(context).no,
-                                    style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.blue),
+                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.blue),
                                   ),
                                   onPressed: () {
                                     Get.back();
@@ -524,7 +524,7 @@ class AccountSettingScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       AppLocalizations.of(context).save_changes,
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),

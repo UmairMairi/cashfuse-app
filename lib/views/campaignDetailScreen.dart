@@ -103,7 +103,7 @@ class CampaignDetailScreen extends StatelessWidget {
                           ),
                           title: Text(
                             campaign.partner.name,
-                            style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                           ),
                           flexibleSpace: CustomizableSpaceBar(builder: (context, scrollingRate) {
                             return (scrollingRate != 1.0)
@@ -249,7 +249,7 @@ class CampaignDetailScreen extends StatelessWidget {
                               //           children: [
                               //             Text(
                               //               'Just for You',
-                              //               style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                              //               style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                               //                 color: Colors.red,
                               //               ),
                               //             ),
@@ -529,7 +529,7 @@ class CampaignDetailScreen extends StatelessWidget {
                             },
                             child: Text(
                               campaign.partner.leftTab,
-                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                              style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
                             ),
                           ),
                           (campaign.partner.leftTab.isNotEmpty && campaign.partner.rightTab.isNotEmpty)
@@ -556,7 +556,7 @@ class CampaignDetailScreen extends StatelessWidget {
                             },
                             child: Text(
                               campaign.partner.rightTab.camelCase,
-                              style: Get.theme.primaryTextTheme.subtitle2.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                              style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
                             ),
                           ),
                         ],

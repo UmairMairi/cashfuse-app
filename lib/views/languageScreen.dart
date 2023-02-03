@@ -26,7 +26,7 @@ class LanguageScreen extends StatelessWidget {
         ),
         title: Text(
           AppLocalizations.of(context).language,
-          style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+          style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
         ),
       ),
       body: SafeArea(

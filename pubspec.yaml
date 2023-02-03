@@ -80,7 +80,7 @@ dependencies:
   provider: ^6.0.3
   intl: ^0.17.0
   shared_preferences: ^2.0.15
-  country_code_picker: ^2.0.2
+  fl_country_code_picker: ^0.0.4
   pin_code_fields: ^7.4.0
   http_parser: ^4.0.1
   flutter_share: ^2.0.0

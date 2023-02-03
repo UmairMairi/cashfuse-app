@@ -27,7 +27,7 @@ class HelpDetailSceen extends StatelessWidget {
               ),
               title: Text(
                 faq.ques,
-                style: Get.theme.primaryTextTheme.subtitle2.copyWith(color: Colors.white),
+                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
               ),
             ),
       body: GetBuilder<CommonController>(builder: (controller) {
@@ -40,7 +40,7 @@ class HelpDetailSceen extends StatelessWidget {
             child: SingleChildScrollView(
               child: HtmlWidget(
                 faq.ans,
-                textStyle: global.getPlatFrom() ? Get.theme.primaryTextTheme.subtitle2 : null,
+                textStyle: global.getPlatFrom() ? Get.theme.primaryTextTheme.titleSmall : null,
               ),
             ),
           ),

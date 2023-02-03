@@ -26,7 +26,7 @@ class MoreAdsScreen extends StatelessWidget {
                   children: [
                     Text(
                       AppLocalizations.of(context).see_more_offers,
-                      style: Get.theme.primaryTextTheme.subtitle2.copyWith(
+                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.1,
                       ),
@@ -74,7 +74,7 @@ class MoreAdsScreen extends StatelessWidget {
                                     Text(
                                       homeController.seeMoreAdsList[index].name,
                                       textAlign: TextAlign.start,
-                                      style: Get.theme.primaryTextTheme.subtitle2,
+                                      style: Get.theme.primaryTextTheme.titleSmall,
                                     ),
                                     Text(
                                       homeController.seeMoreAdsList[index].description,
