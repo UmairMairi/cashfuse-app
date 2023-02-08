@@ -91,7 +91,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  '${global.appInfo.currency} ${global.currentUser.earning.referralEarning}',
+                                  global.currentUser.earning != null ? '${global.appInfo.currency} ${global.currentUser.earning.referralEarning}' : '${global.appInfo.currency} 0.0',
                                   style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w300,

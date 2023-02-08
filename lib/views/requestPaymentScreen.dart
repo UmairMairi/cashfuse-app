@@ -524,7 +524,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                 Positioned(
                                   left: -38,
                                   child: FloatingActionButton(
-                                    heroTag: "3",
+                                    heroTag: "5",
                                     elevation: 0,
                                     backgroundColor: Colors.white,
                                     onPressed: () {},

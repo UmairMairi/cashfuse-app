@@ -20,7 +20,7 @@ import 'package:universal_html/html.dart' as html;
 
 String appName = "Cashfuse";
 
-String baseUrl = "https://cf.codefuse.org/admin/api"; //"https://okaydemo.com/cashback/api";
+String baseUrl = "https://panelcb.cashbucket.in/api"; //"https://cf.codefuse.org/admin/api"; //"https://okaydemo.com/cashback/api";
 
 String webConfigurationKey = "BGPWwFL-u-5K7CdmI7bW1Qav23aJxTUFtksG5SDigWG3M2J1-pqgwY-qB1fMQlRJepzlqq9Qv8rDUqk4v9Ph584";
 

@@ -9,7 +9,7 @@ class UserModel {
   String email;
   String phone;
   String cmFirebaseToken;
-  DateTime emailVerifiedAt;
+  int emailVerifiedAt;
   int isPhoneVerified;
   int status;
   DateTime createdAt;
@@ -43,11 +43,11 @@ class UserModel {
       email = json["email"] != null ? json["email"] : '';
       phone = json["phone"] != null ? json["phone"] : '';
       cmFirebaseToken = json["cm_firebase_token"] != null ? json["cm_firebase_token"] : '';
-      emailVerifiedAt = json["email_verified_at"];
-      isPhoneVerified = json["is_phone_verified"];
-      status = json["status"];
-      createdAt = DateTime.parse(json["created_at"]);
-      updatedAt = DateTime.parse(json["updated_at"]);
+      emailVerifiedAt = json["email_verified_at"] != null ? int.parse(json["email_verified_at"].toString()) : null;
+      isPhoneVerified = json["is_phone_verified"] != null ? int.parse(json["is_phone_verified"].toString()) : null;
+      status = json["status"] != null ? int.parse(json["status"].toString()) : null;
+      createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : null;
+      updatedAt = json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null;
       token = json['token'] != null ? json['token'] : null;
       earning = json['earning'] != null ? EarningModel.fromJson(json['earning']) : null;
       bankDetail = json['bank_detail'] != null ? BankDetailsModel.fromJson(json['bank_detail']) : null;

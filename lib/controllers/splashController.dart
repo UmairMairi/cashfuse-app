@@ -163,7 +163,9 @@ class SplashController extends GetxController {
 
               await apiHelper.getBannerNotification().then((result) {
                 if (result.statusCode == 200) {
-                  global.bannerImage = result.data['image'];
+                  if (result.data != null) {
+                    global.bannerImage = result.data['image'];
+                  }
                 }
               });
               await bannerShow();

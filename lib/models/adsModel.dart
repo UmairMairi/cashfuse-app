@@ -54,7 +54,7 @@ class AdsModel {
 
   AdsModel.fromJson(Map<String, dynamic> json) {
     try {
-      id = json["id"];
+      id = json["id"] != null ? int.parse(json["id"].toString()) : null;
       adId = json["ad_id"];
       cId = json["c_id"];
       advId = json["adv_id"];
@@ -62,19 +62,19 @@ class AdsModel {
 
       trackingLink = json["tracking_link"] != null ? json["tracking_link"] : '';
       name = json["name"] != null ? json["name"] : '';
-      categoryId = json["category_id"];
+      categoryId = json["category_id"] != null ? int.parse(json["category_id"].toString()) : null;
       categoryIds = json["category_ids"] != null ? json["category_ids"] : '';
       description = json["description"] != null ? json["description"] : '';
       image = json["image"] != null ? json["image"] : '';
       buttonText = json["button_text"] != null ? json["button_text"] : '';
-      partnerId = json["partner_id"];
+      partnerId = json["partner_id"] != null ? int.parse(json["partner_id"].toString()) : null;
       affiliatePartner = json["affiliate_partner"];
       landingPage = json["landing_page"] != null ? json["landing_page"] : '';
       type = json["type"];
       status = json["status"];
       createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : null;
       updatedAt = json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null;
-      ads = json["ads"];
+      ads = json["ads"] != null ? int.parse(json["ads"].toString()) : 0;
       partner = json["partner"] != null ? CategoryModel.fromJson(json["partner"]) : null;
       couponList = json["coupon"] != null && json["coupon"] != [] ? List<Coupon>.from(json["coupon"].map((x) => Coupon.fromJson(x))) : [];
     } catch (e) {

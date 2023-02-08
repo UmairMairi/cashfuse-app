@@ -27,13 +27,13 @@ class AdModel {
 
   AdModel.fromJson(Map<String, dynamic> json) {
     try {
-      id = json["id"];
+      id = json["id"] != null ? int.parse(json["id"].toString()) : null;
       adId = json["ad_id"] != null ? json["ad_id"] : '';
       placementId = json["placement_id"] != null ? json["placement_id"] : '';
       adType = json["ad_type"] != null ? json["ad_type"] : '';
-      status = json["status"];
-      location = json["location"];
-      clicks = json["clicks"];
+      status = json["status"] != null ? int.parse(json["status"].toString()) : null;
+      location = json["location"] != null ? int.parse(json["location"].toString()) : null;
+      clicks = json["clicks"] != null ? int.parse(json["clicks"].toString()) : 0;
       rewards = json["rewards"];
       platform = json["platform"];
       createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : null;

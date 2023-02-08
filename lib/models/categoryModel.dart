@@ -5,7 +5,7 @@ import 'package:cashfuse/models/commonModel.dart';
 class CategoryModel {
   int id;
   int cueCatId;
-  String advId;
+  int advId;
   String name;
   String image;
   int parentId;
@@ -57,10 +57,10 @@ class CategoryModel {
 
   CategoryModel.fromJson(Map<String, dynamic> json) {
     try {
-      id = json["id"];
-      cueCatId = json["cue_cat_id"];
-      advId = json["adv_id"];
-      name = json["name"];
+      id = json["id"] != null ? int.parse(json["id"].toString()) : null;
+      cueCatId = json["cue_cat_id"] != null ? int.parse(json["cue_cat_id"].toString()) : null;
+      advId = json["adv_id"] != null ? int.parse(json["adv_id"].toString()) : null;
+      name = json["name"] != null ? json["name"] : '';
       image = json["image"] != null ? json["image"] : '';
       parentId = json["parent_id"];
       position = json["position"];
@@ -75,12 +75,12 @@ class CategoryModel {
       rightTabDesc = json["right_tab_desc"] != null ? json["right_tab_desc"] : '';
       affiliatePartner = json["affiliate_partner"] != null ? json["affiliate_partner"] : '';
       regions = json["regions"] != null ? json["regions"] : '';
-      topCashback = json["top_cashback"];
+      topCashback = json["top_cashback"] != null ? int.parse(json["top_cashback"].toString()) : 0;
 
       ads = json["ads"] != null && json["ads"] != [] ? List<AdsModel>.from(json["ads"].map((x) => AdsModel.fromJson(x))) : [];
       cuecampaigns = json["cuecampaigns"] != null && json["cuecampaigns"] != [] ? List<CampaignModel>.from(json["cuecampaigns"].map((x) => CampaignModel.fromJson(x))) : [];
-      pId = json["p_id"];
-      rank = json["rank"];
+      pId = json["p_id"] != null ? int.parse(json["p_id"].toString()) : null;
+      rank = json["rank"] != null ? int.parse(json["rank"].toString()) : null;
       tagline = json["tagline"] != null ? json["tagline"] : '';
     } catch (e) {
       print("Exception - CategoryModel.dart - CategoryModel.fromJson():" + e.toString());

@@ -45,8 +45,8 @@ class Coupon {
 
   Coupon.fromJson(Map<String, dynamic> json) {
     try {
-      id = json["id"];
-      advId = json["adv_id"];
+      id = json["id"] != null ? int.parse(json["id"].toString()) : null;
+      advId = json["adv_id"] != null ? int.parse(json["adv_id"].toString()) : null;
       name = json["name"] != null ? json["name"] : '';
       code = json["code"] != null ? json["code"] : '';
       image = json["image"] != null ? json["image"] : '';
