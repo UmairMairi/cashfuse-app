@@ -572,7 +572,7 @@ class DrawerWidget extends StatelessWidget {
                           if (global.appShareLink.isNotEmpty) {
                             await FlutterShare.share(
                               title: '${global.appName}',
-                              text: 'I recently tried Cashfuse app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
+                              text: 'I recently tried ${global.appName} app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
                             ).then((value) {
                               if (value) {}
                             }).onError((error, stackTrace) {
@@ -613,6 +613,7 @@ class DrawerWidget extends StatelessWidget {
                           Get.back();
                           StoreRedirect.redirect(
                             androidAppId: 'com.cashfuse.app',
+                            iOSAppId: 'com.cashfuse.app',
                           );
                         },
                         child: Padding(

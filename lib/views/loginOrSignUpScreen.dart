@@ -59,7 +59,8 @@ class LoginOrSignUpScreen extends StatelessWidget {
                   child: TextFormField(
                     controller: authController.contactNo,
                     cursorColor: Get.theme.primaryColor,
-                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.done,
+                    keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                     ],

@@ -20,7 +20,7 @@ import 'package:universal_html/html.dart' as html;
 
 String appName = "Cashfuse";
 
-String baseUrl = "https://panelcb.cashbucket.in/api"; //"https://cf.codefuse.org/admin/api"; //"https://okaydemo.com/cashback/api";
+String baseUrl = "https://cash.codefuse.org/admin/api"; //"https://cf.codefuse.org/admin/api";
 
 String webConfigurationKey = "BGPWwFL-u-5K7CdmI7bW1Qav23aJxTUFtksG5SDigWG3M2J1-pqgwY-qB1fMQlRJepzlqq9Qv8rDUqk4v9Ph584";
 
@@ -39,7 +39,7 @@ bool isBannerShow = false;
 String bannerImage = '';
 String languageCode = 'en';
 String referralUserId = '';
-String appShareContent = "I recently tried Cashfuse app & highly recommend it! You get extra Cashback on top of all retailer discounts. Download the app from below link.";
+String appShareContent = "I recently tried $appName app & highly recommend it! You get extra Cashback on top of all retailer discounts. Download the app from below link.";
 String appShareLink = '';
 FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 int totalJoinedCount = 0;
@@ -71,7 +71,7 @@ Future<Map<String, String>> getApiHeaders(bool authorizationRequired, {String us
 
 void showInterstitialAd() async {
   try {
-    if (admobSetting.interstitialAdList != null && admobSetting.interstitialAdList.length > 0) {
+    if (Get.find<AdController>().isAdmobInterstitialAdExist) {
       admobclickCount++;
       if (admobclickCount > admobSetting.interstitialAdList[0].clicks) {
         admobclickCount = 0;
@@ -81,7 +81,7 @@ void showInterstitialAd() async {
       }
     }
 
-    if (facebookAdSetting.interstitialAdList != null && facebookAdSetting.interstitialAdList.length > 0) {
+    if (Get.find<AdController>().isFbInterstitialAdExist) {
       fbclickCount++;
 
       if (fbclickCount > facebookAdSetting.interstitialAdList[0].clicks) {
@@ -138,10 +138,16 @@ Future share(String link, String image, String title) async {
     } else if (title.isNotEmpty) {
       final DynamicLinkParameters parameters = DynamicLinkParameters(
         uriPrefix: 'https://cashfuse.page.link',
-        link: Uri.parse('https://cashfuse.page.link/'),
+        link: Uri.parse('https://cashfuse.page.link/?link=https://cashfuse.page.link&apn=com.cashfuse.app&ibi=com.cashfuse.app&isi=123456789'),
         androidParameters: AndroidParameters(
           packageName: 'com.cashfuse.app',
           minimumVersion: 1,
+        ),
+        iosParameters: IOSParameters(
+          bundleId: 'com.cashfuse.app',
+          minimumVersion: '1',
+          appStoreId: '123456789',
+          fallbackUrl: Uri.parse('https://apps.apple.com/in/app/cashfuse/id123456789'),
         ),
       );
       Uri url;
@@ -184,10 +190,16 @@ Future referAndEarn() async {
   try {
     final DynamicLinkParameters parameters = DynamicLinkParameters(
       uriPrefix: 'https://cashfuse.page.link',
-      link: Uri.parse('https://cashfuse.page.link/referEarn?userId=${currentUser.id}'),
+      link: Uri.parse('https://cashfuse.page.link/?link=https://cashfuse.page.link/referEarn&userId=${currentUser.id}&apn=com.cashfuse.app&ibi=com.cashfuse.app&isi=123456789'),
       androidParameters: AndroidParameters(
         packageName: 'com.cashfuse.app',
         minimumVersion: 1,
+      ),
+      iosParameters: IOSParameters(
+        bundleId: 'com.cashfuse.app',
+        minimumVersion: '1',
+        appStoreId: '123456789',
+        fallbackUrl: Uri.parse('https://apps.apple.com/in/app/cashfuse/id123456789'),
       ),
     );
     Uri url;

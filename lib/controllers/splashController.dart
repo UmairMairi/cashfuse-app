@@ -91,6 +91,7 @@ class SplashController extends GetxController {
             if (global.sp.getString('currentUser') != null) {
               global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
               await Get.find<AuthController>().getProfile();
+
               if (global.getPlatFrom()) {
                 Get.to(() => HomeScreen(), routeName: 'home');
               } else {
@@ -136,7 +137,7 @@ class SplashController extends GetxController {
               if (global.sp.getString('currentUser') != null) {
                 global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
                 await Get.find<AuthController>().getProfile();
-
+                await global.referAndEarn();
                 Get.off(
                   () => BottomNavigationBarScreen(
                     pageIndex: 0,

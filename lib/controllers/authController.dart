@@ -199,6 +199,9 @@ class AuthController extends GetxController {
               await getProfile();
               if (fromMenu) {
                 await Get.find<HomeController>().init();
+                if (!GetPlatform.isWeb) {
+                  await global.referAndEarn();
+                }
               }
             } else {
               showCustomSnackBar(response.message);

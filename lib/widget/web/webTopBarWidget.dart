@@ -130,6 +130,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
             ),
             VerticalDivider(
               endIndent: 20,
+              indent: 20,
               color: Get.theme.primaryColor,
             ),
             global.currentUser.id != null
