@@ -7,6 +7,8 @@ class DefaultFirebaseOptions {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
+      case TargetPlatform.iOS:
+        return ios;
       default:
         return web;
     }
@@ -23,6 +25,16 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
+    apiKey: "AIzaSyCuGP6eCEJW5mGHvk4YoCOoXz6TiKxKJSM",
+    authDomain: "cashfuse-60939.firebaseapp.com",
+    projectId: "cashfuse-60939",
+    storageBucket: "cashfuse-60939.appspot.com",
+    messagingSenderId: "521109211624",
+    appId: "1:521109211624:android:73898e9cbfabc8e4c53c5d",
+    measurementId: "G-KBPRBBZRYC",
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
     apiKey: "AIzaSyCuGP6eCEJW5mGHvk4YoCOoXz6TiKxKJSM",
     authDomain: "cashfuse-60939.firebaseapp.com",
     projectId: "cashfuse-60939",

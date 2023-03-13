@@ -34,7 +34,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
   HttpOverrides.global = new MyHttpOverrides();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {}
 
   if (!GetPlatform.isWeb) {
     await NotificationHelper.initialize();
