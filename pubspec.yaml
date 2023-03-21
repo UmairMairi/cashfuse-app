@@ -59,6 +59,7 @@ dependencies:
   google_mobile_ads: ^2.3.0
   facebook_audience_network: ^1.0.1
 
+
   #CONNECTIVITY
   connectivity_plus: ^2.1.0
   http: any

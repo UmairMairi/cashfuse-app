@@ -2,6 +2,8 @@ import 'package:cashfuse/models/adsModel.dart';
 import 'package:cashfuse/models/campaignModel.dart';
 import 'package:cashfuse/models/commonModel.dart';
 
+import 'admitedoffersModal.dart';
+
 class CategoryModel {
   int id;
   int cueCatId;
@@ -16,6 +18,7 @@ class CategoryModel {
   int priority;
   List<AdsModel> ads;
   List<CampaignModel> cuecampaigns;
+  List<AdmitedOffersModal> admitedoffers;
   String leftTab;
   String leftTabDesc;
   String rightTab;
@@ -42,6 +45,7 @@ class CategoryModel {
     this.priority,
     this.ads,
     this.cuecampaigns,
+    this.admitedoffers,
     this.leftTab,
     this.leftTabDesc,
     this.rightTab,
@@ -79,6 +83,7 @@ class CategoryModel {
 
       ads = json["ads"] != null && json["ads"] != [] ? List<AdsModel>.from(json["ads"].map((x) => AdsModel.fromJson(x))) : [];
       cuecampaigns = json["cuecampaigns"] != null && json["cuecampaigns"] != [] ? List<CampaignModel>.from(json["cuecampaigns"].map((x) => CampaignModel.fromJson(x))) : [];
+      admitedoffers = json["admitadoffers"] != null && json["admitadoffers"] != [] ? List<AdmitedOffersModal>.from(json["admitadoffers"].map((x) => AdmitedOffersModal.fromJson(x))) : [];
       pId = json["p_id"] != null ? int.parse(json["p_id"].toString()) : null;
       rank = json["rank"] != null ? int.parse(json["rank"].toString()) : null;
       tagline = json["tagline"] != null ? json["tagline"] : '';

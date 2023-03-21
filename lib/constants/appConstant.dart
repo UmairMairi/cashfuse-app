@@ -20,6 +20,7 @@ class AppConstants {
   static const String AD_DETAIL_URI = '/ads_details';
   static const String OFEFER_DETAIL_URI = '/offer_details';
   static const String CAMPAIGN_DETAIL_URI = '/campaigns_details';
+  static const String ADMITEDOFFERS_DETAIL = '/admitadoffer_details';
   static const String COUPON_URI = '/coupon';
   static const String FAQ_URI = '/faq';
   static const String ABOUT_US_URI = '/about_us';

@@ -347,7 +347,7 @@ class HomeScreen extends StatelessWidget {
                                     ? ListView.builder(
                                         shrinkWrap: true,
                                         scrollDirection: Axis.horizontal,
-                                        itemCount: homeController.topCategoryList.length > 10 ? 10 : homeController.topCategoryList.length,
+                                        itemCount: homeController.topCategoryList.length > 10 ? homeController.topCategoryList.length : homeController.topCategoryList.length,
                                         padding: const EdgeInsets.symmetric(horizontal: 6),
                                         itemBuilder: (context, index) {
                                           return InkWell(

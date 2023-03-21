@@ -15,14 +15,24 @@ import 'package:cashfuse/widget/web/webAdsCampaignWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
-class CategoryScreen extends StatelessWidget {
+import '../provider/admit_detail_provider.dart';
+import 'admitedOfferDetailScreen.dart';
+
+class CategoryScreen extends StatefulWidget {
   final String title;
   final CategoryModel category;
   // CategoryModel category = Get.arguments;
   CategoryScreen({this.category, this.title});
 
+  @override
+  State<CategoryScreen> createState() => _CategoryScreenState();
+}
+
+class _CategoryScreenState extends State<CategoryScreen> {
   HomeController homeController = Get.find<HomeController>();
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   AdController _adController = Get.find<AdController>();
@@ -34,6 +44,13 @@ class CategoryScreen extends StatelessWidget {
       return 'ios';
     }
     return '';
+  }
+
+   AdmitedOffers _admitedOffers;
+  @override
+  void initState() {
+    _admitedOffers=Provider.of(context,listen: false);
+    super.initState();
   }
 
   @override
@@ -56,7 +73,7 @@ class CategoryScreen extends StatelessWidget {
                 ),
               ),
               title: Text(
-                category != null ? category.name : '',
+                widget.category != null ? widget.category.name : '',
                 style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
               ),
             ),
@@ -86,7 +103,7 @@ class CategoryScreen extends StatelessWidget {
                           : SizedBox();
                     },
                   ),
-                  category.commonList != null && category.commonList.length > 0
+                  widget.category.commonList != null && widget.category.commonList.length > 0
                       ? GetBuilder<HomeController>(builder: (controller) {
                           return GridView.builder(
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -94,15 +111,15 @@ class CategoryScreen extends StatelessWidget {
                               crossAxisSpacing: global.getPlatFrom() ? 25 : 15.0,
                               mainAxisSpacing: global.getPlatFrom() ? 25 : 15.0,
                             ),
-                            itemCount: category.commonList.length,
+                            itemCount: widget.category.commonList.length,
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () async {
-                                  if (category.commonList[index].adId != null && category.commonList[index].adId.isNotEmpty) {
-                                    await homeController.getAdDetails(category.commonList[index].adId);
+                                  if (widget.category.commonList[index].adId != null && widget.category.commonList[index].adId.isNotEmpty) {
+                                    await homeController.getAdDetails(widget.category.commonList[index].adId);
                                     Get.to(
                                       () => AdsDetailScreen(
                                         ads: homeController.ads,
@@ -111,22 +128,48 @@ class CategoryScreen extends StatelessWidget {
                                       routeName: 'detail',
                                     );
                                   } else {
-                                    await homeController.getCampignDetails(category.commonList[index].campaignId.toString());
-                                    Get.to(
-                                        () => CampaignDetailScreen(
+                                    print('jkabshjd');
+                                    print('${widget.category.commonList[index].from}');
+
+                                    if(widget.category.commonList[index].from.toString()=="admit")
+                                      {
+                                       // await homeController.getCampignDetails(widget.category.commonList[index].campaignId.toString());
+                                        _admitedOffers.admitedOfferDetails(widget.category.commonList[index].campaignId.toString()).then((value){
+
+                                          value['status'].toString()=="0"?null:
+                                        Get.to(
+                                                  () => AdmitedDetailScreen(
+                                                  fromSeeMore: false,
+                                                  admitedData:_admitedOffers.admitedData
+                                              ),
+                                              routeName: 'detail');
+
+                                        });
+                                      }
+                                    else
+                                      {
+
+
+                                        await homeController.getCampignDetails(widget.category.commonList[index].campaignId.toString());
+                                        print('jasbhjd');
+                                        print('${homeController.campaign}');
+                                        Get.to(
+                                                () => CampaignDetailScreen(
                                               campaign: homeController.campaign,
                                               fromSeeMore: false,
                                             ),
-                                        routeName: 'detail');
+                                            routeName: 'detail');
+                                      }
+
                                   }
                                 },
                                 child: global.getPlatFrom()
                                     ? WebAdsCampaignWidget(
                                         fromWebHome: false,
-                                        commonModel: category.commonList[index],
+                                        commonModel: widget.category.commonList[index],
                                       )
                                     : AdsCampaignWidget(
-                                        commonModel: category.commonList[index],
+                                        commonModel: widget.category.commonList[index],
                                       ),
                               );
                             },

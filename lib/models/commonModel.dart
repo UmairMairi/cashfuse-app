@@ -14,6 +14,7 @@ class CommonModel {
   String tagline;
   CategoryModel partner;
   bool isExist = false;
+  String from;
 
   CommonModel({
     this.adId,
@@ -29,5 +30,6 @@ class CommonModel {
     this.tagline,
     this.partner,
     this.isExist,
+    this.from
   });
 }

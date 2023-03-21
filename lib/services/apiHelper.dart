@@ -165,7 +165,8 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.CAEGORY_URI}?page=$page',
+      // response = await dio.get('${global.baseUrl}${AppConstants.CAEGORY_URI}?page=$page',
+      response = await dio.get('https://cash.codefuse.org/newcashfuse/api/getcategory?page=$page',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
@@ -173,6 +174,8 @@ class APIHelper {
       dynamic recordList;
       if (response.statusCode == 200) {
         recordList = List<CategoryModel>.from(response.data['data'].map((x) => CategoryModel.fromJson(x)));
+        print('jasjkdn');
+        print('${recordList[0]}');
       } else {
         recordList = null;
       }

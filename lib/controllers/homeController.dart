@@ -214,10 +214,12 @@ class HomeController extends GetxController {
                             buttonText: _topCategoryList[i].ads[j].buttonText,
                             trackingLink: _topCategoryList[i].ads[j].landingPage,
                             adId: _topCategoryList[i].ads[j].id.toString(),
+                            from: "ads"
                           ),
                         );
                   }
                 }
+
 
                 // if (_topCategoryList[i].commonList.length > 0) {
                 //   for (var t = 0; t < _topCategoryList[i].commonList.length; t++) {
@@ -236,8 +238,25 @@ class HomeController extends GetxController {
                             buttonText: _topCategoryList[n].cuecampaigns[k].buttonText,
                             trackingLink: _topCategoryList[n].cuecampaigns[k].url,
                             campaignId: _topCategoryList[n].cuecampaigns[k].id,
+                            from: "cue"
                           ),
                         );
+                  }
+                }
+                if (_topCategoryList[n].admitedoffers != []) {
+                  for (var k = 0; k < _topCategoryList[n].admitedoffers.length; k++) {
+                    print('ajhsbdhjbsad');
+                    print('${_topCategoryList[n].admitedoffers[k].name}');
+                    _topCategoryList[n].commonList.add(
+                      CommonModel(
+                        name: _topCategoryList[n].admitedoffers[k].name,
+                        image: '${global.appInfo.baseUrls.offerImageUrl}/${_topCategoryList[n].admitedoffers[k].image}',
+                        buttonText:"Grap Now",// _topCategoryList[n].admitedoffers[k].buttonText,
+                        trackingLink: _topCategoryList[n].admitedoffers[k].gotourl,
+                        campaignId: _topCategoryList[n].admitedoffers[k].id,
+                        from: "admit"
+                      ),
+                    );
                   }
                 }
                 // if (_topCategoryList[n].commonList.length > 0) {
@@ -246,6 +265,34 @@ class HomeController extends GetxController {
                 //   }
                 // }
               }
+
+              // for (var n = 0; n < _topCategoryList.length; n++) {
+              //   _topCategoryList[n].commonList = [];
+              //   if (_topCategoryList[n].admitedoffers != []) {
+              //     for (var k = 0; k < _topCategoryList[n].admitedoffers.length; k++) {
+              //       print('ajhsbdhjbsad');
+              //       print('${_topCategoryList[n].admitedoffers[k].name}');
+              //       _topCategoryList[n].commonList.add(
+              //         CommonModel(
+              //           name: _topCategoryList[n].admitedoffers[k].name,
+              //           image: '${global.appInfo.baseUrls.offerImageUrl}/${_topCategoryList[n].admitedoffers[k].image}',
+              //           buttonText:"Grap Now",// _topCategoryList[n].admitedoffers[k].buttonText,
+              //           trackingLink: _topCategoryList[n].admitedoffers[k].gotourl,
+              //           campaignId: _topCategoryList[n].admitedoffers[k].id,
+              //         ),
+              //       );
+              //     }
+              //   }
+              //   // if (_topCategoryList[n].commonList.length > 0) {
+              //   //   for (var t = 0; t < _topCategoryList[n].commonList.length; n++) {
+              //   //     _topCategoryList[n].commonList.insert((t * 3) + 3, CommonModel(name: 'Ad'));
+              //   //   }
+              //   // }
+              // }
+
+
+
+
             }
           } else {
             showCustomSnackBar(response.message);
@@ -294,6 +341,7 @@ class HomeController extends GetxController {
                             buttonText: _topCashbackList[i].ads[j].buttonText,
                             trackingLink: _topCashbackList[i].ads[j].landingPage,
                             adId: _topCashbackList[i].ads[j].id.toString(),
+                            from: "ads"
                           ),
                         );
                   }
@@ -316,6 +364,7 @@ class HomeController extends GetxController {
                             buttonText: _topCashbackList[n].cuecampaigns[k].buttonText,
                             trackingLink: _topCashbackList[n].cuecampaigns[k].url,
                             campaignId: _topCashbackList[n].cuecampaigns[k].id,
+                            from: "cue"
                           ),
                         );
                   }

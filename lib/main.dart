@@ -10,6 +10,7 @@ import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/controllers/splashController.dart';
 import 'package:cashfuse/controllers/themeController.dart';
 import 'package:cashfuse/l10n/l10n.dart';
+import 'package:cashfuse/provider/admit_detail_provider.dart';
 import 'package:cashfuse/provider/local_provider.dart';
 import 'package:cashfuse/theme/nativeTheme.dart';
 import 'package:cashfuse/utils/binding/networkBinding.dart';
@@ -60,7 +61,11 @@ void main() async {
   }
 
   runApp(
-    MyApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AdmitedOffers()),
+      ],
+        child: MyApp()),
   );
 }
 
