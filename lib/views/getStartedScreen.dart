@@ -10,6 +10,8 @@ import 'package:video_player/video_player.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 
+import 'login/screens/login_screen/login_screen.dart';
+
 class GetStartedScreen extends StatelessWidget {
   final bool fromSplash;
   GetStartedScreen({this.fromSplash});
@@ -103,12 +105,13 @@ class GetStartedScreen extends StatelessWidget {
               fromSplash
                   ? InkWell(
                       onTap: () async {
-                        Get.to(
-                          () => LoginOrSignUpScreen(
-                            fromMenu: false,
-                          ),
-                          routeName: 'login',
-                        );
+                        // Get.to(
+                        //   () => LoginOrSignUpScreen(
+                        //     fromMenu: false,
+                        //   ),
+                        //   routeName: 'login',
+                        // );
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
                       },
                       child: Container(
                         height: 50,

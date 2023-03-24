@@ -16,6 +16,7 @@ import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
   APIHelper apiHelper = new APIHelper();
@@ -42,7 +43,14 @@ class AuthController extends GetxController {
   }
 
   Future logout() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     try {
+
+      sharedPreferences.remove("user_token");
+      sharedPreferences.remove("user_id");
+      sharedPreferences.remove("user_name");
+      sharedPreferences.remove("user_email");
+      sharedPreferences.remove("user_phone");
       global.sp.remove('currentUser');
       global.currentUser = new UserModel();
       contactNo.clear();

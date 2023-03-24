@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
-class LoginOrSignUpScreen extends StatelessWidget {
+class LoginOrSignUpScreen1 extends StatelessWidget {
   final bool fromMenu;
-  LoginOrSignUpScreen({this.fromMenu});
+  LoginOrSignUpScreen1({this.fromMenu});
 
   final countryPicker = FlCountryCodePicker();
 

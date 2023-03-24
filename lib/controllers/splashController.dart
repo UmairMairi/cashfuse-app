@@ -128,23 +128,40 @@ class SplashController extends GetxController {
     try {
       Timer(Duration.zero, () async {
         global.sp = await SharedPreferences.getInstance();
+        SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+        String token=sharedPreferences.getString("user_token");
+        print('akjsnbjkd');
+        print('${token!=null}');
 
         log(global.appDeviceId);
         if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
           await apiHelper.getAppInfo().then((response) async {
             if (response.statusCode == 200) {
               global.appInfo = response.data;
-              if (global.sp.getString('currentUser') != null) {
-                global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
-                await Get.find<AuthController>().getProfile();
+              // if (global.sp.getString('currentUser') != null) {
+              //   global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
+              //   await Get.find<AuthController>().getProfile();
+              //   await global.referAndEarn();
+              //   Get.off(
+              //     () => BottomNavigationBarScreen(
+              //       pageIndex: 0,
+              //     ),
+              //     routeName: 'home',
+              //   );
+              // }
+            if(token!=null)
+              {
                 await global.referAndEarn();
+                await Get.find<AuthController>().getProfile();
                 Get.off(
-                  () => BottomNavigationBarScreen(
-                    pageIndex: 0,
-                  ),
-                  routeName: 'home',
-                );
-              } else {
+                      () => BottomNavigationBarScreen(
+                        pageIndex: 0,
+                      ),
+                      routeName: 'home',
+                    );
+
+              }
+              else {
                 if (GetPlatform.isWeb) {
                   Get.to(
                     () => BottomNavigationBarScreen(

@@ -26,6 +26,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../../views/login/screens/login_screen/login_screen.dart';
+
 class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   WebTopBarWidget({this.scaffoldKey});
@@ -163,9 +165,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       Get.dialog(Dialog(
                         child: SizedBox(
                           width: Get.width / 3,
-                          child: LoginOrSignUpScreen(
-                            fromMenu: true,
-                          ),
+                          child:LoginScreen()
+                          // LoginOrSignUpScreen(
+                          //   fromMenu: true,
+                          // ),
                         ),
                       ));
                     },

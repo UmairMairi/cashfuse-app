@@ -42,7 +42,9 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.APP_INFO_URI}',
+      response = await dio.get(
+          //'${global.baseUrl}${AppConstants.APP_INFO_URI}',
+        "https://cash.codefuse.org/newcashfuse/api/app_info",
           options: Options(
             headers: await global.getApiHeaders(false),
           ));

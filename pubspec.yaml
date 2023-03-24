@@ -94,6 +94,10 @@ dependencies:
   image_cropper: ^3.0.0
   cached_network_image: ^3.2.1
 
+  ionicons: ^0.1.2
+  google_sign_in: ^6.0.2
+  device_info: ^2.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

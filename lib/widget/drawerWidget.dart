@@ -15,6 +15,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:store_redirect/store_redirect.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../views/login/screens/login_screen/login_screen.dart';
+
 class DrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -710,9 +712,10 @@ class DrawerWidget extends StatelessWidget {
                       Get.dialog(Dialog(
                         child: SizedBox(
                           width: Get.width / 3,
-                          child: LoginOrSignUpScreen(
-                            fromMenu: true,
-                          ),
+                          child:LoginScreen()
+                          // LoginOrSignUpScreen(
+                          //   fromMenu: true,
+                          // ),
                         ),
                       ));
                     } else {
@@ -720,16 +723,18 @@ class DrawerWidget extends StatelessWidget {
                         Get.dialog(Dialog(
                           child: SizedBox(
                             width: Get.width / 3,
-                            child: LoginOrSignUpScreen(
-                              fromMenu: true,
-                            ),
+                            child:LoginScreen(),
+                            // LoginOrSignUpScreen(
+                            //   fromMenu: true,
+                            // ),
                           ),
                         ));
                       } else {
                         Get.to(
-                          () => LoginOrSignUpScreen(
-                            fromMenu: true,
-                          ),
+                          () => LoginScreen(),
+                          //     LoginOrSignUpScreen(
+                          //   fromMenu: true,
+                          // ),
                           routeName: 'login',
                         );
                       }

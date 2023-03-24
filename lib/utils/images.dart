@@ -34,4 +34,6 @@ class Images {
   static const String access = "assets/images/access.png";
   static const String appleLogo = "assets/images/apple_logo.png";
   static const String playStore = "assets/images/play-store.png";
+  static const String facebook = "assets/images/facebook.png";
+  static const String google = "assets/images/google.png";
 }

@@ -16,6 +16,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 
+import 'login/screens/login_screen/login_screen.dart';
+
 class OfferDetailScreen extends StatelessWidget {
   final OfferModel offer;
   final bool fromSeeMore;
@@ -75,16 +77,18 @@ class OfferDetailScreen extends StatelessWidget {
                                   Get.dialog(Dialog(
                                     child: SizedBox(
                                       width: Get.width / 3,
-                                      child: LoginOrSignUpScreen(
-                                        fromMenu: true,
-                                      ),
+                                      child:LoginScreen()
+                                      // LoginOrSignUpScreen(
+                                      //   fromMenu: true,
+                                      // ),
                                     ),
                                   ));
                                 } else {
                                   Get.to(
-                                    () => LoginOrSignUpScreen(
-                                      fromMenu: true,
-                                    ),
+                                    () => LoginScreen(),
+                                    //     LoginOrSignUpScreen(
+                                    //   fromMenu: true,
+                                    // ),
                                     routeName: 'login',
                                   );
                                 }
@@ -192,16 +196,18 @@ class OfferDetailScreen extends StatelessWidget {
                                     Get.dialog(Dialog(
                                       child: SizedBox(
                                         width: Get.width / 3,
-                                        child: LoginOrSignUpScreen(
-                                          fromMenu: true,
-                                        ),
+                                        child:LoginScreen(),
+                                        // LoginOrSignUpScreen(
+                                        //   fromMenu: true,
+                                        // ),
                                       ),
                                     ));
                                   } else {
                                     Get.to(
-                                      () => LoginOrSignUpScreen(
-                                        fromMenu: true,
-                                      ),
+                                      () => LoginScreen(),
+                                      //     LoginOrSignUpScreen(
+                                      //   fromMenu: true,
+                                      // ),
                                       routeName: 'login',
                                     );
                                   }

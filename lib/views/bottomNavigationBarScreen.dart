@@ -14,6 +14,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/product_listProvider.dart';
 
 class BottomNavigationBarScreen extends StatefulWidget {
   int pageIndex;
@@ -25,6 +28,8 @@ class BottomNavigationBarScreen extends StatefulWidget {
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   bool _canExit = global.getPlatFrom() ? true : false;
   int bottomNavIndex;
+
+
 
   CircularBottomNavigationController navigationController;
 
@@ -62,8 +67,11 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         ),
       ];
 
+  ProductListProvider productListProvider;
   @override
   void initState() {
+    productListProvider=Provider.of<ProductListProvider>(context,listen: false);
+    productListProvider.productListMethod();
     _init();
     super.initState();
   }

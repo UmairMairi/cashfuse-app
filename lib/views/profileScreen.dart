@@ -19,11 +19,34 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:store_redirect/store_redirect.dart';
 
-class ProfileScreen extends StatelessWidget {
+import 'login/screens/login_screen/login_screen.dart';
+
+class ProfileScreen extends StatefulWidget {
   final Color bgColor;
   ProfileScreen({this.bgColor});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  String userToken;
+  SharedPreferences sharedPreferences;
+  Future userDetails() async
+  {
+     sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      userToken=sharedPreferences.getString("user_token");
+    });
+  }
+  @override
+  void initState() {
+    userDetails();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthController>(
@@ -46,11 +69,11 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             title: Text(
-              global.currentUser.id != null ? AppLocalizations.of(context).profile : '',
+              userToken != null ? AppLocalizations.of(context).profile : '',
               style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
             ),
           ),
-          body: global.currentUser.id != null
+          body: userToken != null
               ? SingleChildScrollView(
                   child: Column(
                     children: [
@@ -65,11 +88,11 @@ class ProfileScreen extends StatelessWidget {
                                 leading: CircleAvatar(
                                   radius: 25,
                                   backgroundColor: Colors.white,
-                                  child: global.currentUser.userImage.isNotEmpty
+                                  child: sharedPreferences.getString("user_profile")!=null
                                       ? ClipRRect(
                                           borderRadius: BorderRadius.circular(25),
                                           child: CustomImage(
-                                            image: global.appInfo.baseUrls.userImageUrl + '/' + global.currentUser.userImage,
+                                            image: global.appInfo.baseUrls.userImageUrl + '/' + sharedPreferences.getString("user_profile"),
                                             // height: 30,
                                             // width: 30,
                                             fit: BoxFit.cover,
@@ -85,11 +108,11 @@ class ProfileScreen extends StatelessWidget {
                                         ),
                                 ),
                                 title: Text(
-                                  global.currentUser.name,
+                                  sharedPreferences.getString("user_name"),
                                   style: Get.theme.primaryTextTheme.titleMedium.copyWith(color: Colors.white),
                                 ),
                                 subtitle: Text(
-                                  global.currentUser.email.isNotEmpty ? global.currentUser.email : global.currentUser.phone,
+                                  sharedPreferences.getString("user_email") !=null ? sharedPreferences.getString("user_email") : sharedPreferences.getString("user_phone"),
                                   style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
                                 ),
                               ),
@@ -108,7 +131,7 @@ class ProfileScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.pendingEarning}' : '${global.appInfo.currency}0.00',
+                                        sharedPreferences.getString("user_earnings") != null ? '${global.appInfo.currency}${sharedPreferences.getString("user_earnings")}' : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
                                         style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                                       ),
@@ -134,7 +157,7 @@ class ProfileScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
+                                        sharedPreferences.getString("user_earnings") != null ? '${global.appInfo.currency}${sharedPreferences.getString("user_earnings")}' : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
                                         style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                                       ),
@@ -160,7 +183,7 @@ class ProfileScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
+                                        sharedPreferences.getString("user_earnings") != null ? '${global.appInfo.currency}${sharedPreferences.getString("user_earnings")}' : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
                                         style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                                       ),
@@ -186,7 +209,7 @@ class ProfileScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.rewardEarning}' : '${global.appInfo.currency}0.00',
+                                        sharedPreferences.getString("user_earnings") != null ? '${global.appInfo.currency}${sharedPreferences.getString("user_earnings")}' : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
                                         style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
                                       ),
@@ -751,16 +774,18 @@ class ProfileScreen extends StatelessWidget {
                             Get.dialog(Dialog(
                               child: SizedBox(
                                 width: Get.width / 3,
-                                child: LoginOrSignUpScreen(
-                                  fromMenu: true,
-                                ),
+                                child:LoginScreen()
+                                // LoginOrSignUpScreen(
+                                //   fromMenu: true,
+                                // ),
                               ),
                             ));
                           } else {
                             Get.to(
-                              () => LoginOrSignUpScreen(
-                                fromMenu: true,
-                              ),
+                              () => LoginScreen(),
+                              //     LoginOrSignUpScreen(
+                              //   fromMenu: true,
+                              // ),
                               routeName: 'login',
                             );
                           }

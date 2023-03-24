@@ -20,6 +20,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/admit_detail_provider.dart';
+import 'login/screens/login_screen/login_screen.dart';
 
 class AdmitedDetailScreen extends StatefulWidget {
   final bool fromSeeMore;
@@ -192,16 +193,18 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                               Get.dialog(Dialog(
                                 child: SizedBox(
                                   width: Get.width / 3,
-                                  child: LoginOrSignUpScreen(
-                                    fromMenu: true,
-                                  ),
+                                  child: LoginScreen()
+                                  // LoginOrSignUpScreen(
+                                  //   fromMenu: true,
+                                  // ),
                                 ),
                               ));
                             } else {
                               Get.to(
-                                    () => LoginOrSignUpScreen(
-                                  fromMenu: true,
-                                ),
+                                    () => LoginScreen(),
+                                //         LoginOrSignUpScreen(
+                                //   fromMenu: true,
+                                // ),
                                 routeName: 'login',
                               );
                             }
@@ -349,16 +352,19 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                       Get.dialog(Dialog(
                                         child: SizedBox(
                                           width: Get.width / 3,
-                                          child: LoginOrSignUpScreen(
-                                            fromMenu: true,
-                                          ),
+                                          child:
+                                          LoginScreen(),
+                                          // LoginOrSignUpScreen(
+                                          //   fromMenu: true,
+                                          // ),
                                         ),
                                       ));
                                     } else {
                                       Get.to(
-                                            () => LoginOrSignUpScreen(
-                                          fromMenu: true,
-                                        ),
+                                            () => LoginScreen(),
+                                        //         LoginOrSignUpScreen(
+                                        //   fromMenu: true,
+                                        // ),
                                         routeName: 'login',
                                       );
                                     }
@@ -379,7 +385,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      "Grap Now",
+                                      "Grab Now",
                                       style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
                                     ),
                                   ),

@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
+import '../../views/login/screens/login_screen/login_screen.dart';
+
 class WebBannerView extends StatelessWidget {
   final HomeController homeController;
   WebBannerView({@required this.homeController});
@@ -54,9 +56,10 @@ class WebBannerView extends StatelessWidget {
                                         Get.dialog(Dialog(
                                           child: SizedBox(
                                             width: Get.width / 3,
-                                            child: LoginOrSignUpScreen(
-                                              fromMenu: true,
-                                            ),
+                                            child:LoginScreen()
+                                            // LoginOrSignUpScreen(
+                                            //   fromMenu: true,
+                                            // ),
                                           ),
                                         ));
                                       }
@@ -105,9 +108,10 @@ class WebBannerView extends StatelessWidget {
                                                 Get.dialog(Dialog(
                                                   child: SizedBox(
                                                     width: Get.width / 3,
-                                                    child: LoginOrSignUpScreen(
-                                                      fromMenu: true,
-                                                    ),
+                                                    child:LoginScreen(),
+                                                    // LoginOrSignUpScreen(
+                                                    //   fromMenu: true,
+                                                    // ),
                                                   ),
                                                 ));
                                               }
@@ -156,9 +160,10 @@ class WebBannerView extends StatelessWidget {
                                               Get.dialog(Dialog(
                                                 child: SizedBox(
                                                   width: Get.width / 3,
-                                                  child: LoginOrSignUpScreen(
-                                                    fromMenu: true,
-                                                  ),
+                                                  child:LoginScreen()
+                                                  // LoginOrSignUpScreen(
+                                                  //   fromMenu: true,
+                                                  // ),
                                                 ),
                                               ));
                                             }
