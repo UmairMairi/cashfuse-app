@@ -1,12 +1,13 @@
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
+import 'package:cashfuse/views/loginWithEmail.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:video_player/video_player.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:get/get.dart';
 
 import '../utils/images.dart';
@@ -182,7 +183,8 @@ class GetStartedScreen extends StatelessWidget {
                             ),
                             Text(
                               'Login with Google',
-                              style: Get.theme.primaryTextTheme.titleMedium.copyWith(
+                              style: Get.theme.primaryTextTheme.titleMedium
+                                  .copyWith(
                                 color: Get.theme.primaryColor,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -195,7 +197,7 @@ class GetStartedScreen extends StatelessWidget {
                       onTap: () async {
                         Get.to(
                           () => LoginOrSignUpScreen(
-                            fromMenu: false,
+                            fromMenu: true,
                           ),
                           routeName: 'login',
                         );
@@ -203,7 +205,8 @@ class GetStartedScreen extends StatelessWidget {
                       },
                       child: Container(
                         height: 50,
-                        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         width: MediaQuery.of(context).size.width,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
@@ -223,7 +226,8 @@ class GetStartedScreen extends StatelessWidget {
                             ),
                             Text(
                               'Login with Phone',
-                              style: Get.theme.primaryTextTheme.titleMedium.copyWith(
+                              style: Get.theme.primaryTextTheme.titleMedium
+                                  .copyWith(
                                 color: Get.theme.primaryColor,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -235,7 +239,7 @@ class GetStartedScreen extends StatelessWidget {
                     InkWell(
                       onTap: () async {
                         Get.to(
-                          () => LoginOrSignUpScreen(
+                          () => LoginWithEmailScreen(
                             fromMenu: false,
                           ),
                           routeName: 'login',
@@ -244,7 +248,8 @@ class GetStartedScreen extends StatelessWidget {
                       },
                       child: Container(
                         height: 50,
-                        margin: EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 10),
+                        margin: EdgeInsets.symmetric(horizontal: 20)
+                            .copyWith(bottom: 10),
                         width: MediaQuery.of(context).size.width,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
@@ -264,7 +269,8 @@ class GetStartedScreen extends StatelessWidget {
                             ),
                             Text(
                               'Login with Email',
-                              style: Get.theme.primaryTextTheme.titleMedium.copyWith(
+                              style: Get.theme.primaryTextTheme.titleMedium
+                                  .copyWith(
                                 color: Get.theme.primaryColor,
                                 fontWeight: FontWeight.w600,
                               ),

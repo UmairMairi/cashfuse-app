@@ -35,7 +35,7 @@ class SearchController extends GetxController {
   @override
   void onInit() async {
     await getTrendingKeywords();
-    await allInOneSearch();
+    // await allInOneSearch();
     super.onInit();
   }
 

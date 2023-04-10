@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
+import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/models/admitedoffersModal.dart';
 import 'package:cashfuse/models/adsModel.dart';
 import 'package:cashfuse/models/bannerModel.dart';
@@ -82,6 +83,8 @@ class HomeController extends GetxController {
   bool isOfferLoaded = false;
   bool isHomeAdvLoaded = false;
   bool isFlashOffersLoaded = false;
+  bool isProductsLoaded = false;
+  bool isTrendingProductsLoaded = false;
 
   bool isCategoryExpand = false;
   bool isRoted = true;
@@ -160,7 +163,7 @@ class HomeController extends GetxController {
 
       await getNewFlashOffers();
       await getHomeAdv();
-
+      await Get.find<SearchController>().allInOneSearch();
       await getAllAdv();
       if (global.currentUser.id != null) {
         await getClick();
@@ -1033,6 +1036,7 @@ class HomeController extends GetxController {
       } else {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
+      isProductsLoaded = true;
       update();
     } catch (e) {
       print("Exception - HomeController.dart - getProducts():" + e.toString());
@@ -1055,6 +1059,7 @@ class HomeController extends GetxController {
       } else {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
+      isTrendingProductsLoaded = true;
       update();
     } catch (e) {
       print("Exception - HomeController.dart - getTrendingProducts():" +

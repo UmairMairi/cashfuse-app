@@ -177,6 +177,35 @@ class APIHelper {
     }
   }
 
+  Future<dynamic> loginWithEmail(String email) async {
+    try {
+      Response response;
+      var dio = Dio();
+      var formData = FormData.fromMap({
+        'email': email,
+        'device_id': global.appDeviceId,
+      });
+
+      response = await dio.post(
+          '${global.baseUrl}${AppConstants.LOGIN_WITH_EMAIL_URI}',
+          data: formData,
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+      } else {
+        recordList = null;
+      }
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.LOGIN_RESGISTER}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - loginWithEmail():" + e.toString());
+    }
+  }
+
   Future<dynamic> verifyOtp(String phone, String status) async {
     try {
       Response response;
@@ -881,11 +910,13 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response =
-          await dio.get('${global.baseUrl}${AppConstants.ALL_IN_ONE_URI}',
-              options: Options(
-                headers: await global.getApiHeaders(false),
-              ));
+      response = await dio.get(
+          global.currentUser.id != null
+              ? '${global.baseUrl}${AppConstants.ALL_IN_ONE_URI}?user_id=${global.currentUser.id}'
+              : '${global.baseUrl}${AppConstants.ALL_IN_ONE_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
 
       dynamic recordList;
       if (response.statusCode == 200) {

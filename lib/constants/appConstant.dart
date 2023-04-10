@@ -56,4 +56,5 @@ class AppConstants {
   static const String REMOVE_USER_FROM_DB_URI = '/remove_user_from_db';
   static const String GET_PRODUCTS_URI = '/get_products';
   static const String GET_TRENDING_PRODUCTS_URI = '/get_trending_products';
+  static const String LOGIN_WITH_EMAIL_URI = '/auth/login_with_email';
 }
