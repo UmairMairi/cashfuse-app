@@ -18,12 +18,10 @@ import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:video_player/video_player.dart';
 
 class SplashController extends GetxController {
   APIHelper apiHelper = new APIHelper();
   NetworkController networkController = Get.find<NetworkController>();
-  VideoPlayerController videoPlayerController;
 
   @override
   void onInit() async {
@@ -47,31 +45,12 @@ class SplashController extends GetxController {
       await init();
     }
 
-    videoPlayerController = VideoPlayerController.network(
-      global.earningVideoUrl,
-    )..initialize().then((_) {
-        videoPlayerController.pause();
-        videoPlayerController.setLooping(true);
-
-        update();
-      });
-
     super.onInit();
   }
 
   @override
   void dispose() {
     super.dispose();
-  }
-
-  void playPauseVideo() {
-    if (videoPlayerController.value.isPlaying) {
-      videoPlayerController.pause();
-      update();
-    } else {
-      videoPlayerController.play();
-      update();
-    }
   }
 
   @override
@@ -84,12 +63,14 @@ class SplashController extends GetxController {
       global.sp = await SharedPreferences.getInstance();
 
       log(global.appDeviceId);
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         await apiHelper.getAppInfo().then((response) async {
           if (response.statusCode == 200) {
             global.appInfo = response.data;
             if (global.sp.getString('currentUser') != null) {
-              global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
+              global.currentUser = UserModel.fromJson(
+                  json.decode(global.sp.getString("currentUser")));
               await Get.find<AuthController>().getProfile();
 
               if (global.getPlatFrom()) {
@@ -128,40 +109,25 @@ class SplashController extends GetxController {
     try {
       Timer(Duration.zero, () async {
         global.sp = await SharedPreferences.getInstance();
-        SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-        String token=sharedPreferences.getString("user_token");
-        print('akjsnbjkd');
-        print('${token!=null}');
 
         log(global.appDeviceId);
-        if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+        if (networkController.connectionStatus.value == 1 ||
+            networkController.connectionStatus.value == 2) {
           await apiHelper.getAppInfo().then((response) async {
             if (response.statusCode == 200) {
               global.appInfo = response.data;
-              // if (global.sp.getString('currentUser') != null) {
-              //   global.currentUser = UserModel.fromJson(json.decode(global.sp.getString("currentUser")));
-              //   await Get.find<AuthController>().getProfile();
-              //   await global.referAndEarn();
-              //   Get.off(
-              //     () => BottomNavigationBarScreen(
-              //       pageIndex: 0,
-              //     ),
-              //     routeName: 'home',
-              //   );
-              // }
-            if(token!=null)
-              {
-                await global.referAndEarn();
+              if (global.sp.getString('currentUser') != null) {
+                global.currentUser = UserModel.fromJson(
+                    json.decode(global.sp.getString("currentUser")));
                 await Get.find<AuthController>().getProfile();
+                await global.referAndEarn();
                 Get.off(
-                      () => BottomNavigationBarScreen(
-                        pageIndex: 0,
-                      ),
-                      routeName: 'home',
-                    );
-
-              }
-              else {
+                  () => BottomNavigationBarScreen(
+                    pageIndex: 0,
+                  ),
+                  routeName: 'home',
+                );
+              } else {
                 if (GetPlatform.isWeb) {
                   Get.to(
                     () => BottomNavigationBarScreen(
@@ -203,13 +169,15 @@ class SplashController extends GetxController {
   Future bannerShow() async {
     try {
       if (global.sp.getString('isBannerDate') != null) {
-        if (DateConverter.dateTimeToDateOnly(DateTime.now()) == global.sp.getString('isBannerDate')) {
+        if (DateConverter.dateTimeToDateOnly(DateTime.now()) ==
+            global.sp.getString('isBannerDate')) {
           global.isBannerShow = false;
           print('+++++ in bannerdate exist');
         } else {
           print('+++++ in bannerdate exist but not same');
           global.isBannerShow = true;
-          global.isBannerDate = DateConverter.dateTimeToDateOnly(DateTime.now());
+          global.isBannerDate =
+              DateConverter.dateTimeToDateOnly(DateTime.now());
           global.sp.setString('isBannerDate', global.isBannerDate);
         }
       } else {

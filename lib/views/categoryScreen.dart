@@ -15,9 +15,7 @@ import 'package:cashfuse/widget/web/webAdsCampaignWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
-import '../provider/admit_detail_provider.dart';
 import 'admitedOfferDetailScreen.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -46,10 +44,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return '';
   }
 
-   AdmitedOffers _admitedOffers;
   @override
   void initState() {
-    _admitedOffers=Provider.of(context,listen: false);
     super.initState();
   }
 
@@ -74,7 +70,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
               ),
               title: Text(
                 widget.category != null ? widget.category.name : '',
-                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
+                style: Get.theme.primaryTextTheme.titleSmall
+                    .copyWith(color: Colors.white),
               ),
             ),
       body: GetBuilder<AdController>(builder: (adController) {
@@ -89,7 +86,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     builder: (adController) {
                       return _adController.isfbNativeAd2Exist
                           ? FbNativeAdWidget(
-                              adId: "VID_HD_16_9_46S_APP_INSTALL#536153035214384_536880055141682",
+                              adId:
+                                  "VID_HD_16_9_46S_APP_INSTALL#536153035214384_536880055141682",
                             )
                           : SizedBox();
                     },
@@ -103,23 +101,31 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           : SizedBox();
                     },
                   ),
-                  widget.category.commonList != null && widget.category.commonList.length > 0
+                  widget.category.commonList != null &&
+                          widget.category.commonList.length > 0
                       ? GetBuilder<HomeController>(builder: (controller) {
                           return GridView.builder(
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: global.getPlatFrom() ? 4 : 2,
-                              crossAxisSpacing: global.getPlatFrom() ? 25 : 15.0,
+                              crossAxisSpacing:
+                                  global.getPlatFrom() ? 25 : 15.0,
                               mainAxisSpacing: global.getPlatFrom() ? 25 : 15.0,
                             ),
                             itemCount: widget.category.commonList.length,
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
-                            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 20),
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () async {
-                                  if (widget.category.commonList[index].adId != null && widget.category.commonList[index].adId.isNotEmpty) {
-                                    await homeController.getAdDetails(widget.category.commonList[index].adId);
+                                  if (widget.category.commonList[index].adId !=
+                                          null &&
+                                      widget.category.commonList[index].adId
+                                          .isNotEmpty) {
+                                    await homeController.getAdDetails(
+                                        widget.category.commonList[index].adId);
                                     Get.to(
                                       () => AdsDetailScreen(
                                         ads: homeController.ads,
@@ -127,49 +133,67 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                       ),
                                       routeName: 'detail',
                                     );
+                                  } else if (widget
+                                          .category.commonList[index].from
+                                          .toString() ==
+                                      "admit") {
+                                    await homeController.getAdmitedDetails(
+                                        widget.category.commonList[index]
+                                            .campaignId);
+
+                                    Get.to(
+                                        () => AdmitedDetailScreen(
+                                              admitedData:
+                                                  controller.admitedOffer,
+                                              fromSeeMore: false,
+                                            ),
+                                        routeName: 'detail');
+                                    // print('jkabshjd');
+                                    // print(
+                                    //     '${widget.category.commonList[index].from}');
+
+                                    // if (widget.category.commonList[index].from
+                                    //         .toString() ==
+                                    //     "admit") {
+                                    //   // await homeController.getCampignDetails(widget.category.commonList[index].campaignId.toString());
+                                    //   _admitedOffers
+                                    //       .admitedOfferDetails(widget.category
+                                    //           .commonList[index].campaignId
+                                    //           .toString())
+                                    //       .then((value) {
+                                    //     value['status'].toString() == "0"
+                                    //         ? null
+                                    //         : Get.to(
+                                    //             () => AdmitedDetailScreen(
+                                    //                 fromSeeMore: false,
+                                    //                 admitedData: _admitedOffers
+                                    //                     .admitedData),
+                                    //             routeName: 'detail');
+                                    //   });
                                   } else {
-                                    print('jkabshjd');
-                                    print('${widget.category.commonList[index].from}');
-
-                                    if(widget.category.commonList[index].from.toString()=="admit")
-                                      {
-                                       // await homeController.getCampignDetails(widget.category.commonList[index].campaignId.toString());
-                                        _admitedOffers.admitedOfferDetails(widget.category.commonList[index].campaignId.toString()).then((value){
-
-                                          value['status'].toString()=="0"?null:
-                                        Get.to(
-                                                  () => AdmitedDetailScreen(
-                                                  fromSeeMore: false,
-                                                  admitedData:_admitedOffers.admitedData
-                                              ),
-                                              routeName: 'detail');
-
-                                        });
-                                      }
-                                    else
-                                      {
-
-
-                                        await homeController.getCampignDetails(widget.category.commonList[index].campaignId.toString());
-                                        print('jasbhjd');
-                                        print('${homeController.campaign}');
-                                        Get.to(
-                                                () => CampaignDetailScreen(
+                                    await homeController.getCampignDetails(
+                                        widget.category.commonList[index]
+                                            .campaignId
+                                            .toString());
+                                    print('jasbhjd');
+                                    print('${homeController.campaign}');
+                                    Get.to(
+                                        () => CampaignDetailScreen(
                                               campaign: homeController.campaign,
                                               fromSeeMore: false,
                                             ),
-                                            routeName: 'detail');
-                                      }
-
+                                        routeName: 'detail');
                                   }
                                 },
                                 child: global.getPlatFrom()
                                     ? WebAdsCampaignWidget(
                                         fromWebHome: false,
-                                        commonModel: widget.category.commonList[index],
+                                        commonModel:
+                                            widget.category.commonList[index],
                                       )
                                     : AdsCampaignWidget(
-                                        commonModel: widget.category.commonList[index],
+                                        commonModel:
+                                            widget.category.commonList[index],
                                       ),
                               );
                             },

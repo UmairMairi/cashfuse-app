@@ -25,7 +25,8 @@ class OtpVerificationScreen extends StatelessWidget {
                   Get.back();
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
                   child: Icon(
                     Icons.arrow_back,
                     color: Colors.black,
@@ -45,7 +46,8 @@ class OtpVerificationScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -60,7 +62,10 @@ class OtpVerificationScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: global.getPlatFrom() ? EdgeInsets.symmetric(horizontal: 30) : const EdgeInsets.only(top: 20, left: 20, bottom: 10, right: 20),
+                padding: global.getPlatFrom()
+                    ? EdgeInsets.symmetric(horizontal: 30)
+                    : const EdgeInsets.only(
+                        top: 20, left: 20, bottom: 10, right: 20),
                 child: SizedBox(
                   child: PinCodeTextField(
                     enablePinAutofill: true,
@@ -70,7 +75,8 @@ class OtpVerificationScreen extends StatelessWidget {
                     onChanged: (code) async {
                       if (code.length == 6) {
                         FocusScope.of(context).requestFocus(FocusNode());
-                        await authController.checkOTP(verificationCode, fromMenu);
+                        await authController.checkOTP(
+                            verificationCode, fromMenu);
                       }
                     },
                     scrollPadding: EdgeInsets.zero,
@@ -111,14 +117,16 @@ class OtpVerificationScreen extends StatelessWidget {
                         child: RichText(
                           text: TextSpan(
                             text: AppLocalizations.of(context).otp_not_receive,
-                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                            style:
+                                Get.theme.primaryTextTheme.titleSmall.copyWith(
                               letterSpacing: -0.2,
                               fontWeight: FontWeight.w600,
                             ),
                             children: <TextSpan>[
                               TextSpan(
                                 text: ' ${AppLocalizations.of(context).resend}',
-                                style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                style: Get.theme.primaryTextTheme.titleSmall
+                                    .copyWith(
                                   letterSpacing: -0.2,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.blue[900],
@@ -151,7 +159,10 @@ class OtpVerificationScreen extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               AppLocalizations.of(context).conti,
-              style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600),
             ),
           ),
         ),

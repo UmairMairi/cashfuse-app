@@ -15,8 +15,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
-import 'login/screens/login_screen/login_screen.dart';
-
 class CouponDetailScreen extends StatelessWidget {
   final Coupon coupon;
   CouponDetailScreen({this.coupon});
@@ -46,17 +44,24 @@ class CouponDetailScreen extends StatelessWidget {
                 ),
                 title: Text(
                   coupon.name,
-                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
+                  style: Get.theme.primaryTextTheme.titleSmall
+                      .copyWith(color: Colors.white),
                 ),
                 actions: [
                   !GetPlatform.isWeb
                       ? InkWell(
                           onTap: () async {
                             if (global.currentUser.id != null) {
-                              await homeController.getTrackingLink(coupon.url, coupon.affiliatePartner);
+                              await homeController.getTrackingLink(
+                                  coupon.url, coupon.affiliatePartner);
                               global.share(
-                                homeController.createdLink.isNotEmpty ? homeController.createdLink : coupon.url,
-                                coupon.bannerImage.isNotEmpty && !coupon.isImageError ? '${global.appInfo.baseUrls.couponBannerImageUrl}/${coupon.bannerImage}' : '',
+                                homeController.createdLink.isNotEmpty
+                                    ? homeController.createdLink
+                                    : coupon.url,
+                                coupon.bannerImage.isNotEmpty &&
+                                        !coupon.isImageError
+                                    ? '${global.appInfo.baseUrls.couponBannerImageUrl}/${coupon.bannerImage}'
+                                    : '',
                                 '',
                               );
                             } else {
@@ -64,25 +69,24 @@ class CouponDetailScreen extends StatelessWidget {
                                 Get.dialog(Dialog(
                                   child: SizedBox(
                                     width: Get.width / 3,
-                                    child:LoginScreen()
-                                    // LoginOrSignUpScreen(
-                                    //   fromMenu: true,
-                                    // ),
+                                    child: LoginOrSignUpScreen(
+                                      fromMenu: true,
+                                    ),
                                   ),
                                 ));
                               } else {
                                 Get.to(
-                                  () => LoginScreen(),
-                                  //     LoginOrSignUpScreen(
-                                  //   fromMenu: true,
-                                  // ),
+                                  () => LoginOrSignUpScreen(
+                                    fromMenu: true,
+                                  ),
                                   routeName: 'login',
                                 );
                               }
                             }
                           },
                           child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 12).copyWith(right: 10),
+                            margin: EdgeInsets.symmetric(vertical: 12)
+                                .copyWith(right: 10),
                             padding: EdgeInsets.only(left: 10, right: 3),
                             decoration: BoxDecoration(
                               color: Colors.green[500],
@@ -134,7 +138,10 @@ class CouponDetailScreen extends StatelessWidget {
                               days: 'day',
                             ),
                             slideDirection: SlideDirection.none,
-                            textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600),
                             decoration: BoxDecoration(
                               color: Colors.red[800],
                               borderRadius: BorderRadius.circular(3),
@@ -156,10 +163,15 @@ class CouponDetailScreen extends StatelessWidget {
                         Stack(
                           children: [
                             CustomImage(
-                              image: '${global.appInfo.baseUrls.couponBannerImageUrl}/${coupon.bannerImage}',
+                              image:
+                                  '${global.appInfo.baseUrls.couponBannerImageUrl}/${coupon.bannerImage}',
                               height: global.getPlatFrom() ? 250 : 200,
-                              width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 3 : Get.width,
-                              fit: global.getPlatFrom() ? BoxFit.contain : BoxFit.fill,
+                              width: global.getPlatFrom()
+                                  ? AppConstants.WEB_MAX_WIDTH / 3
+                                  : Get.width,
+                              fit: global.getPlatFrom()
+                                  ? BoxFit.contain
+                                  : BoxFit.fill,
                               coupon: coupon,
                             ),
                             // Align(
@@ -197,7 +209,8 @@ class CouponDetailScreen extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(4.0),
                                 child: CustomImage(
-                                  image: '${global.appInfo.baseUrls.partnerImageUrl}/${coupon.image}',
+                                  image:
+                                      '${global.appInfo.baseUrls.partnerImageUrl}/${coupon.image}',
                                   height: 30,
                                   width: 60,
                                   fit: BoxFit.contain,
@@ -211,19 +224,22 @@ class CouponDetailScreen extends StatelessWidget {
                           children: [
                             Text(
                               AppLocalizations.of(context).use_code,
-                              style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
+                              style:
+                                  Get.theme.primaryTextTheme.bodyLarge.copyWith(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w300,
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
                               child: DottedBorder(
                                 padding: EdgeInsets.all(10),
                                 color: Get.theme.secondaryHeaderColor,
                                 child: Text(
                                   coupon.code,
-                                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                  style: Get.theme.primaryTextTheme.titleSmall
+                                      .copyWith(
                                     color: Get.theme.secondaryHeaderColor,
                                   ),
                                 ),
@@ -243,7 +259,8 @@ class CouponDetailScreen extends StatelessWidget {
                               },
                               child: Text(
                                 AppLocalizations.of(context).copy_code,
-                                style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
+                                style: Get.theme.primaryTextTheme.bodyLarge
+                                    .copyWith(
                                   color: Colors.teal,
                                   fontWeight: FontWeight.w300,
                                 ),
@@ -254,11 +271,17 @@ class CouponDetailScreen extends StatelessWidget {
                         InkWell(
                           onTap: () async {
                             if (global.currentUser.id != null) {
-                              await homeController.getTrackingLink(coupon.url, coupon.affiliatePartner);
-                              await homeController.addClick(coupon.partnerName, '${global.appInfo.baseUrls.partnerImageUrl}/${coupon.image}', coupon.url);
+                              await homeController.getTrackingLink(
+                                  coupon.url, coupon.affiliatePartner);
+                              await homeController.addClick(
+                                  coupon.partnerName,
+                                  '${global.appInfo.baseUrls.partnerImageUrl}/${coupon.image}',
+                                  coupon.url);
 
                               global.launchInBrowser(
-                                homeController.createdLink.isNotEmpty ? homeController.createdLink : coupon.url,
+                                homeController.createdLink.isNotEmpty
+                                    ? homeController.createdLink
+                                    : coupon.url,
                               );
                               // Get.to(() => WebViewScreen(
                               //       urlString: coupon.url,
@@ -275,28 +298,30 @@ class CouponDetailScreen extends StatelessWidget {
                                 Get.dialog(Dialog(
                                   child: SizedBox(
                                     width: Get.width / 3,
-                                    child:LoginScreen(),
-                                    // LoginOrSignUpScreen(
-                                    //   fromMenu: true,
-                                    // ),
+                                    child: LoginOrSignUpScreen(
+                                      fromMenu: true,
+                                    ),
                                   ),
                                 ));
                               } else {
                                 Get.to(
-                                  () =>LoginScreen(),
-                                  //     LoginOrSignUpScreen(
-                                  //   fromMenu: true,
-                                  // ),
+                                  () => LoginOrSignUpScreen(
+                                    fromMenu: true,
+                                  ),
                                   routeName: 'login',
                                 );
                               }
                             }
                           },
                           child: Container(
-                            width: global.getPlatFrom() ? Get.width / 4 : Get.width,
+                            width: global.getPlatFrom()
+                                ? Get.width / 4
+                                : Get.width,
                             height: 45,
-                            margin: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                            padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 20),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 7, vertical: 8),
                             decoration: BoxDecoration(
                               color: Get.theme.secondaryHeaderColor,
                               borderRadius: BorderRadius.circular(2),
@@ -304,7 +329,10 @@ class CouponDetailScreen extends StatelessWidget {
                             alignment: Alignment.center,
                             child: Text(
                               coupon.buttonText,
-                              style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600),
                             ),
                           ),
                         ),
@@ -325,16 +353,21 @@ class CouponDetailScreen extends StatelessWidget {
                         children: [
                           Text(
                             AppLocalizations.of(context).about_this_coupon,
-                            style: global.getPlatFrom() ? Get.theme.primaryTextTheme.titleMedium.copyWith(fontWeight: FontWeight.w600) : Get.theme.primaryTextTheme.titleSmall,
+                            style: global.getPlatFrom()
+                                ? Get.theme.primaryTextTheme.titleMedium
+                                    .copyWith(fontWeight: FontWeight.w600)
+                                : Get.theme.primaryTextTheme.titleSmall,
                           ),
                           Divider(),
                           Text(
                             coupon.heading,
-                            style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w500),
+                            style: Get.theme.primaryTextTheme.bodyMedium
+                                .copyWith(fontWeight: FontWeight.w500),
                           ),
                           Text(
                             coupon.description,
-                            style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
+                            style: Get.theme.primaryTextTheme.bodyMedium
+                                .copyWith(fontWeight: FontWeight.w300),
                           ),
                         ],
                       ),

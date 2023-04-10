@@ -26,8 +26,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../views/login/screens/login_screen/login_screen.dart';
-
 class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   WebTopBarWidget({this.scaffoldKey});
@@ -84,7 +82,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                   child: TextFormField(
                     controller: searchController.searchString,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search, size: 25, color: Theme.of(context).disabledColor),
+                      prefixIcon: Icon(Icons.search,
+                          size: 25, color: Theme.of(context).disabledColor),
                       hintText: 'What do you want to buy today?',
                       border: InputBorder.none,
                     ),
@@ -165,10 +164,9 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       Get.dialog(Dialog(
                         child: SizedBox(
                           width: Get.width / 3,
-                          child:LoginScreen()
-                          // LoginOrSignUpScreen(
-                          //   fromMenu: true,
-                          // ),
+                          child: LoginOrSignUpScreen(
+                            fromMenu: true,
+                          ),
                         ),
                       ));
                     },
@@ -370,7 +368,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                             CupertinoDialogAction(
                               child: Text(
                                 AppLocalizations.of(context).yes,
-                                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.red),
+                                style: Get.theme.primaryTextTheme.titleSmall
+                                    .copyWith(color: Colors.red),
                               ),
                               onPressed: () {
                                 Get.back();
@@ -385,7 +384,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                             CupertinoDialogAction(
                               child: Text(
                                 AppLocalizations.of(context).no,
-                                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.blue),
+                                style: Get.theme.primaryTextTheme.titleSmall
+                                    .copyWith(color: Colors.blue),
                               ),
                               onPressed: () {
                                 Get.back();

@@ -10,11 +10,7 @@ import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/controllers/splashController.dart';
 import 'package:cashfuse/controllers/themeController.dart';
 import 'package:cashfuse/l10n/l10n.dart';
-import 'package:cashfuse/provider/admit_detail_provider.dart';
-import 'package:cashfuse/provider/googleSignInprovider.dart';
 import 'package:cashfuse/provider/local_provider.dart';
-import 'package:cashfuse/provider/loginAndSignProvider.dart';
-import 'package:cashfuse/provider/product_listProvider.dart';
 import 'package:cashfuse/theme/nativeTheme.dart';
 import 'package:cashfuse/utils/binding/networkBinding.dart';
 import 'package:cashfuse/utils/firebaseoption.dart';
@@ -63,16 +59,7 @@ void main() async {
     Get.put(CouponController());
   }
 
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AdmitedOffers()),
-        ChangeNotifierProvider(create: (_) => ProductListProvider()),
-        ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
-        ChangeNotifierProvider(create: (_) => LoginAndSignInProvider()),
-      ],
-        child: MyApp()),
-  );
+  runApp(MyApp());
 }
 
 Future fetchLinkData() async {
@@ -138,6 +125,8 @@ class MyApp extends StatelessWidget {
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext context) {
-    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

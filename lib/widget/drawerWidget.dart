@@ -1,21 +1,18 @@
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/accountSettingScreen.dart';
-import 'package:cashfuse/views/allcategoriesScreen.dart';
 import 'package:cashfuse/views/allInOneSearchScreen.dart';
+import 'package:cashfuse/views/allcategoriesScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
-import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/requestPaymentScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:store_redirect/store_redirect.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../views/login/screens/login_screen/login_screen.dart';
 
 class DrawerWidget extends StatelessWidget {
   @override
@@ -41,7 +38,10 @@ class DrawerWidget extends StatelessWidget {
                                   ? ClipRRect(
                                       borderRadius: BorderRadius.circular(60),
                                       child: CustomImage(
-                                        image: global.appInfo.baseUrls.userImageUrl + '/' + global.currentUser.userImage,
+                                        image: global
+                                                .appInfo.baseUrls.userImageUrl +
+                                            '/' +
+                                            global.currentUser.userImage,
                                         // height: 30,
                                         // width: 30,
                                         fit: BoxFit.cover,
@@ -62,12 +62,17 @@ class DrawerWidget extends StatelessWidget {
                             global.currentUser.name.isNotEmpty
                                 ? Text(
                                     global.currentUser.name,
-                                    style: Get.theme.primaryTextTheme.titleMedium.copyWith(color: Colors.white),
+                                    style: Get
+                                        .theme.primaryTextTheme.titleMedium
+                                        .copyWith(color: Colors.white),
                                   )
                                 : SizedBox(),
                             Text(
-                              global.currentUser.email.isNotEmpty ? global.currentUser.email : global.currentUser.phone,
-                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
+                              global.currentUser.email.isNotEmpty
+                                  ? global.currentUser.email
+                                  : global.currentUser.phone,
+                              style: Get.theme.primaryTextTheme.bodySmall
+                                  .copyWith(color: Colors.white),
                             ),
                             Expanded(child: SizedBox()),
                             Row(
@@ -78,16 +83,22 @@ class DrawerWidget extends StatelessWidget {
                                   children: [
                                     Text(
                                       AppLocalizations.of(context).pending,
-                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.bodySmall
+                                          .copyWith(
                                         color: Colors.white,
                                         fontSize: 11,
                                         letterSpacing: 0,
                                       ),
                                     ),
                                     Text(
-                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.pendingEarning}' : '${global.appInfo.currency}0.00',
+                                      global.currentUser.earning != null
+                                          ? '${global.appInfo.currency}${global.currentUser.earning.pendingEarning}'
+                                          : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall
+                                          .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -107,16 +118,22 @@ class DrawerWidget extends StatelessWidget {
                                   children: [
                                     Text(
                                       AppLocalizations.of(context).approved,
-                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.bodySmall
+                                          .copyWith(
                                         color: Colors.white,
                                         letterSpacing: 0,
                                         fontSize: 11,
                                       ),
                                     ),
                                     Text(
-                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
+                                      global.currentUser.earning != null
+                                          ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}'
+                                          : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall
+                                          .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -136,16 +153,22 @@ class DrawerWidget extends StatelessWidget {
                                   children: [
                                     Text(
                                       AppLocalizations.of(context).redeemed,
-                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.bodySmall
+                                          .copyWith(
                                         color: Colors.white,
                                         letterSpacing: 0,
                                         fontSize: 11,
                                       ),
                                     ),
                                     Text(
-                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
+                                      global.currentUser.earning != null
+                                          ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}'
+                                          : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall
+                                          .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -166,16 +189,22 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       AppLocalizations.of(context).rewards,
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.bodySmall
+                                          .copyWith(
                                         color: Colors.white,
                                         letterSpacing: 0,
                                         fontSize: 11,
                                       ),
                                     ),
                                     Text(
-                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.rewardEarning}' : '${global.appInfo.currency}0.00',
+                                      global.currentUser.earning != null
+                                          ? '${global.appInfo.currency}${global.currentUser.earning.rewardEarning}'
+                                          : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall
+                                          .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -203,7 +232,10 @@ class DrawerWidget extends StatelessWidget {
                                     ? ClipRRect(
                                         borderRadius: BorderRadius.circular(25),
                                         child: CustomImage(
-                                          image: global.appInfo.baseUrls.userImageUrl + '/' + global.currentUser.userImage,
+                                          image: global.appInfo.baseUrls
+                                                  .userImageUrl +
+                                              '/' +
+                                              global.currentUser.userImage,
                                           // height: 30,
                                           // width: 30,
                                           fit: BoxFit.cover,
@@ -221,19 +253,27 @@ class DrawerWidget extends StatelessWidget {
                               title: global.currentUser.name.isNotEmpty
                                   ? Text(
                                       global.currentUser.name,
-                                      style: Get.theme.primaryTextTheme.titleMedium.copyWith(color: Colors.white),
+                                      style: Get
+                                          .theme.primaryTextTheme.titleMedium
+                                          .copyWith(color: Colors.white),
                                     )
                                   : global.currentUser.phone.isNotEmpty
                                       ? Text(
                                           global.currentUser.phone,
-                                          style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
+                                          style: Get
+                                              .theme.primaryTextTheme.bodySmall
+                                              .copyWith(color: Colors.white),
                                         )
                                       : SizedBox(),
                               subtitle: global.currentUser.name.isEmpty
                                   ? SizedBox()
                                   : Text(
-                                      global.currentUser.email.isNotEmpty ? global.currentUser.email : global.currentUser.phone,
-                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
+                                      global.currentUser.email.isNotEmpty
+                                          ? global.currentUser.email
+                                          : global.currentUser.phone,
+                                      style: Get
+                                          .theme.primaryTextTheme.bodySmall
+                                          .copyWith(color: Colors.white),
                                     ),
                               trailing: global.currentUser.name.isNotEmpty
                                   ? SizedBox()
@@ -258,16 +298,22 @@ class DrawerWidget extends StatelessWidget {
                                   children: [
                                     Text(
                                       AppLocalizations.of(context).pending,
-                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.bodySmall
+                                          .copyWith(
                                         color: Colors.white,
                                         fontSize: 11,
                                         letterSpacing: 0,
                                       ),
                                     ),
                                     Text(
-                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.pendingEarning}' : '${global.appInfo.currency}0.00',
+                                      global.currentUser.earning != null
+                                          ? '${global.appInfo.currency}${global.currentUser.earning.pendingEarning}'
+                                          : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall
+                                          .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -287,16 +333,22 @@ class DrawerWidget extends StatelessWidget {
                                   children: [
                                     Text(
                                       AppLocalizations.of(context).approved,
-                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.bodySmall
+                                          .copyWith(
                                         color: Colors.white,
                                         letterSpacing: 0,
                                         fontSize: 11,
                                       ),
                                     ),
                                     Text(
-                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
+                                      global.currentUser.earning != null
+                                          ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}'
+                                          : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall
+                                          .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -316,16 +368,22 @@ class DrawerWidget extends StatelessWidget {
                                   children: [
                                     Text(
                                       AppLocalizations.of(context).redeemed,
-                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.bodySmall
+                                          .copyWith(
                                         color: Colors.white,
                                         letterSpacing: 0,
                                         fontSize: 11,
                                       ),
                                     ),
                                     Text(
-                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
+                                      global.currentUser.earning != null
+                                          ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}'
+                                          : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall
+                                          .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -346,16 +404,22 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       AppLocalizations.of(context).rewards,
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.bodySmall
+                                          .copyWith(
                                         color: Colors.white,
                                         letterSpacing: 0,
                                         fontSize: 11,
                                       ),
                                     ),
                                     Text(
-                                      global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.rewardEarning}' : '${global.appInfo.currency}0.00',
+                                      global.currentUser.earning != null
+                                          ? '${global.appInfo.currency}${global.currentUser.earning.rewardEarning}'
+                                          : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall
+                                          .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -530,42 +594,42 @@ class DrawerWidget extends StatelessWidget {
                   ),
                 ),
 
-                InkWell(
-                  onTap: () {
-                    Get.back();
-                    Get.to(
-                      () => GetStartedScreen(
-                        fromSplash: false,
-                      ),
-                      routeName: 'get-started',
-                    );
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: global.getPlatFrom() ? 25 : 20,
-                      vertical: global.getPlatFrom() ? 20 : 10,
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.info_outline,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          'How ${global.appName} works?',
-                          style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
-                            letterSpacing: 0,
-                            fontWeight: FontWeight.w300,
-                            color: Colors.black.withOpacity(0.6),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                // InkWell(
+                //   onTap: () {
+                //     Get.back();
+                //     Get.to(
+                //       () => GetStartedScreen(
+                //         fromSplash: false,
+                //       ),
+                //       routeName: 'get-started',
+                //     );
+                //   },
+                //   child: Padding(
+                //     padding: EdgeInsets.symmetric(
+                //       horizontal: global.getPlatFrom() ? 25 : 20,
+                //       vertical: global.getPlatFrom() ? 20 : 10,
+                //     ),
+                //     child: Row(
+                //       children: [
+                //         Icon(
+                //           Icons.info_outline,
+                //           color: Colors.black.withOpacity(0.5),
+                //         ),
+                //         SizedBox(
+                //           width: 20,
+                //         ),
+                //         Text(
+                //           'How ${global.appName} works?',
+                //           style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
+                //             letterSpacing: 0,
+                //             fontWeight: FontWeight.w300,
+                //             color: Colors.black.withOpacity(0.6),
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 Divider(),
                 !GetPlatform.isWeb
                     ? InkWell(
@@ -574,7 +638,8 @@ class DrawerWidget extends StatelessWidget {
                           if (global.appShareLink.isNotEmpty) {
                             await FlutterShare.share(
                               title: '${global.appName}',
-                              text: 'I recently tried ${global.appName} app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
+                              text:
+                                  'I recently tried ${global.appName} app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
                             ).then((value) {
                               if (value) {}
                             }).onError((error, stackTrace) {
@@ -598,7 +663,8 @@ class DrawerWidget extends StatelessWidget {
                               ),
                               Text(
                                 AppLocalizations.of(context).share_the_app,
-                                style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
+                                style: Get.theme.primaryTextTheme.bodyLarge
+                                    .copyWith(
                                   letterSpacing: 0,
                                   fontWeight: FontWeight.w300,
                                   color: Colors.black.withOpacity(0.6),
@@ -634,7 +700,8 @@ class DrawerWidget extends StatelessWidget {
                               ),
                               Text(
                                 AppLocalizations.of(context).rate_the_app,
-                                style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
+                                style: Get.theme.primaryTextTheme.bodyLarge
+                                    .copyWith(
                                   letterSpacing: 0,
                                   fontWeight: FontWeight.w300,
                                   color: Colors.black.withOpacity(0.6),
@@ -695,7 +762,8 @@ class DrawerWidget extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Text(
                     AppLocalizations.of(context).login_subtitle,
                     textAlign: TextAlign.center,
@@ -712,10 +780,9 @@ class DrawerWidget extends StatelessWidget {
                       Get.dialog(Dialog(
                         child: SizedBox(
                           width: Get.width / 3,
-                          child:LoginScreen()
-                          // LoginOrSignUpScreen(
-                          //   fromMenu: true,
-                          // ),
+                          child: LoginOrSignUpScreen(
+                            fromMenu: true,
+                          ),
                         ),
                       ));
                     } else {
@@ -723,18 +790,24 @@ class DrawerWidget extends StatelessWidget {
                         Get.dialog(Dialog(
                           child: SizedBox(
                             width: Get.width / 3,
-                            child:LoginScreen(),
+                            child: LoginOrSignUpScreen(),
                             // LoginOrSignUpScreen(
                             //   fromMenu: true,
                             // ),
                           ),
                         ));
                       } else {
+                        // Get.to(
+                        //   () => LoginScreen(),
+                        //   //     LoginOrSignUpScreen(
+                        //   //   fromMenu: true,
+                        //   // ),
+                        //   routeName: 'login',
+                        // );
                         Get.to(
-                          () => LoginScreen(),
-                          //     LoginOrSignUpScreen(
-                          //   fromMenu: true,
-                          // ),
+                          () => LoginOrSignUpScreen(
+                            fromMenu: false,
+                          ),
                           routeName: 'login',
                         );
                       }
@@ -752,7 +825,10 @@ class DrawerWidget extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       AppLocalizations.of(context).conti.toUpperCase(),
-                      style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),

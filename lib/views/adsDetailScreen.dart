@@ -17,8 +17,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 
-import 'login/screens/login_screen/login_screen.dart';
-
 class AdsDetailScreen extends StatelessWidget {
   final AdsModel ads;
   final bool fromSeeMore;
@@ -56,7 +54,8 @@ class AdsDetailScreen extends StatelessWidget {
                                 alignment: Alignment.center,
                                 //margin: EdgeInsets.only(bottom: 20),
                                 child: CustomImage(
-                                  image: '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}',
+                                  image:
+                                      '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}',
                                   width: 500,
                                   height: 300,
                                   fit: BoxFit.fill,
@@ -76,7 +75,8 @@ class AdsDetailScreen extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.all(4.0),
                                     child: CustomImage(
-                                      image: '${global.appInfo.baseUrls.partnerImageUrl}/${ads.partner.image}',
+                                      image:
+                                          '${global.appInfo.baseUrls.partnerImageUrl}/${ads.partner.image}',
                                       height: 30,
                                       width: 60,
                                       fit: BoxFit.contain,
@@ -106,9 +106,11 @@ class AdsDetailScreen extends StatelessWidget {
                           ),
                           title: Text(
                             ads.partner.name,
-                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
+                            style: Get.theme.primaryTextTheme.titleSmall
+                                .copyWith(color: Colors.white),
                           ),
-                          flexibleSpace: CustomizableSpaceBar(builder: (context, scrollingRate) {
+                          flexibleSpace: CustomizableSpaceBar(
+                              builder: (context, scrollingRate) {
                             return (scrollingRate != 1.0)
                                 ? Stack(
                                     alignment: Alignment.bottomCenter,
@@ -117,7 +119,8 @@ class AdsDetailScreen extends StatelessWidget {
                                       Container(
                                         //margin: EdgeInsets.only(bottom: 20),
                                         child: CustomImage(
-                                          image: '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}',
+                                          image:
+                                              '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}',
                                           width: Get.width,
                                           fit: BoxFit.fill,
                                           ads: ads,
@@ -136,7 +139,8 @@ class AdsDetailScreen extends StatelessWidget {
                                           child: Padding(
                                             padding: const EdgeInsets.all(4.0),
                                             child: CustomImage(
-                                              image: '${global.appInfo.baseUrls.partnerImageUrl}/${ads.partner.image}',
+                                              image:
+                                                  '${global.appInfo.baseUrls.partnerImageUrl}/${ads.partner.image}',
                                               height: 30,
                                               width: 60,
                                               fit: BoxFit.contain,
@@ -153,10 +157,17 @@ class AdsDetailScreen extends StatelessWidget {
                                 ? InkWell(
                                     onTap: () async {
                                       if (global.currentUser.id != null) {
-                                        await homeController.getTrackingLink(ads.landingPage, ads.affiliatePartner, cId: ads.cId);
+                                        await homeController.getTrackingLink(
+                                            ads.landingPage,
+                                            ads.affiliatePartner,
+                                            cId: ads.cId);
                                         global.share(
-                                          homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
-                                          ads.image.isNotEmpty ? '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}' : '',
+                                          homeController.createdLink.isNotEmpty
+                                              ? homeController.createdLink
+                                              : ads.landingPage,
+                                          ads.image.isNotEmpty
+                                              ? '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}'
+                                              : '',
                                           '',
                                         );
                                       } else {
@@ -164,33 +175,34 @@ class AdsDetailScreen extends StatelessWidget {
                                           Get.dialog(Dialog(
                                             child: SizedBox(
                                               width: Get.width / 3,
-                                              child:LoginScreen()
-                                              // LoginOrSignUpScreen(
-                                              //   fromMenu: true,
-                                              // ),
+                                              child: LoginOrSignUpScreen(
+                                                fromMenu: true,
+                                              ),
                                             ),
                                           ));
                                         } else {
                                           Get.to(
-                                            () =>LoginScreen(),
-                                            //     LoginOrSignUpScreen(
-                                            //   fromMenu: true,
-                                            // ),
+                                            () => LoginOrSignUpScreen(
+                                              fromMenu: true,
+                                            ),
                                             routeName: 'login',
                                           );
                                         }
                                       }
                                     },
                                     child: Container(
-                                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                                      padding: EdgeInsets.only(left: 10, right: 3),
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 10, horizontal: 10),
+                                      padding:
+                                          EdgeInsets.only(left: 10, right: 3),
                                       decoration: BoxDecoration(
                                         color: Colors.green[500],
                                         borderRadius: BorderRadius.circular(15),
                                       ),
                                       child: Row(
                                         children: [
-                                          Text('${AppLocalizations.of(context).share}  '),
+                                          Text(
+                                              '${AppLocalizations.of(context).share}  '),
                                           CircleAvatar(
                                             radius: 12,
                                             backgroundColor: Colors.green[700],
@@ -223,7 +235,9 @@ class AdsDetailScreen extends StatelessWidget {
                               Text(
                                 ads.name,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontStyle: FontStyle.italic, color: Get.theme.primaryColor),
+                                style: TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    color: Get.theme.primaryColor),
                               ),
                               SizedBox(
                                 height: 15,
@@ -289,15 +303,23 @@ class AdsDetailScreen extends StatelessWidget {
                               InkWell(
                                 onTap: () async {
                                   if (global.currentUser.id != null) {
-                                    await homeController.getTrackingLink(ads.landingPage, ads.affiliatePartner, cId: ads.cId);
+                                    await homeController.getTrackingLink(
+                                        ads.landingPage, ads.affiliatePartner,
+                                        cId: ads.cId);
                                     await homeController.addClick(
                                       ads.advName,
-                                      global.appInfo.baseUrls.offerImageUrl + '/' + ads.image,
-                                      homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
+                                      global.appInfo.baseUrls.offerImageUrl +
+                                          '/' +
+                                          ads.image,
+                                      homeController.createdLink.isNotEmpty
+                                          ? homeController.createdLink
+                                          : ads.landingPage,
                                     );
 
                                     global.launchInBrowser(
-                                      homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
+                                      homeController.createdLink.isNotEmpty
+                                          ? homeController.createdLink
+                                          : ads.landingPage,
                                     );
 
                                     // Get.to(
@@ -319,18 +341,16 @@ class AdsDetailScreen extends StatelessWidget {
                                       Get.dialog(Dialog(
                                         child: SizedBox(
                                           width: Get.width / 3,
-                                          child:LoginScreen()
-                                          // LoginOrSignUpScreen(
-                                          //   fromMenu: true,
-                                          // ),
+                                          child: LoginOrSignUpScreen(
+                                            fromMenu: true,
+                                          ),
                                         ),
                                       ));
                                     } else {
                                       Get.to(
-                                        () => LoginScreen(),
-                                        //     LoginOrSignUpScreen(
-                                        //   fromMenu: true,
-                                        // ),
+                                        () => LoginOrSignUpScreen(
+                                          fromMenu: true,
+                                        ),
                                         routeName: 'login',
                                       );
                                     }
@@ -341,10 +361,14 @@ class AdsDetailScreen extends StatelessWidget {
                                   width: Get.width,
                                   alignment: Alignment.center,
                                   child: Container(
-                                    width: global.getPlatFrom() ? Get.width / 3 : Get.width,
+                                    width: global.getPlatFrom()
+                                        ? Get.width / 3
+                                        : Get.width,
                                     height: 45,
-                                    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                                    padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: 30, vertical: 15),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 7, vertical: 8),
                                     decoration: BoxDecoration(
                                       color: Get.theme.secondaryHeaderColor,
                                       borderRadius: BorderRadius.circular(5),
@@ -352,7 +376,10 @@ class AdsDetailScreen extends StatelessWidget {
                                     alignment: Alignment.center,
                                     child: Text(
                                       ads.buttonText,
-                                      style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600),
                                     ),
                                   ),
                                 ),
@@ -371,7 +398,8 @@ class AdsDetailScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     CircleAvatar(
-                                      backgroundColor: Get.theme.secondaryHeaderColor,
+                                      backgroundColor:
+                                          Get.theme.secondaryHeaderColor,
                                       radius: 10,
                                       child: CircleAvatar(
                                         radius: 7,
@@ -388,16 +416,21 @@ class AdsDetailScreen extends StatelessWidget {
                                         Card(
                                           margin: EdgeInsets.zero,
                                           elevation: 0,
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
                                           child: Text(
                                             '>>',
-                                            style: TextStyle(color: Colors.grey, fontSize: 20, letterSpacing: -5),
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 20,
+                                                letterSpacing: -5),
                                           ),
                                         )
                                       ],
                                     ),
                                     CircleAvatar(
-                                      backgroundColor: Get.theme.secondaryHeaderColor,
+                                      backgroundColor:
+                                          Get.theme.secondaryHeaderColor,
                                       radius: 10,
                                       child: CircleAvatar(
                                         radius: 7,
@@ -410,19 +443,26 @@ class AdsDetailScreen extends StatelessWidget {
                                   padding: const EdgeInsets.only(left: 40),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            AppLocalizations.of(context).purchase,
-                                            style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
+                                            AppLocalizations.of(context)
+                                                .purchase,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 13),
                                           ),
                                           Text(
                                             'Today',
-                                            style: TextStyle(fontWeight: FontWeight.w600),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600),
                                           ),
                                         ],
                                       ),
@@ -430,23 +470,30 @@ class AdsDetailScreen extends StatelessWidget {
                                         width: 50,
                                       ),
                                       Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            AppLocalizations.of(context).cashback_tracks_in,
-                                            style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
+                                            AppLocalizations.of(context)
+                                                .cashback_tracks_in,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 13),
                                           ),
                                           Text(
                                             '24 hours',
-                                            style: TextStyle(fontWeight: FontWeight.w600),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600),
                                           ),
                                         ],
                                       )
                                     ],
                                   ),
                                 ),
-                                homeController.seeMoreAdsList != null && homeController.seeMoreAdsList.length > 0
+                                homeController.seeMoreAdsList != null &&
+                                        homeController.seeMoreAdsList.length > 0
                                     ? InkWell(
                                         onTap: () async {
                                           //await homeController.getMoreAds(ads.id.toString());
@@ -461,12 +508,17 @@ class AdsDetailScreen extends StatelessWidget {
                                           );
                                         },
                                         child: Container(
-                                          width: global.getPlatFrom() ? Get.width / 3 : Get.width,
+                                          width: global.getPlatFrom()
+                                              ? Get.width / 3
+                                              : Get.width,
                                           height: 45,
-                                          margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                                          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 30, vertical: 15),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 7, vertical: 8),
                                           decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                               border: Border.all(
                                                 color: Colors.teal[200],
                                                 width: 1.5,
@@ -474,7 +526,10 @@ class AdsDetailScreen extends StatelessWidget {
                                           alignment: Alignment.center,
                                           child: Text(
                                             '${AppLocalizations.of(context).see_more_offers}  >',
-                                            style: TextStyle(color: Colors.teal[200], fontSize: 14, fontWeight: FontWeight.w400),
+                                            style: TextStyle(
+                                                color: Colors.teal[200],
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400),
                                           ),
                                         ),
                                       )
@@ -490,15 +545,21 @@ class AdsDetailScreen extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: ads.partner != null && (ads.partner.leftTab.isNotEmpty || ads.partner.rightTab.isNotEmpty)
+          bottomNavigationBar: ads.partner != null &&
+                  (ads.partner.leftTab.isNotEmpty ||
+                      ads.partner.rightTab.isNotEmpty)
               ? SizedBox(
                   height: 50,
                   child: Card(
                     margin: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                    shape:
+                        RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                     color: Get.theme.primaryColor,
                     child: Row(
-                      mainAxisAlignment: (ads.partner.leftTab.isNotEmpty && ads.partner.rightTab.isNotEmpty) ? MainAxisAlignment.spaceEvenly : MainAxisAlignment.center,
+                      mainAxisAlignment: (ads.partner.leftTab.isNotEmpty &&
+                              ads.partner.rightTab.isNotEmpty)
+                          ? MainAxisAlignment.spaceEvenly
+                          : MainAxisAlignment.center,
                       children: [
                         InkWell(
                           onTap: () {
@@ -517,10 +578,14 @@ class AdsDetailScreen extends StatelessWidget {
                           },
                           child: Text(
                             ads.partner.leftTab,
-                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                            style: Get.theme.primaryTextTheme.titleSmall
+                                .copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white),
                           ),
                         ),
-                        (ads.partner.leftTab.isNotEmpty && ads.partner.rightTab.isNotEmpty)
+                        (ads.partner.leftTab.isNotEmpty &&
+                                ads.partner.rightTab.isNotEmpty)
                             ? Icon(
                                 Icons.more_vert,
                                 size: 22,
@@ -544,7 +609,10 @@ class AdsDetailScreen extends StatelessWidget {
                           },
                           child: Text(
                             ads.partner.rightTab,
-                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                            style: Get.theme.primaryTextTheme.titleSmall
+                                .copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white),
                           ),
                         ),
                       ],

@@ -17,8 +17,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
-import 'login/screens/login_screen/login_screen.dart';
-
 class RecentClickScreen extends StatelessWidget {
   final Color bgColor;
   RecentClickScreen({this.bgColor});
@@ -58,7 +56,9 @@ class RecentClickScreen extends StatelessWidget {
                   style: Get.theme.primaryTextTheme.titleSmall,
                 ),
                 actions: [
-                  global.currentUser.id != null && homeController.recentClickList != null && homeController.recentClickList.length > 0
+                  global.currentUser.id != null &&
+                          homeController.recentClickList != null &&
+                          homeController.recentClickList.length > 0
                       ? InkWell(
                           onTap: () {
                             showConfirmationDialog(
@@ -69,7 +69,8 @@ class RecentClickScreen extends StatelessWidget {
                                 CupertinoDialogAction(
                                   child: Text(
                                     AppLocalizations.of(context).yes,
-                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.red),
+                                    style: Get.theme.primaryTextTheme.titleSmall
+                                        .copyWith(color: Colors.red),
                                   ),
                                   onPressed: () {
                                     Get.back();
@@ -79,7 +80,8 @@ class RecentClickScreen extends StatelessWidget {
                                 CupertinoDialogAction(
                                   child: Text(
                                     AppLocalizations.of(context).no,
-                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.blue),
+                                    style: Get.theme.primaryTextTheme.titleSmall
+                                        .copyWith(color: Colors.blue),
                                   ),
                                   onPressed: () {
                                     Get.back();
@@ -109,7 +111,8 @@ class RecentClickScreen extends StatelessWidget {
               },
               child: global.currentUser.id != null
                   ? homeController.isClickDataLoaded.value
-                      ? homeController.recentClickList != null && homeController.recentClickList.length > 0
+                      ? homeController.recentClickList != null &&
+                              homeController.recentClickList.length > 0
                           ? global.getPlatFrom()
                               ? Column(
                                   children: [
@@ -117,40 +120,59 @@ class RecentClickScreen extends StatelessWidget {
                                       child: Container(
                                         color: Colors.white,
                                         child: GridView.builder(
-                                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount: 4,
                                               crossAxisSpacing: 15.0,
                                               mainAxisSpacing: 15.0,
                                               childAspectRatio: 2,
                                             ),
-                                            itemCount: homeController.recentClickList.length,
+                                            itemCount: homeController
+                                                .recentClickList.length,
                                             shrinkWrap: true,
-                                            padding: EdgeInsets.all(10).copyWith(top: 20),
+                                            padding: EdgeInsets.all(10)
+                                                .copyWith(top: 20),
                                             itemBuilder: (context, index) {
                                               return Card(
                                                 child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     ListTile(
                                                       leading: Card(
                                                         color: Colors.white,
                                                         //margin: EdgeInsets.all(10),
                                                         child: Padding(
-                                                          padding: const EdgeInsets.all(5.0),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(5.0),
                                                           child: CustomImage(
-                                                            image: homeController.recentClickList[index].image,
+                                                            image: homeController
+                                                                .recentClickList[
+                                                                    index]
+                                                                .image,
                                                             height: 30,
                                                             width: 60,
                                                             fit: BoxFit.contain,
-                                                            errorImage: Images.logo,
+                                                            errorImage:
+                                                                Images.logo,
                                                           ),
                                                         ),
                                                       ),
                                                       trailing: Text(
-                                                        homeController.clickTime(homeController.recentClickList[index]),
-                                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                                          fontWeight: FontWeight.w300,
-                                                          color: Colors.grey[600],
+                                                        homeController.clickTime(
+                                                            homeController
+                                                                    .recentClickList[
+                                                                index]),
+                                                        style: Get
+                                                            .theme
+                                                            .primaryTextTheme
+                                                            .bodySmall
+                                                            .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          color:
+                                                              Colors.grey[600],
                                                         ),
                                                       ),
                                                     ),
@@ -158,11 +180,19 @@ class RecentClickScreen extends StatelessWidget {
                                                       height: 25,
                                                     ),
                                                     Padding(
-                                                      padding: const EdgeInsets.only(left: 20, right: 20),
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 20,
+                                                              right: 20),
                                                       child: Text(
                                                         '${AppLocalizations.of(context).did_you_shop_on} ${homeController.recentClickList[index].name}?',
-                                                        style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
-                                                          fontWeight: FontWeight.w300,
+                                                        style: Get
+                                                            .theme
+                                                            .primaryTextTheme
+                                                            .bodyMedium
+                                                            .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w300,
                                                         ),
                                                       ),
                                                     ),
@@ -170,9 +200,13 @@ class RecentClickScreen extends StatelessWidget {
                                                       height: 25,
                                                     ),
                                                     Padding(
-                                                      padding: const EdgeInsets.only(left: 20, right: 20),
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 20,
+                                                              right: 20),
                                                       child: DottedLine(
-                                                        dashColor: Colors.grey[350],
+                                                        dashColor:
+                                                            Colors.grey[350],
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -182,35 +216,62 @@ class RecentClickScreen extends StatelessWidget {
                                                       onTap: () {
                                                         Get.dialog(
                                                           Dialog(
-                                                            shape: RoundedRectangleBorder(
-                                                              borderRadius: BorderRadius.circular(10),
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
                                                             ),
-                                                            insetPadding: EdgeInsets.symmetric(horizontal: 15),
-                                                            child: RecentClickDialogWidget(
-                                                              click: homeController.recentClickList[index],
+                                                            insetPadding:
+                                                                EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            15),
+                                                            child:
+                                                                RecentClickDialogWidget(
+                                                              click: homeController
+                                                                      .recentClickList[
+                                                                  index],
                                                             ),
                                                           ),
                                                         );
                                                       },
                                                       child: Padding(
-                                                        padding: const EdgeInsets.only(left: 20, right: 20),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 20,
+                                                                right: 20),
                                                         child: Row(
-                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
                                                           children: [
                                                             Text(
                                                               '${AppLocalizations.of(context).yes_i_did} ',
-                                                              textAlign: TextAlign.center,
-                                                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                                                color: Colors.teal,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: Get
+                                                                  .theme
+                                                                  .primaryTextTheme
+                                                                  .bodySmall
+                                                                  .copyWith(
+                                                                color:
+                                                                    Colors.teal,
                                                               ),
                                                             ),
                                                             CircleAvatar(
                                                               radius: 6,
-                                                              backgroundColor: Colors.teal,
+                                                              backgroundColor:
+                                                                  Colors.teal,
                                                               child: Icon(
-                                                                Icons.arrow_forward_ios_rounded,
+                                                                Icons
+                                                                    .arrow_forward_ios_rounded,
                                                                 size: 8,
-                                                                color: Colors.white,
+                                                                color: Colors
+                                                                    .white,
                                                               ),
                                                             )
                                                           ],
@@ -230,21 +291,27 @@ class RecentClickScreen extends StatelessWidget {
                                 )
                               : ListView.builder(
                                   shrinkWrap: true,
-                                  itemCount: homeController.recentClickList.length,
-                                  padding: EdgeInsets.only(top: 10, left: 5, right: 5),
+                                  itemCount:
+                                      homeController.recentClickList.length,
+                                  padding: EdgeInsets.only(
+                                      top: 10, left: 5, right: 5),
                                   itemBuilder: (context, index) {
                                     return Card(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           ListTile(
                                             leading: Card(
                                               color: Colors.white,
                                               //margin: EdgeInsets.all(10),
                                               child: Padding(
-                                                padding: const EdgeInsets.all(5.0),
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
                                                 child: CustomImage(
-                                                  image: homeController.recentClickList[index].image,
+                                                  image: homeController
+                                                      .recentClickList[index]
+                                                      .image,
                                                   height: 30,
                                                   width: 60,
                                                   fit: BoxFit.contain,
@@ -253,8 +320,12 @@ class RecentClickScreen extends StatelessWidget {
                                               ),
                                             ),
                                             trailing: Text(
-                                              homeController.clickTime(homeController.recentClickList[index]),
-                                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                              homeController.clickTime(
+                                                  homeController
+                                                      .recentClickList[index]),
+                                              style: Get.theme.primaryTextTheme
+                                                  .bodySmall
+                                                  .copyWith(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.grey[600],
                                               ),
@@ -264,10 +335,13 @@ class RecentClickScreen extends StatelessWidget {
                                             height: 25,
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 20, right: 20),
+                                            padding: const EdgeInsets.only(
+                                                left: 20, right: 20),
                                             child: Text(
                                               '${AppLocalizations.of(context).did_you_shop_on} ${homeController.recentClickList[index].name}?',
-                                              style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                                              style: Get.theme.primaryTextTheme
+                                                  .bodyMedium
+                                                  .copyWith(
                                                 fontWeight: FontWeight.w300,
                                               ),
                                             ),
@@ -276,7 +350,8 @@ class RecentClickScreen extends StatelessWidget {
                                             height: 25,
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 20, right: 20),
+                                            padding: const EdgeInsets.only(
+                                                left: 20, right: 20),
                                             child: DottedLine(
                                               dashColor: Colors.grey[350],
                                             ),
@@ -289,32 +364,46 @@ class RecentClickScreen extends StatelessWidget {
                                               Get.dialog(
                                                 Dialog(
                                                   shape: RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.circular(10),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
                                                   ),
-                                                  insetPadding: EdgeInsets.symmetric(horizontal: 15),
-                                                  child: RecentClickDialogWidget(
-                                                    click: homeController.recentClickList[index],
+                                                  insetPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 15),
+                                                  child:
+                                                      RecentClickDialogWidget(
+                                                    click: homeController
+                                                        .recentClickList[index],
                                                   ),
                                                 ),
                                               );
                                             },
                                             child: Padding(
-                                              padding: const EdgeInsets.only(left: 20, right: 20),
+                                              padding: const EdgeInsets.only(
+                                                  left: 20, right: 20),
                                               child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     '${AppLocalizations.of(context).yes_i_did} ',
                                                     textAlign: TextAlign.center,
-                                                    style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                                    style: Get
+                                                        .theme
+                                                        .primaryTextTheme
+                                                        .bodySmall
+                                                        .copyWith(
                                                       color: Colors.teal,
                                                     ),
                                                   ),
                                                   CircleAvatar(
                                                     radius: 6,
-                                                    backgroundColor: Colors.teal,
+                                                    backgroundColor:
+                                                        Colors.teal,
                                                     child: Icon(
-                                                      Icons.arrow_forward_ios_rounded,
+                                                      Icons
+                                                          .arrow_forward_ios_rounded,
                                                       size: 8,
                                                       color: Colors.white,
                                                     ),
@@ -344,11 +433,15 @@ class RecentClickScreen extends StatelessWidget {
                                     padding: const EdgeInsets.only(top: 10),
                                     child: Text(
                                       AppLocalizations.of(context).click_title,
-                                      style: Get.theme.primaryTextTheme.titleMedium.copyWith(fontWeight: FontWeight.w500),
+                                      style: Get
+                                          .theme.primaryTextTheme.titleMedium
+                                          .copyWith(
+                                              fontWeight: FontWeight.w500),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 15),
                                     child: Text(
                                       "When you visit any of the sites on ${global.appName}, it will record your click and display on it.",
                                       textAlign: TextAlign.center,
@@ -359,7 +452,8 @@ class RecentClickScreen extends StatelessWidget {
                                     onTap: () async {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
-                                          builder: (context) => BottomNavigationBarScreen(
+                                          builder: (context) =>
+                                              BottomNavigationBarScreen(
                                             pageIndex: 0,
                                           ),
                                         ),
@@ -369,15 +463,20 @@ class RecentClickScreen extends StatelessWidget {
                                       height: 45,
                                       width: Get.width / 2.5,
                                       //margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                                      padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 7, vertical: 8),
                                       decoration: BoxDecoration(
                                         color: Get.theme.secondaryHeaderColor,
                                         borderRadius: BorderRadius.circular(5),
                                       ),
                                       alignment: Alignment.center,
                                       child: Text(
-                                        AppLocalizations.of(context).see_best_deals,
-                                        style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                                        AppLocalizations.of(context)
+                                            .see_best_deals,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600),
                                       ),
                                     ),
                                   ),
@@ -402,7 +501,8 @@ class RecentClickScreen extends StatelessWidget {
                           //   ),
                           // ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 15),
                             child: Text(
                               AppLocalizations.of(context).profile_desc,
                               textAlign: TextAlign.center,
@@ -415,27 +515,33 @@ class RecentClickScreen extends StatelessWidget {
                                 Get.dialog(Dialog(
                                   child: SizedBox(
                                     width: Get.width / 3,
-                                    child:LoginScreen()
-                                    // LoginOrSignUpScreen(
-                                    //   fromMenu: true,
-                                    // ),
+                                    child: LoginOrSignUpScreen(
+                                      fromMenu: true,
+                                    ),
                                   ),
                                 ));
                               } else {
                                 Get.to(
-                                  () =>LoginScreen(),
-                                  //     LoginOrSignUpScreen(
-                                  //   fromMenu: true,
-                                  // ),
+                                  () => LoginOrSignUpScreen(
+                                    fromMenu: true,
+                                  ),
                                   routeName: 'login',
                                 );
+                                // Get.to(
+                                //   () =>LoginScreen(),
+                                //   //     LoginOrSignUpScreen(
+                                //   //   fromMenu: true,
+                                //   // ),
+                                //   routeName: 'login',
+                                // );
                               }
                             },
                             child: Container(
                               height: 45,
                               width: Get.width / 2.5,
                               //margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                              padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 7, vertical: 8),
                               decoration: BoxDecoration(
                                 color: Get.theme.secondaryHeaderColor,
                                 borderRadius: BorderRadius.circular(5),
@@ -443,7 +549,10 @@ class RecentClickScreen extends StatelessWidget {
                               alignment: Alignment.center,
                               child: Text(
                                 AppLocalizations.of(context).login,
-                                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
                           ),

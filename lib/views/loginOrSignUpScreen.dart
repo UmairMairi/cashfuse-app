@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
-class LoginOrSignUpScreen1 extends StatelessWidget {
+class LoginOrSignUpScreen extends StatelessWidget {
   final bool fromMenu;
-  LoginOrSignUpScreen1({this.fromMenu});
+  LoginOrSignUpScreen({this.fromMenu});
 
   final countryPicker = FlCountryCodePicker();
 
@@ -26,7 +26,8 @@ class LoginOrSignUpScreen1 extends StatelessWidget {
                   Get.back();
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
                   child: Icon(
                     Icons.arrow_back,
                     color: Colors.black,
@@ -53,14 +54,16 @@ class LoginOrSignUpScreen1 extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
                 child: SizedBox(
                   height: 50,
                   child: TextFormField(
                     controller: authController.contactNo,
                     cursorColor: Get.theme.primaryColor,
                     textInputAction: TextInputAction.done,
-                    keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
+                    keyboardType: TextInputType.numberWithOptions(
+                        signed: true, decimal: true),
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                     ],
@@ -120,7 +123,8 @@ class LoginOrSignUpScreen1 extends StatelessWidget {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: 45,
-                margin: EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 15),
+                margin:
+                    EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 15),
                 padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
                 decoration: BoxDecoration(
                   color: Get.theme.secondaryHeaderColor,
@@ -129,7 +133,10 @@ class LoginOrSignUpScreen1 extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text(
                   AppLocalizations.of(context).conti,
-                  style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600),
                 ),
               ),
             ),
@@ -146,7 +153,10 @@ class LoginOrSignUpScreen1 extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 15),
                       child: Text(
                         'Skip',
-                        style: TextStyle(fontWeight: FontWeight.bold, color: Get.theme.primaryColor, fontSize: 16),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Get.theme.primaryColor,
+                            fontSize: 16),
                       ),
                     ),
                   )

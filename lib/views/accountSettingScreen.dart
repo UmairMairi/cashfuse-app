@@ -244,6 +244,7 @@ class AccountSettingScreen extends StatelessWidget {
                         TextFormField(
                           focusNode: femailFocus,
                           controller: authController.email,
+                          readOnly: true,
                           scrollPadding: EdgeInsets.zero,
                           cursorColor: Get.theme.primaryColor,
                           decoration: InputDecoration(

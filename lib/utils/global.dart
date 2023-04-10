@@ -20,10 +20,11 @@ import 'package:universal_html/html.dart' as html;
 
 String appName = "Cashfuse";
 
-String baseUrl = "https://cash.codefuse.org/admin/api"; //"https://cf.codefuse.org/admin/api";
-// String baseUrl = "https://cash.codefuse.org/newcashfuse/api/"; //"https://cf.codefuse.org/admin/api";
+String baseUrl = "https://cash.codefuse.org/newcashfuse/api";
+// "https://cash.codefuse.org/admin/api";
 
-String webConfigurationKey = "BGPWwFL-u-5K7CdmI7bW1Qav23aJxTUFtksG5SDigWG3M2J1-pqgwY-qB1fMQlRJepzlqq9Qv8rDUqk4v9Ph584";
+String webConfigurationKey =
+    "BGPWwFL-u-5K7CdmI7bW1Qav23aJxTUFtksG5SDigWG3M2J1-pqgwY-qB1fMQlRJepzlqq9Qv8rDUqk4v9Ph584";
 
 SharedPreferences sp;
 UserModel currentUser = new UserModel();
@@ -40,23 +41,28 @@ bool isBannerShow = false;
 String bannerImage = '';
 String languageCode = 'en';
 String referralUserId = '';
-String appShareContent = "I recently tried $appName app & highly recommend it! You get extra Cashback on top of all retailer discounts. Download the app from below link.";
+String appShareContent =
+    "I recently tried $appName app & highly recommend it! You get extra Cashback on top of all retailer discounts. Download the app from below link.";
 String appShareLink = '';
 FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 int totalJoinedCount = 0;
-String earningVideoUrl = 'https://media.istockphoto.com/id/1323271459/video/connected-lines-and-particles-on-black-background.mp4?s=mp4-640x640-is&k=20&c=Jzkaf3VHLlSrBvCZDPqQgHzb0Ph5OdPhuDlMBBkDyFM=';
 int admobclickCount = 0;
 int fbclickCount = 0;
 
 //Api Header
-Future<Map<String, String>> getApiHeaders(bool authorizationRequired, {String userId}) async {
+Future<Map<String, String>> getApiHeaders(bool authorizationRequired,
+    {String userId}) async {
   Map<String, String> apiHeader = new Map<String, String>();
 
   if (authorizationRequired) {
     sp = await SharedPreferences.getInstance();
     if (sp.getString("currentUser") != null) {
-      UserModel currentUser = UserModel.fromJson(json.decode(sp.getString("currentUser")));
-      log("Token  == Bearer " + currentUser.token + 'id -- ' + currentUser.id.toString());
+      UserModel currentUser =
+          UserModel.fromJson(json.decode(sp.getString("currentUser")));
+      log("Token  == Bearer " +
+          currentUser.token +
+          'id -- ' +
+          currentUser.id.toString());
       apiHeader.addAll({"Authorization": "Bearer " + currentUser.token});
       if (userId != null && userId.isNotEmpty) {
         apiHeader.addAll({"userId": userId});
@@ -133,13 +139,17 @@ Future share(String link, String image, String title) async {
       final temp = await getExternalStorageDirectory();
       final path = '${temp.path}/image.jpg';
       File(path).writeAsBytesSync(bytes);
-      await FlutterShare.shareFile(filePath: path, title: '$appName', text: link).then((value) {}).catchError((e) {
+      await FlutterShare.shareFile(
+              filePath: path, title: '$appName', text: link)
+          .then((value) {})
+          .catchError((e) {
         showCustomSnackBar(e.toString());
       });
     } else if (title.isNotEmpty) {
       final DynamicLinkParameters parameters = DynamicLinkParameters(
         uriPrefix: 'https://cashfuse.page.link',
-        link: Uri.parse('https://cashfuse.page.link/?link=https://cashfuse.page.link&apn=com.cashfuse.app&ibi=com.cashfuse.app&isi=123456789'),
+        link: Uri.parse(
+            'https://cashfuse.page.link/?link=https://cashfuse.page.link&apn=com.cashfuse.app&ibi=com.cashfuse.app&isi=123456789'),
         androidParameters: AndroidParameters(
           packageName: 'com.cashfuse.app',
           minimumVersion: 1,
@@ -148,17 +158,25 @@ Future share(String link, String image, String title) async {
           bundleId: 'com.cashfuse.app',
           minimumVersion: '1',
           appStoreId: '123456789',
-          fallbackUrl: Uri.parse('https://apps.apple.com/in/app/cashfuse/id123456789'),
+          fallbackUrl:
+              Uri.parse('https://apps.apple.com/in/app/cashfuse/id123456789'),
         ),
       );
       Uri url;
-      final ShortDynamicLink shortLink = await dynamicLinks.buildShortLink(parameters, shortLinkType: ShortDynamicLinkType.short);
+      final ShortDynamicLink shortLink = await dynamicLinks.buildShortLink(
+          parameters,
+          shortLinkType: ShortDynamicLinkType.short);
       url = shortLink.shortUrl;
-      await FlutterShare.share(title: '$appName', text: title, linkUrl: url.toString()).then((value) {}).catchError((e) {
+      await FlutterShare.share(
+              title: '$appName', text: title, linkUrl: url.toString())
+          .then((value) {})
+          .catchError((e) {
         showCustomSnackBar(e.toString());
       });
     } else {
-      await FlutterShare.share(title: '$appName', linkUrl: link).then((value) {}).catchError((e) {
+      await FlutterShare.share(title: '$appName', linkUrl: link)
+          .then((value) {})
+          .catchError((e) {
         showCustomSnackBar(e.toString());
       });
     }
@@ -191,7 +209,8 @@ Future referAndEarn() async {
   try {
     final DynamicLinkParameters parameters = DynamicLinkParameters(
       uriPrefix: 'https://cashfuse.page.link',
-      link: Uri.parse('https://cashfuse.page.link/?link=https://cashfuse.page.link/referEarn&userId=${currentUser.id}&apn=com.cashfuse.app&ibi=com.cashfuse.app&isi=123456789'),
+      link: Uri.parse(
+          'https://cashfuse.page.link/?link=https://cashfuse.page.link/referEarn&userId=${currentUser.id}&apn=com.cashfuse.app&ibi=com.cashfuse.app&isi=123456789'),
       androidParameters: AndroidParameters(
         packageName: 'com.cashfuse.app',
         minimumVersion: 1,
@@ -200,11 +219,13 @@ Future referAndEarn() async {
         bundleId: 'com.cashfuse.app',
         minimumVersion: '1',
         appStoreId: '123456789',
-        fallbackUrl: Uri.parse('https://apps.apple.com/in/app/cashfuse/id123456789'),
+        fallbackUrl:
+            Uri.parse('https://apps.apple.com/in/app/cashfuse/id123456789'),
       ),
     );
     Uri url;
-    final ShortDynamicLink shortLink = await dynamicLinks.buildShortLink(parameters, shortLinkType: ShortDynamicLinkType.short);
+    final ShortDynamicLink shortLink = await dynamicLinks
+        .buildShortLink(parameters, shortLinkType: ShortDynamicLinkType.short);
     url = shortLink.shortUrl;
     appShareLink = url.toString();
   } catch (e) {

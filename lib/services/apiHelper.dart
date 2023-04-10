@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cashfuse/constants/appConstant.dart';
+import 'package:cashfuse/models/admitedoffersModal.dart';
 import 'package:cashfuse/models/admobSettingModel.dart';
 import 'package:cashfuse/models/adsModel.dart';
 import 'package:cashfuse/models/allInOneSearchDataModel.dart';
@@ -17,6 +18,7 @@ import 'package:cashfuse/models/faqModel.dart';
 import 'package:cashfuse/models/offerModel.dart';
 import 'package:cashfuse/models/orderModel.dart';
 import 'package:cashfuse/models/paymentHistoryModel.dart';
+import 'package:cashfuse/models/productModel.dart';
 import 'package:cashfuse/models/referralUserModel.dart';
 import 'package:cashfuse/models/searchDataModel.dart';
 import 'package:cashfuse/models/searchKeyWordModel.dart';
@@ -44,7 +46,7 @@ class APIHelper {
       var dio = Dio();
       response = await dio.get(
           //'${global.baseUrl}${AppConstants.APP_INFO_URI}',
-        "https://cash.codefuse.org/newcashfuse/api/app_info",
+          "https://cash.codefuse.org/newcashfuse/api/app_info",
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
@@ -55,7 +57,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.APP_INFO_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.APP_INFO_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getAppInfo():" + e.toString());
@@ -66,10 +69,11 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.ADMOB_SETTING_URI}',
-          options: Options(
-            headers: await global.getApiHeaders(false),
-          ));
+      response =
+          await dio.get('${global.baseUrl}${AppConstants.ADMOB_SETTING_URI}',
+              options: Options(
+                headers: await global.getApiHeaders(false),
+              ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
@@ -77,7 +81,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADMOB_SETTING_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADMOB_SETTING_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getAdmobSettings():" + e.toString());
@@ -88,7 +93,8 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.FACEBOOK_ADS_SETTING_URI}',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.FACEBOOK_ADS_SETTING_URI}',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
@@ -99,10 +105,46 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.FACEBOOK_ADS_SETTING_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.FACEBOOK_ADS_SETTING_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
-      print("Exception -  apiHelper.dart - getFaceBookAdSetting():" + e.toString());
+      print("Exception -  apiHelper.dart - getFaceBookAdSetting():" +
+          e.toString());
+    }
+  }
+
+  Future<dynamic> socialLogin(UserModel user) async {
+    try {
+      Response response;
+      var dio = Dio();
+      var formData = FormData.fromMap({
+        'device_id': global.appDeviceId,
+        'name': user.name,
+        'email': user.email,
+        'image': user.userImage,
+        'type': user.loginType,
+        'social_id': user.socialId,
+      });
+      response =
+          await dio.post('${global.baseUrl}${AppConstants.SOCIAL_LOGIN_URI}',
+              data: formData,
+              options: Options(
+                headers: await global.getApiHeaders(false),
+              ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = UserModel.fromJson(response.data['user']);
+        recordList.token = response.data["token"];
+      } else {
+        recordList = null;
+      }
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.SOCIAL_LOGIN_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - socialLogin():" + e.toString());
     }
   }
 
@@ -114,18 +156,21 @@ class APIHelper {
         'phone': phone,
         'device_id': global.appDeviceId,
       });
-      response = await dio.post('${global.baseUrl}${AppConstants.LOGIN_RESGISTER}',
-          data: formData,
-          options: Options(
-            headers: await global.getApiHeaders(false),
-          ));
+
+      response =
+          await dio.post('${global.baseUrl}${AppConstants.LOGIN_RESGISTER}',
+              data: formData,
+              options: Options(
+                headers: await global.getApiHeaders(false),
+              ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.LOGIN_RESGISTER}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.LOGIN_RESGISTER}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - loginOrRegister():" + e.toString());
@@ -141,7 +186,8 @@ class APIHelper {
         'phone': phone,
         'otp': status,
         'device_id': global.appDeviceId,
-        if (global.referralUserId.isNotEmpty) 'referral_user_id': global.referralUserId,
+        if (global.referralUserId.isNotEmpty)
+          'referral_user_id': global.referralUserId,
       });
       response = await dio.post('${global.baseUrl}${AppConstants.VERIFY_OTP}',
           data: formData,
@@ -156,7 +202,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.VERIFY_OTP}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.VERIFY_OTP}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - verifyOtp():" + e.toString());
@@ -167,21 +214,21 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      // response = await dio.get('${global.baseUrl}${AppConstants.CAEGORY_URI}?page=$page',
-      response = await dio.get('https://cash.codefuse.org/newcashfuse/api/getcategory?page=$page',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.CAEGORY_URI}?page=$page',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<CategoryModel>.from(response.data['data'].map((x) => CategoryModel.fromJson(x)));
-        print('jasjkdn');
-        print('${recordList[0]}');
+        recordList = List<CategoryModel>.from(
+            response.data['data'].map((x) => CategoryModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.CAEGORY_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.CAEGORY_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getTopCategories():" + e.toString());
@@ -192,18 +239,21 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.CASHBACK_URI}?page=$page',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.CASHBACK_URI}?page=$page',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<CategoryModel>.from(response.data['data'].map((x) => CategoryModel.fromJson(x)));
+        recordList = List<CategoryModel>.from(
+            response.data['data'].map((x) => CategoryModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.CASHBACK_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.CASHBACK_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getTopCashBack():" + e.toString());
@@ -221,11 +271,13 @@ class APIHelper {
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<CategoryModel>.from(response.data['data'].map((x) => CategoryModel.fromJson(x)));
+        recordList = List<CategoryModel>.from(
+            response.data['data'].map((x) => CategoryModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.HOME_ADV_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.HOME_ADV_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getHomeAdv():" + e.toString());
@@ -236,18 +288,21 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.ALL_ADV}?page=$page',
-          options: Options(
-            headers: await global.getApiHeaders(false),
-          ));
+      response =
+          await dio.get('${global.baseUrl}${AppConstants.ALL_ADV}?page=$page',
+              options: Options(
+                headers: await global.getApiHeaders(false),
+              ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<CategoryModel>.from(response.data['data'].map((x) => CategoryModel.fromJson(x)));
+        recordList = List<CategoryModel>.from(
+            response.data['data'].map((x) => CategoryModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ALL_ADV}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ALL_ADV}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getAllAdv():" + e.toString());
@@ -258,21 +313,25 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.EXCLUSIVE_OFFER_URI}',
-          options: Options(
-            headers: await global.getApiHeaders(false),
-          ));
+      response =
+          await dio.get('${global.baseUrl}${AppConstants.EXCLUSIVE_OFFER_URI}',
+              options: Options(
+                headers: await global.getApiHeaders(false),
+              ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<OfferModel>.from(response.data['data'].map((x) => OfferModel.fromJson(x)));
+        recordList = List<OfferModel>.from(
+            response.data['data'].map((x) => OfferModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.EXCLUSIVE_OFFER_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.EXCLUSIVE_OFFER_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
-      print("Exception -  apiHelper.dart - getExclusiveOffers():" + e.toString());
+      print(
+          "Exception -  apiHelper.dart - getExclusiveOffers():" + e.toString());
     }
   }
 
@@ -280,21 +339,25 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.NEW_FLASH_OFFER_URI}',
-          options: Options(
-            headers: await global.getApiHeaders(false),
-          ));
+      response =
+          await dio.get('${global.baseUrl}${AppConstants.NEW_FLASH_OFFER_URI}',
+              options: Options(
+                headers: await global.getApiHeaders(false),
+              ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<OfferModel>.from(response.data['data'].map((x) => OfferModel.fromJson(x)));
+        recordList = List<OfferModel>.from(
+            response.data['data'].map((x) => OfferModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.NEW_FLASH_OFFER_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.NEW_FLASH_OFFER_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
-      print("Exception -  apiHelper.dart - getNewFlashOffers():" + e.toString());
+      print(
+          "Exception -  apiHelper.dart - getNewFlashOffers():" + e.toString());
     }
   }
 
@@ -309,11 +372,13 @@ class APIHelper {
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<BannerModel>.from(response.data['data'].map((x) => BannerModel.fromJson(x)));
+        recordList = List<BannerModel>.from(
+            response.data['data'].map((x) => BannerModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.BANNER_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.BANNER_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getTopBanners():" + e.toString());
@@ -324,7 +389,8 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.AD_DETAIL_URI}?ad_id=$adId',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.AD_DETAIL_URI}?ad_id=$adId',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
@@ -335,7 +401,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.AD_DETAIL_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.AD_DETAIL_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getAdDetails():" + e.toString());
@@ -346,7 +413,8 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.OFEFER_DETAIL_URI}?offer_id=$offerId',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.OFEFER_DETAIL_URI}?offer_id=$offerId',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
@@ -357,7 +425,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.OFEFER_DETAIL_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.OFEFER_DETAIL_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getOfferDetails():" + e.toString());
@@ -368,7 +437,8 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.CAMPAIGN_DETAIL_URI}?campaign_id=$campaignId',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.CAMPAIGN_DETAIL_URI}?campaign_id=$campaignId',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
@@ -379,10 +449,12 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.CAMPAIGN_DETAIL_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.CAMPAIGN_DETAIL_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
-      print("Exception -  apiHelper.dart - getCampignDetails():" + e.toString());
+      print(
+          "Exception -  apiHelper.dart - getCampignDetails():" + e.toString());
     }
   }
 
@@ -397,11 +469,13 @@ class APIHelper {
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<Coupon>.from(response.data['data'].map((x) => Coupon.fromJson(x)));
+        recordList = List<Coupon>.from(
+            response.data['data'].map((x) => Coupon.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.COUPON_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.COUPON_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getCoupons():" + e.toString());
@@ -419,11 +493,13 @@ class APIHelper {
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<FaqModel>.from(response.data['data'].map((x) => FaqModel.fromJson(x)));
+        recordList = List<FaqModel>.from(
+            response.data['data'].map((x) => FaqModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.FAQ_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.FAQ_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getFaqs():" + e.toString());
@@ -445,7 +521,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ABOUT_US_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ABOUT_US_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getAboutUs():" + e.toString());
@@ -456,10 +533,11 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.PRIVACY_POLICY_URI}',
-          options: Options(
-            headers: await global.getApiHeaders(false),
-          ));
+      response =
+          await dio.get('${global.baseUrl}${AppConstants.PRIVACY_POLICY_URI}',
+              options: Options(
+                headers: await global.getApiHeaders(false),
+              ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
@@ -467,7 +545,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.PRIVACY_POLICY_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.PRIVACY_POLICY_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getPrivacyPolicy():" + e.toString());
@@ -478,7 +557,8 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.ACCOUNT_DETAILS_URI}?user_id=${global.currentUser.id}',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.ACCOUNT_DETAILS_URI}?user_id=${global.currentUser.id}',
           options: Options(
             headers: await global.getApiHeaders(true),
           ));
@@ -489,14 +569,17 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ACCOUNT_DETAILS_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ACCOUNT_DETAILS_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
-      print("Exception -  apiHelper.dart - getAccountDetails():" + e.toString());
+      print(
+          "Exception -  apiHelper.dart - getAccountDetails():" + e.toString());
     }
   }
 
-  Future<dynamic> addBankDetails(String acHolderName, String accountNo, String bankName, String ifscCode) async {
+  Future<dynamic> addBankDetails(String acHolderName, String accountNo,
+      String bankName, String ifscCode) async {
     try {
       Response response;
       var dio = Dio();
@@ -507,7 +590,8 @@ class APIHelper {
         'bank_name': bankName,
         'ifsc': ifscCode,
       });
-      response = await dio.post('${global.baseUrl}${AppConstants.ADD_BANK_DETAILS_URI}',
+      response = await dio.post(
+          '${global.baseUrl}${AppConstants.ADD_BANK_DETAILS_URI}',
           data: data,
           options: Options(
             headers: await global.getApiHeaders(true),
@@ -519,7 +603,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_BANK_DETAILS_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_BANK_DETAILS_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - addBankDetails():" + e.toString());
@@ -534,7 +619,8 @@ class APIHelper {
         'user_id': global.currentUser.id,
         'amazon_no': amazonNo,
       });
-      response = await dio.post('${global.baseUrl}${AppConstants.ADD_AMAZON_DETAILS_URI}',
+      response = await dio.post(
+          '${global.baseUrl}${AppConstants.ADD_AMAZON_DETAILS_URI}',
           data: data,
           options: Options(
             headers: await global.getApiHeaders(true),
@@ -546,10 +632,12 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_AMAZON_DETAILS_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_AMAZON_DETAILS_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
-      print("Exception -  apiHelper.dart - addAmazonPayDetails():" + e.toString());
+      print("Exception -  apiHelper.dart - addAmazonPayDetails():" +
+          e.toString());
     }
   }
 
@@ -561,7 +649,8 @@ class APIHelper {
         'user_id': global.currentUser.id,
         'paytm_no': paytmNo,
       });
-      response = await dio.post('${global.baseUrl}${AppConstants.ADD_PAYTM_DETAILS_URI}',
+      response = await dio.post(
+          '${global.baseUrl}${AppConstants.ADD_PAYTM_DETAILS_URI}',
           data: data,
           options: Options(
             headers: await global.getApiHeaders(true),
@@ -573,7 +662,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_PAYTM_DETAILS_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_PAYTM_DETAILS_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - addPayTMDetails():" + e.toString());
@@ -588,11 +678,12 @@ class APIHelper {
         'user_id': global.currentUser.id,
         'upi': upi,
       });
-      response = await dio.post('${global.baseUrl}${AppConstants.ADD_UPI_DETAILS_URI}',
-          data: data,
-          options: Options(
-            headers: await global.getApiHeaders(true),
-          ));
+      response =
+          await dio.post('${global.baseUrl}${AppConstants.ADD_UPI_DETAILS_URI}',
+              data: data,
+              options: Options(
+                headers: await global.getApiHeaders(true),
+              ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
@@ -600,7 +691,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_UPI_DETAILS_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_UPI_DETAILS_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - addUpiDetails():" + e.toString());
@@ -615,7 +707,8 @@ class APIHelper {
         'user_id': global.currentUser.id,
         'paypal_email': payPalEmail,
       });
-      response = await dio.post('${global.baseUrl}${AppConstants.ADD_PAYPAL_DETAILS_URI}',
+      response = await dio.post(
+          '${global.baseUrl}${AppConstants.ADD_PAYPAL_DETAILS_URI}',
           data: data,
           options: Options(
             headers: await global.getApiHeaders(true),
@@ -627,7 +720,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_PAYPAL_DETAILS_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_PAYPAL_DETAILS_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - addPayPalDetails():" + e.toString());
@@ -640,13 +734,16 @@ class APIHelper {
       var dio = Dio();
 
       response = await dio.get(
-        cId != null ? '${global.baseUrl}${AppConstants.TRACKING_LINK_URI}?user_id=${global.currentUser.id}&url=$url&type=$type&c_id=$cId' : '${global.baseUrl}${AppConstants.TRACKING_LINK_URI}?user_id=${global.currentUser.id}&url=$url&type=$type',
+        cId != null
+            ? '${global.baseUrl}${AppConstants.TRACKING_LINK_URI}?user_id=${global.currentUser.id}&url=$url&type=$type&c_id=$cId'
+            : '${global.baseUrl}${AppConstants.TRACKING_LINK_URI}?user_id=${global.currentUser.id}&url=$url&type=$type',
         options: Options(
           headers: await global.getApiHeaders(true),
         ),
       );
 
-      log('${global.baseUrl}${AppConstants.TRACKING_LINK_URI}?user_id=${global.currentUser.id}&url=$url&type=$type&c_id=$cId +++++' '${global.baseUrl}${AppConstants.TRACKING_LINK_URI}?user_id=${global.currentUser.id}&url=$url&type=$type');
+      log('${global.baseUrl}${AppConstants.TRACKING_LINK_URI}?user_id=${global.currentUser.id}&url=$url&type=$type&c_id=$cId +++++'
+          '${global.baseUrl}${AppConstants.TRACKING_LINK_URI}?user_id=${global.currentUser.id}&url=$url&type=$type');
 
       dynamic recordList;
       if (response.statusCode == 200) {
@@ -654,7 +751,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.TRACKING_LINK_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.TRACKING_LINK_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getTrackingLink():" + e.toString());
@@ -678,14 +776,16 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.SEARCH_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.SEARCH_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - search():" + e.toString());
     }
   }
 
-  Future<dynamic> addClick(String name, String image, String trackingLink) async {
+  Future<dynamic> addClick(
+      String name, String image, String trackingLink) async {
     try {
       Response response;
       var dio = Dio();
@@ -706,7 +806,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_CLICK_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_CLICK_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - search():" + e.toString());
@@ -725,18 +826,21 @@ class APIHelper {
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<ClickModel>.from(response.data['data'].map((x) => ClickModel.fromJson(x)));
+        recordList = List<ClickModel>.from(
+            response.data['data'].map((x) => ClickModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.GET_CLICK_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.GET_CLICK_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getClick():" + e.toString());
     }
   }
 
-  Future<dynamic> updateProfile(String name, String phone, String email, File userImage) async {
+  Future<dynamic> updateProfile(
+      String name, String phone, String email, File userImage) async {
     try {
       Response response;
       var dio = Dio();
@@ -765,7 +869,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.UPDATE_PROFILE_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.UPDATE_PROFILE_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - updateProfile():" + e.toString());
@@ -776,18 +881,21 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.ALL_IN_ONE_URI}',
-          options: Options(
-            headers: await global.getApiHeaders(false),
-          ));
+      response =
+          await dio.get('${global.baseUrl}${AppConstants.ALL_IN_ONE_URI}',
+              options: Options(
+                headers: await global.getApiHeaders(false),
+              ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<AllInOneSearchDataModel>.from(response.data['data'].map((x) => AllInOneSearchDataModel.fromJson(x)));
+        recordList = List<AllInOneSearchDataModel>.from(response.data['data']
+            .map((x) => AllInOneSearchDataModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ALL_IN_ONE_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ALL_IN_ONE_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - allInOneSearch():" + e.toString());
@@ -798,18 +906,21 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.MORE_CAMAPIGN_URI}?campaign_id=$campaignId',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.MORE_CAMAPIGN_URI}?campaign_id=$campaignId',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<CampaignModel>.from(response.data['data'].map((x) => CampaignModel.fromJson(x)));
+        recordList = List<CampaignModel>.from(
+            response.data['data'].map((x) => CampaignModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.MORE_CAMAPIGN_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.MORE_CAMAPIGN_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getMoreCampaign():" + e.toString());
@@ -820,18 +931,21 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.MORE_OFFERS_URI}?offer_id=$offerId',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.MORE_OFFERS_URI}?offer_id=$offerId',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<OfferModel>.from(response.data['data'].map((x) => OfferModel.fromJson(x)));
+        recordList = List<OfferModel>.from(
+            response.data['data'].map((x) => OfferModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.MORE_OFFERS_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.MORE_OFFERS_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getMoreOffers():" + e.toString());
@@ -842,18 +956,21 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.MORE_ADS_URI}?ad_id=$adsId',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.MORE_ADS_URI}?ad_id=$adsId',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<AdsModel>.from(response.data['data'].map((x) => AdsModel.fromJson(x)));
+        recordList = List<AdsModel>.from(
+            response.data['data'].map((x) => AdsModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.MORE_ADS_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.MORE_ADS_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getMoreAds():" + e.toString());
@@ -876,7 +993,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.MY_PROFILE_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.MY_PROFILE_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - myProfile():" + e.toString());
@@ -891,7 +1009,8 @@ class APIHelper {
         'user_id': global.currentUser.id,
         'medium': medium,
       });
-      response = await dio.post('${global.baseUrl}${AppConstants.SEND_WITHDRAWAL_REQUEST_URI}',
+      response = await dio.post(
+          '${global.baseUrl}${AppConstants.SEND_WITHDRAWAL_REQUEST_URI}',
           data: formData,
           options: Options(
             headers: await global.getApiHeaders(true),
@@ -903,10 +1022,12 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.SEND_WITHDRAWAL_REQUEST_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.SEND_WITHDRAWAL_REQUEST_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
-      print("Exception -  apiHelper.dart - sendWithdrawalRequest():" + e.toString());
+      print("Exception -  apiHelper.dart - sendWithdrawalRequest():" +
+          e.toString());
     }
   }
 
@@ -915,21 +1036,25 @@ class APIHelper {
       Response response;
       var dio = Dio();
 
-      response = await dio.get('${global.baseUrl}${AppConstants.Payment_HISTORY_URI}?user_id=${global.currentUser.id}',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.Payment_HISTORY_URI}?user_id=${global.currentUser.id}',
           options: Options(
             headers: await global.getApiHeaders(true),
           ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<PaymentHistoryModel>.from(response.data['data'].map((x) => PaymentHistoryModel.fromJson(x)));
+        recordList = List<PaymentHistoryModel>.from(
+            response.data['data'].map((x) => PaymentHistoryModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.Payment_HISTORY_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.Payment_HISTORY_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
-      print("Exception -  apiHelper.dart - getPaymentHistory():" + e.toString());
+      print(
+          "Exception -  apiHelper.dart - getPaymentHistory():" + e.toString());
     }
   }
 
@@ -937,18 +1062,21 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.ORDER_HISTORY_URI}?user_id=${global.currentUser.id}',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.ORDER_HISTORY_URI}?user_id=${global.currentUser.id}',
           options: Options(
             headers: await global.getApiHeaders(true),
           ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<OrderModel>.from(response.data['data'].map((x) => OrderModel.fromJson(x)));
+        recordList = List<OrderModel>.from(
+            response.data['data'].map((x) => OrderModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ORDER_HISTORY_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ORDER_HISTORY_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getOrders():" + e.toString());
@@ -959,21 +1087,25 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.GET_ORDER_COMPLAIN_URI}?order_id=$orderId',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.GET_ORDER_COMPLAIN_URI}?order_id=$orderId',
           options: Options(
             headers: await global.getApiHeaders(true),
           ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<ComplainModel>.from(response.data['data'].map((x) => ComplainModel.fromJson(x)));
+        recordList = List<ComplainModel>.from(
+            response.data['data'].map((x) => ComplainModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.GET_ORDER_COMPLAIN_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.GET_ORDER_COMPLAIN_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
-      print("Exception -  apiHelper.dart - getOrderComplains():" + e.toString());
+      print(
+          "Exception -  apiHelper.dart - getOrderComplains():" + e.toString());
     }
   }
 
@@ -986,11 +1118,12 @@ class APIHelper {
         'order_id': orderId,
         'complain': complain,
       });
-      response = await dio.post('${global.baseUrl}${AppConstants.ADD_COMPLAIN_URI}',
-          data: formData,
-          options: Options(
-            headers: await global.getApiHeaders(true),
-          ));
+      response =
+          await dio.post('${global.baseUrl}${AppConstants.ADD_COMPLAIN_URI}',
+              data: formData,
+              options: Options(
+                headers: await global.getApiHeaders(true),
+              ));
 
       dynamic recordList;
       if (response.statusCode == 200 && response.data['status'] == 1) {
@@ -1000,7 +1133,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_COMPLAIN_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADD_COMPLAIN_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - addOrderComplain():" + e.toString());
@@ -1011,7 +1145,8 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.BANNER_NOTIFICATION_URI}',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.BANNER_NOTIFICATION_URI}',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
@@ -1022,10 +1157,12 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.BANNER_NOTIFICATION_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.BANNER_NOTIFICATION_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
-      print("Exception -  apiHelper.dart - getBannerNotification():" + e.toString());
+      print("Exception -  apiHelper.dart - getBannerNotification():" +
+          e.toString());
     }
   }
 
@@ -1033,7 +1170,8 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.DELETE_CLICK_URI}?user_id=${global.currentUser.id}',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.DELETE_CLICK_URI}?user_id=${global.currentUser.id}',
           options: Options(
             headers: await global.getApiHeaders(true),
           ));
@@ -1044,7 +1182,8 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.DELETE_CLICK_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.DELETE_CLICK_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - deleteClicks():" + e.toString());
@@ -1055,19 +1194,22 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.REFERRAL_USERS_URI}?user_id=${global.currentUser.id}',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.REFERRAL_USERS_URI}?user_id=${global.currentUser.id}',
           options: Options(
             headers: await global.getApiHeaders(true),
           ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<ReferralUserModel>.from(response.data['data'].map((x) => ReferralUserModel.fromJson(x)));
+        recordList = List<ReferralUserModel>.from(
+            response.data['data'].map((x) => ReferralUserModel.fromJson(x)));
         global.totalJoinedCount = response.data['count'];
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.REFERRAL_USERS_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.REFERRAL_USERS_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getReferralUsers():" + e.toString());
@@ -1078,21 +1220,25 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.TRENDING_KEYWORD}',
-          options: Options(
-            headers: await global.getApiHeaders(false),
-          ));
+      response =
+          await dio.get('${global.baseUrl}${AppConstants.TRENDING_KEYWORD}',
+              options: Options(
+                headers: await global.getApiHeaders(false),
+              ));
 
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = List<SearchKeyWordModel>.from(response.data['data'].map((x) => SearchKeyWordModel.fromJson(x)));
+        recordList = List<SearchKeyWordModel>.from(
+            response.data['data'].map((x) => SearchKeyWordModel.fromJson(x)));
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.TRENDING_KEYWORD}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.TRENDING_KEYWORD}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
-      print("Exception -  apiHelper.dart - getTrendingKeywords():" + e.toString());
+      print("Exception -  apiHelper.dart - getTrendingKeywords():" +
+          e.toString());
     }
   }
 
@@ -1100,9 +1246,11 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get('${global.baseUrl}${AppConstants.REMOVE_USER_FROM_DB_URI}',
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.REMOVE_USER_FROM_DB_URI}',
           options: Options(
-            headers: await global.getApiHeaders(true, userId: global.currentUser.id.toString()),
+            headers: await global.getApiHeaders(true,
+                userId: global.currentUser.id.toString()),
           ));
 
       dynamic recordList;
@@ -1111,10 +1259,112 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      print('====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.REMOVE_USER_FROM_DB_URI}\n${response.data}');
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.REMOVE_USER_FROM_DB_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - removeUserfromDb():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getAdmitedOfferDetails(int admitedId) async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.ADMITEDOFFERS_DETAIL}?id=$admitedId',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = AdmitedOffersModal.fromJson(response.data);
+      } else {
+        recordList = null;
+      }
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.ADMITEDOFFERS_DETAIL}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getAdmitedOfferDetails():" +
+          e.toString());
+    }
+  }
+
+  Future<dynamic> getMoreAmited(String offerId) async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.MORE_ADMITED_OFFERS_URI}?id=$offerId',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<AdmitedOffersModal>.from(
+            response.data['data'].map((x) => AdmitedOffersModal.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.MORE_ADMITED_OFFERS_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getMoreAmited():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getProducts() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response =
+          await dio.get('${global.baseUrl}${AppConstants.GET_PRODUCTS_URI}',
+              options: Options(
+                headers: await global.getApiHeaders(false),
+              ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<ProductModel>.from(
+            response.data['data'].map((x) => ProductModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.GET_PRODUCTS_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getProducts():" + e.toString());
+    }
+  }
+
+  Future<dynamic> getTrendingProducts() async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get(
+          '${global.baseUrl}${AppConstants.GET_TRENDING_PRODUCTS_URI}',
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = List<ProductModel>.from(
+            response.data['data'].map((x) => ProductModel.fromJson(x)));
+      } else {
+        recordList = null;
+      }
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.GET_TRENDING_PRODUCTS_URI}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getTrendingProducts():" +
+          e.toString());
     }
   }
 }

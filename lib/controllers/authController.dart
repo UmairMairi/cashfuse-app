@@ -31,6 +31,12 @@ class AuthController extends GetxController {
   Timer timer;
   String status;
 
+  UserCredential userCredential;
+  OAuthProvider provider = OAuthProvider("apple.com");
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  get user => _auth.currentUser;
+
   @override
   void onInit() async {
     coutryCode = '+91';
@@ -45,7 +51,6 @@ class AuthController extends GetxController {
   Future logout() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     try {
-
       sharedPreferences.remove("user_token");
       sharedPreferences.remove("user_id");
       sharedPreferences.remove("user_name");
@@ -61,13 +66,72 @@ class AuthController extends GetxController {
     }
   }
 
+  Future sendEmailOtp(bool fromMenu) async {
+    try {
+      print('jasbdjh');
+      print('${networkController.connectionStatus.value == 1}');
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
+        // if (contactNo.text.isNotEmpty) {
+        //   if (contactNo.text.length >= 7) {
+        Get.dialog(CustomLoader(), barrierDismissible: false);
+        await apiHelper
+            .loginOrRegister(
+          email.text,
+        )
+            .then((response) async {
+          if (response.statusCode == 200) {
+            Get.back();
+            // global.currentUser = response.data;
+            // global.sp.setString(
+            //     'currentUser', json.encode(global.currentUser.toJson()));
+            // print('status code=200');
+            //  Get.to(
+            //        () => BottomNavigationBarScreen(
+            //      pageIndex: 0,
+            //    ),
+            //    routeName: 'home',
+            //  );
+            Get.to(() => OtpVerificationScreen(
+                // phoneNumber: settingsController.cNewEmail.text,
+                // verificationId: "",
+                // callId: 2,
+                ));
+            // await sendOTP(fromMenu);
+          } else {
+            Get.back();
+            showCustomSnackBar(response.message);
+            // showCustomSnackBar("Oops, OTP send failed");
+          }
+        });
+        //   } else {
+        //     showCustomSnackBar('Please enter valid number.');
+        //   }
+        // } else {
+        //   showCustomSnackBar('Please enter number.');
+        // }
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+
+      update();
+    } catch (e) {
+      Get.back();
+      print("Exception - authController.dart - loginOrRegister():" +
+          e.toString());
+    }
+  }
+
   Future loginOrRegister(bool fromMenu) async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         if (contactNo.text.isNotEmpty) {
           if (contactNo.text.length >= 7) {
             Get.dialog(CustomLoader(), barrierDismissible: false);
-            await apiHelper.loginOrRegister(coutryCode + contactNo.text).then((response) async {
+            await apiHelper
+                .loginOrRegister(coutryCode + contactNo.text)
+                .then((response) async {
               if (response.statusCode == 200) {
                 await sendOTP(fromMenu);
               } else {
@@ -88,7 +152,8 @@ class AuthController extends GetxController {
       update();
     } catch (e) {
       Get.back();
-      print("Exception - authController.dart - loginOrRegister():" + e.toString());
+      print("Exception - authController.dart - loginOrRegister():" +
+          e.toString());
     }
   }
 
@@ -98,7 +163,8 @@ class AuthController extends GetxController {
       if (global.getPlatFrom()) {
         FirebaseAuth auth = FirebaseAuth.instance;
         Get.back();
-        ConfirmationResult confirmationResult = await auth.signInWithPhoneNumber(coutryCode + contactNo.text);
+        ConfirmationResult confirmationResult =
+            await auth.signInWithPhoneNumber(coutryCode + contactNo.text);
         if (confirmationResult.verificationId != null) {
           Get.dialog(Dialog(
             child: SizedBox(
@@ -143,6 +209,252 @@ class AuthController extends GetxController {
     }
   }
 
+  // Future<void> googleSignInFun(bool fromMenu) async {
+  //   try {
+  //     googleSignIn.signOut();
+
+  //     UserModel _user = new UserModel();
+
+  //     GoogleSignInAccount googleUSer = await googleSignIn.signIn();
+  //     if (googleUSer != null) {
+  //       var user = googleUSer;
+  //       final googleCred = await user.authentication;
+  //       final credential = GoogleAuthProvider.credential(
+  //           accessToken: googleCred.accessToken, idToken: googleCred.idToken);
+  //       userCredential =
+  //           await FirebaseAuth.instance.signInWithCredential(credential);
+  //       log(userCredential.toString());
+
+  //       _user.loginType = 'google';
+  //       _user.socialId = userCredential.user.uid;
+  //       _user.name = userCredential.user.displayName;
+  //       _user.userImage = userCredential.user.photoURL;
+
+  //       _user.email = userCredential.user.email;
+
+  //       Get.dialog(CustomLoader(), barrierDismissible: false);
+
+  //       await apiHelper.socialLogin(_user).then((response) async {
+  //         Get.back();
+  //         if (response.statusCode == 200) {
+  //           global.currentUser = response.data;
+
+  //           global.sp.setString(
+  //               'currentUser', json.encode(global.currentUser.toJson()));
+  //           Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
+  //           await getProfile();
+  //           if (fromMenu) {
+  //             await Get.find<HomeController>().init();
+  //             if (!GetPlatform.isWeb) {
+  //               await global.referAndEarn();
+  //             }
+  //           }
+  //         } else {
+  //           showCustomSnackBar(response.message);
+  //         }
+  //       });
+  //       // update();
+  //       // global.showOnlyLoaderDialog(Get.context);
+  //       // await signIn();
+  //       // global.hideLoader();
+  //       // global.getCurrentUser();
+  //       // if (global.currentUser!.fristName != null && global.currentUser!.fristName != "") {
+  //       //   Get.off(() => BottomNavigationWidget(
+  //       //         a: a,
+  //       //         o: o,
+  //       //       ));
+  //       // } else {
+  //       //   Get.off(() => EditProfileScreen());
+  //       // }
+  //       // await signupController.checkEmailContact(userCredential!.user!.email!, signupController.cPhone.text, callId: 3);
+
+  //       // if (!signupController.isUserExist) {
+  //       //   Get.bottomSheet(inputContactWidget(email: userCredential!.user!.email!));
+  //       // }
+
+  //       //}
+  //     }
+  //   } catch (e) {
+  //     print("Exception - authController.dart - googleSignInFun():" +
+  //         e.toString());
+  //   }
+  // }
+
+  // Future facebookLogin(bool fromMenu) async {
+  //   print("FaceBook");
+  //   // global.showOnlyLoaderDialog(Get.context);
+  //   try {
+  //     final result =
+  //         await FacebookAuth.i.login(permissions: ['public_profile', 'email']);
+  //     if (result.status == LoginStatus.success) {
+  //       final OAuthCredential facebookAuthCredential =
+  //           FacebookAuthProvider.credential(result.accessToken.token);
+  //       // global.hideLoader();
+  //       // var userData = await FacebookAuth.i.getUserData();
+  //       // print(userData);
+  //       // print(userData["email"]);
+  //       //user secrate
+  //       // ignore: prefer_typing_uninitialized_variables
+  //       var cred;
+  //       if (facebookAuthCredential.accessToken != null) {
+  //         cred = await FirebaseAuth.instance
+  //             .signInWithCredential(facebookAuthCredential);
+  //         // oAuthAccessToken = facebookAuthCredential.accessToken;
+  //         // oAuthProviderName = 'facebook';
+  //         // oAuthUserId = cred.user!.uid;
+  //         // oAuthUserName = cred.user!.displayName;
+  //         // oAuthUserPicUrl = cred.user!.photoURL;
+  //         // isOAuth = true;
+  //       }
+  //       // await signupController.checkEmailContact(cred.user.providerData[0].email, null, callId: 3);
+  //       // cEmail.text = cred.user.providerData[0].email;
+  //       update();
+  //       // global.showOnlyLoaderDialog(Get.context);
+  //       // await signIn();
+  //       // global.hideLoader();
+  //       // global.getCurrentUser();
+  //       // if (global.currentUser!.fristName != null && global.currentUser!.fristName != "") {
+  //       //   Get.off(() => BottomNavigationWidget(
+  //       //         a: a,
+  //       //         o: o,
+  //       //       ));
+  //       // } else {
+  //       //   Get.off(() => EditProfileScreen());
+  //       // }
+  //       // await signupController.checkEmailContact(cred.user.providerData[0].email, signupController.cPhone.text, callId: 3);
+  //     }
+  //   } catch (e) {
+  //     print('Exception in facebookLogin:$e');
+  //   }
+  // }
+
+  // Future signInWithApple() async {
+  //   try {
+  //     // global.showOnlyLoaderDialog(Get.context);
+  //     String generateNonce([int length = 32]) {
+  //       const charset =
+  //           '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+  //       final random = math.Random.secure();
+  //       return List.generate(
+  //           length, (_) => charset[random.nextInt(charset.length)]).join();
+  //     }
+
+  //     String sha256ofString(String input) {
+  //       final bytes = utf8.encode(input);
+  //       final digest = sha.sha256.convert(bytes);
+  //       return digest.toString();
+  //     }
+
+  //     final rawNonce = generateNonce();
+  //     final nonce = sha256ofString(rawNonce);
+  //     final credential = await SignInWithApple.getAppleIDCredential(scopes: [
+  //       AppleIDAuthorizationScopes.email,
+  //       AppleIDAuthorizationScopes.fullName
+  //     ], nonce: nonce)
+  //         .catchError((e) {
+  //       print("error $e");
+  //     });
+
+  //     final oauthCredential = provider.credential(
+  //         idToken: credential.identityToken, rawNonce: rawNonce);
+  //     final authResult = await _auth
+  //         .signInWithCredential(oauthCredential)
+  //         .onError((error, stackTrace) {
+  //       print("error ${error.toString()}");
+  //       return user;
+  //     }).catchError((e) {
+  //       // global.hideLoader();
+  //       print("error ${e.toString()}");
+  //     });
+  //     print('Auth cred ${authResult.user.uid}'); //usersecrate
+  //     print(
+  //         '--------------------------------------------------------------------------------');
+  //     print(
+  //         'cred authCode ${credential.authorizationCode} email ${credential.email} givenName ${credential.givenName}  familyname ${credential.familyName} identytToken ${credential.identityToken}');
+
+  //     if (credential.authorizationCode != '') {
+  //       // oAuthProviderName = 'apple';
+  //       // oAuthUserId = authResult.user!.uid;
+  //       // oAuthUserName = credential.givenName;
+  //       // oAuthUserPicUrl = null;
+  //       // isOAuth = true;
+  //       // cEmail.text = credential.email!;
+  //       // update();
+  //       // global.showOnlyLoaderDialog(Get.context);
+  //       // await signIn();
+  //       // global.hideLoader();
+  //       // global.getCurrentUser();
+  //       // if (global.currentUser!.fristName != null && global.currentUser!.fristName != "") {
+  //       //   Get.off(() => BottomNavigationWidget(
+  //       //         a: a,
+  //       //         o: o,
+  //       //       ));
+  //       // } else {
+  //       //   Get.off(() => EditProfileScreen());
+  //       // }
+  //       // await signupController.checkEmailContact(credential.email, signupController.cPhone.text, callId: 3);
+  //     }
+  //   } catch (e) {
+  //     print(
+  //         "Exception - sign_in_controller.dart - signInWithApple(): ${e.toString()}");
+  //     return null;
+  //   }
+  // }
+
+  // Future sendEmailOTP() async {
+  //   try {
+  //     // emailAuth.sessionName = 'Cashfuse';
+  //     // // emailAuth.config(data);
+  //     // bool result = await emailAuth.sendOtp(recipientMail: email.text);
+  //     // emailAuth = new EmailAuth(sessionName: 'Cashfuse');
+  //     // bool result =
+  //     //     await emailAuth.sendOtp(recipientMail: email.text, otpLength: 6);
+  //     // print(result);
+  //
+  //     emailOTP.setConfig(
+  //       appEmail: 'codefuse.org@gmail.com',
+  //       userEmail: email.text,
+  //       otpLength: 6,
+  //       otpType: OTPType.digitsOnly,
+  //       appName: global.appName,
+  //     );
+  //
+  //     // // emailOTP.sendOTP();
+  //
+  //     if (await emailOTP.sendOTP() == true) {
+  //       startTimer();
+  //       // global.hideLoader();
+  //       //  global.showToast(message: "OTP has been sent");
+  //       //  signupController.timer();
+  //       Get.to(() => OtpVerificationScreen(
+  //           // phoneNumber: settingsController.cNewEmail.text,
+  //           // verificationId: "",
+  //           // callId: 2,
+  //           ));
+  //     } else {
+  //       // global.hideLoader();
+  //       // global.showToast(message: "Oops, OTP send failed");
+  //       showCustomSnackBar("Oops, OTP send failed");
+  //     }
+  //   } catch (e) {
+  //     print("Exception - otp_verification_screen.dart - _sendEmailOTP():" +
+  //         e.toString());
+  //   }
+  // }
+
+  // Future verifyEmailOTP(bool fromMenu) async {
+  //   if (await emailOTP.verifyOTP(otp: otp.text) == true) {
+  //    // await loginOrRegister(fromMenu);
+  //     // changeMail(global.currentUser!.email!, cNewEmail.text);
+  //     // cNewEmail.clear();
+  //     // Get.back(); //back from OTP screen
+  //     // Get.back(); //back from change email screen
+  //   } else {
+  //     // global.showToast(message: "Invalid OTP", bg: Colors.red);
+  //     showCustomSnackBar("Invalid OTP");
+  //   }
+  // }
+
   void startTimer() {
     const oneSec = const Duration(seconds: 1);
     timer = Timer.periodic(
@@ -169,9 +481,11 @@ class AuthController extends GetxController {
 
   Future checkOTP(String verificationCode, bool fromMenu) async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         FirebaseAuth auth = FirebaseAuth.instance;
-        var _credential = PhoneAuthProvider.credential(verificationId: verificationCode, smsCode: otp.text.trim());
+        var _credential = PhoneAuthProvider.credential(
+            verificationId: verificationCode, smsCode: otp.text.trim());
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await auth.signInWithCredential(_credential).then((result) {
           Get.back();
@@ -194,15 +508,19 @@ class AuthController extends GetxController {
 
   Future verifyOtp(String status, bool fromMenu) async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
-        await apiHelper.verifyOtp(coutryCode + contactNo.text, status).then((response) async {
+        await apiHelper
+            .verifyOtp(coutryCode + contactNo.text, status)
+            .then((response) async {
           Get.back();
           if (response != null) {
             if (response.statusCode == 200) {
               global.currentUser = response.data;
 
-              global.sp.setString('currentUser', json.encode(global.currentUser.toJson()));
+              global.sp.setString(
+                  'currentUser', json.encode(global.currentUser.toJson()));
               Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
               await getProfile();
               if (fromMenu) {
@@ -265,10 +583,14 @@ class AuthController extends GetxController {
 
   Future updateProfile(File userImage) async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         if (email.text.trim().isNotEmpty) {
           Get.dialog(CustomLoader(), barrierDismissible: false);
-          await apiHelper.updateProfile(name.text.trim(), global.currentUser.phone, email.text.trim(), userImage).then((response) async {
+          await apiHelper
+              .updateProfile(name.text.trim(), global.currentUser.phone,
+                  email.text.trim(), userImage)
+              .then((response) async {
             Get.back();
             if (response != null) {
               if (response.statusCode == 200) {
@@ -290,19 +612,22 @@ class AuthController extends GetxController {
 
       update();
     } catch (e) {
-      print("Exception - authController.dart - updateProfile():" + e.toString());
+      print(
+          "Exception - authController.dart - updateProfile():" + e.toString());
     }
   }
 
   Future getProfile() async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         await apiHelper.myProfile().then((response) {
           if (response.statusCode == 200) {
             String _token = global.currentUser.token;
             global.currentUser = response.data;
             global.currentUser.token = _token;
-            global.sp.setString('currentUser', json.encode(global.currentUser.toJson()));
+            global.sp.setString(
+                'currentUser', json.encode(global.currentUser.toJson()));
           } else {
             showCustomSnackBar(response.message);
           }
@@ -319,7 +644,8 @@ class AuthController extends GetxController {
 
   Future removeUserfromDb() async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         await apiHelper.removeUserfromDb().then((response) async {
           if (response.statusCode == 200) {
             if (global.getPlatFrom()) {
@@ -348,7 +674,8 @@ class AuthController extends GetxController {
 
       update();
     } catch (e) {
-      print("Exception - authController.dart - removeUserfromDb():" + e.toString());
+      print("Exception - authController.dart - removeUserfromDb():" +
+          e.toString());
     }
   }
 }

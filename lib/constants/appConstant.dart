@@ -1,5 +1,6 @@
 class AppConstants {
-  static const String SUCCESS_MESSAGE = " You will be contacted by us very soon.";
+  static const String SUCCESS_MESSAGE =
+      " You will be contacted by us very soon.";
   static const String LOADING_MESSAGE = " Wait data will be here.";
   static const String NO_INTERNET = "No Internet Available.";
 
@@ -9,6 +10,7 @@ class AppConstants {
   static const String ADMOB_SETTING_URI = '/adnetwork/admob_settings';
   static const String FACEBOOK_ADS_SETTING_URI = '/adnetwork/fbads';
   static const String LOGIN_RESGISTER = '/auth/login_or_register';
+  static const String SOCIAL_LOGIN_URI = '/auth/social_login';
   static const String VERIFY_OTP = '/auth/verify-phone';
   static const String CAEGORY_URI = '/getcategory';
   static const String CASHBACK_URI = '/topcashback';
@@ -39,6 +41,7 @@ class AppConstants {
   static const String ALL_IN_ONE_URI = '/allin';
   static const String MORE_CAMAPIGN_URI = '/seemorecampaigns';
   static const String MORE_OFFERS_URI = '/seemoreoffers';
+  static const String MORE_ADMITED_OFFERS_URI = '/seemoradmitadoffers';
   static const String MORE_ADS_URI = '/seemoreads';
   static const String MY_PROFILE_URI = '/my_profile';
   static const String SEND_WITHDRAWAL_REQUEST_URI = '/send_withdrawal_request';
@@ -51,4 +54,6 @@ class AppConstants {
   static const String REFERRAL_USERS_URI = '/referral_users';
   static const String TRENDING_KEYWORD = '/trending_keywords';
   static const String REMOVE_USER_FROM_DB_URI = '/remove_user_from_db';
+  static const String GET_PRODUCTS_URI = '/get_products';
+  static const String GET_TRENDING_PRODUCTS_URI = '/get_trending_products';
 }

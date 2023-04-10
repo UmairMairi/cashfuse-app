@@ -22,8 +22,6 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:store_redirect/store_redirect.dart';
 
-import 'login/screens/login_screen/login_screen.dart';
-
 class ProfileScreen extends StatefulWidget {
   final Color bgColor;
   ProfileScreen({this.bgColor});
@@ -35,18 +33,19 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   String userToken;
   SharedPreferences sharedPreferences;
-  Future userDetails() async
-  {
-     sharedPreferences = await SharedPreferences.getInstance();
+  Future userDetails() async {
+    sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      userToken=sharedPreferences.getString("user_token");
+      userToken = sharedPreferences.getString("user_token");
     });
   }
+
   @override
   void initState() {
     userDetails();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthController>(
@@ -69,11 +68,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             title: Text(
-              userToken != null ? AppLocalizations.of(context).profile : '',
-              style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
+              global.currentUser.id != null
+                  ? AppLocalizations.of(context).profile
+                  : '',
+              style: Get.theme.primaryTextTheme.titleSmall
+                  .copyWith(color: Colors.white),
             ),
           ),
-          body: userToken != null
+          body: global.currentUser.id != null
               ? SingleChildScrollView(
                   child: Column(
                     children: [
@@ -88,18 +90,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 leading: CircleAvatar(
                                   radius: 25,
                                   backgroundColor: Colors.white,
-                                  child: sharedPreferences.getString("user_profile")!=null
+                                  child: global.currentUser.userImage.isNotEmpty
                                       ? ClipRRect(
-                                          borderRadius: BorderRadius.circular(25),
+                                          borderRadius:
+                                              BorderRadius.circular(25),
                                           child: CustomImage(
-                                            image: global.appInfo.baseUrls.userImageUrl + '/' + sharedPreferences.getString("user_profile"),
+                                            image: global.appInfo.baseUrls
+                                                    .userImageUrl +
+                                                '/' +
+                                                global.currentUser.userImage,
                                             // height: 30,
                                             // width: 30,
                                             fit: BoxFit.cover,
                                           ),
                                         )
                                       : ClipRRect(
-                                          borderRadius: BorderRadius.circular(25),
+                                          borderRadius:
+                                              BorderRadius.circular(25),
                                           child: Image.asset(
                                             Images.user,
                                             //height: 30,
@@ -108,32 +115,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         ),
                                 ),
                                 title: Text(
-                                  sharedPreferences.getString("user_name"),
-                                  style: Get.theme.primaryTextTheme.titleMedium.copyWith(color: Colors.white),
+                                  global.currentUser.name,
+                                  style: Get.theme.primaryTextTheme.titleMedium
+                                      .copyWith(color: Colors.white),
                                 ),
                                 subtitle: Text(
-                                  sharedPreferences.getString("user_email") !=null ? sharedPreferences.getString("user_email") : sharedPreferences.getString("user_phone"),
-                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.white),
+                                  global.currentUser.email.isNotEmpty
+                                      ? global.currentUser.email
+                                      : global.currentUser.phone,
+                                  style: Get.theme.primaryTextTheme.bodySmall
+                                      .copyWith(color: Colors.white),
                                 ),
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Text(
                                         AppLocalizations.of(context).pending,
-                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall
+                                            .copyWith(
                                           color: Colors.white,
                                           fontSize: 11,
                                           letterSpacing: 0,
                                         ),
                                       ),
                                       Text(
-                                        sharedPreferences.getString("user_earnings") != null ? '${global.appInfo.currency}${sharedPreferences.getString("user_earnings")}' : '${global.appInfo.currency}0.00',
+                                        global.currentUser.earning != null
+                                            ? '${global.appInfo.currency}${global.currentUser.earning.pendingEarning}'
+                                            : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
-                                        style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
+                                        style: Get
+                                            .theme.primaryTextTheme.titleSmall
+                                            .copyWith(color: Colors.white),
                                       ),
                                     ],
                                   ),
@@ -146,20 +165,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Text(
                                         AppLocalizations.of(context).approved,
-                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall
+                                            .copyWith(
                                           color: Colors.white,
                                           letterSpacing: 0,
                                           fontSize: 11,
                                         ),
                                       ),
                                       Text(
-                                        sharedPreferences.getString("user_earnings") != null ? '${global.appInfo.currency}${sharedPreferences.getString("user_earnings")}' : '${global.appInfo.currency}0.00',
+                                        global.currentUser.earning != null
+                                            ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}'
+                                            : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
-                                        style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
+                                        style: Get
+                                            .theme.primaryTextTheme.titleSmall
+                                            .copyWith(color: Colors.white),
                                       ),
                                     ],
                                   ),
@@ -172,20 +198,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Text(
                                         AppLocalizations.of(context).redeemed,
-                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall
+                                            .copyWith(
                                           color: Colors.white,
                                           letterSpacing: 0,
                                           fontSize: 11,
                                         ),
                                       ),
                                       Text(
-                                        sharedPreferences.getString("user_earnings") != null ? '${global.appInfo.currency}${sharedPreferences.getString("user_earnings")}' : '${global.appInfo.currency}0.00',
+                                        global.currentUser.earning != null
+                                            ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}'
+                                            : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
-                                        style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
+                                        style: Get
+                                            .theme.primaryTextTheme.titleSmall
+                                            .copyWith(color: Colors.white),
                                       ),
                                     ],
                                   ),
@@ -198,20 +231,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Text(
                                         AppLocalizations.of(context).rewards,
-                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall
+                                            .copyWith(
                                           color: Colors.white,
                                           letterSpacing: 0,
                                           fontSize: 11,
                                         ),
                                       ),
                                       Text(
-                                        sharedPreferences.getString("user_earnings") != null ? '${global.appInfo.currency}${sharedPreferences.getString("user_earnings")}' : '${global.appInfo.currency}0.00',
+                                        global.currentUser.earning != null
+                                            ? '${global.appInfo.currency}${global.currentUser.earning.rewardEarning}'
+                                            : '${global.appInfo.currency}0.00',
                                         textAlign: TextAlign.center,
-                                        style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
+                                        style: Get
+                                            .theme.primaryTextTheme.titleSmall
+                                            .copyWith(color: Colors.white),
                                       ),
                                     ],
                                   ),
@@ -294,7 +334,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           );
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
                               // Icon(
@@ -310,7 +351,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Text(
                                 AppLocalizations.of(context).account_settings,
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                style: Get.theme.primaryTextTheme.bodySmall
+                                    .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
@@ -328,7 +370,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           );
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
                               // Icon(
@@ -344,7 +387,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Text(
                                 AppLocalizations.of(context).my_earnings,
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                style: Get.theme.primaryTextTheme.bodySmall
+                                    .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
@@ -362,7 +406,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           );
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
                               Image.asset(
@@ -374,7 +419,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Text(
                                 AppLocalizations.of(context).payments,
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                style: Get.theme.primaryTextTheme.bodySmall
+                                    .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
@@ -392,7 +438,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           );
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
                               // Icon(
@@ -408,7 +455,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Text(
                                 AppLocalizations.of(context).payment_history,
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                style: Get.theme.primaryTextTheme.bodySmall
+                                    .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
@@ -430,7 +478,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           );
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
                               Image.asset(
@@ -442,7 +491,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Text(
                                 AppLocalizations.of(context).recents_clicks,
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                style: Get.theme.primaryTextTheme.bodySmall
+                                    .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
@@ -460,7 +510,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           );
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
                               Image.asset(
@@ -472,7 +523,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Text(
                                 'Referral Network',
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                style: Get.theme.primaryTextTheme.bodySmall
+                                    .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
@@ -490,7 +542,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           );
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
                               // Icon(
@@ -506,7 +559,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Text(
                                 AppLocalizations.of(context).get_help,
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                style: Get.theme.primaryTextTheme.bodySmall
+                                    .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
@@ -524,7 +578,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           );
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
                               // Icon(
@@ -540,7 +595,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Text(
                                 AppLocalizations.of(context).theme,
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                style: Get.theme.primaryTextTheme.bodySmall
+                                    .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
@@ -558,7 +614,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           );
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
                               // Icon(
@@ -574,7 +631,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Text(
                                 AppLocalizations.of(context).language,
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                style: Get.theme.primaryTextTheme.bodySmall
+                                    .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
@@ -596,7 +654,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 );
                               },
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
                                 child: Row(
                                   children: [
                                     Image.asset(
@@ -608,7 +667,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                     Text(
                                       AppLocalizations.of(context).rate_us,
-                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                      style: Get
+                                          .theme.primaryTextTheme.bodySmall
+                                          .copyWith(
                                         letterSpacing: 0,
                                         color: Colors.black.withOpacity(0.75),
                                       ),
@@ -630,7 +691,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           );
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
                               // Icon(
@@ -646,7 +708,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Text(
                                 AppLocalizations.of(context).about_us,
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                style: Get.theme.primaryTextTheme.bodySmall
+                                    .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
@@ -664,7 +727,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           );
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
                               // Icon(
@@ -680,7 +744,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Text(
                                 AppLocalizations.of(context).privacy_policy,
-                                style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                style: Get.theme.primaryTextTheme.bodySmall
+                                    .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
@@ -699,7 +764,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               CupertinoDialogAction(
                                 child: Text(
                                   AppLocalizations.of(context).yes,
-                                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.red),
+                                  style: Get.theme.primaryTextTheme.titleSmall
+                                      .copyWith(color: Colors.red),
                                 ),
                                 onPressed: () {
                                   authController.logout();
@@ -710,7 +776,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               CupertinoDialogAction(
                                 child: Text(
                                   AppLocalizations.of(context).no,
-                                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.blue),
+                                  style: Get.theme.primaryTextTheme.titleSmall
+                                      .copyWith(color: Colors.blue),
                                 ),
                                 onPressed: () {
                                   Get.back();
@@ -720,7 +787,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           );
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
                               Icon(
@@ -732,7 +800,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Text(
                                 AppLocalizations.of(context).logout,
-                                style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                                style: Get.theme.primaryTextTheme.bodyMedium
+                                    .copyWith(
                                   letterSpacing: -0.5,
                                   color: Colors.red,
                                   fontWeight: FontWeight.w500,
@@ -773,19 +842,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           if (global.getPlatFrom()) {
                             Get.dialog(Dialog(
                               child: SizedBox(
-                                width: Get.width / 3,
-                                child:LoginScreen()
-                                // LoginOrSignUpScreen(
-                                //   fromMenu: true,
-                                // ),
-                              ),
+                                  width: Get.width / 3,
+                                  child: LoginOrSignUpScreen()
+                                  // LoginOrSignUpScreen(
+                                  //   fromMenu: true,
+                                  // ),
+                                  ),
                             ));
                           } else {
                             Get.to(
-                              () => LoginScreen(),
-                              //     LoginOrSignUpScreen(
-                              //   fromMenu: true,
-                              // ),
+                              () =>
+                                  //  LoginScreen(),
+                                  LoginOrSignUpScreen(
+                                fromMenu: true,
+                              ),
                               routeName: 'login',
                             );
                           }
@@ -793,8 +863,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Container(
                           width: MediaQuery.of(context).size.width,
                           height: 45,
-                          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-                          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 25),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 7, vertical: 8),
                           decoration: BoxDecoration(
                             color: Get.theme.secondaryHeaderColor,
                             borderRadius: BorderRadius.circular(10),
@@ -802,7 +874,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           alignment: Alignment.center,
                           child: Text(
                             AppLocalizations.of(context).conti.toUpperCase(),
-                            style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),

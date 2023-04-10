@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
+import 'package:cashfuse/models/admitedoffersModal.dart';
 import 'package:cashfuse/models/adsModel.dart';
 import 'package:cashfuse/models/bannerModel.dart';
 import 'package:cashfuse/models/campaignModel.dart';
@@ -10,6 +11,7 @@ import 'package:cashfuse/models/categoryModel.dart';
 import 'package:cashfuse/models/clickModel.dart';
 import 'package:cashfuse/models/commonModel.dart';
 import 'package:cashfuse/models/offerModel.dart';
+import 'package:cashfuse/models/productModel.dart';
 import 'package:cashfuse/services/apiHelper.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/widget/customLoader.dart';
@@ -47,6 +49,9 @@ class HomeController extends GetxController {
   List<CampaignModel> _seeMoreCampaignList = [];
   List<CampaignModel> get seeMoreCampaignList => _seeMoreCampaignList;
 
+  List<AdmitedOffersModal> _seeMoreAdmitedList = [];
+  List<AdmitedOffersModal> get seeMoreAdmitedList => _seeMoreAdmitedList;
+
   List<OfferModel> _seeMoreOfferList = [];
   List<OfferModel> get seeMoreOfferList => _seeMoreOfferList;
 
@@ -61,6 +66,15 @@ class HomeController extends GetxController {
 
   CampaignModel _campaign = new CampaignModel();
   CampaignModel get campaign => _campaign;
+
+  AdmitedOffersModal _admitedOffer = new AdmitedOffersModal();
+  AdmitedOffersModal get admitedOffer => _admitedOffer;
+
+  List<ProductModel> _productList = [];
+  List<ProductModel> get productList => _productList;
+
+  List<ProductModel> _trendingProductList = [];
+  List<ProductModel> get trendingProductList => _trendingProductList;
 
   bool isCategoryLoaded = false;
   bool isBannerLoaded = false;
@@ -106,7 +120,9 @@ class HomeController extends GetxController {
 
   Future addAdCategory(int index) async {
     try {
-      topCategoryList[index].commonList.removeWhere((element) => element.name == 'Ad');
+      topCategoryList[index]
+          .commonList
+          .removeWhere((element) => element.name == 'Ad');
 
       for (var i = 0; i < topCategoryList[index].commonList.length; i++) {
         if (((i * 4) + 4) < topCategoryList[index].commonList.length) {
@@ -118,7 +134,8 @@ class HomeController extends GetxController {
       }
       update();
     } catch (e) {
-      print("Exception - HomeController.dart - addAdCategory():" + e.toString());
+      print(
+          "Exception - HomeController.dart - addAdCategory():" + e.toString());
     }
   }
 
@@ -136,6 +153,8 @@ class HomeController extends GetxController {
 
       await getTopCategories();
       await getTopCashBack(page);
+      await getProducts();
+      await getTrendingProducts();
 
       await getExclusiveOffers();
 
@@ -185,7 +204,8 @@ class HomeController extends GetxController {
   Future getTopCategories() async {
     try {
       isCategoryLoaded = false;
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         if (_topCategoryList.length > 0) {
           page++;
         } else {
@@ -209,17 +229,17 @@ class HomeController extends GetxController {
                   for (var j = 0; j < _topCategoryList[i].ads.length; j++) {
                     _topCategoryList[i].commonList.add(
                           CommonModel(
-                            name: _topCategoryList[i].ads[j].name,
-                            image: '${global.appInfo.baseUrls.offerImageUrl}/${_topCategoryList[i].ads[j].image}',
-                            buttonText: _topCategoryList[i].ads[j].buttonText,
-                            trackingLink: _topCategoryList[i].ads[j].landingPage,
-                            adId: _topCategoryList[i].ads[j].id.toString(),
-                            from: "ads"
-                          ),
+                              name: _topCategoryList[i].ads[j].name,
+                              image:
+                                  '${global.appInfo.baseUrls.offerImageUrl}/${_topCategoryList[i].ads[j].image}',
+                              buttonText: _topCategoryList[i].ads[j].buttonText,
+                              trackingLink:
+                                  _topCategoryList[i].ads[j].landingPage,
+                              adId: _topCategoryList[i].ads[j].id.toString(),
+                              from: "ads"),
                         );
                   }
                 }
-
 
                 // if (_topCategoryList[i].commonList.length > 0) {
                 //   for (var t = 0; t < _topCategoryList[i].commonList.length; t++) {
@@ -230,33 +250,44 @@ class HomeController extends GetxController {
               for (var n = 0; n < _topCategoryList.length; n++) {
                 _topCategoryList[n].commonList = [];
                 if (_topCategoryList[n].cuecampaigns != []) {
-                  for (var k = 0; k < _topCategoryList[n].cuecampaigns.length; k++) {
+                  for (var k = 0;
+                      k < _topCategoryList[n].cuecampaigns.length;
+                      k++) {
                     _topCategoryList[n].commonList.add(
                           CommonModel(
-                            name: _topCategoryList[n].cuecampaigns[k].name,
-                            image: '${global.appInfo.baseUrls.offerImageUrl}/${_topCategoryList[n].cuecampaigns[k].image}',
-                            buttonText: _topCategoryList[n].cuecampaigns[k].buttonText,
-                            trackingLink: _topCategoryList[n].cuecampaigns[k].url,
-                            campaignId: _topCategoryList[n].cuecampaigns[k].id,
-                            from: "cue"
-                          ),
+                              name: _topCategoryList[n].cuecampaigns[k].name,
+                              image:
+                                  '${global.appInfo.baseUrls.offerImageUrl}/${_topCategoryList[n].cuecampaigns[k].image}',
+                              buttonText: _topCategoryList[n]
+                                  .cuecampaigns[k]
+                                  .buttonText,
+                              trackingLink:
+                                  _topCategoryList[n].cuecampaigns[k].url,
+                              campaignId:
+                                  _topCategoryList[n].cuecampaigns[k].id,
+                              from: "cue"),
                         );
                   }
                 }
                 if (_topCategoryList[n].admitedoffers != []) {
-                  for (var k = 0; k < _topCategoryList[n].admitedoffers.length; k++) {
+                  for (var k = 0;
+                      k < _topCategoryList[n].admitedoffers.length;
+                      k++) {
                     print('ajhsbdhjbsad');
                     print('${_topCategoryList[n].admitedoffers[k].name}');
                     _topCategoryList[n].commonList.add(
-                      CommonModel(
-                        name: _topCategoryList[n].admitedoffers[k].name,
-                        image: '${global.appInfo.baseUrls.offerImageUrl}/${_topCategoryList[n].admitedoffers[k].image}',
-                        buttonText:"Grap Now",// _topCategoryList[n].admitedoffers[k].buttonText,
-                        trackingLink: _topCategoryList[n].admitedoffers[k].gotourl,
-                        campaignId: _topCategoryList[n].admitedoffers[k].id,
-                        from: "admit"
-                      ),
-                    );
+                          CommonModel(
+                              name: _topCategoryList[n].admitedoffers[k].name,
+                              image:
+                                  '${global.appInfo.baseUrls.offerImageUrl}/${_topCategoryList[n].admitedoffers[k].image}',
+                              buttonText:
+                                  "Grab Now", // _topCategoryList[n].admitedoffers[k].buttonText,
+                              trackingLink:
+                                  _topCategoryList[n].admitedoffers[k].gotourl,
+                              campaignId:
+                                  _topCategoryList[n].admitedoffers[k].id,
+                              from: "admit"),
+                        );
                   }
                 }
                 // if (_topCategoryList[n].commonList.length > 0) {
@@ -289,10 +320,6 @@ class HomeController extends GetxController {
               //   //   }
               //   // }
               // }
-
-
-
-
             }
           } else {
             showCustomSnackBar(response.message);
@@ -308,7 +335,8 @@ class HomeController extends GetxController {
     } catch (e) {
       isCategoryLoaded = true;
       update();
-      print("Exception - HomeController.dart - getTopCategories():" + e.toString());
+      print("Exception - HomeController.dart - getTopCategories():" +
+          e.toString());
     }
   }
 
@@ -316,7 +344,8 @@ class HomeController extends GetxController {
     try {
       isTopCashbackLoaded = false;
 
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         if (_topCashbackList.length > 0) {
           page = page++;
         }
@@ -336,13 +365,14 @@ class HomeController extends GetxController {
                   for (var j = 0; j < _topCashbackList[i].ads.length; j++) {
                     _topCashbackList[i].commonList.add(
                           CommonModel(
-                            name: _topCashbackList[i].ads[j].name,
-                            image: '${global.appInfo.baseUrls.offerImageUrl}/${_topCashbackList[i].ads[j].image}',
-                            buttonText: _topCashbackList[i].ads[j].buttonText,
-                            trackingLink: _topCashbackList[i].ads[j].landingPage,
-                            adId: _topCashbackList[i].ads[j].id.toString(),
-                            from: "ads"
-                          ),
+                              name: _topCashbackList[i].ads[j].name,
+                              image:
+                                  '${global.appInfo.baseUrls.offerImageUrl}/${_topCashbackList[i].ads[j].image}',
+                              buttonText: _topCashbackList[i].ads[j].buttonText,
+                              trackingLink:
+                                  _topCashbackList[i].ads[j].landingPage,
+                              adId: _topCashbackList[i].ads[j].id.toString(),
+                              from: "ads"),
                         );
                   }
                 }
@@ -356,16 +386,22 @@ class HomeController extends GetxController {
               for (var n = 0; n < _topCashbackList.length; n++) {
                 _topCashbackList[n].commonList = [];
                 if (_topCashbackList[n].cuecampaigns != []) {
-                  for (var k = 0; k < _topCashbackList[n].cuecampaigns.length; k++) {
+                  for (var k = 0;
+                      k < _topCashbackList[n].cuecampaigns.length;
+                      k++) {
                     _topCashbackList[n].commonList.add(
                           CommonModel(
-                            name: _topCashbackList[n].cuecampaigns[k].name,
-                            image: '${global.appInfo.baseUrls.offerImageUrl}/${_topCashbackList[n].cuecampaigns[k].image}',
-                            buttonText: _topCashbackList[n].cuecampaigns[k].buttonText,
-                            trackingLink: _topCashbackList[n].cuecampaigns[k].url,
-                            campaignId: _topCashbackList[n].cuecampaigns[k].id,
-                            from: "cue"
-                          ),
+                              name: _topCashbackList[n].cuecampaigns[k].name,
+                              image:
+                                  '${global.appInfo.baseUrls.offerImageUrl}/${_topCashbackList[n].cuecampaigns[k].image}',
+                              buttonText: _topCashbackList[n]
+                                  .cuecampaigns[k]
+                                  .buttonText,
+                              trackingLink:
+                                  _topCashbackList[n].cuecampaigns[k].url,
+                              campaignId:
+                                  _topCashbackList[n].cuecampaigns[k].id,
+                              from: "cue"),
                         );
                   }
                 }
@@ -388,13 +424,15 @@ class HomeController extends GetxController {
     } catch (e) {
       isTopCashbackLoaded = true;
       update();
-      print("Exception - HomeController.dart - getTopCashBack():" + e.toString());
+      print(
+          "Exception - HomeController.dart - getTopCashBack():" + e.toString());
     }
   }
 
   Future getHomeAdv() async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         await apiHelper.getHomeAdv().then((response) {
           if (response.status == "1") {
             _homeAdvList = response.data;
@@ -422,12 +460,15 @@ class HomeController extends GetxController {
               }
               for (var n = 0; n < _homeAdvList.length; n++) {
                 if (_homeAdvList[n].cuecampaigns != []) {
-                  for (var k = 0; k < _homeAdvList[n].cuecampaigns.length; k++) {
+                  for (var k = 0;
+                      k < _homeAdvList[n].cuecampaigns.length;
+                      k++) {
                     _homeAdvList[n].commonList.add(
                           CommonModel(
                             name: _homeAdvList[n].cuecampaigns[k].name,
                             image: _homeAdvList[n].cuecampaigns[k].image,
-                            buttonText: _homeAdvList[n].cuecampaigns[k].buttonText,
+                            buttonText:
+                                _homeAdvList[n].cuecampaigns[k].buttonText,
                             trackingLink: _homeAdvList[n].cuecampaigns[k].url,
                             campaignId: _homeAdvList[n].cuecampaigns[k].id,
                           ),
@@ -459,7 +500,8 @@ class HomeController extends GetxController {
 
   Future getAllAdv() async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         if (_allAdvList.length > 0) {
           page++;
         } else {
@@ -482,7 +524,8 @@ class HomeController extends GetxController {
                     _allAdvList[i].commonList.add(
                           CommonModel(
                             name: _allAdvList[i].ads[j].name,
-                            image: '${global.appInfo.baseUrls.offerImageUrl}/${_allAdvList[i].ads[j].image}',
+                            image:
+                                '${global.appInfo.baseUrls.offerImageUrl}/${_allAdvList[i].ads[j].image}',
                             buttonText: _allAdvList[i].ads[j].buttonText,
                             trackingLink: _allAdvList[i].ads[j].landingPage,
                             adId: _allAdvList[i].ads[j].id.toString(),
@@ -498,8 +541,10 @@ class HomeController extends GetxController {
                     _allAdvList[n].commonList.add(
                           CommonModel(
                             name: _allAdvList[n].cuecampaigns[k].name,
-                            image: '${global.appInfo.baseUrls.offerImageUrl}/${_allAdvList[n].cuecampaigns[k].image}',
-                            buttonText: _allAdvList[n].cuecampaigns[k].buttonText,
+                            image:
+                                '${global.appInfo.baseUrls.offerImageUrl}/${_allAdvList[n].cuecampaigns[k].image}',
+                            buttonText:
+                                _allAdvList[n].cuecampaigns[k].buttonText,
                             trackingLink: _allAdvList[n].cuecampaigns[k].url,
                             campaignId: _allAdvList[n].cuecampaigns[k].id,
                           ),
@@ -524,7 +569,8 @@ class HomeController extends GetxController {
   Future getExclusiveOffers() async {
     try {
       isOfferLoaded = false;
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         await apiHelper.getExclusiveOffers().then((response) {
           if (response.status == "1") {
             _exclusiveOfferList = response.data;
@@ -532,7 +578,10 @@ class HomeController extends GetxController {
               for (var i = 0; i < _exclusiveOfferList.length; i++) {
                 int diff;
                 if (_exclusiveOfferList[i].endDate != null) {
-                  diff = _exclusiveOfferList[i].endDate.difference(DateTime.now()).inDays;
+                  diff = _exclusiveOfferList[i]
+                      .endDate
+                      .difference(DateTime.now())
+                      .inDays;
                   print(diff);
                   _exclusiveOfferList[i].dayDifference = diff;
                 }
@@ -548,14 +597,16 @@ class HomeController extends GetxController {
     } catch (e) {
       isOfferLoaded = true;
       update();
-      print("Exception - HomeController.dart - getExclusiveOffers():" + e.toString());
+      print("Exception - HomeController.dart - getExclusiveOffers():" +
+          e.toString());
     }
   }
 
   Future getNewFlashOffers() async {
     try {
       isFlashOffersLoaded = false;
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         await apiHelper.getNewFlashOffers().then((response) {
           if (response.status == "1") {
             _newFlashOfferList = response.data;
@@ -563,7 +614,10 @@ class HomeController extends GetxController {
               for (var i = 0; i < _newFlashOfferList.length; i++) {
                 int diff;
                 if (_newFlashOfferList[i].endDate != null) {
-                  diff = _newFlashOfferList[i].endDate.difference(DateTime.now()).inDays;
+                  diff = _newFlashOfferList[i]
+                      .endDate
+                      .difference(DateTime.now())
+                      .inDays;
                   print(diff);
                   _newFlashOfferList[i].dayDifference = diff;
                 }
@@ -579,14 +633,16 @@ class HomeController extends GetxController {
     } catch (e) {
       isFlashOffersLoaded = true;
       update();
-      print("Exception - HomeController.dart - getNewFlashOffers():" + e.toString());
+      print("Exception - HomeController.dart - getNewFlashOffers():" +
+          e.toString());
     }
   }
 
   Future getTopBanners() async {
     try {
       isBannerLoaded = false;
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         await apiHelper.getTopBanners().then((response) {
           if (response.status == "1") {
             _topBannerList = response.data;
@@ -614,7 +670,8 @@ class HomeController extends GetxController {
     } catch (e) {
       isBannerLoaded = true;
       update();
-      print("Exception - HomeController.dart - getTopBanners():" + e.toString());
+      print(
+          "Exception - HomeController.dart - getTopBanners():" + e.toString());
     }
   }
 
@@ -634,7 +691,8 @@ class HomeController extends GetxController {
 
   Future getOfferDetails(String offerId) async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper.getOfferDetails(offerId).then((response) {
           Get.back();
@@ -650,13 +708,15 @@ class HomeController extends GetxController {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
     } catch (e) {
-      print("Exception - HomeController.dart - getOfferDetails():" + e.toString());
+      print("Exception - HomeController.dart - getOfferDetails():" +
+          e.toString());
     }
   }
 
   Future getAdDetails(String adId) async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper.getAdDetails(adId).then((response) {
           Get.back();
@@ -678,7 +738,8 @@ class HomeController extends GetxController {
 
   Future getCampignDetails(String campaignId) async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper.getCampignDetails(campaignId).then((response) {
           Get.back();
@@ -695,14 +756,42 @@ class HomeController extends GetxController {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
     } catch (e) {
-      print("Exception - HomeController.dart - getCampignDetails():" + e.toString());
+      print("Exception - HomeController.dart - getCampignDetails():" +
+          e.toString());
+    }
+  }
+
+  Future getAdmitedDetails(int admitedId) async {
+    try {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
+        Get.dialog(CustomLoader(), barrierDismissible: false);
+        await apiHelper.getAdmitedOfferDetails(admitedId).then((response) {
+          Get.back();
+          if (response.status == "1") {
+            _admitedOffer = response.data;
+
+            // update();
+          } else {
+            showCustomSnackBar(response.message);
+          }
+          getMoreAdmited(admitedId.toString());
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+      update();
+    } catch (e) {
+      print("Exception - HomeController.dart - getAdmitedDetails():" +
+          e.toString());
     }
   }
 
   Future getTrackingLink(String url, String type, {String cId}) async {
     try {
       createdLink = '';
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper.getTrackingLink(url, type, cId: cId).then((response) {
           Get.back();
@@ -718,13 +807,15 @@ class HomeController extends GetxController {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }
     } catch (e) {
-      print("Exception - HomeController.dart - getTrackingLink():" + e.toString());
+      print("Exception - HomeController.dart - getTrackingLink():" +
+          e.toString());
     }
   }
 
   Future addClick(String name, String image, String trackingLink) async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         await apiHelper.addClick(name, image, trackingLink).then((response) {
           if (response.status == "1") {
             getClick();
@@ -744,7 +835,8 @@ class HomeController extends GetxController {
 
   Future getClick() async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         isClickDataLoaded.value = false;
         await apiHelper.getClick().then((response) {
           if (response.status == "1") {
@@ -766,7 +858,8 @@ class HomeController extends GetxController {
 
   Future deleteClicks() async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper.deleteClicks().then((response) {
           Get.back();
@@ -791,17 +884,22 @@ class HomeController extends GetxController {
     try {
       String value = '';
       if (DateTime.now().difference(click.createdAt).inDays == 0) {
-        value = 'All is Well\nit will take upto 72 hours to track your rewards till then keep shopping so #yougetmore ';
+        value =
+            'All is Well\nit will take upto 72 hours to track your rewards till then keep shopping so #yougetmore ';
       } else if (DateTime.now().difference(click.createdAt).inDays == 1) {
-        value = 'All is Well\nit will take upto 36 hours to track your rewards till then keep shopping so #yougetmore ';
+        value =
+            'All is Well\nit will take upto 36 hours to track your rewards till then keep shopping so #yougetmore ';
       } else if (DateTime.now().difference(click.createdAt).inDays == 2) {
-        value = 'All is Well\nit will take upto 24 hours to track your rewards till then keep shopping so #yougetmore';
+        value =
+            'All is Well\nit will take upto 24 hours to track your rewards till then keep shopping so #yougetmore';
       } else {
-        value = "your earnings will show on My Orders Details.\nif you don't see your earnings there , please click below.";
+        value =
+            "your earnings will show on My Orders Details.\nif you don't see your earnings there , please click below.";
       }
       return value;
     } catch (e) {
-      print("Exception - HomeController.dart - clickDialogText():" + e.toString());
+      print("Exception - HomeController.dart - clickDialogText():" +
+          e.toString());
       return '';
     }
   }
@@ -812,9 +910,11 @@ class HomeController extends GetxController {
       if (DateTime.now().difference(click.createdAt).inDays > 0) {
         value = '${DateTime.now().difference(click.createdAt).inDays} day ago';
       } else if (DateTime.now().difference(click.createdAt).inHours > 0) {
-        value = '${DateTime.now().difference(click.createdAt).inHours} hour ago';
+        value =
+            '${DateTime.now().difference(click.createdAt).inHours} hour ago';
       } else if (DateTime.now().difference(click.createdAt).inMinutes > 0) {
-        value = '${DateTime.now().difference(click.createdAt).inMinutes} min ago';
+        value =
+            '${DateTime.now().difference(click.createdAt).inMinutes} min ago';
       } else if (DateTime.now().difference(click.createdAt).inSeconds > 0) {
         value = 'Just Now';
       }
@@ -828,7 +928,8 @@ class HomeController extends GetxController {
 
   Future getMoreCampaign(String campaignId) async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         //Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper.getMoreCampaign(campaignId).then((response) {
           //Get.back();
@@ -843,13 +944,15 @@ class HomeController extends GetxController {
       }
       update();
     } catch (e) {
-      print("Exception - HomeController.dart - getMoreCampaign():" + e.toString());
+      print("Exception - HomeController.dart - getMoreCampaign():" +
+          e.toString());
     }
   }
 
   Future getMoreOffers(String offerId) async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         // Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper.getMoreOffers(offerId).then((response) {
           //Get.back();
@@ -864,13 +967,15 @@ class HomeController extends GetxController {
       }
       update();
     } catch (e) {
-      print("Exception - HomeController.dart - getMoreOffers():" + e.toString());
+      print(
+          "Exception - HomeController.dart - getMoreOffers():" + e.toString());
     }
   }
 
   Future getMoreAds(String adId) async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         //Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper.getMoreAds(adId).then((response) {
           //Get.back();
@@ -886,6 +991,74 @@ class HomeController extends GetxController {
       update();
     } catch (e) {
       print("Exception - HomeController.dart - getMoreAds():" + e.toString());
+    }
+  }
+
+  Future getMoreAdmited(String campaignId) async {
+    try {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
+        //Get.dialog(CustomLoader(), barrierDismissible: false);
+        await apiHelper.getMoreAmited(campaignId).then((response) {
+          //Get.back();
+          if (response.status == "1") {
+            _seeMoreAdmitedList = response.data;
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+      update();
+    } catch (e) {
+      print(
+          "Exception - HomeController.dart - getMoreAdmited():" + e.toString());
+    }
+  }
+
+  Future getProducts() async {
+    try {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
+        //Get.dialog(CustomLoader(), barrierDismissible: false);
+        await apiHelper.getProducts().then((response) {
+          //Get.back();
+          if (response.status == "1") {
+            _productList = response.data;
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+      update();
+    } catch (e) {
+      print("Exception - HomeController.dart - getProducts():" + e.toString());
+    }
+  }
+
+  Future getTrendingProducts() async {
+    try {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
+        //Get.dialog(CustomLoader(), barrierDismissible: false);
+        await apiHelper.getTrendingProducts().then((response) {
+          //Get.back();
+          if (response.status == "1") {
+            _trendingProductList = response.data;
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      } else {
+        showCustomSnackBar(AppConstants.NO_INTERNET);
+      }
+      update();
+    } catch (e) {
+      print("Exception - HomeController.dart - getTrendingProducts():" +
+          e.toString());
     }
   }
 }

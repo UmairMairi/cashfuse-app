@@ -17,8 +17,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 
-import 'login/screens/login_screen/login_screen.dart';
-
 class CampaignDetailScreen extends StatelessWidget {
   final CampaignModel campaign;
   final bool fromSeeMore;
@@ -55,7 +53,8 @@ class CampaignDetailScreen extends StatelessWidget {
                                 alignment: Alignment.center,
                                 //margin: EdgeInsets.only(bottom: 20),
                                 child: CustomImage(
-                                  image: '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}',
+                                  image:
+                                      '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}',
                                   width: 500,
                                   height: 300,
                                   fit: BoxFit.fill,
@@ -75,7 +74,8 @@ class CampaignDetailScreen extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.all(4.0),
                                     child: CustomImage(
-                                      image: '${global.appInfo.baseUrls.partnerImageUrl}/${campaign.partner.image}',
+                                      image:
+                                          '${global.appInfo.baseUrls.partnerImageUrl}/${campaign.partner.image}',
                                       height: 30,
                                       width: 60,
                                       fit: BoxFit.contain,
@@ -105,9 +105,11 @@ class CampaignDetailScreen extends StatelessWidget {
                           ),
                           title: Text(
                             campaign.partner.name,
-                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
+                            style: Get.theme.primaryTextTheme.titleSmall
+                                .copyWith(color: Colors.white),
                           ),
-                          flexibleSpace: CustomizableSpaceBar(builder: (context, scrollingRate) {
+                          flexibleSpace: CustomizableSpaceBar(
+                              builder: (context, scrollingRate) {
                             return (scrollingRate != 1.0)
                                 ? Stack(
                                     alignment: Alignment.bottomCenter,
@@ -116,7 +118,8 @@ class CampaignDetailScreen extends StatelessWidget {
                                       Container(
                                         //margin: EdgeInsets.only(bottom: 20),
                                         child: CustomImage(
-                                          image: '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}',
+                                          image:
+                                              '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}',
                                           width: Get.width,
                                           fit: BoxFit.fill,
                                           campaign: campaign,
@@ -135,7 +138,8 @@ class CampaignDetailScreen extends StatelessWidget {
                                           child: Padding(
                                             padding: const EdgeInsets.all(4.0),
                                             child: CustomImage(
-                                              image: '${global.appInfo.baseUrls.partnerImageUrl}/${campaign.partner.image}',
+                                              image:
+                                                  '${global.appInfo.baseUrls.partnerImageUrl}/${campaign.partner.image}',
                                               height: 30,
                                               width: 60,
                                               fit: BoxFit.contain,
@@ -152,10 +156,17 @@ class CampaignDetailScreen extends StatelessWidget {
                                 ? InkWell(
                                     onTap: () async {
                                       if (global.currentUser.id != null) {
-                                        await homeController.getTrackingLink(campaign.url, campaign.affiliatePartner);
+                                        await homeController.getTrackingLink(
+                                            campaign.url,
+                                            campaign.affiliatePartner);
                                         global.share(
-                                          homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
-                                          campaign.image.isNotEmpty && !campaign.isImageError ? '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}' : '',
+                                          homeController.createdLink.isNotEmpty
+                                              ? homeController.createdLink
+                                              : campaign.url,
+                                          campaign.image.isNotEmpty &&
+                                                  !campaign.isImageError
+                                              ? '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}'
+                                              : '',
                                           '',
                                         );
                                       } else {
@@ -163,33 +174,34 @@ class CampaignDetailScreen extends StatelessWidget {
                                           Get.dialog(Dialog(
                                             child: SizedBox(
                                               width: Get.width / 3,
-                                              child:LoginScreen()
-                                              // LoginOrSignUpScreen(
-                                              //   fromMenu: true,
-                                              // ),
+                                              child: LoginOrSignUpScreen(
+                                                fromMenu: true,
+                                              ),
                                             ),
                                           ));
                                         } else {
                                           Get.to(
-                                            () => LoginScreen(),
-                                            //     LoginOrSignUpScreen(
-                                            //   fromMenu: true,
-                                            // ),
+                                            () => LoginOrSignUpScreen(
+                                              fromMenu: true,
+                                            ),
                                             routeName: 'login',
                                           );
                                         }
                                       }
                                     },
                                     child: Container(
-                                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                                      padding: EdgeInsets.only(left: 10, right: 3),
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 10, horizontal: 10),
+                                      padding:
+                                          EdgeInsets.only(left: 10, right: 3),
                                       decoration: BoxDecoration(
                                         color: Colors.green[500],
                                         borderRadius: BorderRadius.circular(15),
                                       ),
                                       child: Row(
                                         children: [
-                                          Text('${AppLocalizations.of(context).share}  '),
+                                          Text(
+                                              '${AppLocalizations.of(context).share}  '),
                                           CircleAvatar(
                                             radius: 12,
                                             backgroundColor: Colors.green[700],
@@ -221,7 +233,9 @@ class CampaignDetailScreen extends StatelessWidget {
                               Text(
                                 campaign.name,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontStyle: FontStyle.italic, color: Get.theme.primaryColor),
+                                style: TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    color: Get.theme.primaryColor),
                               ),
                               SizedBox(
                                 height: 15,
@@ -283,14 +297,22 @@ class CampaignDetailScreen extends StatelessWidget {
                               InkWell(
                                 onTap: () async {
                                   if (global.currentUser.id != null) {
-                                    await homeController.getTrackingLink(campaign.url, campaign.affiliatePartner);
+                                    await homeController.getTrackingLink(
+                                        campaign.url,
+                                        campaign.affiliatePartner);
                                     await homeController.addClick(
                                       campaign.name,
-                                      global.appInfo.baseUrls.offerImageUrl + '/' + campaign.image,
-                                      homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
+                                      global.appInfo.baseUrls.offerImageUrl +
+                                          '/' +
+                                          campaign.image,
+                                      homeController.createdLink.isNotEmpty
+                                          ? homeController.createdLink
+                                          : campaign.url,
                                     );
                                     global.launchInBrowser(
-                                      homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
+                                      homeController.createdLink.isNotEmpty
+                                          ? homeController.createdLink
+                                          : campaign.url,
                                     );
 
                                     // Get.to(
@@ -312,18 +334,16 @@ class CampaignDetailScreen extends StatelessWidget {
                                       Get.dialog(Dialog(
                                         child: SizedBox(
                                           width: Get.width / 3,
-                                          child:LoginScreen()
-                                          // LoginOrSignUpScreen(
-                                          //   fromMenu: true,
-                                          // ),
+                                          child: LoginOrSignUpScreen(
+                                            fromMenu: true,
+                                          ),
                                         ),
                                       ));
                                     } else {
                                       Get.to(
-                                        () => LoginScreen(),
-                                        //     LoginOrSignUpScreen(
-                                        //   fromMenu: true,
-                                        // ),
+                                        () => LoginOrSignUpScreen(
+                                          fromMenu: true,
+                                        ),
                                         routeName: 'login',
                                       );
                                     }
@@ -335,17 +355,27 @@ class CampaignDetailScreen extends StatelessWidget {
                                   alignment: Alignment.center,
                                   child: Container(
                                     height: 45,
-                                    width: global.getPlatFrom() ? Get.width / 3 : Get.width,
-                                    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                                    padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                                    width: global.getPlatFrom()
+                                        ? Get.width / 3
+                                        : Get.width,
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: 30, vertical: 15),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 7, vertical: 8),
                                     decoration: BoxDecoration(
                                       color: Get.theme.secondaryHeaderColor,
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      campaign.buttonText.isNotEmpty ? campaign.buttonText : AppLocalizations.of(context).earn_cashback,
-                                      style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                                      campaign.buttonText.isNotEmpty
+                                          ? campaign.buttonText
+                                          : AppLocalizations.of(context)
+                                              .earn_cashback,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600),
                                     ),
                                   ),
                                 ),
@@ -364,7 +394,8 @@ class CampaignDetailScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     CircleAvatar(
-                                      backgroundColor: Get.theme.secondaryHeaderColor,
+                                      backgroundColor:
+                                          Get.theme.secondaryHeaderColor,
                                       radius: 10,
                                       child: CircleAvatar(
                                         radius: 7,
@@ -381,16 +412,21 @@ class CampaignDetailScreen extends StatelessWidget {
                                         Card(
                                           margin: EdgeInsets.zero,
                                           elevation: 0,
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
                                           child: Text(
                                             '>>',
-                                            style: TextStyle(color: Colors.grey, fontSize: 20, letterSpacing: -5),
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 20,
+                                                letterSpacing: -5),
                                           ),
                                         )
                                       ],
                                     ),
                                     CircleAvatar(
-                                      backgroundColor: Get.theme.secondaryHeaderColor,
+                                      backgroundColor:
+                                          Get.theme.secondaryHeaderColor,
                                       radius: 10,
                                       child: CircleAvatar(
                                         radius: 7,
@@ -403,19 +439,26 @@ class CampaignDetailScreen extends StatelessWidget {
                                   padding: const EdgeInsets.only(left: 40),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            AppLocalizations.of(context).purchase,
-                                            style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
+                                            AppLocalizations.of(context)
+                                                .purchase,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 13),
                                           ),
                                           Text(
                                             'Today',
-                                            style: TextStyle(fontWeight: FontWeight.w600),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600),
                                           ),
                                         ],
                                       ),
@@ -423,16 +466,22 @@ class CampaignDetailScreen extends StatelessWidget {
                                         width: 50,
                                       ),
                                       Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            AppLocalizations.of(context).cashback_tracks_in,
-                                            style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
+                                            AppLocalizations.of(context)
+                                                .cashback_tracks_in,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 13),
                                           ),
                                           Text(
                                             '24 hours',
-                                            style: TextStyle(fontWeight: FontWeight.w600),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600),
                                           ),
                                         ],
                                       )
@@ -441,7 +490,11 @@ class CampaignDetailScreen extends StatelessWidget {
                                 ),
                                 fromSeeMore
                                     ? SizedBox()
-                                    : homeController.seeMoreCampaignList != null && homeController.seeMoreCampaignList.length > 0
+                                    : homeController.seeMoreCampaignList !=
+                                                null &&
+                                            homeController.seeMoreCampaignList
+                                                    .length >
+                                                0
                                         ? InkWell(
                                             onTap: () async {
                                               //await homeController.getMoreCampaign(campaign.id.toString());
@@ -451,17 +504,24 @@ class CampaignDetailScreen extends StatelessWidget {
                                                         child: SizedBox(
                                                           height: 500,
                                                           width: 500,
-                                                          child: MoreCampignScreen(),
+                                                          child:
+                                                              MoreCampignScreen(),
                                                         ),
                                                       ),
                                                     )
                                                   : Get.bottomSheet(
                                                       ClipRRect(
-                                                        borderRadius: BorderRadius.only(
-                                                          topLeft: Radius.circular(15),
-                                                          topRight: Radius.circular(15),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  15),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  15),
                                                         ),
-                                                        child: MoreCampignScreen(),
+                                                        child:
+                                                            MoreCampignScreen(),
                                                       ),
                                                     );
                                             },
@@ -470,12 +530,19 @@ class CampaignDetailScreen extends StatelessWidget {
                                               alignment: Alignment.center,
                                               color: Colors.white,
                                               child: Container(
-                                                width: global.getPlatFrom() ? Get.width / 3 : Get.width,
+                                                width: global.getPlatFrom()
+                                                    ? Get.width / 3
+                                                    : Get.width,
                                                 height: 45,
-                                                margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                                                padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                                                margin: EdgeInsets.symmetric(
+                                                    horizontal: 30,
+                                                    vertical: 15),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 7, vertical: 8),
                                                 decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(10),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
                                                     border: Border.all(
                                                       color: Colors.teal[200],
                                                       width: 1.5,
@@ -483,7 +550,11 @@ class CampaignDetailScreen extends StatelessWidget {
                                                 alignment: Alignment.center,
                                                 child: Text(
                                                   '${AppLocalizations.of(context).see_more_offers}  >',
-                                                  style: TextStyle(color: Colors.teal[200], fontSize: 14, fontWeight: FontWeight.w400),
+                                                  style: TextStyle(
+                                                      color: Colors.teal[200],
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w400),
                                                 ),
                                               ),
                                             ),
@@ -500,7 +571,9 @@ class CampaignDetailScreen extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: campaign.partner != null && (campaign.partner.leftTab.isNotEmpty || campaign.partner.rightTab.isNotEmpty)
+          bottomNavigationBar: campaign.partner != null &&
+                  (campaign.partner.leftTab.isNotEmpty ||
+                      campaign.partner.rightTab.isNotEmpty)
               ? Container(
                   width: Get.width,
                   alignment: Alignment.center,
@@ -510,10 +583,15 @@ class CampaignDetailScreen extends StatelessWidget {
                     width: AppConstants.WEB_MAX_WIDTH,
                     child: Card(
                       margin: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero),
                       color: Get.theme.primaryColor,
                       child: Row(
-                        mainAxisAlignment: (campaign.partner.leftTab.isNotEmpty && campaign.partner.rightTab.isNotEmpty) ? MainAxisAlignment.spaceEvenly : MainAxisAlignment.center,
+                        mainAxisAlignment:
+                            (campaign.partner.leftTab.isNotEmpty &&
+                                    campaign.partner.rightTab.isNotEmpty)
+                                ? MainAxisAlignment.spaceEvenly
+                                : MainAxisAlignment.center,
                         children: [
                           InkWell(
                             onTap: () {
@@ -535,10 +613,14 @@ class CampaignDetailScreen extends StatelessWidget {
                             },
                             child: Text(
                               campaign.partner.leftTab,
-                              style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                              style: Get.theme.primaryTextTheme.titleSmall
+                                  .copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white),
                             ),
                           ),
-                          (campaign.partner.leftTab.isNotEmpty && campaign.partner.rightTab.isNotEmpty)
+                          (campaign.partner.leftTab.isNotEmpty &&
+                                  campaign.partner.rightTab.isNotEmpty)
                               ? Icon(
                                   Icons.more_vert,
                                   size: 22,
@@ -562,7 +644,10 @@ class CampaignDetailScreen extends StatelessWidget {
                             },
                             child: Text(
                               campaign.partner.rightTab.camelCase,
-                              style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                              style: Get.theme.primaryTextTheme.titleSmall
+                                  .copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white),
                             ),
                           ),
                         ],

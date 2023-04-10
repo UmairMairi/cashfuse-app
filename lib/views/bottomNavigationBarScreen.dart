@@ -14,22 +14,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-
-import '../provider/product_listProvider.dart';
 
 class BottomNavigationBarScreen extends StatefulWidget {
   int pageIndex;
   BottomNavigationBarScreen({this.pageIndex}) : super();
   @override
-  _BottomNavigationBarScreenState createState() => new _BottomNavigationBarScreenState();
+  _BottomNavigationBarScreenState createState() =>
+      new _BottomNavigationBarScreenState();
 }
 
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   bool _canExit = global.getPlatFrom() ? true : false;
   int bottomNavIndex;
-
-
 
   CircularBottomNavigationController navigationController;
 
@@ -67,11 +63,8 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         ),
       ];
 
-  ProductListProvider productListProvider;
   @override
   void initState() {
-    productListProvider=Provider.of<ProductListProvider>(context,listen: false);
-    productListProvider.productListMethod();
     _init();
     super.initState();
   }
@@ -87,7 +80,8 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
       navigationController = CircularBottomNavigationController(bottomNavIndex);
       setState(() {});
     } catch (e) {
-      print("Exception - BottomNavigationBarScreen.dart - _init():" + e.toString());
+      print("Exception - BottomNavigationBarScreen.dart - _init():" +
+          e.toString());
     }
   }
 
@@ -119,7 +113,8 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
           } else {
             !GetPlatform.isWeb
                 ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text('Back press again to exit from app', style: TextStyle(color: Colors.white)),
+                    content: Text('Back press again to exit from app',
+                        style: TextStyle(color: Colors.white)),
                     behavior: SnackBarBehavior.floating,
                     backgroundColor: Colors.green,
                     duration: Duration(seconds: 2),
@@ -168,7 +163,8 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                     controller: navigationController,
                     selectedPos: bottomNavIndex,
                     barBackgroundColor: Colors.white,
-                    animationDuration: Duration(milliseconds: 300), selectedCallback: (int selectedPos) async {
+                    animationDuration: Duration(milliseconds: 300),
+                    selectedCallback: (int selectedPos) async {
                   bottomNavIndex = selectedPos;
                   setState(() {});
                   global.showInterstitialAd();
