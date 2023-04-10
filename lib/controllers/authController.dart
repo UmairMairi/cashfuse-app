@@ -16,6 +16,7 @@ import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
@@ -36,6 +37,8 @@ class AuthController extends GetxController {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   get user => _auth.currentUser;
+
+  GoogleSignIn googleSignIn = GoogleSignIn();
 
   @override
   void onInit() async {
@@ -209,76 +212,76 @@ class AuthController extends GetxController {
     }
   }
 
-  // Future<void> googleSignInFun(bool fromMenu) async {
-  //   try {
-  //     googleSignIn.signOut();
+  Future<void> googleSignInFun(bool fromMenu) async {
+    try {
+      googleSignIn.signOut();
 
-  //     UserModel _user = new UserModel();
+      UserModel _user = new UserModel();
 
-  //     GoogleSignInAccount googleUSer = await googleSignIn.signIn();
-  //     if (googleUSer != null) {
-  //       var user = googleUSer;
-  //       final googleCred = await user.authentication;
-  //       final credential = GoogleAuthProvider.credential(
-  //           accessToken: googleCred.accessToken, idToken: googleCred.idToken);
-  //       userCredential =
-  //           await FirebaseAuth.instance.signInWithCredential(credential);
-  //       log(userCredential.toString());
+      GoogleSignInAccount googleUSer = await googleSignIn.signIn();
+      if (googleUSer != null) {
+        var user = googleUSer;
+        final googleCred = await user.authentication;
+        final credential = GoogleAuthProvider.credential(
+            accessToken: googleCred.accessToken, idToken: googleCred.idToken);
+        userCredential =
+            await FirebaseAuth.instance.signInWithCredential(credential);
+        log(userCredential.toString());
 
-  //       _user.loginType = 'google';
-  //       _user.socialId = userCredential.user.uid;
-  //       _user.name = userCredential.user.displayName;
-  //       _user.userImage = userCredential.user.photoURL;
+        _user.loginType = 'google';
+        _user.socialId = userCredential.user.uid;
+        _user.name = userCredential.user.displayName;
+        _user.userImage = userCredential.user.photoURL;
 
-  //       _user.email = userCredential.user.email;
+        _user.email = userCredential.user.email;
 
-  //       Get.dialog(CustomLoader(), barrierDismissible: false);
+        Get.dialog(CustomLoader(), barrierDismissible: false);
 
-  //       await apiHelper.socialLogin(_user).then((response) async {
-  //         Get.back();
-  //         if (response.statusCode == 200) {
-  //           global.currentUser = response.data;
+        await apiHelper.socialLogin(_user).then((response) async {
+          Get.back();
+          if (response.statusCode == 200) {
+            global.currentUser = response.data;
 
-  //           global.sp.setString(
-  //               'currentUser', json.encode(global.currentUser.toJson()));
-  //           Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
-  //           await getProfile();
-  //           if (fromMenu) {
-  //             await Get.find<HomeController>().init();
-  //             if (!GetPlatform.isWeb) {
-  //               await global.referAndEarn();
-  //             }
-  //           }
-  //         } else {
-  //           showCustomSnackBar(response.message);
-  //         }
-  //       });
-  //       // update();
-  //       // global.showOnlyLoaderDialog(Get.context);
-  //       // await signIn();
-  //       // global.hideLoader();
-  //       // global.getCurrentUser();
-  //       // if (global.currentUser!.fristName != null && global.currentUser!.fristName != "") {
-  //       //   Get.off(() => BottomNavigationWidget(
-  //       //         a: a,
-  //       //         o: o,
-  //       //       ));
-  //       // } else {
-  //       //   Get.off(() => EditProfileScreen());
-  //       // }
-  //       // await signupController.checkEmailContact(userCredential!.user!.email!, signupController.cPhone.text, callId: 3);
+            global.sp.setString(
+                'currentUser', json.encode(global.currentUser.toJson()));
+            Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
+            await getProfile();
+            if (fromMenu) {
+              await Get.find<HomeController>().init();
+              if (!GetPlatform.isWeb) {
+                await global.referAndEarn();
+              }
+            }
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+        // update();
+        // global.showOnlyLoaderDialog(Get.context);
+        // await signIn();
+        // global.hideLoader();
+        // global.getCurrentUser();
+        // if (global.currentUser!.fristName != null && global.currentUser!.fristName != "") {
+        //   Get.off(() => BottomNavigationWidget(
+        //         a: a,
+        //         o: o,
+        //       ));
+        // } else {
+        //   Get.off(() => EditProfileScreen());
+        // }
+        // await signupController.checkEmailContact(userCredential!.user!.email!, signupController.cPhone.text, callId: 3);
 
-  //       // if (!signupController.isUserExist) {
-  //       //   Get.bottomSheet(inputContactWidget(email: userCredential!.user!.email!));
-  //       // }
+        // if (!signupController.isUserExist) {
+        //   Get.bottomSheet(inputContactWidget(email: userCredential!.user!.email!));
+        // }
 
-  //       //}
-  //     }
-  //   } catch (e) {
-  //     print("Exception - authController.dart - googleSignInFun():" +
-  //         e.toString());
-  //   }
-  // }
+        //}
+      }
+    } catch (e) {
+      print("Exception - authController.dart - googleSignInFun():" +
+          e.toString());
+    }
+  }
 
   // Future facebookLogin(bool fromMenu) async {
   //   print("FaceBook");

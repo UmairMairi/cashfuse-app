@@ -22,7 +22,8 @@ class AllCategoriesScreen extends StatelessWidget {
 
   void paginateTask() {
     homeController.catScrollController.addListener(() async {
-      if (homeController.catScrollController.position.pixels == homeController.catScrollController.position.maxScrollExtent) {
+      if (homeController.catScrollController.position.pixels ==
+          homeController.catScrollController.position.maxScrollExtent) {
         homeController.isMoreDataAvailable.value = true;
         print('Reached end');
         await homeController.getTopCategories();
@@ -53,7 +54,8 @@ class AllCategoriesScreen extends StatelessWidget {
               ),
               title: Text(
                 AppLocalizations.of(context).all_categories,
-                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
+                style: Get.theme.primaryTextTheme.titleSmall
+                    .copyWith(color: Colors.white),
               ),
             ),
       body: GetBuilder<HomeController>(builder: (controller) {
@@ -77,7 +79,9 @@ class AllCategoriesScreen extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                     itemBuilder: (context, index) {
-                      return controller.isMoreDataAvailable.value == true && controller.isAllDataLoaded.value && controller.topCategoryList.length - 1 == index
+                      return controller.isMoreDataAvailable.value == true &&
+                              controller.isAllDataLoaded.value &&
+                              controller.topCategoryList.length - 1 == index
                           ? Center(
                               child: CircularProgressIndicator(),
                             )
@@ -95,26 +99,35 @@ class AllCategoriesScreen extends StatelessWidget {
                                 //margin: EdgeInsets.only(right: 15),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: index == 0 ? Get.theme.primaryColor : Colors.white,
+                                  color: Colors.white,
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      controller.topCategoryList[index].name.toUpperCase(),
-                                      textAlign: TextAlign.center,
-                                      style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                                        fontSize: global.getPlatFrom() ? 16 : 10,
-                                        fontWeight: FontWeight.w500,
-                                        color: index == 0 ? Colors.white : Colors.black,
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      child: Text(
+                                        controller.topCategoryList[index].name
+                                            .toUpperCase(),
+                                        textAlign: TextAlign.center,
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall
+                                            .copyWith(
+                                          fontSize:
+                                              global.getPlatFrom() ? 16 : 10,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black,
+                                        ),
                                       ),
                                     ),
                                     SizedBox(
                                       height: global.getPlatFrom() ? 15 : 5,
                                     ),
                                     CustomImage(
-                                      image: '${global.appInfo.baseUrls.categoryImageUrl}/${controller.topCategoryList[index].image}',
+                                      image:
+                                          '${global.appInfo.baseUrls.categoryImageUrl}/${controller.topCategoryList[index].image}',
                                       height: global.getPlatFrom() ? 80 : 40,
                                     ),
                                   ],
@@ -127,7 +140,8 @@ class AllCategoriesScreen extends StatelessWidget {
                     builder: (adController) {
                       return _adController.isfbNativeAd1Exist
                           ? FbNativeAdWidget(
-                              adId: "VID_HD_16_9_46S_APP_INSTALL#536153035214384_536880055141682",
+                              adId:
+                                  "VID_HD_16_9_46S_APP_INSTALL#536153035214384_536880055141682",
                             )
                           : SizedBox();
                     },

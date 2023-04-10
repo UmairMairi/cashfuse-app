@@ -219,55 +219,62 @@ class CouponDetailScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              AppLocalizations.of(context).use_code,
-                              style:
-                                  Get.theme.primaryTextTheme.bodyLarge.copyWith(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.w300,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              child: DottedBorder(
-                                padding: EdgeInsets.all(10),
-                                color: Get.theme.secondaryHeaderColor,
-                                child: Text(
-                                  coupon.code,
-                                  style: Get.theme.primaryTextTheme.titleSmall
-                                      .copyWith(
-                                    color: Get.theme.secondaryHeaderColor,
+                        coupon.code != null && coupon.code.isNotEmpty
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    AppLocalizations.of(context).use_code,
+                                    style: Get.theme.primaryTextTheme.bodyLarge
+                                        .copyWith(
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.w300,
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Clipboard.setData(
-                                  ClipboardData(
-                                    text: coupon.code,
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 10),
+                                    child: DottedBorder(
+                                      padding: EdgeInsets.all(10),
+                                      color: Get.theme.secondaryHeaderColor,
+                                      child: Text(
+                                        coupon.code,
+                                        style: Get
+                                            .theme.primaryTextTheme.titleSmall
+                                            .copyWith(
+                                          color: Get.theme.secondaryHeaderColor,
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ).then((value) {
-                                  showCustomSnackBar(
-                                    'Coupon Code Copied',
-                                  );
-                                });
-                              },
-                              child: Text(
-                                AppLocalizations.of(context).copy_code,
-                                style: Get.theme.primaryTextTheme.bodyLarge
-                                    .copyWith(
-                                  color: Colors.teal,
-                                  fontWeight: FontWeight.w300,
-                                ),
+                                  InkWell(
+                                    onTap: () {
+                                      Clipboard.setData(
+                                        ClipboardData(
+                                          text: coupon.code,
+                                        ),
+                                      ).then((value) {
+                                        showCustomSnackBar(
+                                          'Coupon Code Copied',
+                                        );
+                                      });
+                                    },
+                                    child: Text(
+                                      AppLocalizations.of(context).copy_code,
+                                      style: Get
+                                          .theme.primaryTextTheme.bodyLarge
+                                          .copyWith(
+                                        color: Colors.teal,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            : Text(
+                                '*Coupon code not required',
+                                style: TextStyle(color: Colors.red),
                               ),
-                            )
-                          ],
-                        ),
                         InkWell(
                           onTap: () async {
                             if (global.currentUser.id != null) {

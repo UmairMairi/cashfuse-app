@@ -3,6 +3,7 @@
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/couponController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/utils/Mycolors.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/adsCampaignWidgetListScreen.dart';
@@ -45,9 +46,126 @@ class WebHomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   WebBannerView(homeController: homeController),
-                  homeController.topCategoryList != null && homeController.topCategoryList.length > 0
+                  SizedBox(
+                    height: Get.size.height * 0.35,
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: homeController.productList.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            width: Get.size.width * 0.1,
+                            margin: EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.only(top: 15, bottom: 15),
+                                  child: RichText(
+                                    text: TextSpan(
+                                        text: "Price Comapred ",
+                                        style: TextStyle(
+                                            color: Colors.black54,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 13),
+                                        children: [
+                                          TextSpan(
+                                              text:
+                                                  '(${homeController.productList[index].productPrices.length} Sellers)',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 13,
+                                                  color: Colors
+                                                      .blueAccent.shade400)),
+                                        ]),
+                                  ),
+                                ),
+                                Divider(),
+                                // Container(
+                                //   color: Colors.grey.shade400,
+                                //   height: 1,
+                                // ),
+                                Image.network(
+                                  "${global.appInfo.baseUrls.productImageurl}/${homeController.productList[index].image}",
+                                  width: 150,
+                                  height: 120,
+                                  fit: BoxFit.fill,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8.0, bottom: 8),
+                                  child: RichText(
+                                    text: TextSpan(
+                                        text: "Brand: ",
+                                        style: TextStyle(
+                                            color: Colors.black54,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 10),
+                                        children: [
+                                          TextSpan(
+                                              text:
+                                                  '${homeController.productList[index].name} ',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 12,
+                                                  color: Colors.black)),
+                                        ]),
+                                  ),
+                                ),
+                                Divider(
+                                  height: 0,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8.0, bottom: 8),
+                                  child: Text(
+                                    "${homeController.productList[index].name} ",
+                                    style: TextStyle(
+                                        color: Colors.black54,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13),
+                                  ),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      color: Mycolors.lightOrage,
+                                      border:
+                                          Border.all(color: Mycolors.orange)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 13, vertical: 3),
+                                  child: Text(
+                                    "+ ₹ ${homeController.productList[index].productPrices[0].cashback}  REWARDS",
+                                    style: TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w700,
+                                        color: Mycolors.orange),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8.0, bottom: 8),
+                                  child: Text(
+                                    "Final Price ₹ ${homeController.productList[index].productPrices[0].price}",
+                                    style: TextStyle(
+                                        color: Mycolors.blue,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
+                  ),
+                  homeController.topCategoryList != null &&
+                          homeController.topCategoryList.length > 0
                       ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -69,22 +187,33 @@ class WebHomeScreen extends StatelessWidget {
                                 },
                                 child: Text(
                                   '${AppLocalizations.of(context).view_all} >',
-                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: global.getPlatFrom() ? 16 : null),
+                                  style: Get.theme.primaryTextTheme.bodySmall
+                                      .copyWith(
+                                          color: Colors.teal,
+                                          fontSize:
+                                              global.getPlatFrom() ? 16 : null),
                                 ),
                               )
                             ],
                           ),
                         )
                       : SizedBox(),
-                  homeController.topCategoryList != null && homeController.topCategoryList.length > 0 ? HomeWebCategoryView() : SizedBox(),
-                  couponController.couponList != null && couponController.couponList.length > 0
+                  homeController.topCategoryList != null &&
+                          homeController.topCategoryList.length > 0
+                      ? HomeWebCategoryView()
+                      : SizedBox(),
+                  couponController.couponList != null &&
+                          couponController.couponList.length > 0
                       ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                AppLocalizations.of(context).coupons_of_the_day.toUpperCase(),
+                                AppLocalizations.of(context)
+                                    .coupons_of_the_day
+                                    .toUpperCase(),
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -102,7 +231,13 @@ class WebHomeScreen extends StatelessWidget {
                                       },
                                       child: Text(
                                         '${AppLocalizations.of(context).view_all} >',
-                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: global.getPlatFrom() ? 16 : null),
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall
+                                            .copyWith(
+                                                color: Colors.teal,
+                                                fontSize: global.getPlatFrom()
+                                                    ? 16
+                                                    : null),
                                       ),
                                     )
                                   : SizedBox(),
@@ -110,13 +245,20 @@ class WebHomeScreen extends StatelessWidget {
                           ),
                         )
                       : SizedBox(),
-                  global.appInfo.baseUrls != null && couponController.isDataLoaded
-                      ? couponController.couponList != null && couponController.couponList.length > 0
+                  global.appInfo.baseUrls != null &&
+                          couponController.isDataLoaded
+                      ? couponController.couponList != null &&
+                              couponController.couponList.length > 0
                           ? Row(
                               children: [
                                 global.getPlatFrom()
                                     ? InkWell(
-                                        onTap: () => couponScrollController.animateTo(couponScrollController.initialScrollOffset, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                        onTap: () =>
+                                            couponScrollController.animateTo(
+                                                couponScrollController
+                                                    .initialScrollOffset,
+                                                duration: Duration(seconds: 1),
+                                                curve: Curves.easeInOut),
                                         child: Container(
                                           width: 30,
                                           height: 80,
@@ -124,7 +266,8 @@ class WebHomeScreen extends StatelessWidget {
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             shape: BoxShape.rectangle,
-                                            color: Get.theme.secondaryHeaderColor,
+                                            color:
+                                                Get.theme.secondaryHeaderColor,
                                           ),
                                           child: Icon(
                                             Icons.arrow_back,
@@ -138,17 +281,25 @@ class WebHomeScreen extends StatelessWidget {
                                     height: GetPlatform.isWeb ? 106 : 100,
                                     child: ListView.builder(
                                       controller: couponScrollController,
-                                      padding: const EdgeInsets.symmetric(horizontal: 6),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 6),
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: couponController.couponList.length >= 5 ? 5 : couponController.couponList.length,
+                                      itemCount: couponController
+                                                  .couponList.length >=
+                                              5
+                                          ? 5
+                                          : couponController.couponList.length,
                                       shrinkWrap: true,
                                       itemBuilder: (context, index) {
                                         return InkWell(
                                           onTap: () {
-                                            if (couponController.couponList[index].offer != null) {
+                                            if (couponController
+                                                    .couponList[index].offer !=
+                                                null) {
                                               Get.to(
                                                 () => OfferDetailScreen(
-                                                  offer: couponController.couponList[index].offer,
+                                                  offer: couponController
+                                                      .couponList[index].offer,
                                                   fromSeeMore: false,
                                                 ),
                                                 routeName: 'offer',
@@ -156,16 +307,19 @@ class WebHomeScreen extends StatelessWidget {
                                             } else {
                                               Get.to(
                                                 () => CouponDetailScreen(
-                                                  coupon: couponController.couponList[index],
+                                                  coupon: couponController
+                                                      .couponList[index],
                                                 ),
                                                 routeName: 'coupon',
                                               );
                                             }
                                           },
                                           child: Padding(
-                                            padding: const EdgeInsets.only(right: 10),
+                                            padding: const EdgeInsets.only(
+                                                right: 10),
                                             child: CouponWidget(
-                                              coupon: couponController.couponList[index],
+                                              coupon: couponController
+                                                  .couponList[index],
                                             ),
                                           ),
                                         );
@@ -174,7 +328,11 @@ class WebHomeScreen extends StatelessWidget {
                                   ),
                                 ),
                                 InkWell(
-                                  onTap: () => couponScrollController.animateTo(couponScrollController.position.maxScrollExtent, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                  onTap: () => couponScrollController.animateTo(
+                                      couponScrollController
+                                          .position.maxScrollExtent,
+                                      duration: Duration(seconds: 1),
+                                      curve: Curves.easeInOut),
                                   child: Container(
                                     width: 30,
                                     height: 80,
@@ -196,7 +354,8 @@ class WebHomeScreen extends StatelessWidget {
                       : SizedBox(
                           height: 150,
                           child: ListView.builder(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 20),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 6, vertical: 20),
                             scrollDirection: Axis.horizontal,
                             itemCount: 5,
                             shrinkWrap: true,
@@ -220,9 +379,11 @@ class WebHomeScreen extends StatelessWidget {
                             },
                           ),
                         ),
-                  homeController.exclusiveOfferList != null && homeController.exclusiveOfferList.length > 0
+                  homeController.exclusiveOfferList != null &&
+                          homeController.exclusiveOfferList.length > 0
                       ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 15),
                           child: Text(
                             AppLocalizations.of(context).exclusive_offers,
                             style: TextStyle(
@@ -234,19 +395,26 @@ class WebHomeScreen extends StatelessWidget {
                           ),
                         )
                       : SizedBox(),
-                  global.appInfo.baseUrls != null && homeController.isOfferLoaded
-                      ? homeController.exclusiveOfferList != null && homeController.exclusiveOfferList.length > 0
+                  global.appInfo.baseUrls != null &&
+                          homeController.isOfferLoaded
+                      ? homeController.exclusiveOfferList != null &&
+                              homeController.exclusiveOfferList.length > 0
                           ? SizedBox(
                               height: global.getPlatFrom() ? 170 : 165,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: homeController.exclusiveOfferList.length,
+                                itemCount:
+                                    homeController.exclusiveOfferList.length,
                                 shrinkWrap: true,
-                                padding: const EdgeInsets.symmetric(horizontal: 6),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 6),
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                     onTap: () async {
-                                      await homeController.getOfferDetails(homeController.exclusiveOfferList[index].id.toString());
+                                      await homeController.getOfferDetails(
+                                          homeController
+                                              .exclusiveOfferList[index].id
+                                              .toString());
                                       Get.to(
                                         () => OfferDetailScreen(
                                           offer: homeController.offer,
@@ -256,7 +424,9 @@ class WebHomeScreen extends StatelessWidget {
                                       );
                                     },
                                     child: Container(
-                                      width: global.getPlatFrom() ? 270 : 240, //Get.width - 120,
+                                      width: global.getPlatFrom()
+                                          ? 270
+                                          : 240, //Get.width - 120,
                                       margin: EdgeInsets.only(right: 10),
                                       decoration: BoxDecoration(
                                         color: Colors.white,
@@ -266,9 +436,11 @@ class WebHomeScreen extends StatelessWidget {
                                         alignment: Alignment.bottomLeft,
                                         children: [
                                           ClipRRect(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                               child: CustomImage(
-                                                image: '${global.appInfo.baseUrls.offerImageUrl}/${homeController.exclusiveOfferList[index].bannerImage}',
+                                                image:
+                                                    '${global.appInfo.baseUrls.offerImageUrl}/${homeController.exclusiveOfferList[index].bannerImage}',
                                                 height: 170,
                                                 width: Get.width,
                                                 fit: BoxFit.fill,
@@ -286,9 +458,11 @@ class WebHomeScreen extends StatelessWidget {
                                               color: Colors.white,
                                               margin: EdgeInsets.all(10),
                                               child: Padding(
-                                                padding: const EdgeInsets.all(2.0),
+                                                padding:
+                                                    const EdgeInsets.all(2.0),
                                                 child: CustomImage(
-                                                  image: '${global.appInfo.baseUrls.offerImageUrl}/${homeController.exclusiveOfferList[index].image}',
+                                                  image:
+                                                      '${global.appInfo.baseUrls.offerImageUrl}/${homeController.exclusiveOfferList[index].image}',
                                                   height: 30,
                                                   width: 60,
                                                   fit: BoxFit.contain,
@@ -296,18 +470,38 @@ class WebHomeScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          homeController.exclusiveOfferList[index].dayDifference != null && homeController.exclusiveOfferList[index].dayDifference > 0
+                                          homeController
+                                                          .exclusiveOfferList[
+                                                              index]
+                                                          .dayDifference !=
+                                                      null &&
+                                                  homeController
+                                                          .exclusiveOfferList[
+                                                              index]
+                                                          .dayDifference >
+                                                      0
                                               ? Padding(
-                                                  padding: const EdgeInsets.all(10),
+                                                  padding:
+                                                      const EdgeInsets.all(10),
                                                   child: SlideCountdown(
-                                                    slideDirection: SlideDirection.none,
-                                                    textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
+                                                    slideDirection:
+                                                        SlideDirection.none,
+                                                    textStyle: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w600),
                                                     decoration: BoxDecoration(
                                                       color: Colors.red[800],
-                                                      borderRadius: BorderRadius.circular(3),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              3),
                                                     ),
                                                     duration: Duration(
-                                                      days: homeController.exclusiveOfferList[index].dayDifference,
+                                                      days: homeController
+                                                          .exclusiveOfferList[
+                                                              index]
+                                                          .dayDifference,
                                                     ),
                                                   ),
                                                 )
@@ -325,7 +519,8 @@ class WebHomeScreen extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               itemCount: 5,
                               shrinkWrap: true,
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 20),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 6, vertical: 20),
                               itemBuilder: (context, index) {
                                 return Shimmer(
                                   duration: Duration(seconds: 2),
@@ -341,14 +536,17 @@ class WebHomeScreen extends StatelessWidget {
                                 );
                               }),
                         ),
-                  homeController.topCashbackList != null && homeController.topCashbackList.length > 0
+                  homeController.topCashbackList != null &&
+                          homeController.topCashbackList.length > 0
                       ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 20),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                AppLocalizations.of(context).top_cashback_stores,
+                                AppLocalizations.of(context)
+                                    .top_cashback_stores,
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -360,14 +558,19 @@ class WebHomeScreen extends StatelessWidget {
                                 onTap: () {
                                   Get.to(
                                     () => AdsCampaignWidgetListScreen(
-                                      title: AppLocalizations.of(context).top_cashback_stores,
+                                      title: AppLocalizations.of(context)
+                                          .top_cashback_stores,
                                     ),
                                     routeName: 'all',
                                   );
                                 },
                                 child: Text(
                                   '${AppLocalizations.of(context).view_all} >',
-                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: global.getPlatFrom() ? 16 : null),
+                                  style: Get.theme.primaryTextTheme.bodySmall
+                                      .copyWith(
+                                          color: Colors.teal,
+                                          fontSize:
+                                              global.getPlatFrom() ? 16 : null),
                                 ),
                               )
                             ],
@@ -375,9 +578,48 @@ class WebHomeScreen extends StatelessWidget {
                         )
                       : SizedBox(),
                   HomeWebTopCashbackView(),
-                  homeController.newFlashOfferList != null && homeController.newFlashOfferList.length > 0
+                  homeController.productList != null &&
+                          homeController.productList.length > 0
                       ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 6)
+                              .copyWith(top: 25, bottom: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "LATEST PRODUCTS",
+                                style: TextStyle(
+                                  fontSize: global.getPlatFrom() ? 16 : 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black.withOpacity(0.79),
+                                  letterSpacing: -0.3,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Get.to(
+                                    () => OfferListScreen(),
+                                    routeName: 'all',
+                                  );
+                                },
+                                child: Text(
+                                  '${AppLocalizations.of(context).view_all} >',
+                                  style: Get.theme.primaryTextTheme.bodySmall
+                                      .copyWith(
+                                          color: Colors.teal,
+                                          fontSize:
+                                              global.getPlatFrom() ? 16 : null),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      : SizedBox(),
+                  homeController.newFlashOfferList != null &&
+                          homeController.newFlashOfferList.length > 0
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 6)
+                              .copyWith(top: 25, bottom: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -399,20 +641,31 @@ class WebHomeScreen extends StatelessWidget {
                                 },
                                 child: Text(
                                   '${AppLocalizations.of(context).view_all} >',
-                                  style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: global.getPlatFrom() ? 16 : null),
+                                  style: Get.theme.primaryTextTheme.bodySmall
+                                      .copyWith(
+                                          color: Colors.teal,
+                                          fontSize:
+                                              global.getPlatFrom() ? 16 : null),
                                 ),
                               )
                             ],
                           ),
                         )
                       : SizedBox(),
-                  global.appInfo.baseUrls != null && homeController.isFlashOffersLoaded
-                      ? homeController.newFlashOfferList != null && homeController.newFlashOfferList.length > 0
+                  global.appInfo.baseUrls != null &&
+                          homeController.isFlashOffersLoaded
+                      ? homeController.newFlashOfferList != null &&
+                              homeController.newFlashOfferList.length > 0
                           ? Row(
                               children: [
                                 global.getPlatFrom()
                                     ? InkWell(
-                                        onTap: () => offerScrollController.animateTo(offerScrollController.initialScrollOffset, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                        onTap: () =>
+                                            offerScrollController.animateTo(
+                                                offerScrollController
+                                                    .initialScrollOffset,
+                                                duration: Duration(seconds: 1),
+                                                curve: Curves.easeInOut),
                                         child: Container(
                                           width: 30,
                                           height: 80,
@@ -420,7 +673,8 @@ class WebHomeScreen extends StatelessWidget {
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             shape: BoxShape.rectangle,
-                                            color: Get.theme.secondaryHeaderColor,
+                                            color:
+                                                Get.theme.secondaryHeaderColor,
                                           ),
                                           child: Icon(
                                             Icons.arrow_back,
@@ -433,16 +687,21 @@ class WebHomeScreen extends StatelessWidget {
                                   child: SizedBox(
                                     height: global.getPlatFrom() ? 230 : 200,
                                     child: ListView.builder(
-                                      itemCount: homeController.newFlashOfferList.length,
+                                      itemCount: homeController
+                                          .newFlashOfferList.length,
                                       shrinkWrap: true,
                                       controller: offerScrollController,
                                       scrollDirection: Axis.horizontal,
                                       physics: AlwaysScrollableScrollPhysics(),
-                                      padding: const EdgeInsets.symmetric(horizontal: 6),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 6),
                                       itemBuilder: (context, index) {
                                         return InkWell(
                                           onTap: () async {
-                                            await homeController.getOfferDetails(homeController.newFlashOfferList[index].id.toString());
+                                            await homeController
+                                                .getOfferDetails(homeController
+                                                    .newFlashOfferList[index].id
+                                                    .toString());
                                             Get.to(
                                               () => OfferDetailScreen(
                                                 offer: homeController.offer,
@@ -452,7 +711,8 @@ class WebHomeScreen extends StatelessWidget {
                                             );
                                           },
                                           child: OfferWidget(
-                                            offer: homeController.newFlashOfferList[index],
+                                            offer: homeController
+                                                .newFlashOfferList[index],
                                             fromList: false,
                                           ),
                                         );
@@ -462,7 +722,12 @@ class WebHomeScreen extends StatelessWidget {
                                 ),
                                 global.getPlatFrom()
                                     ? InkWell(
-                                        onTap: () => offerScrollController.animateTo(offerScrollController.position.viewportDimension, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                        onTap: () =>
+                                            offerScrollController.animateTo(
+                                                offerScrollController
+                                                    .position.viewportDimension,
+                                                duration: Duration(seconds: 1),
+                                                curve: Curves.easeInOut),
                                         child: Container(
                                           width: 30,
                                           height: 80,
@@ -470,7 +735,8 @@ class WebHomeScreen extends StatelessWidget {
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             shape: BoxShape.rectangle,
-                                            color: Get.theme.secondaryHeaderColor,
+                                            color:
+                                                Get.theme.secondaryHeaderColor,
                                           ),
                                           child: Icon(
                                             Icons.arrow_forward,
@@ -488,7 +754,8 @@ class WebHomeScreen extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               itemCount: 5,
                               shrinkWrap: true,
-                              padding: const EdgeInsets.symmetric(horizontal: 6),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 6),
                               itemBuilder: (context, index) {
                                 return Shimmer(
                                   duration: Duration(seconds: 2),
@@ -517,10 +784,12 @@ class WebHomeScreen extends StatelessWidget {
                                           child: Container(
                                             height: 35,
                                             width: 80,
-                                            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 10, horizontal: 20),
                                             decoration: BoxDecoration(
                                               color: Colors.grey[300],
-                                              borderRadius: BorderRadius.circular(2),
+                                              borderRadius:
+                                                  BorderRadius.circular(2),
                                             ),
                                           ),
                                         ),
@@ -536,22 +805,35 @@ class WebHomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 6),
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return global.appInfo.baseUrls != null && homeController.isHomeAdvLoaded
-                          ? homeController.homeAdvList[index].commonList != null && homeController.homeAdvList[index].commonList.length > 0
+                      return global.appInfo.baseUrls != null &&
+                              homeController.isHomeAdvLoaded
+                          ? homeController.homeAdvList[index].commonList !=
+                                      null &&
+                                  homeController.homeAdvList[index].commonList
+                                          .length >
+                                      0
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 6).copyWith(top: 25, bottom: 10),
+                                      padding: const EdgeInsets.symmetric(
+                                              horizontal: 6)
+                                          .copyWith(top: 25, bottom: 10),
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            homeController.homeAdvList[index].name.toUpperCase(),
+                                            homeController
+                                                .homeAdvList[index].name
+                                                .toUpperCase(),
                                             style: TextStyle(
-                                              fontSize: global.getPlatFrom() ? 16 : 13,
+                                              fontSize: global.getPlatFrom()
+                                                  ? 16
+                                                  : 13,
                                               fontWeight: FontWeight.w600,
-                                              color: Colors.black.withOpacity(0.79),
+                                              color: Colors.black
+                                                  .withOpacity(0.79),
                                               letterSpacing: -0.3,
                                             ),
                                           ),
@@ -559,33 +841,72 @@ class WebHomeScreen extends StatelessWidget {
                                             onTap: () {
                                               Get.to(
                                                 () => OfferListScreen(
-                                                  categoryModel: homeController.homeAdvList[index],
+                                                  categoryModel: homeController
+                                                      .homeAdvList[index],
                                                 ),
                                                 routeName: 'all',
                                               );
                                             },
                                             child: Text(
                                               '${AppLocalizations.of(context).view_all} >',
-                                              style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal, fontSize: global.getPlatFrom() ? 16 : null),
+                                              style: Get.theme.primaryTextTheme
+                                                  .bodySmall
+                                                  .copyWith(
+                                                      color: Colors.teal,
+                                                      fontSize:
+                                                          global.getPlatFrom()
+                                                              ? 16
+                                                              : null),
                                             ),
                                           )
                                         ],
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.only(bottom: (global.getPlatFrom() && (homeController.homeAdvList[index].commonList.length - 1) != null) ? 20 : 0),
+                                      padding: EdgeInsets.only(
+                                          bottom: (global.getPlatFrom() &&
+                                                  (homeController
+                                                              .homeAdvList[
+                                                                  index]
+                                                              .commonList
+                                                              .length -
+                                                          1) !=
+                                                      null)
+                                              ? 20
+                                              : 0),
                                       child: SizedBox(
-                                        height: global.getPlatFrom() ? 230 : 200,
+                                        height:
+                                            global.getPlatFrom() ? 230 : 200,
                                         child: ListView.builder(
-                                            itemCount: homeController.homeAdvList[index].commonList.length,
+                                            itemCount: homeController
+                                                .homeAdvList[index]
+                                                .commonList
+                                                .length,
                                             shrinkWrap: true,
-                                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 6),
                                             scrollDirection: Axis.horizontal,
                                             itemBuilder: (context, i) {
                                               return InkWell(
                                                 onTap: () async {
-                                                  if (homeController.homeAdvList[index].commonList[i].adId != null && homeController.homeAdvList[index].commonList[i].adId.isNotEmpty) {
-                                                    await homeController.getAdDetails(homeController.homeAdvList[index].commonList[i].adId);
+                                                  if (homeController
+                                                              .homeAdvList[
+                                                                  index]
+                                                              .commonList[i]
+                                                              .adId !=
+                                                          null &&
+                                                      homeController
+                                                          .homeAdvList[index]
+                                                          .commonList[i]
+                                                          .adId
+                                                          .isNotEmpty) {
+                                                    await homeController
+                                                        .getAdDetails(
+                                                            homeController
+                                                                .homeAdvList[
+                                                                    index]
+                                                                .commonList[i]
+                                                                .adId);
                                                     Get.to(
                                                       () => AdsDetailScreen(
                                                         ads: homeController.ads,
@@ -594,10 +915,19 @@ class WebHomeScreen extends StatelessWidget {
                                                       routeName: 'detail',
                                                     );
                                                   } else {
-                                                    await homeController.getCampignDetails(homeController.homeAdvList[index].commonList[i].campaignId.toString());
+                                                    await homeController
+                                                        .getCampignDetails(
+                                                            homeController
+                                                                .homeAdvList[
+                                                                    index]
+                                                                .commonList[i]
+                                                                .campaignId
+                                                                .toString());
                                                     Get.to(
-                                                      () => CampaignDetailScreen(
-                                                        campaign: homeController.campaign,
+                                                      () =>
+                                                          CampaignDetailScreen(
+                                                        campaign: homeController
+                                                            .campaign,
                                                         fromSeeMore: false,
                                                       ),
                                                       routeName: 'detail',
@@ -605,8 +935,11 @@ class WebHomeScreen extends StatelessWidget {
                                                   }
                                                 },
                                                 child: OfferWidget(
-                                                  commonModel: homeController.homeAdvList[index].commonList[i],
-                                                  domainImage: homeController.homeAdvList[index].image,
+                                                  commonModel: homeController
+                                                      .homeAdvList[index]
+                                                      .commonList[i],
+                                                  domainImage: homeController
+                                                      .homeAdvList[index].image,
                                                   fromList: false,
                                                 ),
                                               );
@@ -622,7 +955,8 @@ class WebHomeScreen extends StatelessWidget {
                                   scrollDirection: Axis.horizontal,
                                   itemCount: 5,
                                   shrinkWrap: true,
-                                  padding: const EdgeInsets.only(top: 20, bottom: 10),
+                                  padding: const EdgeInsets.only(
+                                      top: 20, bottom: 10),
                                   itemBuilder: (context, index) {
                                     return Shimmer(
                                       duration: Duration(seconds: 2),
@@ -631,7 +965,8 @@ class WebHomeScreen extends StatelessWidget {
                                         margin: EdgeInsets.only(right: 15),
                                         decoration: BoxDecoration(
                                           color: Colors.white,
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         ),
                                         child: Column(
                                           children: [
@@ -651,10 +986,13 @@ class WebHomeScreen extends StatelessWidget {
                                               child: Container(
                                                 height: 35,
                                                 width: 80,
-                                                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 10,
+                                                    horizontal: 20),
                                                 decoration: BoxDecoration(
                                                   color: Colors.grey[300],
-                                                  borderRadius: BorderRadius.circular(2),
+                                                  borderRadius:
+                                                      BorderRadius.circular(2),
                                                 ),
                                               ),
                                             ),

@@ -452,9 +452,7 @@ class HomeScreen extends StatelessWidget {
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
-                                                  color: index == 0
-                                                      ? Get.theme.primaryColor
-                                                      : Colors.white,
+                                                  color: Colors.white,
                                                 ),
                                                 child: Column(
                                                   crossAxisAlignment:
@@ -478,14 +476,12 @@ class HomeScreen extends StatelessWidget {
                                                         fontSize: 10,
                                                         fontWeight:
                                                             FontWeight.w500,
-                                                        color: index == 0
-                                                            ? Colors.white
-                                                            : Colors.black,
+                                                        color: Colors.black,
                                                       ),
                                                     ),
-                                                    // SizedBox(
-                                                    //   height: 10,
-                                                    // ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
                                                     CustomImage(
                                                       image:
                                                           '${global.appInfo.baseUrls.categoryImageUrl}/${homeController.topCategoryList[index].image}',
@@ -1037,7 +1033,7 @@ class HomeScreen extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "TOP SELLING PRODUCT",
+                                        "LATEST PRODUCTS",
                                         style: TextStyle(
                                           fontSize:
                                               global.getPlatFrom() ? 16 : 13,
@@ -1054,7 +1050,7 @@ class HomeScreen extends StatelessWidget {
                                                   builder: (context) =>
                                                       ViewAllProductScreen(
                                                         title:
-                                                            "TOP SELLING PRODUCT",
+                                                            "LATEST PRODUCTS",
                                                         productList:
                                                             homeController
                                                                 .productList,
@@ -1124,7 +1120,7 @@ class HomeScreen extends StatelessWidget {
                                                           builder: (context) =>
                                                               ProductDetailsScreen(
                                                                 title:
-                                                                    "TOP SELLING PRODUCT",
+                                                                    "LATEST PRODUCTS",
                                                                 product:
                                                                     homeController
                                                                             .productList[
@@ -1294,6 +1290,172 @@ class HomeScreen extends StatelessWidget {
                                                 ));
                                           },
                                         ),
+                                      ),
+                                homeController.newFlashOfferList != null &&
+                                        homeController
+                                                .newFlashOfferList.length >
+                                            0
+                                    ? Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                                horizontal: 6)
+                                            .copyWith(top: 25, bottom: 10),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'NEW FLASH DEALS - LIVE NOW',
+                                              style: TextStyle(
+                                                fontSize: global.getPlatFrom()
+                                                    ? 16
+                                                    : 13,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.black
+                                                    .withOpacity(0.79),
+                                                letterSpacing: -0.3,
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                Get.to(
+                                                  () => OfferListScreen(),
+                                                  routeName: 'all',
+                                                );
+                                              },
+                                              child: Text(
+                                                '${AppLocalizations.of(context).view_all} >',
+                                                style: Get.theme
+                                                    .primaryTextTheme.bodySmall
+                                                    .copyWith(
+                                                        color: Colors.teal,
+                                                        fontSize:
+                                                            global.getPlatFrom()
+                                                                ? 16
+                                                                : null),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    : SizedBox(),
+                                homeController.isFlashOffersLoaded
+                                    ? homeController.newFlashOfferList !=
+                                                null &&
+                                            homeController
+                                                    .newFlashOfferList.length >
+                                                0
+                                        ? SizedBox(
+                                            height: global.getPlatFrom()
+                                                ? 230
+                                                : 200,
+                                            child: ListView.builder(
+                                              itemCount: homeController
+                                                  .newFlashOfferList.length,
+                                              shrinkWrap: true,
+                                              controller: offerScrollController,
+                                              scrollDirection: Axis.horizontal,
+                                              physics:
+                                                  AlwaysScrollableScrollPhysics(),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 6),
+                                              itemBuilder: (context, index) {
+                                                return InkWell(
+                                                  onTap: () async {
+                                                    await homeController
+                                                        .getOfferDetails(
+                                                            homeController
+                                                                .newFlashOfferList[
+                                                                    index]
+                                                                .id
+                                                                .toString());
+                                                    Get.to(
+                                                      () => OfferDetailScreen(
+                                                        offer: homeController
+                                                            .offer,
+                                                        fromSeeMore: false,
+                                                      ),
+                                                      routeName: 'offer',
+                                                    );
+                                                  },
+                                                  child: OfferWidget(
+                                                    offer: homeController
+                                                            .newFlashOfferList[
+                                                        index],
+                                                    fromList: false,
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          )
+                                        : SizedBox()
+                                    : SizedBox(
+                                        height: 200,
+                                        child: ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: 5,
+                                            shrinkWrap: true,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 6),
+                                            itemBuilder: (context, index) {
+                                              return Shimmer(
+                                                duration: Duration(seconds: 2),
+                                                child: Container(
+                                                  width: 330,
+                                                  margin: EdgeInsets.only(
+                                                      right: 15),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                  ),
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                        height: 145,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color:
+                                                              Colors.grey[300],
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    11),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    11),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Align(
+                                                        alignment: Alignment
+                                                            .centerRight,
+                                                        child: Container(
+                                                          height: 35,
+                                                          width: 80,
+                                                          margin: EdgeInsets
+                                                              .symmetric(
+                                                                  vertical: 10,
+                                                                  horizontal:
+                                                                      20),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: Colors
+                                                                .grey[300],
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        2),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            }),
                                       ),
 
                                 Padding(
@@ -1562,172 +1724,6 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                       ),
 
-                                homeController.newFlashOfferList != null &&
-                                        homeController
-                                                .newFlashOfferList.length >
-                                            0
-                                    ? Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                                horizontal: 6)
-                                            .copyWith(top: 25, bottom: 10),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              'NEW FLASH DEALS - LIVE NOW',
-                                              style: TextStyle(
-                                                fontSize: global.getPlatFrom()
-                                                    ? 16
-                                                    : 13,
-                                                fontWeight: FontWeight.w600,
-                                                color: Colors.black
-                                                    .withOpacity(0.79),
-                                                letterSpacing: -0.3,
-                                              ),
-                                            ),
-                                            InkWell(
-                                              onTap: () {
-                                                Get.to(
-                                                  () => OfferListScreen(),
-                                                  routeName: 'all',
-                                                );
-                                              },
-                                              child: Text(
-                                                '${AppLocalizations.of(context).view_all} >',
-                                                style: Get.theme
-                                                    .primaryTextTheme.bodySmall
-                                                    .copyWith(
-                                                        color: Colors.teal,
-                                                        fontSize:
-                                                            global.getPlatFrom()
-                                                                ? 16
-                                                                : null),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    : SizedBox(),
-                                homeController.isFlashOffersLoaded
-                                    ? homeController.newFlashOfferList !=
-                                                null &&
-                                            homeController
-                                                    .newFlashOfferList.length >
-                                                0
-                                        ? SizedBox(
-                                            height: global.getPlatFrom()
-                                                ? 230
-                                                : 200,
-                                            child: ListView.builder(
-                                              itemCount: homeController
-                                                  .newFlashOfferList.length,
-                                              shrinkWrap: true,
-                                              controller: offerScrollController,
-                                              scrollDirection: Axis.horizontal,
-                                              physics:
-                                                  AlwaysScrollableScrollPhysics(),
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 6),
-                                              itemBuilder: (context, index) {
-                                                return InkWell(
-                                                  onTap: () async {
-                                                    await homeController
-                                                        .getOfferDetails(
-                                                            homeController
-                                                                .newFlashOfferList[
-                                                                    index]
-                                                                .id
-                                                                .toString());
-                                                    Get.to(
-                                                      () => OfferDetailScreen(
-                                                        offer: homeController
-                                                            .offer,
-                                                        fromSeeMore: false,
-                                                      ),
-                                                      routeName: 'offer',
-                                                    );
-                                                  },
-                                                  child: OfferWidget(
-                                                    offer: homeController
-                                                            .newFlashOfferList[
-                                                        index],
-                                                    fromList: false,
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          )
-                                        : SizedBox()
-                                    : SizedBox(
-                                        height: 200,
-                                        child: ListView.builder(
-                                            scrollDirection: Axis.horizontal,
-                                            itemCount: 5,
-                                            shrinkWrap: true,
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 6),
-                                            itemBuilder: (context, index) {
-                                              return Shimmer(
-                                                duration: Duration(seconds: 2),
-                                                child: Container(
-                                                  width: 330,
-                                                  margin: EdgeInsets.only(
-                                                      right: 15),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                  ),
-                                                  child: Column(
-                                                    children: [
-                                                      Container(
-                                                        height: 145,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              Colors.grey[300],
-                                                          borderRadius:
-                                                              BorderRadius.only(
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    11),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    11),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Align(
-                                                        alignment: Alignment
-                                                            .centerRight,
-                                                        child: Container(
-                                                          height: 35,
-                                                          width: 80,
-                                                          margin: EdgeInsets
-                                                              .symmetric(
-                                                                  vertical: 10,
-                                                                  horizontal:
-                                                                      20),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: Colors
-                                                                .grey[300],
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        2),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              );
-                                            }),
-                                      ),
                                 GetBuilder<AdController>(
                                   builder: (adController) {
                                     return _adController.isAdmobBannerAd2Exist

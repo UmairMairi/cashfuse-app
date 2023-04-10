@@ -40,7 +40,8 @@ class CouponWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomImage(
-                      image: '${global.appInfo.baseUrls.partnerImageUrl}/${coupon.image}',
+                      image:
+                          '${global.appInfo.baseUrls.partnerImageUrl}/${coupon.image}',
                       height: 35,
                       width: 70,
                       fit: BoxFit.contain,
@@ -49,11 +50,16 @@ class CouponWidget extends StatelessWidget {
                     //   Images.amazon,
                     //   width: 70,
                     // ),
-                    Text(
-                      coupon.name,
-                      style: Get.theme.primaryTextTheme.titleMedium.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: Get.theme.primaryColor,
+                    SizedBox(
+                      width: 160,
+                      child: Text(
+                        coupon.name,
+                        style: Get.theme.primaryTextTheme.titleMedium.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: Get.theme.primaryColor,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     SizedBox(
@@ -93,8 +99,14 @@ class CouponWidget extends StatelessWidget {
                         ),
                         alignment: Alignment.center,
                         child: Text(
-                          'See code',
-                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
+                          coupon.code != null && coupon.code.isNotEmpty
+                              ? 'See code'
+                              : coupon.buttonText != null &&
+                                      coupon.buttonText.isNotEmpty
+                                  ? coupon.buttonText
+                                  : 'Grab Now',
+                          style: Get.theme.primaryTextTheme.titleSmall
+                              .copyWith(color: Colors.white),
                         ),
                       ),
                     ),

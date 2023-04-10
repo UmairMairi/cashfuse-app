@@ -25,7 +25,8 @@ class CouponListScreen extends StatelessWidget {
         ),
         title: Text(
           AppLocalizations.of(context).coupons_of_the_day.toUpperCase(),
-          style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
+          style: Get.theme.primaryTextTheme.titleSmall
+              .copyWith(color: Colors.white),
         ),
       ),
       body: GridView.builder(
@@ -33,10 +34,9 @@ class CouponListScreen extends StatelessWidget {
           crossAxisCount: 1,
           // crossAxisSpacing: 15.0,
           // mainAxisSpacing: 15.0,
-          childAspectRatio: 3.5,
+          childAspectRatio: 3,
         ),
         itemCount: couponController.couponList.length,
-        physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
         itemBuilder: (context, index) {
@@ -59,10 +59,14 @@ class CouponListScreen extends StatelessWidget {
                 );
               }
             },
-            child: Container(
-              alignment: Alignment.center,
-              child: CouponWidget(
-                coupon: couponController.couponList[index],
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Container(
+                alignment: Alignment.center,
+                
+                child: CouponWidget(
+                  coupon: couponController.couponList[index],
+                ),
               ),
             ),
           );

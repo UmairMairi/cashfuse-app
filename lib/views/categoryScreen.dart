@@ -200,7 +200,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           );
                         })
                       : SizedBox(
-                          height: Get.height,
+                          // height: Get.height,
                           child: Center(
                             child: Text(
                               'No data found.',

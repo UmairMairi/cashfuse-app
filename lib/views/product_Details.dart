@@ -46,15 +46,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              margin: EdgeInsets.only(left: 15, top: 10, bottom: 10),
-              child: Text(
-                product.name,
-                style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w600),
-              ),
+            // Container(
+            //   margin: EdgeInsets.only(left: 15, top: 10, bottom: 10),
+            //   child: Text(
+            //     product.name,
+            //     style: TextStyle(
+            //         fontSize: 14,
+            //         color: Colors.black87,
+            //         fontWeight: FontWeight.w600),
+            //   ),
+            // ),
+            SizedBox(
+              height: 10,
             ),
             CarouselSlider(
               options: CarouselOptions(height: 200.0, autoPlay: true),
@@ -221,8 +224,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               onTap: () async {
                                 if (global.currentUser.id != null) {
                                   await homeController.getTrackingLink(
-                                      product.productPrices[index].url, product.affiliatePartner,
-                                      cId: product.productPrices[index].cId.toString());
+                                      product.productPrices[index].url,
+                                      product.affiliatePartner,
+                                      cId: product.productPrices[index].cId
+                                          .toString());
                                   await homeController.addClick(
                                     product.productPrices[index].siteName,
                                     global.appInfo.baseUrls.productSiteUrl +
