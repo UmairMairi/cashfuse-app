@@ -1,3 +1,4 @@
+import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
@@ -120,166 +121,162 @@ class GetStartedScreen extends StatelessWidget {
         //   ],
         // );
         // }),
-        bottomNavigationBar: fromSplash
-            ? InkWell(
-                onTap: () async {
-                  Get.to(
-                    () => LoginOrSignUpScreen(
-                      fromMenu: false,
+        bottomNavigationBar:
+            // fromSplash
+            //     ? InkWell(
+            //         onTap: () async {
+            //           Get.to(
+            //             () => LoginOrSignUpScreen(
+            //               fromMenu: false,
+            //             ),
+            //             routeName: 'login',
+            //           );
+            //         },
+            //         child: Container(
+            //           height: 50,
+            //           margin: EdgeInsets.all(20),
+            //           width: MediaQuery.of(context).size.width,
+            //           alignment: Alignment.center,
+            //           decoration: BoxDecoration(
+            //             color: Get.theme.primaryColor,
+            //             borderRadius: BorderRadius.circular(10),
+            //           ),
+            //           child: Text(
+            //             AppLocalizations.of(context).login_or_signup,
+            //             style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
+            //               color: Colors.white,
+            //               fontWeight: FontWeight.w500,
+            //             ),
+            //           ),
+            //         ),
+            //       )
+            //     : SizedBox(),
+            GetBuilder<AuthController>(builder: (authController) {
+          return fromSplash
+              ? Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      onTap: () async {
+                        await authController.googleSignInFun(fromSplash);
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                      },
+                      child: Container(
+                        height: 50,
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        width: MediaQuery.of(context).size.width,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Get.theme.primaryColor.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              Images.google,
+                              height: 18,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              'Login with Google',
+                              style: Get.theme.primaryTextTheme.titleMedium.copyWith(
+                                color: Get.theme.primaryColor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    routeName: 'login',
-                  );
-                },
-                child: Container(
-                  height: 50,
-                  margin: EdgeInsets.all(20),
-                  width: MediaQuery.of(context).size.width,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Get.theme.primaryColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    AppLocalizations.of(context).login_or_signup,
-                    style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
+                    InkWell(
+                      onTap: () async {
+                        Get.to(
+                          () => LoginOrSignUpScreen(
+                            fromMenu: false,
+                          ),
+                          routeName: 'login',
+                        );
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                      },
+                      child: Container(
+                        height: 50,
+                        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        width: MediaQuery.of(context).size.width,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Get.theme.primaryColor.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.phone,
+                              size: 20,
+                              color: Colors.blue[800],
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              'Login with Phone',
+                              style: Get.theme.primaryTextTheme.titleMedium.copyWith(
+                                color: Get.theme.primaryColor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              )
-            : SizedBox(),
-        //     GetBuilder<AuthController>(builder: (authController) {
-        //   return fromSplash
-        //       ? Column(
-        //           mainAxisSize: MainAxisSize.min,
-        //           children: [
-        //             InkWell(
-        //               onTap: () async {
-        //                 await authController.googleSignInFun(fromSplash);
-        //                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
-        //               },
-        //               child: Container(
-        //                 height: 50,
-        //                 margin: EdgeInsets.symmetric(horizontal: 20),
-        //                 width: MediaQuery.of(context).size.width,
-        //                 alignment: Alignment.center,
-        //                 decoration: BoxDecoration(
-        //                   color: Get.theme.primaryColor.withOpacity(0.1),
-        //                   borderRadius: BorderRadius.circular(10),
-        //                 ),
-        //                 child: Row(
-        //                   mainAxisAlignment: MainAxisAlignment.center,
-        //                   children: [
-        //                     Image.asset(
-        //                       Images.google,
-        //                       height: 18,
-        //                     ),
-        //                     SizedBox(
-        //                       width: 5,
-        //                     ),
-        //                     Text(
-        //                       'Login with Google',
-        //                       style: Get.theme.primaryTextTheme.titleMedium
-        //                           .copyWith(
-        //                         color: Get.theme.primaryColor,
-        //                         fontWeight: FontWeight.w600,
-        //                       ),
-        //                     ),
-        //                   ],
-        //                 ),
-        //               ),
-        //             ),
-        //             InkWell(
-        //               onTap: () async {
-        //                 Get.to(
-        //                   () => LoginOrSignUpScreen(
-        //                     fromMenu: false,
-        //                   ),
-        //                   routeName: 'login',
-        //                 );
-        //                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
-        //               },
-        //               child: Container(
-        //                 height: 50,
-        //                 margin:
-        //                     EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        //                 width: MediaQuery.of(context).size.width,
-        //                 alignment: Alignment.center,
-        //                 decoration: BoxDecoration(
-        //                   color: Get.theme.primaryColor.withOpacity(0.1),
-        //                   borderRadius: BorderRadius.circular(10),
-        //                 ),
-        //                 child: Row(
-        //                   mainAxisAlignment: MainAxisAlignment.center,
-        //                   children: [
-        //                     Icon(
-        //                       Icons.phone,
-        //                       size: 20,
-        //                       color: Colors.blue[800],
-        //                     ),
-        //                     SizedBox(
-        //                       width: 5,
-        //                     ),
-        //                     Text(
-        //                       'Login with Phone',
-        //                       style: Get.theme.primaryTextTheme.titleMedium
-        //                           .copyWith(
-        //                         color: Get.theme.primaryColor,
-        //                         fontWeight: FontWeight.w600,
-        //                       ),
-        //                     ),
-        //                   ],
-        //                 ),
-        //               ),
-        //             ),
-        //             InkWell(
-        //               onTap: () async {
-        //                 Get.to(
-        //                   () => LoginOrSignUpScreen(
-        //                     fromMenu: false,
-        //                   ),
-        //                   routeName: 'login',
-        //                 );
-        //                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
-        //               },
-        //               child: Container(
-        //                 height: 50,
-        //                 margin: EdgeInsets.symmetric(horizontal: 20)
-        //                     .copyWith(bottom: 10),
-        //                 width: MediaQuery.of(context).size.width,
-        //                 alignment: Alignment.center,
-        //                 decoration: BoxDecoration(
-        //                   color: Get.theme.primaryColor.withOpacity(0.1),
-        //                   borderRadius: BorderRadius.circular(10),
-        //                 ),
-        //                 child: Row(
-        //                   mainAxisAlignment: MainAxisAlignment.center,
-        //                   children: [
-        //                     Icon(
-        //                       Icons.email,
-        //                       size: 20,
-        //                       color: Colors.amber,
-        //                     ),
-        //                     SizedBox(
-        //                       width: 5,
-        //                     ),
-        //                     Text(
-        //                       'Login with Email',
-        //                       style: Get.theme.primaryTextTheme.titleMedium
-        //                           .copyWith(
-        //                         color: Get.theme.primaryColor,
-        //                         fontWeight: FontWeight.w600,
-        //                       ),
-        //                     ),
-        //                   ],
-        //                 ),
-        //               ),
-        //             ),
-        //           ],
-        //         )
-        //       : SizedBox();
-        // }),
+                    InkWell(
+                      onTap: () async {
+                        Get.to(
+                          () => LoginOrSignUpScreen(
+                            fromMenu: false,
+                          ),
+                          routeName: 'login',
+                        );
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                      },
+                      child: Container(
+                        height: 50,
+                        margin: EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 10),
+                        width: MediaQuery.of(context).size.width,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Get.theme.primaryColor.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.email,
+                              size: 20,
+                              color: Colors.amber,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              'Login with Email',
+                              style: Get.theme.primaryTextTheme.titleMedium.copyWith(
+                                color: Get.theme.primaryColor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : SizedBox();
+        }),
       ),
     );
   }

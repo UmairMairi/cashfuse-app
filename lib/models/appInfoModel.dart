@@ -6,6 +6,8 @@ class AppInfo {
   String businessName;
   String logo;
   String currency;
+  String country;
+  String countryCode;
   String perOrderReferPercentage;
   String minimumRedeemValue;
   BaseUrls baseUrls;
@@ -27,6 +29,8 @@ class AppInfo {
       facebookAd = json['facebook_ad'];
       businessName = json["business_name"] != null ? json["business_name"] : '';
       logo = json["logo"] != null ? json["logo"] : '';
+      country = json["country"] != null ? json["country"] : '';
+      countryCode = json["phone_code"] != null ? json["phone_code"] : '';
       currency = json["currency"] != null ? json["currency"] : '';
       perOrderReferPercentage = json["per_order_refer_percentage"] != null ? json["per_order_refer_percentage"] : '';
       minimumRedeemValue = json["minimum_redeem_value"] != null ? json["minimum_redeem_value"] : '';
