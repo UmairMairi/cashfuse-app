@@ -5,7 +5,6 @@ import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/models/adsModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/getStartedScreen.dart';
-import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/moreAdsScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
@@ -176,7 +175,7 @@ class AdsDetailScreen extends StatelessWidget {
                                           Get.dialog(Dialog(
                                             child: SizedBox(
                                               width: Get.width / 3,
-                                              child: LoginOrSignUpScreen(
+                                              child: GetStartedScreen(
                                                 fromMenu: true,
                                               ),
                                             ),
@@ -342,7 +341,7 @@ class AdsDetailScreen extends StatelessWidget {
                                       Get.dialog(Dialog(
                                         child: SizedBox(
                                           width: Get.width / 3,
-                                          child: LoginOrSignUpScreen(
+                                          child: GetStartedScreen(
                                             fromMenu: true,
                                           ),
                                         ),

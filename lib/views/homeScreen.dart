@@ -109,7 +109,7 @@ class HomeScreen extends StatelessWidget {
                           Get.dialog(Dialog(
                             child: SizedBox(
                               width: Get.width / 3,
-                              child: LoginOrSignUpScreen(
+                              child: GetStartedScreen(
                                 fromMenu: true,
                               ),
                             ),
@@ -1150,7 +1150,7 @@ class HomeScreen extends StatelessWidget {
                                                         child: RichText(
                                                           text: TextSpan(
                                                               text:
-                                                                  "Price Comapred ",
+                                                                  "Price Compared ",
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black54,
@@ -1568,7 +1568,7 @@ class HomeScreen extends StatelessWidget {
                                                         child: RichText(
                                                           text: TextSpan(
                                                               text:
-                                                                  "Price Comapred ",
+                                                                  "Price Compared ",
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black54,

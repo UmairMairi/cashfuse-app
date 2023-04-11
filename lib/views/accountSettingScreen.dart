@@ -56,6 +56,7 @@ class AccountSettingScreen extends StatelessWidget {
                 ),
           body: Center(
             child: Container(
+              alignment: Alignment.topCenter,
               color: global.getPlatFrom() ? Colors.white : Colors.transparent,
               width: global.getPlatFrom()
                   ? AppConstants.WEB_MAX_WIDTH / 2

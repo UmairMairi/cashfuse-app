@@ -1,6 +1,7 @@
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/models/productModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/views/webScreen/webProductDetails.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -69,16 +70,27 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                     //   ),
                     //   routeName: 'category',
                     // );
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProductDetailsScreen(
-                                  title: '',
-                                  product: productList[index],
-                                )));
+
+                    if (global.getPlatFrom()) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WebProductDetailsScreen(
+                                    title: "LATEST PRODUCTS",
+                                    product: productList[index],
+                                  )));
+                    } else {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProductDetailsScreen(
+                                    title: '',
+                                    product: productList[index],
+                                  )));
+                    }
                   },
                   child: Container(
-                    width: GetPlatform.isWeb ? 120 : 150,
+                    width: global.getPlatFrom() ? 180 : 150,
                     // height: 150,
                     margin: EdgeInsets.only(left: 10),
                     color: Colors.white,
@@ -89,7 +101,7 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                           padding: EdgeInsets.only(top: 15, bottom: 15),
                           child: RichText(
                             text: TextSpan(
-                                text: "Price Comapred ",
+                                text: "Price Compared ",
                                 style: TextStyle(
                                     color: Colors.black54,
                                     fontWeight: FontWeight.w500,

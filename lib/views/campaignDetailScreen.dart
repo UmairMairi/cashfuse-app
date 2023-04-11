@@ -175,7 +175,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                           Get.dialog(Dialog(
                                             child: SizedBox(
                                               width: Get.width / 3,
-                                              child: LoginOrSignUpScreen(
+                                              child: GetStartedScreen(
                                                 fromMenu: true,
                                               ),
                                             ),

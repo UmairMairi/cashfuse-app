@@ -1,10 +1,7 @@
 import 'package:cashfuse/controllers/authController.dart';
-import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/loginWithEmail.dart';
-import 'package:cashfuse/widget/drawerWidget.dart';
-import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:video_player/video_player.dart';
@@ -28,26 +25,22 @@ class GetStartedScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         key: scaffoldKey,
-        drawer: global.getPlatFrom() ? DrawerWidget() : null,
-        appBar: global.getPlatFrom()
-            ? WebTopBarWidget(
-                scaffoldKey: scaffoldKey,
+        // drawer: global.getPlatFrom() ? DrawerWidget() : null,
+        appBar: fromMenu
+            ? AppBar(
+                elevation: 0,
+                backgroundColor: Colors.white,
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Get.theme.secondaryHeaderColor,
+                  ),
+                  onPressed: () {
+                    Get.back();
+                  },
+                ),
               )
-            : fromMenu
-                ? AppBar(
-                    elevation: 0,
-                    backgroundColor: Colors.white,
-                    leading: IconButton(
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: Get.theme.secondaryHeaderColor,
-                      ),
-                      onPressed: () {
-                        Get.back();
-                      },
-                    ),
-                  )
-                : null,
+            : null,
         body: Container(
           color: Colors.white,
           child: Center(
@@ -208,13 +201,28 @@ class GetStartedScreen extends StatelessWidget {
               ),
               InkWell(
                 onTap: () async {
-                  Get.to(
-                    () => LoginOrSignUpScreen(
-                      fromMenu: fromMenu,
-                    ),
-                    routeName: 'login',
-                    preventDuplicates: false,
-                  );
+                  if (GetPlatform.isWeb) {
+                    Get.dialog(Dialog(
+                      child: SizedBox(
+                          width: Get.width / 3,
+                          child: LoginOrSignUpScreen(
+                            fromMenu: fromMenu,
+                          )
+                          // LoginOrSignUpScreen(
+                          //   fromMenu: true,
+                          // ),
+                          ),
+                    ));
+                  } else {
+                    Get.to(
+                      () => LoginOrSignUpScreen(
+                        fromMenu: fromMenu,
+                      ),
+                      routeName: 'login',
+                      preventDuplicates: false,
+                    );
+                  }
+
                   // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
                 },
                 child: Container(
@@ -250,13 +258,28 @@ class GetStartedScreen extends StatelessWidget {
               ),
               InkWell(
                 onTap: () async {
-                  Get.to(
-                    () => LoginWithEmailScreen(
-                      fromMenu: fromMenu,
-                    ),
-                    routeName: 'login',
-                    preventDuplicates: false,
-                  );
+                  if (GetPlatform.isWeb) {
+                    Get.dialog(Dialog(
+                      child: SizedBox(
+                          width: Get.width / 3,
+                          child: LoginWithEmailScreen(
+                            fromMenu: fromMenu,
+                          )
+                          // LoginOrSignUpScreen(
+                          //   fromMenu: true,
+                          // ),
+                          ),
+                    ));
+                  } else {
+                    Get.to(
+                      () => LoginWithEmailScreen(
+                        fromMenu: fromMenu,
+                      ),
+                      routeName: 'login',
+                      preventDuplicates: false,
+                    );
+                  }
+
                   // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
                 },
                 child: Container(

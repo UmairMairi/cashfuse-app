@@ -6,7 +6,6 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
-import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/widget/confirmationDialog.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
@@ -516,7 +515,7 @@ class RecentClickScreen extends StatelessWidget {
                                 Get.dialog(Dialog(
                                   child: SizedBox(
                                     width: Get.width / 3,
-                                    child: LoginOrSignUpScreen(
+                                    child: GetStartedScreen(
                                       fromMenu: true,
                                     ),
                                   ),

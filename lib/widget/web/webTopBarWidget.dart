@@ -10,8 +10,8 @@ import 'package:cashfuse/views/aboutUsScreen.dart';
 import 'package:cashfuse/views/accountSettingScreen.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
+import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/homeScreen.dart';
-import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/myEarningScreen.dart';
 import 'package:cashfuse/views/paymentHistoryScreen.dart';
 import 'package:cashfuse/views/paymentScreen.dart';
@@ -163,11 +163,14 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     onTap: () {
                       Get.dialog(Dialog(
                         child: SizedBox(
-                          width: Get.width / 3,
-                          child: LoginOrSignUpScreen(
-                            fromMenu: true,
-                          ),
-                        ),
+                            width: Get.width / 3,
+                            child: GetStartedScreen(
+                              fromMenu: true,
+                            )
+                            // LoginOrSignUpScreen(
+                            //   fromMenu: true,
+                            // ),
+                            ),
                       ));
                     },
                     child: Padding(
@@ -216,6 +219,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                   children: [
                     InkWell(
                       onTap: () {
+                        authController.name.text = global.currentUser.name;
+                        authController.email.text = global.currentUser.email;
+                        authController.contactNo.text =
+                            global.currentUser.phone;
                         Get.to(
                           () => AccountSettingScreen(),
                           routeName: 'account',

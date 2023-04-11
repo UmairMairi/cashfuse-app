@@ -120,9 +120,23 @@ class AuthController extends GetxController {
           await apiHelper.loginWithEmail(email.text).then((response) async {
             if (response.statusCode == 200) {
               startTimer();
-              Get.to(() => OtpVerificationScreen(
-                    fromMenu: fromMenu,
-                  ));
+              if (GetPlatform.isWeb) {
+                Get.dialog(Dialog(
+                  child: SizedBox(
+                      width: Get.width / 3,
+                      child: OtpVerificationScreen(
+                        fromMenu: fromMenu,
+                      )
+                      // LoginOrSignUpScreen(
+                      //   fromMenu: true,
+                      // ),
+                      ),
+                ));
+              } else {
+                Get.to(() => OtpVerificationScreen(
+                      fromMenu: fromMenu,
+                    ));
+              }
             } else {
               Get.back();
               showCustomSnackBar(response.message);

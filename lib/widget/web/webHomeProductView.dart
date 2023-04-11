@@ -41,7 +41,8 @@ class WebHomeProductView extends StatelessWidget {
                     ),
                     Expanded(
                       child: SizedBox(
-                        height: Get.height * 0.35,
+                        height: 320,
+                        // height: Get.height * 0.35,
                         child: ListView.builder(
                             shrinkWrap: true,
                             itemCount: homeController.productList.length,
@@ -60,7 +61,8 @@ class WebHomeProductView extends StatelessWidget {
                                               )));
                                 },
                                 child: Container(
-                                  width: Get.width * 0.1,
+                                  width: 180,
+                                  // width: Get.width * 0.1,
                                   // height: Get.height * 0.35,
                                   // height: Get.height * 0.35,
                                   margin: EdgeInsets.only(left: 10),
@@ -77,7 +79,7 @@ class WebHomeProductView extends StatelessWidget {
                                             top: 15, bottom: 15),
                                         child: RichText(
                                           text: TextSpan(
-                                              text: "Price Comapred ",
+                                              text: "Price Compared ",
                                               style: TextStyle(
                                                   color: Colors.black54,
                                                   fontWeight: FontWeight.w500,

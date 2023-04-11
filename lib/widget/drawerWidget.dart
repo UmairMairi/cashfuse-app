@@ -5,7 +5,6 @@ import 'package:cashfuse/views/allInOneSearchScreen.dart';
 import 'package:cashfuse/views/allcategoriesScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
-import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/requestPaymentScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
@@ -781,7 +780,7 @@ class DrawerWidget extends StatelessWidget {
                       Get.dialog(Dialog(
                         child: SizedBox(
                           width: Get.width / 3,
-                          child: LoginOrSignUpScreen(
+                          child: GetStartedScreen(
                             fromMenu: true,
                           ),
                         ),
@@ -791,7 +790,9 @@ class DrawerWidget extends StatelessWidget {
                         Get.dialog(Dialog(
                           child: SizedBox(
                             width: Get.width / 3,
-                            child: LoginOrSignUpScreen(),
+                            child: GetStartedScreen(
+                              fromMenu: true,
+                            ),
                             // LoginOrSignUpScreen(
                             //   fromMenu: true,
                             // ),

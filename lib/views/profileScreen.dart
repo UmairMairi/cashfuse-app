@@ -8,7 +8,6 @@ import 'package:cashfuse/views/colorPicker.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/languageScreen.dart';
-import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/myEarningScreen.dart';
 import 'package:cashfuse/views/paymentHistoryScreen.dart';
 import 'package:cashfuse/views/paymentScreen.dart';
@@ -849,7 +848,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Get.dialog(Dialog(
                               child: SizedBox(
                                   width: Get.width / 3,
-                                  child: LoginOrSignUpScreen()
+                                  child: GetStartedScreen(
+                                    fromMenu: true,
+                                  )
                                   // LoginOrSignUpScreen(
                                   //   fromMenu: true,
                                   // ),

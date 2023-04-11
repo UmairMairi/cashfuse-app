@@ -8,7 +8,6 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
-import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -434,7 +433,9 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                   Get.dialog(Dialog(
                                     child: SizedBox(
                                         width: Get.width / 3,
-                                        child: LoginOrSignUpScreen()
+                                        child: GetStartedScreen(
+                                          fromMenu: true,
+                                        )
                                         // LoginOrSignUpScreen(
                                         //   fromMenu: true,
                                         // ),

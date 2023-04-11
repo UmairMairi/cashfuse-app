@@ -1,6 +1,7 @@
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/offerDetailScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
@@ -59,7 +60,7 @@ class WebBannerView extends StatelessWidget {
                                         Get.dialog(Dialog(
                                           child: SizedBox(
                                             width: Get.width / 3,
-                                            child: LoginOrSignUpScreen(
+                                            child: GetStartedScreen(
                                               fromMenu: true,
                                             ),
                                           ),
@@ -189,7 +190,7 @@ class WebBannerView extends StatelessWidget {
                                               Get.dialog(Dialog(
                                                 child: SizedBox(
                                                   width: Get.width / 3,
-                                                  child: LoginOrSignUpScreen(
+                                                  child: GetStartedScreen(
                                                     fromMenu: true,
                                                   ),
                                                 ),
