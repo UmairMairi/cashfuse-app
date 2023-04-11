@@ -1,5 +1,6 @@
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/loginWithEmail.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
@@ -13,15 +14,15 @@ import 'package:get/get.dart';
 import '../utils/images.dart';
 
 class GetStartedScreen extends StatelessWidget {
-  final bool fromSplash;
-  GetStartedScreen({this.fromSplash});
+  final bool fromMenu;
+  GetStartedScreen({this.fromMenu});
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        fromSplash ? SystemNavigator.pop() : Get.back();
+        fromMenu ? Get.back() : SystemNavigator.pop();
         return true;
       },
       child: Scaffold(
@@ -32,7 +33,21 @@ class GetStartedScreen extends StatelessWidget {
             ? WebTopBarWidget(
                 scaffoldKey: scaffoldKey,
               )
-            : null,
+            : fromMenu
+                ? AppBar(
+                    elevation: 0,
+                    backgroundColor: Colors.white,
+                    leading: IconButton(
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Get.theme.secondaryHeaderColor,
+                      ),
+                      onPressed: () {
+                        Get.back();
+                      },
+                    ),
+                  )
+                : null,
         body: Container(
           color: Colors.white,
           child: Center(
@@ -153,135 +168,151 @@ class GetStartedScreen extends StatelessWidget {
             //       )
             //     : SizedBox(),
             GetBuilder<AuthController>(builder: (authController) {
-          return fromSplash
-              ? Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    InkWell(
-                      onTap: () async {
-                        await authController.googleSignInFun(fromSplash);
-                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
-                      },
-                      child: Container(
-                        height: 50,
-                        margin: EdgeInsets.symmetric(horizontal: 20),
-                        width: MediaQuery.of(context).size.width,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Get.theme.primaryColor.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              Images.google,
-                              height: 18,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              'Login with Google',
-                              style: Get.theme.primaryTextTheme.titleMedium
-                                  .copyWith(
-                                color: Get.theme.primaryColor,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              InkWell(
+                onTap: () async {
+                  await authController.googleSignInFun(fromMenu);
+                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                },
+                child: Container(
+                  height: 50,
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  width: MediaQuery.of(context).size.width,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Get.theme.primaryColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        Images.google,
+                        height: 18,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        'Login with Google',
+                        style: Get.theme.primaryTextTheme.titleMedium.copyWith(
+                          color: Get.theme.secondaryHeaderColor,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () async {
+                  Get.to(
+                    () => LoginOrSignUpScreen(
+                      fromMenu: fromMenu,
                     ),
-                    InkWell(
-                      onTap: () async {
-                        Get.to(
-                          () => LoginOrSignUpScreen(
-                            fromMenu: true,
-                          ),
-                          routeName: 'login',
+                    routeName: 'login',
+                    preventDuplicates: false,
+                  );
+                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                },
+                child: Container(
+                  height: 50,
+                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  width: MediaQuery.of(context).size.width,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Get.theme.primaryColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.phone,
+                        size: 20,
+                        color: Colors.blue[800],
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        'Login with Phone',
+                        style: Get.theme.primaryTextTheme.titleMedium.copyWith(
+                          color: Get.theme.secondaryHeaderColor,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () async {
+                  Get.to(
+                    () => LoginWithEmailScreen(
+                      fromMenu: fromMenu,
+                    ),
+                    routeName: 'login',
+                    preventDuplicates: false,
+                  );
+                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                },
+                child: Container(
+                  height: 50,
+                  margin:
+                      EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 10),
+                  width: MediaQuery.of(context).size.width,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Get.theme.primaryColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.email,
+                        size: 20,
+                        color: Colors.amber,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        'Login with Email',
+                        style: Get.theme.primaryTextTheme.titleMedium.copyWith(
+                          color: Get.theme.secondaryHeaderColor,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              fromMenu
+                  ? SizedBox()
+                  : InkWell(
+                      onTap: () {
+                        Get.offAll(
+                          () => BottomNavigationBarScreen(),
+                          routeName: 'home',
                         );
-                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
                       },
-                      child: Container(
-                        height: 50,
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        width: MediaQuery.of(context).size.width,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Get.theme.primaryColor.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.phone,
-                              size: 20,
-                              color: Colors.blue[800],
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              'Login with Phone',
-                              style: Get.theme.primaryTextTheme.titleMedium
-                                  .copyWith(
-                                color: Get.theme.primaryColor,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 15, top: 10),
+                        child: Text(
+                          'Skip',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Get.theme.secondaryHeaderColor,
+                              fontSize: 16),
                         ),
                       ),
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        Get.to(
-                          () => LoginWithEmailScreen(
-                            fromMenu: false,
-                          ),
-                          routeName: 'login',
-                        );
-                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
-                      },
-                      child: Container(
-                        height: 50,
-                        margin: EdgeInsets.symmetric(horizontal: 20)
-                            .copyWith(bottom: 10),
-                        width: MediaQuery.of(context).size.width,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Get.theme.primaryColor.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.email,
-                              size: 20,
-                              color: Colors.amber,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              'Login with Email',
-                              style: Get.theme.primaryTextTheme.titleMedium
-                                  .copyWith(
-                                color: Get.theme.primaryColor,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              : SizedBox();
+                    )
+            ],
+          );
         }),
       ),
     );

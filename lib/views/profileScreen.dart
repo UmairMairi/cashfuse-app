@@ -329,6 +329,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       InkWell(
                         onTap: () {
                           global.showInterstitialAd();
+
+                          authController.name.text = global.currentUser.name;
+                          authController.email.text = global.currentUser.email;
+                          authController.contactNo.text =
+                              global.currentUser.phone;
                           Get.to(
                             () => AccountSettingScreen(),
                             routeName: 'account',
@@ -854,10 +859,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Get.to(
                               () =>
                                   //  LoginScreen(),
-                              //     LoginOrSignUpScreen(
-                              //   fromMenu: true,
-                              // ),
-                              GetStartedScreen(fromSplash: true),
+                                  //     LoginOrSignUpScreen(
+                                  //   fromMenu: true,
+                                  // ),
+                                  GetStartedScreen(
+                                fromMenu: true,
+                              ),
                               routeName: 'login',
                             );
                           }

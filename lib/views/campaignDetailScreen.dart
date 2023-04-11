@@ -4,6 +4,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/models/campaignModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/moreCampignScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
@@ -51,7 +52,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                 color: Colors.white,
                                 width: AppConstants.WEB_MAX_WIDTH,
                                 alignment: Alignment.center,
-                                //margin: EdgeInsets.only(bottom: 20),
+                                margin: EdgeInsets.only(bottom: 20),
                                 child: CustomImage(
                                   image:
                                       '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}',
@@ -181,7 +182,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                           ));
                                         } else {
                                           Get.to(
-                                            () => LoginOrSignUpScreen(
+                                            () => GetStartedScreen(
                                               fromMenu: true,
                                             ),
                                             routeName: 'login',
@@ -341,7 +342,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                       ));
                                     } else {
                                       Get.to(
-                                        () => LoginOrSignUpScreen(
+                                        () => GetStartedScreen(
                                           fromMenu: true,
                                         ),
                                         routeName: 'login',

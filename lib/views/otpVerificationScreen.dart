@@ -52,7 +52,10 @@ class OtpVerificationScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${AppLocalizations.of(context).otp_subtitle} ${authController.coutryCode} ${authController.contactNo.text}',
+                      authController.contactNo.text != null &&
+                              authController.contactNo.text.isNotEmpty
+                          ? '${AppLocalizations.of(context).otp_subtitle} ${authController.coutryCode} ${authController.contactNo.text}'
+                          : '${AppLocalizations.of(context).otp_subtitle} ${authController.email.text}',
                       style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                         letterSpacing: -0.2,
                         fontWeight: FontWeight.w500,
@@ -75,8 +78,13 @@ class OtpVerificationScreen extends StatelessWidget {
                     onChanged: (code) async {
                       if (code.length == 6) {
                         FocusScope.of(context).requestFocus(FocusNode());
-                        await authController.checkOTP(
-                            verificationCode, fromMenu);
+                        if (authController.contactNo.text != null &&
+                            authController.contactNo.text.isNotEmpty) {
+                          await authController.checkOTP(
+                              verificationCode, fromMenu);
+                        } else {
+                          await authController.verifyEmail(fromMenu);
+                        }
                       }
                     },
                     scrollPadding: EdgeInsets.zero,
@@ -110,7 +118,12 @@ class OtpVerificationScreen extends StatelessWidget {
                     )
                   : InkWell(
                       onTap: () async {
-                        await authController.resendOtp();
+                        if (authController.contactNo != null &&
+                            authController.contactNo.text.isNotEmpty) {
+                          await authController.resendOtp();
+                        } else {
+                          await authController.sendEmail(fromMenu);
+                        }
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -145,7 +158,12 @@ class OtpVerificationScreen extends StatelessWidget {
         ),
         bottomNavigationBar: InkWell(
           onTap: () async {
-            await authController.checkOTP(verificationCode, fromMenu);
+            if (authController.contactNo.text != null &&
+                authController.contactNo.text.isNotEmpty) {
+              await authController.checkOTP(verificationCode, fromMenu);
+            } else {
+              await authController.verifyEmail(fromMenu);
+            }
           },
           child: Container(
             width: Get.width,

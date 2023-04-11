@@ -44,9 +44,7 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get(
-          //'${global.baseUrl}${AppConstants.APP_INFO_URI}',
-          "https://cash.codefuse.org/newcashfuse/api/app_info",
+      response = await dio.get('${global.baseUrl}${AppConstants.APP_INFO_URI}',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
@@ -236,6 +234,39 @@ class APIHelper {
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - verifyOtp():" + e.toString());
+    }
+  }
+
+  Future<dynamic> verifyEmail(String email, String otp) async {
+    try {
+      Response response;
+      var dio = Dio();
+
+      var formData = FormData.fromMap({
+        'email': email,
+        'otp': otp,
+        'device_id': global.appDeviceId,
+        if (global.referralUserId.isNotEmpty)
+          'referral_user_id': global.referralUserId,
+      });
+      response = await dio.post('${global.baseUrl}${AppConstants.VERIFY_EMAIL}',
+          data: formData,
+          options: Options(
+            headers: await global.getApiHeaders(false),
+          ));
+
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = UserModel.fromJson(response.data['user']);
+        recordList.token = response.data["token"];
+      } else {
+        recordList = null;
+      }
+      print(
+          '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.VERIFY_EMAIL}\n${response.data}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - verifyEmail():" + e.toString());
     }
   }
 

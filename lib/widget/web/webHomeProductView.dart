@@ -1,10 +1,8 @@
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/Mycolors.dart';
-import 'package:cashfuse/views/product_Details.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/webScreen/webProductDetails.dart';
 import 'package:flutter/material.dart';
-
-import 'package:cashfuse/utils/global.dart' as global;
 import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 

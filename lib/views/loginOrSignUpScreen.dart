@@ -1,5 +1,4 @@
 import 'package:cashfuse/controllers/authController.dart';
-import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -140,26 +139,7 @@ class LoginOrSignUpScreen extends StatelessWidget {
                 ),
               ),
             ),
-            fromMenu
-                ? SizedBox()
-                : InkWell(
-                    onTap: () {
-                      Get.offAll(
-                        () => BottomNavigationBarScreen(),
-                        routeName: 'home',
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 15),
-                      child: Text(
-                        'Skip',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Get.theme.primaryColor,
-                            fontSize: 16),
-                      ),
-                    ),
-                  )
+            
           ],
         ),
       );

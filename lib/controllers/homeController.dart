@@ -163,11 +163,12 @@ class HomeController extends GetxController {
 
       await getNewFlashOffers();
       await getHomeAdv();
-      await Get.find<SearchController>().allInOneSearch();
+
       await getAllAdv();
       if (global.currentUser.id != null) {
         await getClick();
         await Get.find<AuthController>().getProfile();
+        await Get.find<SearchController>().allInOneSearch();
       }
     } catch (e) {
       print("Exception - HomeController.dart - _init():" + e.toString());
@@ -723,7 +724,7 @@ class HomeController extends GetxController {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper.getAdDetails(adId).then((response) {
           Get.back();
-          if (response.status == "1") {
+          if (response.statusCode == 200) {
             _ads = response.data;
             update();
           } else {
@@ -746,7 +747,7 @@ class HomeController extends GetxController {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper.getCampignDetails(campaignId).then((response) {
           Get.back();
-          if (response.status == "1") {
+          if (response.statusCode == 200) {
             _campaign = response.data;
 
             update();
@@ -771,7 +772,7 @@ class HomeController extends GetxController {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper.getAdmitedOfferDetails(admitedId).then((response) {
           Get.back();
-          if (response.status == "1") {
+          if (response.statusCode == 200) {
             _admitedOffer = response.data;
 
             // update();
@@ -1022,6 +1023,7 @@ class HomeController extends GetxController {
 
   Future getProducts() async {
     try {
+      isProductsLoaded = false;
       if (networkController.connectionStatus.value == 1 ||
           networkController.connectionStatus.value == 2) {
         //Get.dialog(CustomLoader(), barrierDismissible: false);

@@ -5,6 +5,7 @@ import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
+import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/widget/confirmationDialog.dart';
 import 'package:cashfuse/widget/customImage.dart';
@@ -522,7 +523,7 @@ class RecentClickScreen extends StatelessWidget {
                                 ));
                               } else {
                                 Get.to(
-                                  () => LoginOrSignUpScreen(
+                                  () => GetStartedScreen(
                                     fromMenu: true,
                                   ),
                                   routeName: 'login',

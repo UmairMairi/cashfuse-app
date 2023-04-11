@@ -20,7 +20,7 @@ import 'package:universal_html/html.dart' as html;
 
 String appName = "Cashfuse";
 
-String baseUrl = "https://cash.codefuse.org/newcashfuse/api";
+String baseUrl = "https://cash.codefuse.org/admin/api";
 // "https://cash.codefuse.org/admin/api";
 
 String webConfigurationKey =

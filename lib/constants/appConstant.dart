@@ -12,6 +12,7 @@ class AppConstants {
   static const String LOGIN_RESGISTER = '/auth/login_or_register';
   static const String SOCIAL_LOGIN_URI = '/auth/social_login';
   static const String VERIFY_OTP = '/auth/verify-phone';
+  static const String VERIFY_EMAIL = '/auth/verify-email';
   static const String CAEGORY_URI = '/getcategory';
   static const String CASHBACK_URI = '/topcashback';
   static const String HOME_ADV_URI = '/homeadv';

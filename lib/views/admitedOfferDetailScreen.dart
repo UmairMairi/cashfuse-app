@@ -4,6 +4,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/models/admitedoffersModal.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
@@ -202,7 +203,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                           ));
                                         } else {
                                           Get.to(
-                                            () => LoginOrSignUpScreen(
+                                            () => GetStartedScreen(
                                               fromMenu: true,
                                             ),
                                             routeName: 'login',
@@ -380,7 +381,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                       ));
                                     } else {
                                       Get.to(
-                                        () => LoginOrSignUpScreen(
+                                        () => GetStartedScreen(
                                           fromMenu: true,
                                         ),
                                         routeName: 'login',

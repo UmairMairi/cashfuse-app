@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
+import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/models/userModel.dart';
 import 'package:cashfuse/services/apiHelper.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -40,6 +41,8 @@ class AuthController extends GetxController {
 
   GoogleSignIn googleSignIn = GoogleSignIn();
 
+  SearchController searchController = Get.put(SearchController());
+
   @override
   void onInit() async {
     coutryCode = global.appInfo.countryCode != null &&
@@ -70,62 +73,6 @@ class AuthController extends GetxController {
       update();
     } catch (e) {
       print("Exception - authController.dart - logout():" + e.toString());
-    }
-  }
-
-  Future sendEmailOtp(bool fromMenu) async {
-    try {
-      print('jasbdjh');
-      print('${networkController.connectionStatus.value == 1}');
-      if (networkController.connectionStatus.value == 1 ||
-          networkController.connectionStatus.value == 2) {
-        // if (contactNo.text.isNotEmpty) {
-        //   if (contactNo.text.length >= 7) {
-        Get.dialog(CustomLoader(), barrierDismissible: false);
-        await apiHelper
-            .loginOrRegister(
-          email.text,
-        )
-            .then((response) async {
-          if (response.statusCode == 200) {
-            Get.back();
-            // global.currentUser = response.data;
-            // global.sp.setString(
-            //     'currentUser', json.encode(global.currentUser.toJson()));
-            // print('status code=200');
-            //  Get.to(
-            //        () => BottomNavigationBarScreen(
-            //      pageIndex: 0,
-            //    ),
-            //    routeName: 'home',
-            //  );
-            Get.to(() => OtpVerificationScreen(
-                // phoneNumber: settingsController.cNewEmail.text,
-                // verificationId: "",
-                // callId: 2,
-                ));
-            // await sendOTP(fromMenu);
-          } else {
-            Get.back();
-            showCustomSnackBar(response.message);
-            // showCustomSnackBar("Oops, OTP send failed");
-          }
-        });
-        //   } else {
-        //     showCustomSnackBar('Please enter valid number.');
-        //   }
-        // } else {
-        //   showCustomSnackBar('Please enter number.');
-        // }
-      } else {
-        showCustomSnackBar(AppConstants.NO_INTERNET);
-      }
-
-      update();
-    } catch (e) {
-      Get.back();
-      print("Exception - authController.dart - loginOrRegister():" +
-          e.toString());
     }
   }
 
@@ -172,7 +119,10 @@ class AuthController extends GetxController {
           Get.dialog(CustomLoader(), barrierDismissible: false);
           await apiHelper.loginWithEmail(email.text).then((response) async {
             if (response.statusCode == 200) {
-              Get.to(() => OtpVerificationScreen());
+              startTimer();
+              Get.to(() => OtpVerificationScreen(
+                    fromMenu: fromMenu,
+                  ));
             } else {
               Get.back();
               showCustomSnackBar(response.message);
@@ -279,7 +229,9 @@ class AuthController extends GetxController {
             Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
             await getProfile();
             if (fromMenu) {
-              await Get.find<HomeController>().init();
+              await Get.find<HomeController>().getClick();
+              await getProfile();
+              await searchController.allInOneSearch();
               if (!GetPlatform.isWeb) {
                 await global.referAndEarn();
               }
@@ -477,19 +429,6 @@ class AuthController extends GetxController {
   //   }
   // }
 
-  // Future verifyEmailOTP(bool fromMenu) async {
-  //   if (await emailOTP.verifyOTP(otp: otp.text) == true) {
-  //    // await loginOrRegister(fromMenu);
-  //     // changeMail(global.currentUser!.email!, cNewEmail.text);
-  //     // cNewEmail.clear();
-  //     // Get.back(); //back from OTP screen
-  //     // Get.back(); //back from change email screen
-  //   } else {
-  //     // global.showToast(message: "Invalid OTP", bg: Colors.red);
-  //     showCustomSnackBar("Invalid OTP");
-  //   }
-  // }
-
   void startTimer() {
     const oneSec = const Duration(seconds: 1);
     timer = Timer.periodic(
@@ -553,13 +492,17 @@ class AuthController extends GetxController {
           if (response != null) {
             if (response.statusCode == 200) {
               global.currentUser = response.data;
+              contactNo.clear();
+              otp.clear();
 
               global.sp.setString(
                   'currentUser', json.encode(global.currentUser.toJson()));
               Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
               await getProfile();
               if (fromMenu) {
-                await Get.find<HomeController>().init();
+                await Get.find<HomeController>().getClick();
+                await getProfile();
+                await searchController.allInOneSearch();
                 if (!GetPlatform.isWeb) {
                   await global.referAndEarn();
                 }
@@ -581,17 +524,19 @@ class AuthController extends GetxController {
     }
   }
 
-  Future verifyEmail(String status, bool fromMenu) async {
+  Future verifyEmail(bool fromMenu) async {
     try {
       if (networkController.connectionStatus.value == 1 ||
           networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper
-            .verifyOtp(coutryCode + contactNo.text, status)
+            .verifyEmail(email.text, otp.text)
             .then((response) async {
           Get.back();
           if (response != null) {
             if (response.statusCode == 200) {
+              email.clear();
+              otp.clear();
               global.currentUser = response.data;
 
               global.sp.setString(
@@ -599,7 +544,9 @@ class AuthController extends GetxController {
               Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
               await getProfile();
               if (fromMenu) {
-                await Get.find<HomeController>().init();
+                await Get.find<HomeController>().getClick();
+                await getProfile();
+                await searchController.allInOneSearch();
                 if (!GetPlatform.isWeb) {
                   await global.referAndEarn();
                 }
@@ -617,7 +564,7 @@ class AuthController extends GetxController {
 
       update();
     } catch (e) {
-      print("Exception - authController.dart - verifyOtp():" + e.toString());
+      print("Exception - authController.dart - verifyEmail():" + e.toString());
     }
   }
 
@@ -663,7 +610,7 @@ class AuthController extends GetxController {
         if (email.text.trim().isNotEmpty) {
           Get.dialog(CustomLoader(), barrierDismissible: false);
           await apiHelper
-              .updateProfile(name.text.trim(), global.currentUser.phone,
+              .updateProfile(name.text.trim(), contactNo.text,
                   email.text.trim(), userImage)
               .then((response) async {
             Get.back();

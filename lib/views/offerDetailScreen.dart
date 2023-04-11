@@ -4,6 +4,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/models/offerModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/moreOfferScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
@@ -89,7 +90,7 @@ class OfferDetailScreen extends StatelessWidget {
                                   ));
                                 } else {
                                   Get.to(
-                                    () => LoginOrSignUpScreen(
+                                    () => GetStartedScreen(
                                       fromMenu: true,
                                     ),
                                     routeName: 'login',
@@ -222,7 +223,7 @@ class OfferDetailScreen extends StatelessWidget {
                                     ));
                                   } else {
                                     Get.to(
-                                      () => LoginOrSignUpScreen(
+                                      () => GetStartedScreen(
                                         fromMenu: true,
                                       ),
                                       routeName: 'login',

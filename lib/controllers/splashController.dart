@@ -138,7 +138,7 @@ class SplashController extends GetxController {
                 } else {
                   Get.off(
                     () => GetStartedScreen(
-                      fromSplash: true,
+                      fromMenu: false,
                     ),
                     routeName: 'get-started',
                   );

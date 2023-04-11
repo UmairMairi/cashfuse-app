@@ -56,19 +56,30 @@ class CampaignModel {
       payoutType = json["payout_type"];
       payout = json["payout"] != null ? json["payout"].toDouble() : 0.0;
       image = json["image"] != null ? json["image"] : '';
-      category = json["category"];
+
       categoryId = json["category_id"];
       status = json["status"];
       buttonText = json["button_text"] != null ? json["button_text"] : '';
-      affiliatePartner = json["affiliate_partner"] != null ? json["affiliate_partner"] : '';
-      createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : null;
-      updatedAt = json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null;
+      affiliatePartner =
+          json["affiliate_partner"] != null ? json["affiliate_partner"] : '';
+      createdAt = json["created_at"] != null
+          ? DateTime.parse(json["created_at"])
+          : null;
+      updatedAt = json["updated_at"] != null
+          ? DateTime.parse(json["updated_at"])
+          : null;
       campaigns = json["campaigns"];
       description = json["description"] != null ? json["description"] : '';
-      partner = json["partner"] != null ? CategoryModel.fromJson(json["partner"]) : null;
-      couponList = json["coupon"] != null && json["coupon"] != [] ? List<Coupon>.from(json["coupon"].map((x) => Coupon.fromJson(x))) : [];
+      partner = json["partner"] != null
+          ? CategoryModel.fromJson(json["partner"])
+          : null;
+      couponList = json["coupon"] != null && json["coupon"] != []
+          ? List<Coupon>.from(json["coupon"].map((x) => Coupon.fromJson(x)))
+          : [];
+      category = json["category"];
     } catch (e) {
-      print("Exception - CampaignModel.dart - CampaignModel.fromJson():" + e.toString());
+      print("Exception - CampaignModel.dart - CampaignModel.fromJson():" +
+          e.toString());
     }
   }
 }

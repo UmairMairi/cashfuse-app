@@ -3,6 +3,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/models/productModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
@@ -73,7 +74,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
-                            width: GetPlatform.isWeb ? AppConstants.WEB_MAX_WIDTH / 2 : MediaQuery.of(context).size.width,
+                            width: GetPlatform.isWeb
+                                ? AppConstants.WEB_MAX_WIDTH / 2
+                                : MediaQuery.of(context).size.width,
                             margin: EdgeInsets.symmetric(horizontal: 5.0),
                             decoration: BoxDecoration(
                                 //color: Colors.amber
@@ -279,7 +282,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         ));
                                       } else {
                                         Get.to(
-                                          () => LoginOrSignUpScreen(
+                                          () => GetStartedScreen(
                                             fromMenu: true,
                                           ),
                                           routeName: 'login',

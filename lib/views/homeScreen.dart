@@ -14,6 +14,7 @@ import 'package:cashfuse/views/categoryScreen.dart';
 import 'package:cashfuse/views/couponDetailScreen.dart';
 import 'package:cashfuse/views/couponListScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
+import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/imageRotateWidget.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/myEarningScreen.dart';
@@ -115,7 +116,7 @@ class HomeScreen extends StatelessWidget {
                           ));
                         } else {
                           Get.to(
-                            () => LoginOrSignUpScreen(
+                            () => GetStartedScreen(
                               fromMenu: true,
                             ),
                             routeName: 'login',
@@ -157,7 +158,7 @@ class HomeScreen extends StatelessWidget {
                         ));
                       } else {
                         Get.to(
-                          () => LoginOrSignUpScreen(
+                          () => GetStartedScreen(
                             fromMenu: true,
                           ),
                           routeName: 'login',
@@ -266,7 +267,7 @@ class HomeScreen extends StatelessWidget {
                                                             Get.to(
                                                               () =>
                                                                   // LoginScreen(),
-                                                                  LoginOrSignUpScreen(
+                                                                  GetStartedScreen(
                                                                 fromMenu: true,
                                                               ),
                                                               routeName:
@@ -468,6 +469,9 @@ class HomeScreen extends StatelessWidget {
                                                           .toUpperCase(),
                                                       textAlign:
                                                           TextAlign.center,
+                                                      maxLines: 2,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                       style: Get
                                                           .theme
                                                           .primaryTextTheme
@@ -1175,24 +1179,10 @@ class HomeScreen extends StatelessWidget {
                                                             .grey.shade400,
                                                         height: 1,
                                                       ),
-                                                      Container(
-                                                        height: 120,
-                                                        //   color: Colors.blueAccent,
-                                                        child: Stack(
-                                                          children: [
-                                                            Image.network(
-                                                              "${global.appInfo.baseUrls.productImageurl}/${homeController.productList[index].image}",
-                                                              width:
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
-                                                              height: 120,
-                                                              fit: BoxFit.fill,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
+                                                      CustomImage(
+                                                          height: 120,
+                                                          image:
+                                                              "${global.appInfo.baseUrls.productImageurl}/${homeController.productList[index].image}"),
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
@@ -1607,24 +1597,10 @@ class HomeScreen extends StatelessWidget {
                                                             .grey.shade400,
                                                         height: 1,
                                                       ),
-                                                      Container(
-                                                        height: 120,
-                                                        //   color: Colors.blueAccent,
-                                                        child: Stack(
-                                                          children: [
-                                                            Image.network(
-                                                              "${global.appInfo.baseUrls.productImageurl}/${homeController.trendingProductList[index].image}",
-                                                              width:
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
-                                                              height: 120,
-                                                              fit: BoxFit.fill,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
+                                                      CustomImage(
+                                                          height: 120,
+                                                          image:
+                                                              "${global.appInfo.baseUrls.productImageurl}/${homeController.trendingProductList[index].image}"),
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets

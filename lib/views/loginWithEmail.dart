@@ -1,8 +1,6 @@
 import 'package:cashfuse/controllers/authController.dart';
-import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
@@ -69,7 +67,7 @@ class LoginWithEmailScreen extends StatelessWidget {
                       labelStyle: TextStyle(color: Colors.black),
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       floatingLabelAlignment: FloatingLabelAlignment.start,
-                      contentPadding: EdgeInsets.only(bottom: 5),
+                      contentPadding: EdgeInsets.only(bottom: 5, left: 15),
                       // prefixIcon: InkWell(
                       //   onTap: () async {
                       //     final code = await countryPicker.showPicker(
@@ -137,26 +135,6 @@ class LoginWithEmailScreen extends StatelessWidget {
                 ),
               ),
             ),
-            fromMenu
-                ? SizedBox()
-                : InkWell(
-                    onTap: () {
-                      Get.offAll(
-                        () => BottomNavigationBarScreen(),
-                        routeName: 'home',
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 15),
-                      child: Text(
-                        'Skip',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Get.theme.primaryColor,
-                            fontSize: 16),
-                      ),
-                    ),
-                  )
           ],
         ),
       );
