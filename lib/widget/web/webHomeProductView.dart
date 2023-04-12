@@ -41,12 +41,14 @@ class WebHomeProductView extends StatelessWidget {
                     ),
                     Expanded(
                       child: SizedBox(
-                        height: 320,
+                        height: 290,
                         // height: Get.height * 0.35,
                         child: ListView.builder(
+                          controller: scrollController,
                             shrinkWrap: true,
                             itemCount: homeController.productList.length,
                             scrollDirection: Axis.horizontal,
+                            padding: EdgeInsets.symmetric(horizontal: 6),
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
@@ -61,11 +63,11 @@ class WebHomeProductView extends StatelessWidget {
                                               )));
                                 },
                                 child: Container(
-                                  width: 180,
+                                  width: 192,
                                   // width: Get.width * 0.1,
                                   // height: Get.height * 0.35,
                                   // height: Get.height * 0.35,
-                                  margin: EdgeInsets.only(left: 10),
+                                  margin: EdgeInsets.only(right: 13),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(10),
@@ -104,33 +106,33 @@ class WebHomeProductView extends StatelessWidget {
                                       // ),
                                       Image.network(
                                         "${global.appInfo.baseUrls.productImageurl}/${homeController.productList[index].image}",
-                                        width: 150,
+                                        // width: 150,
                                         height: 120,
                                         // height: Get.height * 0.15,
-                                        fit: BoxFit.fill,
+                                        fit: BoxFit.contain,
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 8.0, bottom: 8),
-                                        child: RichText(
-                                          text: TextSpan(
-                                              text: "Brand: ",
-                                              style: TextStyle(
-                                                  color: Colors.black54,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 10),
-                                              children: [
-                                                TextSpan(
-                                                    text:
-                                                        '${homeController.productList[index].name} ',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 12,
-                                                        color: Colors.black)),
-                                              ]),
-                                        ),
-                                      ),
+                                      // Padding(
+                                      //   padding: const EdgeInsets.only(
+                                      //       top: 8.0, bottom: 8),
+                                      //   child: RichText(
+                                      //     text: TextSpan(
+                                      //         text: "Brand: ",
+                                      //         style: TextStyle(
+                                      //             color: Colors.black54,
+                                      //             fontWeight: FontWeight.w500,
+                                      //             fontSize: 10),
+                                      //         children: [
+                                      //           TextSpan(
+                                      //               text:
+                                      //                   '${homeController.productList[index].name} ',
+                                      //               style: TextStyle(
+                                      //                   fontWeight:
+                                      //                       FontWeight.w600,
+                                      //                   fontSize: 12,
+                                      //                   color: Colors.black)),
+                                      //         ]),
+                                      //   ),
+                                      // ),
                                       Divider(
                                         height: 0,
                                       ),

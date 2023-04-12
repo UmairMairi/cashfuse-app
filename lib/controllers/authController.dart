@@ -120,7 +120,7 @@ class AuthController extends GetxController {
           await apiHelper.loginWithEmail(email.text).then((response) async {
             if (response.statusCode == 200) {
               startTimer();
-              if (GetPlatform.isWeb) {
+              if (global.getPlatFrom()) {
                 Get.dialog(Dialog(
                   child: SizedBox(
                       width: Get.width / 3,

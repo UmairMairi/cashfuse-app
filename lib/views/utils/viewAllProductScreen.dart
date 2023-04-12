@@ -28,7 +28,7 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GetPlatform.isWeb
+      appBar: global.getPlatFrom()
           ? WebTopBarWidget()
           : AppBar(
               leading: InkWell(
@@ -51,16 +51,22 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
           width: AppConstants.WEB_MAX_WIDTH,
           // height: 285,
           child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: GetPlatform.isWeb ? 7 : 2,
-              crossAxisSpacing: global.getPlatFrom() ? 25 : 15.0,
-              mainAxisSpacing: global.getPlatFrom() ? 25 : 15.0,
-              mainAxisExtent: 285,
-            ),
+            gridDelegate: global.getPlatFrom()
+                ? SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: AppConstants.WEB_MAX_WIDTH / 7,
+                    mainAxisSpacing: 15,
+                    childAspectRatio: 0.8,
+                  )
+                : SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: global.getPlatFrom() ? 7 : 2,
+                    crossAxisSpacing: global.getPlatFrom() ? 25 : 10.0,
+                    mainAxisSpacing: global.getPlatFrom() ? 25 : 10.0,
+                    mainAxisExtent: 260,
+                  ),
             //  scrollDirection: Axis.horizontal,
             itemCount: productList.length,
             shrinkWrap: true,
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
             itemBuilder: (context, index) {
               return InkWell(
                   onTap: () {
@@ -92,7 +98,7 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                   child: Container(
                     width: global.getPlatFrom() ? 180 : 150,
                     // height: 150,
-                    margin: EdgeInsets.only(left: 10),
+                    // margin: EdgeInsets.only(right: 10),
                     color: Colors.white,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -123,31 +129,28 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                         ),
                         Image.network(
                           "${global.appInfo.baseUrls.productImageurl}/${productList[index].image}",
-                          width: GetPlatform.isWeb
-                              ? 120
-                              : MediaQuery.of(context).size.width,
-                          // height: 119,
-                          fit: BoxFit.fill,
+                          height: 120,
+                          fit: BoxFit.contain,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                          child: RichText(
-                            text: TextSpan(
-                                text: "Brand: ",
-                                style: TextStyle(
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 10),
-                                children: [
-                                  TextSpan(
-                                      text: '${productList[index].name} ',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 10,
-                                          color: Colors.black)),
-                                ]),
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                        //   child: RichText(
+                        //     text: TextSpan(
+                        //         text: "Brand: ",
+                        //         style: TextStyle(
+                        //             color: Colors.black54,
+                        //             fontWeight: FontWeight.w500,
+                        //             fontSize: 10),
+                        //         children: [
+                        //           TextSpan(
+                        //               text: '${productList[index].name} ',
+                        //               style: TextStyle(
+                        //                   fontWeight: FontWeight.w600,
+                        //                   fontSize: 10,
+                        //                   color: Colors.black)),
+                        //         ]),
+                        //   ),
+                        // ),
                         Container(
                           color: Colors.grey.shade400,
                           height: 1,

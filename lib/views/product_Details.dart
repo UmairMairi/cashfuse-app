@@ -5,7 +5,6 @@ import 'package:cashfuse/models/productModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,23 +27,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GetPlatform.isWeb
-          ? WebTopBarWidget()
-          : AppBar(
-              leading: InkWell(
-                onTap: () {
-                  Get.back();
-                },
-                child: Icon(
-                  Icons.arrow_back,
-                ),
-              ),
-              title: Text(
-                widget.title,
-                style: Get.theme.primaryTextTheme.titleSmall
-                    .copyWith(color: Colors.white),
-              ),
-            ),
+      appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            Get.back();
+          },
+          child: Icon(
+            Icons.arrow_back,
+          ),
+        ),
+        title: Text(
+          widget.title,
+          style: Get.theme.primaryTextTheme.titleSmall
+              .copyWith(color: Colors.white),
+        ),
+      ),
       body: Align(
         alignment: Alignment.topCenter,
         child: SizedBox(
@@ -83,7 +80,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             child: CustomImage(
                               image:
                                   "${global.appInfo.baseUrls.productImageurl}/$i",
-                              fit: BoxFit.fill,
+                              fit: BoxFit.contain,
                             ));
                       },
                     );
@@ -216,19 +213,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
-                                  children: [
-                                    Image.network(
+                                CustomImage(
+                                  image:
                                       "${global.appInfo.baseUrls.productSiteUrl}/${product.productPrices[index].siteIcon}",
-                                      height: 40,
-                                      width: 100,
-                                    ),
-                                    Icon(
-                                      Icons.info_outline_rounded,
-                                      color: Colors.grey,
-                                      size: 20,
-                                    )
-                                  ],
+                                  height: 40,
+                                  width: 100,
                                 ),
                                 InkWell(
                                   onTap: () async {

@@ -4,6 +4,7 @@ import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/loginWithEmail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 // import 'package:video_player/video_player.dart';
 
 import 'package:get/get.dart';
@@ -201,7 +202,7 @@ class GetStartedScreen extends StatelessWidget {
               ),
               InkWell(
                 onTap: () async {
-                  if (GetPlatform.isWeb) {
+                  if (global.getPlatFrom()) {
                     Get.dialog(Dialog(
                       child: SizedBox(
                           width: Get.width / 3,
@@ -258,7 +259,7 @@ class GetStartedScreen extends StatelessWidget {
               ),
               InkWell(
                 onTap: () async {
-                  if (GetPlatform.isWeb) {
+                  if (global.getPlatFrom()) {
                     Get.dialog(Dialog(
                       child: SizedBox(
                           width: Get.width / 3,

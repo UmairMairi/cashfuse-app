@@ -1102,7 +1102,7 @@ class HomeScreen extends StatelessWidget {
                                             }),
                                       )
                                     : SizedBox(
-                                        height: 285,
+                                        height: 260,
                                         child: ListView.builder(
                                           scrollDirection: Axis.horizontal,
                                           itemCount:
@@ -1183,37 +1183,37 @@ class HomeScreen extends StatelessWidget {
                                                           height: 120,
                                                           image:
                                                               "${global.appInfo.baseUrls.productImageurl}/${homeController.productList[index].image}"),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                top: 8.0,
-                                                                bottom: 8),
-                                                        child: RichText(
-                                                          text: TextSpan(
-                                                              text: "Brand: ",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black54,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  fontSize: 10),
-                                                              children: [
-                                                                TextSpan(
-                                                                    text:
-                                                                        '${homeController.productList[index].name} ',
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w600,
-                                                                        fontSize:
-                                                                            10,
-                                                                        color: Colors
-                                                                            .black)),
-                                                              ]),
-                                                        ),
-                                                      ),
+                                                      // Padding(
+                                                      //   padding:
+                                                      //       const EdgeInsets
+                                                      //               .only(
+                                                      //           top: 8.0,
+                                                      //           bottom: 8),
+                                                      //   child: RichText(
+                                                      //     text: TextSpan(
+                                                      //         text: "Brand: ",
+                                                      //         style: TextStyle(
+                                                      //             color: Colors
+                                                      //                 .black54,
+                                                      //             fontWeight:
+                                                      //                 FontWeight
+                                                      //                     .w500,
+                                                      //             fontSize: 10),
+                                                      //         children: [
+                                                      //           TextSpan(
+                                                      //               text:
+                                                      //                   '${homeController.productList[index].name} ',
+                                                      //               style: TextStyle(
+                                                      //                   fontWeight:
+                                                      //                       FontWeight
+                                                      //                           .w600,
+                                                      //                   fontSize:
+                                                      //                       10,
+                                                      //                   color: Colors
+                                                      //                       .black)),
+                                                      //         ]),
+                                                      //   ),
+                                                      // ),
                                                       Container(
                                                         color: Colors
                                                             .grey.shade400,
@@ -1520,7 +1520,7 @@ class HomeScreen extends StatelessWidget {
                                             }),
                                       )
                                     : SizedBox(
-                                        height: 285,
+                                        height: 260,
                                         child: ListView.builder(
                                           scrollDirection: Axis.horizontal,
                                           itemCount: homeController

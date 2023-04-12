@@ -42,7 +42,8 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
               children: [
                 Expanded(
                   child: CarouselSlider(
-                    options: CarouselOptions(autoPlay: true,viewportFraction: 1),
+                    options:
+                        CarouselOptions(autoPlay: true, viewportFraction: 1),
                     items: product.images.map((i) {
                       return Builder(
                         builder: (BuildContext context) {
@@ -50,7 +51,6 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                             image:
                                 "${global.appInfo.baseUrls.productImageurl}/$i",
                             fit: BoxFit.contain,
-          
                           );
                         },
                       );
@@ -73,21 +73,14 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Image.network(
+                                  CustomImage(
+                                    image:
                                         "${global.appInfo.baseUrls.productSiteUrl}/${product.productPrices[index].siteIcon}",
-                                        height: 40,
-                                        width: 100,
-                                      ),
-                                      Icon(
-                                        Icons.info_outline_rounded,
-                                        color: Colors.grey,
-                                        size: 20,
-                                      )
-                                    ],
+                                    height: 40,
+                                    width: 100,
                                   ),
                                   InkWell(
                                     onTap: () async {
@@ -95,25 +88,29 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                         await homeController.getTrackingLink(
                                             product.productPrices[index].url,
                                             product.affiliatePartner,
-                                            cId: product.productPrices[index].cId
+                                            cId: product
+                                                .productPrices[index].cId
                                                 .toString());
                                         await homeController.addClick(
                                           product.productPrices[index].siteName,
-                                          global.appInfo.baseUrls.productSiteUrl +
+                                          global.appInfo.baseUrls
+                                                  .productSiteUrl +
                                               '/' +
-                                              product
-                                                  .productPrices[index].siteIcon,
+                                              product.productPrices[index]
+                                                  .siteIcon,
                                           homeController.createdLink.isNotEmpty
                                               ? homeController.createdLink
-                                              : product.productPrices[index].url,
+                                              : product
+                                                  .productPrices[index].url,
                                         );
-          
+
                                         global.launchInBrowser(
                                           homeController.createdLink.isNotEmpty
                                               ? homeController.createdLink
-                                              : product.productPrices[index].url,
+                                              : product
+                                                  .productPrices[index].url,
                                         );
-          
+
                                         // Get.to(
                                         //   () => WebViewScreen(
                                         //     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
@@ -150,7 +147,10 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                     },
                                     child: Container(
                                       padding: EdgeInsets.only(
-                                          left: 13, right: 13, bottom: 3, top: 3),
+                                          left: 13,
+                                          right: 13,
+                                          bottom: 3,
+                                          top: 3),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(5),
                                         color: Colors.black,
@@ -177,7 +177,8 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                 height: 10,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Column(
                                     children: [
