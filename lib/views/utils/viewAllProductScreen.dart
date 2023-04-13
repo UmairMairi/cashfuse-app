@@ -55,7 +55,8 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                 ? SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: AppConstants.WEB_MAX_WIDTH / 7,
                     mainAxisSpacing: 15,
-                    childAspectRatio: 0.8,
+                    crossAxisSpacing: 15,
+                    childAspectRatio: 0.75,
                   )
                 : SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: global.getPlatFrom() ? 7 : 2,
