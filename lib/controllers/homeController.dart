@@ -228,7 +228,7 @@ class HomeController extends GetxController {
 
             if (_topCategoryList != []) {
               for (var i = 0; i < _topCategoryList.length; i++) {
-                _topCategoryList[i].commonList = [];
+                // _topCategoryList[i].commonList = [];
                 if (_topCategoryList[i].ads != []) {
                   List<AdsModel> _tList = _topCategoryList[i]
                       .ads
@@ -257,7 +257,7 @@ class HomeController extends GetxController {
                 // }
               }
               for (var n = 0; n < _topCategoryList.length; n++) {
-                _topCategoryList[n].commonList = [];
+                // _topCategoryList[n].commonList = [];
                 if (_topCategoryList[n].cuecampaigns != []) {
                   List<CampaignModel> _tList = _topCategoryList[n]
                       .cuecampaigns
@@ -346,7 +346,7 @@ class HomeController extends GetxController {
             update();
             if (_topCashbackList != []) {
               for (var i = 0; i < _topCashbackList.length; i++) {
-                _topCashbackList[i].commonList = [];
+                // _topCashbackList[i].commonList = [];
                 if (_topCashbackList[i].ads != []) {
                   List<AdsModel> _tList = _topCashbackList[i]
                       .ads
@@ -354,7 +354,7 @@ class HomeController extends GetxController {
                       .toList();
                   if (_tList != null && _tList.length > 0) {
                     for (var j = 0; j < _tList.length; j++) {
-                      _topCategoryList[i].commonList.add(
+                      _topCashbackList[i].commonList.add(
                             CommonModel(
                                 name: _tList[j].name,
                                 image:
@@ -375,7 +375,7 @@ class HomeController extends GetxController {
                 // }
               }
               for (var n = 0; n < _topCashbackList.length; n++) {
-                _topCashbackList[n].commonList = [];
+                // _topCashbackList[n].commonList = [];
                 if (_topCashbackList[n].cuecampaigns != []) {
                   List<CampaignModel> _tList = _topCashbackList[n]
                       .cuecampaigns
@@ -403,7 +403,7 @@ class HomeController extends GetxController {
                 // }
               }
               for (var m = 0; m < _topCashbackList.length; m++) {
-                _topCashbackList[m].commonList = [];
+                // _topCashbackList[m].commonList = [];
                 if (_topCashbackList[m].admitedoffers != []) {
                   List<AdmitedOffersModal> _tList = _topCashbackList[m]
                       .admitedoffers
@@ -513,7 +513,7 @@ class HomeController extends GetxController {
                 }
               }
               for (var m = 0; m < _homeAdvList.length; m++) {
-                _homeAdvList[m].commonList = [];
+                // _homeAdvList[m].commonList = [];
                 if (_homeAdvList[m].admitedoffers != []) {
                   List<AdmitedOffersModal> _tList = _homeAdvList[m]
                       .admitedoffers
