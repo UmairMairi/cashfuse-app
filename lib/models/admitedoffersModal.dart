@@ -138,6 +138,7 @@ class AdmitedOffersModal {
       allowActionsAllCountries = json["allow_actions_all_countries"];
       affiliatePartner = json["affiliate_partner"];
       connected = json["connected"];
+      status = json["status"];
       notify = json["notify"];
       updatedAt = json["updated_at"] == null
           ? null

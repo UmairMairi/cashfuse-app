@@ -230,18 +230,23 @@ class HomeController extends GetxController {
               for (var i = 0; i < _topCategoryList.length; i++) {
                 _topCategoryList[i].commonList = [];
                 if (_topCategoryList[i].ads != []) {
-                  for (var j = 0; j < _topCategoryList[i].ads.length; j++) {
-                    _topCategoryList[i].commonList.add(
-                          CommonModel(
-                              name: _topCategoryList[i].ads[j].name,
-                              image:
-                                  '${global.appInfo.baseUrls.offerImageUrl}/${_topCategoryList[i].ads[j].image}',
-                              buttonText: _topCategoryList[i].ads[j].buttonText,
-                              trackingLink:
-                                  _topCategoryList[i].ads[j].landingPage,
-                              adId: _topCategoryList[i].ads[j].id.toString(),
-                              from: "ads"),
-                        );
+                  List<AdsModel> _tList = _topCategoryList[i]
+                      .ads
+                      .where((element) => element.status == 1)
+                      .toList();
+                  if (_tList != null && _tList.length > 0) {
+                    for (var j = 0; j < _tList.length; j++) {
+                      _topCategoryList[i].commonList.add(
+                            CommonModel(
+                                name: _tList[j].name,
+                                image:
+                                    '${global.appInfo.baseUrls.offerImageUrl}/${_tList[j].image}',
+                                buttonText: _tList[j].buttonText,
+                                trackingLink: _tList[j].landingPage,
+                                adId: _tList[j].id.toString(),
+                                from: "ads"),
+                          );
+                    }
                   }
                 }
 
@@ -254,44 +259,45 @@ class HomeController extends GetxController {
               for (var n = 0; n < _topCategoryList.length; n++) {
                 _topCategoryList[n].commonList = [];
                 if (_topCategoryList[n].cuecampaigns != []) {
-                  for (var k = 0;
-                      k < _topCategoryList[n].cuecampaigns.length;
-                      k++) {
-                    _topCategoryList[n].commonList.add(
-                          CommonModel(
-                              name: _topCategoryList[n].cuecampaigns[k].name,
-                              image:
-                                  '${global.appInfo.baseUrls.offerImageUrl}/${_topCategoryList[n].cuecampaigns[k].image}',
-                              buttonText: _topCategoryList[n]
-                                  .cuecampaigns[k]
-                                  .buttonText,
-                              trackingLink:
-                                  _topCategoryList[n].cuecampaigns[k].url,
-                              campaignId:
-                                  _topCategoryList[n].cuecampaigns[k].id,
-                              from: "cue"),
-                        );
+                  List<CampaignModel> _tList = _topCategoryList[n]
+                      .cuecampaigns
+                      .where((element) => element.status == 1)
+                      .toList();
+
+                  if (_tList != null && _tList.length > 0) {
+                    for (var k = 0; k < _tList.length; k++) {
+                      _topCategoryList[n].commonList.add(
+                            CommonModel(
+                                name: _tList[k].name,
+                                image:
+                                    '${global.appInfo.baseUrls.offerImageUrl}/${_tList[k].image}',
+                                buttonText: _tList[k].buttonText,
+                                trackingLink: _tList[k].url,
+                                campaignId: _tList[k].id,
+                                from: "cue"),
+                          );
+                    }
                   }
                 }
                 if (_topCategoryList[n].admitedoffers != []) {
-                  for (var k = 0;
-                      k < _topCategoryList[n].admitedoffers.length;
-                      k++) {
-                    print('ajhsbdhjbsad');
-                    print('${_topCategoryList[n].admitedoffers[k].name}');
-                    _topCategoryList[n].commonList.add(
-                          CommonModel(
-                              name: _topCategoryList[n].admitedoffers[k].name,
-                              image:
-                                  '${global.appInfo.baseUrls.offerImageUrl}/${_topCategoryList[n].admitedoffers[k].image}',
-                              buttonText:
-                                  "Grab Now", // _topCategoryList[n].admitedoffers[k].buttonText,
-                              trackingLink:
-                                  _topCategoryList[n].admitedoffers[k].gotourl,
-                              campaignId:
-                                  _topCategoryList[n].admitedoffers[k].id,
-                              from: "admit"),
-                        );
+                  List<AdmitedOffersModal> _tList = _topCategoryList[n]
+                      .admitedoffers
+                      .where((element) => element.status == 1)
+                      .toList();
+                  if (_tList != null && _tList.length > 0) {
+                    for (var k = 0; k < _tList.length; k++) {
+                      _topCategoryList[n].commonList.add(
+                            CommonModel(
+                                name: _tList[k].name,
+                                image:
+                                    '${global.appInfo.baseUrls.offerImageUrl}/${_tList[k].image}',
+                                buttonText:
+                                    "Grab Now", // _topCategoryList[n].admitedoffers[k].buttonText,
+                                trackingLink: _tList[k].gotourl,
+                                campaignId: _tList[k].id,
+                                from: "admit"),
+                          );
+                    }
                   }
                 }
                 // if (_topCategoryList[n].commonList.length > 0) {
@@ -300,30 +306,6 @@ class HomeController extends GetxController {
                 //   }
                 // }
               }
-
-              // for (var n = 0; n < _topCategoryList.length; n++) {
-              //   _topCategoryList[n].commonList = [];
-              //   if (_topCategoryList[n].admitedoffers != []) {
-              //     for (var k = 0; k < _topCategoryList[n].admitedoffers.length; k++) {
-              //       print('ajhsbdhjbsad');
-              //       print('${_topCategoryList[n].admitedoffers[k].name}');
-              //       _topCategoryList[n].commonList.add(
-              //         CommonModel(
-              //           name: _topCategoryList[n].admitedoffers[k].name,
-              //           image: '${global.appInfo.baseUrls.offerImageUrl}/${_topCategoryList[n].admitedoffers[k].image}',
-              //           buttonText:"Grap Now",// _topCategoryList[n].admitedoffers[k].buttonText,
-              //           trackingLink: _topCategoryList[n].admitedoffers[k].gotourl,
-              //           campaignId: _topCategoryList[n].admitedoffers[k].id,
-              //         ),
-              //       );
-              //     }
-              //   }
-              //   // if (_topCategoryList[n].commonList.length > 0) {
-              //   //   for (var t = 0; t < _topCategoryList[n].commonList.length; n++) {
-              //   //     _topCategoryList[n].commonList.insert((t * 3) + 3, CommonModel(name: 'Ad'));
-              //   //   }
-              //   // }
-              // }
             }
           } else {
             showCustomSnackBar(response.message);
@@ -366,18 +348,23 @@ class HomeController extends GetxController {
               for (var i = 0; i < _topCashbackList.length; i++) {
                 _topCashbackList[i].commonList = [];
                 if (_topCashbackList[i].ads != []) {
-                  for (var j = 0; j < _topCashbackList[i].ads.length; j++) {
-                    _topCashbackList[i].commonList.add(
-                          CommonModel(
-                              name: _topCashbackList[i].ads[j].name,
-                              image:
-                                  '${global.appInfo.baseUrls.offerImageUrl}/${_topCashbackList[i].ads[j].image}',
-                              buttonText: _topCashbackList[i].ads[j].buttonText,
-                              trackingLink:
-                                  _topCashbackList[i].ads[j].landingPage,
-                              adId: _topCashbackList[i].ads[j].id.toString(),
-                              from: "ads"),
-                        );
+                  List<AdsModel> _tList = _topCashbackList[i]
+                      .ads
+                      .where((element) => element.status == 1)
+                      .toList();
+                  if (_tList != null && _tList.length > 0) {
+                    for (var j = 0; j < _tList.length; j++) {
+                      _topCategoryList[i].commonList.add(
+                            CommonModel(
+                                name: _tList[j].name,
+                                image:
+                                    '${global.appInfo.baseUrls.offerImageUrl}/${_tList[j].image}',
+                                buttonText: _tList[j].buttonText,
+                                trackingLink: _tList[j].landingPage,
+                                adId: _tList[j].id.toString(),
+                                from: "ads"),
+                          );
+                    }
                   }
                 }
 
@@ -390,23 +377,52 @@ class HomeController extends GetxController {
               for (var n = 0; n < _topCashbackList.length; n++) {
                 _topCashbackList[n].commonList = [];
                 if (_topCashbackList[n].cuecampaigns != []) {
-                  for (var k = 0;
-                      k < _topCashbackList[n].cuecampaigns.length;
-                      k++) {
-                    _topCashbackList[n].commonList.add(
-                          CommonModel(
-                              name: _topCashbackList[n].cuecampaigns[k].name,
-                              image:
-                                  '${global.appInfo.baseUrls.offerImageUrl}/${_topCashbackList[n].cuecampaigns[k].image}',
-                              buttonText: _topCashbackList[n]
-                                  .cuecampaigns[k]
-                                  .buttonText,
-                              trackingLink:
-                                  _topCashbackList[n].cuecampaigns[k].url,
-                              campaignId:
-                                  _topCashbackList[n].cuecampaigns[k].id,
-                              from: "cue"),
-                        );
+                  List<CampaignModel> _tList = _topCashbackList[n]
+                      .cuecampaigns
+                      .where((element) => element.status == 1)
+                      .toList();
+                  if (_tList != null && _tList.length > 0) {
+                    for (var k = 0; k < _tList.length; k++) {
+                      _topCashbackList[n].commonList.add(
+                            CommonModel(
+                                name: _tList[k].name,
+                                image:
+                                    '${global.appInfo.baseUrls.offerImageUrl}/${_tList[k].image}',
+                                buttonText: _tList[k].buttonText,
+                                trackingLink: _tList[k].url,
+                                campaignId: _tList[k].id,
+                                from: "cue"),
+                          );
+                    }
+                  }
+                }
+                // if (_topCashbackList[n].commonList.length > 0) {
+                //   for (var t = 0; t < _topCashbackList[n].commonList.length; t++) {
+                //     _topCashbackList[n].commonList.insert((t * 3) + 3, CommonModel(name: 'Ad'));
+                //   }
+                // }
+              }
+              for (var m = 0; m < _topCashbackList.length; m++) {
+                _topCashbackList[m].commonList = [];
+                if (_topCashbackList[m].admitedoffers != []) {
+                  List<AdmitedOffersModal> _tList = _topCashbackList[m]
+                      .admitedoffers
+                      .where((element) => element.status == 1)
+                      .toList();
+
+                  if (_tList != null && _tList.length > 0) {
+                    for (var p = 0; p < _tList.length; p++) {
+                      _topCashbackList[m].commonList.add(
+                            CommonModel(
+                                name: _tList[p].name,
+                                image:
+                                    '${global.appInfo.baseUrls.offerImageUrl}/${_tList[p].image}',
+                                buttonText: 'Grab Now',
+                                trackingLink: _tList[p].gotourl,
+                                campaignId: _tList[p].id,
+                                from: "admit"),
+                          );
+                    }
                   }
                 }
                 // if (_topCashbackList[n].commonList.length > 0) {
@@ -444,17 +460,24 @@ class HomeController extends GetxController {
             if (_homeAdvList != []) {
               for (var i = 0; i < _homeAdvList.length; i++) {
                 if (_homeAdvList[i].ads != []) {
-                  for (var j = 0; j < _homeAdvList[i].ads.length; j++) {
-                    _homeAdvList[i].commonList.add(
-                          CommonModel(
-                            name: _homeAdvList[i].ads[j].name,
-                            image: _homeAdvList[i].ads[j].image,
-                            buttonText: _homeAdvList[i].ads[j].buttonText,
-                            trackingLink: _homeAdvList[i].ads[j].landingPage,
-                            adId: _homeAdvList[i].ads[j].id.toString(),
-                          ),
-                        );
+                  List<AdsModel> _tList = _homeAdvList[i]
+                      .ads
+                      .where((element) => element.status == 1)
+                      .toList();
+                  if (_tList != null && _tList.length > 0) {
+                    for (var j = 0; j < _tList.length; j++) {
+                      _homeAdvList[i].commonList.add(
+                            CommonModel(
+                              name: _tList[j].name,
+                              image: _tList[j].image,
+                              buttonText: _tList[j].buttonText,
+                              trackingLink: _tList[j].landingPage,
+                              adId: _tList[j].id.toString(),
+                            ),
+                          );
+                    }
                   }
+
                   // if (_homeAdvList[i].commonList.length > 0) {
                   //   for (var t = 0; t < _homeAdvList[i].commonList.length; t++) {
                   //     _homeAdvList[i].commonList.insert((t * 3) + 3, CommonModel(name: 'Ad'));
@@ -464,25 +487,52 @@ class HomeController extends GetxController {
               }
               for (var n = 0; n < _homeAdvList.length; n++) {
                 if (_homeAdvList[n].cuecampaigns != []) {
-                  for (var k = 0;
-                      k < _homeAdvList[n].cuecampaigns.length;
-                      k++) {
-                    _homeAdvList[n].commonList.add(
-                          CommonModel(
-                            name: _homeAdvList[n].cuecampaigns[k].name,
-                            image: _homeAdvList[n].cuecampaigns[k].image,
-                            buttonText:
-                                _homeAdvList[n].cuecampaigns[k].buttonText,
-                            trackingLink: _homeAdvList[n].cuecampaigns[k].url,
-                            campaignId: _homeAdvList[n].cuecampaigns[k].id,
-                          ),
-                        );
+                  List<CampaignModel> _tList = _homeAdvList[n]
+                      .cuecampaigns
+                      .where((element) => element.status == 1)
+                      .toList();
+                  if (_tList != null && _tList.length > 0) {
+                    for (var k = 0; k < _tList.length; k++) {
+                      _homeAdvList[n].commonList.add(
+                            CommonModel(
+                              name: _tList[k].name,
+                              image: _tList[k].image,
+                              buttonText: _tList[k].buttonText,
+                              trackingLink: _tList[k].url,
+                              campaignId: _tList[k].id,
+                            ),
+                          );
+                    }
                   }
+
                   // if (_homeAdvList[n].commonList.length > 0) {
                   //   for (var t = 0; t < _homeAdvList[n].commonList.length; t++) {
                   //     _homeAdvList[n].commonList.insert((t * 3) + 3, CommonModel(name: 'Ad'));
                   //   }
                   // }
+                }
+              }
+              for (var m = 0; m < _homeAdvList.length; m++) {
+                _homeAdvList[m].commonList = [];
+                if (_homeAdvList[m].admitedoffers != []) {
+                  List<AdmitedOffersModal> _tList = _homeAdvList[m]
+                      .admitedoffers
+                      .where((element) => element.status == 1)
+                      .toList();
+                  if (_tList != null && _tList.length > 0) {
+                    for (var p = 0; p < _tList.length; p++) {
+                      _homeAdvList[m].commonList.add(
+                            CommonModel(
+                                name: _tList[p].name,
+                                image:
+                                    '${global.appInfo.baseUrls.offerImageUrl}/${_tList[p].image}',
+                                buttonText: 'Grab Now',
+                                trackingLink: _tList[p].gotourl,
+                                campaignId: _tList[p].id,
+                                from: "admit"),
+                          );
+                    }
+                  }
                 }
               }
             }
@@ -524,35 +574,72 @@ class HomeController extends GetxController {
               for (var i = 0; i < _allAdvList.length; i++) {
                 _allAdvList[i].commonList = [];
                 if (_allAdvList[i].ads != []) {
-                  for (var j = 0; j < _allAdvList[i].ads.length; j++) {
-                    _allAdvList[i].commonList.add(
-                          CommonModel(
-                            name: _allAdvList[i].ads[j].name,
-                            image:
-                                '${global.appInfo.baseUrls.offerImageUrl}/${_allAdvList[i].ads[j].image}',
-                            buttonText: _allAdvList[i].ads[j].buttonText,
-                            trackingLink: _allAdvList[i].ads[j].landingPage,
-                            adId: _allAdvList[i].ads[j].id.toString(),
-                          ),
-                        );
+                  List<AdsModel> _tList = _allAdvList[i]
+                      .ads
+                      .where((element) => element.status == 1)
+                      .toList();
+                  if (_tList != null && _tList.length > 0) {
+                    for (var j = 0; j < _tList.length; j++) {
+                      _allAdvList[i].commonList.add(
+                            CommonModel(
+                              name: _tList[j].name,
+                              image:
+                                  '${global.appInfo.baseUrls.offerImageUrl}/${_tList[j].image}',
+                              buttonText: _tList[j].buttonText,
+                              trackingLink: _tList[j].landingPage,
+                              adId: _tList[j].id.toString(),
+                            ),
+                          );
+                    }
                   }
                 }
               }
               for (var n = 0; n < _allAdvList.length; n++) {
                 _allAdvList[n].commonList = [];
                 if (_allAdvList[n].cuecampaigns != []) {
-                  for (var k = 0; k < _allAdvList[n].cuecampaigns.length; k++) {
-                    _allAdvList[n].commonList.add(
-                          CommonModel(
-                            name: _allAdvList[n].cuecampaigns[k].name,
-                            image:
-                                '${global.appInfo.baseUrls.offerImageUrl}/${_allAdvList[n].cuecampaigns[k].image}',
-                            buttonText:
-                                _allAdvList[n].cuecampaigns[k].buttonText,
-                            trackingLink: _allAdvList[n].cuecampaigns[k].url,
-                            campaignId: _allAdvList[n].cuecampaigns[k].id,
-                          ),
-                        );
+                  List<CampaignModel> _tList = _allAdvList[n]
+                      .cuecampaigns
+                      .where((element) => element.status == 1)
+                      .toList();
+                  if (_tList != null && _tList.length > 0) {
+                    for (var k = 0; k < _tList.length; k++) {
+                      _allAdvList[n].commonList.add(
+                            CommonModel(
+                              name: _tList[k].name,
+                              image:
+                                  '${global.appInfo.baseUrls.offerImageUrl}/${_tList[k].image}',
+                              buttonText: _tList[k].buttonText,
+                              trackingLink: _tList[k].url,
+                              campaignId: _tList[k].id,
+                            ),
+                          );
+                    }
+                  }
+                }
+              }
+              for (var m = 0; m < _allAdvList.length; m++) {
+                _allAdvList[m].commonList = [];
+                if (_allAdvList[m].admitedoffers != []) {
+                  List<AdmitedOffersModal> _tList = _allAdvList[m]
+                      .admitedoffers
+                      .where((element) => element.status == 1)
+                      .toList();
+                  if (_tList != null && _tList.length > 0) {
+                    for (var p = 0;
+                        p < _tList.length;
+                        p++) {
+                      _allAdvList[m].commonList.add(
+                            CommonModel(
+                                name: _tList[p].name,
+                                image:
+                                    '${global.appInfo.baseUrls.offerImageUrl}/${_tList[p].image}',
+                                buttonText: 'Grab Now',
+                                trackingLink:
+                                    _tList[p].gotourl,
+                                campaignId: _tList[p].id,
+                                from: "admit"),
+                          );
+                    }
                   }
                 }
               }

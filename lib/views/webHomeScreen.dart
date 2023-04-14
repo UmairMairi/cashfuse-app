@@ -5,6 +5,7 @@ import 'package:cashfuse/controllers/couponController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/views/admitedOfferDetailScreen.dart';
 import 'package:cashfuse/views/adsCampaignWidgetListScreen.dart';
 import 'package:cashfuse/views/adsDetailScreen.dart';
 import 'package:cashfuse/views/allcategoriesScreen.dart';
@@ -710,7 +711,8 @@ class WebHomeScreen extends StatelessWidget {
                                 onTap: () {
                                   Get.to(
                                     () => ViewAllProductScreen(
-                                      productList: homeController.trendingProductList,
+                                      productList:
+                                          homeController.trendingProductList,
                                       title: "TRENDING PRODUCTS",
                                     ),
                                     routeName: 'all',
@@ -845,6 +847,29 @@ class WebHomeScreen extends StatelessWidget {
                                                       ),
                                                       routeName: 'detail',
                                                     );
+                                                  } else if (homeController
+                                                          .homeAdvList[index]
+                                                          .commonList[i]
+                                                          .from ==
+                                                      'admit') {
+                                                    await homeController
+                                                        .getAdmitedDetails(
+                                                            homeController
+                                                                .homeAdvList[
+                                                                    index]
+                                                                .commonList[i]
+                                                                .campaignId);
+
+                                                    Get.to(
+                                                        () =>
+                                                            AdmitedDetailScreen(
+                                                              admitedData:
+                                                                  homeController
+                                                                      .admitedOffer,
+                                                              fromSeeMore:
+                                                                  false,
+                                                            ),
+                                                        routeName: 'detail');
                                                   } else {
                                                     await homeController
                                                         .getCampignDetails(

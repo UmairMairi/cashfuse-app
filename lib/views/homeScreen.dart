@@ -6,6 +6,7 @@ import 'package:cashfuse/controllers/splashController.dart';
 import 'package:cashfuse/models/commonModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/views/admitedOfferDetailScreen.dart';
 import 'package:cashfuse/views/adsCampaignWidgetListScreen.dart';
 import 'package:cashfuse/views/adsDetailScreen.dart';
 import 'package:cashfuse/views/allcategoriesScreen.dart';
@@ -946,12 +947,14 @@ class HomeScreen extends StatelessWidget {
                                             height: 155,
                                             child: ListView.builder(
                                               scrollDirection: Axis.horizontal,
-                                              itemCount: homeController
-                                                          .topCashbackList
-                                                          .length >
-                                                      6
-                                                  ? 6
-                                                  : homeController
+                                              itemCount:
+                                                  // homeController
+                                                  //             .topCashbackList
+                                                  //             .length >
+                                                  //         6
+                                                  //     ? 6
+                                                  //     :
+                                                  homeController
                                                       .topCashbackList.length,
                                               shrinkWrap: true,
                                               padding:
@@ -1601,37 +1604,37 @@ class HomeScreen extends StatelessWidget {
                                                           height: 120,
                                                           image:
                                                               "${global.appInfo.baseUrls.productImageurl}/${homeController.trendingProductList[index].image}"),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                top: 8.0,
-                                                                bottom: 8),
-                                                        child: RichText(
-                                                          text: TextSpan(
-                                                              text: "Brand: ",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black54,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  fontSize: 10),
-                                                              children: [
-                                                                TextSpan(
-                                                                    text:
-                                                                        '${homeController.trendingProductList[index].name} ',
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w600,
-                                                                        fontSize:
-                                                                            10,
-                                                                        color: Colors
-                                                                            .black)),
-                                                              ]),
-                                                        ),
-                                                      ),
+                                                      // Padding(
+                                                      //   padding:
+                                                      //       const EdgeInsets
+                                                      //               .only(
+                                                      //           top: 8.0,
+                                                      //           bottom: 8),
+                                                      //   child: RichText(
+                                                      //     text: TextSpan(
+                                                      //         text: "Brand: ",
+                                                      //         style: TextStyle(
+                                                      //             color: Colors
+                                                      //                 .black54,
+                                                      //             fontWeight:
+                                                      //                 FontWeight
+                                                      //                     .w500,
+                                                      //             fontSize: 10),
+                                                      //         children: [
+                                                      //           TextSpan(
+                                                      //               text:
+                                                      //                   '${homeController.trendingProductList[index].name} ',
+                                                      //               style: TextStyle(
+                                                      //                   fontWeight:
+                                                      //                       FontWeight
+                                                      //                           .w600,
+                                                      //                   fontSize:
+                                                      //                       10,
+                                                      //                   color: Colors
+                                                      //                       .black)),
+                                                      //         ]),
+                                                      //   ),
+                                                      // ),
                                                       Container(
                                                         color: Colors
                                                             .grey.shade400,
@@ -1869,6 +1872,30 @@ class HomeScreen extends StatelessWidget {
                                                                     routeName:
                                                                         'detail',
                                                                   );
+                                                                } else if (homeController
+                                                                        .homeAdvList[
+                                                                            index]
+                                                                        .commonList[
+                                                                            i]
+                                                                        .from ==
+                                                                    'admit') {
+                                                                  await homeController.getAdmitedDetails(homeController
+                                                                      .homeAdvList[
+                                                                          index]
+                                                                      .commonList[
+                                                                          i]
+                                                                      .campaignId);
+
+                                                                  Get.to(
+                                                                      () =>
+                                                                          AdmitedDetailScreen(
+                                                                            admitedData:
+                                                                                controller.admitedOffer,
+                                                                            fromSeeMore:
+                                                                                false,
+                                                                          ),
+                                                                      routeName:
+                                                                          'detail');
                                                                 } else {
                                                                   await homeController.getCampignDetails(homeController
                                                                       .homeAdvList[
