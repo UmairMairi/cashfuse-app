@@ -680,8 +680,8 @@ class DrawerWidget extends StatelessWidget {
                         onTap: () {
                           Get.back();
                           StoreRedirect.redirect(
-                            androidAppId: 'com.cashfuse.app',
-                            iOSAppId: 'com.cashfuse.app',
+                            androidAppId: global.appPackageName,
+                            iOSAppId: global.appPackageName,
                           );
                         },
                         child: Padding(

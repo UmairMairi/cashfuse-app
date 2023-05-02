@@ -115,7 +115,7 @@ class WebFooterWidget extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  launchUrl(Uri.parse('https://play.google.com/store/apps/details?id=com.cashfuse.app'));
+                                  launchUrl(Uri.parse('https://play.google.com/store/apps/details?id=${global.appPackageName}'));
                                 },
                                 behavior: HitTestBehavior.opaque,
                                 child: Container(

@@ -312,7 +312,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 Column(
                                   children: [
                                     Text(
-                                      "₹ ${product.productPrices[index].mrp}",
+                                      "${global.appInfo.currency} ${product.productPrices[index].mrp}",
                                       style: TextStyle(
                                           color: Colors.black54,
                                           fontWeight: FontWeight.w400,
@@ -349,7 +349,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     : Column(
                                         children: [
                                           Text(
-                                            "₹ ${product.productPrices[index].cashback}",
+                                            "${global.appInfo.currency} ${product.productPrices[index].cashback}",
                                             style: TextStyle(
                                                 color: Mycolors.orange,
                                                 fontWeight: FontWeight.w500,
@@ -375,7 +375,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 Column(
                                   children: [
                                     Text(
-                                      "₹ ${product.productPrices[index].price}",
+                                      "${global.appInfo.currency} ${product.productPrices[index].price}",
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w500,

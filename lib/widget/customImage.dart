@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cashfuse/models/admitedoffersModal.dart';
 import 'package:cashfuse/models/adsModel.dart';
 import 'package:cashfuse/models/campaignModel.dart';
 import 'package:cashfuse/models/couponModel.dart';
@@ -19,6 +20,7 @@ class CustomImage extends StatelessWidget {
   final CampaignModel campaign;
   final AdsModel ads;
   final Coupon coupon;
+  final AdmitedOffersModal admitedOffersModal;
   CustomImage({
     @required this.image,
     this.height,
@@ -29,6 +31,7 @@ class CustomImage extends StatelessWidget {
     this.campaign,
     this.ads,
     this.coupon,
+    this.admitedOffersModal,
   }) {
     width != null ? width = width : width = height;
   }
@@ -62,6 +65,8 @@ class CustomImage extends StatelessWidget {
             ads.isImageError = true;
           } else if (coupon != null) {
             coupon.isImageError = true;
+          }else if(admitedOffersModal != null){
+            admitedOffersModal.isImageError = true;
           }
           return Container(
             decoration: BoxDecoration(

@@ -155,7 +155,7 @@ class WebHomeProductView extends StatelessWidget {
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 13, vertical: 3),
                                         child: Text(
-                                          "+ ₹ ${homeController.productList[index].productPrices[0].cashback}  REWARDS",
+                                          "+ ${global.appInfo.currency} ${homeController.productList[index].productPrices[0].cashback}  REWARDS",
                                           style: TextStyle(
                                               fontSize: 11,
                                               fontWeight: FontWeight.w700,
@@ -166,7 +166,7 @@ class WebHomeProductView extends StatelessWidget {
                                         padding: const EdgeInsets.only(
                                             top: 8.0, bottom: 8),
                                         child: Text(
-                                          "Final Price ₹ ${homeController.productList[index].productPrices[0].price}",
+                                          "Final Price ${global.appInfo.currency} ${homeController.productList[index].productPrices[0].price}",
                                           style: TextStyle(
                                               color: Mycolors.blue,
                                               fontWeight: FontWeight.w600,

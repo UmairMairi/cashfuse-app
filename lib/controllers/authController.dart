@@ -1,3 +1,5 @@
+// ignore_for_file: implementation_imports
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
@@ -19,6 +21,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'dart:math' as math;
+import 'package:crypto/src/sha256.dart' as sha;
 
 class AuthController extends GetxController {
   APIHelper apiHelper = new APIHelper();
@@ -126,6 +131,7 @@ class AuthController extends GetxController {
                       width: Get.width / 3,
                       child: OtpVerificationScreen(
                         fromMenu: fromMenu,
+                        isEmail: true,
                       )
                       // LoginOrSignUpScreen(
                       //   fromMenu: true,
@@ -135,6 +141,7 @@ class AuthController extends GetxController {
               } else {
                 Get.to(() => OtpVerificationScreen(
                       fromMenu: fromMenu,
+                      isEmail: true,
                     ));
               }
             } else {
@@ -171,6 +178,7 @@ class AuthController extends GetxController {
               child: OtpVerificationScreen(
                 verificationCode: confirmationResult.verificationId,
                 fromMenu: fromMenu,
+                isEmail: false,
               ),
             ),
           ));
@@ -195,6 +203,7 @@ class AuthController extends GetxController {
               () => OtpVerificationScreen(
                 verificationCode: verificationId,
                 fromMenu: fromMenu,
+                isEmail: false,
               ),
               routeName: 'verifyOtp',
             );
@@ -254,26 +263,6 @@ class AuthController extends GetxController {
             showCustomSnackBar(response.message);
           }
         });
-        // update();
-        // global.showOnlyLoaderDialog(Get.context);
-        // await signIn();
-        // global.hideLoader();
-        // global.getCurrentUser();
-        // if (global.currentUser!.fristName != null && global.currentUser!.fristName != "") {
-        //   Get.off(() => BottomNavigationWidget(
-        //         a: a,
-        //         o: o,
-        //       ));
-        // } else {
-        //   Get.off(() => EditProfileScreen());
-        // }
-        // await signupController.checkEmailContact(userCredential!.user!.email!, signupController.cPhone.text, callId: 3);
-
-        // if (!signupController.isUserExist) {
-        //   Get.bottomSheet(inputContactWidget(email: userCredential!.user!.email!));
-        // }
-
-        //}
       }
     } catch (e) {
       print("Exception - authController.dart - googleSignInFun():" +
@@ -329,119 +318,88 @@ class AuthController extends GetxController {
   //   }
   // }
 
-  // Future signInWithApple() async {
-  //   try {
-  //     // global.showOnlyLoaderDialog(Get.context);
-  //     String generateNonce([int length = 32]) {
-  //       const charset =
-  //           '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
-  //       final random = math.Random.secure();
-  //       return List.generate(
-  //           length, (_) => charset[random.nextInt(charset.length)]).join();
-  //     }
+  Future signInWithApple(bool fromMenu) async {
+    try {
+      // global.showOnlyLoaderDialog(Get.context);
+      String generateNonce([int length = 32]) {
+        const charset =
+            '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+        final random = math.Random.secure();
+        return List.generate(
+            length, (_) => charset[random.nextInt(charset.length)]).join();
+      }
 
-  //     String sha256ofString(String input) {
-  //       final bytes = utf8.encode(input);
-  //       final digest = sha.sha256.convert(bytes);
-  //       return digest.toString();
-  //     }
+      String sha256ofString(String input) {
+        final bytes = utf8.encode(input);
+        final digest = sha.sha256.convert(bytes);
+        return digest.toString();
+      }
 
-  //     final rawNonce = generateNonce();
-  //     final nonce = sha256ofString(rawNonce);
-  //     final credential = await SignInWithApple.getAppleIDCredential(scopes: [
-  //       AppleIDAuthorizationScopes.email,
-  //       AppleIDAuthorizationScopes.fullName
-  //     ], nonce: nonce)
-  //         .catchError((e) {
-  //       print("error $e");
-  //     });
+      final rawNonce = generateNonce();
+      final nonce = sha256ofString(rawNonce);
+      final credential = await SignInWithApple.getAppleIDCredential(scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName
+      ], nonce: nonce)
+          .catchError((e) {
+        print("error $e");
+      });
 
-  //     final oauthCredential = provider.credential(
-  //         idToken: credential.identityToken, rawNonce: rawNonce);
-  //     final authResult = await _auth
-  //         .signInWithCredential(oauthCredential)
-  //         .onError((error, stackTrace) {
-  //       print("error ${error.toString()}");
-  //       return user;
-  //     }).catchError((e) {
-  //       // global.hideLoader();
-  //       print("error ${e.toString()}");
-  //     });
-  //     print('Auth cred ${authResult.user.uid}'); //usersecrate
-  //     print(
-  //         '--------------------------------------------------------------------------------');
-  //     print(
-  //         'cred authCode ${credential.authorizationCode} email ${credential.email} givenName ${credential.givenName}  familyname ${credential.familyName} identytToken ${credential.identityToken}');
+      final oauthCredential = provider.credential(
+          idToken: credential.identityToken, rawNonce: rawNonce);
+      final authResult = await _auth
+          .signInWithCredential(oauthCredential)
+          .onError((error, stackTrace) {
+        print("error ${error.toString()}");
+        return user;
+      }).catchError((e) {
+        // global.hideLoader();
+        print("error ${e.toString()}");
+      });
+      print('Auth cred ${authResult.user.uid}'); //usersecrate
+      print(
+          '--------------------------------------------------------------------------------');
+      print(
+          'cred authCode ${credential.authorizationCode} email ${credential.email} givenName ${credential.givenName}  familyname ${credential.familyName} identytToken ${credential.identityToken}');
+      UserModel _user = new UserModel();
+      if (credential.authorizationCode != '') {
+        _user.loginType = 'apple';
+        _user.socialId = authResult.user.uid;
+        _user.name = authResult.user.displayName;
+        _user.userImage = authResult.user.photoURL;
 
-  //     if (credential.authorizationCode != '') {
-  //       // oAuthProviderName = 'apple';
-  //       // oAuthUserId = authResult.user!.uid;
-  //       // oAuthUserName = credential.givenName;
-  //       // oAuthUserPicUrl = null;
-  //       // isOAuth = true;
-  //       // cEmail.text = credential.email!;
-  //       // update();
-  //       // global.showOnlyLoaderDialog(Get.context);
-  //       // await signIn();
-  //       // global.hideLoader();
-  //       // global.getCurrentUser();
-  //       // if (global.currentUser!.fristName != null && global.currentUser!.fristName != "") {
-  //       //   Get.off(() => BottomNavigationWidget(
-  //       //         a: a,
-  //       //         o: o,
-  //       //       ));
-  //       // } else {
-  //       //   Get.off(() => EditProfileScreen());
-  //       // }
-  //       // await signupController.checkEmailContact(credential.email, signupController.cPhone.text, callId: 3);
-  //     }
-  //   } catch (e) {
-  //     print(
-  //         "Exception - sign_in_controller.dart - signInWithApple(): ${e.toString()}");
-  //     return null;
-  //   }
-  // }
+        _user.email = authResult.user.email;
 
-  // Future sendEmailOTP() async {
-  //   try {
-  //     // emailAuth.sessionName = 'Cashfuse';
-  //     // // emailAuth.config(data);
-  //     // bool result = await emailAuth.sendOtp(recipientMail: email.text);
-  //     // emailAuth = new EmailAuth(sessionName: 'Cashfuse');
-  //     // bool result =
-  //     //     await emailAuth.sendOtp(recipientMail: email.text, otpLength: 6);
-  //     // print(result);
-  //
-  //     emailOTP.setConfig(
-  //       appEmail: 'codefuse.org@gmail.com',
-  //       userEmail: email.text,
-  //       otpLength: 6,
-  //       otpType: OTPType.digitsOnly,
-  //       appName: global.appName,
-  //     );
-  //
-  //     // // emailOTP.sendOTP();
-  //
-  //     if (await emailOTP.sendOTP() == true) {
-  //       startTimer();
-  //       // global.hideLoader();
-  //       //  global.showToast(message: "OTP has been sent");
-  //       //  signupController.timer();
-  //       Get.to(() => OtpVerificationScreen(
-  //           // phoneNumber: settingsController.cNewEmail.text,
-  //           // verificationId: "",
-  //           // callId: 2,
-  //           ));
-  //     } else {
-  //       // global.hideLoader();
-  //       // global.showToast(message: "Oops, OTP send failed");
-  //       showCustomSnackBar("Oops, OTP send failed");
-  //     }
-  //   } catch (e) {
-  //     print("Exception - otp_verification_screen.dart - _sendEmailOTP():" +
-  //         e.toString());
-  //   }
-  // }
+        // Get.dialog(CustomLoader(), barrierDismissible: false);
+
+        await apiHelper.socialLogin(_user).then((response) async {
+          Get.back();
+          if (response.statusCode == 200) {
+            global.currentUser = response.data;
+
+            global.sp.setString(
+                'currentUser', json.encode(global.currentUser.toJson()));
+            Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
+            await getProfile();
+            if (fromMenu) {
+              await Get.find<HomeController>().getClick();
+              await getProfile();
+              await searchController.allInOneSearch();
+              if (!GetPlatform.isWeb) {
+                await global.referAndEarn();
+              }
+            }
+          } else {
+            showCustomSnackBar(response.message);
+          }
+        });
+      }
+    } catch (e) {
+      print(
+          "Exception - sign_in_controller.dart - signInWithApple(): ${e.toString()}");
+      return null;
+    }
+  }
 
   void startTimer() {
     const oneSec = const Duration(seconds: 1);
@@ -600,6 +558,7 @@ class AuthController extends GetxController {
             MaterialPageRoute(
               builder: (context) => OtpVerificationScreen(
                 verificationCode: verificationId,
+                isEmail: false,
               ),
             ),
           );

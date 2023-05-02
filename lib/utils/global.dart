@@ -19,9 +19,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_html/html.dart' as html;
 
 String appName = "Cashfuse";
+String appPackageName = 'com.cashfuse.app';
 
-String baseUrl = "https://cash.codefuse.org/admin/api";
-// "https://cash.codefuse.org/admin/api";
+String baseUrl = 'https://cash.codefuse.org/admin/api';
 
 String webConfigurationKey =
     "BGPWwFL-u-5K7CdmI7bW1Qav23aJxTUFtksG5SDigWG3M2J1-pqgwY-qB1fMQlRJepzlqq9Qv8rDUqk4v9Ph584";
@@ -132,6 +132,26 @@ Future<void> launchInBrowser(String url) async {
 
 Future share(String link, String image, String title) async {
   try {
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      uriPrefix: 'https://cashfuse.page.link',
+      link: Uri.parse(
+          'https://cashfuse.page.link/?link=https://cashfuse.page.link&apn=$appPackageName&ibi=$appPackageName&isi=123456789'),
+      androidParameters: AndroidParameters(
+        packageName: appPackageName,
+        minimumVersion: 1,
+      ),
+      iosParameters: IOSParameters(
+        bundleId: appPackageName,
+        minimumVersion: '1',
+        appStoreId: '123456789',
+        fallbackUrl:
+            Uri.parse('https://apps.apple.com/in/app/cashfuse/id123456789'),
+      ),
+    );
+    Uri shortUrl;
+    final ShortDynamicLink shortLink = await dynamicLinks
+        .buildShortLink(parameters, shortLinkType: ShortDynamicLinkType.short);
+    shortUrl = shortLink.shortUrl;
     if (image.isNotEmpty) {
       final uri = Uri.parse(image);
       final response = await http.get(uri);
@@ -146,29 +166,8 @@ Future share(String link, String image, String title) async {
         showCustomSnackBar(e.toString());
       });
     } else if (title.isNotEmpty) {
-      final DynamicLinkParameters parameters = DynamicLinkParameters(
-        uriPrefix: 'https://cashfuse.page.link',
-        link: Uri.parse(
-            'https://cashfuse.page.link/?link=https://cashfuse.page.link&apn=com.cashfuse.app&ibi=com.cashfuse.app&isi=123456789'),
-        androidParameters: AndroidParameters(
-          packageName: 'com.cashfuse.app',
-          minimumVersion: 1,
-        ),
-        iosParameters: IOSParameters(
-          bundleId: 'com.cashfuse.app',
-          minimumVersion: '1',
-          appStoreId: '123456789',
-          fallbackUrl:
-              Uri.parse('https://apps.apple.com/in/app/cashfuse/id123456789'),
-        ),
-      );
-      Uri url;
-      final ShortDynamicLink shortLink = await dynamicLinks.buildShortLink(
-          parameters,
-          shortLinkType: ShortDynamicLinkType.short);
-      url = shortLink.shortUrl;
       await FlutterShare.share(
-              title: '$appName', text: title, linkUrl: url.toString())
+              title: '$appName', text: title, linkUrl: shortUrl.toString())
           .then((value) {})
           .catchError((e) {
         showCustomSnackBar(e.toString());
@@ -210,13 +209,13 @@ Future referAndEarn() async {
     final DynamicLinkParameters parameters = DynamicLinkParameters(
       uriPrefix: 'https://cashfuse.page.link',
       link: Uri.parse(
-          'https://cashfuse.page.link/?link=https://cashfuse.page.link/referEarn&userId=${currentUser.id}&apn=com.cashfuse.app&ibi=com.cashfuse.app&isi=123456789'),
+          'https://cashfuse.page.link/?link=https://cashfuse.page.link/referEarn&userId=${currentUser.id}&apn=$appPackageName&ibi=$appPackageName&isi=123456789'),
       androidParameters: AndroidParameters(
-        packageName: 'com.cashfuse.app',
+        packageName: appPackageName,
         minimumVersion: 1,
       ),
       iosParameters: IOSParameters(
-        bundleId: 'com.cashfuse.app',
+        bundleId: appPackageName,
         minimumVersion: '1',
         appStoreId: '123456789',
         fallbackUrl:

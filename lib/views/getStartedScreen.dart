@@ -165,41 +165,81 @@ class GetStartedScreen extends StatelessWidget {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              InkWell(
-                onTap: () async {
-                  await authController.googleSignInFun(fromMenu);
-                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
-                },
-                child: Container(
-                  height: 50,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  width: MediaQuery.of(context).size.width,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Get.theme.primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Images.google,
-                        height: 18,
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        'Login with Google',
-                        style: Get.theme.primaryTextTheme.titleMedium.copyWith(
-                          color: Get.theme.secondaryHeaderColor,
-                          fontWeight: FontWeight.w600,
+              GetPlatform.isIOS
+                  ? InkWell(
+                      onTap: () async {
+                        await authController.signInWithApple(fromMenu);
+
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                      },
+                      child: Container(
+                        height: 50,
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        width: MediaQuery.of(context).size.width,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Get.theme.primaryColor.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              Images.appleLogo,
+                              height: 18,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              'Login with Apple',
+                              style: Get.theme.primaryTextTheme.titleMedium
+                                  .copyWith(
+                                color: Get.theme.secondaryHeaderColor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
+                    )
+                  : InkWell(
+                      onTap: () async {
+                        await authController.googleSignInFun(fromMenu);
+
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                      },
+                      child: Container(
+                        height: 50,
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        width: MediaQuery.of(context).size.width,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Get.theme.primaryColor.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              Images.google,
+                              height: 18,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              'Login with Google',
+                              style: Get.theme.primaryTextTheme.titleMedium
+                                  .copyWith(
+                                color: Get.theme.secondaryHeaderColor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
               InkWell(
                 onTap: () async {
                   if (global.getPlatFrom()) {

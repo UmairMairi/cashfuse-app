@@ -1032,53 +1032,59 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                 //Product
 
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 6, vertical: 20),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "LATEST PRODUCTS",
-                                        style: TextStyle(
-                                          fontSize:
-                                              global.getPlatFrom() ? 16 : 13,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.black.withOpacity(0.79),
-                                          letterSpacing: -0.3,
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ViewAllProductScreen(
-                                                        title:
-                                                            "LATEST PRODUCTS",
-                                                        productList:
-                                                            homeController
-                                                                .productList,
-                                                      )));
-                                        },
-                                        child: Text(
-                                          '${AppLocalizations.of(context).view_all} >',
-                                          style: Get
-                                              .theme.primaryTextTheme.bodySmall
-                                              .copyWith(
-                                                  color: Colors.teal,
-                                                  fontSize: global.getPlatFrom()
-                                                      ? 16
-                                                      : null),
+                                homeController.productList != null &&
+                                        homeController.productList.length > 0
+                                    ? Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 6, vertical: 20),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "LATEST PRODUCTS",
+                                              style: TextStyle(
+                                                fontSize: global.getPlatFrom()
+                                                    ? 16
+                                                    : 13,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.black
+                                                    .withOpacity(0.79),
+                                                letterSpacing: -0.3,
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ViewAllProductScreen(
+                                                              title:
+                                                                  "LATEST PRODUCTS",
+                                                              productList:
+                                                                  homeController
+                                                                      .productList,
+                                                            )));
+                                              },
+                                              child: Text(
+                                                '${AppLocalizations.of(context).view_all} >',
+                                                style: Get.theme
+                                                    .primaryTextTheme.bodySmall
+                                                    .copyWith(
+                                                        color: Colors.teal,
+                                                        fontSize:
+                                                            global.getPlatFrom()
+                                                                ? 16
+                                                                : null),
+                                              ),
+                                            )
+                                          ],
                                         ),
                                       )
-                                    ],
-                                  ),
-                                ),
+                                    : SizedBox(),
 
-                                homeController.productList.isEmpty
+                                !homeController.isProductsLoaded
                                     ? SizedBox(
                                         height: 155,
                                         child: ListView.builder(
@@ -1104,56 +1110,133 @@ class HomeScreen extends StatelessWidget {
                                               );
                                             }),
                                       )
-                                    : SizedBox(
-                                        height: 260,
-                                        child: ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount:
-                                              homeController.productList.length,
-                                          shrinkWrap: true,
-                                          // padding: const EdgeInsets.symmetric(horizontal: 6),
-                                          itemBuilder: (context, index) {
-                                            return InkWell(
-                                                onTap: () {
-                                                  // Get.to(
-                                                  //       () => CategoryScreen(
-                                                  //     category: homeController.topCashbackList[index],
-                                                  //   ),
-                                                  //   routeName: 'category',
-                                                  // );
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              ProductDetailsScreen(
-                                                                title:
-                                                                    "LATEST PRODUCTS",
-                                                                product:
-                                                                    homeController
+                                    : homeController.productList != null &&
+                                            homeController.productList.length >
+                                                0
+                                        ? SizedBox(
+                                            height: 260,
+                                            child: ListView.builder(
+                                              scrollDirection: Axis.horizontal,
+                                              itemCount: homeController
+                                                  .productList.length,
+                                              shrinkWrap: true,
+                                              // padding: const EdgeInsets.symmetric(horizontal: 6),
+                                              itemBuilder: (context, index) {
+                                                return InkWell(
+                                                    onTap: () {
+                                                      // Get.to(
+                                                      //       () => CategoryScreen(
+                                                      //     category: homeController.topCashbackList[index],
+                                                      //   ),
+                                                      //   routeName: 'category',
+                                                      // );
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  ProductDetailsScreen(
+                                                                    title:
+                                                                        "LATEST PRODUCTS",
+                                                                    product: homeController
                                                                             .productList[
                                                                         index],
-                                                              )));
-                                                },
-                                                child: Container(
-                                                  width: 150,
-                                                  height: 150,
-                                                  margin:
-                                                      EdgeInsets.only(left: 10),
-                                                  color: Colors.white,
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Container(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                top: 15,
-                                                                bottom: 15),
-                                                        child: RichText(
-                                                          text: TextSpan(
-                                                              text:
-                                                                  "Price Compared ",
+                                                                  )));
+                                                    },
+                                                    child: Container(
+                                                      width: 150,
+                                                      height: 150,
+                                                      margin: EdgeInsets.only(
+                                                          left: 10),
+                                                      color: Colors.white,
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Container(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    top: 15,
+                                                                    bottom: 15),
+                                                            child: RichText(
+                                                              text: TextSpan(
+                                                                  text:
+                                                                      "Price Compared ",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black54,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      fontSize:
+                                                                          10),
+                                                                  children: [
+                                                                    TextSpan(
+                                                                        text:
+                                                                            '(${homeController.productList[index].productPrices.length} Sellers)',
+                                                                        style: TextStyle(
+                                                                            fontWeight: FontWeight
+                                                                                .w500,
+                                                                            fontSize:
+                                                                                10,
+                                                                            color:
+                                                                                Colors.blueAccent.shade400)),
+                                                                  ]),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            color: Colors
+                                                                .grey.shade400,
+                                                            height: 1,
+                                                          ),
+                                                          CustomImage(
+                                                              height: 120,
+                                                              image:
+                                                                  "${global.appInfo.baseUrls.productImageurl}/${homeController.productList[index].image}"),
+                                                          // Padding(
+                                                          //   padding:
+                                                          //       const EdgeInsets
+                                                          //               .only(
+                                                          //           top: 8.0,
+                                                          //           bottom: 8),
+                                                          //   child: RichText(
+                                                          //     text: TextSpan(
+                                                          //         text: "Brand: ",
+                                                          //         style: TextStyle(
+                                                          //             color: Colors
+                                                          //                 .black54,
+                                                          //             fontWeight:
+                                                          //                 FontWeight
+                                                          //                     .w500,
+                                                          //             fontSize: 10),
+                                                          //         children: [
+                                                          //           TextSpan(
+                                                          //               text:
+                                                          //                   '${homeController.productList[index].name} ',
+                                                          //               style: TextStyle(
+                                                          //                   fontWeight:
+                                                          //                       FontWeight
+                                                          //                           .w600,
+                                                          //                   fontSize:
+                                                          //                       10,
+                                                          //                   color: Colors
+                                                          //                       .black)),
+                                                          //         ]),
+                                                          //   ),
+                                                          // ),
+                                                          Container(
+                                                            color: Colors
+                                                                .grey.shade400,
+                                                            height: 1,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    top: 8.0,
+                                                                    bottom: 8),
+                                                            child: Text(
+                                                              "${homeController.productList[index].name} ",
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black54,
@@ -1161,129 +1244,57 @@ class HomeScreen extends StatelessWidget {
                                                                       FontWeight
                                                                           .w500,
                                                                   fontSize: 10),
-                                                              children: [
-                                                                TextSpan(
-                                                                    text:
-                                                                        '(${homeController.productList[index].productPrices.length} Sellers)',
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
-                                                                        fontSize:
-                                                                            10,
-                                                                        color: Colors
-                                                                            .blueAccent
-                                                                            .shade400)),
-                                                              ]),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        color: Colors
-                                                            .grey.shade400,
-                                                        height: 1,
-                                                      ),
-                                                      CustomImage(
-                                                          height: 120,
-                                                          image:
-                                                              "${global.appInfo.baseUrls.productImageurl}/${homeController.productList[index].image}"),
-                                                      // Padding(
-                                                      //   padding:
-                                                      //       const EdgeInsets
-                                                      //               .only(
-                                                      //           top: 8.0,
-                                                      //           bottom: 8),
-                                                      //   child: RichText(
-                                                      //     text: TextSpan(
-                                                      //         text: "Brand: ",
-                                                      //         style: TextStyle(
-                                                      //             color: Colors
-                                                      //                 .black54,
-                                                      //             fontWeight:
-                                                      //                 FontWeight
-                                                      //                     .w500,
-                                                      //             fontSize: 10),
-                                                      //         children: [
-                                                      //           TextSpan(
-                                                      //               text:
-                                                      //                   '${homeController.productList[index].name} ',
-                                                      //               style: TextStyle(
-                                                      //                   fontWeight:
-                                                      //                       FontWeight
-                                                      //                           .w600,
-                                                      //                   fontSize:
-                                                      //                       10,
-                                                      //                   color: Colors
-                                                      //                       .black)),
-                                                      //         ]),
-                                                      //   ),
-                                                      // ),
-                                                      Container(
-                                                        color: Colors
-                                                            .grey.shade400,
-                                                        height: 1,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                top: 8.0,
-                                                                bottom: 8),
-                                                        child: Text(
-                                                          "${homeController.productList[index].name} ",
-                                                          style: TextStyle(
-                                                              color: Colors
-                                                                  .black54,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontSize: 10),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        decoration: BoxDecoration(
-                                                            color: Mycolors
-                                                                .lightOrage,
-                                                            border: Border.all(
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            decoration: BoxDecoration(
                                                                 color: Mycolors
-                                                                    .orange)),
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 13,
-                                                                vertical: 3),
-                                                        child: Text(
-                                                          "+ ₹ ${homeController.productList[index].productPrices[0].cashback}  REWARDS",
-                                                          style: TextStyle(
-                                                              fontSize: 11,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              color: Mycolors
-                                                                  .orange),
-                                                        ),
+                                                                    .lightOrage,
+                                                                border: Border.all(
+                                                                    color: Mycolors
+                                                                        .orange)),
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        13,
+                                                                    vertical:
+                                                                        3),
+                                                            child: Text(
+                                                              "+ ${global.appInfo.currency} ${homeController.productList[index].productPrices[0].cashback}  REWARDS",
+                                                              style: TextStyle(
+                                                                  fontSize: 11,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  color: Mycolors
+                                                                      .orange),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    top: 8.0,
+                                                                    bottom: 8),
+                                                            child: Text(
+                                                              "Final Price ${global.appInfo.currency} ${homeController.productList[index].productPrices[0].price}",
+                                                              style: TextStyle(
+                                                                  color:
+                                                                      Mycolors
+                                                                          .blue,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize: 12),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                top: 8.0,
-                                                                bottom: 8),
-                                                        child: Text(
-                                                          "Final Price ₹ ${homeController.productList[index].productPrices[0].price}",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Mycolors.blue,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              fontSize: 12),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ));
-                                          },
-                                        ),
-                                      ),
+                                                    ));
+                                              },
+                                            ),
+                                          )
+                                        : SizedBox(),
                                 homeController.newFlashOfferList != null &&
                                         homeController
                                                 .newFlashOfferList.length >
@@ -1451,52 +1462,61 @@ class HomeScreen extends StatelessWidget {
                                             }),
                                       ),
 
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 6, vertical: 20),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "TRENDING PRODUCTS",
-                                        style: TextStyle(
-                                          fontSize:
-                                              global.getPlatFrom() ? 16 : 13,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.black.withOpacity(0.79),
-                                          letterSpacing: -0.3,
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ViewAllProductScreen(
-                                                        title:
-                                                            "TRENDING PRODUCTS",
-                                                        productList: homeController
-                                                            .trendingProductList,
-                                                      )));
-                                        },
-                                        child: Text(
-                                          '${AppLocalizations.of(context).view_all} >',
-                                          style: Get
-                                              .theme.primaryTextTheme.bodySmall
-                                              .copyWith(
-                                                  color: Colors.teal,
-                                                  fontSize: global.getPlatFrom()
-                                                      ? 16
-                                                      : null),
+                                homeController.trendingProductList != null &&
+                                        homeController
+                                                .trendingProductList.length >
+                                            0
+                                    ? Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 6, vertical: 20),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "TRENDING PRODUCTS",
+                                              style: TextStyle(
+                                                fontSize: global.getPlatFrom()
+                                                    ? 16
+                                                    : 13,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.black
+                                                    .withOpacity(0.79),
+                                                letterSpacing: -0.3,
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ViewAllProductScreen(
+                                                              title:
+                                                                  "TRENDING PRODUCTS",
+                                                              productList:
+                                                                  homeController
+                                                                      .trendingProductList,
+                                                            )));
+                                              },
+                                              child: Text(
+                                                '${AppLocalizations.of(context).view_all} >',
+                                                style: Get.theme
+                                                    .primaryTextTheme.bodySmall
+                                                    .copyWith(
+                                                        color: Colors.teal,
+                                                        fontSize:
+                                                            global.getPlatFrom()
+                                                                ? 16
+                                                                : null),
+                                              ),
+                                            )
+                                          ],
                                         ),
                                       )
-                                    ],
-                                  ),
-                                ),
+                                    : SizedBox(),
 
-                                homeController.trendingProductList.isEmpty
+                                !homeController.isTrendingProductsLoaded
                                     ? SizedBox(
                                         height: 155,
                                         child: ListView.builder(
@@ -1522,56 +1542,135 @@ class HomeScreen extends StatelessWidget {
                                               );
                                             }),
                                       )
-                                    : SizedBox(
-                                        height: 260,
-                                        child: ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount: homeController
-                                              .trendingProductList.length,
-                                          shrinkWrap: true,
-                                          // padding: const EdgeInsets.symmetric(horizontal: 6),
-                                          itemBuilder: (context, index) {
-                                            return InkWell(
-                                                onTap: () {
-                                                  // Get.to(
-                                                  //       () => CategoryScreen(
-                                                  //     category: homeController.topCashbackList[index],
-                                                  //   ),
-                                                  //   routeName: 'category',
-                                                  // );
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              ProductDetailsScreen(
-                                                                title:
-                                                                    "TOP SELLING PRODUCT",
-                                                                product:
-                                                                    homeController
+                                    : homeController.trendingProductList !=
+                                                null &&
+                                            homeController.trendingProductList
+                                                    .length >
+                                                0
+                                        ? SizedBox(
+                                            height: 260,
+                                            child: ListView.builder(
+                                              scrollDirection: Axis.horizontal,
+                                              itemCount: homeController
+                                                  .trendingProductList.length,
+                                              shrinkWrap: true,
+                                              // padding: const EdgeInsets.symmetric(horizontal: 6),
+                                              itemBuilder: (context, index) {
+                                                return InkWell(
+                                                    onTap: () {
+                                                      // Get.to(
+                                                      //       () => CategoryScreen(
+                                                      //     category: homeController.topCashbackList[index],
+                                                      //   ),
+                                                      //   routeName: 'category',
+                                                      // );
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  ProductDetailsScreen(
+                                                                    title:
+                                                                        "TOP SELLING PRODUCT",
+                                                                    product: homeController
                                                                             .trendingProductList[
                                                                         index],
-                                                              )));
-                                                },
-                                                child: Container(
-                                                  width: 150,
-                                                  height: 150,
-                                                  margin:
-                                                      EdgeInsets.only(left: 10),
-                                                  color: Colors.white,
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Container(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                top: 15,
-                                                                bottom: 15),
-                                                        child: RichText(
-                                                          text: TextSpan(
-                                                              text:
-                                                                  "Price Compared ",
+                                                                  )));
+                                                    },
+                                                    child: Container(
+                                                      width: 150,
+                                                      height: 150,
+                                                      margin: EdgeInsets.only(
+                                                          left: 10),
+                                                      color: Colors.white,
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Container(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    top: 15,
+                                                                    bottom: 15),
+                                                            child: RichText(
+                                                              text: TextSpan(
+                                                                  text:
+                                                                      "Price Compared ",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black54,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      fontSize:
+                                                                          10),
+                                                                  children: [
+                                                                    TextSpan(
+                                                                        text:
+                                                                            '(${homeController.trendingProductList[index].productPrices.length} Sellers)',
+                                                                        style: TextStyle(
+                                                                            fontWeight: FontWeight
+                                                                                .w500,
+                                                                            fontSize:
+                                                                                10,
+                                                                            color:
+                                                                                Colors.blueAccent.shade400)),
+                                                                  ]),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            color: Colors
+                                                                .grey.shade400,
+                                                            height: 1,
+                                                          ),
+                                                          CustomImage(
+                                                              height: 120,
+                                                              image:
+                                                                  "${global.appInfo.baseUrls.productImageurl}/${homeController.trendingProductList[index].image}"),
+                                                          // Padding(
+                                                          //   padding:
+                                                          //       const EdgeInsets
+                                                          //               .only(
+                                                          //           top: 8.0,
+                                                          //           bottom: 8),
+                                                          //   child: RichText(
+                                                          //     text: TextSpan(
+                                                          //         text: "Brand: ",
+                                                          //         style: TextStyle(
+                                                          //             color: Colors
+                                                          //                 .black54,
+                                                          //             fontWeight:
+                                                          //                 FontWeight
+                                                          //                     .w500,
+                                                          //             fontSize: 10),
+                                                          //         children: [
+                                                          //           TextSpan(
+                                                          //               text:
+                                                          //                   '${homeController.trendingProductList[index].name} ',
+                                                          //               style: TextStyle(
+                                                          //                   fontWeight:
+                                                          //                       FontWeight
+                                                          //                           .w600,
+                                                          //                   fontSize:
+                                                          //                       10,
+                                                          //                   color: Colors
+                                                          //                       .black)),
+                                                          //         ]),
+                                                          //   ),
+                                                          // ),
+                                                          Container(
+                                                            color: Colors
+                                                                .grey.shade400,
+                                                            height: 1,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    top: 8.0,
+                                                                    bottom: 8),
+                                                            child: Text(
+                                                              "${homeController.trendingProductList[index].name} ",
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black54,
@@ -1579,129 +1678,57 @@ class HomeScreen extends StatelessWidget {
                                                                       FontWeight
                                                                           .w500,
                                                                   fontSize: 10),
-                                                              children: [
-                                                                TextSpan(
-                                                                    text:
-                                                                        '(${homeController.trendingProductList[index].productPrices.length} Sellers)',
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
-                                                                        fontSize:
-                                                                            10,
-                                                                        color: Colors
-                                                                            .blueAccent
-                                                                            .shade400)),
-                                                              ]),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        color: Colors
-                                                            .grey.shade400,
-                                                        height: 1,
-                                                      ),
-                                                      CustomImage(
-                                                          height: 120,
-                                                          image:
-                                                              "${global.appInfo.baseUrls.productImageurl}/${homeController.trendingProductList[index].image}"),
-                                                      // Padding(
-                                                      //   padding:
-                                                      //       const EdgeInsets
-                                                      //               .only(
-                                                      //           top: 8.0,
-                                                      //           bottom: 8),
-                                                      //   child: RichText(
-                                                      //     text: TextSpan(
-                                                      //         text: "Brand: ",
-                                                      //         style: TextStyle(
-                                                      //             color: Colors
-                                                      //                 .black54,
-                                                      //             fontWeight:
-                                                      //                 FontWeight
-                                                      //                     .w500,
-                                                      //             fontSize: 10),
-                                                      //         children: [
-                                                      //           TextSpan(
-                                                      //               text:
-                                                      //                   '${homeController.trendingProductList[index].name} ',
-                                                      //               style: TextStyle(
-                                                      //                   fontWeight:
-                                                      //                       FontWeight
-                                                      //                           .w600,
-                                                      //                   fontSize:
-                                                      //                       10,
-                                                      //                   color: Colors
-                                                      //                       .black)),
-                                                      //         ]),
-                                                      //   ),
-                                                      // ),
-                                                      Container(
-                                                        color: Colors
-                                                            .grey.shade400,
-                                                        height: 1,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                top: 8.0,
-                                                                bottom: 8),
-                                                        child: Text(
-                                                          "${homeController.trendingProductList[index].name} ",
-                                                          style: TextStyle(
-                                                              color: Colors
-                                                                  .black54,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontSize: 10),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        decoration: BoxDecoration(
-                                                            color: Mycolors
-                                                                .lightOrage,
-                                                            border: Border.all(
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            decoration: BoxDecoration(
                                                                 color: Mycolors
-                                                                    .orange)),
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 13,
-                                                                vertical: 3),
-                                                        child: Text(
-                                                          "+ ₹ ${homeController.trendingProductList[index].productPrices[0].cashback}  REWARDS",
-                                                          style: TextStyle(
-                                                              fontSize: 11,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              color: Mycolors
-                                                                  .orange),
-                                                        ),
+                                                                    .lightOrage,
+                                                                border: Border.all(
+                                                                    color: Mycolors
+                                                                        .orange)),
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        13,
+                                                                    vertical:
+                                                                        3),
+                                                            child: Text(
+                                                              "+ ${global.appInfo.currency} ${homeController.trendingProductList[index].productPrices[0].cashback}  REWARDS",
+                                                              style: TextStyle(
+                                                                  fontSize: 11,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  color: Mycolors
+                                                                      .orange),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    top: 8.0,
+                                                                    bottom: 8),
+                                                            child: Text(
+                                                              "Final Price ${global.appInfo.currency} ${homeController.trendingProductList[index].productPrices[0].price}",
+                                                              style: TextStyle(
+                                                                  color:
+                                                                      Mycolors
+                                                                          .blue,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize: 12),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                top: 8.0,
-                                                                bottom: 8),
-                                                        child: Text(
-                                                          "Final Price ₹ ${homeController.trendingProductList[index].productPrices[0].price}",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Mycolors.blue,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              fontSize: 12),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ));
-                                          },
-                                        ),
-                                      ),
+                                                    ));
+                                              },
+                                            ),
+                                          )
+                                        : SizedBox(),
 
                                 GetBuilder<AdController>(
                                   builder: (adController) {

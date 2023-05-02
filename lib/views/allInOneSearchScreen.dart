@@ -649,7 +649,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                               onTap: () {
                                 launchUrl(
                                   Uri.parse(
-                                      "https://play.google.com/store/apps/details?id=com.cashfuse.app"),
+                                      "https://play.google.com/store/apps/details?id=${global.appPackageName}"),
                                   webOnlyWindowName: 'blank',
                                 );
                               },

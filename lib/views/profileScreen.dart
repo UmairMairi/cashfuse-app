@@ -653,9 +653,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       !GetPlatform.isWeb
                           ? InkWell(
                               onTap: () {
-                                //Get.to(() => RateUsScreen());
                                 StoreRedirect.redirect(
-                                  androidAppId: 'com.cashfuse.app',
+                                  androidAppId: global.appPackageName,
+                                  iOSAppId: global.appPackageName,
                                 );
                               },
                               child: Padding(

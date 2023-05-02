@@ -74,6 +74,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                   width: 500,
                                   height: 300,
                                   fit: BoxFit.fill,
+                                  admitedOffersModal: admitedData,
                                 ),
                                 // Image.asset(
                                 //   Images.dummyImage,
@@ -137,6 +138,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                               '${global.appInfo.baseUrls.offerImageUrl}/${admitedData.image}',
                                           width: Get.width,
                                           fit: BoxFit.fill,
+                                          admitedOffersModal: admitedData,
                                         ),
                                         // Image.asset(
                                         //   Images.dummyImage,
@@ -170,26 +172,21 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                 ? InkWell(
                                     onTap: () async {
                                       if (global.currentUser.id != null) {
-                                        // _admitedOffers
-                                        //     .admitedGetLink(
-                                        //         widget.admitedData['gotourl']
-                                        //             .toString(),
-                                        //         "admitad",
-                                        //         widget.admitedData['ad_id']
-                                        //             .toString())
-                                        //     .then((value) {
-                                        //   global.share(
-                                        //     value['tracking_link'],
-                                        //     '${global.appInfo.baseUrls.offerImageUrl}/${widget.admitedData['image']}',
-                                        //     '',
-                                        //   );
-                                        // });
-                                        // await homeController.getTrackingLink(widget.campaign.url, widget.campaign.affiliatePartner);
-                                        // global.share(
-                                        //   homeController.createdLink.isNotEmpty ? homeController.createdLink : widget.campaign.url,
-                                        //   widget.campaign.image.isNotEmpty && !widget.campaign.isImageError ? '${global.appInfo.baseUrls.offerImageUrl}/${widget.campaign.image}' : '',
-                                        //   '',
-                                        // );
+                                        await homeController.getTrackingLink(
+                                          admitedData.gotourl,
+                                          admitedData.affiliatePartner,
+                                          cId: admitedData.adId.toString(),
+                                        );
+                                        global.share(
+                                          homeController.createdLink.isNotEmpty
+                                              ? homeController.createdLink
+                                              : admitedData.gotourl,
+                                          admitedData.image.isNotEmpty &&
+                                                  !admitedData.isImageError
+                                              ? '${global.appInfo.baseUrls.offerImageUrl}/${admitedData.image}'
+                                              : '',
+                                          '',
+                                        );
                                       } else {
                                         if (global.getPlatFrom()) {
                                           Get.dialog(Dialog(

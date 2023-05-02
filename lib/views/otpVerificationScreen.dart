@@ -8,8 +8,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class OtpVerificationScreen extends StatelessWidget {
   final String verificationCode;
   final bool fromMenu;
+  final bool isEmail;
 
-  OtpVerificationScreen({this.verificationCode, this.fromMenu});
+  OtpVerificationScreen({this.verificationCode, this.fromMenu, this.isEmail});
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +53,7 @@ class OtpVerificationScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      authController.contactNo.text != null &&
-                              authController.contactNo.text.isNotEmpty
+                      !isEmail
                           ? '${AppLocalizations.of(context).otp_subtitle} ${authController.coutryCode} ${authController.contactNo.text}'
                           : '${AppLocalizations.of(context).otp_subtitle} ${authController.email.text}',
                       style: Get.theme.primaryTextTheme.titleSmall.copyWith(

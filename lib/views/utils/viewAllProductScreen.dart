@@ -173,7 +173,7 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                           padding:
                               EdgeInsets.symmetric(horizontal: 13, vertical: 3),
                           child: Text(
-                            "+ ₹ ${productList[index].productPrices[0].cashback}  REWARDS",
+                            "+ ${global.appInfo.currency} ${productList[index].productPrices[0].cashback}  REWARDS",
                             style: TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w600,
@@ -183,7 +183,7 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0, bottom: 8),
                           child: Text(
-                            "Final Price ₹ ${productList[index].productPrices[0].price}",
+                            "Final Price ${global.appInfo.currency} ${productList[index].productPrices[0].price}",
                             style: TextStyle(
                                 color: Mycolors.blue,
                                 fontWeight: FontWeight.w600,

@@ -45,6 +45,7 @@ class AdmitedOffersModal {
     this.notify,
     this.updatedAt,
     this.createdAt,
+    this.isImageError,
   });
 
   int id;
@@ -92,6 +93,7 @@ class AdmitedOffersModal {
   DateTime createdAt;
   List<Coupon> coupon;
   CategoryModel partner;
+  bool isImageError = false; 
 
   AdmitedOffersModal.fromJson(Map<String, dynamic> json) {
     try {

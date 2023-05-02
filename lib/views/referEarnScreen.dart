@@ -195,7 +195,7 @@ class ReferEarnScreen extends StatelessWidget {
                                   InkWell(
                                     onTap: () {
                                       launchUrl(
-                                        Uri.parse("https://play.google.com/store/apps/details?id=com.cashfuse.app"),
+                                        Uri.parse("https://play.google.com/store/apps/details?id=${global.appPackageName}"),
                                         webOnlyWindowName: 'blank',
                                       );
                                     },
@@ -379,7 +379,7 @@ class ReferEarnScreen extends StatelessWidget {
                                       InkWell(
                                         onTap: () {
                                           launchUrl(
-                                            Uri.parse("https://play.google.com/store/apps/details?id=com.cashfuse.app"),
+                                            Uri.parse("https://play.google.com/store/apps/details?id=${global.appPackageName}"),
                                             webOnlyWindowName: 'blank',
                                           );
                                         },
