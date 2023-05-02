@@ -4,7 +4,8 @@ import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:google_translator/google_translator.dart';
 
 class MoreCampignScreen extends StatelessWidget {
   @override
@@ -18,17 +19,18 @@ class MoreCampignScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      AppLocalizations.of(context).see_more_offers,
+                      'See More Offers',
                       style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.1,
                       ),
-                    ),
+                    ).translate(),
                     InkWell(
                       onTap: () {
                         Get.back();
@@ -59,7 +61,8 @@ class MoreCampignScreen extends StatelessWidget {
                         Row(
                           children: [
                             CustomImage(
-                              image: '${global.appInfo.baseUrls.offerImageUrl}/${homeController.seeMoreCampaignList[index].image}',
+                              image:
+                                  '${global.appInfo.baseUrls.offerImageUrl}/${homeController.seeMoreCampaignList[index].image}',
                               height: global.getPlatFrom() ? 50 : 50,
                               width: global.getPlatFrom() ? 100 : 50,
                               fit: BoxFit.fill,
@@ -70,14 +73,17 @@ class MoreCampignScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    homeController.seeMoreCampaignList[index].name,
+                                    homeController
+                                        .seeMoreCampaignList[index].name,
                                     textAlign: TextAlign.start,
-                                    style: Get.theme.primaryTextTheme.titleSmall,
-                                  ),
+                                    style:
+                                        Get.theme.primaryTextTheme.titleSmall,
+                                  ).translate(),
                                   Text(
-                                    homeController.seeMoreCampaignList[index].description,
+                                    homeController
+                                        .seeMoreCampaignList[index].description,
                                     textAlign: TextAlign.start,
-                                  ),
+                                  ).translate(),
                                 ],
                               ),
                             ),
@@ -86,7 +92,9 @@ class MoreCampignScreen extends StatelessWidget {
                         InkWell(
                           onTap: () async {
                             Get.back();
-                            await homeController.getCampignDetails(homeController.seeMoreCampaignList[index].id.toString());
+                            await homeController.getCampignDetails(
+                                homeController.seeMoreCampaignList[index].id
+                                    .toString());
                             Get.to(
                               () => CampaignDetailScreen(
                                 campaign: homeController.campaign,
@@ -100,7 +108,8 @@ class MoreCampignScreen extends StatelessWidget {
                             width: Get.width / 2,
                             height: 45,
                             margin: EdgeInsets.only(top: 10, bottom: 10),
-                            padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 7, vertical: 8),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 border: Border.all(
@@ -109,9 +118,13 @@ class MoreCampignScreen extends StatelessWidget {
                                 )),
                             alignment: Alignment.center,
                             child: Text(
-                              homeController.seeMoreCampaignList[index].buttonText,
-                              style: TextStyle(color: Get.theme.secondaryHeaderColor, fontSize: 14, fontWeight: FontWeight.w600),
-                            ),
+                              homeController
+                                  .seeMoreCampaignList[index].buttonText,
+                              style: TextStyle(
+                                  color: Get.theme.secondaryHeaderColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600),
+                            ).translate(),
                           ),
                         ),
                         Container(

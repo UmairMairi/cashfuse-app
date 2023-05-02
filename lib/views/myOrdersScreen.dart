@@ -12,8 +12,9 @@ import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class MyOrdersScreen extends StatelessWidget {
@@ -40,9 +41,10 @@ class MyOrdersScreen extends StatelessWidget {
                 ),
               ),
               title: Text(
-                AppLocalizations.of(context).my_orders,
-                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-              ),
+                'My Orders',
+                style: Get.theme.primaryTextTheme.titleSmall
+                    .copyWith(color: Colors.white),
+              ).translate(),
             ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -50,7 +52,8 @@ class MyOrdersScreen extends StatelessWidget {
           width: AppConstants.WEB_MAX_WIDTH,
           child: GetBuilder<OrderController>(builder: (controller) {
             return orderController.isDataLoaded
-                ? orderController.orderList != null && orderController.orderList.length > 0
+                ? orderController.orderList != null &&
+                        orderController.orderList.length > 0
                     ? global.getPlatFrom()
                         ? Column(
                             children: [
@@ -58,36 +61,48 @@ class MyOrdersScreen extends StatelessWidget {
                                 child: Container(
                                   color: Colors.white,
                                   child: GridView.builder(
-                                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 3,
                                         crossAxisSpacing: 15.0,
                                         mainAxisSpacing: 15.0,
                                         childAspectRatio: 1.45,
                                       ),
-                                      itemCount: global.currentUser.withdrawalRequest.length,
+                                      itemCount: global
+                                          .currentUser.withdrawalRequest.length,
                                       shrinkWrap: true,
-                                      padding: EdgeInsets.all(10).copyWith(top: 20),
+                                      padding:
+                                          EdgeInsets.all(10).copyWith(top: 20),
                                       itemBuilder: (context, index) {
                                         return Container(
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(5),
+                                            borderRadius:
+                                                BorderRadius.circular(5),
                                             border: Border.all(
-                                              color: Get.theme.secondaryHeaderColor.withOpacity(0.2),
+                                              color: Get
+                                                  .theme.secondaryHeaderColor
+                                                  .withOpacity(0.2),
                                             ),
                                           ),
                                           padding: const EdgeInsets.all(8),
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Card(
-                                                margin: EdgeInsets.symmetric(horizontal: 10),
+                                                margin: EdgeInsets.symmetric(
+                                                    horizontal: 10),
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(10.0),
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
                                                   child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       ListTile(
-                                                        contentPadding: EdgeInsets.zero,
+                                                        contentPadding:
+                                                            EdgeInsets.zero,
                                                         leading:
                                                             // Container(
                                                             //   width: 50,
@@ -101,83 +116,153 @@ class MyOrdersScreen extends StatelessWidget {
                                                             //   padding: EdgeInsets.all(2),
                                                             //   child:
                                                             CustomImage(
-                                                          image: global.appInfo.baseUrls.partnerImageUrl + '/' + orderController.orderList[index].logo,
+                                                          image: global
+                                                                  .appInfo
+                                                                  .baseUrls
+                                                                  .partnerImageUrl +
+                                                              '/' +
+                                                              orderController
+                                                                  .orderList[
+                                                                      index]
+                                                                  .logo,
                                                           fit: BoxFit.contain,
-                                                          errorImage: Images.logo,
+                                                          errorImage:
+                                                              Images.logo,
                                                           width: 50,
                                                         ),
                                                         //),
-                                                        title: Text(orderController.orderList[index].advertisers),
+                                                        title: Text(
+                                                                orderController
+                                                                    .orderList[
+                                                                        index]
+                                                                    .advertisers)
+                                                            .translate(),
                                                         trailing: InkWell(
                                                           onTap: () async {
-                                                            await orderController.getOrderComplains(orderController.orderList[index].id);
+                                                            await orderController
+                                                                .getOrderComplains(
+                                                                    orderController
+                                                                        .orderList[
+                                                                            index]
+                                                                        .id);
                                                             Get.to(
-                                                              () => OrderComplaintScreen(
-                                                                orderModel: orderController.orderList[index],
+                                                              () =>
+                                                                  OrderComplaintScreen(
+                                                                orderModel:
+                                                                    orderController
+                                                                            .orderList[
+                                                                        index],
                                                               ),
-                                                              routeName: 'order-complaint',
+                                                              routeName:
+                                                                  'order-complaint',
                                                             );
                                                           },
                                                           child: Container(
-                                                            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-                                                            decoration: BoxDecoration(
-                                                              color: Colors.white,
-                                                              borderRadius: BorderRadius.circular(3),
-                                                              border: Border.all(
-                                                                color: Get.theme.primaryColor,
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        5,
+                                                                    vertical:
+                                                                        3),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color:
+                                                                  Colors.white,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          3),
+                                                              border:
+                                                                  Border.all(
+                                                                color: Get.theme
+                                                                    .primaryColor,
                                                               ),
                                                             ),
                                                             child: Text(
-                                                              AppLocalizations.of(context).raise_complaint,
+                                                              'Raise Complaint',
                                                               style: TextStyle(
                                                                 fontSize: 10,
-                                                                color: Get.theme.primaryColor,
+                                                                color: Get.theme
+                                                                    .primaryColor,
                                                               ),
-                                                            ),
+                                                            ).translate(),
                                                           ),
                                                         ),
                                                       ),
                                                       Divider(),
                                                       Padding(
-                                                        padding: const EdgeInsets.only(top: 10),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(top: 10),
                                                         child: Row(
                                                           children: [
                                                             Container(
-                                                              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-                                                              decoration: BoxDecoration(
-                                                                color: orderController.orderList[index].orderStatus == 0.toString()
-                                                                    ? Get.theme.primaryColor.withOpacity(0.2)
-                                                                    : orderController.orderList[index].orderStatus == 1.toString()
-                                                                        ? Colors.green.withOpacity(0.2)
-                                                                        : Colors.red.withOpacity(0.2),
-                                                                borderRadius: BorderRadius.circular(15),
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          5,
+                                                                      vertical:
+                                                                          3),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: orderController.orderList[index].orderStatus ==
+                                                                        0
+                                                                            .toString()
+                                                                    ? Get.theme
+                                                                        .primaryColor
+                                                                        .withOpacity(
+                                                                            0.2)
+                                                                    : orderController.orderList[index].orderStatus ==
+                                                                            1
+                                                                                .toString()
+                                                                        ? Colors
+                                                                            .green
+                                                                            .withOpacity(
+                                                                                0.2)
+                                                                        : Colors
+                                                                            .red
+                                                                            .withOpacity(0.2),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15),
                                                               ),
                                                               child: Row(
                                                                 children: [
                                                                   Icon(
-                                                                    Icons.check_circle,
-                                                                    color: orderController.orderList[index].orderStatus == 0.toString()
-                                                                        ? Get.theme.primaryColor
-                                                                        : orderController.orderList[index].orderStatus == 1.toString()
+                                                                    Icons
+                                                                        .check_circle,
+                                                                    color: orderController.orderList[index].orderStatus ==
+                                                                            0
+                                                                                .toString()
+                                                                        ? Get
+                                                                            .theme
+                                                                            .primaryColor
+                                                                        : orderController.orderList[index].orderStatus ==
+                                                                                1.toString()
                                                                             ? Colors.green
                                                                             : Colors.red,
                                                                     size: 20,
                                                                   ),
                                                                   Text(
-                                                                    orderController.orderList[index].orderStatus == 0.toString()
+                                                                    orderController.orderList[index].orderStatus ==
+                                                                            0.toString()
                                                                         ? 'Purchase Tracked'
                                                                         : orderController.orderList[index].orderStatus == 1.toString()
                                                                             ? 'Cashback Received'
                                                                             : 'Cashback Reject',
-                                                                    style: TextStyle(
-                                                                      fontSize: 10,
-                                                                      color: orderController.orderList[index].orderStatus == 0.toString()
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          10,
+                                                                      color: orderController.orderList[index].orderStatus ==
+                                                                              0.toString()
                                                                           ? Get.theme.primaryColor
                                                                           : orderController.orderList[index].orderStatus == 1.toString()
                                                                               ? Colors.green
                                                                               : Colors.red,
                                                                     ),
-                                                                  ),
+                                                                  ).translate(),
                                                                 ],
                                                               ),
                                                             ),
@@ -225,10 +310,13 @@ class MyOrdersScreen extends StatelessWidget {
                                               ),
                                               Container(
                                                 color: Colors.white,
-                                                margin: EdgeInsets.symmetric(horizontal: 15),
-                                                padding: EdgeInsets.all(10).copyWith(top: 20),
+                                                margin: EdgeInsets.symmetric(
+                                                    horizontal: 15),
+                                                padding: EdgeInsets.all(10)
+                                                    .copyWith(top: 20),
                                                 child: Column(
-                                                  mainAxisSize: MainAxisSize.min,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
                                                   // mainAxisAlignment: MainAxisAlignment.start,
                                                   // crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
@@ -237,75 +325,196 @@ class MyOrdersScreen extends StatelessWidget {
                                                         Icon(
                                                           Icons.check_circle,
                                                           size: 20,
-                                                          color:
-                                                              orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString() ? Get.theme.secondaryHeaderColor : Colors.grey,
+                                                          color: orderController.orderList[index].orderStatus == 0.toString() ||
+                                                                  orderController
+                                                                          .orderList[
+                                                                              index]
+                                                                          .orderStatus ==
+                                                                      1
+                                                                          .toString() ||
+                                                                  orderController
+                                                                          .orderList[
+                                                                              index]
+                                                                          .orderStatus ==
+                                                                      2
+                                                                          .toString()
+                                                              ? Get.theme
+                                                                  .secondaryHeaderColor
+                                                              : Colors.grey,
                                                         ),
                                                         Padding(
-                                                          padding: const EdgeInsets.only(left: 10),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 10),
                                                           child: Text(
                                                             'Clicked Tracked',
                                                             style: TextStyle(
-                                                              fontWeight: FontWeight.w500,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
                                                               fontSize: 12,
-                                                              color: orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString() ? Colors.black : Colors.grey,
+                                                              color: orderController.orderList[index].orderStatus == 0.toString() ||
+                                                                      orderController
+                                                                              .orderList[
+                                                                                  index]
+                                                                              .orderStatus ==
+                                                                          1
+                                                                              .toString() ||
+                                                                      orderController
+                                                                              .orderList[index]
+                                                                              .orderStatus ==
+                                                                          2.toString()
+                                                                  ? Colors.black
+                                                                  : Colors.grey,
                                                             ),
-                                                          ),
+                                                          ).translate(),
                                                         ),
-                                                        Expanded(child: SizedBox()),
-                                                        orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString()
+                                                        Expanded(
+                                                            child: SizedBox()),
+                                                        orderController
+                                                                        .orderList[
+                                                                            index]
+                                                                        .orderStatus ==
+                                                                    0
+                                                                        .toString() ||
+                                                                orderController
+                                                                        .orderList[
+                                                                            index]
+                                                                        .orderStatus ==
+                                                                    1
+                                                                        .toString() ||
+                                                                orderController
+                                                                        .orderList[
+                                                                            index]
+                                                                        .orderStatus ==
+                                                                    2.toString()
                                                             ? Text(
-                                                                DateConverter.dateTimeStringToDateTime(
-                                                                  orderController.orderList[index].createdAt.toString(),
+                                                                DateConverter
+                                                                    .dateTimeStringToDateTime(
+                                                                  orderController
+                                                                      .orderList[
+                                                                          index]
+                                                                      .createdAt
+                                                                      .toString(),
                                                                 ).toString(),
-                                                                style: TextStyle(fontSize: 10, color: Colors.grey),
-                                                              )
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        10,
+                                                                    color: Colors
+                                                                        .grey),
+                                                              ).translate()
                                                             : SizedBox(),
                                                       ],
                                                     ),
                                                     Stack(
-                                                      alignment: Alignment.centerLeft,
+                                                      alignment:
+                                                          Alignment.centerLeft,
                                                       children: [
                                                         Padding(
-                                                          padding: const EdgeInsets.only(left: 10),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 10),
                                                           child: DottedLine(
                                                             lineLength: 125,
-                                                            direction: Axis.vertical,
-                                                            dashColor: Colors.grey,
+                                                            direction:
+                                                                Axis.vertical,
+                                                            dashColor:
+                                                                Colors.grey,
                                                           ),
                                                         ),
                                                         Row(
                                                           children: [
                                                             Card(
-                                                              margin: EdgeInsets.zero,
+                                                              margin: EdgeInsets
+                                                                  .zero,
                                                               elevation: 0,
-                                                              shape: RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.circular(10),
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
                                                               ),
                                                               child: Icon(
-                                                                Icons.check_circle,
+                                                                Icons
+                                                                    .check_circle,
                                                                 size: 20,
-                                                                color: orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString() ? Get.theme.primaryColor : Colors.grey,
+                                                                color: orderController.orderList[index].orderStatus == 0.toString() ||
+                                                                        orderController.orderList[index].orderStatus ==
+                                                                            1
+                                                                                .toString() ||
+                                                                        orderController.orderList[index].orderStatus ==
+                                                                            2
+                                                                                .toString()
+                                                                    ? Get.theme
+                                                                        .primaryColor
+                                                                    : Colors
+                                                                        .grey,
                                                               ),
                                                             ),
                                                             Padding(
-                                                              padding: const EdgeInsets.only(left: 10),
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      left: 10),
                                                               child: Text(
                                                                 'Purchase Tracked',
-                                                                style: TextStyle(
-                                                                  fontWeight: FontWeight.w500,
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
                                                                   fontSize: 12,
-                                                                  color: orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString() ? Colors.black : Colors.grey,
+                                                                  color: orderController.orderList[index].orderStatus == 0.toString() ||
+                                                                          orderController.orderList[index].orderStatus ==
+                                                                              1
+                                                                                  .toString() ||
+                                                                          orderController.orderList[index].orderStatus ==
+                                                                              2
+                                                                                  .toString()
+                                                                      ? Colors
+                                                                          .black
+                                                                      : Colors
+                                                                          .grey,
                                                                 ),
-                                                              ),
+                                                              ).translate(),
                                                             ),
-                                                            Expanded(child: SizedBox()),
-                                                            orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString()
+                                                            Expanded(
+                                                                child:
+                                                                    SizedBox()),
+                                                            orderController
+                                                                            .orderList[
+                                                                                index]
+                                                                            .orderStatus ==
+                                                                        0
+                                                                            .toString() ||
+                                                                    orderController
+                                                                            .orderList[
+                                                                                index]
+                                                                            .orderStatus ==
+                                                                        1
+                                                                            .toString() ||
+                                                                    orderController
+                                                                            .orderList[index]
+                                                                            .orderStatus ==
+                                                                        2.toString()
                                                                 ? Text(
-                                                                    DateConverter.dateTimeStringToDateTime(
-                                                                      orderController.orderList[index].createdAt.toString(),
+                                                                    DateConverter
+                                                                        .dateTimeStringToDateTime(
+                                                                      orderController
+                                                                          .orderList[
+                                                                              index]
+                                                                          .createdAt
+                                                                          .toString(),
                                                                     ).toString(),
-                                                                    style: TextStyle(fontSize: 10, color: Colors.grey),
-                                                                  )
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            10,
+                                                                        color: Colors
+                                                                            .grey),
+                                                                  ).translate()
                                                                 : SizedBox(),
                                                           ],
                                                         ),
@@ -313,43 +522,96 @@ class MyOrdersScreen extends StatelessWidget {
                                                     ),
                                                     Row(
                                                       children: [
-                                                        orderController.orderList[index].orderStatus == 2.toString()
+                                                        orderController
+                                                                    .orderList[
+                                                                        index]
+                                                                    .orderStatus ==
+                                                                2.toString()
                                                             ? Padding(
-                                                                padding: const EdgeInsets.only(left: 2),
-                                                                child: CircleAvatar(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            2),
+                                                                child:
+                                                                    CircleAvatar(
                                                                   radius: 9,
                                                                   child: Icon(
                                                                     Icons.close,
-                                                                    color: Colors.white,
+                                                                    color: Colors
+                                                                        .white,
                                                                     size: 14,
                                                                   ),
-                                                                  backgroundColor: Colors.red,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .red,
                                                                 ),
                                                               )
                                                             : Icon(
-                                                                Icons.check_circle,
+                                                                Icons
+                                                                    .check_circle,
                                                                 size: 20,
-                                                                color: orderController.orderList[index].orderStatus == 1.toString() ? Colors.green : Colors.grey,
+                                                                color: orderController
+                                                                            .orderList[
+                                                                                index]
+                                                                            .orderStatus ==
+                                                                        1
+                                                                            .toString()
+                                                                    ? Colors
+                                                                        .green
+                                                                    : Colors
+                                                                        .grey,
                                                               ),
                                                         Padding(
-                                                          padding: const EdgeInsets.only(left: 10),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 10),
                                                           child: Text(
-                                                            orderController.orderList[index].orderStatus == 2.toString() ? 'Cashback Rejected' : 'Cashback Received',
+                                                            orderController
+                                                                        .orderList[
+                                                                            index]
+                                                                        .orderStatus ==
+                                                                    2.toString()
+                                                                ? 'Cashback Rejected'
+                                                                : 'Cashback Received',
                                                             style: TextStyle(
-                                                              fontWeight: FontWeight.w500,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
                                                               fontSize: 12,
-                                                              color: orderController.orderList[index].orderStatus == 1.toString() ? Colors.black : Colors.grey,
+                                                              color: orderController
+                                                                          .orderList[
+                                                                              index]
+                                                                          .orderStatus ==
+                                                                      1.toString()
+                                                                  ? Colors.black
+                                                                  : Colors.grey,
                                                             ),
-                                                          ),
+                                                          ).translate(),
                                                         ),
-                                                        Expanded(child: SizedBox()),
-                                                        orderController.orderList[index].orderStatus == 1.toString()
+                                                        Expanded(
+                                                            child: SizedBox()),
+                                                        orderController
+                                                                    .orderList[
+                                                                        index]
+                                                                    .orderStatus ==
+                                                                1.toString()
                                                             ? Text(
-                                                                DateConverter.dateTimeStringToDateTime(
-                                                                  orderController.orderList[index].updatedAt.toString(),
+                                                                DateConverter
+                                                                    .dateTimeStringToDateTime(
+                                                                  orderController
+                                                                      .orderList[
+                                                                          index]
+                                                                      .updatedAt
+                                                                      .toString(),
                                                                 ).toString(),
-                                                                style: TextStyle(fontSize: 10, color: Colors.grey),
-                                                              )
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        10,
+                                                                    color: Colors
+                                                                        .grey),
+                                                              ).translate()
                                                             : SizedBox(),
                                                       ],
                                                     )
@@ -375,11 +637,13 @@ class MyOrdersScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Card(
-                                      margin: EdgeInsets.symmetric(horizontal: 10),
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 10),
                                       child: Padding(
                                         padding: const EdgeInsets.all(10.0),
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             ListTile(
                                               contentPadding: EdgeInsets.zero,
@@ -396,83 +660,148 @@ class MyOrdersScreen extends StatelessWidget {
                                                   //   padding: EdgeInsets.all(2),
                                                   //   child:
                                                   CustomImage(
-                                                image: global.appInfo.baseUrls.partnerImageUrl + '/' + orderController.orderList[index].logo,
+                                                image: global.appInfo.baseUrls
+                                                        .partnerImageUrl +
+                                                    '/' +
+                                                    orderController
+                                                        .orderList[index].logo,
                                                 fit: BoxFit.contain,
                                                 errorImage: Images.logo,
                                                 width: 50,
                                               ),
                                               //),
-                                              title: Text(orderController.orderList[index].advertisers),
+                                              title: Text(orderController
+                                                      .orderList[index]
+                                                      .advertisers)
+                                                  .translate(),
                                               trailing: InkWell(
                                                 onTap: () async {
-                                                  await orderController.getOrderComplains(orderController.orderList[index].id);
+                                                  await orderController
+                                                      .getOrderComplains(
+                                                          orderController
+                                                              .orderList[index]
+                                                              .id);
                                                   Get.to(
                                                     () => OrderComplaintScreen(
-                                                      orderModel: orderController.orderList[index],
+                                                      orderModel:
+                                                          orderController
+                                                              .orderList[index],
                                                     ),
-                                                    routeName: 'order-complaint',
+                                                    routeName:
+                                                        'order-complaint',
                                                   );
                                                 },
                                                 child: Container(
-                                                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 5,
+                                                      vertical: 3),
                                                   decoration: BoxDecoration(
                                                     color: Colors.white,
-                                                    borderRadius: BorderRadius.circular(3),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            3),
                                                     border: Border.all(
-                                                      color: Get.theme.primaryColor,
+                                                      color: Get
+                                                          .theme.primaryColor,
                                                     ),
                                                   ),
                                                   child: Text(
-                                                    AppLocalizations.of(context).raise_complaint,
+                                                    'Raise Complaint',
                                                     style: TextStyle(
                                                       fontSize: 10,
-                                                      color: Get.theme.primaryColor,
+                                                      color: Get
+                                                          .theme.primaryColor,
                                                     ),
-                                                  ),
+                                                  ).translate(),
                                                 ),
                                               ),
                                             ),
                                             Divider(),
                                             Padding(
-                                              padding: const EdgeInsets.only(top: 10),
+                                              padding: const EdgeInsets.only(
+                                                  top: 10),
                                               child: Row(
                                                 children: [
                                                   Container(
-                                                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 5,
+                                                            vertical: 3),
                                                     decoration: BoxDecoration(
-                                                      color: orderController.orderList[index].orderStatus == 0.toString()
-                                                          ? Get.theme.primaryColor.withOpacity(0.2)
-                                                          : orderController.orderList[index].orderStatus == 1.toString()
-                                                              ? Colors.green.withOpacity(0.2)
-                                                              : Colors.red.withOpacity(0.2),
-                                                      borderRadius: BorderRadius.circular(15),
+                                                      color: orderController
+                                                                  .orderList[
+                                                                      index]
+                                                                  .orderStatus ==
+                                                              0.toString()
+                                                          ? Get.theme
+                                                              .primaryColor
+                                                              .withOpacity(0.2)
+                                                          : orderController
+                                                                      .orderList[
+                                                                          index]
+                                                                      .orderStatus ==
+                                                                  1.toString()
+                                                              ? Colors.green
+                                                                  .withOpacity(
+                                                                      0.2)
+                                                              : Colors.red
+                                                                  .withOpacity(
+                                                                      0.2),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
                                                     ),
                                                     child: Row(
                                                       children: [
                                                         Icon(
                                                           Icons.check_circle,
-                                                          color: orderController.orderList[index].orderStatus == 0.toString()
-                                                              ? Get.theme.primaryColor
-                                                              : orderController.orderList[index].orderStatus == 1.toString()
+                                                          color: orderController
+                                                                      .orderList[
+                                                                          index]
+                                                                      .orderStatus ==
+                                                                  0.toString()
+                                                              ? Get.theme
+                                                                  .primaryColor
+                                                              : orderController
+                                                                          .orderList[
+                                                                              index]
+                                                                          .orderStatus ==
+                                                                      1.toString()
                                                                   ? Colors.green
                                                                   : Colors.red,
                                                           size: 20,
                                                         ),
                                                         Text(
-                                                          orderController.orderList[index].orderStatus == 0.toString()
+                                                          orderController
+                                                                      .orderList[
+                                                                          index]
+                                                                      .orderStatus ==
+                                                                  0.toString()
                                                               ? 'Purchase Tracked'
-                                                              : orderController.orderList[index].orderStatus == 1.toString()
+                                                              : orderController
+                                                                          .orderList[
+                                                                              index]
+                                                                          .orderStatus ==
+                                                                      1.toString()
                                                                   ? 'Cashback Received'
                                                                   : 'Cashback Reject',
                                                           style: TextStyle(
                                                             fontSize: 10,
-                                                            color: orderController.orderList[index].orderStatus == 0.toString()
-                                                                ? Get.theme.primaryColor
-                                                                : orderController.orderList[index].orderStatus == 1.toString()
+                                                            color: orderController
+                                                                        .orderList[
+                                                                            index]
+                                                                        .orderStatus ==
+                                                                    0.toString()
+                                                                ? Get.theme
+                                                                    .primaryColor
+                                                                : orderController
+                                                                            .orderList[index]
+                                                                            .orderStatus ==
+                                                                        1.toString()
                                                                     ? Colors.green
                                                                     : Colors.red,
                                                           ),
-                                                        ),
+                                                        ).translate(),
                                                       ],
                                                     ),
                                                   ),
@@ -520,8 +849,10 @@ class MyOrdersScreen extends StatelessWidget {
                                     ),
                                     Container(
                                       color: Colors.white,
-                                      margin: EdgeInsets.symmetric(horizontal: 15),
-                                      padding: EdgeInsets.all(10).copyWith(top: 20),
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 15),
+                                      padding:
+                                          EdgeInsets.all(10).copyWith(top: 20),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         // mainAxisAlignment: MainAxisAlignment.start,
@@ -532,27 +863,77 @@ class MyOrdersScreen extends StatelessWidget {
                                               Icon(
                                                 Icons.check_circle,
                                                 size: 20,
-                                                color: orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString() ? Get.theme.secondaryHeaderColor : Colors.grey,
+                                                color: orderController
+                                                                .orderList[
+                                                                    index]
+                                                                .orderStatus ==
+                                                            0.toString() ||
+                                                        orderController
+                                                                .orderList[
+                                                                    index]
+                                                                .orderStatus ==
+                                                            1.toString() ||
+                                                        orderController
+                                                                .orderList[
+                                                                    index]
+                                                                .orderStatus ==
+                                                            2.toString()
+                                                    ? Get.theme
+                                                        .secondaryHeaderColor
+                                                    : Colors.grey,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 10),
+                                                padding: const EdgeInsets.only(
+                                                    left: 10),
                                                 child: Text(
                                                   'Clicked Tracked',
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 12,
-                                                    color: orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString() ? Colors.black : Colors.grey,
+                                                    color: orderController
+                                                                    .orderList[
+                                                                        index]
+                                                                    .orderStatus ==
+                                                                0.toString() ||
+                                                            orderController
+                                                                    .orderList[
+                                                                        index]
+                                                                    .orderStatus ==
+                                                                1.toString() ||
+                                                            orderController
+                                                                    .orderList[
+                                                                        index]
+                                                                    .orderStatus ==
+                                                                2.toString()
+                                                        ? Colors.black
+                                                        : Colors.grey,
                                                   ),
-                                                ),
+                                                ).translate(),
                                               ),
                                               Expanded(child: SizedBox()),
-                                              orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString()
+                                              orderController.orderList[index]
+                                                              .orderStatus ==
+                                                          0.toString() ||
+                                                      orderController
+                                                              .orderList[index]
+                                                              .orderStatus ==
+                                                          1.toString() ||
+                                                      orderController
+                                                              .orderList[index]
+                                                              .orderStatus ==
+                                                          2.toString()
                                                   ? Text(
-                                                      DateConverter.dateTimeStringToDateTime(
-                                                        orderController.orderList[index].createdAt.toString(),
+                                                      DateConverter
+                                                          .dateTimeStringToDateTime(
+                                                        orderController
+                                                            .orderList[index]
+                                                            .createdAt
+                                                            .toString(),
                                                       ).toString(),
-                                                      style: TextStyle(fontSize: 10, color: Colors.grey),
-                                                    )
+                                                      style: TextStyle(
+                                                          fontSize: 10,
+                                                          color: Colors.grey),
+                                                    ).translate()
                                                   : SizedBox(),
                                             ],
                                           ),
@@ -560,7 +941,8 @@ class MyOrdersScreen extends StatelessWidget {
                                             alignment: Alignment.centerLeft,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 10),
+                                                padding: const EdgeInsets.only(
+                                                    left: 10),
                                                 child: DottedLine(
                                                   lineLength: 125,
                                                   direction: Axis.vertical,
@@ -572,34 +954,99 @@ class MyOrdersScreen extends StatelessWidget {
                                                   Card(
                                                     margin: EdgeInsets.zero,
                                                     elevation: 0,
-                                                    shape: RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(10),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
                                                     ),
                                                     child: Icon(
                                                       Icons.check_circle,
                                                       size: 20,
-                                                      color: orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString() ? Get.theme.primaryColor : Colors.grey,
+                                                      color: orderController
+                                                                      .orderList[
+                                                                          index]
+                                                                      .orderStatus ==
+                                                                  0
+                                                                      .toString() ||
+                                                              orderController
+                                                                      .orderList[
+                                                                          index]
+                                                                      .orderStatus ==
+                                                                  1
+                                                                      .toString() ||
+                                                              orderController
+                                                                      .orderList[
+                                                                          index]
+                                                                      .orderStatus ==
+                                                                  2.toString()
+                                                          ? Get.theme
+                                                              .primaryColor
+                                                          : Colors.grey,
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets.only(left: 10),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10),
                                                     child: Text(
                                                       'Purchase Tracked',
                                                       style: TextStyle(
-                                                        fontWeight: FontWeight.w500,
+                                                        fontWeight:
+                                                            FontWeight.w500,
                                                         fontSize: 12,
-                                                        color: orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString() ? Colors.black : Colors.grey,
+                                                        color: orderController
+                                                                        .orderList[
+                                                                            index]
+                                                                        .orderStatus ==
+                                                                    0
+                                                                        .toString() ||
+                                                                orderController
+                                                                        .orderList[
+                                                                            index]
+                                                                        .orderStatus ==
+                                                                    1
+                                                                        .toString() ||
+                                                                orderController
+                                                                        .orderList[
+                                                                            index]
+                                                                        .orderStatus ==
+                                                                    2.toString()
+                                                            ? Colors.black
+                                                            : Colors.grey,
                                                       ),
-                                                    ),
+                                                    ).translate(),
                                                   ),
                                                   Expanded(child: SizedBox()),
-                                                  orderController.orderList[index].orderStatus == 0.toString() || orderController.orderList[index].orderStatus == 1.toString() || orderController.orderList[index].orderStatus == 2.toString()
+                                                  orderController
+                                                                  .orderList[
+                                                                      index]
+                                                                  .orderStatus ==
+                                                              0.toString() ||
+                                                          orderController
+                                                                  .orderList[
+                                                                      index]
+                                                                  .orderStatus ==
+                                                              1.toString() ||
+                                                          orderController
+                                                                  .orderList[
+                                                                      index]
+                                                                  .orderStatus ==
+                                                              2.toString()
                                                       ? Text(
-                                                          DateConverter.dateTimeStringToDateTime(
-                                                            orderController.orderList[index].createdAt.toString(),
+                                                          DateConverter
+                                                              .dateTimeStringToDateTime(
+                                                            orderController
+                                                                .orderList[
+                                                                    index]
+                                                                .createdAt
+                                                                .toString(),
                                                           ).toString(),
-                                                          style: TextStyle(fontSize: 10, color: Colors.grey),
-                                                        )
+                                                          style: TextStyle(
+                                                              fontSize: 10,
+                                                              color:
+                                                                  Colors.grey),
+                                                        ).translate()
                                                       : SizedBox(),
                                                 ],
                                               ),
@@ -607,9 +1054,13 @@ class MyOrdersScreen extends StatelessWidget {
                                           ),
                                           Row(
                                             children: [
-                                              orderController.orderList[index].orderStatus == 2.toString()
+                                              orderController.orderList[index]
+                                                          .orderStatus ==
+                                                      2.toString()
                                                   ? Padding(
-                                                      padding: const EdgeInsets.only(left: 2),
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 2),
                                                       child: CircleAvatar(
                                                         radius: 9,
                                                         child: Icon(
@@ -617,33 +1068,60 @@ class MyOrdersScreen extends StatelessWidget {
                                                           color: Colors.white,
                                                           size: 14,
                                                         ),
-                                                        backgroundColor: Colors.red,
+                                                        backgroundColor:
+                                                            Colors.red,
                                                       ),
                                                     )
                                                   : Icon(
                                                       Icons.check_circle,
                                                       size: 20,
-                                                      color: orderController.orderList[index].orderStatus == 1.toString() ? Colors.green : Colors.grey,
+                                                      color: orderController
+                                                                  .orderList[
+                                                                      index]
+                                                                  .orderStatus ==
+                                                              1.toString()
+                                                          ? Colors.green
+                                                          : Colors.grey,
                                                     ),
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 10),
+                                                padding: const EdgeInsets.only(
+                                                    left: 10),
                                                 child: Text(
-                                                  orderController.orderList[index].orderStatus == 2.toString() ? 'Cashback Rejected' : 'Cashback Received',
+                                                  orderController
+                                                              .orderList[index]
+                                                              .orderStatus ==
+                                                          2.toString()
+                                                      ? 'Cashback Rejected'
+                                                      : 'Cashback Received',
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 12,
-                                                    color: orderController.orderList[index].orderStatus == 1.toString() ? Colors.black : Colors.grey,
+                                                    color: orderController
+                                                                .orderList[
+                                                                    index]
+                                                                .orderStatus ==
+                                                            1.toString()
+                                                        ? Colors.black
+                                                        : Colors.grey,
                                                   ),
-                                                ),
+                                                ).translate(),
                                               ),
                                               Expanded(child: SizedBox()),
-                                              orderController.orderList[index].orderStatus == 1.toString()
+                                              orderController.orderList[index]
+                                                          .orderStatus ==
+                                                      1.toString()
                                                   ? Text(
-                                                      DateConverter.dateTimeStringToDateTime(
-                                                        orderController.orderList[index].updatedAt.toString(),
+                                                      DateConverter
+                                                          .dateTimeStringToDateTime(
+                                                        orderController
+                                                            .orderList[index]
+                                                            .updatedAt
+                                                            .toString(),
                                                       ).toString(),
-                                                      style: TextStyle(fontSize: 10, color: Colors.grey),
-                                                    )
+                                                      style: TextStyle(
+                                                          fontSize: 10,
+                                                          color: Colors.grey),
+                                                    ).translate()
                                                   : SizedBox(),
                                             ],
                                           )
@@ -666,23 +1144,26 @@ class MyOrdersScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child: Text(
-                                AppLocalizations.of(context).orders_title,
-                                style: Get.theme.primaryTextTheme.titleMedium.copyWith(fontWeight: FontWeight.w500),
-                              ),
+                                'There is where it all happens!',
+                                style: Get.theme.primaryTextTheme.titleMedium
+                                    .copyWith(fontWeight: FontWeight.w500),
+                              ).translate(),
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 15),
                               child: Text(
                                 "Once you shop via ${global.appName}, your order details will appear here within 72 hours.",
                                 textAlign: TextAlign.center,
                                 //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
-                              ),
+                              ).translate(),
                             ),
                             InkWell(
                               onTap: () async {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => BottomNavigationBarScreen(
+                                    builder: (context) =>
+                                        BottomNavigationBarScreen(
                                       pageIndex: 0,
                                     ),
                                   ),
@@ -692,16 +1173,20 @@ class MyOrdersScreen extends StatelessWidget {
                                 height: 45,
                                 width: Get.width / 2.5,
                                 //margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                                padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 7, vertical: 8),
                                 decoration: BoxDecoration(
                                   color: Get.theme.secondaryHeaderColor,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  AppLocalizations.of(context).see_best_deals,
-                                  style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                                ),
+                                  'SEE BEST DEALS',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600),
+                                ).translate(),
                               ),
                             ),
                           ],

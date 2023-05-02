@@ -11,8 +11,9 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
 class CouponDetailScreen extends StatelessWidget {
@@ -46,7 +47,7 @@ class CouponDetailScreen extends StatelessWidget {
                   coupon.name,
                   style: Get.theme.primaryTextTheme.titleSmall
                       .copyWith(color: Colors.white),
-                ),
+                ).translate(),
                 actions: [
                   !GetPlatform.isWeb
                       ? InkWell(
@@ -94,7 +95,7 @@ class CouponDetailScreen extends StatelessWidget {
                             ),
                             child: Row(
                               children: [
-                                Text('${AppLocalizations.of(context).share}  '),
+                                Text('Share'),
                                 CircleAvatar(
                                   radius: 12,
                                   backgroundColor: Colors.green[700],
@@ -123,9 +124,9 @@ class CouponDetailScreen extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    AppLocalizations.of(context).deal_ends_in,
+                    'Deal ends in:',
                     style: Get.theme.primaryTextTheme.titleSmall,
-                  ),
+                  ).translate(),
                   coupon.dayDifference != null && coupon.dayDifference > 0
                       ? Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
@@ -224,13 +225,13 @@ class CouponDetailScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context).use_code,
+                                    'Use Code',
                                     style: Get.theme.primaryTextTheme.bodyLarge
                                         .copyWith(
                                       color: Colors.grey,
                                       fontWeight: FontWeight.w300,
                                     ),
-                                  ),
+                                  ).translate(),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10, vertical: 10),
@@ -244,7 +245,7 @@ class CouponDetailScreen extends StatelessWidget {
                                             .copyWith(
                                           color: Get.theme.secondaryHeaderColor,
                                         ),
-                                      ),
+                                      ).translate(),
                                     ),
                                   ),
                                   InkWell(
@@ -260,21 +261,21 @@ class CouponDetailScreen extends StatelessWidget {
                                       });
                                     },
                                     child: Text(
-                                      AppLocalizations.of(context).copy_code,
+                                      'Copy Code',
                                       style: Get
                                           .theme.primaryTextTheme.bodyLarge
                                           .copyWith(
                                         color: Colors.teal,
                                         fontWeight: FontWeight.w300,
                                       ),
-                                    ),
+                                    ).translate(),
                                   )
                                 ],
                               )
                             : Text(
                                 '*Coupon code not required',
                                 style: TextStyle(color: Colors.red),
-                              ),
+                              ).translate(),
                         InkWell(
                           onTap: () async {
                             if (global.currentUser.id != null) {
@@ -340,7 +341,7 @@ class CouponDetailScreen extends StatelessWidget {
                                   color: Colors.white,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600),
-                            ),
+                            ).translate(),
                           ),
                         ),
                       ],
@@ -359,23 +360,23 @@ class CouponDetailScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            AppLocalizations.of(context).about_this_coupon,
+                            'About this Coupon',
                             style: global.getPlatFrom()
                                 ? Get.theme.primaryTextTheme.titleMedium
                                     .copyWith(fontWeight: FontWeight.w600)
                                 : Get.theme.primaryTextTheme.titleSmall,
-                          ),
+                          ).translate(),
                           Divider(),
                           Text(
                             coupon.heading,
                             style: Get.theme.primaryTextTheme.bodyMedium
                                 .copyWith(fontWeight: FontWeight.w500),
-                          ),
+                          ).translate(),
                           Text(
                             coupon.description,
                             style: Get.theme.primaryTextTheme.bodyMedium
                                 .copyWith(fontWeight: FontWeight.w300),
-                          ),
+                          ).translate(),
                         ],
                       ),
                     ),

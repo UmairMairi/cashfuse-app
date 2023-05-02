@@ -8,6 +8,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 // import 'package:video_player/video_player.dart';
 
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 
 import '../utils/images.dart';
 
@@ -198,7 +199,7 @@ class GetStartedScreen extends StatelessWidget {
                                 color: Get.theme.secondaryHeaderColor,
                                 fontWeight: FontWeight.w600,
                               ),
-                            ),
+                            ).translate(),
                           ],
                         ),
                       ),
@@ -235,7 +236,7 @@ class GetStartedScreen extends StatelessWidget {
                                 color: Get.theme.secondaryHeaderColor,
                                 fontWeight: FontWeight.w600,
                               ),
-                            ),
+                            ).translate(),
                           ],
                         ),
                       ),
@@ -292,7 +293,7 @@ class GetStartedScreen extends StatelessWidget {
                           color: Get.theme.secondaryHeaderColor,
                           fontWeight: FontWeight.w600,
                         ),
-                      ),
+                      ).translate(),
                     ],
                   ),
                 ),
@@ -350,7 +351,7 @@ class GetStartedScreen extends StatelessWidget {
                           color: Get.theme.secondaryHeaderColor,
                           fontWeight: FontWeight.w600,
                         ),
-                      ),
+                      ).translate(),
                     ],
                   ),
                 ),
@@ -372,7 +373,7 @@ class GetStartedScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               color: Get.theme.secondaryHeaderColor,
                               fontSize: 16),
-                        ),
+                        ).translate(),
                       ),
                     )
             ],

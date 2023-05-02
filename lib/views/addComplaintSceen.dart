@@ -5,7 +5,8 @@ import 'package:cashfuse/models/orderModel.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:google_translator/google_translator.dart';
 
 class AddComplaintSceen extends StatelessWidget {
   final OrderModel orderModel;
@@ -26,9 +27,10 @@ class AddComplaintSceen extends StatelessWidget {
           ),
         ),
         title: Text(
-          AppLocalizations.of(context).add_complaint,
-          style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-        ),
+          'Add Complaint',
+          style: Get.theme.primaryTextTheme.titleSmall
+              .copyWith(color: Colors.white),
+        ).translate(),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -54,7 +56,8 @@ class AddComplaintSceen extends StatelessWidget {
       bottomNavigationBar: InkWell(
         onTap: () {
           if (orderController.complain.text.trim().isNotEmpty) {
-            orderController.addOrderComplain(orderModel.id, orderController.complain.text);
+            orderController.addOrderComplain(
+                orderModel.id, orderController.complain.text);
           } else {
             showCustomSnackBar('Please add Complaint.');
           }
@@ -65,12 +68,12 @@ class AddComplaintSceen extends StatelessWidget {
           color: Get.theme.secondaryHeaderColor,
           alignment: Alignment.center,
           child: Text(
-            AppLocalizations.of(context).submit,
+            'SUBMIT',
             style: Get.theme.primaryTextTheme.titleSmall.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w600,
             ),
-          ),
+          ).translate(),
         ),
       ),
     );

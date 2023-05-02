@@ -11,8 +11,9 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AccountSettingScreen extends StatelessWidget {
@@ -49,10 +50,10 @@ class AccountSettingScreen extends StatelessWidget {
                     ),
                   ),
                   title: Text(
-                    AppLocalizations.of(context).account_settings,
+                    'Account Settings',
                     style: Get.theme.primaryTextTheme.titleLarge
                         .copyWith(color: Colors.white),
-                  ),
+                  ).translate(),
                 ),
           body: Center(
             child: Container(
@@ -149,13 +150,13 @@ class AccountSettingScreen extends StatelessWidget {
                                 Get.bottomSheet(
                                   CupertinoActionSheet(
                                     title: Text(
-                                      AppLocalizations.of(context).select,
+                                      'Select',
                                       style: Get
                                           .theme.primaryTextTheme.titleLarge
                                           .copyWith(
                                         color: Colors.grey,
                                       ),
-                                    ),
+                                    ).translate(),
                                     actions: [
                                       InkWell(
                                         onTap: () async {
@@ -167,11 +168,10 @@ class AccountSettingScreen extends StatelessWidget {
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(15),
                                           child: Text(
-                                            AppLocalizations.of(context)
-                                                .take_picture,
+                                            'Take Picture',
                                             style: Get.theme.primaryTextTheme
                                                 .titleMedium,
-                                          ),
+                                          ).translate(),
                                         ),
                                       ),
                                       InkWell(
@@ -184,21 +184,20 @@ class AccountSettingScreen extends StatelessWidget {
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(15),
                                           child: Text(
-                                            AppLocalizations.of(context)
-                                                .image_from_gallery,
+                                            'Image from Gallery',
                                             style: Get.theme.primaryTextTheme
                                                 .titleMedium,
-                                          ),
+                                          ).translate(),
                                         ),
                                       ),
                                     ],
                                     cancelButton: TextButton(
                                       child: Text(
-                                        AppLocalizations.of(context).cancel,
+                                        'Cancel',
                                         style: Get
                                             .theme.primaryTextTheme.titleMedium
                                             .copyWith(color: Colors.red),
-                                      ),
+                                      ).translate(),
                                       onPressed: () {
                                         Get.back();
                                       },
@@ -227,11 +226,11 @@ class AccountSettingScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            AppLocalizations.of(context).full_name,
+                            'Full Name',
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w300),
-                          ),
+                          ).translate(),
                           TextFormField(
                             focusNode: fnameFocus,
                             controller: authController.name,
@@ -267,11 +266,11 @@ class AccountSettingScreen extends StatelessWidget {
                             height: 20,
                           ),
                           Text(
-                            AppLocalizations.of(context).email_address,
+                            'Email Address',
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w300),
-                          ),
+                          ).translate(),
                           SizedBox(
                             height: 10,
                           ),
@@ -327,11 +326,11 @@ class AccountSettingScreen extends StatelessWidget {
                             height: 20,
                           ),
                           Text(
-                            AppLocalizations.of(context).mobile_number,
+                            'Mobile Number',
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w300),
-                          ),
+                          ).translate(),
                           SizedBox(
                             height: 10,
                           ),
@@ -418,22 +417,22 @@ class AccountSettingScreen extends StatelessWidget {
                                 [
                                   CupertinoDialogAction(
                                     child: Text(
-                                      AppLocalizations.of(context).yes,
+                                      'Yes',
                                       style: Get
                                           .theme.primaryTextTheme.titleSmall
                                           .copyWith(color: Colors.red),
-                                    ),
+                                    ).translate(),
                                     onPressed: () {
                                       authController.removeUserfromDb();
                                     },
                                   ),
                                   CupertinoDialogAction(
                                     child: Text(
-                                      AppLocalizations.of(context).no,
+                                      'No',
                                       style: Get
                                           .theme.primaryTextTheme.titleSmall
                                           .copyWith(color: Colors.blue),
-                                    ),
+                                    ).translate(),
                                     onPressed: () {
                                       Get.back();
                                     },
@@ -462,7 +461,7 @@ class AccountSettingScreen extends StatelessWidget {
                                       color: Colors.red,
                                       fontWeight: FontWeight.w500,
                                     ),
-                                  ),
+                                  ).translate(),
                                 ],
                               ),
                             ),
@@ -616,12 +615,12 @@ class AccountSettingScreen extends StatelessWidget {
                     ),
                     alignment: Alignment.center,
                     child: Text(
-                      AppLocalizations.of(context).save_changes,
+                      'SAVE CHANGES',
                       style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),
-                    ),
+                    ).translate(),
                   ),
                 ),
               ),

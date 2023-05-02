@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:google_translator/google_translator.dart';
 
 class HelpDetailSceen extends StatelessWidget {
   final FaqModel faq;
@@ -28,7 +29,7 @@ class HelpDetailSceen extends StatelessWidget {
               title: Text(
                 faq.ques,
                 style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-              ),
+              ).translate(),
             ),
       body: GetBuilder<CommonController>(builder: (controller) {
         return Center(

@@ -1,8 +1,9 @@
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 
 class LoginWithEmailScreen extends StatelessWidget {
   final bool fromMenu;
@@ -34,22 +35,22 @@ class LoginWithEmailScreen extends StatelessWidget {
               ),
               Center(
                 child: Text(
-                  AppLocalizations.of(context).login,
+                  'Login or signup',
                   style: Get.theme.primaryTextTheme.displaySmall.copyWith(
                     letterSpacing: -1,
                     fontWeight: FontWeight.w700,
                   ),
-                ),
+                ).translate(),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
-                  AppLocalizations.of(context).login_subtitle,
+                  'We will send a SMS to verify',
                   style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                     letterSpacing: -0.2,
                     fontWeight: FontWeight.w600,
                   ),
-                ),
+                ).translate(),
               ),
               Padding(
                 padding:
@@ -127,12 +128,12 @@ class LoginWithEmailScreen extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 child: Text(
-                  AppLocalizations.of(context).conti,
+                  'Continue',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
                       fontWeight: FontWeight.w600),
-                ),
+                ).translate(),
               ),
             ),
           ],

@@ -49,6 +49,8 @@ int totalJoinedCount = 0;
 int admobclickCount = 0;
 int fbclickCount = 0;
 
+String languageApiKey = 'AIzaSyDbLaa85zHKSvm1oChRb6xdXyC-kSTiWXU';
+
 //Api Header
 Future<Map<String, String>> getApiHeaders(bool authorizationRequired,
     {String userId}) async {

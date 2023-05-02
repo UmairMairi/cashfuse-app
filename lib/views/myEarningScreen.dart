@@ -10,9 +10,9 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:cashfuse/utils/global.dart' as global;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyEarningSceen extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -37,9 +37,10 @@ class MyEarningSceen extends StatelessWidget {
                 ),
               ),
               title: Text(
-                AppLocalizations.of(context).my_earnings,
-                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-              ),
+                'My Earnings',
+                style: Get.theme.primaryTextTheme.titleSmall
+                    .copyWith(color: Colors.white),
+              ).translate(),
             ),
       body: Column(
         children: [
@@ -72,8 +73,8 @@ class MyEarningSceen extends StatelessWidget {
                           title: Row(
                             children: [
                               Text(
-                                AppLocalizations.of(context).total_earning,
-                              ),
+                                'Total Earnings',
+                              ).translate(),
                               InkWell(
                                 onTap: () {
                                   showAlignedDialog(
@@ -95,9 +96,12 @@ class MyEarningSceen extends StatelessWidget {
                             ],
                           ),
                           subtitle: Text(
-                            global.currentUser.earning != null ? '${global.appInfo.currency} ${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency} 0.00',
-                            style: Get.theme.primaryTextTheme.headlineSmall.copyWith(fontWeight: FontWeight.w600),
-                          ),
+                            global.currentUser.earning != null
+                                ? '${global.appInfo.currency} ${global.currentUser.earning.totalEarnings}'
+                                : '${global.appInfo.currency} 0.00',
+                            style: Get.theme.primaryTextTheme.headlineSmall
+                                .copyWith(fontWeight: FontWeight.w600),
+                          ).translate(),
                           trailing: Card(
                             elevation: 5,
                             shape: RoundedRectangleBorder(
@@ -133,15 +137,17 @@ class MyEarningSceen extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 10),
                           child: Text(
-                            '${AppLocalizations.of(context).my_earnings_subtitile} ${global.appName}.',
-                            style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
+                            'Earning will show here within 24 hours of your shopping via ${global.appName}.',
+                            style:
+                                Get.theme.primaryTextTheme.bodyLarge.copyWith(
                               color: Colors.grey[600],
                               fontWeight: FontWeight.w400,
                               letterSpacing: -0.5,
                             ),
-                          ),
+                          ).translate(),
                         )
                       ],
                     ),
@@ -188,18 +194,22 @@ class MyEarningSceen extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.all(12.0),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          AppLocalizations.of(context).my_order_details,
-                                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                          'My Order Details',
+                                          style: Get
+                                              .theme.primaryTextTheme.titleSmall
+                                              .copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
                                           ),
-                                        ),
+                                        ).translate(),
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 10),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10),
                                           child: DottedLine(
                                             dashLength: 1,
                                             lineThickness: 1.5,
@@ -210,11 +220,13 @@ class MyEarningSceen extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              '${AppLocalizations.of(context).view_more} ',
-                                              style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                              'View More',
+                                              style: Get.theme.primaryTextTheme
+                                                  .titleSmall
+                                                  .copyWith(
                                                 color: Colors.white,
                                               ),
-                                            ),
+                                            ).translate(),
                                             CircleAvatar(
                                               radius: 6,
                                               backgroundColor: Colors.white,
@@ -296,18 +308,22 @@ class MyEarningSceen extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.all(12.0),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          AppLocalizations.of(context).recents_clicks,
-                                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                          'Recents Clicks',
+                                          style: Get
+                                              .theme.primaryTextTheme.titleSmall
+                                              .copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
                                           ),
-                                        ),
+                                        ).translate(),
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 10),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10),
                                           child: DottedLine(
                                             dashLength: 1,
                                             lineThickness: 1.5,
@@ -318,11 +334,13 @@ class MyEarningSceen extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              '${AppLocalizations.of(context).view_more} ',
-                                              style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                              'View More',
+                                              style: Get.theme.primaryTextTheme
+                                                  .titleSmall
+                                                  .copyWith(
                                                 color: Colors.white,
                                               ),
-                                            ),
+                                            ).translate(),
                                             CircleAvatar(
                                               radius: 6,
                                               backgroundColor: Colors.white,
@@ -372,7 +390,8 @@ class MyEarningSceen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(() => RequestPaymentScreen(), routeName: 'request-payment');
+                          Get.to(() => RequestPaymentScreen(),
+                              routeName: 'request-payment');
                         },
                         child: Card(
                           margin: EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -397,18 +416,22 @@ class MyEarningSceen extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.all(12.0),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          AppLocalizations.of(context).request_paymets,
-                                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                          'Request Payments',
+                                          style: Get
+                                              .theme.primaryTextTheme.titleSmall
+                                              .copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
                                           ),
-                                        ),
+                                        ).translate(),
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 10),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10),
                                           child: DottedLine(
                                             dashLength: 1,
                                             lineThickness: 1.5,
@@ -419,16 +442,19 @@ class MyEarningSceen extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              '${AppLocalizations.of(context).view_more} ',
-                                              style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                              'View More',
+                                              style: Get.theme.primaryTextTheme
+                                                  .titleSmall
+                                                  .copyWith(
                                                 color: Colors.white,
                                               ),
-                                            ),
+                                            ).translate(),
                                             CircleAvatar(
                                               radius: 6,
                                               backgroundColor: Colors.white,
                                               child: Icon(
-                                                Icons.arrow_forward_ios_outlined,
+                                                Icons
+                                                    .arrow_forward_ios_outlined,
                                                 size: 8,
                                               ),
                                             )
@@ -500,18 +526,22 @@ class MyEarningSceen extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.all(12.0),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          AppLocalizations.of(context).get_help,
-                                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                          'Get Help',
+                                          style: Get
+                                              .theme.primaryTextTheme.titleSmall
+                                              .copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
                                           ),
-                                        ),
+                                        ).translate(),
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 10),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10),
                                           child: DottedLine(
                                             dashLength: 1,
                                             lineThickness: 1.5,
@@ -522,11 +552,13 @@ class MyEarningSceen extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              '${AppLocalizations.of(context).view_more} ',
-                                              style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                              'View More',
+                                              style: Get.theme.primaryTextTheme
+                                                  .titleSmall
+                                                  .copyWith(
                                                 color: Colors.white,
                                               ),
-                                            ),
+                                            ).translate(),
                                             CircleAvatar(
                                               radius: 6,
                                               backgroundColor: Colors.white,
@@ -632,7 +664,7 @@ class MyEarningSceen extends StatelessWidget {
                       Text(
                         'Your total eanings and amount includes your Cashback + Rewards + Refferal amount.',
                         style: Get.theme.primaryTextTheme.bodyMedium,
-                      ),
+                      ).translate(),
                     ],
                   ),
                 ),
@@ -650,7 +682,10 @@ class TrianglePainter extends CustomPainter {
   final PaintingStyle paintingStyle;
   final double strokeWidth;
 
-  TrianglePainter({this.strokeColor = Colors.black, this.strokeWidth = 3, this.paintingStyle = PaintingStyle.stroke});
+  TrianglePainter(
+      {this.strokeColor = Colors.black,
+      this.strokeWidth = 3,
+      this.paintingStyle = PaintingStyle.stroke});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -672,6 +707,8 @@ class TrianglePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(TrianglePainter oldDelegate) {
-    return oldDelegate.strokeColor != strokeColor || oldDelegate.paintingStyle != paintingStyle || oldDelegate.strokeWidth != strokeWidth;
+    return oldDelegate.strokeColor != strokeColor ||
+        oldDelegate.paintingStyle != paintingStyle ||
+        oldDelegate.strokeWidth != strokeWidth;
   }
 }

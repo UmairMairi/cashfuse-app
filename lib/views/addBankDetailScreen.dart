@@ -5,7 +5,8 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/addBankAccountDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:google_translator/google_translator.dart';
 
 class AddPaymentDetailScreen extends StatelessWidget {
   PaymentController paymentController = Get.find<PaymentController>();
@@ -25,9 +26,10 @@ class AddPaymentDetailScreen extends StatelessWidget {
             ),
           ),
           title: Text(
-            AppLocalizations.of(context).bank_transfer_redeem,
-            style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-          ),
+            'Bank Transfer Redeem',
+            style: Get.theme.primaryTextTheme.titleSmall
+                .copyWith(color: Colors.white),
+          ).translate(),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -79,31 +81,39 @@ class AddPaymentDetailScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            AppLocalizations.of(context).account_details,
-                            style: Get.theme.primaryTextTheme.titleMedium.copyWith(fontWeight: FontWeight.w600),
-                          ),
+                            'Account Details',
+                            style: Get.theme.primaryTextTheme.titleMedium
+                                .copyWith(fontWeight: FontWeight.w600),
+                          ).translate(),
                           InkWell(
                             onTap: () {
                               Get.dialog(
                                 Dialog(
                                   child: AddBankAccountDialog(),
-                                  insetPadding: EdgeInsets.symmetric(horizontal: 15),
+                                  insetPadding:
+                                      EdgeInsets.symmetric(horizontal: 15),
                                 ),
                               );
                             },
                             child: Container(
                               height: 45,
                               //margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                              padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 7, vertical: 8),
                               decoration: BoxDecoration(
                                 color: Get.theme.secondaryHeaderColor,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                paymentController.bankDetails != null ? AppLocalizations.of(context).edit.toString().toUpperCase() : '${AppLocalizations.of(context).add.toString().toUpperCase()} +',
-                                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                              ),
+                                paymentController.bankDetails != null
+                                    ? 'edit'.toUpperCase()
+                                    : 'add'.toUpperCase(),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
+                              ).translate(),
                             ),
                           ),
                         ],
@@ -114,15 +124,19 @@ class AddPaymentDetailScreen extends StatelessWidget {
                               children: [
                                 RichText(
                                   text: TextSpan(
-                                    text: AppLocalizations.of(context).holder_name,
-                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                    text: 'Holder Name:',
+                                    style: Get.theme.primaryTextTheme.titleSmall
+                                        .copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
                                     ),
                                     children: <TextSpan>[
                                       TextSpan(
-                                        text: paymentController.bankDetails.acHolderName,
-                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        text: paymentController
+                                            .bankDetails.acHolderName,
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall
+                                            .copyWith(
                                           letterSpacing: -0.2,
                                           fontWeight: FontWeight.w300,
                                         ),
@@ -132,15 +146,19 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                 ),
                                 RichText(
                                   text: TextSpan(
-                                    text: AppLocalizations.of(context).account_no,
-                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                    text: 'Account No.',
+                                    style: Get.theme.primaryTextTheme.titleSmall
+                                        .copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
                                     ),
                                     children: <TextSpan>[
                                       TextSpan(
-                                        text: paymentController.bankDetails.acNo,
-                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        text:
+                                            paymentController.bankDetails.acNo,
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall
+                                            .copyWith(
                                           letterSpacing: -0.2,
                                           fontWeight: FontWeight.w300,
                                         ),
@@ -150,15 +168,19 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                 ),
                                 RichText(
                                   text: TextSpan(
-                                    text: AppLocalizations.of(context).bank_name,
-                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                    text: 'Bank Name:',
+                                    style: Get.theme.primaryTextTheme.titleSmall
+                                        .copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
                                     ),
                                     children: <TextSpan>[
                                       TextSpan(
-                                        text: paymentController.bankDetails.bankName,
-                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        text: paymentController
+                                            .bankDetails.bankName,
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall
+                                            .copyWith(
                                           letterSpacing: -0.2,
                                           fontWeight: FontWeight.w300,
                                         ),
@@ -168,15 +190,19 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                 ),
                                 RichText(
                                   text: TextSpan(
-                                    text: AppLocalizations.of(context).ifsc_code,
-                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                    text: 'IFSC Code:',
+                                    style: Get.theme.primaryTextTheme.titleSmall
+                                        .copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
                                     ),
                                     children: <TextSpan>[
                                       TextSpan(
-                                        text: paymentController.bankDetails.ifsc,
-                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        text:
+                                            paymentController.bankDetails.ifsc,
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall
+                                            .copyWith(
                                           letterSpacing: -0.2,
                                           fontWeight: FontWeight.w300,
                                         ),
@@ -210,9 +236,12 @@ class AddPaymentDetailScreen extends StatelessWidget {
                   ),
                   alignment: Alignment.center,
                   child: Text(
-                    AppLocalizations.of(context).send_withdrawal_request,
-                    style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                  ),
+                    'Send Withdrawal Request',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  ).translate(),
                 ),
               )
             : SizedBox(),

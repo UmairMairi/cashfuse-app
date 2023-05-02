@@ -5,6 +5,7 @@ import 'package:cashfuse/views/webScreen/webProductDetails.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 
 import '../../utils/Mycolors.dart';
 import '../product_Details.dart';
@@ -43,7 +44,7 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                 title,
                 style: Get.theme.primaryTextTheme.titleSmall
                     .copyWith(color: Colors.white),
-              ),
+              ).translate(),
             ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -67,7 +68,7 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
             //  scrollDirection: Axis.horizontal,
             itemCount: productList.length,
             shrinkWrap: true,
-            padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             itemBuilder: (context, index) {
               return InkWell(
                   onTap: () {
@@ -164,7 +165,7 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                                 color: Colors.black54,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 10),
-                          ),
+                          ).translate(),
                         ),
                         Container(
                           decoration: BoxDecoration(
@@ -178,7 +179,7 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                                 fontSize: 11,
                                 fontWeight: FontWeight.w600,
                                 color: Mycolors.orange),
-                          ),
+                          ).translate(),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0, bottom: 8),
@@ -188,7 +189,7 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                                 color: Mycolors.blue,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12),
-                          ),
+                          ).translate(),
                         ),
                       ],
                     ),

@@ -11,8 +11,9 @@ import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/fbNativeAdWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 
 class AllCategoriesScreen extends StatelessWidget {
   HomeController homeController = Get.find<HomeController>();
@@ -53,10 +54,10 @@ class AllCategoriesScreen extends StatelessWidget {
                 ),
               ),
               title: Text(
-                AppLocalizations.of(context).all_categories,
+                'All Categories',
                 style: Get.theme.primaryTextTheme.titleSmall
                     .copyWith(color: Colors.white),
-              ),
+              ).translate(),
             ),
       body: GetBuilder<HomeController>(builder: (controller) {
         return Align(
@@ -120,7 +121,7 @@ class AllCategoriesScreen extends StatelessWidget {
                                           fontWeight: FontWeight.w500,
                                           color: Colors.black,
                                         ),
-                                      ),
+                                      ).translate(),
                                     ),
                                     SizedBox(
                                       height: global.getPlatFrom() ? 15 : 5,

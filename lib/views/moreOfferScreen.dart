@@ -5,7 +5,8 @@ import 'package:cashfuse/views/offerDetailScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:google_translator/google_translator.dart';
 
 class MoreOfferScreen extends StatelessWidget {
   @override
@@ -19,23 +20,26 @@ class MoreOfferScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
             ),
-            padding: global.getPlatFrom() ? EdgeInsets.only(bottom: 15) : EdgeInsets.zero,
+            padding: global.getPlatFrom()
+                ? EdgeInsets.only(bottom: 15)
+                : EdgeInsets.zero,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        AppLocalizations.of(context).see_more_offers,
+                        'See More Offers',
                         style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                           fontWeight: FontWeight.w600,
                           letterSpacing: -0.1,
                         ),
-                      ),
+                      ).translate(),
                       InkWell(
                         onTap: () {
                           Get.back();
@@ -75,7 +79,8 @@ class MoreOfferScreen extends StatelessWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: CustomImage(
-                                    image: '${global.appInfo.baseUrls.offerImageUrl}/${homeController.seeMoreOfferList[index].image}',
+                                    image:
+                                        '${global.appInfo.baseUrls.offerImageUrl}/${homeController.seeMoreOfferList[index].image}',
                                     height: 50,
                                     fit: BoxFit.contain,
                                   ),
@@ -85,17 +90,21 @@ class MoreOfferScreen extends StatelessWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 10),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        homeController.seeMoreOfferList[index].name,
+                                        homeController
+                                            .seeMoreOfferList[index].name,
                                         textAlign: TextAlign.start,
-                                        style: Get.theme.primaryTextTheme.titleSmall,
-                                      ),
+                                        style: Get
+                                            .theme.primaryTextTheme.titleSmall,
+                                      ).translate(),
                                       Text(
-                                        homeController.seeMoreOfferList[index].description,
+                                        homeController.seeMoreOfferList[index]
+                                            .description,
                                         textAlign: TextAlign.center,
-                                      ),
+                                      ).translate(),
                                     ],
                                   ),
                                 ),
@@ -105,7 +114,9 @@ class MoreOfferScreen extends StatelessWidget {
                           InkWell(
                             onTap: () async {
                               Get.back();
-                              await homeController.getOfferDetails(homeController.seeMoreOfferList[index].id.toString());
+                              await homeController.getOfferDetails(
+                                  homeController.seeMoreOfferList[index].id
+                                      .toString());
 
                               Get.to(
                                 () => OfferDetailScreen(
@@ -120,7 +131,8 @@ class MoreOfferScreen extends StatelessWidget {
                               width: Get.width / 2,
                               height: 45,
                               margin: EdgeInsets.only(top: 10, bottom: 10),
-                              padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 7, vertical: 8),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   border: Border.all(
@@ -129,9 +141,13 @@ class MoreOfferScreen extends StatelessWidget {
                                   )),
                               alignment: Alignment.center,
                               child: Text(
-                                homeController.seeMoreOfferList[index].buttonText,
-                                style: TextStyle(color: Get.theme.secondaryHeaderColor, fontSize: 14, fontWeight: FontWeight.w600),
-                              ),
+                                homeController
+                                    .seeMoreOfferList[index].buttonText,
+                                style: TextStyle(
+                                    color: Get.theme.secondaryHeaderColor,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
+                              ).translate(),
                             ),
                           ),
                           Container(

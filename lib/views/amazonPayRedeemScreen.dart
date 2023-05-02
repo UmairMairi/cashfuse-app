@@ -6,8 +6,9 @@ import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:google_translator/google_translator.dart';
 
 class AmazonPayRedeemScreen extends StatelessWidget {
   final fContactNo = new FocusNode();
@@ -32,9 +33,10 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                   ),
                 ),
                 title: Text(
-                  AppLocalizations.of(context).amazon_pay_redeem,
-                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-                ),
+                  'Amazon Pay Redeem',
+                  style: Get.theme.primaryTextTheme.titleSmall
+                      .copyWith(color: Colors.white),
+                ).translate(),
               ),
         body: SingleChildScrollView(
           child: Padding(
@@ -79,21 +81,26 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            AppLocalizations.of(context).account_details,
-                            style: Get.theme.primaryTextTheme.titleMedium.copyWith(fontWeight: FontWeight.w600),
-                          ),
+                            'Account Details',
+                            style: Get.theme.primaryTextTheme.titleMedium
+                                .copyWith(fontWeight: FontWeight.w600),
+                          ).translate(),
                           InkWell(
                             onTap: () {
                               if (paymentController.amazonDetails != null) {
-                                contactNo.text = paymentController.amazonDetails.amazonNo;
+                                contactNo.text =
+                                    paymentController.amazonDetails.amazonNo;
                               }
 
                               Get.dialog(
                                 Dialog(
                                   child: StatefulBuilder(
-                                    builder: (BuildContext context, StateSetter setState) => Container(
+                                    builder: (BuildContext context,
+                                            StateSetter setState) =>
+                                        Container(
                                       width: global.getPlatFrom() ? 400 : null,
-                                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 20, horizontal: 20),
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(15),
@@ -102,9 +109,13 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Text(
-                                            AppLocalizations.of(context).add_amazon_account,
-                                            style: Get.theme.primaryTextTheme.titleLarge.copyWith(fontWeight: FontWeight.w600),
-                                          ),
+                                            'Add Amazon Account',
+                                            style: Get.theme.primaryTextTheme
+                                                .titleLarge
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                          ).translate(),
                                           TextFormField(
                                             controller: contactNo,
                                             focusNode: fContactNo,
@@ -112,31 +123,45 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                             cursorColor: Get.theme.primaryColor,
                                             keyboardType: TextInputType.number,
                                             inputFormatters: [
-                                              FilteringTextInputFormatter.digitsOnly,
-                                              LengthLimitingTextInputFormatter(10),
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly,
+                                              LengthLimitingTextInputFormatter(
+                                                  10),
                                             ],
                                             decoration: InputDecoration(
                                               contentPadding: EdgeInsets.zero,
                                               hintText: 'Mobile Number',
                                               labelStyle: TextStyle(
-                                                color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                                color: fContactNo.hasFocus
+                                                    ? Get.theme.primaryColor
+                                                    : Colors.grey,
                                               ),
-                                              focusColor: Get.theme.primaryColor,
-                                              focusedBorder: UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                              focusColor:
+                                                  Get.theme.primaryColor,
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                color: fContactNo.hasFocus
+                                                    ? Get.theme.primaryColor
+                                                    : Colors.grey,
                                               )),
                                               border: UnderlineInputBorder(
                                                   borderSide: BorderSide(
-                                                color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                                color: fContactNo.hasFocus
+                                                    ? Get.theme.primaryColor
+                                                    : Colors.grey,
                                               )),
-                                              enabledBorder: UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                color: fContactNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                              enabledBorder:
+                                                  UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                color: fContactNo.hasFocus
+                                                    ? Get.theme.primaryColor
+                                                    : Colors.grey,
                                               )),
                                             ),
                                             onTap: () {
-                                              FocusScope.of(context).requestFocus(fContactNo);
+                                              FocusScope.of(context)
+                                                  .requestFocus(fContactNo);
                                               setState(() {});
                                             },
                                           ),
@@ -144,25 +169,39 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                             onTap: () {
                                               if (contactNo.text.isNotEmpty) {
                                                 Get.back();
-                                                paymentController.addAmazonPayDetails(contactNo.text.trim());
+                                                paymentController
+                                                    .addAmazonPayDetails(
+                                                        contactNo.text.trim());
                                               } else {
-                                                showCustomSnackBar('Please add Number.');
+                                                showCustomSnackBar(
+                                                    'Please add Number.');
                                               }
                                             },
                                             child: Container(
                                               height: 45,
                                               width: Get.width / 3,
                                               margin: EdgeInsets.only(top: 30),
-                                              padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 7, vertical: 8),
                                               decoration: BoxDecoration(
-                                                color: Get.theme.secondaryHeaderColor,
-                                                borderRadius: BorderRadius.circular(5),
+                                                color: Get
+                                                    .theme.secondaryHeaderColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
                                               ),
                                               alignment: Alignment.center,
                                               child: Text(
-                                                paymentController.amazonDetails != null ? AppLocalizations.of(context).edit.toString().toUpperCase() : '${AppLocalizations.of(context).add.toString().toUpperCase()} +',
-                                                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                                              ),
+                                                paymentController
+                                                            .amazonDetails !=
+                                                        null
+                                                    ? 'edit'.toUpperCase()
+                                                    : 'add'.toUpperCase() + '+',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ).translate(),
                                             ),
                                           ),
                                         ],
@@ -174,16 +213,22 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                             },
                             child: Container(
                               height: 45,
-                              padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 7, vertical: 8),
                               decoration: BoxDecoration(
                                 color: Get.theme.secondaryHeaderColor,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                paymentController.amazonDetails != null ? AppLocalizations.of(context).edit.toString().toUpperCase() : '${AppLocalizations.of(context).add.toString().toUpperCase()} +',
-                                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                              ),
+                                paymentController.amazonDetails != null
+                                    ? 'edit'.toUpperCase()
+                                    : 'add'.toUpperCase() + '+',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
+                              ).translate(),
                             ),
                           ),
                         ],
@@ -191,15 +236,18 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                       paymentController.amazonDetails != null
                           ? RichText(
                               text: TextSpan(
-                                text: AppLocalizations.of(context).phone_no,
-                                style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                text: 'Phone No.',
+                                style: Get.theme.primaryTextTheme.titleSmall
+                                    .copyWith(
                                   letterSpacing: -0.2,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: paymentController.amazonDetails.amazonNo,
-                                    style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                    text: paymentController
+                                        .amazonDetails.amazonNo,
+                                    style: Get.theme.primaryTextTheme.bodySmall
+                                        .copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w300,
                                     ),
@@ -231,9 +279,12 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                   ),
                   alignment: Alignment.center,
                   child: Text(
-                    AppLocalizations.of(context).send_withdrawal_request,
-                    style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                  ),
+                    'Send Withdrawal Request',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  ).translate(),
                 ),
               )
             : SizedBox(),

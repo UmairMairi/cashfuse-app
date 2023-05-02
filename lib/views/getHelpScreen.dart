@@ -7,8 +7,8 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:google_translator/google_translator.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GetHelpScreen extends StatelessWidget {
   final fSeachNode = new FocusNode();
@@ -34,9 +34,10 @@ class GetHelpScreen extends StatelessWidget {
                 ),
               ),
               title: Text(
-                AppLocalizations.of(context).get_help,
-                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-              ),
+                'Get Help',
+                style: Get.theme.primaryTextTheme.titleSmall
+                    .copyWith(color: Colors.white),
+              ).translate(),
             ),
       body: Center(
         child: SizedBox(
@@ -73,12 +74,17 @@ class GetHelpScreen extends StatelessWidget {
                           contentPadding: EdgeInsets.only(bottom: 5),
                           border: InputBorder.none,
                           hintText: 'What are you looking for?',
-                          hintStyle: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.black54, fontSize: 11),
+                          hintStyle: Get.theme.primaryTextTheme.bodySmall
+                              .copyWith(color: Colors.black54, fontSize: 11),
                           prefixIcon: Icon(
                             Icons.search,
-                            color: fSeachNode.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                            color: fSeachNode.hasFocus
+                                ? Get.theme.primaryColor
+                                : Colors.grey,
                           ),
-                          prefixIconColor: fSeachNode.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                          prefixIconColor: fSeachNode.hasFocus
+                              ? Get.theme.primaryColor
+                              : Colors.grey,
                         ),
                         onFieldSubmitted: (value) {
                           controller.faqLocalSearch();
@@ -87,9 +93,11 @@ class GetHelpScreen extends StatelessWidget {
                     ),
                   ),
                   controller.isfaqLoaded
-                      ? controller.faqList != null && controller.faqList.length > 0
+                      ? controller.faqList != null &&
+                              controller.faqList.length > 0
                           ? GridView.builder(
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: global.getPlatFrom() ? 5 : 2,
                                 crossAxisSpacing: 15.0,
                                 mainAxisSpacing: 15.0,
@@ -114,12 +122,16 @@ class GetHelpScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         CustomImage(
-                                          image: '${global.appInfo.baseUrls.faqImageUrl}/${controller.faqList[index].image}',
-                                          height: global.getPlatFrom() ? 80 : 40,
+                                          image:
+                                              '${global.appInfo.baseUrls.faqImageUrl}/${controller.faqList[index].image}',
+                                          height:
+                                              global.getPlatFrom() ? 80 : 40,
                                           //width: Get.width,
                                           fit: BoxFit.contain,
                                         ),
@@ -163,8 +175,12 @@ class GetHelpScreen extends StatelessWidget {
                                         Text(
                                           controller.faqList[index].ques,
                                           textAlign: TextAlign.center,
-                                          style: global.getPlatFrom() ? Get.theme.primaryTextTheme.titleMedium : Get.theme.primaryTextTheme.titleSmall,
-                                        ),
+                                          style: global.getPlatFrom()
+                                              ? Get.theme.primaryTextTheme
+                                                  .titleMedium
+                                              : Get.theme.primaryTextTheme
+                                                  .titleSmall,
+                                        ).translate(),
                                       ],
                                     ),
                                   ),
@@ -173,12 +189,15 @@ class GetHelpScreen extends StatelessWidget {
                             )
                           : Expanded(
                               child: Center(
-                                  child: Text(
-                              'No Data found.',
-                              style: TextStyle(color: Colors.white),
-                            )))
+                                child: Text(
+                                  'No Data found.',
+                                  style: TextStyle(color: Colors.white),
+                                ).translate(),
+                              ),
+                            )
                       : GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: global.getPlatFrom() ? 5 : 2,
                             crossAxisSpacing: 15.0,
                             mainAxisSpacing: 15.0,

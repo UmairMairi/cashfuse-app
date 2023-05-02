@@ -4,7 +4,8 @@ import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:google_translator/google_translator.dart';
 
 class MoreAdsScreen extends StatelessWidget {
   @override
@@ -20,17 +21,18 @@ class MoreAdsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      AppLocalizations.of(context).see_more_offers,
+                      'See More Offers',
                       style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.1,
                       ),
-                    ),
+                    ).translate(),
                     InkWell(
                       onTap: () {
                         Get.back();
@@ -61,7 +63,8 @@ class MoreAdsScreen extends StatelessWidget {
                         Row(
                           children: [
                             CustomImage(
-                              image: '${global.appInfo.baseUrls.offerImageUrl}/${homeController.seeMoreAdsList[index].image}',
+                              image:
+                                  '${global.appInfo.baseUrls.offerImageUrl}/${homeController.seeMoreAdsList[index].image}',
                               height: 50,
                               fit: BoxFit.contain,
                             ),
@@ -74,12 +77,14 @@ class MoreAdsScreen extends StatelessWidget {
                                     Text(
                                       homeController.seeMoreAdsList[index].name,
                                       textAlign: TextAlign.start,
-                                      style: Get.theme.primaryTextTheme.titleSmall,
-                                    ),
+                                      style:
+                                          Get.theme.primaryTextTheme.titleSmall,
+                                    ).translate(),
                                     Text(
-                                      homeController.seeMoreAdsList[index].description,
+                                      homeController
+                                          .seeMoreAdsList[index].description,
                                       textAlign: TextAlign.start,
-                                    ),
+                                    ).translate(),
                                   ],
                                 ),
                               ),
@@ -89,7 +94,9 @@ class MoreAdsScreen extends StatelessWidget {
                         InkWell(
                           onTap: () async {
                             Get.back();
-                            await homeController.getAdDetails(homeController.seeMoreAdsList[index].id.toString());
+                            await homeController.getAdDetails(homeController
+                                .seeMoreAdsList[index].id
+                                .toString());
                             Get.to(
                               () => AdsDetailScreen(
                                 ads: homeController.ads,
@@ -103,7 +110,8 @@ class MoreAdsScreen extends StatelessWidget {
                             width: Get.width / 2,
                             height: 45,
                             margin: EdgeInsets.only(top: 10, bottom: 10),
-                            padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 7, vertical: 8),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 border: Border.all(
@@ -113,8 +121,11 @@ class MoreAdsScreen extends StatelessWidget {
                             alignment: Alignment.center,
                             child: Text(
                               homeController.seeMoreAdsList[index].buttonText,
-                              style: TextStyle(color: Get.theme.secondaryHeaderColor, fontSize: 14, fontWeight: FontWeight.w600),
-                            ),
+                              style: TextStyle(
+                                  color: Get.theme.secondaryHeaderColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600),
+                            ).translate(),
                           ),
                         ),
                         Container(

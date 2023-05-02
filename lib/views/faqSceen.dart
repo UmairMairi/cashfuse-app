@@ -7,7 +7,8 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:google_translator/google_translator.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import '../controllers/commonController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -48,16 +49,18 @@ class FaqScreen extends StatelessWidget {
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'What are you looking for?',
-                          hintStyle: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.grey, fontSize: 11),
+                          hintStyle: Get.theme.primaryTextTheme.bodySmall
+                              .copyWith(color: Colors.grey, fontSize: 11),
                         ),
                         onFieldSubmitted: (value) {
                           commonController.faqLocalSearch();
                         },
                       )
                     : Text(
-                        AppLocalizations.of(context).faqs,
-                        style: Get.theme.primaryTextTheme.titleLarge.copyWith(color: Colors.white),
-                      ),
+                        'FAQs',
+                        style: Get.theme.primaryTextTheme.titleLarge
+                            .copyWith(color: Colors.white),
+                      ).translate(),
                 actions: [
                   InkWell(
                     onTap: () {
@@ -85,9 +88,12 @@ class FaqScreen extends StatelessWidget {
               Expanded(
                 child: Container(
                   color: Colors.white,
-                  width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 2 : Get.width,
+                  width: global.getPlatFrom()
+                      ? AppConstants.WEB_MAX_WIDTH / 2
+                      : Get.width,
                   child: commonController.isfaqLoaded
-                      ? commonController.faqList != null && commonController.faqList.length > 0
+                      ? commonController.faqList != null &&
+                              commonController.faqList.length > 0
                           ? ListView.builder(
                               padding: EdgeInsets.only(top: 5),
                               shrinkWrap: true,
@@ -103,14 +109,18 @@ class FaqScreen extends StatelessWidget {
                                     );
                                   },
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
                                           commonController.faqList[index].ques,
-                                          style: Get.theme.primaryTextTheme.bodyMedium.copyWith(color: Colors.grey[600]),
-                                        ),
+                                          style: Get
+                                              .theme.primaryTextTheme.bodyMedium
+                                              .copyWith(
+                                                  color: Colors.grey[600]),
+                                        ).translate(),
                                       ),
                                       Divider(
                                         color: Colors.grey,
@@ -122,12 +132,15 @@ class FaqScreen extends StatelessWidget {
                               },
                             )
                           : Center(
-                              child: Text(AppLocalizations.of(context).no_data_found),
+                              child: Text(
+                                'No data found',
+                              ).translate(),
                             )
                       : ListView.builder(
                           shrinkWrap: true,
                           itemCount: 10,
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
                           itemBuilder: (context, index) {
                             return Shimmer(
                               duration: Duration(seconds: 2),

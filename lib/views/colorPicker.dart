@@ -2,8 +2,9 @@ import 'package:cashfuse/controllers/themeController.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 
 class ColorPickerPage extends StatefulWidget {
   const ColorPickerPage({Key key, this.themeMode}) : super(key: key);
@@ -13,7 +14,8 @@ class ColorPickerPage extends StatefulWidget {
   _ColorPickerPageState createState() => _ColorPickerPageState();
 }
 
-class _ColorPickerPageState extends State<ColorPickerPage> with SingleTickerProviderStateMixin {
+class _ColorPickerPageState extends State<ColorPickerPage>
+    with SingleTickerProviderStateMixin {
   TabController tabController;
 
   List<Color> fullMaterialColors = [
@@ -80,8 +82,8 @@ class _ColorPickerPageState extends State<ColorPickerPage> with SingleTickerProv
             elevation: 0,
             centerTitle: true,
             title: Text(
-              AppLocalizations.of(context).theme,
-            ),
+              'Theme',
+            ).translate(),
             leading: InkWell(
               splashColor: Colors.transparent,
               focusColor: Colors.transparent,
@@ -113,16 +115,20 @@ class _ColorPickerPageState extends State<ColorPickerPage> with SingleTickerProv
                     TabBar(
                       controller: tabController,
                       labelColor: Colors.white,
-                      unselectedLabelColor: tabController.index != 0 ? themeController.pickColor : themeController.pickSecondaryColor,
+                      unselectedLabelColor: tabController.index != 0
+                          ? themeController.pickColor
+                          : themeController.pickSecondaryColor,
                       indicator: BoxDecoration(
-                        color: tabController.index == 0 ? themeController.pickColor : themeController.pickSecondaryColor,
+                        color: tabController.index == 0
+                            ? themeController.pickColor
+                            : themeController.pickSecondaryColor,
                       ),
                       tabs: [
                         Tab(
-                          text: AppLocalizations.of(context).primary_color,
+                          text: 'Primary Color',
                         ),
                         Tab(
-                          text: AppLocalizations.of(context).secondary_color,
+                          text: 'Secondary Color',
                         ),
                       ],
                       onTap: (value) {
@@ -135,21 +141,27 @@ class _ColorPickerPageState extends State<ColorPickerPage> with SingleTickerProv
                         controller: tabController,
                         children: [
                           GridView.builder(
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 5,
                                 crossAxisSpacing: 15.0,
                                 mainAxisSpacing: 15.0,
                               ),
                               itemCount: fullMaterialColors.length,
                               shrinkWrap: true,
-                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 20),
                               itemBuilder: (context, index) {
                                 return InkWell(
                                   onTap: () {
-                                    if (fullMaterialColors[index].value == themeController.pickSecondaryColor.value) {
-                                      showCustomSnackBar('Primary Color & Secondary Should be Different');
+                                    if (fullMaterialColors[index].value ==
+                                        themeController
+                                            .pickSecondaryColor.value) {
+                                      showCustomSnackBar(
+                                          'Primary Color & Secondary Should be Different');
                                     } else {
-                                      themeController.setPickColor(fullMaterialColors[index]);
+                                      themeController.setPickColor(
+                                          fullMaterialColors[index]);
                                     }
                                   },
                                   child: Stack(
@@ -157,9 +169,11 @@ class _ColorPickerPageState extends State<ColorPickerPage> with SingleTickerProv
                                     alignment: Alignment.center,
                                     children: [
                                       CircleAvatar(
-                                        backgroundColor: fullMaterialColors[index],
+                                        backgroundColor:
+                                            fullMaterialColors[index],
                                       ),
-                                      fullMaterialColors[index].value == themeController.pickColor.value
+                                      fullMaterialColors[index].value ==
+                                              themeController.pickColor.value
                                           ? Icon(
                                               Icons.check,
                                               color: Colors.white,
@@ -170,21 +184,26 @@ class _ColorPickerPageState extends State<ColorPickerPage> with SingleTickerProv
                                 );
                               }),
                           GridView.builder(
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 5,
                                 crossAxisSpacing: 15.0,
                                 mainAxisSpacing: 15.0,
                               ),
                               itemCount: fullMaterialColors.length,
                               shrinkWrap: true,
-                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 20),
                               itemBuilder: (context, index) {
                                 return InkWell(
                                   onTap: () {
-                                    if (fullMaterialColors[index].value == themeController.pickColor.value) {
-                                      showCustomSnackBar('Primary Color & Secondary Should be Different');
+                                    if (fullMaterialColors[index].value ==
+                                        themeController.pickColor.value) {
+                                      showCustomSnackBar(
+                                          'Primary Color & Secondary Should be Different');
                                     } else {
-                                      themeController.setSecondaryPickColor(fullMaterialColors[index]);
+                                      themeController.setSecondaryPickColor(
+                                          fullMaterialColors[index]);
                                     }
                                   },
                                   child: Stack(
@@ -192,9 +211,12 @@ class _ColorPickerPageState extends State<ColorPickerPage> with SingleTickerProv
                                     alignment: Alignment.center,
                                     children: [
                                       CircleAvatar(
-                                        backgroundColor: fullMaterialColors[index],
+                                        backgroundColor:
+                                            fullMaterialColors[index],
                                       ),
-                                      fullMaterialColors[index].value == themeController.pickSecondaryColor.value
+                                      fullMaterialColors[index].value ==
+                                              themeController
+                                                  .pickSecondaryColor.value
                                           ? Icon(
                                               Icons.check,
                                               color: Colors.white,

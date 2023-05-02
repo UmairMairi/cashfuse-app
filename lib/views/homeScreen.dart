@@ -36,8 +36,9 @@ import 'package:cashfuse/widget/offerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:slide_countdown/slide_countdown.dart';
@@ -384,8 +385,7 @@ class HomeScreen extends StatelessWidget {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              AppLocalizations.of(context)
-                                                  .top_categories,
+                                              'TOP CATEGORIES',
                                               style: TextStyle(
                                                 fontSize: 13,
                                                 fontWeight: FontWeight.w600,
@@ -393,7 +393,7 @@ class HomeScreen extends StatelessWidget {
                                                     .withOpacity(0.79),
                                                 letterSpacing: -0.3,
                                               ),
-                                            ),
+                                            ).translate(),
                                             InkWell(
                                               onTap: () {
                                                 Get.to(
@@ -402,7 +402,7 @@ class HomeScreen extends StatelessWidget {
                                                 );
                                               },
                                               child: Text(
-                                                '${AppLocalizations.of(context).view_all} >',
+                                                'View All >',
                                                 style: Get.theme
                                                     .primaryTextTheme.bodySmall
                                                     .copyWith(
@@ -483,7 +483,7 @@ class HomeScreen extends StatelessWidget {
                                                             FontWeight.w500,
                                                         color: Colors.black,
                                                       ),
-                                                    ),
+                                                    ).translate(),
                                                     SizedBox(
                                                       height: 5,
                                                     ),
@@ -555,8 +555,7 @@ class HomeScreen extends StatelessWidget {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              AppLocalizations.of(context)
-                                                  .coupons_of_the_day
+                                              'Coupons of the day'
                                                   .toUpperCase(),
                                               style: TextStyle(
                                                 fontSize: global.getPlatFrom()
@@ -567,7 +566,7 @@ class HomeScreen extends StatelessWidget {
                                                     .withOpacity(0.79),
                                                 letterSpacing: -0.3,
                                               ),
-                                            ),
+                                            ).translate(),
                                             couponController.couponList.length >
                                                     6
                                                 ? InkWell(
@@ -579,7 +578,7 @@ class HomeScreen extends StatelessWidget {
                                                       );
                                                     },
                                                     child: Text(
-                                                      '${AppLocalizations.of(context).view_all} >',
+                                                      'View All >',
                                                       style: Get
                                                           .theme
                                                           .primaryTextTheme
@@ -591,7 +590,7 @@ class HomeScreen extends StatelessWidget {
                                                                       .getPlatFrom()
                                                                   ? 16
                                                                   : null),
-                                                    ),
+                                                    ).translate(),
                                                   )
                                                 : SizedBox(),
                                           ],
@@ -698,8 +697,7 @@ class HomeScreen extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 6, vertical: 15),
                                         child: Text(
-                                          AppLocalizations.of(context)
-                                              .exclusive_offers,
+                                          'EXCLUSIVE OFFERS FOR YOU',
                                           style: TextStyle(
                                             fontSize:
                                                 global.getPlatFrom() ? 16 : 13,
@@ -708,7 +706,7 @@ class HomeScreen extends StatelessWidget {
                                                 Colors.black.withOpacity(0.79),
                                             letterSpacing: -0.3,
                                           ),
-                                        ),
+                                        ).translate(),
                                       )
                                     : SizedBox(),
                                 homeController.isOfferLoaded
@@ -898,8 +896,7 @@ class HomeScreen extends StatelessWidget {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              AppLocalizations.of(context)
-                                                  .top_cashback_stores,
+                                              'TOP CASHBACK STORES',
                                               style: TextStyle(
                                                 fontSize: global.getPlatFrom()
                                                     ? 16
@@ -909,21 +906,19 @@ class HomeScreen extends StatelessWidget {
                                                     .withOpacity(0.79),
                                                 letterSpacing: -0.3,
                                               ),
-                                            ),
+                                            ).translate(),
                                             InkWell(
                                               onTap: () {
                                                 Get.to(
                                                   () =>
                                                       AdsCampaignWidgetListScreen(
-                                                    title: AppLocalizations.of(
-                                                            context)
-                                                        .top_cashback_stores,
+                                                    title: 'TOP CASHBACK STORES',
                                                   ),
                                                   routeName: 'all',
                                                 );
                                               },
                                               child: Text(
-                                                '${AppLocalizations.of(context).view_all} >',
+                                                'View All >',
                                                 style: Get.theme
                                                     .primaryTextTheme.bodySmall
                                                     .copyWith(
@@ -932,7 +927,7 @@ class HomeScreen extends StatelessWidget {
                                                             global.getPlatFrom()
                                                                 ? 16
                                                                 : null),
-                                              ),
+                                              ).translate(),
                                             )
                                           ],
                                         ),
@@ -1052,7 +1047,7 @@ class HomeScreen extends StatelessWidget {
                                                     .withOpacity(0.79),
                                                 letterSpacing: -0.3,
                                               ),
-                                            ),
+                                            ).translate(),
                                             InkWell(
                                               onTap: () {
                                                 Navigator.push(
@@ -1068,7 +1063,7 @@ class HomeScreen extends StatelessWidget {
                                                             )));
                                               },
                                               child: Text(
-                                                '${AppLocalizations.of(context).view_all} >',
+                                                'View All >',
                                                 style: Get.theme
                                                     .primaryTextTheme.bodySmall
                                                     .copyWith(
@@ -1077,7 +1072,7 @@ class HomeScreen extends StatelessWidget {
                                                             global.getPlatFrom()
                                                                 ? 16
                                                                 : null),
-                                              ),
+                                              ).translate(),
                                             )
                                           ],
                                         ),
@@ -1244,7 +1239,7 @@ class HomeScreen extends StatelessWidget {
                                                                       FontWeight
                                                                           .w500,
                                                                   fontSize: 10),
-                                                            ),
+                                                            ).translate(),
                                                           ),
                                                           Container(
                                                             decoration: BoxDecoration(
@@ -1268,7 +1263,7 @@ class HomeScreen extends StatelessWidget {
                                                                           .w700,
                                                                   color: Mycolors
                                                                       .orange),
-                                                            ),
+                                                            ).translate(),
                                                           ),
                                                           Padding(
                                                             padding:
@@ -1286,7 +1281,7 @@ class HomeScreen extends StatelessWidget {
                                                                       FontWeight
                                                                           .w600,
                                                                   fontSize: 12),
-                                                            ),
+                                                            ).translate(),
                                                           ),
                                                         ],
                                                       ),
@@ -1318,7 +1313,7 @@ class HomeScreen extends StatelessWidget {
                                                     .withOpacity(0.79),
                                                 letterSpacing: -0.3,
                                               ),
-                                            ),
+                                            ).translate(),
                                             InkWell(
                                               onTap: () {
                                                 Get.to(
@@ -1327,7 +1322,7 @@ class HomeScreen extends StatelessWidget {
                                                 );
                                               },
                                               child: Text(
-                                                '${AppLocalizations.of(context).view_all} >',
+                                                'View All >',
                                                 style: Get.theme
                                                     .primaryTextTheme.bodySmall
                                                     .copyWith(
@@ -1336,7 +1331,7 @@ class HomeScreen extends StatelessWidget {
                                                             global.getPlatFrom()
                                                                 ? 16
                                                                 : null),
-                                              ),
+                                              ).translate(),
                                             )
                                           ],
                                         ),
@@ -1484,7 +1479,7 @@ class HomeScreen extends StatelessWidget {
                                                     .withOpacity(0.79),
                                                 letterSpacing: -0.3,
                                               ),
-                                            ),
+                                            ).translate(),
                                             InkWell(
                                               onTap: () {
                                                 Navigator.push(
@@ -1500,7 +1495,7 @@ class HomeScreen extends StatelessWidget {
                                                             )));
                                               },
                                               child: Text(
-                                                '${AppLocalizations.of(context).view_all} >',
+                                                'View All >',
                                                 style: Get.theme
                                                     .primaryTextTheme.bodySmall
                                                     .copyWith(
@@ -1509,7 +1504,7 @@ class HomeScreen extends StatelessWidget {
                                                             global.getPlatFrom()
                                                                 ? 16
                                                                 : null),
-                                              ),
+                                              ).translate(),
                                             )
                                           ],
                                         ),
@@ -1678,7 +1673,7 @@ class HomeScreen extends StatelessWidget {
                                                                       FontWeight
                                                                           .w500,
                                                                   fontSize: 10),
-                                                            ),
+                                                            ).translate(),
                                                           ),
                                                           Container(
                                                             decoration: BoxDecoration(
@@ -1702,7 +1697,7 @@ class HomeScreen extends StatelessWidget {
                                                                           .w700,
                                                                   color: Mycolors
                                                                       .orange),
-                                                            ),
+                                                            ).translate(),
                                                           ),
                                                           Padding(
                                                             padding:
@@ -1720,7 +1715,7 @@ class HomeScreen extends StatelessWidget {
                                                                       FontWeight
                                                                           .w600,
                                                                   fontSize: 12),
-                                                            ),
+                                                            ).translate(),
                                                           ),
                                                         ],
                                                       ),
@@ -1800,7 +1795,7 @@ class HomeScreen extends StatelessWidget {
                                                                     0.79),
                                                             letterSpacing: -0.3,
                                                           ),
-                                                        ),
+                                                        ).translate(),
                                                         InkWell(
                                                           onTap: () {
                                                             Get.to(
@@ -1815,7 +1810,7 @@ class HomeScreen extends StatelessWidget {
                                                             );
                                                           },
                                                           child: Text(
-                                                            '${AppLocalizations.of(context).view_all} >',
+                                                            'View All >',
                                                             style: Get
                                                                 .theme
                                                                 .primaryTextTheme
@@ -1827,7 +1822,7 @@ class HomeScreen extends StatelessWidget {
                                                                             .getPlatFrom()
                                                                         ? 16
                                                                         : null),
-                                                          ),
+                                                          ).translate(),
                                                         )
                                                       ],
                                                     ),

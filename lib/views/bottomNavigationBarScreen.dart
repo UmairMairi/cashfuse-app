@@ -12,8 +12,9 @@ import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 
 class BottomNavigationBarScreen extends StatefulWidget {
   int pageIndex;
@@ -88,11 +89,11 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   @override
   Widget build(BuildContext context) {
     List<String> tabList = [
-      AppLocalizations.of(context).home,
-      AppLocalizations.of(context).search,
-      AppLocalizations.of(context).bottom_allInOne,
-      AppLocalizations.of(context).recents_clicks,
-      AppLocalizations.of(context).profile,
+      'Home',
+      'Search',
+      'All in one\n Search',
+      'Recents Clicks',
+      'Profile',
     ];
 
     return WillPopScope(
@@ -114,7 +115,8 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
             !GetPlatform.isWeb
                 ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text('Back press again to exit from app',
-                        style: TextStyle(color: Colors.white)),
+                            style: TextStyle(color: Colors.white))
+                        .translate(),
                     behavior: SnackBarBehavior.floating,
                     backgroundColor: Colors.green,
                     duration: Duration(seconds: 2),

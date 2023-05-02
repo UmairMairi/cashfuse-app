@@ -11,6 +11,7 @@ import 'package:cashfuse/widget/web/webAdsCampaignWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 
 class AdsCampaignWidgetListScreen extends StatelessWidget {
   final String title;
@@ -52,7 +53,7 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
                 title: Text(
                   title,
                   style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-                ),
+                ).translate(),
               ),
         body: Align(
           alignment: Alignment.topCenter,

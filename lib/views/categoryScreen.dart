@@ -15,6 +15,7 @@ import 'package:cashfuse/widget/web/webAdsCampaignWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 
 import 'admitedOfferDetailScreen.dart';
 
@@ -72,7 +73,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 widget.category != null ? widget.category.name : '',
                 style: Get.theme.primaryTextTheme.titleSmall
                     .copyWith(color: Colors.white),
-              ),
+              ).translate(),
             ),
       body: GetBuilder<AdController>(builder: (adController) {
         return SingleChildScrollView(
@@ -205,7 +206,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             child: Text(
                               'No data found.',
                               textAlign: TextAlign.center,
-                            ),
+                            ).translate(),
                           ),
                         ),
                 ],

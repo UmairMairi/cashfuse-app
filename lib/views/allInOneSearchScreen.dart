@@ -11,9 +11,10 @@ import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -206,8 +207,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                       ),
                                     )
                                   : SizedBox(),
-                          hintText:
-                              AppLocalizations.of(context).all_in_one_search,
+                          hintText: 'All in one search',
                           hintStyle: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.w300),
                           contentPadding: EdgeInsets.only(left: 10),
@@ -335,8 +335,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                         : Colors.white,
                                   ),
                                 ),
-                                hintText: AppLocalizations.of(context)
-                                    .all_in_one_search,
+                                hintText: 'All in one search',
                                 hintStyle: TextStyle(
                                     color: global.getPlatFrom()
                                         ? Colors.black
@@ -393,7 +392,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                 child: Center(
                                   child: Text(
                                     'No data found.',
-                                  ),
+                                  ).translate(),
                                 ),
                               )
                         : Expanded(
@@ -407,25 +406,25 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              AppLocalizations.of(context).login,
+                              'Login or signup',
                               style: Get.theme.primaryTextTheme.displaySmall
                                   .copyWith(
                                 letterSpacing: -1,
                                 fontWeight: FontWeight.w700,
                               ),
-                            ),
+                            ).translate(),
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 15),
                               child: Text(
-                                AppLocalizations.of(context).profile_desc,
+                                'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
                                 textAlign: TextAlign.center,
                                 style: Get.theme.primaryTextTheme.titleSmall
                                     .copyWith(
                                   letterSpacing: -0.2,
                                   fontWeight: FontWeight.w600,
                                 ),
-                              ),
+                              ).translate(),
                             ),
                             InkWell(
                               onTap: () async {
@@ -468,14 +467,12 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                 ),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  AppLocalizations.of(context)
-                                      .conti
-                                      .toUpperCase(),
+                                  'Continue'.toUpperCase(),
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600),
-                                ),
+                                ).translate(),
                               ),
                             ),
                           ],
@@ -594,7 +591,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                               child: Text(
                                 searchController.addNewTabList2[index].name,
                                 style: TextStyle(color: Colors.white),
-                              ),
+                              ).translate(),
                             ),
                             // Padding(
                             //   padding: const EdgeInsets.only(left: 4),
@@ -643,7 +640,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                     .copyWith(
                                         color: Colors.red,
                                         fontWeight: FontWeight.w600),
-                              ),
+                              ).translate(),
                             ),
                             InkWell(
                               onTap: () {
@@ -666,7 +663,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
                                   ),
-                                ),
+                                ).translate(),
                               ),
                             ),
                           ],
@@ -706,7 +703,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                                 .titleMedium
                                                 .copyWith(
                                                     color: Colors.black54),
-                                          ),
+                                          ).translate(),
                                           DropdownButton(
                                             items: searchController.allInOneList
                                                 .map<
@@ -728,7 +725,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                                           .copyWith(
                                                               color: Colors
                                                                   .black54),
-                                                    ),
+                                                    ).translate(),
                                                     Divider(
                                                       color: Colors.grey,
                                                     ),
@@ -770,7 +767,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                                   .titleMedium
                                                   .copyWith(
                                                       color: Colors.black54),
-                                            ),
+                                            ).translate(),
                                           ),
                                           InkWell(
                                             onTap: () {
@@ -906,12 +903,12 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                           ),
                                           alignment: Alignment.center,
                                           child: Text(
-                                            AppLocalizations.of(context).save,
+                                            'SAVE',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w400),
-                                          ),
+                                          ).translate(),
                                         ),
                                       ),
                                     ),
@@ -935,13 +932,12 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                           ),
                                           alignment: Alignment.center,
                                           child: Text(
-                                            AppLocalizations.of(context)
-                                                .add_new_tab,
+                                            'ADD NEW TAB',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w400),
-                                          ),
+                                          ).translate(),
                                         ),
                                       ),
                                     ),

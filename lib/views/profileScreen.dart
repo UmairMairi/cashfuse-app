@@ -19,6 +19,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:store_redirect/store_redirect.dart';
 
@@ -73,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   : '',
               style: Get.theme.primaryTextTheme.titleSmall
                   .copyWith(color: Colors.white),
-            ),
+            ).translate(),
           ),
           body: global.currentUser.id != null
               ? SingleChildScrollView(
