@@ -7,8 +7,9 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:google_translator/google_translator.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
   CommonController commonController = Get.find<CommonController>();
@@ -34,18 +35,23 @@ class PrivacyPolicyScreen extends StatelessWidget {
                 ),
               ),
               title: Text(
-                AppLocalizations.of(context).privacy_policy,
-                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-              ),
+                'Privacy Policy',
+                style: Get.theme.primaryTextTheme.titleSmall
+                    .copyWith(color: Colors.white),
+              ).translate(),
             ),
       body: GetBuilder<CommonController>(builder: (controller) {
         return Center(
             child: Container(
           padding: global.getPlatFrom() ? EdgeInsets.all(15) : EdgeInsets.zero,
-          width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 2 : AppConstants.WEB_MAX_WIDTH,
+          width: global.getPlatFrom()
+              ? AppConstants.WEB_MAX_WIDTH / 2
+              : AppConstants.WEB_MAX_WIDTH,
           color: Colors.white,
           height: Get.height,
-          margin: global.getPlatFrom() ? EdgeInsets.zero : EdgeInsets.all(10).copyWith(bottom: 0),
+          margin: global.getPlatFrom()
+              ? EdgeInsets.zero
+              : EdgeInsets.all(10).copyWith(bottom: 0),
           child: SingleChildScrollView(
             child: HtmlWidget(
               commonController.privacyPolicy,

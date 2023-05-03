@@ -1,9 +1,9 @@
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:cashfuse/utils/global.dart' as global;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OtpVerificationScreen extends StatelessWidget {
   final String verificationCode;
@@ -37,14 +37,14 @@ class OtpVerificationScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
-                  AppLocalizations.of(context).otp_title,
+                  'Enter 6 digit code we have sent you',
                   textAlign: TextAlign.left,
                   style: Get.theme.primaryTextTheme.displaySmall.copyWith(
                     height: 1.2,
                     letterSpacing: -1,
                     fontWeight: FontWeight.w700,
                   ),
-                ),
+                ).translate(),
               ),
               Padding(
                 padding:
@@ -54,13 +54,13 @@ class OtpVerificationScreen extends StatelessWidget {
                   children: [
                     Text(
                       !isEmail
-                          ? '${AppLocalizations.of(context).otp_subtitle} ${authController.coutryCode} ${authController.contactNo.text}'
-                          : '${AppLocalizations.of(context).otp_subtitle} ${authController.email.text}',
+                          ? 'Code sent to ${authController.coutryCode} ${authController.contactNo.text}'
+                          : 'Code sent to ${authController.email.text}',
                       style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                         letterSpacing: -0.2,
                         fontWeight: FontWeight.w500,
                       ),
-                    ),
+                    ).translate(),
                   ],
                 ),
               ),
@@ -114,7 +114,7 @@ class OtpVerificationScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Text(
                         "Wait 00 : ${authController.seconds}",
-                      ),
+                      ).translate(),
                     )
                   : InkWell(
                       onTap: () async {
@@ -129,7 +129,7 @@ class OtpVerificationScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: RichText(
                           text: TextSpan(
-                            text: AppLocalizations.of(context).otp_not_receive,
+                            text: "Haven't receive the OTP ?",
                             style:
                                 Get.theme.primaryTextTheme.titleSmall.copyWith(
                               letterSpacing: -0.2,
@@ -137,7 +137,7 @@ class OtpVerificationScreen extends StatelessWidget {
                             ),
                             children: <TextSpan>[
                               TextSpan(
-                                text: ' ${AppLocalizations.of(context).resend}',
+                                text: ' Resend',
                                 style: Get.theme.primaryTextTheme.titleSmall
                                     .copyWith(
                                   letterSpacing: -0.2,
@@ -176,12 +176,12 @@ class OtpVerificationScreen extends StatelessWidget {
             ),
             alignment: Alignment.center,
             child: Text(
-              AppLocalizations.of(context).conti,
+              'Continue',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 14,
                   fontWeight: FontWeight.w600),
-            ),
+            ).translate(),
           ),
         ),
       );

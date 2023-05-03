@@ -2,8 +2,9 @@ import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 
 import 'admitedOfferDetailScreen.dart';
 
@@ -36,12 +37,12 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      AppLocalizations.of(context).see_more_offers,
+                      'See More Offers',
                       style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.1,
                       ),
-                    ),
+                    ).translate(),
                     InkWell(
                       onTap: () {
                         Get.back();
@@ -62,7 +63,7 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
               ),
               homeController.seeMoreAdsList.length == 0
                   ? Center(
-                      child: Text("No More Offers"),
+                      child: Text("No More Offers").translate(),
                     )
                   : Expanded(
                       child: ListView.builder(
@@ -94,7 +95,7 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                                           textAlign: TextAlign.start,
                                           style: Get.theme.primaryTextTheme
                                               .titleSmall,
-                                        ),
+                                        ).translate(),
                                         Container(
                                           width: 250,
                                           child: Text(
@@ -103,7 +104,7 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                                             maxLines: 3,
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.start,
-                                          ),
+                                          ).translate(),
                                         ),
                                       ],
                                     ),
@@ -150,7 +151,7 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                                         color: Get.theme.secondaryHeaderColor,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600),
-                                  ),
+                                  ).translate(),
                                 ),
                               ),
                               Container(

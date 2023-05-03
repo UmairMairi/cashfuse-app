@@ -15,8 +15,9 @@ import 'package:cashfuse/widget/adsCampaignWidget.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/offerWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
@@ -50,7 +51,8 @@ class SearchScreen extends StatelessWidget {
         title: TextFormField(
           controller: searchController.searchString,
           cursorColor: Colors.orange,
-          style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.black),
+          style: Get.theme.primaryTextTheme.bodySmall
+              .copyWith(color: Colors.black),
           decoration: InputDecoration(
             suffix: searchController.searchString.text.isNotEmpty
                 ? InkWell(
@@ -67,58 +69,83 @@ class SearchScreen extends StatelessWidget {
                 : SizedBox(),
             border: InputBorder.none,
             hintText: 'What do you want to buy today?',
-            hintStyle: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.black.withOpacity(0.4)),
+            hintStyle: Get.theme.primaryTextTheme.bodySmall
+                .copyWith(color: Colors.black.withOpacity(0.4)),
           ),
           onEditingComplete: () {
-            searchController.getSearchData(searchController.searchString.text.trim());
+            searchController
+                .getSearchData(searchController.searchString.text.trim());
           },
         ),
       ),
       body: GetBuilder<SearchController>(builder: (controller) {
         return searchController.searchData != null
-            ? searchController.searchData.advertiserList.isEmpty && searchController.searchData.commonList.isEmpty && searchController.searchData.offerList.isEmpty
-                ? Center(child: Text(AppLocalizations.of(context).no_data_found))
+            ? searchController.searchData.advertiserList.isEmpty &&
+                    searchController.searchData.commonList.isEmpty &&
+                    searchController.searchData.offerList.isEmpty
+                ? Center(
+                    child: Text('No data found')
+                        .translate(),
+                  )
                 : SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        searchController.searchData.advertiserList != null && searchController.searchData.advertiserList.length > 0
+                        searchController.searchData.advertiserList != null &&
+                                searchController
+                                        .searchData.advertiserList.length >
+                                    0
                             ? Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
                                 child: Text(
                                   'in Stores',
                                   style: Get.theme.primaryTextTheme.titleSmall,
-                                ),
+                                ).translate(),
                               )
                             : SizedBox(),
-                        searchController.searchData.advertiserList != null && searchController.searchData.advertiserList.length > 0
+                        searchController.searchData.advertiserList != null &&
+                                searchController
+                                        .searchData.advertiserList.length >
+                                    0
                             ? SizedBox(
                                 height: 155,
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: searchController.searchData.advertiserList.length,
+                                  itemCount: searchController
+                                      .searchData.advertiserList.length,
                                   padding: EdgeInsets.symmetric(horizontal: 10),
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                       onTap: () {
                                         Get.to(
                                           () => CategoryScreen(
-                                            category: searchController.searchData.advertiserList[index],
+                                            category: searchController
+                                                .searchData
+                                                .advertiserList[index],
                                           ),
                                           routeName: 'category',
                                         );
                                       },
                                       child: Padding(
-                                        padding: const EdgeInsets.only(right: 12),
+                                        padding:
+                                            const EdgeInsets.only(right: 12),
                                         child: SizedBox(
                                           width: 155,
                                           child: AdsCampaignWidget(
                                             commonModel: CommonModel(
-                                              name: searchController.searchData.advertiserList[index].name,
-                                              image: '${global.appInfo.baseUrls.partnerImageUrl}/${searchController.searchData.advertiserList[index].image}',
-                                              tagline: searchController.searchData.advertiserList[index].tagline,
-                                              adId: searchController.searchData.advertiserList[index].id.toString(),
+                                              name: searchController.searchData
+                                                  .advertiserList[index].name,
+                                              image:
+                                                  '${global.appInfo.baseUrls.partnerImageUrl}/${searchController.searchData.advertiserList[index].image}',
+                                              tagline: searchController
+                                                  .searchData
+                                                  .advertiserList[index]
+                                                  .tagline,
+                                              adId: searchController.searchData
+                                                  .advertiserList[index].id
+                                                  .toString(),
                                             ),
                                           ),
                                         ),
@@ -128,28 +155,43 @@ class SearchScreen extends StatelessWidget {
                                 ),
                               )
                             : SizedBox(),
-                        searchController.searchData.commonList != null && searchController.searchData.commonList.length > 0
+                        searchController.searchData.commonList != null &&
+                                searchController.searchData.commonList.length >
+                                    0
                             ? Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
                                 child: Text(
                                   'in Offers & Deals',
                                   style: Get.theme.primaryTextTheme.titleSmall,
-                                ),
+                                ).translate(),
                               )
                             : SizedBox(),
-                        searchController.searchData.commonList != null && searchController.searchData.commonList.length > 0
+                        searchController.searchData.commonList != null &&
+                                searchController.searchData.commonList.length >
+                                    0
                             ? SizedBox(
                                 height: 155,
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: searchController.searchData.commonList.length,
+                                  itemCount: searchController
+                                      .searchData.commonList.length,
                                   padding: EdgeInsets.symmetric(horizontal: 10),
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                       onTap: () async {
-                                        if (searchController.searchData.commonList[index].adId != null && searchController.searchData.commonList[index].adId.isNotEmpty) {
-                                          await homeController.getAdDetails(searchController.searchData.commonList[index].adId);
+                                        if (searchController.searchData
+                                                    .commonList[index].adId !=
+                                                null &&
+                                            searchController
+                                                .searchData
+                                                .commonList[index]
+                                                .adId
+                                                .isNotEmpty) {
+                                          await homeController.getAdDetails(
+                                              searchController.searchData
+                                                  .commonList[index].adId);
                                           Get.to(
                                             () => AdsDetailScreen(
                                               ads: homeController.ads,
@@ -158,7 +200,13 @@ class SearchScreen extends StatelessWidget {
                                             routeName: 'detail',
                                           );
                                         } else {
-                                          await homeController.getCampignDetails(searchController.searchData.commonList[index].campaignId.toString());
+                                          await homeController
+                                              .getCampignDetails(
+                                                  searchController
+                                                      .searchData
+                                                      .commonList[index]
+                                                      .campaignId
+                                                      .toString());
                                           Get.to(
                                             () => CampaignDetailScreen(
                                               campaign: homeController.campaign,
@@ -169,11 +217,13 @@ class SearchScreen extends StatelessWidget {
                                         }
                                       },
                                       child: Padding(
-                                        padding: const EdgeInsets.only(right: 15),
+                                        padding:
+                                            const EdgeInsets.only(right: 15),
                                         child: SizedBox(
                                           width: 155,
                                           child: AdsCampaignWidget(
-                                            commonModel: searchController.searchData.commonList[index],
+                                            commonModel: searchController
+                                                .searchData.commonList[index],
                                           ),
                                         ),
                                       ),
@@ -182,18 +232,24 @@ class SearchScreen extends StatelessWidget {
                                 ),
                               )
                             : SizedBox(),
-                        searchController.searchData.offerList != null && searchController.searchData.offerList.length > 0
+                        searchController.searchData.offerList != null &&
+                                searchController.searchData.offerList.length > 0
                             ? SizedBox(
                                 height: global.getPlatFrom() ? 260 : 230,
                                 child: ListView.builder(
-                                  itemCount: searchController.searchData.offerList.length,
+                                  itemCount: searchController
+                                      .searchData.offerList.length,
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
-                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 15),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 6, vertical: 15),
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                       onTap: () async {
-                                        await homeController.getOfferDetails(searchController.searchData.offerList[index].id.toString());
+                                        await homeController.getOfferDetails(
+                                            searchController
+                                                .searchData.offerList[index].id
+                                                .toString());
                                         Get.to(
                                           () => OfferDetailScreen(
                                             offer: homeController.offer,
@@ -203,7 +259,8 @@ class SearchScreen extends StatelessWidget {
                                         );
                                       },
                                       child: OfferWidget(
-                                        offer: searchController.searchData.offerList[index],
+                                        offer: searchController
+                                            .searchData.offerList[index],
                                         fromList: false,
                                       ),
                                     );
@@ -225,15 +282,17 @@ class SearchScreen extends StatelessWidget {
                         child: Text(
                           'Trending Keywords',
                           style: Get.theme.primaryTextTheme.titleSmall,
-                        ),
+                        ).translate(),
                       ),
                       Wrap(
                         runSpacing: 0,
                         spacing: 10,
-                        children: List.generate(searchController.searchKeywordList.length, (index) {
+                        children: List.generate(
+                            searchController.searchKeywordList.length, (index) {
                           return InkWell(
                             onTap: () {
-                              searchController.getSearchData(searchController.searchKeywordList[index].name);
+                              searchController.getSearchData(searchController
+                                  .searchKeywordList[index].name);
                             },
                             child: Chip(
                               label: Text(
@@ -244,34 +303,39 @@ class SearchScreen extends StatelessWidget {
                         }),
                       ),
                       GetBuilder<HomeController>(builder: (hmController) {
-                        return hmController.topCashbackList != null && hmController.topCashbackList.length > 0
+                        return hmController.topCashbackList != null &&
+                                hmController.topCashbackList.length > 0
                             ? Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 20),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 6, vertical: 20),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      AppLocalizations.of(context).top_cashback_stores,
+                                      'TOP CASHBACK STORES',
                                       style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black.withOpacity(0.79),
                                         letterSpacing: -0.3,
                                       ),
-                                    ),
+                                    ).translate(),
                                     InkWell(
                                       onTap: () {
                                         Get.to(
                                           () => AdsCampaignWidgetListScreen(
-                                            title: AppLocalizations.of(context).top_cashback_stores,
+                                            title: 'TOP CASHBACK STORES',
                                           ),
                                           routeName: 'all',
                                         );
                                       },
                                       child: Text(
-                                        '${AppLocalizations.of(context).view_all} >',
-                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(color: Colors.teal),
-                                      ),
+                                        'View All >',
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall
+                                            .copyWith(color: Colors.teal),
+                                      ).translate(),
                                     )
                                   ],
                                 ),
@@ -280,12 +344,17 @@ class SearchScreen extends StatelessWidget {
                       }),
                       GetBuilder<HomeController>(builder: (hmController) {
                         return hmController.isTopCashbackLoaded
-                            ? hmController.topCashbackList != null && hmController.topCashbackList.length > 0
+                            ? hmController.topCashbackList != null &&
+                                    hmController.topCashbackList.length > 0
                                 ? SizedBox(
                                     height: 155,
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: hmController.topCashbackList.length > 6 ? 6 : hmController.topCashbackList.length,
+                                      itemCount: hmController
+                                                  .topCashbackList.length >
+                                              6
+                                          ? 6
+                                          : hmController.topCashbackList.length,
                                       shrinkWrap: true,
                                       padding: EdgeInsets.zero,
                                       itemBuilder: (context, index) {
@@ -293,21 +362,30 @@ class SearchScreen extends StatelessWidget {
                                           onTap: () {
                                             Get.to(
                                               () => CategoryScreen(
-                                                category: hmController.topCashbackList[index],
+                                                category: hmController
+                                                    .topCashbackList[index],
                                               ),
                                               routeName: 'category',
                                             );
                                           },
                                           child: Padding(
-                                            padding: const EdgeInsets.only(right: 13),
+                                            padding: const EdgeInsets.only(
+                                                right: 13),
                                             child: SizedBox(
                                               width: 155,
                                               child: AdsCampaignWidget(
                                                 commonModel: CommonModel(
-                                                  name: hmController.topCashbackList[index].name,
-                                                  image: '${global.appInfo.baseUrls.partnerImageUrl}/${hmController.topCashbackList[index].image}',
-                                                  tagline: hmController.topCashbackList[index].tagline,
-                                                  adId: hmController.topCashbackList[index].id.toString(),
+                                                  name: hmController
+                                                      .topCashbackList[index]
+                                                      .name,
+                                                  image:
+                                                      '${global.appInfo.baseUrls.partnerImageUrl}/${hmController.topCashbackList[index].image}',
+                                                  tagline: hmController
+                                                      .topCashbackList[index]
+                                                      .tagline,
+                                                  adId: hmController
+                                                      .topCashbackList[index].id
+                                                      .toString(),
                                                 ),
                                               ),
                                             ),
@@ -323,7 +401,8 @@ class SearchScreen extends StatelessWidget {
                                     scrollDirection: Axis.horizontal,
                                     itemCount: 5,
                                     shrinkWrap: true,
-                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 6, vertical: 20),
                                     itemBuilder: (context, index) {
                                       return Shimmer(
                                         duration: Duration(seconds: 2),
@@ -332,7 +411,8 @@ class SearchScreen extends StatelessWidget {
                                           margin: EdgeInsets.only(right: 15),
                                           decoration: BoxDecoration(
                                             color: Colors.grey[300],
-                                            borderRadius: BorderRadius.circular(10),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                           ),
                                         ),
                                       );
@@ -340,35 +420,41 @@ class SearchScreen extends StatelessWidget {
                               );
                       }),
                       GetBuilder<HomeController>(builder: (hmCon) {
-                        return hmCon.exclusiveOfferList != null && hmCon.exclusiveOfferList.length > 0
+                        return hmCon.exclusiveOfferList != null &&
+                                hmCon.exclusiveOfferList.length > 0
                             ? Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 15),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 6, vertical: 15),
                                 child: Text(
-                                  AppLocalizations.of(context).exclusive_offers,
+                                  'EXCLUSIVE OFFERS FOR YOU',
                                   style: TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.black.withOpacity(0.79),
                                     letterSpacing: -0.3,
                                   ),
-                                ),
+                                ).translate(),
                               )
                             : SizedBox();
                       }),
                       GetBuilder<HomeController>(builder: (hmCon) {
                         return hmCon.isOfferLoaded
-                            ? hmCon.exclusiveOfferList != null && hmCon.exclusiveOfferList.length > 0
+                            ? hmCon.exclusiveOfferList != null &&
+                                    hmCon.exclusiveOfferList.length > 0
                                 ? SizedBox(
                                     height: 165,
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: hmCon.exclusiveOfferList.length,
+                                      itemCount:
+                                          hmCon.exclusiveOfferList.length,
                                       shrinkWrap: true,
                                       padding: EdgeInsets.zero,
                                       itemBuilder: (context, index) {
                                         return InkWell(
                                           onTap: () async {
-                                            await hmCon.getOfferDetails(hmCon.exclusiveOfferList[index].id.toString());
+                                            await hmCon.getOfferDetails(hmCon
+                                                .exclusiveOfferList[index].id
+                                                .toString());
                                             Get.to(
                                               () => OfferDetailScreen(
                                                 offer: hmCon.offer,
@@ -382,19 +468,24 @@ class SearchScreen extends StatelessWidget {
                                             margin: EdgeInsets.only(right: 10),
                                             decoration: BoxDecoration(
                                               color: Colors.white,
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                             ),
                                             child: Stack(
                                               alignment: Alignment.bottomLeft,
                                               children: [
                                                 ClipRRect(
-                                                    borderRadius: BorderRadius.circular(10),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
                                                     child: CustomImage(
-                                                      image: '${global.appInfo.baseUrls.offerImageUrl}/${hmCon.exclusiveOfferList[index].bannerImage}',
+                                                      image:
+                                                          '${global.appInfo.baseUrls.offerImageUrl}/${hmCon.exclusiveOfferList[index].bannerImage}',
                                                       height: 165,
                                                       width: Get.width,
                                                       fit: BoxFit.fill,
-                                                      errorImage: Images.dummyImage,
+                                                      errorImage:
+                                                          Images.dummyImage,
                                                     )
                                                     // Image.asset(
                                                     //   Images.dummyImage,
@@ -408,9 +499,12 @@ class SearchScreen extends StatelessWidget {
                                                     color: Colors.white,
                                                     margin: EdgeInsets.all(10),
                                                     child: Padding(
-                                                      padding: const EdgeInsets.all(2.0),
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              2.0),
                                                       child: CustomImage(
-                                                        image: '${global.appInfo.baseUrls.offerImageUrl}/${hmCon.exclusiveOfferList[index].image}',
+                                                        image:
+                                                            '${global.appInfo.baseUrls.offerImageUrl}/${hmCon.exclusiveOfferList[index].image}',
                                                         height: 30,
                                                         width: 60,
                                                         fit: BoxFit.contain,
@@ -418,18 +512,43 @@ class SearchScreen extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
-                                                hmCon.exclusiveOfferList[index].dayDifference != null && hmCon.exclusiveOfferList[index].dayDifference > 0
+                                                hmCon.exclusiveOfferList[index]
+                                                                .dayDifference !=
+                                                            null &&
+                                                        hmCon
+                                                                .exclusiveOfferList[
+                                                                    index]
+                                                                .dayDifference >
+                                                            0
                                                     ? Padding(
-                                                        padding: const EdgeInsets.all(10),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
                                                         child: SlideCountdown(
-                                                          slideDirection: SlideDirection.none,
-                                                          textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
-                                                          decoration: BoxDecoration(
-                                                            color: Colors.red[800],
-                                                            borderRadius: BorderRadius.circular(3),
+                                                          slideDirection:
+                                                              SlideDirection
+                                                                  .none,
+                                                          textStyle: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 10,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color:
+                                                                Colors.red[800],
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        3),
                                                           ),
                                                           duration: Duration(
-                                                            days: hmCon.exclusiveOfferList[index].dayDifference,
+                                                            days: hmCon
+                                                                .exclusiveOfferList[
+                                                                    index]
+                                                                .dayDifference,
                                                           ),
                                                         ),
                                                       )
@@ -447,7 +566,8 @@ class SearchScreen extends StatelessWidget {
                                     scrollDirection: Axis.horizontal,
                                     itemCount: 5,
                                     shrinkWrap: true,
-                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 6, vertical: 20),
                                     itemBuilder: (context, index) {
                                       return Shimmer(
                                         duration: Duration(seconds: 2),
@@ -457,7 +577,8 @@ class SearchScreen extends StatelessWidget {
                                           margin: EdgeInsets.only(right: 15),
                                           decoration: BoxDecoration(
                                             color: Colors.grey[300],
-                                            borderRadius: BorderRadius.circular(10),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                           ),
                                         ),
                                       );

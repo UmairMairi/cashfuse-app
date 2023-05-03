@@ -14,8 +14,9 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 
 class RecentClickScreen extends StatelessWidget {
   final Color bgColor;
@@ -52,9 +53,9 @@ class RecentClickScreen extends StatelessWidget {
                   ),
                 ),
                 title: Text(
-                  AppLocalizations.of(context).recents_clicks,
+                  'Recents Clicks',
                   style: Get.theme.primaryTextTheme.titleSmall,
-                ),
+                ).translate(),
                 actions: [
                   global.currentUser.id != null &&
                           homeController.recentClickList != null &&
@@ -63,15 +64,15 @@ class RecentClickScreen extends StatelessWidget {
                           onTap: () {
                             showConfirmationDialog(
                               context,
-                              AppLocalizations.of(context).delete,
-                              AppLocalizations.of(context).delete_desc_click,
+                              'Delete',
+                              'Are you sure, You want to delete clicks older than 10 days ?',
                               [
                                 CupertinoDialogAction(
                                   child: Text(
-                                    AppLocalizations.of(context).yes,
+                                    'Yes',
                                     style: Get.theme.primaryTextTheme.titleSmall
                                         .copyWith(color: Colors.red),
-                                  ),
+                                  ).translate(),
                                   onPressed: () {
                                     Get.back();
                                     homeController.deleteClicks();
@@ -79,10 +80,10 @@ class RecentClickScreen extends StatelessWidget {
                                 ),
                                 CupertinoDialogAction(
                                   child: Text(
-                                    AppLocalizations.of(context).no,
+                                    'No',
                                     style: Get.theme.primaryTextTheme.titleSmall
                                         .copyWith(color: Colors.blue),
-                                  ),
+                                  ).translate(),
                                   onPressed: () {
                                     Get.back();
                                   },
@@ -174,7 +175,7 @@ class RecentClickScreen extends StatelessWidget {
                                                           color:
                                                               Colors.grey[600],
                                                         ),
-                                                      ),
+                                                      ).translate(),
                                                     ),
                                                     SizedBox(
                                                       height: 25,
@@ -185,7 +186,7 @@ class RecentClickScreen extends StatelessWidget {
                                                               left: 20,
                                                               right: 20),
                                                       child: Text(
-                                                        '${AppLocalizations.of(context).did_you_shop_on} ${homeController.recentClickList[index].name}?',
+                                                        'Did you shop on ${homeController.recentClickList[index].name}?',
                                                         style: Get
                                                             .theme
                                                             .primaryTextTheme
@@ -194,7 +195,7 @@ class RecentClickScreen extends StatelessWidget {
                                                           fontWeight:
                                                               FontWeight.w300,
                                                         ),
-                                                      ),
+                                                      ).translate(),
                                                     ),
                                                     SizedBox(
                                                       height: 25,
@@ -249,7 +250,7 @@ class RecentClickScreen extends StatelessWidget {
                                                                   .start,
                                                           children: [
                                                             Text(
-                                                              '${AppLocalizations.of(context).yes_i_did} ',
+                                                              'Yes I Did',
                                                               textAlign:
                                                                   TextAlign
                                                                       .center,
@@ -261,7 +262,7 @@ class RecentClickScreen extends StatelessWidget {
                                                                 color:
                                                                     Colors.teal,
                                                               ),
-                                                            ),
+                                                            ).translate(),
                                                             CircleAvatar(
                                                               radius: 6,
                                                               backgroundColor:
@@ -329,7 +330,7 @@ class RecentClickScreen extends StatelessWidget {
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.grey[600],
                                               ),
-                                            ),
+                                            ).translate(),
                                           ),
                                           SizedBox(
                                             height: 25,
@@ -338,13 +339,13 @@ class RecentClickScreen extends StatelessWidget {
                                             padding: const EdgeInsets.only(
                                                 left: 20, right: 20),
                                             child: Text(
-                                              '${AppLocalizations.of(context).did_you_shop_on} ${homeController.recentClickList[index].name}?',
+                                              'Did you shop on ${homeController.recentClickList[index].name}?',
                                               style: Get.theme.primaryTextTheme
                                                   .bodyMedium
                                                   .copyWith(
                                                 fontWeight: FontWeight.w300,
                                               ),
-                                            ),
+                                            ).translate(),
                                           ),
                                           SizedBox(
                                             height: 25,
@@ -387,7 +388,7 @@ class RecentClickScreen extends StatelessWidget {
                                                     MainAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    '${AppLocalizations.of(context).yes_i_did} ',
+                                                    'Yes I Did',
                                                     textAlign: TextAlign.center,
                                                     style: Get
                                                         .theme
@@ -396,7 +397,7 @@ class RecentClickScreen extends StatelessWidget {
                                                         .copyWith(
                                                       color: Colors.teal,
                                                     ),
-                                                  ),
+                                                  ).translate(),
                                                   CircleAvatar(
                                                     radius: 6,
                                                     backgroundColor:
@@ -432,12 +433,12 @@ class RecentClickScreen extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),
                                     child: Text(
-                                      AppLocalizations.of(context).click_title,
+                                      "Don't stop, just shop!",
                                       style: Get
                                           .theme.primaryTextTheme.titleMedium
                                           .copyWith(
                                               fontWeight: FontWeight.w500),
-                                    ),
+                                    ).translate(),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -446,7 +447,7 @@ class RecentClickScreen extends StatelessWidget {
                                       "When you visit any of the sites on ${global.appName}, it will record your click and display on it.",
                                       textAlign: TextAlign.center,
                                       //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
-                                    ),
+                                    ).translate(),
                                   ),
                                   InkWell(
                                     onTap: () async {
@@ -471,13 +472,12 @@ class RecentClickScreen extends StatelessWidget {
                                       ),
                                       alignment: Alignment.center,
                                       child: Text(
-                                        AppLocalizations.of(context)
-                                            .see_best_deals,
+                                        'SEE BEST DEALS',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w600),
-                                      ),
+                                      ).translate(),
                                     ),
                                   ),
                                 ],
@@ -504,10 +504,10 @@ class RecentClickScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 15),
                             child: Text(
-                              AppLocalizations.of(context).profile_desc,
+                              'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
                               textAlign: TextAlign.center,
                               //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
-                            ),
+                            ).translate(),
                           ),
                           InkWell(
                             onTap: () async {
@@ -548,12 +548,12 @@ class RecentClickScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                AppLocalizations.of(context).login,
+                                'Login or signup',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600),
-                              ),
+                              ).translate(),
                             ),
                           ),
                         ],

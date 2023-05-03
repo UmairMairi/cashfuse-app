@@ -6,10 +6,11 @@ import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:flutter_share/flutter_share.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ReferEarnScreen extends StatelessWidget {
@@ -34,9 +35,10 @@ class ReferEarnScreen extends StatelessWidget {
                   ),
                 ),
                 title: Text(
-                  AppLocalizations.of(context).refer_earn,
-                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-                ),
+                  'Refer & Earn',
+                  style: Get.theme.primaryTextTheme.titleSmall
+                      .copyWith(color: Colors.white),
+                ).translate(),
               ),
         body: global.getPlatFrom()
             ? Column(
@@ -59,22 +61,24 @@ class ReferEarnScreen extends StatelessWidget {
                               Text(
                                 "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
                                 textAlign: TextAlign.center,
-                                style: Get.theme.primaryTextTheme.headlineMedium.copyWith(
+                                style: Get.theme.primaryTextTheme.headlineMedium
+                                    .copyWith(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,
                                 ),
-                              ),
+                              ).translate(),
                               SizedBox(
                                 height: 20,
                               ),
                               Text(
                                 'Make your friends join ${global.appName} via your referral link below - No referral code needed',
                                 textAlign: TextAlign.center,
-                                style: Get.theme.primaryTextTheme.titleLarge.copyWith(
+                                style: Get.theme.primaryTextTheme.titleLarge
+                                    .copyWith(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
                                 ),
-                              ),
+                              ).translate(),
                             ],
                           ),
                         ),
@@ -87,7 +91,8 @@ class ReferEarnScreen extends StatelessWidget {
                             color: Colors.white,
                             //margin: EdgeInsets.only(top: Get.height * 0.2),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 40),
                               child: Column(
                                 children: [
                                   Card(
@@ -100,24 +105,36 @@ class ReferEarnScreen extends StatelessWidget {
                                         children: [
                                           Text(
                                             'Your Referral Link : ',
-                                          ),
+                                          ).translate(),
                                           Expanded(
                                             child: Container(
                                               color: Colors.white,
                                               height: 50,
                                               alignment: Alignment.centerLeft,
-                                              padding: EdgeInsets.symmetric(horizontal: 5),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 5),
                                               child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    global.appShareLink.isNotEmpty ? global.appShareLink : 'Link Url',
-                                                    style: Get.theme.primaryTextTheme.titleSmall,
-                                                  ),
+                                                    global.appShareLink
+                                                            .isNotEmpty
+                                                        ? global.appShareLink
+                                                        : 'Link Url',
+                                                    style: Get
+                                                        .theme
+                                                        .primaryTextTheme
+                                                        .titleSmall,
+                                                  ).translate(),
                                                   Text(
                                                     'Copy Link'.toUpperCase(),
-                                                    style: Get.theme.primaryTextTheme.titleMedium,
-                                                  ),
+                                                    style: Get
+                                                        .theme
+                                                        .primaryTextTheme
+                                                        .titleMedium,
+                                                  ).translate(),
                                                 ],
                                               ),
                                             ),
@@ -134,7 +151,8 @@ class ReferEarnScreen extends StatelessWidget {
                                         if (global.appShareLink.isNotEmpty) {
                                           await FlutterShare.share(
                                             title: '${global.appName}',
-                                            text: 'I recently tried ${global.appName} app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
+                                            text:
+                                                'I recently tried ${global.appName} app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
                                           ).then((value) {
                                             if (value) {}
                                           }).onError((error, stackTrace) {
@@ -145,17 +163,22 @@ class ReferEarnScreen extends StatelessWidget {
                                       child: Container(
                                         width: AppConstants.WEB_MAX_WIDTH / 3,
                                         height: 45,
-                                        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 20),
                                         //padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
                                         decoration: BoxDecoration(
                                           color: Get.theme.secondaryHeaderColor,
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         ),
                                         alignment: Alignment.center,
                                         child: Text(
-                                          AppLocalizations.of(context).invite_now,
-                                          style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                                        ),
+                                          'Invite Now',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600),
+                                        ).translate(),
                                       ),
                                     ),
                                   )
@@ -175,7 +198,8 @@ class ReferEarnScreen extends StatelessWidget {
                         return Get.dialog(
                           Dialog(
                             backgroundColor: Colors.white,
-                            insetPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                            insetPadding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
                             child: SizedBox(
                               width: AppConstants.WEB_MAX_WIDTH / 3,
                               child: Column(
@@ -186,16 +210,22 @@ class ReferEarnScreen extends StatelessWidget {
                                   ),
                                   Image.asset(Images.access),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 20),
                                     child: Text(
                                       'To access this feature, download the app',
-                                      style: Get.theme.primaryTextTheme.titleLarge.copyWith(color: Colors.red, fontWeight: FontWeight.w600),
-                                    ),
+                                      style: Get
+                                          .theme.primaryTextTheme.titleLarge
+                                          .copyWith(
+                                              color: Colors.red,
+                                              fontWeight: FontWeight.w600),
+                                    ).translate(),
                                   ),
                                   InkWell(
                                     onTap: () {
                                       launchUrl(
-                                        Uri.parse("https://play.google.com/store/apps/details?id=${global.appPackageName}"),
+                                        Uri.parse(
+                                            "https://play.google.com/store/apps/details?id=${global.appPackageName}"),
                                         webOnlyWindowName: 'blank',
                                       );
                                     },
@@ -207,11 +237,13 @@ class ReferEarnScreen extends StatelessWidget {
                                       alignment: Alignment.center,
                                       child: Text(
                                         'Download The App',
-                                        style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                        style: Get
+                                            .theme.primaryTextTheme.titleSmall
+                                            .copyWith(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w600,
                                         ),
-                                      ),
+                                      ).translate(),
                                     ),
                                   ),
                                 ],
@@ -247,7 +279,7 @@ class ReferEarnScreen extends StatelessWidget {
                               "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
                               textAlign: TextAlign.center,
                               style: Get.theme.primaryTextTheme.titleSmall,
-                            ),
+                            ).translate(),
                             SizedBox(
                               height: 20,
                             ),
@@ -258,18 +290,19 @@ class ReferEarnScreen extends StatelessWidget {
                         height: 20,
                       ),
                       Text(
-                        AppLocalizations.of(context).reffral_link,
+                        'Your Referal Link',
                         textAlign: TextAlign.center,
                         style: Get.theme.primaryTextTheme.titleSmall,
-                      ),
+                      ).translate(),
                       SizedBox(
                         height: 20,
                       ),
                       Text(
                         'Make your friends join ${global.appName} via your referral link below - No referral code needed',
                         textAlign: TextAlign.center,
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(fontWeight: FontWeight.w300),
-                      ),
+                        style: Get.theme.primaryTextTheme.bodySmall
+                            .copyWith(fontWeight: FontWeight.w300),
+                      ).translate(),
                       SizedBox(
                         height: 20,
                       ),
@@ -280,8 +313,11 @@ class ReferEarnScreen extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         padding: EdgeInsets.symmetric(horizontal: 5),
                         child: Text(
-                          global.appShareLink.isNotEmpty ? global.appShareLink : 'Link Url',
-                          style: Get.theme.primaryTextTheme.bodySmall.copyWith(fontWeight: FontWeight.w300),
+                          global.appShareLink.isNotEmpty
+                              ? global.appShareLink
+                              : 'Link Url',
+                          style: Get.theme.primaryTextTheme.bodySmall
+                              .copyWith(fontWeight: FontWeight.w300),
                         ),
                       ),
                       SizedBox(
@@ -290,7 +326,9 @@ class ReferEarnScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           if (global.appShareLink.isNotEmpty) {
-                            Clipboard.setData(ClipboardData(text: global.appShareLink)).then((value) {
+                            Clipboard.setData(
+                                    ClipboardData(text: global.appShareLink))
+                                .then((value) {
                               Fluttertoast.showToast(
                                 msg: 'Link Copied',
                                 toastLength: Toast.LENGTH_SHORT,
@@ -304,10 +342,11 @@ class ReferEarnScreen extends StatelessWidget {
                           }
                         },
                         child: Text(
-                          AppLocalizations.of(context).tap_to_copy,
+                          'Tap to Copy',
                           textAlign: TextAlign.center,
-                          style: Get.theme.primaryTextTheme.bodySmall.copyWith(fontWeight: FontWeight.w300),
-                        ),
+                          style: Get.theme.primaryTextTheme.bodySmall
+                              .copyWith(fontWeight: FontWeight.w300),
+                        ).translate(),
                       ),
                       SizedBox(
                         height: 20,
@@ -321,7 +360,8 @@ class ReferEarnScreen extends StatelessWidget {
                               if (global.appShareLink.isNotEmpty) {
                                 await FlutterShare.share(
                                   title: '${global.appName}',
-                                  text: 'I recently tried ${global.appName} app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
+                                  text:
+                                      'I recently tried ${global.appName} app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
                                 ).then((value) {
                                   if (value) {}
                                 }).onError((error, stackTrace) {
@@ -332,7 +372,8 @@ class ReferEarnScreen extends StatelessWidget {
                             child: Container(
                               width: MediaQuery.of(context).size.width,
                               height: 45,
-                              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 30),
                               //padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
                               decoration: BoxDecoration(
                                 color: Get.theme.secondaryHeaderColor,
@@ -340,9 +381,12 @@ class ReferEarnScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                AppLocalizations.of(context).invite_now,
-                                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                              ),
+                                'Invite Now',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
+                              ).translate(),
                             ),
                           ),
                         ),
@@ -358,7 +402,8 @@ class ReferEarnScreen extends StatelessWidget {
                             return Get.dialog(
                               Dialog(
                                 backgroundColor: Colors.white,
-                                insetPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                                insetPadding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 20),
                                 child: SizedBox(
                                   width: AppConstants.WEB_MAX_WIDTH / 3,
                                   child: Column(
@@ -369,17 +414,23 @@ class ReferEarnScreen extends StatelessWidget {
                                       ),
                                       Image.asset(Images.access),
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 20, horizontal: 15),
                                         child: Text(
                                           'To access this feature, download the app',
                                           textAlign: TextAlign.center,
-                                          style: Get.theme.primaryTextTheme.titleLarge.copyWith(color: Colors.red, fontWeight: FontWeight.w600),
-                                        ),
+                                          style: Get
+                                              .theme.primaryTextTheme.titleLarge
+                                              .copyWith(
+                                                  color: Colors.red,
+                                                  fontWeight: FontWeight.w600),
+                                        ).translate(),
                                       ),
                                       InkWell(
                                         onTap: () {
                                           launchUrl(
-                                            Uri.parse("https://play.google.com/store/apps/details?id=${global.appPackageName}"),
+                                            Uri.parse(
+                                                "https://play.google.com/store/apps/details?id=${global.appPackageName}"),
                                             webOnlyWindowName: 'blank',
                                           );
                                         },
@@ -391,11 +442,13 @@ class ReferEarnScreen extends StatelessWidget {
                                           alignment: Alignment.center,
                                           child: Text(
                                             'Download The App',
-                                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                            style: Get.theme.primaryTextTheme
+                                                .titleSmall
+                                                .copyWith(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w600,
                                             ),
-                                          ),
+                                          ).translate(),
                                         ),
                                       ),
                                     ],

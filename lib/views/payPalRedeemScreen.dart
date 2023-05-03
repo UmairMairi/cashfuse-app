@@ -5,8 +5,9 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:google_translator/google_translator.dart';
 
 class PayPalRedeemScreen extends StatelessWidget {
   final fPayPalId = new FocusNode();
@@ -29,9 +30,10 @@ class PayPalRedeemScreen extends StatelessWidget {
             ),
           ),
           title: Text(
-            AppLocalizations.of(context).paypal_redeem,
-            style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-          ),
+            'PayPal Redeem',
+            style: Get.theme.primaryTextTheme.titleSmall
+                .copyWith(color: Colors.white),
+          ).translate(),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -76,20 +78,23 @@ class PayPalRedeemScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            AppLocalizations.of(context).account_details,
-                            style: Get.theme.primaryTextTheme.titleMedium.copyWith(fontWeight: FontWeight.w600),
-                          ),
+                            'Account Details',
+                            style: Get.theme.primaryTextTheme.titleMedium
+                                .copyWith(fontWeight: FontWeight.w600),
+                          ).translate(),
                           InkWell(
                             onTap: () {
                               if (paymentController.payPalDetails != null) {
-                                payPalId.text = paymentController.payPalDetails.payPalEmail;
+                                payPalId.text =
+                                    paymentController.payPalDetails.payPalEmail;
                               }
                               Get.dialog(
                                 Dialog(
                                   child: Container(
                                     height: 210,
                                     width: global.getPlatFrom() ? 400 : null,
-                                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 20, horizontal: 20),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(15),
@@ -97,62 +102,87 @@ class PayPalRedeemScreen extends StatelessWidget {
                                     child: Column(
                                       children: [
                                         Text(
-                                          AppLocalizations.of(context).paypal_account_add,
-                                          style: Get.theme.primaryTextTheme.titleLarge.copyWith(fontWeight: FontWeight.w600),
-                                        ),
+                                          'Add PayPal Account',
+                                          style: Get
+                                              .theme.primaryTextTheme.titleLarge
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w600),
+                                        ).translate(),
                                         TextFormField(
                                           focusNode: fPayPalId,
                                           controller: payPalId,
                                           scrollPadding: EdgeInsets.zero,
                                           cursorColor: Get.theme.primaryColor,
-                                          keyboardType: TextInputType.emailAddress,
+                                          keyboardType:
+                                              TextInputType.emailAddress,
                                           decoration: InputDecoration(
                                             contentPadding: EdgeInsets.zero,
                                             hintText: 'PayPal Email Address',
                                             labelStyle: TextStyle(
-                                              color: fPayPalId.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                              color: fPayPalId.hasFocus
+                                                  ? Get.theme.primaryColor
+                                                  : Colors.grey,
                                             ),
                                             focusColor: Get.theme.primaryColor,
                                             focusedBorder: UnderlineInputBorder(
                                                 borderSide: BorderSide(
-                                              color: fPayPalId.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                              color: fPayPalId.hasFocus
+                                                  ? Get.theme.primaryColor
+                                                  : Colors.grey,
                                             )),
                                             border: UnderlineInputBorder(
                                                 borderSide: BorderSide(
-                                              color: fPayPalId.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                              color: fPayPalId.hasFocus
+                                                  ? Get.theme.primaryColor
+                                                  : Colors.grey,
                                             )),
                                             enabledBorder: UnderlineInputBorder(
                                                 borderSide: BorderSide(
-                                              color: fPayPalId.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                                              color: fPayPalId.hasFocus
+                                                  ? Get.theme.primaryColor
+                                                  : Colors.grey,
                                             )),
                                           ),
                                           onTap: () {
-                                            FocusScope.of(context).requestFocus(fPayPalId);
+                                            FocusScope.of(context)
+                                                .requestFocus(fPayPalId);
                                           },
                                         ),
                                         InkWell(
                                           onTap: () {
                                             if (payPalId.text.isNotEmpty) {
                                               Get.back();
-                                              paymentController.addPayPalDetails(payPalId.text.trim());
+                                              paymentController
+                                                  .addPayPalDetails(
+                                                      payPalId.text.trim());
                                             } else {
-                                              showCustomSnackBar('Please enter PayPal Email.');
+                                              showCustomSnackBar(
+                                                  'Please enter PayPal Email.');
                                             }
                                           },
                                           child: Container(
                                             height: 45,
                                             width: Get.width / 3,
                                             margin: EdgeInsets.only(top: 30),
-                                            padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 7, vertical: 8),
                                             decoration: BoxDecoration(
-                                              color: Get.theme.secondaryHeaderColor,
-                                              borderRadius: BorderRadius.circular(5),
+                                              color: Get
+                                                  .theme.secondaryHeaderColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                             ),
                                             alignment: Alignment.center,
                                             child: Text(
-                                              paymentController.payPalDetails != null ? AppLocalizations.of(context).edit.toString().toUpperCase() : '${AppLocalizations.of(context).add.toString().toUpperCase()} +',
-                                              style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                                            ),
+                                              paymentController.payPalDetails !=
+                                                      null
+                                                  ? 'edit'.toUpperCase()
+                                                  : 'add'.toLowerCase() + "+",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w600),
+                                            ).translate(),
                                           ),
                                         ),
                                       ],
@@ -164,16 +194,22 @@ class PayPalRedeemScreen extends StatelessWidget {
                             child: Container(
                               height: 45,
                               //margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                              padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 7, vertical: 8),
                               decoration: BoxDecoration(
                                 color: Get.theme.secondaryHeaderColor,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                paymentController.payPalDetails != null ? AppLocalizations.of(context).edit.toString().toUpperCase() : '${AppLocalizations.of(context).add.toString().toUpperCase()} +',
-                                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                              ),
+                                paymentController.payPalDetails != null
+                                    ? 'edit'.toUpperCase()
+                                    : 'add'.toUpperCase() + '+',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
+                              ).translate(),
                             ),
                           ),
                         ],
@@ -181,15 +217,19 @@ class PayPalRedeemScreen extends StatelessWidget {
                       paymentController.payPalDetails != null
                           ? RichText(
                               text: TextSpan(
-                                text: "${AppLocalizations.of(context).paypal_email} ",
-                                style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                text:
+                                    "PayPal Email: ",
+                                style: Get.theme.primaryTextTheme.titleSmall
+                                    .copyWith(
                                   letterSpacing: -0.2,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: paymentController.payPalDetails.payPalEmail,
-                                    style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                    text: paymentController
+                                        .payPalDetails.payPalEmail,
+                                    style: Get.theme.primaryTextTheme.bodySmall
+                                        .copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w300,
                                     ),
@@ -221,9 +261,12 @@ class PayPalRedeemScreen extends StatelessWidget {
                   ),
                   alignment: Alignment.center,
                   child: Text(
-                    AppLocalizations.of(context).send_withdrawal_request,
-                    style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-                  ),
+                    'Send Withdrawal Request',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  ).translate(),
                 ),
               )
             : SizedBox(),

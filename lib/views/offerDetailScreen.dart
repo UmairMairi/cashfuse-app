@@ -13,7 +13,7 @@ import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
@@ -109,8 +109,7 @@ class OfferDetailScreen extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  Text('Share')
-                                      .translate(),
+                                  Text('Share').translate(),
                                   CircleAvatar(
                                     radius: 12,
                                     backgroundColor: Colors.green[700],

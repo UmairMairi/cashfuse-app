@@ -10,6 +10,7 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:google_translator/google_translator.dart';
 
 class OfferListScreen extends StatelessWidget {
   final CategoryModel categoryModel;
@@ -37,9 +38,12 @@ class OfferListScreen extends StatelessWidget {
                   ),
                 ),
                 title: Text(
-                  categoryModel != null ? categoryModel.name : 'NEW FLASH DEALS - LIVE NOW',
-                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-                ),
+                  categoryModel != null
+                      ? categoryModel.name
+                      : 'NEW FLASH DEALS - LIVE NOW',
+                  style: Get.theme.primaryTextTheme.titleSmall
+                      .copyWith(color: Colors.white),
+                ).translate(),
               ),
         body: Align(
           alignment: Alignment.topCenter,
@@ -52,7 +56,8 @@ class OfferListScreen extends StatelessWidget {
                       ? global.getPlatFrom()
                           ? GridView.builder(
                               //controller: homeController.scrollController,
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 4,
                                 crossAxisSpacing: 15.0,
                                 mainAxisSpacing: 15.0,
@@ -64,8 +69,12 @@ class OfferListScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return InkWell(
                                   onTap: () async {
-                                    if (categoryModel.commonList[index].adId != null && categoryModel.commonList[index].adId.isNotEmpty) {
-                                      await homeController.getAdDetails(categoryModel.commonList[index].adId);
+                                    if (categoryModel.commonList[index].adId !=
+                                            null &&
+                                        categoryModel.commonList[index].adId
+                                            .isNotEmpty) {
+                                      await homeController.getAdDetails(
+                                          categoryModel.commonList[index].adId);
                                       Get.to(
                                         () => AdsDetailScreen(
                                           ads: homeController.ads,
@@ -74,7 +83,10 @@ class OfferListScreen extends StatelessWidget {
                                         routeName: 'detail',
                                       );
                                     } else {
-                                      await homeController.getCampignDetails(categoryModel.commonList[index].campaignId.toString());
+                                      await homeController.getCampignDetails(
+                                          categoryModel
+                                              .commonList[index].campaignId
+                                              .toString());
                                       Get.to(
                                         () => CampaignDetailScreen(
                                           campaign: homeController.campaign,
@@ -85,7 +97,8 @@ class OfferListScreen extends StatelessWidget {
                                     }
                                   },
                                   child: OfferWidget(
-                                    commonModel: categoryModel.commonList[index],
+                                    commonModel:
+                                        categoryModel.commonList[index],
                                     fromList: true,
                                     domainImage: categoryModel.image,
                                   ),
@@ -99,8 +112,12 @@ class OfferListScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return InkWell(
                                   onTap: () async {
-                                    if (categoryModel.commonList[index].adId != null && categoryModel.commonList[index].adId.isNotEmpty) {
-                                      await homeController.getAdDetails(categoryModel.commonList[index].adId);
+                                    if (categoryModel.commonList[index].adId !=
+                                            null &&
+                                        categoryModel.commonList[index].adId
+                                            .isNotEmpty) {
+                                      await homeController.getAdDetails(
+                                          categoryModel.commonList[index].adId);
                                       Get.to(
                                         () => AdsDetailScreen(
                                           ads: homeController.ads,
@@ -109,7 +126,10 @@ class OfferListScreen extends StatelessWidget {
                                         routeName: 'detail',
                                       );
                                     } else {
-                                      await homeController.getCampignDetails(categoryModel.commonList[index].campaignId.toString());
+                                      await homeController.getCampignDetails(
+                                          categoryModel
+                                              .commonList[index].campaignId
+                                              .toString());
                                       Get.to(
                                         () => CampaignDetailScreen(
                                           campaign: homeController.campaign,
@@ -120,7 +140,8 @@ class OfferListScreen extends StatelessWidget {
                                     }
                                   },
                                   child: OfferWidget(
-                                    commonModel: categoryModel.commonList[index],
+                                    commonModel:
+                                        categoryModel.commonList[index],
                                     fromList: true,
                                     domainImage: categoryModel.image,
                                   ),
@@ -130,20 +151,23 @@ class OfferListScreen extends StatelessWidget {
                       : global.getPlatFrom()
                           ? GridView.builder(
                               //controller: homeController.scrollController,
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 4,
                                 crossAxisSpacing: 15.0,
                                 mainAxisSpacing: 15.0,
                                 childAspectRatio: 1.4,
                               ),
-                              itemCount: homeController.newFlashOfferList.length,
+                              itemCount:
+                                  homeController.newFlashOfferList.length,
                               shrinkWrap: true,
                               padding: EdgeInsets.all(10).copyWith(top: 20),
                               itemBuilder: (context, index) {
                                 return InkWell(
                                   onTap: () async {
                                     await homeController.getOfferDetails(
-                                      homeController.newFlashOfferList[index].id.toString(),
+                                      homeController.newFlashOfferList[index].id
+                                          .toString(),
                                     );
                                     Get.to(
                                       () => OfferDetailScreen(
@@ -154,21 +178,24 @@ class OfferListScreen extends StatelessWidget {
                                     );
                                   },
                                   child: OfferWidget(
-                                    offer: homeController.newFlashOfferList[index],
+                                    offer:
+                                        homeController.newFlashOfferList[index],
                                     fromList: true,
                                   ),
                                 );
                               },
                             )
                           : ListView.builder(
-                              itemCount: homeController.newFlashOfferList.length,
+                              itemCount:
+                                  homeController.newFlashOfferList.length,
                               shrinkWrap: true,
                               padding: EdgeInsets.all(10),
                               itemBuilder: (context, index) {
                                 return InkWell(
                                   onTap: () async {
                                     await homeController.getOfferDetails(
-                                      homeController.newFlashOfferList[index].id.toString(),
+                                      homeController.newFlashOfferList[index].id
+                                          .toString(),
                                     );
                                     Get.to(
                                       () => OfferDetailScreen(
@@ -179,7 +206,8 @@ class OfferListScreen extends StatelessWidget {
                                     );
                                   },
                                   child: OfferWidget(
-                                    offer: homeController.newFlashOfferList[index],
+                                    offer:
+                                        homeController.newFlashOfferList[index],
                                     fromList: true,
                                   ),
                                 );

@@ -7,7 +7,8 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:google_translator/google_translator.dart';
 
 class PaymentScreen extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -31,9 +32,10 @@ class PaymentScreen extends StatelessWidget {
                 ),
               ),
               title: Text(
-                AppLocalizations.of(context).payments,
-                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-              ),
+                'Payments',
+                style: Get.theme.primaryTextTheme.titleSmall
+                    .copyWith(color: Colors.white),
+              ).translate(),
             ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -48,13 +50,15 @@ class PaymentScreen extends StatelessWidget {
                             child: Container(
                               color: Colors.white,
                               child: GridView.builder(
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 3,
                                     crossAxisSpacing: 15.0,
                                     mainAxisSpacing: 15.0,
                                     childAspectRatio: 5,
                                   ),
-                                  itemCount: global.currentUser.withdrawalRequest.length,
+                                  itemCount: global
+                                      .currentUser.withdrawalRequest.length,
                                   shrinkWrap: true,
                                   padding: EdgeInsets.all(10).copyWith(top: 20),
                                   itemBuilder: (context, index) {
@@ -62,20 +66,45 @@ class PaymentScreen extends StatelessWidget {
                                       shape: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(5),
                                         borderSide: BorderSide(
-                                          color: Get.theme.secondaryHeaderColor.withOpacity(0.2),
+                                          color: Get.theme.secondaryHeaderColor
+                                              .withOpacity(0.2),
                                         ),
                                       ),
                                       child: ListTile(
                                         leading: Image.asset(
-                                          global.currentUser.withdrawalRequest[index].medium == 'UPI'
+                                          global
+                                                      .currentUser
+                                                      .withdrawalRequest[index]
+                                                      .medium ==
+                                                  'UPI'
                                               ? Images.upi
-                                              : global.currentUser.withdrawalRequest[index].medium == 'Bank'
+                                              : global
+                                                          .currentUser
+                                                          .withdrawalRequest[
+                                                              index]
+                                                          .medium ==
+                                                      'Bank'
                                                   ? Images.bank
-                                                  : global.currentUser.withdrawalRequest[index].medium == 'Amazon'
+                                                  : global
+                                                              .currentUser
+                                                              .withdrawalRequest[
+                                                                  index]
+                                                              .medium ==
+                                                          'Amazon'
                                                       ? Images.Amazon_pay
-                                                      : global.currentUser.withdrawalRequest[index].medium == 'Paytm'
+                                                      : global
+                                                                  .currentUser
+                                                                  .withdrawalRequest[
+                                                                      index]
+                                                                  .medium ==
+                                                              'Paytm'
                                                           ? Images.paytm
-                                                          : global.currentUser.withdrawalRequest[index].medium == 'Paypal'
+                                                          : global
+                                                                      .currentUser
+                                                                      .withdrawalRequest[
+                                                                          index]
+                                                                      .medium ==
+                                                                  'Paypal'
                                                               ? Images.paypal
                                                               : Images.logo,
                                           height: 40,
@@ -84,37 +113,73 @@ class PaymentScreen extends StatelessWidget {
                                         title: Row(
                                           children: [
                                             Text(
-                                              global.appInfo.currency + global.currentUser.withdrawalRequest[index].amount.toString(),
-                                            ),
+                                              global.appInfo.currency +
+                                                  global
+                                                      .currentUser
+                                                      .withdrawalRequest[index]
+                                                      .amount
+                                                      .toString(),
+                                            ).translate(),
                                           ],
                                         ),
                                         subtitle: Text(
                                           DateConverter.formatDate(
-                                            global.currentUser.withdrawalRequest[index].createdAt,
+                                            global
+                                                .currentUser
+                                                .withdrawalRequest[index]
+                                                .createdAt,
                                           ),
-                                          style: Get.theme.primaryTextTheme.bodySmall,
-                                        ),
+                                          style: Get
+                                              .theme.primaryTextTheme.bodySmall,
+                                        ).translate(),
                                         trailing: Container(
                                           width: 80,
                                           height: 40,
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
-                                            color: global.currentUser.withdrawalRequest[index].approved == 1
+                                            color: global
+                                                        .currentUser
+                                                        .withdrawalRequest[
+                                                            index]
+                                                        .approved ==
+                                                    1
                                                 ? Colors.green
-                                                : global.currentUser.withdrawalRequest[index].approved == 2
+                                                : global
+                                                            .currentUser
+                                                            .withdrawalRequest[
+                                                                index]
+                                                            .approved ==
+                                                        2
                                                     ? Colors.red
                                                     : Colors.orange,
                                           ),
                                           child: Text(
-                                            global.currentUser.withdrawalRequest[index].approved == 1
+                                            global
+                                                        .currentUser
+                                                        .withdrawalRequest[
+                                                            index]
+                                                        .approved ==
+                                                    1
                                                 ? 'Approved'
-                                                : global.currentUser.withdrawalRequest[index].approved == 2
+                                                : global
+                                                            .currentUser
+                                                            .withdrawalRequest[
+                                                                index]
+                                                            .approved ==
+                                                        2
                                                     ? 'Rejected'
-                                                    : global.currentUser.withdrawalRequest[index].approved == 0
+                                                    : global
+                                                                .currentUser
+                                                                .withdrawalRequest[
+                                                                    index]
+                                                                .approved ==
+                                                            0
                                                         ? 'Pending'
                                                         : '',
-                                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-                                          ),
+                                            style: Get.theme.primaryTextTheme
+                                                .titleSmall
+                                                .copyWith(color: Colors.white),
+                                          ).translate(),
                                         ),
                                       ),
                                     );
@@ -126,20 +191,41 @@ class PaymentScreen extends StatelessWidget {
                     : ListView.builder(
                         itemCount: global.currentUser.withdrawalRequest.length,
                         shrinkWrap: true,
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         itemBuilder: (context, index) {
                           return Card(
                             child: ListTile(
                               leading: Image.asset(
-                                global.currentUser.withdrawalRequest[index].medium == 'UPI'
+                                global.currentUser.withdrawalRequest[index]
+                                            .medium ==
+                                        'UPI'
                                     ? Images.upi
-                                    : global.currentUser.withdrawalRequest[index].medium == 'Bank'
+                                    : global
+                                                .currentUser
+                                                .withdrawalRequest[index]
+                                                .medium ==
+                                            'Bank'
                                         ? Images.bank
-                                        : global.currentUser.withdrawalRequest[index].medium == 'Amazon'
+                                        : global
+                                                    .currentUser
+                                                    .withdrawalRequest[index]
+                                                    .medium ==
+                                                'Amazon'
                                             ? Images.Amazon_pay
-                                            : global.currentUser.withdrawalRequest[index].medium == 'Paytm'
+                                            : global
+                                                        .currentUser
+                                                        .withdrawalRequest[
+                                                            index]
+                                                        .medium ==
+                                                    'Paytm'
                                                 ? Images.paytm
-                                                : global.currentUser.withdrawalRequest[index].medium == 'Paypal'
+                                                : global
+                                                            .currentUser
+                                                            .withdrawalRequest[
+                                                                index]
+                                                            .medium ==
+                                                        'Paypal'
                                                     ? Images.paypal
                                                     : Images.logo,
                                 height: 40,
@@ -148,37 +234,60 @@ class PaymentScreen extends StatelessWidget {
                               title: Row(
                                 children: [
                                   Text(
-                                    global.appInfo.currency + global.currentUser.withdrawalRequest[index].amount.toString(),
-                                  ),
+                                    global.appInfo.currency +
+                                        global.currentUser
+                                            .withdrawalRequest[index].amount
+                                            .toString(),
+                                  ).translate(),
                                 ],
                               ),
                               subtitle: Text(
                                 DateConverter.formatDate(
-                                  global.currentUser.withdrawalRequest[index].createdAt,
+                                  global.currentUser.withdrawalRequest[index]
+                                      .createdAt,
                                 ),
                                 style: Get.theme.primaryTextTheme.bodySmall,
-                              ),
+                              ).translate(),
                               trailing: Container(
                                 width: 80,
                                 height: 40,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                  color: global.currentUser.withdrawalRequest[index].approved == 1
+                                  color: global
+                                              .currentUser
+                                              .withdrawalRequest[index]
+                                              .approved ==
+                                          1
                                       ? Colors.green
-                                      : global.currentUser.withdrawalRequest[index].approved == 2
+                                      : global
+                                                  .currentUser
+                                                  .withdrawalRequest[index]
+                                                  .approved ==
+                                              2
                                           ? Colors.red
                                           : Colors.orange,
                                 ),
                                 child: Text(
-                                  global.currentUser.withdrawalRequest[index].approved == 1
+                                  global.currentUser.withdrawalRequest[index]
+                                              .approved ==
+                                          1
                                       ? 'Approved'
-                                      : global.currentUser.withdrawalRequest[index].approved == 2
+                                      : global
+                                                  .currentUser
+                                                  .withdrawalRequest[index]
+                                                  .approved ==
+                                              2
                                           ? 'Rejected'
-                                          : global.currentUser.withdrawalRequest[index].approved == 0
+                                          : global
+                                                      .currentUser
+                                                      .withdrawalRequest[index]
+                                                      .approved ==
+                                                  0
                                               ? 'Pending'
                                               : '',
-                                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-                                ),
+                                  style: Get.theme.primaryTextTheme.titleSmall
+                                      .copyWith(color: Colors.white),
+                                ).translate(),
                               ),
                             ),
                           );
@@ -186,8 +295,8 @@ class PaymentScreen extends StatelessWidget {
                       )
                 : Center(
                     child: Text(
-                      AppLocalizations.of(context).no_data_found,
-                    ),
+                      'No data found',
+                    ).translate(),
                   );
           }),
         ),

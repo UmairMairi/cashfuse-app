@@ -8,10 +8,11 @@ import 'package:cashfuse/views/faqSceen.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:google_translator/google_translator.dart';
 
 class OrderComplaintScreen extends StatelessWidget {
   bool isSHow = false;
@@ -44,9 +45,10 @@ class OrderComplaintScreen extends StatelessWidget {
                     ),
                   ),
                   title: Text(
-                    AppLocalizations.of(context).order_complaints,
-                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-                  ),
+                    'Order Complaints',
+                    style: Get.theme.primaryTextTheme.titleSmall
+                        .copyWith(color: Colors.white),
+                  ).translate(),
                 ),
           backgroundColor: Colors.grey[200],
           floatingActionButton: FloatingActionButton(
@@ -59,7 +61,8 @@ class OrderComplaintScreen extends StatelessWidget {
               );
             },
           ),
-          body: orderController.complainList != null && orderController.complainList.length > 0
+          body: orderController.complainList != null &&
+                  orderController.complainList.length > 0
               ? global.getPlatFrom()
                   ? Align(
                       alignment: Alignment.topCenter,
@@ -75,36 +78,57 @@ class OrderComplaintScreen extends StatelessWidget {
                                     width: AppConstants.WEB_MAX_WIDTH,
                                     color: Colors.white,
                                     child: GridView.builder(
-                                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 3,
                                           crossAxisSpacing: 15.0,
                                           mainAxisSpacing: 15.0,
                                           childAspectRatio: 5,
                                         ),
-                                        itemCount: orderController.complainList.length,
+                                        itemCount:
+                                            orderController.complainList.length,
                                         shrinkWrap: true,
-                                        padding: EdgeInsets.all(10).copyWith(top: 20),
+                                        padding: EdgeInsets.all(10)
+                                            .copyWith(top: 20),
                                         itemBuilder: (context, index) {
                                           return InkWell(
                                             child: Card(
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Padding(
-                                                    padding: const EdgeInsets.all(8),
+                                                    padding:
+                                                        const EdgeInsets.all(8),
                                                     child: RichText(
                                                       text: TextSpan(
-                                                        text: "${AppLocalizations.of(context).complaint} : ",
-                                                        style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                                        text:
+                                                            "Complaint : ",
+                                                        style: Get
+                                                            .theme
+                                                            .primaryTextTheme
+                                                            .titleSmall
+                                                            .copyWith(
                                                           letterSpacing: -0.2,
-                                                          fontWeight: FontWeight.w500,
+                                                          fontWeight:
+                                                              FontWeight.w500,
                                                         ),
                                                         children: <TextSpan>[
                                                           TextSpan(
-                                                            text: orderController.complainList[index].complain,
-                                                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(
-                                                              letterSpacing: -0.2,
-                                                              fontWeight: FontWeight.w300,
+                                                            text: orderController
+                                                                .complainList[
+                                                                    index]
+                                                                .complain,
+                                                            style: Get
+                                                                .theme
+                                                                .primaryTextTheme
+                                                                .titleSmall
+                                                                .copyWith(
+                                                              letterSpacing:
+                                                                  -0.2,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w300,
                                                             ),
                                                           ),
                                                         ],
@@ -112,20 +136,43 @@ class OrderComplaintScreen extends StatelessWidget {
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets.all(8),
+                                                    padding:
+                                                        const EdgeInsets.all(8),
                                                     child: RichText(
                                                       text: TextSpan(
-                                                        text: "${AppLocalizations.of(context).reply} : ",
-                                                        style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                                        text:
+                                                            "Reply : ",
+                                                        style: Get
+                                                            .theme
+                                                            .primaryTextTheme
+                                                            .titleSmall
+                                                            .copyWith(
                                                           letterSpacing: -0.2,
-                                                          fontWeight: FontWeight.w500,
+                                                          fontWeight:
+                                                              FontWeight.w500,
                                                         ),
                                                         children: <TextSpan>[
                                                           TextSpan(
-                                                            text: orderController.complainList[index].reply.isNotEmpty ? orderController.complainList[index].reply : 'Waiting for reply....',
-                                                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(
-                                                              letterSpacing: -0.2,
-                                                              fontWeight: FontWeight.w300,
+                                                            text: orderController
+                                                                    .complainList[
+                                                                        index]
+                                                                    .reply
+                                                                    .isNotEmpty
+                                                                ? orderController
+                                                                    .complainList[
+                                                                        index]
+                                                                    .reply
+                                                                : 'Waiting for reply....',
+                                                            style: Get
+                                                                .theme
+                                                                .primaryTextTheme
+                                                                .titleSmall
+                                                                .copyWith(
+                                                              letterSpacing:
+                                                                  -0.2,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w300,
                                                             ),
                                                           ),
                                                         ],
@@ -169,8 +216,13 @@ class OrderComplaintScreen extends StatelessWidget {
                                     },
                                     child: CircleAvatar(
                                       radius: 30,
-                                      backgroundColor: Get.theme.secondaryHeaderColor,
-                                      child: orderController.complainList != null && orderController.complainList.length > 0
+                                      backgroundColor:
+                                          Get.theme.secondaryHeaderColor,
+                                      child: orderController.complainList !=
+                                                  null &&
+                                              orderController
+                                                      .complainList.length >
+                                                  0
                                           ? InkWell(
                                               onTap: () {
                                                 if (global.getPlatFrom()) {
@@ -204,12 +256,13 @@ class OrderComplaintScreen extends StatelessWidget {
                                     height: 10,
                                   ),
                                   Text(
-                                    AppLocalizations.of(context).add_complaint,
-                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                    'Add Complaint',
+                                    style: Get.theme.primaryTextTheme.titleSmall
+                                        .copyWith(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w600,
                                     ),
-                                  ),
+                                  ).translate(),
                                 ],
                               ),
                             )
@@ -231,15 +284,21 @@ class OrderComplaintScreen extends StatelessWidget {
                                   padding: const EdgeInsets.all(8),
                                   child: RichText(
                                     text: TextSpan(
-                                      text: "${AppLocalizations.of(context).complaint} : ",
-                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                      text:
+                                          "Complaint : ",
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall
+                                          .copyWith(
                                         letterSpacing: -0.2,
                                         fontWeight: FontWeight.w500,
                                       ),
                                       children: <TextSpan>[
                                         TextSpan(
-                                          text: orderController.complainList[index].complain,
-                                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                          text: orderController
+                                              .complainList[index].complain,
+                                          style: Get
+                                              .theme.primaryTextTheme.titleSmall
+                                              .copyWith(
                                             letterSpacing: -0.2,
                                             fontWeight: FontWeight.w300,
                                           ),
@@ -252,15 +311,26 @@ class OrderComplaintScreen extends StatelessWidget {
                                   padding: const EdgeInsets.all(8),
                                   child: RichText(
                                     text: TextSpan(
-                                      text: "${AppLocalizations.of(context).reply} : ",
-                                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                      text:
+                                          "Reply : ",
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall
+                                          .copyWith(
                                         letterSpacing: -0.2,
                                         fontWeight: FontWeight.w500,
                                       ),
                                       children: <TextSpan>[
                                         TextSpan(
-                                          text: orderController.complainList[index].reply.isNotEmpty ? orderController.complainList[index].reply : 'Waiting for reply....',
-                                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                          text: orderController
+                                                  .complainList[index]
+                                                  .reply
+                                                  .isNotEmpty
+                                              ? orderController
+                                                  .complainList[index].reply
+                                              : 'Waiting for reply....',
+                                          style: Get
+                                              .theme.primaryTextTheme.titleSmall
+                                              .copyWith(
                                             letterSpacing: -0.2,
                                             fontWeight: FontWeight.w300,
                                           ),
@@ -292,16 +362,17 @@ class OrderComplaintScreen extends StatelessWidget {
                         height: 30,
                       ),
                       Text(
-                        AppLocalizations.of(context).add_complaint_title,
-                        style: Get.theme.primaryTextTheme.bodyLarge.copyWith(fontWeight: FontWeight.w300),
-                      ),
+                        "You don't have any Complaint",
+                        style: Get.theme.primaryTextTheme.bodyLarge
+                            .copyWith(fontWeight: FontWeight.w300),
+                      ).translate(),
                       SizedBox(
                         height: 30,
                       ),
                       Text(
-                        AppLocalizations.of(context).add_complaint_subtitle,
+                        'Add any Complaint ?',
                         style: Get.theme.primaryTextTheme.bodySmall,
-                      ),
+                      ).translate(),
                       SizedBox(
                         height: 15,
                       ),
@@ -332,18 +403,21 @@ class OrderComplaintScreen extends StatelessWidget {
                           color: Get.theme.secondaryHeaderColor,
                           alignment: Alignment.center,
                           child: Text(
-                            AppLocalizations.of(context).add_complaint,
-                            style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                            'Add Complaint',
+                            style:
+                                Get.theme.primaryTextTheme.titleSmall.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
                             ),
-                          ),
+                          ).translate(),
                         ),
                       ),
                     ],
                   ),
                 ),
-          bottomNavigationBar: !global.getPlatFrom() && orderController.complainList != null && orderController.complainList.length > 0
+          bottomNavigationBar: !global.getPlatFrom() &&
+                  orderController.complainList != null &&
+                  orderController.complainList.length > 0
               ? InkWell(
                   onTap: () {
                     if (global.getPlatFrom()) {
@@ -371,12 +445,12 @@ class OrderComplaintScreen extends StatelessWidget {
                     color: Get.theme.secondaryHeaderColor,
                     alignment: Alignment.center,
                     child: Text(
-                      AppLocalizations.of(context).add_complaint,
+                      'Add Complaint',
                       style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),
-                    ),
+                    ).translate(),
                   ),
                 )
               : SizedBox(),

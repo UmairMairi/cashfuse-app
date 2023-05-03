@@ -7,6 +7,7 @@ import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 
 import '../utils/Mycolors.dart';
 
@@ -40,7 +41,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           widget.title,
           style: Get.theme.primaryTextTheme.titleSmall
               .copyWith(color: Colors.white),
-        ),
+        ).translate(),
       ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -194,7 +195,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         color: Colors.black,
                         fontSize: 12,
                         fontWeight: FontWeight.w500),
-                  ),
+                  ).translate(),
                 ),
                 SizedBox(
                   height: 10,
@@ -291,7 +292,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           color: Colors.white,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 13),
-                                    ),
+                                    ).translate(),
                                   ),
                                 )
                               ],
@@ -317,14 +318,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           color: Colors.black54,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12),
-                                    ),
+                                    ).translate(),
                                     Text(
                                       "Seller price",
                                       style: TextStyle(
                                           color: Colors.black54,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12),
-                                    ),
+                                    ).translate(),
                                   ],
                                 ),
                                 SizedBox(
@@ -344,7 +345,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                               color: Colors.black54,
                                               fontWeight: FontWeight.w400,
                                               fontSize: 12),
-                                        ),
+                                        ).translate(),
                                       )
                                     : Column(
                                         children: [
@@ -354,14 +355,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                                 color: Mycolors.orange,
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 12),
-                                          ),
+                                          ).translate(),
                                           Text(
                                             "CashBack",
                                             style: TextStyle(
                                                 color: Colors.black54,
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 12),
-                                          ),
+                                          ).translate(),
                                         ],
                                       ),
                                 SizedBox(
@@ -380,14 +381,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 12),
-                                    ),
+                                    ).translate(),
                                     Text(
                                       "Best Price",
                                       style: TextStyle(
                                           color: Colors.black54,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12),
-                                    ),
+                                    ).translate(),
                                   ],
                                 ),
                                 SizedBox(

@@ -11,7 +11,8 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:google_translator/google_translator.dart';
 
 class RequestPaymentScreen extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -35,9 +36,10 @@ class RequestPaymentScreen extends StatelessWidget {
                 ),
               ),
               title: Text(
-                AppLocalizations.of(context).request_paymets,
-                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-              ),
+                'Request Payments',
+                style: Get.theme.primaryTextTheme.titleSmall
+                    .copyWith(color: Colors.white),
+              ).translate(),
             ),
       body: Center(
         child: SizedBox(
@@ -47,7 +49,9 @@ class RequestPaymentScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 3 : Get.width,
+                    width: global.getPlatFrom()
+                        ? AppConstants.WEB_MAX_WIDTH / 3
+                        : Get.width,
                     height: global.getPlatFrom() ? Get.height / 3 : null,
                     child: Card(
                       shape: RoundedRectangleBorder(
@@ -59,28 +63,34 @@ class RequestPaymentScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              AppLocalizations.of(context).request_paymets,
-                              style: Get.theme.primaryTextTheme.titleLarge.copyWith(fontSize: 18),
-                            ),
+                              'Request Payments',
+                              style: Get.theme.primaryTextTheme.titleLarge
+                                  .copyWith(fontSize: 18),
+                            ).translate(),
                             SizedBox(
                               height: global.getPlatFrom() ? 30 : 0,
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(vertical: global.getPlatFrom() ? 15 : 5),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: global.getPlatFrom() ? 15 : 5),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context).remaining_earning,
+                                    'Remaining Earning',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w300,
                                     ),
-                                  ),
+                                  ).translate(),
                                   Text(
-                                    global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}' : '${global.appInfo.currency}0.00',
-                                    style: Get.theme.primaryTextTheme.titleSmall,
-                                  ),
+                                    global.currentUser.earning != null
+                                        ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}'
+                                        : '${global.appInfo.currency}0.00',
+                                    style:
+                                        Get.theme.primaryTextTheme.titleSmall,
+                                  ).translate(),
                                 ],
                               ),
                             ),
@@ -88,34 +98,41 @@ class RequestPaymentScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  AppLocalizations.of(context).send_withdrawal_request,
+                                  'Send Withdrawal Request',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w300,
                                   ),
-                                ),
+                                ).translate(),
                                 Text(
-                                  global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.sentForWithdrawal}' : '${global.appInfo.currency}0.00',
+                                  global.currentUser.earning != null
+                                      ? '${global.appInfo.currency}${global.currentUser.earning.sentForWithdrawal}'
+                                      : '${global.appInfo.currency}0.00',
                                   style: Get.theme.primaryTextTheme.titleSmall,
-                                ),
+                                ).translate(),
                               ],
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(vertical: global.getPlatFrom() ? 15 : 5),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: global.getPlatFrom() ? 15 : 5),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context).successful_withdrawal,
+                                    'Successful Withdrawal',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w300,
                                     ),
-                                  ),
+                                  ).translate(),
                                   Text(
-                                    global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}' : '${global.appInfo.currency}0.00',
-                                    style: Get.theme.primaryTextTheme.titleSmall,
-                                  ),
+                                    global.currentUser.earning != null
+                                        ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}'
+                                        : '${global.appInfo.currency}0.00',
+                                    style:
+                                        Get.theme.primaryTextTheme.titleSmall,
+                                  ).translate(),
                                 ],
                               ),
                             ),
@@ -123,13 +140,15 @@ class RequestPaymentScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  AppLocalizations.of(context).total_earning,
+                                  'Total Earnings',
                                   style: Get.theme.primaryTextTheme.titleSmall,
-                                ),
+                                ).translate(),
                                 Text(
-                                  global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency}0.00',
+                                  global.currentUser.earning != null
+                                      ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}'
+                                      : '${global.appInfo.currency}0.00',
                                   style: Get.theme.primaryTextTheme.titleSmall,
-                                ),
+                                ).translate(),
                               ],
                             )
                           ],
@@ -147,9 +166,10 @@ class RequestPaymentScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            AppLocalizations.of(context).redeem,
-                            style: Get.theme.primaryTextTheme.titleLarge.copyWith(fontSize: 18),
-                          ),
+                            'Redeem',
+                            style: Get.theme.primaryTextTheme.titleLarge
+                                .copyWith(fontSize: 18),
+                          ).translate(),
                           SizedBox(
                             height: 10,
                           ),
@@ -190,15 +210,18 @@ class RequestPaymentScreen extends StatelessWidget {
                                   ),
                                   padding: EdgeInsets.symmetric(horizontal: 20),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        ' ${AppLocalizations.of(context).amazon_pay}',
-                                        style: Get.theme.primaryTextTheme.titleLarge.copyWith(
+                                        'Amazon Pay',
+                                        style: Get
+                                            .theme.primaryTextTheme.titleLarge
+                                            .copyWith(
                                           fontSize: 20,
                                           color: Colors.white,
                                         ),
-                                      ),
+                                      ).translate(),
                                       Card(
                                         margin: EdgeInsets.zero,
                                         color: Colors.white,
@@ -267,15 +290,18 @@ class RequestPaymentScreen extends StatelessWidget {
                                   ),
                                   padding: EdgeInsets.symmetric(horizontal: 20),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        ' ${AppLocalizations.of(context).payTM}',
-                                        style: Get.theme.primaryTextTheme.titleLarge.copyWith(
+                                        'PayTM',
+                                        style: Get
+                                            .theme.primaryTextTheme.titleLarge
+                                            .copyWith(
                                           fontSize: 20,
                                           color: Colors.white,
                                         ),
-                                      ),
+                                      ).translate(),
                                       Card(
                                         margin: EdgeInsets.zero,
                                         color: Colors.white,
@@ -343,15 +369,18 @@ class RequestPaymentScreen extends StatelessWidget {
                                   ),
                                   padding: EdgeInsets.symmetric(horizontal: 20),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        ' ${AppLocalizations.of(context).upi}',
-                                        style: Get.theme.primaryTextTheme.titleLarge.copyWith(
+                                        ' UPI',
+                                        style: Get
+                                            .theme.primaryTextTheme.titleLarge
+                                            .copyWith(
                                           fontSize: 20,
                                           color: Colors.white,
                                         ),
-                                      ),
+                                      ).translate(),
                                       Card(
                                         margin: EdgeInsets.zero,
                                         color: Colors.white,
@@ -420,15 +449,18 @@ class RequestPaymentScreen extends StatelessWidget {
                                   ),
                                   padding: EdgeInsets.symmetric(horizontal: 20),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        ' ${AppLocalizations.of(context).bank_transfer}',
-                                        style: Get.theme.primaryTextTheme.titleLarge.copyWith(
+                                        ' Bank Transfer',
+                                        style: Get
+                                            .theme.primaryTextTheme.titleLarge
+                                            .copyWith(
                                           fontSize: 20,
                                           color: Colors.white,
                                         ),
-                                      ),
+                                      ).translate(),
                                       Card(
                                         margin: EdgeInsets.zero,
                                         color: Colors.white,
@@ -497,15 +529,18 @@ class RequestPaymentScreen extends StatelessWidget {
                                   ),
                                   padding: EdgeInsets.symmetric(horizontal: 20),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        ' ${AppLocalizations.of(context).paypal}',
-                                        style: Get.theme.primaryTextTheme.titleLarge.copyWith(
+                                        ' PayPal',
+                                        style: Get
+                                            .theme.primaryTextTheme.titleLarge
+                                            .copyWith(
                                           fontSize: 20,
                                           color: Colors.white,
                                         ),
-                                      ),
+                                      ).translate(),
                                       Card(
                                         margin: EdgeInsets.zero,
                                         color: Colors.white,
