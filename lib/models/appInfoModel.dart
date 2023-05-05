@@ -1,4 +1,5 @@
 import 'package:cashfuse/models/baseUrlsModel.dart';
+import 'package:cashfuse/models/languageModel.dart';
 
 class AppInfo {
   String admob;
@@ -11,6 +12,7 @@ class AppInfo {
   String perOrderReferPercentage;
   String minimumRedeemValue;
   BaseUrls baseUrls;
+  List<LanguageModel> languages;
 
   AppInfo({
     this.admob,
@@ -21,6 +23,7 @@ class AppInfo {
     this.perOrderReferPercentage,
     this.minimumRedeemValue,
     this.baseUrls,
+    this.languages,
   });
 
   AppInfo.fromJson(Map<String, dynamic> json) {
@@ -32,9 +35,19 @@ class AppInfo {
       country = json["country"] != null ? json["country"] : '';
       countryCode = json["phone_code"] != null ? json["phone_code"] : '';
       currency = json["currency"] != null ? json["currency"] : '';
-      perOrderReferPercentage = json["per_order_refer_percentage"] != null ? json["per_order_refer_percentage"] : '';
-      minimumRedeemValue = json["minimum_redeem_value"] != null ? json["minimum_redeem_value"] : '';
-      baseUrls = json["base_urls"] != null ? BaseUrls.fromJson(json["base_urls"]) : BaseUrls();
+      perOrderReferPercentage = json["per_order_refer_percentage"] != null
+          ? json["per_order_refer_percentage"]
+          : '';
+      minimumRedeemValue = json["minimum_redeem_value"] != null
+          ? json["minimum_redeem_value"]
+          : '';
+      baseUrls = json["base_urls"] != null
+          ? BaseUrls.fromJson(json["base_urls"])
+          : BaseUrls();
+      languages = json['languages'] != null && json['languages'] != []
+          ? List<LanguageModel>.from(
+              json['languages'].map((x) => LanguageModel.fromJson(x)))
+          : [];
     } catch (e) {
       print("Exception - AppInfo.dart - AppInfo.fromJson():" + e.toString());
     }

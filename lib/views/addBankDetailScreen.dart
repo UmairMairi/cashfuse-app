@@ -5,7 +5,7 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/addBankAccountDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:google_translator/google_translator.dart';
 
 class AddPaymentDetailScreen extends StatelessWidget {
@@ -122,94 +122,121 @@ class AddPaymentDetailScreen extends StatelessWidget {
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                RichText(
-                                  text: TextSpan(
-                                    text: 'Holder Name:',
-                                    style: Get.theme.primaryTextTheme.titleSmall
-                                        .copyWith(
-                                      letterSpacing: -0.2,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text: paymentController
-                                            .bankDetails.acHolderName,
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall
-                                            .copyWith(
-                                          letterSpacing: -0.2,
-                                          fontWeight: FontWeight.w300,
+                                FutureBuilder(
+                                    future:
+                                        global.translatedText("Holder Name: "),
+                                    builder: (context, snapShot) {
+                                      return Padding(
+                                        padding: EdgeInsets.only(top: 0),
+                                        child: RichText(
+                                          text: TextSpan(
+                                            text: snapShot.data,
+                                            style: Get.theme.primaryTextTheme
+                                                .titleSmall
+                                                .copyWith(
+                                              letterSpacing: -0.2,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                text:
+                                                    " ${paymentController.bankDetails.acHolderName}",
+                                                style: Get.theme
+                                                    .primaryTextTheme.bodySmall
+                                                    .copyWith(
+                                                  letterSpacing: -0.2,
+                                                  fontWeight: FontWeight.w300,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                    text: 'Account No.',
-                                    style: Get.theme.primaryTextTheme.titleSmall
-                                        .copyWith(
-                                      letterSpacing: -0.2,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text:
-                                            paymentController.bankDetails.acNo,
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall
-                                            .copyWith(
-                                          letterSpacing: -0.2,
-                                          fontWeight: FontWeight.w300,
+                                      );
+                                    }),
+                                FutureBuilder(
+                                    future:
+                                        global.translatedText("Account No: "),
+                                    builder: (context, snapShot) {
+                                      return RichText(
+                                        text: TextSpan(
+                                          text: snapShot.data,
+                                          style: Get
+                                              .theme.primaryTextTheme.titleSmall
+                                              .copyWith(
+                                            letterSpacing: -0.2,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                              text:
+                                                  " ${paymentController.bankDetails.acNo}",
+                                              style: Get.theme.primaryTextTheme
+                                                  .bodySmall
+                                                  .copyWith(
+                                                letterSpacing: -0.2,
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                    text: 'Bank Name:',
-                                    style: Get.theme.primaryTextTheme.titleSmall
-                                        .copyWith(
-                                      letterSpacing: -0.2,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text: paymentController
-                                            .bankDetails.bankName,
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall
-                                            .copyWith(
-                                          letterSpacing: -0.2,
-                                          fontWeight: FontWeight.w300,
+                                      );
+                                    }),
+                                FutureBuilder(
+                                    future:
+                                        global.translatedText("Bank Name: "),
+                                    builder: (context, snapShot) {
+                                      return RichText(
+                                        text: TextSpan(
+                                          text: snapShot.data,
+                                          style: Get
+                                              .theme.primaryTextTheme.titleSmall
+                                              .copyWith(
+                                            letterSpacing: -0.2,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                              text:
+                                                  " ${paymentController.bankDetails.bankName}",
+                                              style: Get.theme.primaryTextTheme
+                                                  .bodySmall
+                                                  .copyWith(
+                                                letterSpacing: -0.2,
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                    text: 'IFSC Code:',
-                                    style: Get.theme.primaryTextTheme.titleSmall
-                                        .copyWith(
-                                      letterSpacing: -0.2,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text:
-                                            paymentController.bankDetails.ifsc,
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall
-                                            .copyWith(
-                                          letterSpacing: -0.2,
-                                          fontWeight: FontWeight.w300,
+                                      );
+                                    }),
+                                FutureBuilder(
+                                    future:
+                                        global.translatedText("IFSC Code: "),
+                                    builder: (context, snapShot) {
+                                      return RichText(
+                                        text: TextSpan(
+                                          text: snapShot.data,
+                                          style: Get
+                                              .theme.primaryTextTheme.titleSmall
+                                              .copyWith(
+                                            letterSpacing: -0.2,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                              text: " ${paymentController
+                                                  .bankDetails.ifsc}",
+                                              style: Get.theme.primaryTextTheme
+                                                  .bodySmall
+                                                  .copyWith(
+                                                letterSpacing: -0.2,
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                      );
+                                    }),
                               ],
                             )
                           : SizedBox(),

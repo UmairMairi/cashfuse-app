@@ -5,8 +5,9 @@ import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:google_translator/google_translator.dart';
 
 class AddBankAccountDialog extends StatelessWidget {
   final fName = new FocusNode();
@@ -43,9 +44,10 @@ class AddBankAccountDialog extends StatelessWidget {
           //   height: 20,
           // ),
           Text(
-            AppLocalizations.of(context).add_bank_account,
-            style: Get.theme.primaryTextTheme.titleLarge.copyWith(fontWeight: FontWeight.w600),
-          ),
+            'Add Bank Account',
+            style: Get.theme.primaryTextTheme.titleLarge
+                .copyWith(fontWeight: FontWeight.w600),
+          ).translate(),
 
           StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) => Padding(
@@ -63,20 +65,28 @@ class AddBankAccountDialog extends StatelessWidget {
                       contentPadding: EdgeInsets.zero,
                       hintText: 'Holder Name',
                       labelStyle: TextStyle(
-                        color: fName.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fName.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       ),
                       focusColor: Get.theme.primaryColor,
                       focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                        color: fName.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fName.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       )),
                       border: UnderlineInputBorder(
                           borderSide: BorderSide(
-                        color: fName.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fName.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       )),
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                        color: fName.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fName.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       )),
                     ),
                     onTap: () {
@@ -101,20 +111,28 @@ class AddBankAccountDialog extends StatelessWidget {
                       contentPadding: EdgeInsets.zero,
                       hintText: 'Account No.',
                       labelStyle: TextStyle(
-                        color: fAccountNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fAccountNo.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       ),
                       focusColor: Get.theme.primaryColor,
                       focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                        color: fAccountNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fAccountNo.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       )),
                       border: UnderlineInputBorder(
                           borderSide: BorderSide(
-                        color: fAccountNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fAccountNo.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       )),
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                        color: fAccountNo.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fAccountNo.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       )),
                     ),
                     onTap: () {
@@ -135,20 +153,28 @@ class AddBankAccountDialog extends StatelessWidget {
                       contentPadding: EdgeInsets.zero,
                       hintText: 'Bank Name',
                       labelStyle: TextStyle(
-                        color: fBankName.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fBankName.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       ),
                       focusColor: Get.theme.primaryColor,
                       focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                        color: fBankName.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fBankName.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       )),
                       border: UnderlineInputBorder(
                           borderSide: BorderSide(
-                        color: fBankName.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fBankName.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       )),
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                        color: fBankName.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fBankName.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       )),
                     ),
                     onTap: () {
@@ -169,20 +195,28 @@ class AddBankAccountDialog extends StatelessWidget {
                       contentPadding: EdgeInsets.zero,
                       hintText: 'IFSC Code',
                       labelStyle: TextStyle(
-                        color: fIfscCode.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fIfscCode.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       ),
                       focusColor: Get.theme.primaryColor,
                       focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                        color: fIfscCode.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fIfscCode.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       )),
                       border: UnderlineInputBorder(
                           borderSide: BorderSide(
-                        color: fIfscCode.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fIfscCode.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       )),
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                        color: fIfscCode.hasFocus ? Get.theme.primaryColor : Colors.grey,
+                        color: fIfscCode.hasFocus
+                            ? Get.theme.primaryColor
+                            : Colors.grey,
                       )),
                     ),
                     onTap: () {
@@ -217,7 +251,9 @@ class AddBankAccountDialog extends StatelessWidget {
             child: Container(
               height: 45,
               width: Get.width / 3,
-              margin: global.getPlatFrom() ? EdgeInsets.symmetric(horizontal: 15) : EdgeInsets.zero,
+              margin: global.getPlatFrom()
+                  ? EdgeInsets.symmetric(horizontal: 15)
+                  : EdgeInsets.zero,
               padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
               decoration: BoxDecoration(
                 color: Get.theme.secondaryHeaderColor,
@@ -225,9 +261,12 @@ class AddBankAccountDialog extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: Text(
-                '${AppLocalizations.of(context).add.toString().toUpperCase()} +',
-                style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
-              ),
+                '${'add'.toUpperCase()} +',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ).translate(),
             ),
           ),
         ],

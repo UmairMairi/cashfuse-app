@@ -97,88 +97,108 @@ class OrderComplaintScreen extends StatelessWidget {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(8),
-                                                    child: RichText(
-                                                      text: TextSpan(
-                                                        text:
-                                                            "Complaint : ",
-                                                        style: Get
-                                                            .theme
-                                                            .primaryTextTheme
-                                                            .titleSmall
-                                                            .copyWith(
-                                                          letterSpacing: -0.2,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                        children: <TextSpan>[
-                                                          TextSpan(
-                                                            text: orderController
-                                                                .complainList[
-                                                                    index]
-                                                                .complain,
-                                                            style: Get
-                                                                .theme
-                                                                .primaryTextTheme
-                                                                .titleSmall
-                                                                .copyWith(
-                                                              letterSpacing:
-                                                                  -0.2,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w300,
+                                                  FutureBuilder(
+                                                      future:
+                                                          global.translatedText(
+                                                              "Complaint : "),
+                                                      builder:
+                                                          (context, snapShot) {
+                                                        return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8),
+                                                          child: RichText(
+                                                            text: TextSpan(
+                                                              text:
+                                                                  snapShot.data,
+                                                              style: Get
+                                                                  .theme
+                                                                  .primaryTextTheme
+                                                                  .titleSmall
+                                                                  .copyWith(
+                                                                letterSpacing:
+                                                                    -0.2,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                              children: <
+                                                                  TextSpan>[
+                                                                TextSpan(
+                                                                  text:
+                                                                      "${orderController.complainList[index].complain}",
+                                                                  style: Get
+                                                                      .theme
+                                                                      .primaryTextTheme
+                                                                      .titleSmall
+                                                                      .copyWith(
+                                                                    letterSpacing:
+                                                                        -0.2,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w300,
+                                                                  ),
+                                                                ),
+                                                              ],
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(8),
-                                                    child: RichText(
-                                                      text: TextSpan(
-                                                        text:
-                                                            "Reply : ",
-                                                        style: Get
-                                                            .theme
-                                                            .primaryTextTheme
-                                                            .titleSmall
-                                                            .copyWith(
-                                                          letterSpacing: -0.2,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                        children: <TextSpan>[
-                                                          TextSpan(
-                                                            text: orderController
-                                                                    .complainList[
-                                                                        index]
-                                                                    .reply
-                                                                    .isNotEmpty
-                                                                ? orderController
-                                                                    .complainList[
-                                                                        index]
-                                                                    .reply
-                                                                : 'Waiting for reply....',
-                                                            style: Get
-                                                                .theme
-                                                                .primaryTextTheme
-                                                                .titleSmall
-                                                                .copyWith(
-                                                              letterSpacing:
-                                                                  -0.2,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w300,
+                                                        );
+                                                      }),
+                                                  FutureBuilder(
+                                                      future:
+                                                          global.translatedText(
+                                                              "Reply : "),
+                                                      builder:
+                                                          (context, snapShot) {
+                                                        return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8),
+                                                          child: RichText(
+                                                            text: TextSpan(
+                                                              text:
+                                                                  snapShot.data,
+                                                              style: Get
+                                                                  .theme
+                                                                  .primaryTextTheme
+                                                                  .titleSmall
+                                                                  .copyWith(
+                                                                letterSpacing:
+                                                                    -0.2,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                              children: <
+                                                                  TextSpan>[
+                                                                TextSpan(
+                                                                  text: orderController
+                                                                          .complainList[
+                                                                              index]
+                                                                          .reply
+                                                                          .isNotEmpty
+                                                                      ? orderController
+                                                                          .complainList[
+                                                                              index]
+                                                                          .reply
+                                                                      : 'Waiting for reply....',
+                                                                  style: Get
+                                                                      .theme
+                                                                      .primaryTextTheme
+                                                                      .titleSmall
+                                                                      .copyWith(
+                                                                    letterSpacing:
+                                                                        -0.2,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w300,
+                                                                  ),
+                                                                ),
+                                                              ],
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
+                                                        );
+                                                      }),
                                                 ],
                                               ),
                                             ),
@@ -280,65 +300,73 @@ class OrderComplaintScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text:
-                                          "Complaint : ",
-                                      style: Get
-                                          .theme.primaryTextTheme.titleSmall
-                                          .copyWith(
-                                        letterSpacing: -0.2,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: orderController
-                                              .complainList[index].complain,
-                                          style: Get
-                                              .theme.primaryTextTheme.titleSmall
-                                              .copyWith(
-                                            letterSpacing: -0.2,
-                                            fontWeight: FontWeight.w300,
+                                FutureBuilder(
+                                    future:
+                                        global.translatedText("Complaint : "),
+                                    builder: (context, snapShot) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(8),
+                                        child: RichText(
+                                          text: TextSpan(
+                                            text: snapShot.data,
+                                            style: Get.theme.primaryTextTheme
+                                                .titleSmall
+                                                .copyWith(
+                                              letterSpacing: -0.2,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                text:
+                                                    "${orderController.complainList[index].complain}",
+                                                style: Get.theme
+                                                    .primaryTextTheme.titleSmall
+                                                    .copyWith(
+                                                  letterSpacing: -0.2,
+                                                  fontWeight: FontWeight.w300,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text:
-                                          "Reply : ",
-                                      style: Get
-                                          .theme.primaryTextTheme.titleSmall
-                                          .copyWith(
-                                        letterSpacing: -0.2,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: orderController
-                                                  .complainList[index]
-                                                  .reply
-                                                  .isNotEmpty
-                                              ? orderController
-                                                  .complainList[index].reply
-                                              : 'Waiting for reply....',
-                                          style: Get
-                                              .theme.primaryTextTheme.titleSmall
-                                              .copyWith(
-                                            letterSpacing: -0.2,
-                                            fontWeight: FontWeight.w300,
+                                      );
+                                    }),
+                                FutureBuilder(
+                                    future: global.translatedText("Reply : "),
+                                    builder: (context, snapShot) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(8),
+                                        child: RichText(
+                                          text: TextSpan(
+                                            text: snapShot.data,
+                                            style: Get.theme.primaryTextTheme
+                                                .titleSmall
+                                                .copyWith(
+                                              letterSpacing: -0.2,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                text: orderController
+                                                        .complainList[index]
+                                                        .reply
+                                                        .isNotEmpty
+                                                    ? orderController
+                                                        .complainList[index]
+                                                        .reply
+                                                    : 'Waiting for reply....',
+                                                style: Get.theme
+                                                    .primaryTextTheme.titleSmall
+                                                    .copyWith(
+                                                  letterSpacing: -0.2,
+                                                  fontWeight: FontWeight.w300,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                      );
+                                    }),
                               ],
                             ),
                           ),

@@ -23,7 +23,7 @@ import 'package:cashfuse/views/offerDetailScreen.dart';
 import 'package:cashfuse/views/offerListScreen.dart';
 import 'package:cashfuse/views/product_Details.dart';
 import 'package:cashfuse/views/referEarnScreen.dart';
-import 'package:cashfuse/views/utils/viewAllProductScreen.dart';
+import 'package:cashfuse/views/viewAllProductScreen.dart';
 import 'package:cashfuse/views/webHomeScreen.dart';
 import 'package:cashfuse/widget/admobBannerAdWidget.dart';
 import 'package:cashfuse/widget/adsCampaignWidget.dart';
@@ -912,7 +912,8 @@ class HomeScreen extends StatelessWidget {
                                                 Get.to(
                                                   () =>
                                                       AdsCampaignWidgetListScreen(
-                                                    title: 'TOP CASHBACK STORES',
+                                                    title:
+                                                        'TOP CASHBACK STORES',
                                                   ),
                                                   routeName: 'all',
                                                 );
@@ -1148,37 +1149,37 @@ class HomeScreen extends StatelessWidget {
                                                             CrossAxisAlignment
                                                                 .center,
                                                         children: [
-                                                          Container(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 15,
-                                                                    bottom: 15),
-                                                            child: RichText(
-                                                              text: TextSpan(
-                                                                  text:
-                                                                      "Price Compared ",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black54,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      fontSize:
-                                                                          10),
-                                                                  children: [
-                                                                    TextSpan(
-                                                                        text:
-                                                                            '(${homeController.productList[index].productPrices.length} Sellers)',
+                                                          FutureBuilder(
+                                                              future: global
+                                                                  .translatedText(
+                                                                      "Price Compared "),
+                                                              builder: (context,
+                                                                  snapShot) {
+                                                                return Container(
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          top:
+                                                                              15,
+                                                                          bottom:
+                                                                              15),
+                                                                  child:
+                                                                      RichText(
+                                                                    text: TextSpan(
+                                                                        text: snapShot
+                                                                            .data,
                                                                         style: TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .w500,
-                                                                            fontSize:
-                                                                                10,
                                                                             color:
-                                                                                Colors.blueAccent.shade400)),
-                                                                  ]),
-                                                            ),
-                                                          ),
+                                                                                Colors.black54,
+                                                                            fontWeight: FontWeight.w500,
+                                                                            fontSize: 10),
+                                                                        children: [
+                                                                          TextSpan(
+                                                                              text: ' (${homeController.productList[index].productPrices.length} Sellers)',
+                                                                              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 10, color: Colors.blueAccent.shade400)),
+                                                                        ]),
+                                                                  ),
+                                                                );
+                                                              }),
                                                           Container(
                                                             color: Colors
                                                                 .grey.shade400,
@@ -1582,37 +1583,37 @@ class HomeScreen extends StatelessWidget {
                                                             CrossAxisAlignment
                                                                 .center,
                                                         children: [
-                                                          Container(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 15,
-                                                                    bottom: 15),
-                                                            child: RichText(
-                                                              text: TextSpan(
-                                                                  text:
-                                                                      "Price Compared ",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black54,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      fontSize:
-                                                                          10),
-                                                                  children: [
-                                                                    TextSpan(
-                                                                        text:
-                                                                            '(${homeController.trendingProductList[index].productPrices.length} Sellers)',
+                                                          FutureBuilder(
+                                                              future: global
+                                                                  .translatedText(
+                                                                      "Price Compared "),
+                                                              builder: (context,
+                                                                  snapShot) {
+                                                                return Container(
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          top:
+                                                                              15,
+                                                                          bottom:
+                                                                              15),
+                                                                  child:
+                                                                      RichText(
+                                                                    text: TextSpan(
+                                                                        text: snapShot
+                                                                            .data,
                                                                         style: TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .w500,
-                                                                            fontSize:
-                                                                                10,
                                                                             color:
-                                                                                Colors.blueAccent.shade400)),
-                                                                  ]),
-                                                            ),
-                                                          ),
+                                                                                Colors.black54,
+                                                                            fontWeight: FontWeight.w500,
+                                                                            fontSize: 10),
+                                                                        children: [
+                                                                          TextSpan(
+                                                                              text: ' (${homeController.trendingProductList[index].productPrices.length} Sellers)',
+                                                                              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 10, color: Colors.blueAccent.shade400)),
+                                                                        ]),
+                                                                  ),
+                                                                );
+                                                              }),
                                                           Container(
                                                             color: Colors
                                                                 .grey.shade400,

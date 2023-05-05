@@ -4,6 +4,7 @@ import 'package:cashfuse/models/categoryModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 
 class RatesAndOfferTermsSheetWidget extends StatelessWidget {
   final bool isOffer;
@@ -33,17 +34,20 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
+                    padding:
+                        const EdgeInsets.only(left: 15, right: 15, bottom: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          homeController.isOffer ? partner.rightTab : partner.leftTab,
+                          homeController.isOffer
+                              ? partner.rightTab
+                              : partner.leftTab,
                           style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                             fontWeight: FontWeight.w600,
                             letterSpacing: -0.1,
                           ),
-                        ),
+                        ).translate(),
                         InkWell(
                           onTap: () {
                             Get.back();
@@ -80,19 +84,24 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                           height: 50,
                           child: Card(
                             margin: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.zero),
                             color: Get.theme.primaryColor,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    Get.find<HomeController>().setIsOffer(false);
+                                    Get.find<HomeController>()
+                                        .setIsOffer(false);
                                   },
                                   child: Text(
                                     partner.leftTab,
-                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
-                                  ),
+                                    style: Get.theme.primaryTextTheme.titleSmall
+                                        .copyWith(
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                  ).translate(),
                                 ),
                                 Icon(
                                   Icons.more_vert,
@@ -105,8 +114,11 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                                   },
                                   child: Text(
                                     partner.rightTab,
-                                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
-                                  ),
+                                    style: Get.theme.primaryTextTheme.titleSmall
+                                        .copyWith(
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                  ).translate(),
                                 ),
                               ],
                             ),

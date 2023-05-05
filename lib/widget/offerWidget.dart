@@ -8,6 +8,7 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
 class OfferWidget extends StatelessWidget {
@@ -81,7 +82,7 @@ class OfferWidget extends StatelessWidget {
                         child: Text(
                           commonModel.buttonText.isNotEmpty ? commonModel.buttonText : 'Grab Now',
                           style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
-                        ),
+                        ).translate(),
                       ),
                     ],
                   ),
@@ -153,7 +154,7 @@ class OfferWidget extends StatelessWidget {
                               child: Text(
                                 offer.buttonText,
                                 style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
-                              ),
+                              ).translate(),
                             ),
                           ],
                         ),

@@ -14,7 +14,7 @@ import 'package:cashfuse/views/couponDetailScreen.dart';
 import 'package:cashfuse/views/couponListScreen.dart';
 import 'package:cashfuse/views/offerDetailScreen.dart';
 import 'package:cashfuse/views/offerListScreen.dart';
-import 'package:cashfuse/views/utils/viewAllProductScreen.dart';
+import 'package:cashfuse/views/viewAllProductScreen.dart';
 import 'package:cashfuse/widget/couponWidget.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/offerWidget.dart';
@@ -24,7 +24,7 @@ import 'package:cashfuse/widget/web/webBannerView.dart';
 import 'package:cashfuse/widget/web/webFooterWidget.dart';
 import 'package:cashfuse/widget/web/webHomeProductView.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:slide_countdown/slide_countdown.dart';
@@ -57,7 +57,7 @@ class WebHomeScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                AppLocalizations.of(context).top_categories,
+                                'TOP CATEGORIES',
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -73,7 +73,7 @@ class WebHomeScreen extends StatelessWidget {
                                   );
                                 },
                                 child: Text(
-                                  '${AppLocalizations.of(context).view_all} >',
+                                  'View All >',
                                   style: Get.theme.primaryTextTheme.bodySmall
                                       .copyWith(
                                           color: Colors.teal,
@@ -98,9 +98,7 @@ class WebHomeScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                AppLocalizations.of(context)
-                                    .coupons_of_the_day
-                                    .toUpperCase(),
+                                'Coupons of the day'.toUpperCase(),
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -117,7 +115,7 @@ class WebHomeScreen extends StatelessWidget {
                                         );
                                       },
                                       child: Text(
-                                        '${AppLocalizations.of(context).view_all} >',
+                                        'View All >',
                                         style: Get
                                             .theme.primaryTextTheme.bodySmall
                                             .copyWith(
@@ -272,7 +270,7 @@ class WebHomeScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 6, vertical: 15),
                           child: Text(
-                            AppLocalizations.of(context).exclusive_offers,
+                            'EXCLUSIVE OFFERS FOR YOU',
                             style: TextStyle(
                               fontSize: global.getPlatFrom() ? 16 : 13,
                               fontWeight: FontWeight.w600,
@@ -432,8 +430,7 @@ class WebHomeScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                AppLocalizations.of(context)
-                                    .top_cashback_stores,
+                                'TOP CASHBACK STORES',
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -445,14 +442,13 @@ class WebHomeScreen extends StatelessWidget {
                                 onTap: () {
                                   Get.to(
                                     () => AdsCampaignWidgetListScreen(
-                                      title: AppLocalizations.of(context)
-                                          .top_cashback_stores,
+                                      title: 'TOP CASHBACK STORES',
                                     ),
                                     routeName: 'all',
                                   );
                                 },
                                 child: Text(
-                                  '${AppLocalizations.of(context).view_all} >',
+                                  'View All >',
                                   style: Get.theme.primaryTextTheme.bodySmall
                                       .copyWith(
                                           color: Colors.teal,
@@ -493,7 +489,7 @@ class WebHomeScreen extends StatelessWidget {
                                   );
                                 },
                                 child: Text(
-                                  '${AppLocalizations.of(context).view_all} >',
+                                  'View All >',
                                   style: Get.theme.primaryTextTheme.bodySmall
                                       .copyWith(
                                           color: Colors.teal,
@@ -531,7 +527,7 @@ class WebHomeScreen extends StatelessWidget {
                                   );
                                 },
                                 child: Text(
-                                  '${AppLocalizations.of(context).view_all} >',
+                                  'View All >',
                                   style: Get.theme.primaryTextTheme.bodySmall
                                       .copyWith(
                                           color: Colors.teal,
@@ -719,7 +715,7 @@ class WebHomeScreen extends StatelessWidget {
                                   );
                                 },
                                 child: Text(
-                                  '${AppLocalizations.of(context).view_all} >',
+                                  'View All >',
                                   style: Get.theme.primaryTextTheme.bodySmall
                                       .copyWith(
                                           color: Colors.teal,
@@ -781,7 +777,7 @@ class WebHomeScreen extends StatelessWidget {
                                               );
                                             },
                                             child: Text(
-                                              '${AppLocalizations.of(context).view_all} >',
+                                              'View All >',
                                               style: Get.theme.primaryTextTheme
                                                   .bodySmall
                                                   .copyWith(

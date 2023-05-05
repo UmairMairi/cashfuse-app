@@ -7,6 +7,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
+import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:customizable_space_bar/customizable_space_bar.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -219,8 +220,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                       ),
                                       child: Row(
                                         children: [
-                                          Text('Share')
-                                              .translate(),
+                                          Text('Share').translate(),
                                           CircleAvatar(
                                             radius: 12,
                                             backgroundColor: Colors.green[700],
@@ -260,10 +260,21 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                               SizedBox(
                                 height: 15,
                               ),
-                              HtmlWidget(
-                                admitedData.description,
-                                //textAlign: TextAlign.center,
-                              ),
+                              FutureBuilder(
+                                  future: global
+                                      .translatedText(admitedData.description),
+                                  builder: (context, snapShot) {
+                                    return snapShot.data != null
+                                        ? HtmlWidget(
+                                            snapShot.data,
+                                            //textAlign: TextAlign.center,
+                                          )
+                                        : Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 20),
+                                            child: CircularProgressIndicator(),
+                                          );
+                                  }),
                               // Text(
                               //   offer.terms,
                               //   textAlign: TextAlign.center,
@@ -603,91 +614,97 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
               ),
             ),
           ),
-          // bottomNavigationBar: admitedData.partner != null &&
-          //         (admitedData.partner.leftTab != null ||
-          //             admitedData.partner.rightTab != null)
-          //     ? Container(
-          //         width: Get.width,
-          //         alignment: Alignment.center,
-          //         height: 50,
-          //         child: SizedBox(
-          //           height: 50,
-          //           width: AppConstants.WEB_MAX_WIDTH,
-          //           child: Card(
-          //             margin: EdgeInsets.zero,
-          //             shape: RoundedRectangleBorder(
-          //                 borderRadius: BorderRadius.zero),
-          //             color: Get.theme.primaryColor,
-          //             child: Row(
-          //               mainAxisAlignment:
-          //                   (admitedData.partner.leftTab != null &&
-          //                           widget.admitedData.partner.rightTab != null)
-          //                       ? MainAxisAlignment.spaceEvenly
-          //                       : MainAxisAlignment.center,
-          //               children: [
-          //                 InkWell(
-          //                   onTap: () {
-          //                     Get.find<HomeController>().setIsOffer(false);
-          //                     Get.bottomSheet(
-          //                       SizedBox(
-          //                         width: AppConstants.WEB_MAX_WIDTH,
-          //                         child: ClipRRect(
-          //                           borderRadius: BorderRadius.only(
-          //                             topLeft: Radius.circular(15),
-          //                             topRight: Radius.circular(15),
-          //                           ),
-          //                           child: RatesAndOfferTermsSheetWidget(
-          //                             partner: admitedData.partner,
-          //                           ),
-          //                         ),
-          //                       ),
-          //                     );
-          //                   },
-          //                   child: Text(
-          //                     admitedData.partner.leftTab,
-          //                     style: Get.theme.primaryTextTheme.titleSmall
-          //                         .copyWith(
-          //                             fontWeight: FontWeight.w400,
-          //                             color: Colors.white),
-          //                   ),
-          //                 ),
-          //                 (admitedData.partner.leftTab != null &&
-          //                         admitedData.partner.rightTab != null)
-          //                     ? Icon(
-          //                         Icons.more_vert,
-          //                         size: 22,
-          //                         color: Colors.white.withOpacity(0.3),
-          //                       )
-          //                     : SizedBox(),
-          //                 InkWell(
-          //                   onTap: () {
-          //                     Get.find<HomeController>().setIsOffer(true);
-          //                     Get.bottomSheet(
-          //                       ClipRRect(
-          //                         borderRadius: BorderRadius.only(
-          //                           topLeft: Radius.circular(15),
-          //                           topRight: Radius.circular(15),
-          //                         ),
-          //                         child: RatesAndOfferTermsSheetWidget(
-          //                           partner: admitedData.partner,
-          //                         ),
-          //                       ),
-          //                     );
-          //                   },
-          //                   child: Text(
-          //                     admitedData.partner.rightTab.camelCase,
-          //                     style: Get.theme.primaryTextTheme.titleSmall
-          //                         .copyWith(
-          //                             fontWeight: FontWeight.w400,
-          //                             color: Colors.white),
-          //                   ),
-          //                 ),
-          //               ],
-          //             ),
-          //           ),
-          //         ),
-          //       )
-          //     : SizedBox(),
+          bottomNavigationBar: admitedData.partner != null &&
+                      (admitedData.partner.leftTab != null &&
+                          admitedData.partner.leftTab.isNotEmpty) ||
+                  (admitedData.partner.rightTab != null &&
+                      admitedData.partner.rightTab.isNotEmpty)
+              ? Container(
+                  width: Get.width,
+                  alignment: Alignment.center,
+                  height: 50,
+                  child: SizedBox(
+                    height: 50,
+                    width: AppConstants.WEB_MAX_WIDTH,
+                    child: Card(
+                      margin: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero),
+                      color: Get.theme.primaryColor,
+                      child: Row(
+                        mainAxisAlignment: (admitedData.partner.leftTab !=
+                                        null &&
+                                    admitedData.partner.leftTab.isNotEmpty) ||
+                                (admitedData.partner.rightTab != null &&
+                                    admitedData.partner.rightTab.isNotEmpty)
+                            ? MainAxisAlignment.spaceEvenly
+                            : MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Get.find<HomeController>().setIsOffer(false);
+                              Get.bottomSheet(
+                                SizedBox(
+                                  width: AppConstants.WEB_MAX_WIDTH,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15),
+                                    ),
+                                    child: RatesAndOfferTermsSheetWidget(
+                                      partner: admitedData.partner,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              admitedData.partner.leftTab,
+                              style: Get.theme.primaryTextTheme.titleSmall
+                                  .copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white),
+                            ),
+                          ),
+                          (admitedData.partner.leftTab != null &&
+                                      admitedData.partner.leftTab.isNotEmpty) ||
+                                  (admitedData.partner.rightTab != null &&
+                                      admitedData.partner.rightTab.isNotEmpty)
+                              ? Icon(
+                                  Icons.more_vert,
+                                  size: 22,
+                                  color: Colors.white.withOpacity(0.3),
+                                )
+                              : SizedBox(),
+                          InkWell(
+                            onTap: () {
+                              Get.find<HomeController>().setIsOffer(true);
+                              Get.bottomSheet(
+                                ClipRRect(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(15),
+                                    topRight: Radius.circular(15),
+                                  ),
+                                  child: RatesAndOfferTermsSheetWidget(
+                                    partner: admitedData.partner,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              admitedData.partner.rightTab.camelCase,
+                              style: Get.theme.primaryTextTheme.titleSmall
+                                  .copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox(),
         ),
       );
     });

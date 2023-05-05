@@ -396,7 +396,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
-                              ),
+                              ).translate(),
                             ],
                           ),
                         ),

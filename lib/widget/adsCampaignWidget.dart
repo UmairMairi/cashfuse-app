@@ -4,6 +4,7 @@ import 'package:cashfuse/widget/customImage.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 
 class AdsCampaignWidget extends StatelessWidget {
   final CommonModel commonModel;
@@ -39,7 +40,9 @@ class AdsCampaignWidget extends StatelessWidget {
           //:
           Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: commonModel.tagline != null ? MainAxisAlignment.start : MainAxisAlignment.center,
+        mainAxisAlignment: commonModel.tagline != null
+            ? MainAxisAlignment.start
+            : MainAxisAlignment.center,
         children: [
           commonModel.tagline != null && commonModel.tagline.isNotEmpty
               ? Align(
@@ -47,7 +50,8 @@ class AdsCampaignWidget extends StatelessWidget {
                   child: RotatedBox(
                     quarterTurns: -45,
                     child: ClipPath(
-                      clipper: MultiplePointsClipper(Sides.bottom, heightOfPoint: 10, numberOfPoints: 1),
+                      clipper: MultiplePointsClipper(Sides.bottom,
+                          heightOfPoint: 10, numberOfPoints: 1),
                       child: Container(
                         width: 20,
                         height: 135,
@@ -63,11 +67,12 @@ class AdsCampaignWidget extends StatelessWidget {
                           child: Text(
                             commonModel.tagline,
                             textAlign: TextAlign.center,
-                            style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                            style:
+                                Get.theme.primaryTextTheme.bodySmall.copyWith(
                               color: Colors.white,
                               fontSize: 10,
                             ),
-                          ),
+                          ).translate(),
                         ),
                       ),
                     ),
@@ -94,7 +99,7 @@ class AdsCampaignWidget extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-            ),
+            ).translate(),
           ),
           Container(
             margin: EdgeInsets.only(top: 10),
@@ -104,9 +109,14 @@ class AdsCampaignWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(2),
             ),
             child: Text(
-              commonModel.buttonText != null ? commonModel.buttonText : 'Grab deal',
-              style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
-            ),
+              commonModel.buttonText != null
+                  ? commonModel.buttonText
+                  : 'Grab deal',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600),
+            ).translate(),
           ),
           // InkWell(
           //   onTap: () {

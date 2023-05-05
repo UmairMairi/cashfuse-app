@@ -6,9 +6,10 @@ import 'package:cashfuse/models/clickModel.dart';
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:google_translator/google_translator.dart';
 
 class RecentClickDialogWidget extends StatelessWidget {
   final ClickModel click;
@@ -48,13 +49,13 @@ class RecentClickDialogWidget extends StatelessWidget {
           Text(
             'All is well!',
             style: Get.theme.primaryTextTheme.titleLarge,
-          ),
+          ).translate(),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Text(
               homeController.clickDialogText(click),
               textAlign: TextAlign.center,
-            ),
+            ).translate(),
           ),
           InkWell(
             onTap: () async {
@@ -78,9 +79,12 @@ class RecentClickDialogWidget extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: Text(
-                AppLocalizations.of(context).see_best_deals,
-                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-              ),
+                'SEE BEST DEALS',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600),
+              ).translate(),
             ),
           ),
           Expanded(child: SizedBox()),

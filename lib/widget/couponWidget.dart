@@ -5,6 +5,7 @@ import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 
 class CouponWidget extends StatelessWidget {
   final Coupon coupon;
@@ -107,7 +108,7 @@ class CouponWidget extends StatelessWidget {
                                   : 'Grab Now',
                           style: Get.theme.primaryTextTheme.titleSmall
                               .copyWith(color: Colors.white),
-                        ),
+                        ).translate(),
                       ),
                     ),
                   ],

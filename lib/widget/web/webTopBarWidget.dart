@@ -22,7 +22,7 @@ import 'package:cashfuse/views/searchScreen.dart';
 import 'package:cashfuse/widget/confirmationDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -175,7 +175,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text(AppLocalizations.of(context).login),
+                      child: Text('Login or signup'),
                     ),
                   ),
             global.currentUser.id != null
@@ -229,7 +229,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                         );
                       },
                       child: Text(
-                        AppLocalizations.of(context).account_settings,
+                        'Account Settings',
                         style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -245,7 +245,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                         );
                       },
                       child: Text(
-                        AppLocalizations.of(context).my_earnings,
+                        'My Earnings',
                         style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -261,7 +261,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                         );
                       },
                       child: Text(
-                        AppLocalizations.of(context).payments,
+                        'Payments',
                         style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -277,7 +277,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                         );
                       },
                       child: Text(
-                        AppLocalizations.of(context).payment_history,
+                        'Payment History',
                         style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -293,7 +293,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                         );
                       },
                       child: Text(
-                        AppLocalizations.of(context).recents_clicks,
+                        'Recents Clicks',
                         style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -325,7 +325,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                         );
                       },
                       child: Text(
-                        AppLocalizations.of(context).get_help,
+                        'Get Help',
                         style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -341,7 +341,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                         );
                       },
                       child: Text(
-                        AppLocalizations.of(context).about_us,
+                        'About Us',
                         style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -357,7 +357,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                         );
                       },
                       child: Text(
-                        AppLocalizations.of(context).privacy_policy,
+                        'Privacy Policy',
                         style: Get.theme.primaryTextTheme.bodySmall.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -369,12 +369,12 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       onTap: () {
                         showConfirmationDialog(
                           context,
-                          AppLocalizations.of(context).logout,
-                          AppLocalizations.of(context).logout_desc,
+                          'Logout',
+                          'Are you sure you want to logout ?',
                           [
                             CupertinoDialogAction(
                               child: Text(
-                                AppLocalizations.of(context).yes,
+                                'Yes',
                                 style: Get.theme.primaryTextTheme.titleSmall
                                     .copyWith(color: Colors.red),
                               ),
@@ -390,7 +390,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                             ),
                             CupertinoDialogAction(
                               child: Text(
-                                AppLocalizations.of(context).no,
+                                'No',
                                 style: Get.theme.primaryTextTheme.titleSmall
                                     .copyWith(color: Colors.blue),
                               ),
@@ -402,7 +402,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                         );
                       },
                       child: Text(
-                        AppLocalizations.of(context).logout,
+                        'Logout',
                         style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
                           letterSpacing: -0.5,
                           color: Colors.red,

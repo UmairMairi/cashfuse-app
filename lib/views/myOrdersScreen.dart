@@ -403,7 +403,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                                         10,
                                                                     color: Colors
                                                                         .grey),
-                                                              ).translate()
+                                                              )
                                                             : SizedBox(),
                                                       ],
                                                     ),
@@ -514,7 +514,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                                             10,
                                                                         color: Colors
                                                                             .grey),
-                                                                  ).translate()
+                                                                  )
                                                                 : SizedBox(),
                                                           ],
                                                         ),
@@ -611,7 +611,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                                         10,
                                                                     color: Colors
                                                                         .grey),
-                                                              ).translate()
+                                                              )
                                                             : SizedBox(),
                                                       ],
                                                     )
@@ -933,7 +933,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                       style: TextStyle(
                                                           fontSize: 10,
                                                           color: Colors.grey),
-                                                    ).translate()
+                                                    )
                                                   : SizedBox(),
                                             ],
                                           ),
@@ -1046,7 +1046,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                               fontSize: 10,
                                                               color:
                                                                   Colors.grey),
-                                                        ).translate()
+                                                      )
                                                       : SizedBox(),
                                                 ],
                                               ),
@@ -1121,7 +1121,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                       style: TextStyle(
                                                           fontSize: 10,
                                                           color: Colors.grey),
-                                                    ).translate()
+                                                    )
                                                   : SizedBox(),
                                             ],
                                           )

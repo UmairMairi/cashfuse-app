@@ -223,27 +223,32 @@ class PaytmRedeemScreen extends StatelessWidget {
                         ],
                       ),
                       paymentController.payTMDetails != null
-                          ? RichText(
-                              text: TextSpan(
-                                text: 'Phone No.',
-                                style: Get.theme.primaryTextTheme.titleSmall
-                                    .copyWith(
-                                  letterSpacing: -0.2,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text:
-                                        paymentController.payTMDetails.paytmNo,
-                                    style: Get.theme.primaryTextTheme.bodySmall
+                          ? FutureBuilder(
+                              future: global.translatedText("Phone No "),
+                              builder: (context, snapShot) {
+                                return RichText(
+                                  text: TextSpan(
+                                    text: snapShot.data,
+                                    style: Get.theme.primaryTextTheme.titleSmall
                                         .copyWith(
                                       letterSpacing: -0.2,
-                                      fontWeight: FontWeight.w300,
+                                      fontWeight: FontWeight.w500,
                                     ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text:
+                                            " ${paymentController.payTMDetails.paytmNo}",
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall
+                                            .copyWith(
+                                          letterSpacing: -0.2,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            )
+                                );
+                              })
                           : SizedBox(),
                     ],
                   ),

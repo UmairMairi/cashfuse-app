@@ -1,9 +1,9 @@
 // ignore_for_file: invalid_use_of_protected_member
 
 import 'package:cashfuse/controllers/localizationController.dart';
-import 'package:cashfuse/l10n/l10n.dart';
 
 import 'package:flutter/material.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 
 import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
@@ -34,7 +34,7 @@ class LanguageScreen extends StatelessWidget {
       body: GetBuilder<LocalizationController>(
         builder: (localizationController) {
           return ListView.builder(
-              itemCount: L10n.languageListName.length,
+              itemCount: global.appInfo.languages.length,
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) => Column(
@@ -53,11 +53,11 @@ class LanguageScreen extends StatelessWidget {
                           localizationController.setLanguage(val);
                           localizationController.refresh();
                         },
-                        value: L10n.all[index].languageCode,
+                        value: global.appInfo.languages[index].languageCode,
                         groupValue: localizationController.languageCode,
-                        title: Text(L10n.languageListName[index]),
+                        title: Text(global.appInfo.languages[index].key),
                       ),
-                      index != L10n.languageListName.length - 1
+                      index != global.appInfo.languages.length - 1
                           ? Divider(
                               color: Color(0xFFDFE8EF),
                             )

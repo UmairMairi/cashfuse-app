@@ -625,17 +625,14 @@ class HomeController extends GetxController {
                       .where((element) => element.status == 1)
                       .toList();
                   if (_tList != null && _tList.length > 0) {
-                    for (var p = 0;
-                        p < _tList.length;
-                        p++) {
+                    for (var p = 0; p < _tList.length; p++) {
                       _allAdvList[m].commonList.add(
                             CommonModel(
                                 name: _tList[p].name,
                                 image:
                                     '${global.appInfo.baseUrls.offerImageUrl}/${_tList[p].image}',
                                 buttonText: 'Grab Now',
-                                trackingLink:
-                                    _tList[p].gotourl,
+                                trackingLink: _tList[p].gotourl,
                                 campaignId: _tList[p].id,
                                 from: "admit"),
                           );

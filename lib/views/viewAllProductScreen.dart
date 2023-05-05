@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 
-import '../../utils/Mycolors.dart';
-import '../product_Details.dart';
+import '../utils/Mycolors.dart';
+import 'product_Details.dart';
 
 class ViewAllProductScreen extends StatefulWidget {
   final String title;
@@ -105,26 +105,31 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          padding: EdgeInsets.only(top: 15, bottom: 15),
-                          child: RichText(
-                            text: TextSpan(
-                                text: "Price Compared ",
-                                style: TextStyle(
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 10),
-                                children: [
-                                  TextSpan(
-                                      text:
-                                          '(${productList[index].productPrices.length} Sellers)',
+                        FutureBuilder(
+                            future: global.translatedText("Price Compared "),
+                            builder: (context, snapShot) {
+                              return Container(
+                                padding: EdgeInsets.only(top: 15, bottom: 15),
+                                child: RichText(
+                                  text: TextSpan(
+                                      text: snapShot.data,
                                       style: TextStyle(
+                                          color: Colors.black54,
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 10,
-                                          color: Colors.blueAccent.shade400)),
-                                ]),
-                          ),
-                        ),
+                                          fontSize: 10),
+                                      children: [
+                                        TextSpan(
+                                            text:
+                                                '(${productList[index].productPrices.length} Sellers)',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 10,
+                                                color: Colors
+                                                    .blueAccent.shade400)),
+                                      ]),
+                                ),
+                              );
+                            }),
                         Container(
                           color: Colors.grey.shade400,
                           height: 1,

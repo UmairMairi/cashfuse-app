@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:cashfuse/controllers/localizationController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/allInOneSearchScreen.dart';
 import 'package:cashfuse/views/homeScreen.dart';
@@ -12,9 +13,9 @@ import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
+import 'package:translator/translator.dart';
 
 class BottomNavigationBarScreen extends StatefulWidget {
   int pageIndex;
@@ -27,6 +28,13 @@ class BottomNavigationBarScreen extends StatefulWidget {
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   bool _canExit = global.getPlatFrom() ? true : false;
   int bottomNavIndex;
+
+  bool _isHomeIndex = false;
+  bool _isSearchIndex = false;
+  bool _isAllInOneIndex = false;
+  bool _isRecentClickIndex = false;
+  bool _isProfileIndex = false;
+  String _label = '';
 
   CircularBottomNavigationController navigationController;
 
@@ -146,16 +154,161 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                 color: Colors.grey[200],
                 child: CircularBottomNavigation(
                     List.generate(iconList.length, (index) {
-                      return TabItem(
-                        iconList[index],
-                        tabList[index],
-                        colorList[index],
-                        labelStyle: TextStyle(
-                          color: colorList[index],
-                          height: 1.2,
-                          fontSize: 12,
-                        ),
-                      );
+                      final translator = GoogleTranslator();
+
+                      if (index == 0) {
+                        if (!_isHomeIndex) {
+                          translator
+                              .translate(tabList[index],
+                                  to: Get.find<LocalizationController>()
+                                      .languageCode)
+                              .then(
+                            (value) {
+                              setState(() {
+                                tabList[index] = value.text;
+                                _isHomeIndex = true;
+                              });
+                            },
+                          );
+                        }
+
+                        return TabItem(
+                          iconList[index],
+                          tabList[index],
+                          colorList[index],
+                          labelStyle: TextStyle(
+                            color: colorList[index],
+                            height: 1.2,
+                            fontSize: 12,
+                          ),
+                        );
+                      } else if (index == 1) {
+                        if (!_isSearchIndex) {
+                          translator
+                              .translate(tabList[index],
+                                  to: Get.find<LocalizationController>()
+                                      .languageCode)
+                              .then(
+                            (value) {
+                              setState(() {
+                                tabList[index] = value.text;
+                                _isSearchIndex = true;
+                              });
+                            },
+                          );
+                        }
+
+                        return TabItem(
+                          iconList[index],
+                          tabList[index],
+                          colorList[index],
+                          labelStyle: TextStyle(
+                            color: colorList[index],
+                            height: 1.2,
+                            fontSize: 12,
+                          ),
+                        );
+                      } else if (index == 2) {
+                        if (!_isAllInOneIndex) {
+                          translator
+                              .translate(tabList[index],
+                                  to: Get.find<LocalizationController>()
+                                      .languageCode)
+                              .then(
+                            (value) {
+                              setState(() {
+                                tabList[index] = value.text;
+                                _isAllInOneIndex = true;
+                              });
+                            },
+                          );
+                        }
+
+                        return TabItem(
+                          iconList[index],
+                          tabList[index],
+                          colorList[index],
+                          labelStyle: TextStyle(
+                            color: colorList[index],
+                            height: 1.2,
+                            fontSize: 12,
+                          ),
+                        );
+                      } else if (index == 3) {
+                        if (!_isRecentClickIndex) {
+                          translator
+                              .translate(tabList[index],
+                                  to: Get.find<LocalizationController>()
+                                      .languageCode)
+                              .then(
+                            (value) {
+                              setState(() {
+                                tabList[index] = value.text;
+                                _isRecentClickIndex = true;
+                              });
+                            },
+                          );
+                        }
+
+                        return TabItem(
+                          iconList[index],
+                          tabList[index],
+                          colorList[index],
+                          labelStyle: TextStyle(
+                            color: colorList[index],
+                            height: 1.2,
+                            fontSize: 12,
+                          ),
+                        );
+                      } else if (index == 4) {
+                        if (!_isProfileIndex) {
+                          translator
+                              .translate(tabList[index],
+                                  to: Get.find<LocalizationController>()
+                                      .languageCode)
+                              .then(
+                            (value) {
+                              setState(() {
+                                tabList[index] = value.text;
+                                _isProfileIndex = true;
+                              });
+                            },
+                          );
+                        }
+
+                        return TabItem(
+                          iconList[index],
+                          tabList[index],
+                          colorList[index],
+                          labelStyle: TextStyle(
+                            color: colorList[index],
+                            height: 1.2,
+                            fontSize: 12,
+                          ),
+                        );
+                      } else {
+                        return TabItem(
+                          iconList[index],
+                          tabList[index],
+                          colorList[index],
+                          labelStyle: TextStyle(
+                            color: colorList[index],
+                            height: 1.2,
+                            fontSize: 12,
+                          ),
+                        );
+                      }
+
+                      // return TabItem(
+                      //   iconList[index],
+                      //   tabList[index],
+                      //   colorList[index],
+                      //   labelStyle: TextStyle(
+                      //     color: colorList[index],
+                      //     height: 1.2,
+                      //     fontSize: 12,
+                      //   ),
+                      // );
                     }),
                     circleSize: 50,
                     iconsSize: 25,
