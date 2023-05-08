@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_use_of_protected_member
 
 import 'package:cashfuse/controllers/localizationController.dart';
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -17,7 +18,10 @@ class LanguageScreen extends StatelessWidget {
       appBar: AppBar(
         leading: InkWell(
           onTap: () async {
-            Get.back();
+            Get.to(
+              () => BottomNavigationBarScreen(pageIndex: 4),
+              routeName: 'home',
+            );
           },
           child: Icon(
             Icons.arrow_back,
@@ -55,7 +59,8 @@ class LanguageScreen extends StatelessWidget {
                         },
                         value: global.appInfo.languages[index].languageCode,
                         groupValue: localizationController.languageCode,
-                        title: Text(global.appInfo.languages[index].key),
+                        title:
+                            Text(global.appInfo.languages[index].languageName),
                       ),
                       index != global.appInfo.languages.length - 1
                           ? Divider(

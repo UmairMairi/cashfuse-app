@@ -133,6 +133,19 @@ class HomeScreen extends StatelessWidget {
                           height: 25,
                         )),
                   ),
+                  Container(
+                    width: 35,
+                    margin: EdgeInsets.symmetric(vertical: 10).copyWith(right: 10),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Get.theme.primaryColor,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Get.theme.secondaryHeaderColor),
+                    ),
+                    child: Text(
+                      global.country.countryCode,
+                    ),
+                  ),
                 ],
               ),
         floatingActionButton: GetBuilder<SplashController>(builder: (splash) {

@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
+import 'package:cashfuse/controllers/locationController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/controllers/referEarnController.dart';
 import 'package:cashfuse/controllers/searchController.dart';
@@ -116,6 +117,7 @@ class SplashController extends GetxController {
           await apiHelper.getAppInfo().then((response) async {
             if (response.statusCode == 200) {
               global.appInfo = response.data;
+              await Get.find<LocationController>().getLocationPermission();
               if (global.sp.getString('currentUser') != null) {
                 global.currentUser = UserModel.fromJson(
                     json.decode(global.sp.getString("currentUser")));

@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:cashfuse/controllers/localizationController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -34,7 +35,6 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   bool _isAllInOneIndex = false;
   bool _isRecentClickIndex = false;
   bool _isProfileIndex = false;
-  String _label = '';
 
   CircularBottomNavigationController navigationController;
 
@@ -71,6 +71,8 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
           bgColor: colorList[bottomNavIndex],
         ),
       ];
+  String _label = '';
+  String _home = '';
 
   @override
   void initState() {
@@ -94,16 +96,16 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
     }
   }
 
+  List<String> tabList = [
+    'Home',
+    'Search',
+    'All in one\n Search',
+    'Recents Clicks',
+    'Profile',
+  ];
+
   @override
   Widget build(BuildContext context) {
-    List<String> tabList = [
-      'Home',
-      'Search',
-      'All in one\n Search',
-      'Recents Clicks',
-      'Profile',
-    ];
-
     return WillPopScope(
       onWillPop: () async {
         if (bottomNavIndex != 0) {
@@ -150,180 +152,338 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         ),
         bottomNavigationBar: global.getPlatFrom()
             ? SizedBox()
-            : Container(
-                color: Colors.grey[200],
-                child: CircularBottomNavigation(
-                    List.generate(iconList.length, (index) {
-                      final translator = GoogleTranslator();
+            : GetBuilder<LocalizationController>(
+                builder: (localizationController) => Container(
+                  color: Colors.grey[200],
+                  child: CircularBottomNavigation(
+                      List.generate(iconList.length, (index) {
+                        final translator = GoogleTranslator();
+                        if (index == 0) {
+                          if (_isHomeIndex == false) {
+                            Future.delayed(Duration.zero).then((value) {
+                              translator
+                                  .translate(tabList[index],
+                                      to: localizationController.languageCode)
+                                  .then(
+                                (value) {
+                                  _home = value.text;
+                                  tabList[index] = value.text;
+                                  setState(() {});
+                                  log(value.text);
+                                  log(_isHomeIndex.toString());
+                                  log(_home);
+                                  log('++++++++++++++++++' + tabList[index]);
+                                },
+                              );
+                            });
+                            _isHomeIndex = true;
+                          }
 
-                      if (index == 0) {
-                        if (!_isHomeIndex) {
-                          translator
-                              .translate(tabList[index],
-                                  to: Get.find<LocalizationController>()
-                                      .languageCode)
-                              .then(
-                            (value) {
-                              setState(() {
+                          return TabItem(
+                            iconList[index],
+                            tabList[index],
+                            colorList[index],
+                            labelStyle: TextStyle(
+                              color: colorList[index],
+                              height: 1.2,
+                              fontSize: 12,
+                            ),
+                          );
+                        } else if (index == 1) {
+                          if (_isSearchIndex == false) {
+                            Future.delayed(Duration.zero).then((value) {
+                              translator
+                                  .translate(tabList[index],
+                                      to: localizationController.languageCode)
+                                  .then(
+                                (value) {
+                                  _home = value.text;
+                                  tabList[index] = value.text;
+                                  setState(() {});
+                                  log(value.text);
+                                  log(_isHomeIndex.toString());
+                                  log(_home);
+                                  log('++++++++++++++++++' + tabList[index]);
+                                },
+                              );
+                            });
+                            _isSearchIndex = true;
+                          }
+                          return TabItem(
+                            iconList[index],
+                            tabList[index],
+                            colorList[index],
+                            labelStyle: TextStyle(
+                              color: colorList[index],
+                              height: 1.2,
+                              fontSize: 12,
+                            ),
+                          );
+                        } else if (index == 2) {
+                          if (_isAllInOneIndex == false) {
+                            translator
+                                .translate(tabList[index],
+                                    to: localizationController.languageCode)
+                                .then(
+                              (value) {
                                 tabList[index] = value.text;
-                                _isHomeIndex = true;
-                              });
-                            },
+                                setState(() {});
+                              },
+                            );
+                            _isAllInOneIndex = true;
+                          }
+                          return TabItem(
+                            iconList[index],
+                            tabList[index],
+                            colorList[index],
+                            labelStyle: TextStyle(
+                              color: colorList[index],
+                              height: 1.2,
+                              fontSize: 12,
+                            ),
+                          );
+                        } else if (index == 3) {
+                          if (_isRecentClickIndex == false) {
+                            translator
+                                .translate(tabList[index],
+                                    to: localizationController.languageCode)
+                                .then(
+                              (value) {
+                                tabList[index] = value.text;
+                                setState(() {});
+                              },
+                            );
+                            _isRecentClickIndex = true;
+                          }
+                          return TabItem(
+                            iconList[index],
+                            tabList[index],
+                            colorList[index],
+                            labelStyle: TextStyle(
+                              color: colorList[index],
+                              height: 1.2,
+                              fontSize: 12,
+                            ),
+                          );
+                        } else {
+                          if (_isProfileIndex == false) {
+                            translator
+                                .translate(tabList[index],
+                                    to: localizationController.languageCode)
+                                .then(
+                              (value) {
+                                tabList[index] = value.text;
+                                setState(() {});
+                              },
+                            );
+                            _isProfileIndex = true;
+                          }
+                          return TabItem(
+                            iconList[index],
+                            tabList[index],
+                            colorList[index],
+                            labelStyle: TextStyle(
+                              color: colorList[index],
+                              height: 1.2,
+                              fontSize: 12,
+                            ),
                           );
                         }
+                      }),
 
-                        return TabItem(
-                          iconList[index],
-                          tabList[index],
-                          colorList[index],
-                          labelStyle: TextStyle(
-                            color: colorList[index],
-                            height: 1.2,
-                            fontSize: 12,
-                          ),
-                        );
-                      } else if (index == 1) {
-                        if (!_isSearchIndex) {
-                          translator
-                              .translate(tabList[index],
-                                  to: Get.find<LocalizationController>()
-                                      .languageCode)
-                              .then(
-                            (value) {
-                              setState(() {
-                                tabList[index] = value.text;
-                                _isSearchIndex = true;
-                              });
-                            },
-                          );
-                        }
+                      // List.generate(iconList.length, (index) {
+                      //   // final translator = GoogleTranslator();
 
-                        return TabItem(
-                          iconList[index],
-                          tabList[index],
-                          colorList[index],
-                          labelStyle: TextStyle(
-                            color: colorList[index],
-                            height: 1.2,
-                            fontSize: 12,
-                          ),
-                        );
-                      } else if (index == 2) {
-                        if (!_isAllInOneIndex) {
-                          translator
-                              .translate(tabList[index],
-                                  to: Get.find<LocalizationController>()
-                                      .languageCode)
-                              .then(
-                            (value) {
-                              setState(() {
-                                tabList[index] = value.text;
-                                _isAllInOneIndex = true;
-                              });
-                            },
-                          );
-                        }
+                      //   if (index == bottomNavIndex) {
+                      //     if (!_isHomeIndex) {
+                      //       Timer.periodic(Duration.zero, (timer) async {
+                      //         if (index == bottomNavIndex) {
+                      //           _label =
+                      //               await global.translatedText(tabList[index]);
+                      //           setState(() {});
+                      //         }
+                      //       });
+                      //     }
 
-                        return TabItem(
-                          iconList[index],
-                          tabList[index],
-                          colorList[index],
-                          labelStyle: TextStyle(
-                            color: colorList[index],
-                            height: 1.2,
-                            fontSize: 12,
-                          ),
-                        );
-                      } else if (index == 3) {
-                        if (!_isRecentClickIndex) {
-                          translator
-                              .translate(tabList[index],
-                                  to: Get.find<LocalizationController>()
-                                      .languageCode)
-                              .then(
-                            (value) {
-                              setState(() {
-                                tabList[index] = value.text;
-                                _isRecentClickIndex = true;
-                              });
-                            },
-                          );
-                        }
+                      //     return TabItem(
+                      //       iconList[index],
+                      //       _label,
+                      //       colorList[index],
+                      //       labelStyle: TextStyle(
+                      //         color: colorList[index],
+                      //         height: 1.2,
+                      //         fontSize: 12,
+                      //       ),
+                      //     );
+                      //   } else {
+                      //     return TabItem(
+                      //       iconList[index],
+                      //       tabList[index],
+                      //       colorList[index],
+                      //       labelStyle: TextStyle(
+                      //         color: colorList[index],
+                      //         height: 1.2,
+                      //         fontSize: 12,
+                      //       ),
+                      //     );
+                      //   }
+                      //   //  else if (index == 1) {
+                      //   //   if (!_isSearchIndex) {
+                      //   //     translator
+                      //   //         .translate(tabList[index],
+                      //   //             to: Get.find<LocalizationController>()
+                      //   //                 .languageCode)
+                      //   //         .then(
+                      //   //       (value) {
+                      //   //         setState(() {
+                      //   //           tabList[index] = value.text;
+                      //   //           _isSearchIndex = true;
+                      //   //         });
+                      //   //       },
+                      //   //     );
+                      //   //   }
 
-                        return TabItem(
-                          iconList[index],
-                          tabList[index],
-                          colorList[index],
-                          labelStyle: TextStyle(
-                            color: colorList[index],
-                            height: 1.2,
-                            fontSize: 12,
-                          ),
-                        );
-                      } else if (index == 4) {
-                        if (!_isProfileIndex) {
-                          translator
-                              .translate(tabList[index],
-                                  to: Get.find<LocalizationController>()
-                                      .languageCode)
-                              .then(
-                            (value) {
-                              setState(() {
-                                tabList[index] = value.text;
-                                _isProfileIndex = true;
-                              });
-                            },
-                          );
-                        }
+                      //   //   return TabItem(
+                      //   //     iconList[index],
+                      //   //     tabList[index],
+                      //   //     colorList[index],
+                      //   //     labelStyle: TextStyle(
+                      //   //       color: colorList[index],
+                      //   //       height: 1.2,
+                      //   //       fontSize: 12,
+                      //   //     ),
+                      //   //   );
+                      //   // } else if (index == 2) {
+                      //   //   if (!_isAllInOneIndex) {
+                      //   //     translator
+                      //   //         .translate(tabList[index],
+                      //   //             to: Get.find<LocalizationController>()
+                      //   //                 .languageCode)
+                      //   //         .then(
+                      //   //       (value) {
+                      //   //         setState(() {
+                      //   //           tabList[index] = value.text;
+                      //   //           _isAllInOneIndex = true;
+                      //   //         });
+                      //   //       },
+                      //   //     );
+                      //   //   }
 
-                        return TabItem(
-                          iconList[index],
-                          tabList[index],
-                          colorList[index],
-                          labelStyle: TextStyle(
-                            color: colorList[index],
-                            height: 1.2,
-                            fontSize: 12,
-                          ),
-                        );
-                      } else {
-                        return TabItem(
-                          iconList[index],
-                          tabList[index],
-                          colorList[index],
-                          labelStyle: TextStyle(
-                            color: colorList[index],
-                            height: 1.2,
-                            fontSize: 12,
-                          ),
-                        );
-                      }
+                      //   //   return TabItem(
+                      //   //     iconList[index],
+                      //   //     tabList[index],
+                      //   //     colorList[index],
+                      //   //     labelStyle: TextStyle(
+                      //   //       color: colorList[index],
+                      //   //       height: 1.2,
+                      //   //       fontSize: 12,
+                      //   //     ),
+                      //   //   );
+                      //   // } else if (index == 3) {
+                      //   //   if (!_isRecentClickIndex) {
+                      //   //     translator
+                      //   //         .translate(tabList[index],
+                      //   //             to: Get.find<LocalizationController>()
+                      //   //                 .languageCode)
+                      //   //         .then(
+                      //   //       (value) {
+                      //   //         setState(() {
+                      //   //           tabList[index] = value.text;
+                      //   //           _isRecentClickIndex = true;
+                      //   //         });
+                      //   //       },
+                      //   //     );
+                      //   //   }
 
-                      // return TabItem(
-                      //   iconList[index],
-                      //   tabList[index],
-                      //   colorList[index],
-                      //   labelStyle: TextStyle(
-                      //     color: colorList[index],
-                      //     height: 1.2,
-                      //     fontSize: 12,
-                      //   ),
-                      // );
-                    }),
-                    circleSize: 50,
-                    iconsSize: 25,
-                    barHeight: 50,
-                    normalIconColor: Colors.grey,
-                    selectedIconColor: Colors.white,
-                    controller: navigationController,
-                    selectedPos: bottomNavIndex,
-                    barBackgroundColor: Colors.white,
-                    animationDuration: Duration(milliseconds: 300),
-                    selectedCallback: (int selectedPos) async {
-                  bottomNavIndex = selectedPos;
-                  setState(() {});
-                  global.showInterstitialAd();
-                }),
+                      //   //   return TabItem(
+                      //   //     iconList[index],
+                      //   //     tabList[index],
+                      //   //     colorList[index],
+                      //   //     labelStyle: TextStyle(
+                      //   //       color: colorList[index],
+                      //   //       height: 1.2,
+                      //   //       fontSize: 12,
+                      //   //     ),
+                      //   //   );
+                      //   // } else if (index == 4) {
+                      //   //   if (!_isProfileIndex) {
+                      //   //     translator
+                      //   //         .translate(tabList[index],
+                      //   //             to: Get.find<LocalizationController>()
+                      //   //                 .languageCode)
+                      //   //         .then(
+                      //   //       (value) {
+                      //   //         setState(() {
+                      //   //           tabList[index] = value.text;
+                      //   //           _isProfileIndex = true;
+                      //   //         });
+                      //   //       },
+                      //   //     );
+                      //   //   }
+
+                      //   //   return TabItem(
+                      //   //     iconList[index],
+                      //   //     tabList[index],
+                      //   //     colorList[index],
+                      //   //     labelStyle: TextStyle(
+                      //   //       color: colorList[index],
+                      //   //       height: 1.2,
+                      //   //       fontSize: 12,
+                      //   //     ),
+                      //   //   );
+                      //   // } else {
+                      //   //   return TabItem(
+                      //   //     iconList[index],
+                      //   //     tabList[index],
+                      //   //     colorList[index],
+                      //   //     labelStyle: TextStyle(
+                      //   //       color: colorList[index],
+                      //   //       height: 1.2,
+                      //   //       fontSize: 12,
+                      //   //     ),
+                      //   //   );
+                      //   // }
+
+                      //   // return TabItem(
+                      //   //   iconList[index],
+                      //   //   tabList[index],
+                      //   //   colorList[index],
+                      //   //   labelStyle: TextStyle(
+                      //   //     color: colorList[index],
+                      //   //     height: 1.2,
+                      //   //     fontSize: 12,
+                      //   //   ),
+                      //   // );
+                      // }),
+
+                      circleSize: 50,
+                      iconsSize: 25,
+                      barHeight: 50,
+                      normalIconColor: Colors.grey,
+                      selectedIconColor: Colors.white,
+                      controller: navigationController,
+                      selectedPos: bottomNavIndex,
+                      barBackgroundColor: Colors.white,
+                      animationDuration: Duration(milliseconds: 300),
+                      selectedCallback: (int selectedPos) async {
+                    bottomNavIndex = selectedPos;
+                    setState(() {});
+                    if (bottomNavIndex == 0) {
+                      _isHomeIndex = false;
+                    } else if (bottomNavIndex == 1) {
+                      _isSearchIndex = false;
+                    } else if (bottomNavIndex == 2) {
+                      _isAllInOneIndex = false;
+                    } else if (bottomNavIndex == 3) {
+                      _isRecentClickIndex = false;
+                    } else {
+                      _isProfileIndex = false;
+                    }
+
+                    setState(() {});
+                    global.showInterstitialAd();
+                  }),
+                ),
               ),
         body: _screens().elementAt(bottomNavIndex),
       ),

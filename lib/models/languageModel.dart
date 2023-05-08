@@ -6,14 +6,21 @@ class LanguageModel {
   String countryCode;
   bool isLangShown;
 
-  LanguageModel({this.key, this.imageUrl, this.languageName, this.countryCode, this.languageCode, this.isLangShown});
+  LanguageModel(
+      {this.key,
+      this.imageUrl,
+      this.languageName,
+      this.countryCode,
+      this.languageCode,
+      this.isLangShown});
 
   LanguageModel.fromJson(Map<String, dynamic> json) {
     try {
-      key = json["key"] != null ? json["key"] : '';
-      languageName = json["value"] != null ? json["value"] : '';
+      languageCode = json["languageCode"] != null ? json["languageCode"] : '';
+      languageName = json["languageName"] != null ? json["languageName"] : '';
     } catch (e) {
-      print("Exception - LanguageModel.dart - LanguageModel.fromJson():" + e.toString());
+      print("Exception - LanguageModel.dart - LanguageModel.fromJson():" +
+          e.toString());
     }
   }
 }

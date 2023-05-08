@@ -7,6 +7,7 @@ import 'package:cashfuse/controllers/localizationController.dart';
 
 import 'package:cashfuse/models/admobSettingModel.dart';
 import 'package:cashfuse/models/appInfoModel.dart';
+import 'package:cashfuse/models/countryModel.dart';
 import 'package:cashfuse/models/userModel.dart';
 import 'package:cashfuse/utils/date_converter.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
@@ -24,7 +25,8 @@ import 'package:universal_html/html.dart' as html;
 String appName = "Cashfuse";
 String appPackageName = 'com.cashfuse.app';
 
-String baseUrl = 'https://cash.codefuse.org/admin/api';
+String baseUrl = 'https://cash.codefuse.org/multicountry/api';
+// 'https://cash.codefuse.org/admin/api';
 
 String webConfigurationKey =
     "BGPWwFL-u-5K7CdmI7bW1Qav23aJxTUFtksG5SDigWG3M2J1-pqgwY-qB1fMQlRJepzlqq9Qv8rDUqk4v9Ph584";
@@ -52,6 +54,8 @@ int totalJoinedCount = 0;
 int admobclickCount = 0;
 int fbclickCount = 0;
 final translator = GoogleTranslator();
+String countrySlug = '';
+CountryModel country;
 
 String languageApiKey = 'AIzaSyDbLaa85zHKSvm1oChRb6xdXyC-kSTiWXU';
 
@@ -74,6 +78,9 @@ Future<Map<String, String>> getApiHeaders(bool authorizationRequired,
         apiHeader.addAll({"userId": userId});
       }
     }
+  }
+  if (countrySlug != null && countrySlug.isNotEmpty) {
+    apiHeader.addAll({"country_slug": countrySlug});
   }
 
   apiHeader.addAll({"Content-Type": "application/json"});

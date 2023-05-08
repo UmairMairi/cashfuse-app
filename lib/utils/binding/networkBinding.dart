@@ -5,6 +5,7 @@ import 'package:cashfuse/controllers/couponController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/imageController.dart';
 import 'package:cashfuse/controllers/localizationController.dart';
+import 'package:cashfuse/controllers/locationController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/controllers/orderController.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
@@ -32,5 +33,6 @@ class NetworkBinding extends Bindings {
     Get.lazyPut<ReferEarnController>(() => ReferEarnController(), fenix: true);
     Get.lazyPut<LocalizationController>(() => LocalizationController(), fenix: true);
     Get.lazyPut<AdController>(() => AdController(), fenix: true);
+    Get.lazyPut<LocationController>(() => LocationController(), fenix: true);
   }
 }

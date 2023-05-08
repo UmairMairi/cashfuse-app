@@ -94,9 +94,9 @@ class MyApp extends StatelessWidget {
       builder: (localizationController) =>
           GetBuilder<ThemeController>(builder: (themeController) {
         return GoogleTranslatorInit(global.languageApiKey,
-            translateFrom: Locale('en'),
-                // localizationController.languageCode == 'en' ? 'hi' : 'en'),
-            translateTo: Locale('hi'),
+            translateFrom: Locale(
+                localizationController.languageCode == 'en' ? 'hi' : 'en'),
+            translateTo: Locale(localizationController.languageCode),
             automaticDetection: true, builder: () {
           return GetMaterialApp(
             navigatorKey: Get.key,

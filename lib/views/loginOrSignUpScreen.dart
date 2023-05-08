@@ -34,11 +34,13 @@ class LoginOrSignUpScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Center(
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
                   'Login or signup',
                   style: Get.theme.primaryTextTheme.displaySmall.copyWith(
                     letterSpacing: -1,
+                    height: 1.2,
                     fontWeight: FontWeight.w700,
                   ),
                 ).translate(),
