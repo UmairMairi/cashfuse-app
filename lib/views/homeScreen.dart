@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cashfuse/controllers/adController.dart';
 import 'package:cashfuse/controllers/couponController.dart';
@@ -28,6 +30,7 @@ import 'package:cashfuse/views/webHomeScreen.dart';
 import 'package:cashfuse/widget/admobBannerAdWidget.dart';
 import 'package:cashfuse/widget/adsCampaignWidget.dart';
 import 'package:cashfuse/widget/bannerImageWidget.dart';
+import 'package:cashfuse/widget/countrySelectOption.dart';
 import 'package:cashfuse/widget/couponWidget.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
@@ -67,6 +70,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log(global.country.countryName.toString());
     return Scaffold(
         key: scaffoldKey,
         drawer: DrawerWidget(),
@@ -133,19 +137,165 @@ class HomeScreen extends StatelessWidget {
                           height: 25,
                         )),
                   ),
-                  Container(
-                    width: 35,
-                    margin: EdgeInsets.symmetric(vertical: 10).copyWith(right: 10),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Get.theme.primaryColor,
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Get.theme.secondaryHeaderColor),
-                    ),
-                    child: Text(
-                      global.country.countryCode,
-                    ),
-                  ),
+                  global.country != null
+                      ? StatefulBuilder(
+                          builder:
+                              (BuildContext context, StateSetter setState) =>
+                                  InkWell(
+                            onTap: () {
+                              Get.dialog(
+                                Dialog(
+                                  alignment: Alignment.topRight,
+                                  backgroundColor: Colors.transparent,
+                                  insetPadding:
+                                      EdgeInsets.only(top: 50, right: 20),
+                                  child: SizedBox(
+                                    width: Get.width / 2,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      // mainAxisAlignment: MainAxisAlignment.start,
+                                      // alignment: Alignment.topCenter,
+                                      // clipBehavior: Clip.none,
+                                      children: [
+                                        Align(
+                                          alignment: Alignment.topRight,
+                                          child: InkWell(
+                                            onTap: () async {
+                                              Get.back();
+                                            },
+                                            child: CircleAvatar(
+                                              radius: 15,
+                                              child: Icon(
+                                                Icons.close,
+                                                color: Colors.black,
+                                                size: 20,
+                                              ),
+                                              backgroundColor: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        StatefulBuilder(
+                                          builder: (BuildContext context,
+                                                  StateSetter setState) =>
+                                              Container(
+                                            margin: EdgeInsets.only(top: 20),
+                                            color: Colors.white,
+                                            child: ListView.builder(
+                                              padding: EdgeInsets.zero,
+                                              shrinkWrap: true,
+                                              itemCount: global
+                                                  .appInfo.countries.length,
+                                              itemBuilder: (context, index) {
+                                                return Column(
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(10.0),
+                                                          child: Text(global
+                                                              .appInfo
+                                                              .countries[index]
+                                                              .countryName),
+                                                        ),
+                                                        Radio(
+                                                          groupValue:
+                                                              global.country,
+                                                          value: global.appInfo
+                                                              .countries[index],
+                                                          onChanged: (value) {
+                                                            if (value != null) {
+                                                              global.country =
+                                                                  value;
+                                                              global.appInfo
+                                                                  .countries
+                                                                  .map((e) =>
+                                                                      e.isSelected =
+                                                                          false)
+                                                                  .toList();
+                                                              global
+                                                                      .appInfo
+                                                                      .countries[
+                                                                          index]
+                                                                      .isSelected =
+                                                                  true;
+
+                                                              setState(() {});
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop(global
+                                                                      .country);
+                                                            }
+                                                          },
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Divider(
+                                                      height: 0,
+                                                      thickness: 0.5,
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                        // Positioned(
+                                        //    top: !global.getPlatFrom() ? -50 : 10,
+                                        //   // right: -7,
+                                        //   child: InkWell(
+                                        //     onTap: () async {
+                                        //       Get.back();
+                                        //     },
+                                        //     child: CircleAvatar(
+                                        //       radius: 15,
+                                        //       child: Icon(
+                                        //         Icons.close,
+                                        //         color: Colors.black,
+                                        //         size: 20,
+                                        //       ),
+                                        //       backgroundColor: Colors.grey[400],
+                                        //     ),
+                                        //   ),
+                                        // ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                barrierDismissible: false,
+                              ).then((value) async {
+                                if (value != null) {
+                                  global.country = value;
+                                  global.countrySlug = global.country.slug;
+                                  setState((){});
+
+                                  await homeController.init();
+                                }
+                              });
+                            },
+                            child: Container(
+                              width: 35,
+                              margin: EdgeInsets.symmetric(vertical: 10)
+                                  .copyWith(right: 10),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Get.theme.primaryColor,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color: Get.theme.secondaryHeaderColor),
+                              ),
+                              child: Text(
+                                global.country.countryCode,
+                              ),
+                            ),
+                          ),
+                        )
+                      : SizedBox(),
                 ],
               ),
         floatingActionButton: GetBuilder<SplashController>(builder: (splash) {
@@ -2076,6 +2226,7 @@ class HomeScreen extends StatelessWidget {
                     });
                   }),
             bannerImageWidget(),
+            global.countrySlug.isNotEmpty ? SizedBox() : countrySelectWidget(),
           ],
         ));
   }

@@ -55,10 +55,12 @@ class LocationController extends GetxController {
         String _country = placemarks[0].country;
 
         List<CountryModel> _tList = global.appInfo.countries
-            .where((element) => element.countryName == _country).toList();
+            .where((element) => element.countryName == _country)
+            .toList();
         if (_tList != null && _tList.length > 0) {
           global.country =
               _tList.firstWhere((element) => element.countryName == _country);
+          _tList.map((e) => e.isSelected = true).toList();
           global.countrySlug = _tList
               .firstWhere((element) => element.countryName == _country)
               .slug;

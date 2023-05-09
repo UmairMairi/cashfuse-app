@@ -10,6 +10,7 @@ class CountryModel {
   int status;
   DateTime createdAt;
   DateTime updatedAt;
+  bool isSelected = false; // for chnage country selection
 
   CountryModel({
     this.id,
@@ -23,6 +24,7 @@ class CountryModel {
     this.status,
     this.createdAt,
     this.updatedAt,
+    this.isSelected = false,
   });
 
   CountryModel.fromJson(Map<String, dynamic> json) {

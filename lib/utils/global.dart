@@ -80,7 +80,7 @@ Future<Map<String, String>> getApiHeaders(bool authorizationRequired,
     }
   }
   if (countrySlug != null && countrySlug.isNotEmpty) {
-    apiHeader.addAll({"country_slug": countrySlug});
+    apiHeader.addAll({"countryslug": countrySlug});
   }
 
   apiHeader.addAll({"Content-Type": "application/json"});
