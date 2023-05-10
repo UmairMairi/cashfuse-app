@@ -9,7 +9,7 @@ import 'package:cashfuse/models/admobSettingModel.dart';
 import 'package:cashfuse/models/appInfoModel.dart';
 import 'package:cashfuse/models/countryModel.dart';
 import 'package:cashfuse/models/userModel.dart';
-import 'package:cashfuse/utils/date_converter.dart';
+import 'package:cashfuse/utils/dateConverter.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';

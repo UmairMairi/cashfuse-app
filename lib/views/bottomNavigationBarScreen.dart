@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:cashfuse/controllers/localizationController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -71,8 +70,6 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
           bgColor: colorList[bottomNavIndex],
         ),
       ];
-  String _label = '';
-  String _home = '';
 
   @override
   void initState() {
@@ -166,13 +163,8 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                                       to: localizationController.languageCode)
                                   .then(
                                 (value) {
-                                  _home = value.text;
                                   tabList[index] = value.text;
                                   setState(() {});
-                                  log(value.text);
-                                  log(_isHomeIndex.toString());
-                                  log(_home);
-                                  log('++++++++++++++++++' + tabList[index]);
                                 },
                               );
                             });
@@ -197,13 +189,8 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                                       to: localizationController.languageCode)
                                   .then(
                                 (value) {
-                                  _home = value.text;
                                   tabList[index] = value.text;
                                   setState(() {});
-                                  log(value.text);
-                                  log(_isHomeIndex.toString());
-                                  log(_home);
-                                  log('++++++++++++++++++' + tabList[index]);
                                 },
                               );
                             });

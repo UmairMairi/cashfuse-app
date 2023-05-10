@@ -46,7 +46,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
-import '../utils/Mycolors.dart';
+import '../utils/myColors.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {

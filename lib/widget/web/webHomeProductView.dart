@@ -1,5 +1,5 @@
 import 'package:cashfuse/controllers/homeController.dart';
-import 'package:cashfuse/utils/Mycolors.dart';
+import 'package:cashfuse/utils/myColors.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/webScreen/webProductDetails.dart';
 import 'package:flutter/material.dart';

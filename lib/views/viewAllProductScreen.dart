@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 
-import '../utils/Mycolors.dart';
+import '../utils/myColors.dart';
 import 'product_Details.dart';
 
 class ViewAllProductScreen extends StatefulWidget {

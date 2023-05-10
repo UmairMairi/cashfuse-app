@@ -1,6 +1,6 @@
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
-import 'package:cashfuse/utils/date_converter.dart';
+import 'package:cashfuse/utils/dateConverter.dart';
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';

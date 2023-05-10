@@ -10,7 +10,7 @@ import 'package:cashfuse/controllers/referEarnController.dart';
 import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/models/userModel.dart';
 import 'package:cashfuse/services/apiHelper.dart';
-import 'package:cashfuse/utils/date_converter.dart';
+import 'package:cashfuse/utils/dateConverter.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
