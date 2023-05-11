@@ -19,10 +19,12 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
 
   HomeController homeController = Get.find<HomeController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  ScrollController topCashBackScrollController = ScrollController();
 
   void paginateTask() {
-    homeController.topCashBackScrollController.addListener(() async {
-      if (homeController.topCashBackScrollController.position.pixels == homeController.topCashBackScrollController.position.maxScrollExtent) {
+    topCashBackScrollController.addListener(() async {
+      if (topCashBackScrollController.position.pixels ==
+          topCashBackScrollController.position.maxScrollExtent) {
         homeController.isMoreDataAvailable.value = true;
         print('Reached end');
         await homeController.getAllAdv();
@@ -33,6 +35,7 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     paginateTask();
+
     return GetBuilder<HomeController>(builder: (homeController1) {
       return Scaffold(
         key: scaffoldKey,
@@ -52,57 +55,71 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
                 ),
                 title: Text(
                   title,
-                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
+                  style: Get.theme.primaryTextTheme.titleSmall
+                      .copyWith(color: Colors.white),
                 ).translate(),
               ),
         body: Align(
           alignment: Alignment.topCenter,
           child: SizedBox(
             width: AppConstants.WEB_MAX_WIDTH,
-            child: GridView.builder(
-              controller: homeController.topCashBackScrollController,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: global.getPlatFrom() ? 5 : 2,
-                crossAxisSpacing: global.getPlatFrom() ? 25 : 15.0,
-                mainAxisSpacing: global.getPlatFrom() ? 25 : 15.0,
-              ),
-              itemCount: homeController.allAdvList.length,
-              shrinkWrap: true,
-              padding: EdgeInsets.all(10).copyWith(top: 20),
-              itemBuilder: (context, index) {
-                return homeController.isMoreDataAvailable.value == true && homeController.allAdvList.length - 1 == index
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : InkWell(
-                        onTap: () {
-                          Get.to(
-                            () => CategoryScreen(
-                              category: homeController.allAdvList[index],
-                            ),
-                            routeName: 'category',
-                          );
-                        },
-                        child: global.getPlatFrom()
-                            ? WebAdsCampaignWidget(
-                                fromWebHome: false,
-                                commonModel: CommonModel(
-                                  name: homeController.allAdvList[index].name,
-                                  image: '${global.appInfo.baseUrls.partnerImageUrl}/${homeController.allAdvList[index].image}',
-                                  tagline: homeController.allAdvList[index].tagline,
-                                  adId: homeController.allAdvList[index].id.toString(),
-                                ),
-                              )
-                            : AdsCampaignWidget(
-                                commonModel: CommonModel(
-                                  name: homeController.allAdvList[index].name,
-                                  image: '${global.appInfo.baseUrls.partnerImageUrl}/${homeController.allAdvList[index].image}',
-                                  tagline: homeController.allAdvList[index].tagline,
-                                  adId: homeController.allAdvList[index].id.toString(),
-                                ),
+            child: Scrollbar(
+              trackVisibility: true,
+              interactive: true,
+              thumbVisibility: true,
+               controller: topCashBackScrollController,
+              child: GridView.builder(
+                controller: topCashBackScrollController,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: global.getPlatFrom() ? 5 : 2,
+                  crossAxisSpacing: global.getPlatFrom() ? 25 : 15.0,
+                  mainAxisSpacing: global.getPlatFrom() ? 25 : 15.0,
+                ),
+                itemCount: homeController.allAdvList.length,
+                shrinkWrap: true,
+                padding: EdgeInsets.all(10).copyWith(top: 20),
+                itemBuilder: (context, index) {
+                  return homeController.isMoreDataAvailable.value == true &&
+                          homeController.allAdvList.length - 1 == index
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : InkWell(
+                          onTap: () {
+                            Get.to(
+                              () => CategoryScreen(
+                                category: homeController.allAdvList[index],
                               ),
-                      );
-              },
+                              routeName: 'category',
+                            );
+                          },
+                          child: global.getPlatFrom()
+                              ? WebAdsCampaignWidget(
+                                  fromWebHome: false,
+                                  commonModel: CommonModel(
+                                    name: homeController.allAdvList[index].name,
+                                    image:
+                                        '${global.appInfo.baseUrls.partnerImageUrl}/${homeController.allAdvList[index].image}',
+                                    tagline: homeController
+                                        .allAdvList[index].tagline,
+                                    adId: homeController.allAdvList[index].id
+                                        .toString(),
+                                  ),
+                                )
+                              : AdsCampaignWidget(
+                                  commonModel: CommonModel(
+                                    name: homeController.allAdvList[index].name,
+                                    image:
+                                        '${global.appInfo.baseUrls.partnerImageUrl}/${homeController.allAdvList[index].image}',
+                                    tagline: homeController
+                                        .allAdvList[index].tagline,
+                                    adId: homeController.allAdvList[index].id
+                                        .toString(),
+                                  ),
+                                ),
+                        );
+                },
+              ),
             ),
           ),
         ),

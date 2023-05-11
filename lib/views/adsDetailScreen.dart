@@ -202,8 +202,7 @@ class AdsDetailScreen extends StatelessWidget {
                                       ),
                                       child: Row(
                                         children: [
-                                          Text('Share')
-                                              .translate(),
+                                          Text('Share').translate(),
                                           CircleAvatar(
                                             radius: 12,
                                             backgroundColor: Colors.green[700],
@@ -454,7 +453,7 @@ class AdsDetailScreen extends StatelessWidget {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                           'Purchase',
+                                            'Purchase',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13),

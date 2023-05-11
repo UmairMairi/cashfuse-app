@@ -295,12 +295,12 @@ class APIHelper {
     }
   }
 
-  Future<dynamic> getTopCashBack(int page) async {
+  Future<dynamic> getTopCashBack() async {
     try {
       Response response;
       var dio = Dio();
       response = await dio.get(
-          '${global.baseUrl}${AppConstants.CASHBACK_URI}?page=$page',
+          '${global.baseUrl}${AppConstants.CASHBACK_URI}',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));

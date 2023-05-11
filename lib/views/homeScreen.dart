@@ -272,7 +272,18 @@ class HomeScreen extends StatelessWidget {
                                 if (value != null) {
                                   global.country = value;
                                   global.countrySlug = global.country.slug;
-                                  setState((){});
+                                  homeController.topBannerList = [];
+                                  homeController.topCategoryList = [];
+                                  couponController.couponList = [];
+                                  homeController.topCashbackList = [];
+                                  homeController.exclusiveOfferList = [];
+                                  homeController.productList = [];
+                                  homeController.trendingProductList = [];
+                                  homeController.newFlashOfferList = [];
+                                  homeController.homeAdvList = [];
+                                  homeController.allAdvList = [];
+
+                                  setState(() {});
 
                                   await homeController.init();
                                 }
@@ -364,6 +375,17 @@ class HomeScreen extends StatelessWidget {
                     return GetBuilder<CouponController>(builder: (cont) {
                       return RefreshIndicator(
                           onRefresh: () async {
+                            homeController.topBannerList = [];
+                            homeController.topCategoryList = [];
+                            couponController.couponList = [];
+                            homeController.topCashbackList = [];
+                            homeController.exclusiveOfferList = [];
+                            homeController.productList = [];
+                            homeController.trendingProductList = [];
+                            homeController.newFlashOfferList = [];
+                            homeController.homeAdvList = [];
+                            homeController.allAdvList = [];
+                            homeController.update();
                             await homeController.init();
                           },
                           child: SingleChildScrollView(

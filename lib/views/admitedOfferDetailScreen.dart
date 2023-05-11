@@ -33,6 +33,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   AdmitedOffersModal admitedData;
+  double _scrollingRate = 0.0;
 
   _AdmitedDetailScreenState(this.admitedData) : super();
 
@@ -111,7 +112,10 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                           floating: true,
                           pinned: true,
                           elevation: 0,
-                          backgroundColor: Get.theme.primaryColor,
+                          backgroundColor: _scrollingRate == 1.0
+                              ? Get.theme.primaryColor
+                              : Colors.transparent,
+                          // backgroundColor: Get.theme.primaryColor,
                           leading: IconButton(
                             icon: Icon(
                               Icons.arrow_back,
@@ -125,9 +129,15 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                             admitedData.partner.name,
                             style: Get.theme.primaryTextTheme.titleSmall
                                 .copyWith(color: Colors.white),
-                          ).translate(),
+                          ),
                           flexibleSpace: CustomizableSpaceBar(
                               builder: (context, scrollingRate) {
+                            Future.delayed(Duration.zero).then(
+                              (value) {
+                                _scrollingRate = scrollingRate;
+                                setState(() {});
+                              },
+                            );
                             return (scrollingRate != 1.0)
                                 ? Stack(
                                     alignment: Alignment.bottomCenter,
