@@ -25,7 +25,8 @@ import 'package:universal_html/html.dart' as html;
 String appName = "Cashfuse";
 String appPackageName = 'com.cashfuse.app';
 
-String baseUrl = 'https://cash.codefuse.org/multicountry/api';
+String baseUrl = "https://adminpanel.cashoppi.in/api";
+// 'https://cash.codefuse.org/multicountry/api';
 // 'https://cash.codefuse.org/admin/api';
 
 String webConfigurationKey =
@@ -39,7 +40,6 @@ AdmobSettingModel facebookAdSetting = new AdmobSettingModel();
 String timeFormat = '12';
 String appDeviceId;
 bool isRTL = false;
-List<String> clickedList = [];
 
 String isBannerDate = DateConverter.dateTimeToDateOnly(DateTime.now());
 bool isBannerShow = false;

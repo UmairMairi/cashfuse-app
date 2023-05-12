@@ -78,8 +78,7 @@ class OtpVerificationScreen extends StatelessWidget {
                     onChanged: (code) async {
                       if (code.length == 6) {
                         FocusScope.of(context).requestFocus(FocusNode());
-                        if (authController.contactNo.text != null &&
-                            authController.contactNo.text.isNotEmpty) {
+                        if (!isEmail) {
                           await authController.checkOTP(
                               verificationCode, fromMenu);
                         } else {
@@ -113,13 +112,12 @@ class OtpVerificationScreen extends StatelessWidget {
                   ? Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Text(
-                        "Wait 00 : ${authController.seconds}",
+                        "Wait 00 : ${authController.seconds.toString().padLeft(2, '0')}",
                       ).translate(),
                     )
                   : InkWell(
                       onTap: () async {
-                        if (authController.contactNo != null &&
-                            authController.contactNo.text.isNotEmpty) {
+                        if (!isEmail) {
                           await authController.resendOtp();
                         } else {
                           await authController.sendEmail(fromMenu);
@@ -158,8 +156,7 @@ class OtpVerificationScreen extends StatelessWidget {
         ),
         bottomNavigationBar: InkWell(
           onTap: () async {
-            if (authController.contactNo.text != null &&
-                authController.contactNo.text.isNotEmpty) {
+            if (!isEmail) {
               await authController.checkOTP(verificationCode, fromMenu);
             } else {
               await authController.verifyEmail(fromMenu);

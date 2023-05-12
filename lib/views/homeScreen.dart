@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cashfuse/controllers/adController.dart';
 import 'package:cashfuse/controllers/couponController.dart';
@@ -39,7 +37,6 @@ import 'package:cashfuse/widget/offerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -70,7 +67,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log(global.country.countryName.toString());
+    // log(global.country.countryName.toString());
     return Scaffold(
         key: scaffoldKey,
         drawer: DrawerWidget(),

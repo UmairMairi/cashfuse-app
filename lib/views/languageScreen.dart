@@ -45,15 +45,6 @@ class LanguageScreen extends StatelessWidget {
                     children: [
                       RadioListTile(
                         onChanged: (val) {
-                          //  global.languageCode = val;
-                          //  localizationController.update();
-                          // final provider = Provider.of<LocaleProvider>(
-                          //     context,
-                          //     listen: false);
-                          // locale = Locale(L10n.all[index].languageCode);
-                          // provider.setLocale(locale);
-                          // global.languageCode = locale.languageCode;
-
                           localizationController.setLanguage(val);
                           localizationController.refresh();
                         },

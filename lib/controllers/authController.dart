@@ -132,11 +132,7 @@ class AuthController extends GetxController {
                       child: OtpVerificationScreen(
                         fromMenu: fromMenu,
                         isEmail: true,
-                      )
-                      // LoginOrSignUpScreen(
-                      //   fromMenu: true,
-                      // ),
-                      ),
+                      )),
                 ));
               } else {
                 Get.to(() => OtpVerificationScreen(
