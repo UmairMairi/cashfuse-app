@@ -100,6 +100,7 @@ class MyApp extends StatelessWidget {
             automaticDetection: true, builder: () {
           return GetMaterialApp(
             navigatorKey: Get.key,
+            textDirection: global.isRTL ? TextDirection.rtl : TextDirection.ltr,
             debugShowCheckedModeBanner: false,
             enableLog: true,
             theme: nativeTheme(),

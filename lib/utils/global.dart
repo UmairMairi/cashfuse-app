@@ -25,8 +25,9 @@ import 'package:universal_html/html.dart' as html;
 String appName = "Cashfuse";
 String appPackageName = 'com.cashfuse.app';
 
-String baseUrl = "https://adminpanel.cashoppi.in/api";
-// 'https://cash.codefuse.org/multicountry/api';
+String baseUrl =
+// "https://adminpanel.cashoppi.in/api";
+    'https://cash.codefuse.org/multicountry/api';
 // 'https://cash.codefuse.org/admin/api';
 
 String webConfigurationKey =
@@ -56,6 +57,21 @@ int fbclickCount = 0;
 final translator = GoogleTranslator();
 String countrySlug = '';
 CountryModel country;
+List<String> rtlLanguageCodeLList = [
+  'ar',
+  'arc',
+  'ckb',
+  'dv',
+  'fa',
+  'ha',
+  'he',
+  'khw',
+  'ks',
+  'ps',
+  'ur',
+  'uz_AF',
+  'yi'
+];
 
 String languageApiKey = 'AIzaSyDbLaa85zHKSvm1oChRb6xdXyC-kSTiWXU';
 

@@ -53,9 +53,14 @@ class PrivacyPolicyScreen extends StatelessWidget {
               ? EdgeInsets.zero
               : EdgeInsets.all(10).copyWith(bottom: 0),
           child: SingleChildScrollView(
-            child: HtmlWidget(
-              commonController.privacyPolicy,
-            ),
+            padding: EdgeInsets.all(10),
+            child: FutureBuilder(
+                future: global.translatedText(commonController.privacyPolicy),
+                builder: (context, snapShot) {
+                  return HtmlWidget(
+                    snapShot.data != null ? snapShot.data : '',
+                  );
+                }),
           ),
         ));
       }),

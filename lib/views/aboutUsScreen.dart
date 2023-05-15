@@ -52,10 +52,19 @@ class AboutUsScreen extends StatelessWidget {
                 ? EdgeInsets.zero
                 : EdgeInsets.all(10).copyWith(bottom: 0),
             child: SingleChildScrollView(
-              child: HtmlWidget(
-                commonController.aboutUs,
-              ),
+              child: FutureBuilder(
+                  future: global.translatedText(commonController.aboutUs),
+                  builder: (context, snapShot) {
+                    return HtmlWidget(
+                      snapShot.data != null ? snapShot.data : '',
+                    );
+                  }),
             ),
+            // SingleChildScrollView(
+            //   child: HtmlWidget(
+            //     commonController.aboutUs,
+            //   ),
+            // ),
           ),
         );
       }),

@@ -19,6 +19,12 @@ class LocalizationController extends GetxController {
       languageCode = 'en';
     }
 
+    if (global.rtlLanguageCodeLList.contains(languageCode)) {
+      global.isRTL = true;
+    } else {
+      global.isRTL = false;
+    }
+
     update();
   }
 
@@ -36,10 +42,10 @@ class LocalizationController extends GetxController {
     try {
       languageCode = code;
       update();
-      if (languageCode == 'ar') {
-        global.isRTL = false;
-      } else {
+      if (global.rtlLanguageCodeLList.contains(languageCode)) {
         global.isRTL = true;
+      } else {
+        global.isRTL = false;
       }
       global.sp.setString('languageCode', languageCode);
       update();
