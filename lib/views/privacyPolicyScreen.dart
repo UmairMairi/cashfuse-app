@@ -43,7 +43,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
       body: GetBuilder<CommonController>(builder: (controller) {
         return Center(
             child: Container(
-          padding: global.getPlatFrom() ? EdgeInsets.all(15) : EdgeInsets.zero,
+          padding: EdgeInsets.all(15),
           width: global.getPlatFrom()
               ? AppConstants.WEB_MAX_WIDTH / 2
               : AppConstants.WEB_MAX_WIDTH,
@@ -53,7 +53,6 @@ class PrivacyPolicyScreen extends StatelessWidget {
               ? EdgeInsets.zero
               : EdgeInsets.all(10).copyWith(bottom: 0),
           child: SingleChildScrollView(
-            padding: EdgeInsets.all(10),
             child: FutureBuilder(
                 future: global.translatedText(commonController.privacyPolicy),
                 builder: (context, snapShot) {

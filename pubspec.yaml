@@ -60,6 +60,7 @@ dependencies:
   facebook_audience_network: ^1.0.1
 
 
+
   #CONNECTIVITY
   connectivity_plus: ^2.1.0
   http: any
@@ -91,6 +92,8 @@ dependencies:
   permission_handler: ^10.2.0
   geolocator: ^9.0.2
   geocoding: ^2.1.0
+  email_validator: ^2.1.17
+  phone_number: ^1.0.0
   
 
   #IMAGE

@@ -64,7 +64,10 @@ class LocationController extends GetxController {
           global.countrySlug = _tList
               .firstWhere((element) => element.countryName == _country)
               .slug;
+        }else{
+          global.showCountryPopUp = true;
         }
+        update();
       }).catchError((e) {
         print("Exceptioin - LocationController.dart - getCurrentLocation():" +
             e.toString());

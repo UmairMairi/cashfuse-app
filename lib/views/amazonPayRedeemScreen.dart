@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
@@ -9,12 +10,14 @@ import 'package:get/get.dart';
 
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:google_translator/google_translator.dart';
+import 'package:phone_number/phone_number.dart';
 
 class AmazonPayRedeemScreen extends StatelessWidget {
   final fContactNo = new FocusNode();
   var contactNo = TextEditingController();
 
   PaymentController paymentController = Get.find<PaymentController>();
+  AuthController authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -86,12 +89,26 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                 .copyWith(fontWeight: FontWeight.w600),
                           ).translate(),
                           InkWell(
-                            onTap: () {
-                              if (paymentController.amazonDetails != null) {
-                                contactNo.text =
-                                    paymentController.amazonDetails.amazonNo;
+                            onTap: () async {
+                              if (paymentController.amazonDetails != null &&
+                                  paymentController.amazonDetails.amazonNo !=
+                                      null) {
+                                if (GetPlatform.isAndroid) {
+                                  try {
+                                    PhoneNumber phoneNumber =
+                                        await PhoneNumberUtil().parse(
+                                            paymentController
+                                                .amazonDetails.amazonNo);
+                                    authController.coutryCode =
+                                        '+' + phoneNumber.countryCode;
+                                    contactNo.text = phoneNumber.nationalNumber;
+                                  } catch (e) {
+                                    print(
+                                        "Exception - AmazonPayRedeemScreen.dart - PhoneNumberUtil():" +
+                                            e.toString());
+                                  }
+                                }
                               }
-
                               Get.dialog(
                                 Dialog(
                                   child: StatefulBuilder(
@@ -128,9 +145,20 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                               LengthLimitingTextInputFormatter(
                                                   10),
                                             ],
+                                            textAlign: TextAlign.start,
+                                            textAlignVertical:
+                                                TextAlignVertical.center,
                                             decoration: InputDecoration(
                                               contentPadding: EdgeInsets.zero,
                                               hintText: 'Mobile Number',
+                                              prefixIcon: Container(
+                                                width: 20,
+                                                height: 20,
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  authController.coutryCode,
+                                                ),
+                                              ),
                                               labelStyle: TextStyle(
                                                 color: fContactNo.hasFocus
                                                     ? Get.theme.primaryColor
@@ -171,7 +199,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                                 Get.back();
                                                 paymentController
                                                     .addAmazonPayDetails(
-                                                        contactNo.text.trim());
+                                                       authController.coutryCode + contactNo.text.trim());
                                               } else {
                                                 showCustomSnackBar(
                                                     'Please add Number.');
@@ -247,8 +275,8 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                     ),
                                     children: <TextSpan>[
                                       TextSpan(
-                                        text: " ${paymentController
-                                            .amazonDetails.amazonNo}",
+                                        text:
+                                            " ${paymentController.amazonDetails.amazonNo}",
                                         style: Get
                                             .theme.primaryTextTheme.bodySmall
                                             .copyWith(

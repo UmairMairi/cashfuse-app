@@ -57,6 +57,7 @@ int fbclickCount = 0;
 final translator = GoogleTranslator();
 String countrySlug = '';
 CountryModel country;
+bool showCountryPopUp = false;
 List<String> rtlLanguageCodeLList = [
   'ar',
   'arc',

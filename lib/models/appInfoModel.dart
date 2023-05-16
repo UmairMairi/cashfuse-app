@@ -38,7 +38,8 @@ class AppInfo {
       businessName = json["business_name"] != null ? json["business_name"] : '';
       logo = json["logo"] != null ? json["logo"] : '';
       country = json["country"] != null ? json["country"].toString() : '';
-      countryCode = json["phone_code"] != null ? json["phone_code"].toString() : '';
+      countryCode =
+          json["phone_code"] != null ? json["phone_code"].toString() : '';
       currency = json["currency"] != null ? json["currency"] : '';
       perOrderReferPercentage = json["per_order_refer_percentage"] != null
           ? json["per_order_refer_percentage"]
@@ -57,7 +58,8 @@ class AppInfo {
           ? List<CountryModel>.from(
               json['countries'].map((x) => CountryModel.fromJson(x)))
           : [];
-      countryselection = json['countryselection'];
+      countryselection =
+          json['countryselection'] != null ? json['countryselection'] : 0;
     } catch (e) {
       print("Exception - AppInfo.dart - AppInfo.fromJson():" + e.toString());
     }

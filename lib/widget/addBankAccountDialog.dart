@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:cashfuse/controllers/paymentController.dart';
+import 'package:cashfuse/services/apiHelper.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +22,7 @@ class AddBankAccountDialog extends StatelessWidget {
   var ifscCode = new TextEditingController();
 
   PaymentController paymentController = Get.find<PaymentController>();
+  APIHelper apiHelper = new APIHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +63,7 @@ class AddBankAccountDialog extends StatelessWidget {
                     scrollPadding: EdgeInsets.zero,
                     cursorColor: Get.theme.primaryColor,
                     keyboardType: TextInputType.name,
+                    textCapitalization: TextCapitalization.words,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       hintText: 'Holder Name',
@@ -106,6 +109,7 @@ class AddBankAccountDialog extends StatelessWidget {
                     keyboardType: TextInputType.number,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(14),
                     ],
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
@@ -149,6 +153,7 @@ class AddBankAccountDialog extends StatelessWidget {
                     scrollPadding: EdgeInsets.zero,
                     cursorColor: Get.theme.primaryColor,
                     keyboardType: TextInputType.name,
+                    textCapitalization: TextCapitalization.words,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       hintText: 'Bank Name',
@@ -191,6 +196,10 @@ class AddBankAccountDialog extends StatelessWidget {
                     scrollPadding: EdgeInsets.zero,
                     cursorColor: Get.theme.primaryColor,
                     keyboardType: TextInputType.text,
+                    textCapitalization: TextCapitalization.characters,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp("[0-9A-Z]"))
+                    ],
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       hintText: 'IFSC Code',
@@ -229,15 +238,19 @@ class AddBankAccountDialog extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {
+            onTap: () async {
               if (name.text.isEmpty) {
                 showCustomSnackBar('Please enter name.');
               } else if (accountNo.text.isEmpty) {
                 showCustomSnackBar('Please enter account No.');
+              } else if (accountNo.text.length < 14) {
+                showCustomSnackBar('Please enter valid account No.');
               } else if (bankName.text.isEmpty) {
                 showCustomSnackBar('Please enter bank name.');
               } else if (ifscCode.text.isEmpty) {
                 showCustomSnackBar('Please enter IFSC code.');
+              } else if (!await apiHelper.verifyIFSC(ifscCode.text)) {
+                showCustomSnackBar('Please enter valid IFSC code.');
               } else {
                 Get.back();
                 paymentController.addBankDetails(
@@ -266,7 +279,7 @@ class AddBankAccountDialog extends StatelessWidget {
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w600),
-              ).translate(),
+              ),
             ),
           ),
         ],

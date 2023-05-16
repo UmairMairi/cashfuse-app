@@ -28,6 +28,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' as getx;
 import 'package:http_parser/http_parser.dart';
+import 'package:http/http.dart' as http;
 
 class APIHelper {
   dynamic getDioResult<T>(final response, T recordList) {
@@ -1427,6 +1428,25 @@ class APIHelper {
     } catch (e) {
       print("Exception -  apiHelper.dart - getTrendingProducts():" +
           e.toString());
+    }
+  }
+
+  Future<bool> verifyIFSC(String ifscCode) async {
+    try {
+      var url = Uri.parse('https://ifsc.razorpay.com/' + ifscCode);
+      var res = await http.get(url, headers: {
+        "content-type": "application/x-www-form-urlencoded",
+      });
+      if (res.statusCode == 200) {
+        return true;
+      } else {
+        print("Exception -  apiHelper.dart - verifyIFSC():" + res.toString());
+
+        return false;
+      }
+    } catch (e) {
+      print("Exception -  apiHelper.dart - verifyIFSC():" + e.toString());
+      return false;
     }
   }
 }

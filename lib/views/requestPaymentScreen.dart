@@ -11,7 +11,6 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
-
 import 'package:google_translator/google_translator.dart';
 
 class RequestPaymentScreen extends StatelessWidget {
@@ -90,7 +89,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                         : '${global.appInfo.currency}0.00',
                                     style:
                                         Get.theme.primaryTextTheme.titleSmall,
-                                  ).translate(),
+                                  ),
                                 ],
                               ),
                             ),
@@ -109,7 +108,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                       ? '${global.appInfo.currency}${global.currentUser.earning.sentForWithdrawal}'
                                       : '${global.appInfo.currency}0.00',
                                   style: Get.theme.primaryTextTheme.titleSmall,
-                                ).translate(),
+                                ),
                               ],
                             ),
                             Padding(
@@ -132,7 +131,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                         : '${global.appInfo.currency}0.00',
                                     style:
                                         Get.theme.primaryTextTheme.titleSmall,
-                                  ).translate(),
+                                  ),
                                 ],
                               ),
                             ),
@@ -148,7 +147,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                       ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}'
                                       : '${global.appInfo.currency}0.00',
                                   style: Get.theme.primaryTextTheme.titleSmall,
-                                ).translate(),
+                                ),
                               ],
                             )
                           ],

@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
@@ -9,12 +10,14 @@ import 'package:get/get.dart';
 
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:google_translator/google_translator.dart';
+import 'package:phone_number/phone_number.dart';
 
 class PaytmRedeemScreen extends StatelessWidget {
   final fContactNo = new FocusNode();
   var contactNo = TextEditingController();
 
   PaymentController paymentController = Get.find<PaymentController>();
+  AuthController authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -84,10 +87,25 @@ class PaytmRedeemScreen extends StatelessWidget {
                                 .copyWith(fontWeight: FontWeight.w600),
                           ).translate(),
                           InkWell(
-                            onTap: () {
-                              if (paymentController.payTMDetails != null) {
-                                contactNo.text =
-                                    paymentController.payTMDetails.paytmNo;
+                            onTap: () async {
+                              if (paymentController.payTMDetails != null &&
+                                  paymentController.payTMDetails.paytmNo !=
+                                      null) {
+                                if (GetPlatform.isAndroid) {
+                                  try {
+                                    PhoneNumber phoneNumber =
+                                        await PhoneNumberUtil().parse(
+                                            paymentController
+                                                .amazonDetails.amazonNo);
+                                    authController.coutryCode =
+                                        '+' + phoneNumber.countryCode;
+                                    contactNo.text = phoneNumber.nationalNumber;
+                                  } catch (e) {
+                                    print(
+                                        "Exception - PaytmRedeemScreen.dart - PhoneNumberUtil():" +
+                                            e.toString());
+                                  }
+                                }
                               }
                               Get.dialog(
                                 Dialog(
@@ -124,7 +142,18 @@ class PaytmRedeemScreen extends StatelessWidget {
                                             LengthLimitingTextInputFormatter(
                                                 10),
                                           ],
+                                          textAlign: TextAlign.start,
+                                          textAlignVertical:
+                                              TextAlignVertical.center,
                                           decoration: InputDecoration(
+                                            prefixIcon: Container(
+                                              width: 20,
+                                              height: 20,
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                authController.coutryCode,
+                                              ),
+                                            ),
                                             contentPadding: EdgeInsets.zero,
                                             hintText: 'Mobile Number',
                                             labelStyle: TextStyle(
@@ -163,7 +192,7 @@ class PaytmRedeemScreen extends StatelessWidget {
                                             if (contactNo.text.isNotEmpty) {
                                               Get.back();
                                               paymentController.addPayTMDetails(
-                                                  contactNo.text.trim());
+                                                 authController.coutryCode + contactNo.text.trim());
                                             } else {
                                               showCustomSnackBar(
                                                   'Please add Number.');

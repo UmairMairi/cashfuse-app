@@ -274,16 +274,11 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                   future: global
                                       .translatedText(admitedData.description),
                                   builder: (context, snapShot) {
-                                    return snapShot.data != null
-                                        ? HtmlWidget(
-                                            snapShot.data,
-                                            //textAlign: TextAlign.center,
-                                          )
-                                        : Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 20),
-                                            child: CircularProgressIndicator(),
-                                          );
+                                    return HtmlWidget(
+                                      snapShot.data != null
+                                          ? snapShot.data
+                                          : admitedData.description,
+                                    );
                                   }),
                               // Text(
                               //   offer.terms,

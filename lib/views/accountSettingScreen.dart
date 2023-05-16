@@ -6,8 +6,10 @@ import 'package:cashfuse/controllers/imageController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/widget/confirmationDialog.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
+import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +17,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:phone_number/phone_number.dart';
 
 class AccountSettingScreen extends StatelessWidget {
   final fnameFocus = new FocusNode();
@@ -26,6 +29,8 @@ class AccountSettingScreen extends StatelessWidget {
 
   AuthController authController = Get.find<AuthController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final countryPicker = FlCountryCodePicker();
 
   @override
   Widget build(BuildContext context) {
@@ -236,6 +241,8 @@ class AccountSettingScreen extends StatelessWidget {
                             controller: authController.name,
                             scrollPadding: EdgeInsets.zero,
                             cursorColor: Get.theme.primaryColor,
+                            textCapitalization: TextCapitalization.words,
+                            keyboardType: TextInputType.name,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero,
                               hintText: 'Test User',
@@ -283,6 +290,7 @@ class AccountSettingScreen extends StatelessWidget {
                                 : false,
                             scrollPadding: EdgeInsets.zero,
                             cursorColor: Get.theme.primaryColor,
+                            keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero,
                               hintText: 'test@gmail.com',
@@ -309,19 +317,6 @@ class AccountSettingScreen extends StatelessWidget {
                               )),
                             ),
                           ),
-                          // Text(
-                          //   'test@gmail.com',
-                          //   style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w300),
-                          // ),
-                          // Padding(
-                          //   padding: const EdgeInsets.symmetric(vertical: 5),
-                          //   child: DottedLine(
-                          //     dashLength: 1,
-                          //     lineThickness: 1.5,
-                          //     dashGapLength: 1.5,
-                          //     dashColor: Colors.grey,
-                          //   ),
-                          // ),
                           SizedBox(
                             height: 20,
                           ),
@@ -335,17 +330,13 @@ class AccountSettingScreen extends StatelessWidget {
                             height: 10,
                           ),
                           TextFormField(
-                            focusNode: fnumberFocus,
                             controller: authController.contactNo,
-                            readOnly: global.currentUser.phone != null &&
-                                    global.currentUser.phone.isNotEmpty
-                                ? true
-                                : false,
-                            scrollPadding: EdgeInsets.zero,
                             cursorColor: Get.theme.primaryColor,
                             textInputAction: TextInputAction.done,
                             keyboardType: TextInputType.numberWithOptions(
                                 signed: true, decimal: true),
+                            textAlignVertical: TextAlignVertical.center,
+                            textAlign: TextAlign.start,
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
                             ],
@@ -373,220 +364,138 @@ class AccountSettingScreen extends StatelessWidget {
                                     ? Get.theme.primaryColor
                                     : Colors.grey,
                               )),
+                              prefixIcon: InkWell(
+                                onTap: () async {
+                                  final code = await countryPicker.showPicker(
+                                    context: context,
+                                  );
+                                  if (code != null) {
+                                    authController.coutryCode = code.dialCode;
+                                    authController.update();
+                                  }
+                                },
+                                child: Container(
+                                  width: 20,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    authController.coutryCode,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                          // Padding(
-                          //   padding: const EdgeInsets.symmetric(vertical: 5),
-                          //   child: DottedLine(
-                          //     dashLength: 1,
-                          //     lineThickness: 1.5,
-                          //     dashGapLength: 1.5,
-                          //     dashColor: Colors.grey,
+                          // TextFormField(
+                          //   focusNode: fnumberFocus,
+                          //   controller: authController.contactNo,
+                          //   readOnly: global.currentUser.phone != null &&
+                          //           global.currentUser.phone.isNotEmpty
+                          //       ? true
+                          //       : false,
+                          //   scrollPadding: EdgeInsets.zero,
+                          //   cursorColor: Get.theme.primaryColor,
+                          //   textInputAction: TextInputAction.done,
+                          //   keyboardType: TextInputType.numberWithOptions(
+                          //       signed: true, decimal: true),
+                          //   inputFormatters: [
+                          //     FilteringTextInputFormatter.digitsOnly,
+                          //   ],
+                          //   decoration: InputDecoration(
+                          //     contentPadding: EdgeInsets.zero,
+                          //     hintText: '9999999999',
+                          //     hintStyle: Get.theme.primaryTextTheme.bodySmall
+                          //         .copyWith(color: Colors.grey[400]),
+                          //     focusColor: Get.theme.primaryColor,
+                          //     focusedBorder: UnderlineInputBorder(
+                          //         borderSide: BorderSide(
+                          //       color: fnumberFocus.hasFocus
+                          //           ? Get.theme.primaryColor
+                          //           : Colors.grey,
+                          //     )),
+                          //     border: UnderlineInputBorder(
+                          //         borderSide: BorderSide(
+                          //       color: fnumberFocus.hasFocus
+                          //           ? Get.theme.primaryColor
+                          //           : Colors.grey,
+                          //     )),
+                          //     enabledBorder: UnderlineInputBorder(
+                          //         borderSide: BorderSide(
+                          //       color: fnumberFocus.hasFocus
+                          //           ? Get.theme.primaryColor
+                          //           : Colors.grey,
+                          //     )),
                           //   ),
                           // ),
                           SizedBox(
                             height: 20,
                           ),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //   children: [
-                          //     Expanded(
-                          //       child: Text(
-                          //         'Receive email when I get referral earning',
-                          //       ),
-                          //     ),
-                          //     Switch(
-                          //       thumbColor: MaterialStateProperty.all(
-                          //         Colors.white,
-                          //       ),
-                          //       value: true,
-                          //       onChanged: (val) {},
-                          //     )
-                          //   ],
-                          // ),
                         ],
                       ),
                     ),
                     !GetPlatform.isWeb
-                        ? InkWell(
-                            onTap: () {
-                              showConfirmationDialog(
-                                context,
-                                'Delete My Account',
-                                'Are you sure you want to delete Account ?',
-                                [
-                                  CupertinoDialogAction(
-                                    child: Text(
-                                      'Yes',
-                                      style: Get
-                                          .theme.primaryTextTheme.titleSmall
-                                          .copyWith(color: Colors.red),
-                                    ).translate(),
-                                    onPressed: () {
-                                      authController.removeUserfromDb();
-                                    },
-                                  ),
-                                  CupertinoDialogAction(
-                                    child: Text(
-                                      'No',
-                                      style: Get
-                                          .theme.primaryTextTheme.titleSmall
-                                          .copyWith(color: Colors.blue),
-                                    ).translate(),
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                  ),
-                                  SizedBox(
-                                    width: 4,
-                                  ),
-                                  Text(
-                                    'Delete My Account',
-                                    style: Get.theme.primaryTextTheme.bodyMedium
-                                        .copyWith(
-                                      letterSpacing: -0.5,
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.w500,
+                        ? Align(
+                            alignment: Alignment.centerRight,
+                            child: InkWell(
+                              onTap: () {
+                                showConfirmationDialog(
+                                  context,
+                                  'Delete My Account',
+                                  'Are you sure you want to delete Account ?',
+                                  [
+                                    CupertinoDialogAction(
+                                      child: Text(
+                                        'Yes',
+                                        style: Get
+                                            .theme.primaryTextTheme.titleSmall
+                                            .copyWith(color: Colors.red),
+                                      ).translate(),
+                                      onPressed: () {
+                                        authController.removeUserfromDb();
+                                      },
                                     ),
-                                  ).translate(),
-                                ],
+                                    CupertinoDialogAction(
+                                      child: Text(
+                                        'No',
+                                        style: Get
+                                            .theme.primaryTextTheme.titleSmall
+                                            .copyWith(color: Colors.blue),
+                                      ).translate(),
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    ),
+                                    SizedBox(
+                                      width: 4,
+                                    ),
+                                    Text(
+                                      'Delete My Account',
+                                      style: Get
+                                          .theme.primaryTextTheme.bodyMedium
+                                          .copyWith(
+                                        letterSpacing: -0.5,
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           )
                         : SizedBox(),
-                    // : SizedBox(),
-                    // StatefulBuilder(
-                    //     builder: (BuildContext context, StateSetter setState) => Padding(
-                    //       padding: const EdgeInsets.all(20.0),
-                    //       child: Column(
-                    //         crossAxisAlignment: CrossAxisAlignment.start,
-                    //         children: [
-                    //           TextFormField(
-                    //             focusNode: cPasswordFocus,
-                    //             scrollPadding: EdgeInsets.zero,
-                    //             cursorColor: Get.theme.primaryColor,
-                    //             decoration: InputDecoration(
-                    //               contentPadding: EdgeInsets.zero,
-                    //               labelText: 'Current Password',
-                    //               labelStyle: TextStyle(
-                    //                 color: cPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                    //               ),
-                    //               focusColor: Get.theme.primaryColor,
-                    //               focusedBorder: UnderlineInputBorder(
-                    //                   borderSide: BorderSide(
-                    //                 color: cPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                    //               )),
-                    //               border: UnderlineInputBorder(
-                    //                   borderSide: BorderSide(
-                    //                 color: cPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                    //               )),
-                    //               enabledBorder: UnderlineInputBorder(
-                    //                   borderSide: BorderSide(
-                    //                 color: cPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                    //               )),
-                    //               suffixIcon: Icon(
-                    //                 Icons.visibility_off_rounded,
-                    //                 color: Colors.grey,
-                    //               ),
-                    //             ),
-                    //             onTap: () {
-                    //               //FocusScope.of(context).unfocus(disposition: UnfocusDisposition.previouslyFocusedChild);
-                    //               FocusScope.of(context).requestFocus(cPasswordFocus);
-                    //               setState(() {});
-                    //             },
-                    //           ),
-                    //           SizedBox(
-                    //             height: 20,
-                    //           ),
-                    //           TextFormField(
-                    //             focusNode: newPasswordFocus,
-                    //             scrollPadding: EdgeInsets.zero,
-                    //             cursorColor: Get.theme.primaryColor,
-                    //             decoration: InputDecoration(
-                    //               contentPadding: EdgeInsets.zero,
-                    //               labelText: 'New Password',
-                    //               labelStyle: TextStyle(
-                    //                 color: newPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                    //               ),
-                    //               focusColor: Get.theme.primaryColor,
-                    //               focusedBorder: UnderlineInputBorder(
-                    //                   borderSide: BorderSide(
-                    //                 color: newPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                    //               )),
-                    //               border: UnderlineInputBorder(
-                    //                   borderSide: BorderSide(
-                    //                 color: newPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                    //               )),
-                    //               enabledBorder: UnderlineInputBorder(
-                    //                   borderSide: BorderSide(
-                    //                 color: newPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                    //               )),
-                    //               suffixIcon: Icon(
-                    //                 Icons.visibility_off_rounded,
-                    //                 color: Colors.grey,
-                    //               ),
-                    //             ),
-                    //             onTap: () {
-                    //               FocusScope.of(context).requestFocus(newPasswordFocus);
-                    //               setState(() {});
-                    //             },
-                    //           ),
-                    //           SizedBox(
-                    //             height: 20,
-                    //           ),
-                    //           TextFormField(
-                    //             focusNode: conPasswordFocus,
-                    //             scrollPadding: EdgeInsets.zero,
-                    //             cursorColor: Get.theme.primaryColor,
-                    //             decoration: InputDecoration(
-                    //               contentPadding: EdgeInsets.zero,
-                    //               labelText: 'Confirm Password',
-                    //               labelStyle: TextStyle(
-                    //                 color: conPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                    //               ),
-                    //               focusColor: Get.theme.primaryColor,
-                    //               focusedBorder: UnderlineInputBorder(
-                    //                   borderSide: BorderSide(
-                    //                 color: conPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                    //               )),
-                    //               border: UnderlineInputBorder(
-                    //                   borderSide: BorderSide(
-                    //                 color: conPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                    //               )),
-                    //               enabledBorder: UnderlineInputBorder(
-                    //                   borderSide: BorderSide(
-                    //                 color: conPasswordFocus.hasFocus ? Get.theme.primaryColor : Colors.grey,
-                    //               )),
-                    //               suffixIcon: Icon(
-                    //                 Icons.visibility_off_rounded,
-                    //                 color: Colors.grey,
-                    //               ),
-                    //             ),
-                    //             onTap: () {
-                    //               FocusScope.of(context).requestFocus(conPasswordFocus);
-                    //               setState(() {});
-                    //             },
-                    //           ),
-                    //           SizedBox(
-                    //             height: 20,
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   )
                   ],
                 ),
               ),
@@ -596,8 +505,30 @@ class AccountSettingScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               InkWell(
-                onTap: () {
-                  authController.updateProfile(imageControlller.imageFile);
+                onTap: () async {
+                  String _numberWithCountryCode =
+                      authController.coutryCode + authController.contactNo.text;
+                  bool _isValid = GetPlatform.isAndroid ? false : true;
+                  if (GetPlatform.isAndroid) {
+                    try {
+                      PhoneNumber phoneNumber =
+                          await PhoneNumberUtil().parse(_numberWithCountryCode);
+                      _numberWithCountryCode = '+' +
+                          phoneNumber.countryCode +
+                          phoneNumber.nationalNumber;
+                      _isValid = true;
+                    } catch (e) {
+                      print(
+                          "Exception - LoginWithPhoneScreen.dart - PhoneNumberUtil():" +
+                              e.toString());
+                    }
+                  }
+                  if (!_isValid) {
+                    showCustomSnackBar('Invalid phone number');
+                  } else {
+                    await authController
+                        .updateProfile(imageControlller.imageFile);
+                  }
                 },
                 child: Align(
                   alignment: Alignment.bottomCenter,

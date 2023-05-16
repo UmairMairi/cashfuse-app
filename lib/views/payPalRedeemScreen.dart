@@ -3,6 +3,7 @@
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -151,10 +152,16 @@ class PayPalRedeemScreen extends StatelessWidget {
                                         InkWell(
                                           onTap: () {
                                             if (payPalId.text.isNotEmpty) {
-                                              Get.back();
-                                              paymentController
-                                                  .addPayPalDetails(
-                                                      payPalId.text.trim());
+                                              if (EmailValidator.validate(
+                                                  payPalId.text)) {
+                                                Get.back();
+                                                paymentController
+                                                    .addPayPalDetails(
+                                                        payPalId.text.trim());
+                                              } else {
+                                                showCustomSnackBar(
+                                                    'Please enter valid PayPal Email.');
+                                              }
                                             } else {
                                               showCustomSnackBar(
                                                   'Please enter PayPal Email.');

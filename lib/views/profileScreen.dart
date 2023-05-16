@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
+import 'package:phone_number/phone_number.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:store_redirect/store_redirect.dart';
 
@@ -325,13 +326,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       //   ),
                       // ),
                       InkWell(
-                        onTap: () {
+                        onTap: () async {
                           global.showInterstitialAd();
 
                           authController.name.text = global.currentUser.name;
                           authController.email.text = global.currentUser.email;
                           authController.contactNo.text =
                               global.currentUser.phone;
+                          if (global.currentUser.phone != null) {
+                            if (GetPlatform.isAndroid) {
+                              try {
+                                PhoneNumber phoneNumber =
+                                    await PhoneNumberUtil()
+                                        .parse(global.currentUser.phone);
+                                authController.coutryCode =
+                                    '+' + phoneNumber.countryCode;
+                                authController.contactNo.text =
+                                    phoneNumber.nationalNumber;
+                              } catch (e) {
+                                print(
+                                    "Exception - ProfileScreen.dart - PhoneNumberUtil():" +
+                                        e.toString());
+                              }
+                            }
+                          }
                           Get.to(
                             () => AccountSettingScreen(),
                             routeName: 'account',
@@ -762,8 +780,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         onTap: () {
                           showConfirmationDialog(
                             context,
-                            'Logout',
-                            'Are you sure you want to logout ?',
+                            'Signout',
+                            'Are you sure you want to Signout?',
                             [
                               CupertinoDialogAction(
                                 child: Text(
@@ -803,7 +821,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 width: 20,
                               ),
                               Text(
-                                'Logout',
+                                'Signout',
                                 style: Get.theme.primaryTextTheme.bodyMedium
                                     .copyWith(
                                   letterSpacing: -0.5,
