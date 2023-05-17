@@ -15,7 +15,7 @@ class CommonController extends GetxController with GetTickerProviderStateMixin {
   String aboutUs = '';
   String privacyPolicy = '';
 
-  TabController tabController;
+  TabController? tabController;
 
   var searchString = TextEditingController();
 
@@ -37,7 +37,7 @@ class CommonController extends GetxController with GetTickerProviderStateMixin {
   }
 
   setTabIndex(int index) {
-    tabController.index = index;
+    tabController!.index = index;
     update();
   }
 
@@ -87,12 +87,12 @@ class CommonController extends GetxController with GetTickerProviderStateMixin {
         if (_mainFaqList.length > 0) {
           _faqList = List.from(
             _mainFaqList
-                .where((e) => ((e.ques.isNotEmpty &&
-                        e.ques.toLowerCase().split(' ').toString().split('?').toString().contains(
+                .where((e) => ((e.ques!.isNotEmpty &&
+                        e.ques!.toLowerCase().split(' ').toString().split('?').toString().contains(
                               searchString.text.trim().toLowerCase(),
                             )) ||
-                    (e.ans.isNotEmpty &&
-                        e.ans.toLowerCase().split(' ').toString().split('?').toString().contains(
+                    (e.ans!.isNotEmpty &&
+                        e.ans!.toLowerCase().split(' ').toString().split('?').toString().contains(
                               searchString.text.trim().toLowerCase(),
                             ))))
                 .toList(),

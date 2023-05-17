@@ -8,7 +8,7 @@ import 'dart:io';
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
-import 'package:cashfuse/controllers/searchController.dart';
+
 import 'package:cashfuse/models/userModel.dart';
 import 'package:cashfuse/services/apiHelper.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -24,21 +24,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'dart:math' as math;
 import 'package:crypto/src/sha256.dart' as sha;
+import 'package:cashfuse/controllers/searchController.dart';
 
 class AuthController extends GetxController {
   APIHelper apiHelper = new APIHelper();
   NetworkController networkController = Get.find<NetworkController>();
-  String coutryCode;
+  String? coutryCode;
   var otp = TextEditingController();
   final FocusNode phoneFocus = FocusNode();
   var contactNo = TextEditingController();
   var name = TextEditingController();
   var email = TextEditingController();
   int seconds = 60;
-  Timer timer;
-  String status;
+  Timer? timer;
+  String? status;
 
-  UserCredential userCredential;
+  UserCredential? userCredential;
   OAuthProvider provider = OAuthProvider("apple.com");
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -46,12 +47,12 @@ class AuthController extends GetxController {
 
   GoogleSignIn googleSignIn = GoogleSignIn();
 
-  SearchController searchController = Get.put(SearchController());
+  SearchGetController searchController = Get.put(SearchGetController());
 
   @override
   void onInit() async {
     coutryCode = global.appInfo.countryCode != null &&
-            global.appInfo.countryCode.isNotEmpty
+            global.appInfo.countryCode!.isNotEmpty
         ? global.appInfo.countryCode
         : '+91';
     super.onInit();
@@ -63,14 +64,8 @@ class AuthController extends GetxController {
   }
 
   Future logout() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     try {
-      sharedPreferences.remove("user_token");
-      sharedPreferences.remove("user_id");
-      sharedPreferences.remove("user_name");
-      sharedPreferences.remove("user_email");
-      sharedPreferences.remove("user_phone");
-      global.sp.remove('currentUser');
+      global.sp!.remove('currentUser');
       global.currentUser = new UserModel();
       contactNo.clear();
       googleSignIn.signOut();
@@ -89,7 +84,7 @@ class AuthController extends GetxController {
           if (contactNo.text.length >= 7) {
             Get.dialog(CustomLoader(), barrierDismissible: false);
             await apiHelper
-                .loginOrRegister(coutryCode + contactNo.text)
+                .loginOrRegister(coutryCode! + contactNo.text)
                 .then((response) async {
               if (response.statusCode == 200) {
                 await sendOTP(fromMenu);
@@ -166,7 +161,7 @@ class AuthController extends GetxController {
         FirebaseAuth auth = FirebaseAuth.instance;
         Get.back();
         ConfirmationResult confirmationResult =
-            await auth.signInWithPhoneNumber(coutryCode + contactNo.text);
+            await auth.signInWithPhoneNumber(coutryCode! + contactNo.text);
         if (confirmationResult.verificationId != null) {
           Get.dialog(Dialog(
             child: SizedBox(
@@ -181,9 +176,9 @@ class AuthController extends GetxController {
         }
       } else {
         await FirebaseAuth.instance.verifyPhoneNumber(
-          phoneNumber: coutryCode + contactNo.text,
+          phoneNumber: coutryCode! + contactNo.text,
           verificationCompleted: (PhoneAuthCredential credential) {
-            otp.text = credential.smsCode;
+            otp.text = credential.smsCode!;
             update();
           },
           verificationFailed: (FirebaseAuthException e) {
@@ -191,7 +186,7 @@ class AuthController extends GetxController {
             showCustomSnackBar(e.message.toString());
             log(e.message.toString());
           },
-          codeSent: (String verificationId, int resendToken) async {
+          codeSent: (String verificationId, int? resendToken) async {
             Get.back();
             startTimer();
 
@@ -219,7 +214,7 @@ class AuthController extends GetxController {
 
       UserModel _user = new UserModel();
 
-      GoogleSignInAccount googleUSer = await googleSignIn.signIn();
+      GoogleSignInAccount? googleUSer = await googleSignIn.signIn();
       if (googleUSer != null) {
         var user = googleUSer;
         final googleCred = await user.authentication;
@@ -230,11 +225,11 @@ class AuthController extends GetxController {
         log(userCredential.toString());
 
         _user.loginType = 'google';
-        _user.socialId = userCredential.user.uid;
-        _user.name = userCredential.user.displayName;
-        _user.userImage = userCredential.user.photoURL;
+        _user.socialId = userCredential!.user!.uid;
+        _user.name = userCredential!.user!.displayName!;
+        _user.userImage = userCredential!.user!.photoURL!;
 
-        _user.email = userCredential.user.email;
+        _user.email = userCredential!.user!.email!;
 
         Get.dialog(CustomLoader(), barrierDismissible: false);
 
@@ -243,7 +238,7 @@ class AuthController extends GetxController {
           if (response.statusCode == 200) {
             global.currentUser = response.data;
 
-            global.sp.setString(
+            global.sp!.setString(
                 'currentUser', json.encode(global.currentUser.toJson()));
             Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
             await getProfile();
@@ -352,19 +347,15 @@ class AuthController extends GetxController {
         // global.hideLoader();
         print("error ${e.toString()}");
       });
-      print('Auth cred ${authResult.user.uid}'); //usersecrate
-      print(
-          '--------------------------------------------------------------------------------');
-      print(
-          'cred authCode ${credential.authorizationCode} email ${credential.email} givenName ${credential.givenName}  familyname ${credential.familyName} identytToken ${credential.identityToken}');
+
       UserModel _user = new UserModel();
       if (credential.authorizationCode != '') {
         _user.loginType = 'apple';
-        _user.socialId = authResult.user.uid;
-        _user.name = authResult.user.displayName;
-        _user.userImage = authResult.user.photoURL;
+        _user.socialId = authResult.user!.uid;
+        _user.name = authResult.user!.displayName!;
+        _user.userImage = authResult.user!.photoURL!;
 
-        _user.email = authResult.user.email;
+        _user.email = authResult.user!.email!;
 
         // Get.dialog(CustomLoader(), barrierDismissible: false);
 
@@ -373,7 +364,7 @@ class AuthController extends GetxController {
           if (response.statusCode == 200) {
             global.currentUser = response.data;
 
-            global.sp.setString(
+            global.sp!.setString(
                 'currentUser', json.encode(global.currentUser.toJson()));
             Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
             await getProfile();
@@ -403,7 +394,7 @@ class AuthController extends GetxController {
       oneSec,
       (timerVal) {
         if (seconds == 0) {
-          timer.cancel();
+          timer!.cancel();
           timerVal.cancel();
           update();
         } else {
@@ -432,11 +423,11 @@ class AuthController extends GetxController {
         await auth.signInWithCredential(_credential).then((result) {
           Get.back();
           status = 'success';
-          verifyOtp(status, fromMenu);
+          verifyOtp(status!, fromMenu);
         }).catchError((e) {
           status = 'failed';
           Get.back();
-          verifyOtp(status, fromMenu);
+          verifyOtp(status!, fromMenu);
         }).onError((error, stackTrace) {
           showCustomSnackBar(error.toString());
         });
@@ -454,7 +445,7 @@ class AuthController extends GetxController {
           networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper
-            .verifyOtp(coutryCode + contactNo.text, status)
+            .verifyOtp(coutryCode! + contactNo.text, status)
             .then((response) async {
           Get.back();
           if (response != null) {
@@ -463,7 +454,7 @@ class AuthController extends GetxController {
               contactNo.clear();
               otp.clear();
 
-              global.sp.setString(
+              global.sp!.setString(
                   'currentUser', json.encode(global.currentUser.toJson()));
               Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
               await getProfile();
@@ -507,7 +498,7 @@ class AuthController extends GetxController {
               otp.clear();
               global.currentUser = response.data;
 
-              global.sp.setString(
+              global.sp!.setString(
                   'currentUser', json.encode(global.currentUser.toJson()));
               Get.to(() => BottomNavigationBarScreen(), routeName: 'home');
               await getProfile();
@@ -542,15 +533,15 @@ class AuthController extends GetxController {
       FirebaseAuth auth = FirebaseAuth.instance;
       await auth
           .verifyPhoneNumber(
-        phoneNumber: coutryCode + contactNo.text,
+        phoneNumber: coutryCode! + contactNo.text,
         verificationCompleted: (AuthCredential authCredential) async {},
         verificationFailed: (e) {
           showCustomSnackBar(e.message.toString());
           log(e.message.toString());
         },
-        codeSent: (String verificationId, [int forceResendingToken]) async {
+        codeSent: (String verificationId, [int? forceResendingToken]) async {
           startTimer();
-          Navigator.of(Get.context).push(
+          Navigator.of(Get.context!).push(
             MaterialPageRoute(
               builder: (context) => OtpVerificationScreen(
                 verificationCode: verificationId,
@@ -614,10 +605,10 @@ class AuthController extends GetxController {
           networkController.connectionStatus.value == 2) {
         await apiHelper.myProfile().then((response) {
           if (response.statusCode == 200) {
-            String _token = global.currentUser.token;
+            String _token = global.currentUser.token!;
             global.currentUser = response.data;
             global.currentUser.token = _token;
-            global.sp.setString(
+            global.sp!.setString(
                 'currentUser', json.encode(global.currentUser.toJson()));
           } else {
             showCustomSnackBar(response.message);

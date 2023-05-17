@@ -8,7 +8,7 @@ import 'package:google_translator/google_translator.dart';
 
 class LoginOrSignUpScreen extends StatelessWidget {
   final bool fromMenu;
-  LoginOrSignUpScreen({this.fromMenu});
+  LoginOrSignUpScreen({required this.fromMenu});
 
   final countryPicker = FlCountryCodePicker();
 
@@ -38,7 +38,7 @@ class LoginOrSignUpScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
                   'Login or signup',
-                  style: Get.theme.primaryTextTheme.displaySmall.copyWith(
+                  style: Get.theme.primaryTextTheme.displaySmall!.copyWith(
                     letterSpacing: -1,
                     height: 1.2,
                     fontWeight: FontWeight.w700,
@@ -49,7 +49,7 @@ class LoginOrSignUpScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
                   'We will send a SMS to verify',
-                  style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                  style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                     letterSpacing: -0.2,
                     fontWeight: FontWeight.w600,
                   ),
@@ -89,7 +89,7 @@ class LoginOrSignUpScreen extends StatelessWidget {
                           width: 20,
                           alignment: Alignment.center,
                           child: Text(
-                            authController.coutryCode,
+                            authController.coutryCode!,
                           ).translate(),
                         ),
                       ),

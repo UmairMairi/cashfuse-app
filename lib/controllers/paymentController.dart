@@ -15,11 +15,11 @@ class PaymentController extends GetxController {
   APIHelper apiHelper = new APIHelper();
   NetworkController networkController = Get.find<NetworkController>();
 
-  BankDetailsModel bankDetails;
-  BankDetailsModel amazonDetails;
-  BankDetailsModel payTMDetails;
-  BankDetailsModel upiDetails;
-  BankDetailsModel payPalDetails;
+  BankDetailsModel? bankDetails;
+  BankDetailsModel? amazonDetails;
+  BankDetailsModel? payTMDetails;
+  BankDetailsModel? upiDetails;
+  BankDetailsModel? payPalDetails;
 
   List<PaymentHistoryModel> _paymentHistoryList = [];
   List<PaymentHistoryModel> get paymentHistoryList => _paymentHistoryList;
@@ -40,20 +40,20 @@ class PaymentController extends GetxController {
   Future init() async {
     try {
       await getPaymentHistory();
-      if (global.sp.getString('amazon_pay') != null) {
-        amazonDetails = BankDetailsModel.fromJson(json.decode(global.sp.getString("amazon_pay")));
+      if (global.sp!.getString('amazon_pay') != null) {
+        amazonDetails = BankDetailsModel.fromJson(json.decode(global.sp!.getString("amazon_pay")!));
       }
-      if (global.sp.getString('payTM') != null) {
-        payTMDetails = BankDetailsModel.fromJson(json.decode(global.sp.getString("payTM")));
+      if (global.sp!.getString('payTM') != null) {
+        payTMDetails = BankDetailsModel.fromJson(json.decode(global.sp!.getString("payTM")!));
       }
-      if (global.sp.getString('upi') != null) {
-        upiDetails = BankDetailsModel.fromJson(json.decode(global.sp.getString("upi")));
+      if (global.sp!.getString('upi') != null) {
+        upiDetails = BankDetailsModel.fromJson(json.decode(global.sp!.getString("upi")!));
       }
-      if (global.sp.getString('bank') != null) {
-        bankDetails = BankDetailsModel.fromJson(json.decode(global.sp.getString("bank")));
+      if (global.sp!.getString('bank') != null) {
+        bankDetails = BankDetailsModel.fromJson(json.decode(global.sp!.getString("bank")!));
       }
-      if (global.sp.getString('pay_pal') != null) {
-        payPalDetails = BankDetailsModel.fromJson(json.decode(global.sp.getString("pay_pal")));
+      if (global.sp!.getString('pay_pal') != null) {
+        payPalDetails = BankDetailsModel.fromJson(json.decode(global.sp!.getString("pay_pal")!));
       }
       update();
     } catch (e) {
@@ -88,7 +88,7 @@ class PaymentController extends GetxController {
           Get.back();
           if (response.status == "1") {
             amazonDetails = response.data;
-            global.sp.setString('amazon_pay', json.encode(amazonDetails.toJson()));
+            global.sp!.setString('amazon_pay', json.encode(amazonDetails!.toJson()));
           } else {
             showCustomSnackBar(response.message);
           }
@@ -110,7 +110,7 @@ class PaymentController extends GetxController {
           Get.back();
           if (response.status == "1") {
             payTMDetails = response.data;
-            global.sp.setString('payTM', json.encode(payTMDetails.toJson()));
+            global.sp!.setString('payTM', json.encode(payTMDetails!.toJson()));
           } else {
             showCustomSnackBar(response.message);
           }
@@ -132,7 +132,7 @@ class PaymentController extends GetxController {
           Get.back();
           if (response.status == "1") {
             upiDetails = response.data;
-            global.sp.setString('upi', json.encode(upiDetails.toJson()));
+            global.sp!.setString('upi', json.encode(upiDetails!.toJson()));
           } else {
             showCustomSnackBar(response.message);
           }
@@ -154,7 +154,7 @@ class PaymentController extends GetxController {
           Get.back();
           if (response.status == "1") {
             bankDetails = response.data;
-            global.sp.setString('bank', json.encode(bankDetails.toJson()));
+            global.sp!.setString('bank', json.encode(bankDetails!.toJson()));
           } else {
             showCustomSnackBar(response.message);
           }
@@ -176,7 +176,7 @@ class PaymentController extends GetxController {
           Get.back();
           if (response.status == "1") {
             payPalDetails = response.data;
-            global.sp.setString('pay_pal', json.encode(payPalDetails.toJson()));
+            global.sp!.setString('pay_pal', json.encode(payPalDetails!.toJson()));
           } else {
             showCustomSnackBar(response.message);
           }

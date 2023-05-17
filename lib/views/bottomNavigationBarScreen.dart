@@ -18,7 +18,7 @@ import 'package:google_translator/google_translator.dart';
 import 'package:translator/translator.dart';
 
 class BottomNavigationBarScreen extends StatefulWidget {
-  int pageIndex;
+  int? pageIndex;
   BottomNavigationBarScreen({this.pageIndex}) : super();
   @override
   _BottomNavigationBarScreenState createState() =>
@@ -27,7 +27,7 @@ class BottomNavigationBarScreen extends StatefulWidget {
 
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   bool _canExit = global.getPlatFrom() ? true : false;
-  int bottomNavIndex;
+  int? bottomNavIndex;
 
   bool _isHomeIndex = false;
   bool _isSearchIndex = false;
@@ -35,7 +35,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   bool _isRecentClickIndex = false;
   bool _isProfileIndex = false;
 
-  CircularBottomNavigationController navigationController;
+  CircularBottomNavigationController? navigationController;
 
   List<IconData> iconList = [
     Icons.home,
@@ -55,19 +55,19 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
 
   List<Widget> _screens() => [
         HomeScreen(
-          bgColor: colorList[bottomNavIndex],
+          bgColor: colorList[bottomNavIndex!],
         ),
         SearchScreen(
-          bgColor: colorList[bottomNavIndex],
+          bgColor: colorList[bottomNavIndex!],
         ),
         AllInOneSearchScreen(
-          bgColor: colorList[bottomNavIndex],
+          // bgColor: colorList[bottomNavIndex!],
         ),
         RecentClickScreen(
-          bgColor: colorList[bottomNavIndex],
+          bgColor: colorList[bottomNavIndex!],
         ),
         ProfileScreen(
-          bgColor: colorList[bottomNavIndex],
+          bgColor: colorList[bottomNavIndex!],
         ),
       ];
 
@@ -144,7 +144,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
           toolbarHeight: 0,
           elevation: 0,
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: colorList[bottomNavIndex],
+            statusBarColor: colorList[bottomNavIndex!],
           ),
         ),
         bottomNavigationBar: global.getPlatFrom()
@@ -449,10 +449,10 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                       normalIconColor: Colors.grey,
                       selectedIconColor: Colors.white,
                       controller: navigationController,
-                      selectedPos: bottomNavIndex,
+                      selectedPos: bottomNavIndex!,
                       barBackgroundColor: Colors.white,
                       animationDuration: Duration(milliseconds: 300),
-                      selectedCallback: (int selectedPos) async {
+                      selectedCallback: (int? selectedPos) async {
                     bottomNavIndex = selectedPos;
                     setState(() {});
                     if (bottomNavIndex == 0) {
@@ -472,7 +472,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                   }),
                 ),
               ),
-        body: _screens().elementAt(bottomNavIndex),
+        body: _screens().elementAt(bottomNavIndex!),
       ),
     );
   }

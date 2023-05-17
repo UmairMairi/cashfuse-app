@@ -1,16 +1,16 @@
 class BankDetailsModel {
-  int id;
-  int userId;
-  String acNo;
-  String acHolderName;
-  String bankName;
-  String ifsc;
-  String upi;
-  String payPalEmail;
-  String paytmNo;
-  String amazonNo;
-  DateTime createdAt;
-  DateTime updatedAt;
+  int? id;
+  int? userId;
+  String? acNo;
+  String? acHolderName;
+  String? bankName;
+  String? ifsc;
+  String? upi;
+  String? payPalEmail;
+  String? paytmNo;
+  String? amazonNo;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   BankDetailsModel({
     this.id,
@@ -57,7 +57,7 @@ class BankDetailsModel {
         "paypal_email": payPalEmail,
         "paytm_no": paytmNo,
         "amazon_no": amazonNo,
-        "created_at": createdAt != null ? createdAt.toIso8601String() : null,
-        "updated_at": updatedAt != null ? updatedAt.toIso8601String() : null,
+        "created_at": createdAt != null ? createdAt!.toIso8601String() : null,
+        "updated_at": updatedAt != null ? updatedAt!.toIso8601String() : null,
       };
 }

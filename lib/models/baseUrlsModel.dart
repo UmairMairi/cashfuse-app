@@ -1,16 +1,16 @@
 class BaseUrls {
-  String offerImageUrl;
-  String partnerImageUrl;
-  String userImageUrl;
-  String categoryImageUrl;
-  String businessLogoUrl;
-  String bannerImageUrl;
-  String faqImageUrl;
-  String couponBannerImageUrl;
-  String orderImageUrl;
-  String notificationBannerImageUrl;
-  String productImageurl;
-  String productSiteUrl;
+  String? offerImageUrl;
+  String? partnerImageUrl;
+  String? userImageUrl;
+  String? categoryImageUrl;
+  String? businessLogoUrl;
+  String? bannerImageUrl;
+  String? faqImageUrl;
+  String? couponBannerImageUrl;
+  String? orderImageUrl;
+  String? notificationBannerImageUrl;
+  String? productImageurl;
+  String? productSiteUrl;
 
   BaseUrls({
     this.offerImageUrl,

@@ -10,7 +10,7 @@ import 'package:google_translator/google_translator.dart';
 
 class HelpDetailSceen extends StatelessWidget {
   final FaqModel faq;
-  HelpDetailSceen({this.faq});
+  HelpDetailSceen({required this.faq});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +27,8 @@ class HelpDetailSceen extends StatelessWidget {
                 ),
               ),
               title: Text(
-                faq.ques,
-                style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
+                faq.ques!,
+                style: Get.theme.primaryTextTheme.titleSmall!.copyWith(color: Colors.white),
               ).translate(),
             ),
       body: GetBuilder<CommonController>(builder: (controller) {
@@ -40,7 +40,7 @@ class HelpDetailSceen extends StatelessWidget {
             margin: global.getPlatFrom() ? EdgeInsets.zero : EdgeInsets.all(10).copyWith(bottom: 0),
             child: SingleChildScrollView(
               child: HtmlWidget(
-                faq.ans,
+                faq.ans!,
                 textStyle: global.getPlatFrom() ? Get.theme.primaryTextTheme.titleSmall : null,
               ),
             ),

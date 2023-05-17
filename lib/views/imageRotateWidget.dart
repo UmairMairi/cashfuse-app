@@ -7,7 +7,7 @@ class ImageRotate extends StatefulWidget {
 }
 
 class _ImageRotateState extends State<ImageRotate> with SingleTickerProviderStateMixin {
-  AnimationController animationController;
+  late AnimationController animationController;
 
   @override
   void initState() {
@@ -35,7 +35,7 @@ class _ImageRotateState extends State<ImageRotate> with SingleTickerProviderStat
         Images.refer,
         height: 50,
       ),
-      builder: (BuildContext context, Widget _widget) {
+      builder: (BuildContext context, Widget? _widget) {
         return new Transform.rotate(
           angle: animationController.value * 6.3,
           child: _widget,

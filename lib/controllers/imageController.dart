@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 class ImageControlller extends GetxController {
   NetworkController networkController = Get.find<NetworkController>();
 
-  File imageFile;
+  File? imageFile;
 
   @override
   void onInit() async {
@@ -20,15 +20,15 @@ class ImageControlller extends GetxController {
     super.onClose();
   }
 
-  Future<File> imageService(ImageSource imageSource) async {
+  Future<File?> imageService(ImageSource imageSource) async {
     try {
       imageFile = new File('');
       final ImagePicker _picker = ImagePicker();
-      XFile _selectedImage = await _picker.pickImage(source: imageSource);
+      XFile? _selectedImage = await _picker.pickImage(source: imageSource);
 
       if (_selectedImage != null) {
         imageFile = File(_selectedImage.path);
-        CroppedFile croppedFile = await ImageCropper().cropImage(
+        CroppedFile? croppedFile = await ImageCropper().cropImage(
           sourcePath: _selectedImage.path,
           uiSettings: [
             AndroidUiSettings(
@@ -40,14 +40,14 @@ class ImageControlller extends GetxController {
               activeControlsWidgetColor: Colors.blue[200],
               cropFrameColor: Colors.blue[200],
             ),
-            WebUiSettings(context: Get.context)
+            WebUiSettings(context: Get.context!)
           ],
         );
 
         if (croppedFile != null) {
           imageFile = File(croppedFile.path);
           update();
-          return imageFile;
+          return imageFile!;
         }
       }
     } catch (e) {

@@ -35,7 +35,7 @@ class GetHelpScreen extends StatelessWidget {
               ),
               title: Text(
                 'Get Help',
-                style: Get.theme.primaryTextTheme.titleSmall
+                style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ).translate(),
             ),
@@ -74,7 +74,7 @@ class GetHelpScreen extends StatelessWidget {
                           contentPadding: EdgeInsets.only(bottom: 5),
                           border: InputBorder.none,
                           hintText: 'What are you looking for?',
-                          hintStyle: Get.theme.primaryTextTheme.bodySmall
+                          hintStyle: Get.theme.primaryTextTheme.bodySmall!
                               .copyWith(color: Colors.black54, fontSize: 11),
                           prefixIcon: Icon(
                             Icons.search,
@@ -129,7 +129,7 @@ class GetHelpScreen extends StatelessWidget {
                                       children: [
                                         CustomImage(
                                           image:
-                                              '${global.appInfo.baseUrls.faqImageUrl}/${controller.faqList[index].image}',
+                                              '${global.appInfo.baseUrls!.faqImageUrl}/${controller.faqList[index].image}',
                                           height:
                                               global.getPlatFrom() ? 80 : 40,
                                           //width: Get.width,
@@ -173,7 +173,7 @@ class GetHelpScreen extends StatelessWidget {
                                         //   //),
                                         // ),
                                         Text(
-                                          controller.faqList[index].ques,
+                                          controller.faqList[index].ques!,
                                           textAlign: TextAlign.center,
                                           style: global.getPlatFrom()
                                               ? Get.theme.primaryTextTheme

@@ -31,7 +31,7 @@ class CouponListScreen extends StatelessWidget {
               ),
               title: Text(
                 'Coupons of the day'.toUpperCase(),
-                style: Get.theme.primaryTextTheme.titleSmall
+                style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ).translate(),
             ),
@@ -61,7 +61,7 @@ class CouponListScreen extends StatelessWidget {
                   if (couponController.couponList[index].offer != null) {
                     Get.to(
                       () => OfferDetailScreen(
-                        offer: couponController.couponList[index].offer,
+                        offer: couponController.couponList[index].offer!,
                         fromSeeMore: false,
                       ),
                       routeName: 'offer',

@@ -33,13 +33,13 @@ String baseUrl =
 String webConfigurationKey =
     "BGPWwFL-u-5K7CdmI7bW1Qav23aJxTUFtksG5SDigWG3M2J1-pqgwY-qB1fMQlRJepzlqq9Qv8rDUqk4v9Ph584";
 
-SharedPreferences sp;
+SharedPreferences? sp;
 UserModel currentUser = new UserModel();
 AppInfo appInfo = new AppInfo();
 AdmobSettingModel admobSetting = new AdmobSettingModel();
 AdmobSettingModel facebookAdSetting = new AdmobSettingModel();
 String timeFormat = '12';
-String appDeviceId;
+String? appDeviceId;
 bool isRTL = false;
 
 String isBannerDate = DateConverter.dateTimeToDateOnly(DateTime.now());
@@ -56,7 +56,7 @@ int admobclickCount = 0;
 int fbclickCount = 0;
 final translator = GoogleTranslator();
 String countrySlug = '';
-CountryModel country;
+CountryModel? country;
 bool showCountryPopUp = false;
 List<String> rtlLanguageCodeLList = [
   'ar',
@@ -78,19 +78,19 @@ String languageApiKey = 'AIzaSyDbLaa85zHKSvm1oChRb6xdXyC-kSTiWXU';
 
 //Api Header
 Future<Map<String, String>> getApiHeaders(bool authorizationRequired,
-    {String userId}) async {
+    {String? userId}) async {
   Map<String, String> apiHeader = new Map<String, String>();
 
   if (authorizationRequired) {
     sp = await SharedPreferences.getInstance();
-    if (sp.getString("currentUser") != null) {
+    if (sp!.getString("currentUser") != null) {
       UserModel currentUser =
-          UserModel.fromJson(json.decode(sp.getString("currentUser")));
+          UserModel.fromJson(json.decode(sp!.getString("currentUser")!));
       log("Token  == Bearer " +
-          currentUser.token +
+          currentUser.token! +
           'id -- ' +
           currentUser.id.toString());
-      apiHeader.addAll({"Authorization": "Bearer " + currentUser.token});
+      apiHeader.addAll({"Authorization": "Bearer " + currentUser.token!});
       if (userId != null && userId.isNotEmpty) {
         apiHeader.addAll({"userId": userId});
       }
@@ -110,10 +110,10 @@ void showInterstitialAd() async {
   try {
     if (Get.find<AdController>().isAdmobInterstitialAdExist) {
       admobclickCount++;
-      if (admobclickCount > admobSetting.interstitialAdList[0].clicks) {
+      if (admobclickCount > admobSetting.interstitialAdList![0].clicks!) {
         admobclickCount = 0;
       }
-      if (admobclickCount == admobSetting.interstitialAdList[0].clicks) {
+      if (admobclickCount == admobSetting.interstitialAdList![0].clicks) {
         Get.find<AdController>().showInterstitialAd();
       }
     }
@@ -121,11 +121,11 @@ void showInterstitialAd() async {
     if (Get.find<AdController>().isFbInterstitialAdExist) {
       fbclickCount++;
 
-      if (fbclickCount > facebookAdSetting.interstitialAdList[0].clicks) {
+      if (fbclickCount > facebookAdSetting.interstitialAdList![0].clicks!) {
         fbclickCount = 0;
       }
 
-      if (fbclickCount == facebookAdSetting.interstitialAdList[0].clicks) {
+      if (fbclickCount == facebookAdSetting.interstitialAdList![0].clicks) {
         FacebookInterstitialAd.showInterstitialAd();
       }
     }
@@ -193,7 +193,7 @@ Future share(String link, String image, String title) async {
       final response = await http.get(uri);
       final bytes = response.bodyBytes;
       final temp = await getExternalStorageDirectory();
-      final path = '${temp.path}/image.jpg';
+      final path = '${temp!.path}/image.jpg';
       File(path).writeAsBytesSync(bytes);
       await FlutterShare.shareFile(
               filePath: path, title: '$appName', text: link)

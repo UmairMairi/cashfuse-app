@@ -2,35 +2,35 @@ import 'package:cashfuse/models/categoryModel.dart';
 import 'package:cashfuse/models/couponModel.dart';
 
 class OfferModel {
-  int id;
-  String campaignName;
-  int campaignId;
-  int categoryId;
-  CategoryModel category;
-  int offerId;
-  String name;
-  String bannerImage;
-  String image;
-  String description;
-  String terms;
-  String couponCode;
-  String url;
-  String affiliateUrl;
-  int status;
-  DateTime startDate;
-  DateTime endDate;
-  String buttonText;
-  String affiliatePartner;
-  int exclusive;
-  DateTime createdAt;
-  DateTime updatedAt;
-  int offers;
-  CategoryModel partner;
-  bool isCliked = false; // for first loader in webview
-  List<Coupon> couponList;
+  int? id;
+  String? campaignName;
+  int? campaignId;
+  int? categoryId;
+  CategoryModel? category;
+  int? offerId;
+  String? name;
+  String? bannerImage;
+  String? image;
+  String? description;
+  String? terms;
+  String? couponCode;
+  String? url;
+  String? affiliateUrl;
+  int? status;
+  DateTime? startDate;
+  DateTime? endDate;
+  String? buttonText;
+  String? affiliatePartner;
+  int? exclusive;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? offers;
+  CategoryModel? partner;
+  bool? isCliked = false; // for first loader in webview
+  List<Coupon>? couponList;
   bool isImageError = false; //for check image error
 
-  int dayDifference; //for exclusive offer timer
+  int? dayDifference; //for exclusive offer timer
 
   OfferModel({
     this.id,
@@ -59,7 +59,7 @@ class OfferModel {
     this.partner,
     this.isCliked,
     this.couponList,
-    this.isImageError,
+    this.isImageError = false,
     this.dayDifference,
   });
 

@@ -1,25 +1,25 @@
 import 'package:cashfuse/models/offerModel.dart';
 
 class Coupon {
-  int id;
-  String name;
-  String code;
-  String image;
-  int advId;
-  String heading;
-  String description;
-  DateTime startDate;
-  DateTime endDate;
-  String affiliatePartner;
-  DateTime createdAt;
-  DateTime updatedAt;
-  OfferModel offer;
-  String url;
-  String bannerImage;
-  String buttonText;
-  String partnerName;
+  int? id;
+  String? name;
+  String? code;
+  String? image;
+  int? advId;
+  String? heading;
+  String? description;
+  DateTime? startDate;
+  DateTime? endDate;
+  String? affiliatePartner;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  OfferModel? offer;
+  String? url;
+  String? bannerImage;
+  String? buttonText;
+  String? partnerName;
   bool isImageError = false; //for check image error
-  int dayDifference; //for coupon timer
+  int? dayDifference; //for coupon timer
 
   Coupon({
     this.id,
@@ -39,7 +39,7 @@ class Coupon {
     this.bannerImage,
     this.buttonText,
     this.partnerName,
-    this.isImageError,
+    this.isImageError = false,
     this.dayDifference,
   });
 
@@ -55,8 +55,8 @@ class Coupon {
       startDate = json["start_date"] != null ? DateTime.parse(json["start_date"]) : null;
       endDate = json["end_date"] != null ? DateTime.parse(json["end_date"]) : null;
       affiliatePartner = json["affiliate_partner"];
-      createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : '';
-      updatedAt = json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : '';
+      createdAt = json["created_at"] != null ? DateTime.parse(json["created_at"]) : null;
+      updatedAt = json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null;
       offer = json["offers"] != null ? OfferModel.fromJson(json["offers"]) : null;
       url = json["url"] != null ? json["url"] : '';
       bannerImage = json["banner_image"] != null ? json["banner_image"] : '';

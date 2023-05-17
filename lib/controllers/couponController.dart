@@ -36,7 +36,7 @@ class CouponController extends GetxController {
                 int diff;
                 if (couponList[i].endDate != null) {
                   diff =
-                      couponList[i].endDate.difference(DateTime.now()).inDays;
+                      couponList[i].endDate!.difference(DateTime.now()).inDays;
                   print(diff);
                   couponList[i].dayDifference = diff;
                 }

@@ -2,25 +2,25 @@ import 'package:cashfuse/models/categoryModel.dart';
 import 'package:cashfuse/models/couponModel.dart';
 
 class CampaignModel {
-  int id;
-  int campaignId;
-  String name;
-  String url;
-  String domain;
-  String payoutType;
-  double payout;
-  String image;
-  String category;
-  int categoryId;
-  int status;
-  String buttonText;
-  String affiliatePartner;
-  DateTime createdAt;
-  DateTime updatedAt;
-  int campaigns;
-  String description;
-  CategoryModel partner;
-  List<Coupon> couponList;
+  int? id;
+  int? campaignId;
+  String? name;
+  String? url;
+  String? domain;
+  String? payoutType;
+  double? payout;
+  String? image;
+  String? category;
+  int? categoryId;
+  int? status;
+  String? buttonText;
+  String? affiliatePartner;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? campaigns;
+  String? description;
+  CategoryModel? partner;
+  List<Coupon>? couponList;
   bool isImageError = false; //for check image error
 
   CampaignModel({
@@ -43,7 +43,7 @@ class CampaignModel {
     this.description,
     this.partner,
     this.couponList,
-    this.isImageError,
+    this.isImageError = false,
   });
 
   CampaignModel.fromJson(Map<String, dynamic> json) {

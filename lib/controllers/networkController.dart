@@ -7,12 +7,13 @@ import 'package:get/get.dart';
 class NetworkController extends GetxController {
   var connectionStatus = GetPlatform.isWeb ? 1.obs : 0.obs;
   final Connectivity _connectivity = Connectivity();
-  StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void onInit() async {
     await initConnectivity();
-    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(updateConnectivity);
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(updateConnectivity);
     super.onInit();
   }
 
@@ -20,10 +21,11 @@ class NetworkController extends GetxController {
     ConnectivityResult result;
     try {
       result = await _connectivity.checkConnectivity();
+      return updateConnectivity(result);
     } catch (e) {
-      print("Exception - NetworkController.dart - initConnectivity():" + e.toString());
+      print("Exception - NetworkController.dart - initConnectivity():" +
+          e.toString());
     }
-    return updateConnectivity(result);
   }
 
   updateConnectivity(ConnectivityResult result) {
@@ -40,7 +42,8 @@ class NetworkController extends GetxController {
         break;
       case ConnectivityResult.none:
         connectionStatus.value = 0;
-        Get.snackbar('Netowrk Error', 'No internet connectio over there', snackPosition: SnackPosition.BOTTOM);
+        Get.snackbar('Netowrk Error', 'No internet connectio over there',
+            snackPosition: SnackPosition.BOTTOM);
         break;
 
       default:

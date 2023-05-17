@@ -55,7 +55,7 @@ class AllCategoriesScreen extends StatelessWidget {
               ),
               title: Text(
                 'All Categories',
-                style: Get.theme.primaryTextTheme.titleSmall
+                style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ).translate(),
             ),
@@ -110,11 +110,11 @@ class AllCategoriesScreen extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 5),
                                       child: Text(
-                                        controller.topCategoryList[index].name
+                                        controller.topCategoryList[index].name!
                                             .toUpperCase(),
                                         textAlign: TextAlign.center,
                                         style: Get
-                                            .theme.primaryTextTheme.bodySmall
+                                            .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
                                           fontSize:
                                               global.getPlatFrom() ? 16 : 10,
@@ -128,7 +128,7 @@ class AllCategoriesScreen extends StatelessWidget {
                                     ),
                                     CustomImage(
                                       image:
-                                          '${global.appInfo.baseUrls.categoryImageUrl}/${controller.topCategoryList[index].image}',
+                                          '${global.appInfo.baseUrls!.categoryImageUrl}/${controller.topCategoryList[index].image}',
                                       height: global.getPlatFrom() ? 80 : 40,
                                     ),
                                   ],

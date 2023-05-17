@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cashfuse/controllers/adController.dart';
 import 'package:cashfuse/controllers/couponController.dart';
@@ -10,6 +12,7 @@ import 'package:cashfuse/views/admitedOfferDetailScreen.dart';
 import 'package:cashfuse/views/adsCampaignWidgetListScreen.dart';
 import 'package:cashfuse/views/adsDetailScreen.dart';
 import 'package:cashfuse/views/allcategoriesScreen.dart';
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/campaignDetailScreen.dart';
 import 'package:cashfuse/views/categoryScreen.dart';
 import 'package:cashfuse/views/couponDetailScreen.dart';
@@ -82,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                 backgroundColor: Colors.grey[200],
                 leading: InkWell(
                   onTap: () {
-                    scaffoldKey.currentState.openDrawer();
+                    scaffoldKey.currentState!.openDrawer();
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
@@ -145,154 +148,169 @@ class HomeScreen extends StatelessWidget {
                             highlightColor: Colors.transparent,
                             onTap: () {
                               if (global.appInfo.countryselection == 1) {
-                                Get.dialog(
-                                  Dialog(
-                                    alignment: Alignment.topRight,
-                                    backgroundColor: Colors.transparent,
-                                    insetPadding:
-                                        EdgeInsets.only(top: 50, right: 20),
-                                    child: SizedBox(
-                                      width: Get.width / 2,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        // mainAxisAlignment: MainAxisAlignment.start,
-                                        // alignment: Alignment.topCenter,
-                                        // clipBehavior: Clip.none,
-                                        children: [
-                                          Align(
-                                            alignment: Alignment.topRight,
-                                            child: InkWell(
-                                              onTap: () async {
-                                                Get.back();
-                                              },
-                                              child: CircleAvatar(
-                                                radius: 15,
-                                                child: Icon(
-                                                  Icons.close,
-                                                  color: Colors.black,
-                                                  size: 20,
-                                                ),
-                                                backgroundColor: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                          StatefulBuilder(
-                                            builder: (BuildContext context,
-                                                    StateSetter setState) =>
-                                                Container(
-                                              margin: EdgeInsets.only(top: 20),
-                                              color: Colors.white,
-                                              child: ListView.builder(
-                                                padding: EdgeInsets.zero,
-                                                shrinkWrap: true,
-                                                itemCount: global
-                                                    .appInfo.countries.length,
-                                                itemBuilder: (context, index) {
-                                                  return Column(
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10.0),
-                                                            child: Text(global
-                                                                .appInfo
-                                                                .countries[
-                                                                    index]
-                                                                .countryName),
-                                                          ),
-                                                          Radio(
-                                                            groupValue:
-                                                                global.country,
-                                                            value: global
-                                                                    .appInfo
-                                                                    .countries[
-                                                                index],
-                                                            onChanged: (value) {
-                                                              if (value !=
-                                                                  null) {
-                                                                global.country =
-                                                                    value;
-                                                                global.appInfo
-                                                                    .countries
-                                                                    .map((e) =>
-                                                                        e.isSelected =
-                                                                            false)
-                                                                    .toList();
-                                                                global
-                                                                    .appInfo
-                                                                    .countries[
-                                                                        index]
-                                                                    .isSelected = true;
+                                global.showCountryPopUp = true;
 
-                                                                setState(() {});
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop(global
-                                                                        .country);
-                                                              }
-                                                            },
-                                                          )
-                                                        ],
-                                                      ),
-                                                      Divider(
-                                                        height: 0,
-                                                        thickness: 0.5,
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                          // Positioned(
-                                          //    top: !global.getPlatFrom() ? -50 : 10,
-                                          //   // right: -7,
-                                          //   child: InkWell(
-                                          //     onTap: () async {
-                                          //       Get.back();
-                                          //     },
-                                          //     child: CircleAvatar(
-                                          //       radius: 15,
-                                          //       child: Icon(
-                                          //         Icons.close,
-                                          //         color: Colors.black,
-                                          //         size: 20,
-                                          //       ),
-                                          //       backgroundColor: Colors.grey[400],
-                                          //     ),
-                                          //   ),
-                                          // ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  barrierDismissible: false,
-                                ).then((value) async {
-                                  if (value != null) {
-                                    global.country = value;
-                                    global.countrySlug = global.country.slug;
-                                    homeController.topBannerList = [];
-                                    homeController.topCategoryList = [];
-                                    couponController.couponList = [];
-                                    homeController.topCashbackList = [];
-                                    homeController.exclusiveOfferList = [];
-                                    homeController.productList = [];
-                                    homeController.trendingProductList = [];
-                                    homeController.newFlashOfferList = [];
-                                    homeController.homeAdvList = [];
-                                    homeController.allAdvList = [];
+                                setState(() {});
 
-                                    setState(() {});
+                                // homeController.setCountryPopUp(true);
+                                // homeController.refresh();
 
-                                    await homeController.init();
-                                  }
-                                });
+                                Get.to(
+                                  () => BottomNavigationBarScreen(),
+                                  preventDuplicates: false,
+                                  routeName: 'home',
+                                );
+
+                                // Get.dialog(Dialog(child: CountrySelectWidget()));
+                                // CountrySelectWidget();
+                                // Get.dialog(
+                                //   Dialog(
+                                //     alignment: Alignment.topRight,
+                                //     backgroundColor: Colors.transparent,
+                                //     insetPadding:
+                                //         EdgeInsets.only(top: 50, right: 20),
+                                //     child: SizedBox(
+                                //       width: Get.width / 2,
+                                //       child: Column(
+                                //         crossAxisAlignment:
+                                //             CrossAxisAlignment.end,
+                                //         // mainAxisAlignment: MainAxisAlignment.start,
+                                //         // alignment: Alignment.topCenter,
+                                //         // clipBehavior: Clip.none,
+                                //         children: [
+                                //           Align(
+                                //             alignment: Alignment.topRight,
+                                //             child: InkWell(
+                                //               onTap: () async {
+                                //                 Get.back();
+                                //               },
+                                //               child: CircleAvatar(
+                                //                 radius: 15,
+                                //                 child: Icon(
+                                //                   Icons.close,
+                                //                   color: Colors.black,
+                                //                   size: 20,
+                                //                 ),
+                                //                 backgroundColor: Colors.white,
+                                //               ),
+                                //             ),
+                                //           ),
+                                //           StatefulBuilder(
+                                //             builder: (BuildContext context,
+                                //                     StateSetter setState) =>
+                                //                 Container(
+                                //               margin: EdgeInsets.only(top: 20),
+                                //               color: Colors.white,
+                                //               child: ListView.builder(
+                                //                 padding: EdgeInsets.zero,
+                                //                 shrinkWrap: true,
+                                //                 itemCount: global
+                                //                     .appInfo.countries.length,
+                                //                 itemBuilder: (context, index) {
+                                //                   return Column(
+                                //                     children: [
+                                //                       Row(
+                                //                         mainAxisAlignment:
+                                //                             MainAxisAlignment
+                                //                                 .spaceBetween,
+                                //                         children: [
+                                //                           Padding(
+                                //                             padding:
+                                //                                 const EdgeInsets
+                                //                                     .all(10.0),
+                                //                             child: Text(global
+                                //                                 .appInfo
+                                //                                 .countries[
+                                //                                     index]
+                                //                                 .countryName),
+                                //                           ),
+                                //                           Radio(
+                                //                             groupValue:
+                                //                                 global.country,
+                                //                             value: global
+                                //                                     .appInfo
+                                //                                     .countries[
+                                //                                 index],
+                                //                             onChanged: (value) {
+                                //                               if (value !=
+                                //                                   null) {
+                                //                                 global.country =
+                                //                                     value;
+                                //                                 global.appInfo
+                                //                                     .countries
+                                //                                     .map((e) =>
+                                //                                         e.isSelected =
+                                //                                             false)
+                                //                                     .toList();
+                                //                                 global
+                                //                                     .appInfo
+                                //                                     .countries[
+                                //                                         index]
+                                //                                     .isSelected = true;
+
+                                //                                 setState(() {});
+                                //                                 Navigator.of(
+                                //                                         context)
+                                //                                     .pop(global
+                                //                                         .country);
+                                //                               }
+                                //                             },
+                                //                           )
+                                //                         ],
+                                //                       ),
+                                //                       Divider(
+                                //                         height: 0,
+                                //                         thickness: 0.5,
+                                //                       ),
+                                //                     ],
+                                //                   );
+                                //                 },
+                                //               ),
+                                //             ),
+                                //           ),
+                                //           // Positioned(
+                                //           //    top: !global.getPlatFrom() ? -50 : 10,
+                                //           //   // right: -7,
+                                //           //   child: InkWell(
+                                //           //     onTap: () async {
+                                //           //       Get.back();
+                                //           //     },
+                                //           //     child: CircleAvatar(
+                                //           //       radius: 15,
+                                //           //       child: Icon(
+                                //           //         Icons.close,
+                                //           //         color: Colors.black,
+                                //           //         size: 20,
+                                //           //       ),
+                                //           //       backgroundColor: Colors.grey[400],
+                                //           //     ),
+                                //           //   ),
+                                //           // ),
+                                //         ],
+                                //       ),
+                                //     ),
+                                //   ),
+                                //   barrierDismissible: false,
+                                // ).then((value) async {
+                                //   if (value != null) {
+                                //     global.country = value;
+                                //     global.countrySlug = global.country.slug;
+                                //     homeController.topBannerList = [];
+                                //     homeController.topCategoryList = [];
+                                //     couponController.couponList = [];
+                                //     homeController.topCashbackList = [];
+                                //     homeController.exclusiveOfferList = [];
+                                //     homeController.productList = [];
+                                //     homeController.trendingProductList = [];
+                                //     homeController.newFlashOfferList = [];
+                                //     homeController.homeAdvList = [];
+                                //     homeController.allAdvList = [];
+
+                                //     setState(() {});
+
+                                //     await homeController.init();
+                                //   }
+                                // });
                               }
                             },
                             child: Container(
@@ -307,7 +325,7 @@ class HomeScreen extends StatelessWidget {
                                     color: Get.theme.secondaryHeaderColor),
                               ),
                               child: Text(
-                                global.country.countryCode,
+                                global.country!.countryCode!,
                               ),
                             ),
                           ),
@@ -375,11 +393,11 @@ class HomeScreen extends StatelessWidget {
         body: Stack(
           alignment: Alignment.center,
           children: [
-            !global.showCountryPopUp && global.countrySlug.isEmpty
+            !global.showCountryPopUp && global.country == null
                 ? Center(
                     child: Text(
                       'No offers available in your country.',
-                      style: Get.theme.primaryTextTheme.titleMedium.copyWith(
+                      style: Get.theme.primaryTextTheme.titleMedium!.copyWith(
                         fontWeight: FontWeight.w600,
                         color: Colors.red,
                         height: 1.2,
@@ -471,7 +489,7 @@ class HomeScreen extends StatelessWidget {
                                                                   homeController
                                                                       .topBannerList[
                                                                           index]
-                                                                      .url,
+                                                                      .url!,
                                                                 );
                                                               } else {
                                                                 Get.to(
@@ -528,7 +546,7 @@ class HomeScreen extends StatelessWidget {
                                                               child:
                                                                   CustomImage(
                                                                 image:
-                                                                    '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[index].image}',
+                                                                    '${global.appInfo.baseUrls!.bannerImageUrl}/${homeController.topBannerList[index].image}',
                                                                 //height: 25,
                                                                 width:
                                                                     Get.width,
@@ -629,7 +647,7 @@ class HomeScreen extends StatelessWidget {
                                                     style: Get
                                                         .theme
                                                         .primaryTextTheme
-                                                        .bodySmall
+                                                        .bodySmall!
                                                         .copyWith(
                                                             color: Colors.teal,
                                                             fontSize: global
@@ -697,7 +715,7 @@ class HomeScreen extends StatelessWidget {
                                                           homeController
                                                               .topCategoryList[
                                                                   index]
-                                                              .name
+                                                              .name!
                                                               .toUpperCase(),
                                                           textAlign:
                                                               TextAlign.center,
@@ -707,7 +725,7 @@ class HomeScreen extends StatelessWidget {
                                                           style: Get
                                                               .theme
                                                               .primaryTextTheme
-                                                              .bodySmall
+                                                              .bodySmall!
                                                               .copyWith(
                                                             fontSize: 10,
                                                             fontWeight:
@@ -720,7 +738,7 @@ class HomeScreen extends StatelessWidget {
                                                         ),
                                                         CustomImage(
                                                           image:
-                                                              '${global.appInfo.baseUrls.categoryImageUrl}/${homeController.topCategoryList[index].image}',
+                                                              '${global.appInfo.baseUrls!.categoryImageUrl}/${homeController.topCategoryList[index].image}',
                                                           height: 40,
                                                         ),
                                                       ],
@@ -821,7 +839,7 @@ class HomeScreen extends StatelessWidget {
                                                           style: Get
                                                               .theme
                                                               .primaryTextTheme
-                                                              .bodySmall
+                                                              .bodySmall!
                                                               .copyWith(
                                                                   color: Colors
                                                                       .teal,
@@ -876,7 +894,7 @@ class HomeScreen extends StatelessWidget {
                                                                   couponController
                                                                       .couponList[
                                                                           index]
-                                                                      .offer,
+                                                                      .offer!,
                                                               fromSeeMore:
                                                                   false,
                                                             ),
@@ -1029,7 +1047,7 @@ class HomeScreen extends StatelessWidget {
                                                                 child:
                                                                     CustomImage(
                                                                   image:
-                                                                      '${global.appInfo.baseUrls.offerImageUrl}/${homeController.exclusiveOfferList[index].bannerImage}',
+                                                                      '${global.appInfo.baseUrls!.offerImageUrl}/${homeController.exclusiveOfferList[index].bannerImage}',
                                                                   height: 170,
                                                                   width:
                                                                       Get.width,
@@ -1063,7 +1081,7 @@ class HomeScreen extends StatelessWidget {
                                                                   child:
                                                                       CustomImage(
                                                                     image:
-                                                                        '${global.appInfo.baseUrls.offerImageUrl}/${homeController.exclusiveOfferList[index].image}',
+                                                                        '${global.appInfo.baseUrls!.offerImageUrl}/${homeController.exclusiveOfferList[index].image}',
                                                                     height: 30,
                                                                     width: 60,
                                                                     fit: BoxFit
@@ -1079,7 +1097,7 @@ class HomeScreen extends StatelessWidget {
                                                                         null &&
                                                                     homeController
                                                                             .exclusiveOfferList[index]
-                                                                            .dayDifference >
+                                                                            .dayDifference! >
                                                                         0
                                                                 ? Padding(
                                                                     padding:
@@ -1108,7 +1126,7 @@ class HomeScreen extends StatelessWidget {
                                                                           Duration(
                                                                         days: homeController
                                                                             .exclusiveOfferList[index]
-                                                                            .dayDifference,
+                                                                            .dayDifference!,
                                                                       ),
                                                                     ),
                                                                   )
@@ -1191,7 +1209,7 @@ class HomeScreen extends StatelessWidget {
                                                     style: Get
                                                         .theme
                                                         .primaryTextTheme
-                                                        .bodySmall
+                                                        .bodySmall!
                                                         .copyWith(
                                                             color: Colors.teal,
                                                             fontSize: global
@@ -1257,7 +1275,7 @@ class HomeScreen extends StatelessWidget {
                                                                       index]
                                                                   .name,
                                                               image:
-                                                                  '${global.appInfo.baseUrls.partnerImageUrl}/${homeController.topCashbackList[index].image}',
+                                                                  '${global.appInfo.baseUrls!.partnerImageUrl}/${homeController.topCashbackList[index].image}',
                                                               tagline:
                                                                   homeController
                                                                       .topCashbackList[
@@ -1351,7 +1369,7 @@ class HomeScreen extends StatelessWidget {
                                                     style: Get
                                                         .theme
                                                         .primaryTextTheme
-                                                        .bodySmall
+                                                        .bodySmall!
                                                         .copyWith(
                                                             color: Colors.teal,
                                                             fontSize: global
@@ -1464,7 +1482,7 @@ class HomeScreen extends StatelessWidget {
                                                                                 fontWeight: FontWeight.w500,
                                                                                 fontSize: 10),
                                                                             children: [
-                                                                              TextSpan(text: ' (${homeController.productList[index].productPrices.length} Sellers)', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 10, color: Colors.blueAccent.shade400)),
+                                                                              TextSpan(text: ' (${homeController.productList[index].productPrices!.length} Sellers)', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 10, color: Colors.blueAccent.shade400)),
                                                                             ]),
                                                                       ),
                                                                     );
@@ -1478,7 +1496,7 @@ class HomeScreen extends StatelessWidget {
                                                               CustomImage(
                                                                   height: 120,
                                                                   image:
-                                                                      "${global.appInfo.baseUrls.productImageurl}/${homeController.productList[index].image}"),
+                                                                      "${global.appInfo.baseUrls!.productImageurl}/${homeController.productList[index].image}"),
                                                               // Padding(
                                                               //   padding:
                                                               //       const EdgeInsets
@@ -1550,7 +1568,7 @@ class HomeScreen extends StatelessWidget {
                                                                         vertical:
                                                                             3),
                                                                 child: Text(
-                                                                  "+ ${global.appInfo.currency} ${homeController.productList[index].productPrices[0].cashback}  REWARDS",
+                                                                  "+ ${global.appInfo.currency} ${homeController.productList[index].productPrices![0].cashback}  REWARDS",
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           11,
@@ -1570,7 +1588,7 @@ class HomeScreen extends StatelessWidget {
                                                                         bottom:
                                                                             8),
                                                                 child: Text(
-                                                                  "Final Price ${global.appInfo.currency} ${homeController.productList[index].productPrices[0].price}",
+                                                                  "Final Price ${global.appInfo.currency} ${homeController.productList[index].productPrices![0].price}",
                                                                   style: TextStyle(
                                                                       color: Mycolors
                                                                           .blue,
@@ -1626,7 +1644,7 @@ class HomeScreen extends StatelessWidget {
                                                     style: Get
                                                         .theme
                                                         .primaryTextTheme
-                                                        .bodySmall
+                                                        .bodySmall!
                                                         .copyWith(
                                                             color: Colors.teal,
                                                             fontSize: global
@@ -1813,7 +1831,7 @@ class HomeScreen extends StatelessWidget {
                                                     style: Get
                                                         .theme
                                                         .primaryTextTheme
-                                                        .bodySmall
+                                                        .bodySmall!
                                                         .copyWith(
                                                             color: Colors.teal,
                                                             fontSize: global
@@ -1929,7 +1947,7 @@ class HomeScreen extends StatelessWidget {
                                                                                 fontWeight: FontWeight.w500,
                                                                                 fontSize: 10),
                                                                             children: [
-                                                                              TextSpan(text: ' (${homeController.trendingProductList[index].productPrices.length} Sellers)', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 10, color: Colors.blueAccent.shade400)),
+                                                                              TextSpan(text: ' (${homeController.trendingProductList[index].productPrices!.length} Sellers)', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 10, color: Colors.blueAccent.shade400)),
                                                                             ]),
                                                                       ),
                                                                     );
@@ -1943,7 +1961,7 @@ class HomeScreen extends StatelessWidget {
                                                               CustomImage(
                                                                   height: 120,
                                                                   image:
-                                                                      "${global.appInfo.baseUrls.productImageurl}/${homeController.trendingProductList[index].image}"),
+                                                                      "${global.appInfo.baseUrls!.productImageurl}/${homeController.trendingProductList[index].image}"),
                                                               // Padding(
                                                               //   padding:
                                                               //       const EdgeInsets
@@ -2015,7 +2033,7 @@ class HomeScreen extends StatelessWidget {
                                                                         vertical:
                                                                             3),
                                                                 child: Text(
-                                                                  "+ ${global.appInfo.currency} ${homeController.trendingProductList[index].productPrices[0].cashback}  REWARDS",
+                                                                  "+ ${global.appInfo.currency} ${homeController.trendingProductList[index].productPrices![0].cashback}  REWARDS",
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           11,
@@ -2035,7 +2053,7 @@ class HomeScreen extends StatelessWidget {
                                                                         bottom:
                                                                             8),
                                                                 child: Text(
-                                                                  "Final Price ${global.appInfo.currency} ${homeController.trendingProductList[index].productPrices[0].price}",
+                                                                  "Final Price ${global.appInfo.currency} ${homeController.trendingProductList[index].productPrices![0].price}",
                                                                   style: TextStyle(
                                                                       color: Mycolors
                                                                           .blue,
@@ -2113,7 +2131,7 @@ class HomeScreen extends StatelessWidget {
                                                               homeController
                                                                   .homeAdvList[
                                                                       index]
-                                                                  .name
+                                                                  .name!
                                                                   .toUpperCase(),
                                                               style: TextStyle(
                                                                 fontSize: global
@@ -2149,7 +2167,7 @@ class HomeScreen extends StatelessWidget {
                                                                 style: Get
                                                                     .theme
                                                                     .primaryTextTheme
-                                                                    .bodySmall
+                                                                    .bodySmall!
                                                                     .copyWith(
                                                                         color: Colors
                                                                             .teal,
@@ -2199,11 +2217,11 @@ class HomeScreen extends StatelessWidget {
                                                                           () async {
                                                                         if (homeController.homeAdvList[index].commonList[i].adId !=
                                                                                 null &&
-                                                                            homeController.homeAdvList[index].commonList[i].adId.isNotEmpty) {
+                                                                            homeController.homeAdvList[index].commonList[i].adId!.isNotEmpty) {
                                                                           await homeController.getAdDetails(homeController
                                                                               .homeAdvList[index]
                                                                               .commonList[i]
-                                                                              .adId);
+                                                                              .adId!);
                                                                           Get.to(
                                                                             () =>
                                                                                 AdsDetailScreen(
@@ -2217,7 +2235,7 @@ class HomeScreen extends StatelessWidget {
                                                                           await homeController.getAdmitedDetails(homeController
                                                                               .homeAdvList[index]
                                                                               .commonList[i]
-                                                                              .campaignId);
+                                                                              .campaignId!);
 
                                                                           Get.to(
                                                                               () => AdmitedDetailScreen(
@@ -2249,7 +2267,7 @@ class HomeScreen extends StatelessWidget {
                                                                             .commonList[i],
                                                                         domainImage: homeController
                                                                             .homeAdvList[index]
-                                                                            .image,
+                                                                            .image!,
                                                                         fromList:
                                                                             false,
                                                                       ),

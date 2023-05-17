@@ -56,7 +56,7 @@ class AccountSettingScreen extends StatelessWidget {
                   ),
                   title: Text(
                     'Account Settings',
-                    style: Get.theme.primaryTextTheme.titleLarge
+                    style: Get.theme.primaryTextTheme.titleLarge!
                         .copyWith(color: Colors.white),
                   ).translate(),
                 ),
@@ -110,29 +110,29 @@ class AccountSettingScreen extends StatelessWidget {
                               ),
                             ),
                             child: imageControlller.imageFile != null &&
-                                    imageControlller.imageFile.path.isNotEmpty
+                                    imageControlller.imageFile!.path.isNotEmpty
                                 ? ClipRRect(
                                     borderRadius: BorderRadius.circular(100),
                                     child: GetPlatform.isWeb
                                         ? Image.network(
-                                            imageControlller.imageFile.path)
+                                            imageControlller.imageFile!.path)
                                         : Image.file(
-                                            imageControlller.imageFile,
+                                            imageControlller.imageFile!,
                                             fit: BoxFit.cover,
                                             // height: 100,
                                             // width: 120,
                                           ),
                                   )
                                 : global.currentUser.userImage != null &&
-                                        global.currentUser.userImage.isNotEmpty
+                                        global.currentUser.userImage!.isNotEmpty
                                     ? ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(100),
                                         child: CustomImage(
-                                          image: global.appInfo.baseUrls
-                                                  .userImageUrl +
+                                          image: global.appInfo.baseUrls!
+                                                  .userImageUrl! +
                                               '/' +
-                                              global.currentUser.userImage,
+                                              global.currentUser.userImage!,
                                           fit: BoxFit.cover,
                                           // height: 150,
                                           // width: 150,
@@ -157,7 +157,7 @@ class AccountSettingScreen extends StatelessWidget {
                                     title: Text(
                                       'Select',
                                       style: Get
-                                          .theme.primaryTextTheme.titleLarge
+                                          .theme.primaryTextTheme.titleLarge!
                                           .copyWith(
                                         color: Colors.grey,
                                       ),
@@ -200,7 +200,7 @@ class AccountSettingScreen extends StatelessWidget {
                                       child: Text(
                                         'Cancel',
                                         style: Get
-                                            .theme.primaryTextTheme.titleMedium
+                                            .theme.primaryTextTheme.titleMedium!
                                             .copyWith(color: Colors.red),
                                       ).translate(),
                                       onPressed: () {
@@ -246,7 +246,7 @@ class AccountSettingScreen extends StatelessWidget {
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero,
                               hintText: 'Test User',
-                              hintStyle: Get.theme.primaryTextTheme.bodySmall
+                              hintStyle: Get.theme.primaryTextTheme.bodySmall!
                                   .copyWith(color: Colors.grey[400]),
                               focusColor: Get.theme.primaryColor,
                               focusedBorder: UnderlineInputBorder(
@@ -285,7 +285,7 @@ class AccountSettingScreen extends StatelessWidget {
                             focusNode: femailFocus,
                             controller: authController.email,
                             readOnly: global.currentUser.email != null &&
-                                    global.currentUser.email.isNotEmpty
+                                    global.currentUser.email!.isNotEmpty
                                 ? true
                                 : false,
                             scrollPadding: EdgeInsets.zero,
@@ -294,7 +294,7 @@ class AccountSettingScreen extends StatelessWidget {
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero,
                               hintText: 'test@gmail.com',
-                              hintStyle: Get.theme.primaryTextTheme.bodySmall
+                              hintStyle: Get.theme.primaryTextTheme.bodySmall!
                                   .copyWith(color: Colors.grey[400]),
                               focusColor: Get.theme.primaryColor,
                               focusedBorder: UnderlineInputBorder(
@@ -343,7 +343,7 @@ class AccountSettingScreen extends StatelessWidget {
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero,
                               hintText: '9999999999',
-                              hintStyle: Get.theme.primaryTextTheme.bodySmall
+                              hintStyle: Get.theme.primaryTextTheme.bodySmall!
                                   .copyWith(color: Colors.grey[400]),
                               focusColor: Get.theme.primaryColor,
                               focusedBorder: UnderlineInputBorder(
@@ -378,7 +378,7 @@ class AccountSettingScreen extends StatelessWidget {
                                   width: 20,
                                   alignment: Alignment.center,
                                   child: Text(
-                                    authController.coutryCode,
+                                    authController.coutryCode!,
                                   ),
                                 ),
                               ),
@@ -445,7 +445,7 @@ class AccountSettingScreen extends StatelessWidget {
                                       child: Text(
                                         'Yes',
                                         style: Get
-                                            .theme.primaryTextTheme.titleSmall
+                                            .theme.primaryTextTheme.titleSmall!
                                             .copyWith(color: Colors.red),
                                       ).translate(),
                                       onPressed: () {
@@ -456,7 +456,7 @@ class AccountSettingScreen extends StatelessWidget {
                                       child: Text(
                                         'No',
                                         style: Get
-                                            .theme.primaryTextTheme.titleSmall
+                                            .theme.primaryTextTheme.titleSmall!
                                             .copyWith(color: Colors.blue),
                                       ).translate(),
                                       onPressed: () {
@@ -483,7 +483,7 @@ class AccountSettingScreen extends StatelessWidget {
                                     Text(
                                       'Delete My Account',
                                       style: Get
-                                          .theme.primaryTextTheme.bodyMedium
+                                          .theme.primaryTextTheme.bodyMedium!
                                           .copyWith(
                                         letterSpacing: -0.5,
                                         color: Colors.red,
@@ -507,7 +507,7 @@ class AccountSettingScreen extends StatelessWidget {
               InkWell(
                 onTap: () async {
                   String _numberWithCountryCode =
-                      authController.coutryCode + authController.contactNo.text;
+                      authController.coutryCode! + authController.contactNo.text;
                   bool _isValid = GetPlatform.isAndroid ? false : true;
                   if (GetPlatform.isAndroid) {
                     try {
@@ -527,7 +527,7 @@ class AccountSettingScreen extends StatelessWidget {
                     showCustomSnackBar('Invalid phone number');
                   } else {
                     await authController
-                        .updateProfile(imageControlller.imageFile);
+                        .updateProfile(imageControlller.imageFile!);
                   }
                 },
                 child: Align(
@@ -547,7 +547,7 @@ class AccountSettingScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       'SAVE CHANGES',
-                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                      style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),

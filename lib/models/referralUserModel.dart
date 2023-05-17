@@ -1,14 +1,14 @@
 import 'package:cashfuse/models/userModel.dart';
 
 class ReferralUserModel {
-  int id;
-  int userId;
-  int referredUserId;
-  int earn;
-  DateTime createdAt;
-  DateTime updatedAt;
-  UserModel user;
-  UserModel referraluser;
+  int? id;
+  int? userId;
+  int? referredUserId;
+  int? earn;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  UserModel? user;
+  UserModel? referraluser;
 
   ReferralUserModel({
     this.id,

@@ -21,8 +21,8 @@ import 'package:google_translator/google_translator.dart';
 class OfferDetailScreen extends StatelessWidget {
   final OfferModel offer;
   final bool fromSeeMore;
-  final BuildContext context1;
-  OfferDetailScreen({this.offer, this.fromSeeMore, this.context1});
+  
+  OfferDetailScreen({required this.offer, required this.fromSeeMore});
 
   HomeController homeController = Get.find<HomeController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -58,8 +58,8 @@ class OfferDetailScreen extends StatelessWidget {
                     },
                   ),
                   title: Text(
-                    offer.name,
-                    style: Get.theme.primaryTextTheme.titleSmall
+                    offer.name!,
+                    style: Get.theme.primaryTextTheme.titleSmall!
                         .copyWith(color: Colors.white),
                   ).translate(),
                   actions: [
@@ -68,14 +68,14 @@ class OfferDetailScreen extends StatelessWidget {
                             onTap: () async {
                               if (global.currentUser.id != null) {
                                 await homeController.getTrackingLink(
-                                    offer.url, offer.affiliatePartner);
+                                    offer.url!, offer.affiliatePartner!);
                                 global.share(
                                   homeController.createdLink.isNotEmpty
                                       ? homeController.createdLink
-                                      : offer.url,
-                                  offer.bannerImage.isNotEmpty &&
+                                      : offer.url!,
+                                  offer.bannerImage!.isNotEmpty &&
                                           !offer.isImageError
-                                      ? '${global.appInfo.baseUrls.offerImageUrl}/${offer.bannerImage}'
+                                      ? '${global.appInfo.baseUrls!.offerImageUrl}/${offer.bannerImage}'
                                       : '',
                                   '',
                                 );
@@ -148,7 +148,7 @@ class OfferDetailScreen extends StatelessWidget {
                               children: [
                                 CustomImage(
                                   image:
-                                      '${global.appInfo.baseUrls.offerImageUrl}/${offer.bannerImage}',
+                                      '${global.appInfo.baseUrls!.offerImageUrl}/${offer.bannerImage}',
                                   height: global.getPlatFrom() ? 250 : 200,
                                   width: global.getPlatFrom()
                                       ? AppConstants.WEB_MAX_WIDTH / 3
@@ -166,7 +166,7 @@ class OfferDetailScreen extends StatelessWidget {
                                     padding: const EdgeInsets.all(4.0),
                                     child: CustomImage(
                                       image:
-                                          '${global.appInfo.baseUrls.partnerImageUrl}/${offer.image}',
+                                          '${global.appInfo.baseUrls!.partnerImageUrl}/${offer.image}',
                                       height: 30,
                                       width: 60,
                                       fit: BoxFit.contain,
@@ -179,21 +179,21 @@ class OfferDetailScreen extends StatelessWidget {
                               onTap: () async {
                                 if (global.currentUser.id != null) {
                                   await homeController.getTrackingLink(
-                                      offer.url, offer.affiliatePartner);
+                                      offer.url!, offer.affiliatePartner!);
                                   await homeController.addClick(
-                                    offer.campaignName,
-                                    global.appInfo.baseUrls.offerImageUrl +
+                                    offer.campaignName!,
+                                    global.appInfo.baseUrls!.offerImageUrl! +
                                         '/' +
-                                        offer.image,
+                                        offer.image!,
                                     homeController.createdLink.isNotEmpty
                                         ? homeController.createdLink
-                                        : offer.url,
+                                        : offer.url!,
                                   );
 
                                   global.launchInBrowser(
                                     homeController.createdLink.isNotEmpty
                                         ? homeController.createdLink
-                                        : offer.url,
+                                        : offer.url!,
                                   );
 
                                   // Get.to(
@@ -246,7 +246,7 @@ class OfferDetailScreen extends StatelessWidget {
                                 ),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  offer.buttonText,
+                                  offer.buttonText!,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
@@ -271,11 +271,11 @@ class OfferDetailScreen extends StatelessWidget {
                                 : CrossAxisAlignment.start,
                             children: [
                               Text(
-                                offer.name,
+                                offer.name!,
                                 style: Get.theme.primaryTextTheme.titleSmall,
                               ).translate(),
                               HtmlWidget(
-                                offer.description,
+                                offer.description!,
                                 //style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
                               ),
                               Row(
@@ -423,7 +423,7 @@ class OfferDetailScreen extends StatelessWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(10),
                                                 border: Border.all(
-                                                  color: Colors.teal[200],
+                                                  color: Colors.teal[200]!,
                                                   width: 1.5,
                                                 )),
                                             alignment: Alignment.center,
@@ -449,8 +449,8 @@ class OfferDetailScreen extends StatelessWidget {
           ),
         ]),
         bottomNavigationBar: offer.partner != null &&
-                (offer.partner.leftTab.isNotEmpty ||
-                    offer.partner.rightTab.isNotEmpty)
+                (offer.partner!.leftTab!.isNotEmpty ||
+                    offer.partner!.rightTab!.isNotEmpty)
             ? Container(
                 width: Get.width,
                 alignment: Alignment.center,
@@ -464,8 +464,8 @@ class OfferDetailScreen extends StatelessWidget {
                         RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                     color: Get.theme.primaryColor,
                     child: Row(
-                      mainAxisAlignment: (offer.partner.leftTab.isNotEmpty &&
-                              offer.partner.rightTab.isNotEmpty)
+                      mainAxisAlignment: (offer.partner!.leftTab!.isNotEmpty &&
+                              offer.partner!.rightTab!.isNotEmpty)
                           ? MainAxisAlignment.spaceEvenly
                           : MainAxisAlignment.center,
                       children: [
@@ -479,21 +479,21 @@ class OfferDetailScreen extends StatelessWidget {
                                   topRight: Radius.circular(15),
                                 ),
                                 child: RatesAndOfferTermsSheetWidget(
-                                  partner: offer.partner,
+                                  partner: offer.partner!,
                                 ),
                               ),
                             );
                           },
                           child: Text(
-                            offer.partner.leftTab,
-                            style: Get.theme.primaryTextTheme.titleSmall
+                            offer.partner!.leftTab!,
+                            style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: Colors.white),
                           ).translate(),
                         ),
-                        (offer.partner.leftTab.isNotEmpty &&
-                                offer.partner.rightTab.isNotEmpty)
+                        (offer.partner!.leftTab!.isNotEmpty &&
+                                offer.partner!.rightTab!.isNotEmpty)
                             ? Icon(
                                 Icons.more_vert,
                                 size: 22,
@@ -510,15 +510,15 @@ class OfferDetailScreen extends StatelessWidget {
                                   topRight: Radius.circular(15),
                                 ),
                                 child: RatesAndOfferTermsSheetWidget(
-                                  partner: offer.partner,
+                                  partner: offer.partner!,
                                 ),
                               ),
                               isScrollControlled: true,
                             );
                           },
                           child: Text(
-                            offer.partner.rightTab,
-                            style: Get.theme.primaryTextTheme.titleSmall
+                            offer.partner!.rightTab!,
+                            style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: Colors.white),

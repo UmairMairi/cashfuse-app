@@ -35,7 +35,7 @@ class AboutUsScreen extends StatelessWidget {
               ),
               title: Text(
                 'About Us',
-                style: Get.theme.primaryTextTheme.titleSmall
+                style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ).translate(),
             ),
@@ -56,7 +56,7 @@ class AboutUsScreen extends StatelessWidget {
                   future: global.translatedText(commonController.aboutUs),
                   builder: (context, snapShot) {
                     return HtmlWidget(
-                      snapShot.data != null ? snapShot.data : '',
+                      snapShot.data != null ? snapShot.data! : '',
                     );
                   }),
             ),

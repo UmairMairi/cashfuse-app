@@ -1,19 +1,19 @@
 import 'package:cashfuse/models/productPriceModel.dart';
 
 class ProductModel {
-  int id;
-  String name;
-  String description;
-  String image;
-  int status;
-  String affiliatePartner;
-  int trending;
-  int comissionType;
+  int? id;
+  String? name;
+  String? description;
+  String? image;
+  int? status;
+  String? affiliatePartner;
+  int? trending;
+  int? comissionType;
   dynamic comissionPercentage;
-  DateTime createdAt;
-  DateTime updatedAt;
-  List<String> images;
-  List<ProductPriceModel> productPrices;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  List<String>? images;
+  List<ProductPriceModel>? productPrices;
 
   ProductModel({
     this.id,

@@ -1,8 +1,8 @@
 class DioResult<T> {
-  int statusCode;
-  String status;
-  String message;
-  T data;
+  int? statusCode;
+  String? status;
+  String? message;
+  T? data;
 
   DioResult({this.statusCode, this.data, this.status});
   DioResult.fromJson(dynamic response, T recordList) {

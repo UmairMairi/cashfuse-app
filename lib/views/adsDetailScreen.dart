@@ -19,8 +19,8 @@ import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 
 class AdsDetailScreen extends StatelessWidget {
-  final AdsModel ads;
-  final bool fromSeeMore;
+  final AdsModel? ads;
+  final bool? fromSeeMore;
   AdsDetailScreen({this.ads, this.fromSeeMore});
   HomeController homeController = Get.find<HomeController>();
 
@@ -56,11 +56,11 @@ class AdsDetailScreen extends StatelessWidget {
                                 //margin: EdgeInsets.only(bottom: 20),
                                 child: CustomImage(
                                   image:
-                                      '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}',
+                                      '${global.appInfo.baseUrls!.offerImageUrl}/${ads!.image}',
                                   width: 500,
                                   height: 300,
                                   fit: BoxFit.fill,
-                                  ads: ads,
+                                  ads: ads!,
                                 ),
                                 // Image.asset(
                                 //   Images.dummyImage,
@@ -77,7 +77,7 @@ class AdsDetailScreen extends StatelessWidget {
                                     padding: const EdgeInsets.all(4.0),
                                     child: CustomImage(
                                       image:
-                                          '${global.appInfo.baseUrls.partnerImageUrl}/${ads.partner.image}',
+                                          '${global.appInfo.baseUrls!.partnerImageUrl}/${ads!.partner!.image}',
                                       height: 30,
                                       width: 60,
                                       fit: BoxFit.contain,
@@ -106,8 +106,8 @@ class AdsDetailScreen extends StatelessWidget {
                             },
                           ),
                           title: Text(
-                            ads.partner.name,
-                            style: Get.theme.primaryTextTheme.titleSmall
+                            ads!.partner!.name!,
+                            style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(color: Colors.white),
                           ).translate(),
                           flexibleSpace: CustomizableSpaceBar(
@@ -121,10 +121,10 @@ class AdsDetailScreen extends StatelessWidget {
                                         //margin: EdgeInsets.only(bottom: 20),
                                         child: CustomImage(
                                           image:
-                                              '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}',
+                                              '${global.appInfo.baseUrls!.offerImageUrl}/${ads!.image}',
                                           width: Get.width,
                                           fit: BoxFit.fill,
-                                          ads: ads,
+                                          ads: ads!,
                                         ),
                                         // Image.asset(
                                         //   Images.dummyImage,
@@ -141,7 +141,7 @@ class AdsDetailScreen extends StatelessWidget {
                                             padding: const EdgeInsets.all(4.0),
                                             child: CustomImage(
                                               image:
-                                                  '${global.appInfo.baseUrls.partnerImageUrl}/${ads.partner.image}',
+                                                  '${global.appInfo.baseUrls!.partnerImageUrl}/${ads!.partner!.image}',
                                               height: 30,
                                               width: 60,
                                               fit: BoxFit.contain,
@@ -159,15 +159,15 @@ class AdsDetailScreen extends StatelessWidget {
                                     onTap: () async {
                                       if (global.currentUser.id != null) {
                                         await homeController.getTrackingLink(
-                                            ads.landingPage,
-                                            ads.affiliatePartner,
-                                            cId: ads.cId);
+                                            ads!.landingPage!,
+                                            ads!.affiliatePartner!,
+                                            cId: ads!.cId!);
                                         global.share(
                                           homeController.createdLink.isNotEmpty
                                               ? homeController.createdLink
-                                              : ads.landingPage,
-                                          ads.image.isNotEmpty
-                                              ? '${global.appInfo.baseUrls.offerImageUrl}/${ads.image}'
+                                              : ads!.landingPage!,
+                                          ads!.image!.isNotEmpty
+                                              ? '${global.appInfo.baseUrls!.offerImageUrl}/${ads!.image}'
                                               : '',
                                           '',
                                         );
@@ -233,7 +233,7 @@ class AdsDetailScreen extends StatelessWidget {
                                 height: 40,
                               ),
                               Text(
-                                ads.name,
+                                ads!.name!,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontStyle: FontStyle.italic,
@@ -245,7 +245,7 @@ class AdsDetailScreen extends StatelessWidget {
                               Align(
                                 alignment: Alignment.center,
                                 child: HtmlWidget(
-                                  ads.description,
+                                  ads!.description!,
 
                                   //textAlign: TextAlign.center,
                                 ),
@@ -304,22 +304,22 @@ class AdsDetailScreen extends StatelessWidget {
                                 onTap: () async {
                                   if (global.currentUser.id != null) {
                                     await homeController.getTrackingLink(
-                                        ads.landingPage, ads.affiliatePartner,
-                                        cId: ads.cId);
+                                        ads!.landingPage!, ads!.affiliatePartner!,
+                                        cId: ads!.cId!);
                                     await homeController.addClick(
-                                      ads.advName,
-                                      global.appInfo.baseUrls.offerImageUrl +
+                                      ads!.advName!,
+                                      global.appInfo.baseUrls!.offerImageUrl! +
                                           '/' +
-                                          ads.image,
+                                          ads!.image!,
                                       homeController.createdLink.isNotEmpty
                                           ? homeController.createdLink
-                                          : ads.landingPage,
+                                          : ads!.landingPage!,
                                     );
 
                                     global.launchInBrowser(
                                       homeController.createdLink.isNotEmpty
                                           ? homeController.createdLink
-                                          : ads.landingPage,
+                                          : ads!.landingPage!,
                                     );
 
                                     // Get.to(
@@ -375,7 +375,7 @@ class AdsDetailScreen extends StatelessWidget {
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      ads.buttonText,
+                                      ads!.buttonText!,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
@@ -518,7 +518,7 @@ class AdsDetailScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               border: Border.all(
-                                                color: Colors.teal[200],
+                                                color: Colors.teal[200]!,
                                                 width: 1.5,
                                               )),
                                           alignment: Alignment.center,
@@ -543,9 +543,9 @@ class AdsDetailScreen extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: ads.partner != null &&
-                  (ads.partner.leftTab.isNotEmpty ||
-                      ads.partner.rightTab.isNotEmpty)
+          bottomNavigationBar: ads!.partner != null &&
+                  (ads!.partner!.leftTab!.isNotEmpty ||
+                      ads!.partner!.rightTab!.isNotEmpty)
               ? SizedBox(
                   height: 50,
                   child: Card(
@@ -554,8 +554,8 @@ class AdsDetailScreen extends StatelessWidget {
                         RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                     color: Get.theme.primaryColor,
                     child: Row(
-                      mainAxisAlignment: (ads.partner.leftTab.isNotEmpty &&
-                              ads.partner.rightTab.isNotEmpty)
+                      mainAxisAlignment: (ads!.partner!.leftTab!.isNotEmpty &&
+                              ads!.partner!.rightTab!.isNotEmpty)
                           ? MainAxisAlignment.spaceEvenly
                           : MainAxisAlignment.center,
                       children: [
@@ -569,21 +569,21 @@ class AdsDetailScreen extends StatelessWidget {
                                   topRight: Radius.circular(15),
                                 ),
                                 child: RatesAndOfferTermsSheetWidget(
-                                  partner: ads.partner,
+                                  partner: ads!.partner!,
                                 ),
                               ),
                             );
                           },
                           child: Text(
-                            ads.partner.leftTab,
-                            style: Get.theme.primaryTextTheme.titleSmall
+                            ads!.partner!.leftTab!,
+                            style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: Colors.white),
                           ).translate(),
                         ),
-                        (ads.partner.leftTab.isNotEmpty &&
-                                ads.partner.rightTab.isNotEmpty)
+                        (ads!.partner!.leftTab!.isNotEmpty &&
+                                ads!.partner!.rightTab!.isNotEmpty)
                             ? Icon(
                                 Icons.more_vert,
                                 size: 22,
@@ -600,14 +600,14 @@ class AdsDetailScreen extends StatelessWidget {
                                   topRight: Radius.circular(15),
                                 ),
                                 child: RatesAndOfferTermsSheetWidget(
-                                  partner: ads.partner,
+                                  partner: ads!.partner!,
                                 ),
                               ),
                             );
                           },
                           child: Text(
-                            ads.partner.rightTab,
-                            style: Get.theme.primaryTextTheme.titleSmall
+                            ads!.partner!.rightTab!,
+                            style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: Colors.white),

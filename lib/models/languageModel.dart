@@ -1,10 +1,10 @@
 class LanguageModel {
-  String key;
-  String imageUrl;
-  String languageName;
-  String languageCode;
-  String countryCode;
-  bool isLangShown;
+  String? key;
+  String? imageUrl;
+  String? languageName;
+  String? languageCode;
+  String? countryCode;
+  bool? isLangShown;
 
   LanguageModel(
       {this.key,

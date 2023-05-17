@@ -38,7 +38,7 @@ class MyEarningSceen extends StatelessWidget {
               ),
               title: Text(
                 'My Earnings',
-                style: Get.theme.primaryTextTheme.titleSmall
+                style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ).translate(),
             ),
@@ -97,9 +97,9 @@ class MyEarningSceen extends StatelessWidget {
                           ),
                           subtitle: Text(
                             global.currentUser.earning != null
-                                ? '${global.appInfo.currency} ${global.currentUser.earning.totalEarnings}'
+                                ? '${global.appInfo.currency} ${global.currentUser.earning!.totalEarnings}'
                                 : '${global.appInfo.currency} 0.00',
-                            style: Get.theme.primaryTextTheme.headlineSmall
+                            style: Get.theme.primaryTextTheme.headlineSmall!
                                 .copyWith(fontWeight: FontWeight.w600),
                           ).translate(),
                           trailing: Card(
@@ -133,7 +133,7 @@ class MyEarningSceen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: DottedLine(
                             dashLength: 3,
-                            dashColor: Colors.grey[350],
+                            dashColor: Colors.grey[350]!,
                           ),
                         ),
                         Padding(
@@ -142,7 +142,7 @@ class MyEarningSceen extends StatelessWidget {
                           child: Text(
                             'Earning will show here within 24 hours of your shopping via ${global.appName}.',
                             style:
-                                Get.theme.primaryTextTheme.bodyLarge.copyWith(
+                                Get.theme.primaryTextTheme.bodyLarge!.copyWith(
                               color: Colors.grey[600],
                               fontWeight: FontWeight.w400,
                               letterSpacing: -0.5,
@@ -200,7 +200,7 @@ class MyEarningSceen extends StatelessWidget {
                                         Text(
                                           'My Order Details',
                                           style: Get
-                                              .theme.primaryTextTheme.titleSmall
+                                              .theme.primaryTextTheme.titleSmall!
                                               .copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
@@ -222,7 +222,7 @@ class MyEarningSceen extends StatelessWidget {
                                             Text(
                                               'View More',
                                               style: Get.theme.primaryTextTheme
-                                                  .titleSmall
+                                                  .titleSmall!
                                                   .copyWith(
                                                 color: Colors.white,
                                               ),
@@ -314,7 +314,7 @@ class MyEarningSceen extends StatelessWidget {
                                         Text(
                                           'Recents Clicks',
                                           style: Get
-                                              .theme.primaryTextTheme.titleSmall
+                                              .theme.primaryTextTheme.titleSmall!
                                               .copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
@@ -336,7 +336,7 @@ class MyEarningSceen extends StatelessWidget {
                                             Text(
                                               'View More',
                                               style: Get.theme.primaryTextTheme
-                                                  .titleSmall
+                                                  .titleSmall!
                                                   .copyWith(
                                                 color: Colors.white,
                                               ),
@@ -422,7 +422,7 @@ class MyEarningSceen extends StatelessWidget {
                                         Text(
                                           'Request Payments',
                                           style: Get
-                                              .theme.primaryTextTheme.titleSmall
+                                              .theme.primaryTextTheme.titleSmall!
                                               .copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
@@ -444,7 +444,7 @@ class MyEarningSceen extends StatelessWidget {
                                             Text(
                                               'View More',
                                               style: Get.theme.primaryTextTheme
-                                                  .titleSmall
+                                                  .titleSmall!
                                                   .copyWith(
                                                 color: Colors.white,
                                               ),
@@ -532,7 +532,7 @@ class MyEarningSceen extends StatelessWidget {
                                         Text(
                                           'Get Help',
                                           style: Get
-                                              .theme.primaryTextTheme.titleSmall
+                                              .theme.primaryTextTheme.titleSmall!
                                               .copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
@@ -554,7 +554,7 @@ class MyEarningSceen extends StatelessWidget {
                                             Text(
                                               'View More',
                                               style: Get.theme.primaryTextTheme
-                                                  .titleSmall
+                                                  .titleSmall!
                                                   .copyWith(
                                                 color: Colors.white,
                                               ),

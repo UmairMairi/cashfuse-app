@@ -62,7 +62,7 @@ void main() async {
 Future fetchLinkData() async {
   var link = await FirebaseDynamicLinks.instance.getInitialLink();
 
-  handleLinkData(link);
+  handleLinkData(link!);
 
   dynamicLinks.onLink.listen((dynamicLinkData) {
     handleLinkData(dynamicLinkData);
@@ -73,11 +73,11 @@ Future fetchLinkData() async {
 }
 
 void handleLinkData(PendingDynamicLinkData data) {
-  final Uri uri = data?.link;
+  final Uri? uri = data.link;
   if (uri != null) {
     final queryParams = uri.queryParameters;
     if (queryParams.length > 0) {
-      global.referralUserId = queryParams["userId"];
+      global.referralUserId = queryParams["userId"]!;
       print("My user id is: ${global.referralUserId}");
     }
   }
@@ -120,7 +120,7 @@ class MyApp extends StatelessWidget {
 
 class MyHttpOverrides extends HttpOverrides {
   @override
-  HttpClient createHttpClient(SecurityContext context) {
+  HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
       ..badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;

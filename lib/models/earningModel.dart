@@ -1,15 +1,15 @@
 class EarningModel {
-  int id;
-  int userId;
-  String totalEarnings;
-  String withdrawal;
-  String remEarning;
-  String sentForWithdrawal;
-  String referralEarning;
-  String rewardEarning;
-  String pendingEarning;
-  DateTime createdAt;
-  DateTime updatedAt;
+  int? id;
+  int? userId;
+  String? totalEarnings;
+  String? withdrawal;
+  String? remEarning;
+  String? sentForWithdrawal;
+  String? referralEarning;
+  String? rewardEarning;
+  String? pendingEarning;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   EarningModel({
     this.id,
@@ -53,7 +53,7 @@ class EarningModel {
         "referral_earning": referralEarning,
         "reward_earning": rewardEarning,
         "pending_earnings": pendingEarning,
-        "created_at": createdAt != null ? createdAt.toIso8601String() : null,
-        "updated_at": updatedAt != null ? updatedAt.toIso8601String() : null,
+        "created_at": createdAt != null ? createdAt!.toIso8601String() : null,
+        "updated_at": updatedAt != null ? updatedAt!.toIso8601String() : null,
       };
 }

@@ -14,7 +14,7 @@ import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 
 class AdsCampaignWidgetListScreen extends StatelessWidget {
-  final String title;
+  final String? title;
   AdsCampaignWidgetListScreen({this.title});
 
   HomeController homeController = Get.find<HomeController>();
@@ -54,8 +54,8 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
                   ),
                 ),
                 title: Text(
-                  title,
-                  style: Get.theme.primaryTextTheme.titleSmall
+                  title!,
+                  style: Get.theme.primaryTextTheme.titleSmall!
                       .copyWith(color: Colors.white),
                 ).translate(),
               ),
@@ -99,7 +99,7 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
                                   commonModel: CommonModel(
                                     name: homeController.allAdvList[index].name,
                                     image:
-                                        '${global.appInfo.baseUrls.partnerImageUrl}/${homeController.allAdvList[index].image}',
+                                        '${global.appInfo.baseUrls!.partnerImageUrl}/${homeController.allAdvList[index].image}',
                                     tagline: homeController
                                         .allAdvList[index].tagline,
                                     adId: homeController.allAdvList[index].id
@@ -110,7 +110,7 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
                                   commonModel: CommonModel(
                                     name: homeController.allAdvList[index].name,
                                     image:
-                                        '${global.appInfo.baseUrls.partnerImageUrl}/${homeController.allAdvList[index].image}',
+                                        '${global.appInfo.baseUrls!.partnerImageUrl}/${homeController.allAdvList[index].image}',
                                     tagline: homeController
                                         .allAdvList[index].tagline,
                                     adId: homeController.allAdvList[index].id

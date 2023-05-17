@@ -42,7 +42,7 @@ class MyOrdersScreen extends StatelessWidget {
               ),
               title: Text(
                 'My Orders',
-                style: Get.theme.primaryTextTheme.titleSmall
+                style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ).translate(),
             ),
@@ -69,7 +69,7 @@ class MyOrdersScreen extends StatelessWidget {
                                         childAspectRatio: 1.45,
                                       ),
                                       itemCount: global
-                                          .currentUser.withdrawalRequest.length,
+                                          .currentUser.withdrawalRequest!.length,
                                       shrinkWrap: true,
                                       padding:
                                           EdgeInsets.all(10).copyWith(top: 20),
@@ -118,13 +118,13 @@ class MyOrdersScreen extends StatelessWidget {
                                                             CustomImage(
                                                           image: global
                                                                   .appInfo
-                                                                  .baseUrls
-                                                                  .partnerImageUrl +
+                                                                  .baseUrls!
+                                                                  .partnerImageUrl! +
                                                               '/' +
                                                               orderController
                                                                   .orderList[
                                                                       index]
-                                                                  .logo,
+                                                                  .logo!,
                                                           fit: BoxFit.contain,
                                                           errorImage:
                                                               Images.logo,
@@ -135,7 +135,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                                 orderController
                                                                     .orderList[
                                                                         index]
-                                                                    .advertisers)
+                                                                    .advertisers!)
                                                             .translate(),
                                                         trailing: InkWell(
                                                           onTap: () async {
@@ -144,7 +144,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                                     orderController
                                                                         .orderList[
                                                                             index]
-                                                                        .id);
+                                                                        .id!);
                                                             Get.to(
                                                               () =>
                                                                   OrderComplaintScreen(
@@ -660,11 +660,11 @@ class MyOrdersScreen extends StatelessWidget {
                                                   //   padding: EdgeInsets.all(2),
                                                   //   child:
                                                   CustomImage(
-                                                image: global.appInfo.baseUrls
-                                                        .partnerImageUrl +
+                                                image: global.appInfo.baseUrls!
+                                                        .partnerImageUrl! +
                                                     '/' +
                                                     orderController
-                                                        .orderList[index].logo,
+                                                        .orderList[index].logo!,
                                                 fit: BoxFit.contain,
                                                 errorImage: Images.logo,
                                                 width: 50,
@@ -672,7 +672,7 @@ class MyOrdersScreen extends StatelessWidget {
                                               //),
                                               title: Text(orderController
                                                       .orderList[index]
-                                                      .advertisers)
+                                                      .advertisers!)
                                                   .translate(),
                                               trailing: InkWell(
                                                 onTap: () async {
@@ -680,7 +680,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                       .getOrderComplains(
                                                           orderController
                                                               .orderList[index]
-                                                              .id);
+                                                              .id!);
                                                   Get.to(
                                                     () => OrderComplaintScreen(
                                                       orderModel:
@@ -1145,7 +1145,7 @@ class MyOrdersScreen extends StatelessWidget {
                               padding: const EdgeInsets.only(top: 10),
                               child: Text(
                                 'There is where it all happens!',
-                                style: Get.theme.primaryTextTheme.titleMedium
+                                style: Get.theme.primaryTextTheme.titleMedium!
                                     .copyWith(fontWeight: FontWeight.w500),
                               ).translate(),
                             ),

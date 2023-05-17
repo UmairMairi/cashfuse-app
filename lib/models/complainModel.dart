@@ -1,13 +1,13 @@
 class ComplainModel {
-  int userId;
-  int orderId;
-  String complain;
-  DateTime createdAt;
-  DateTime updatedAt;
-  int id;
+  int? userId;
+  int? orderId;
+  String? complain;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? id;
 
-  int status;
-  String reply;
+  int? status;
+  String? reply;
 
   ComplainModel({
     this.userId,

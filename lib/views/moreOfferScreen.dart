@@ -35,7 +35,7 @@ class MoreOfferScreen extends StatelessWidget {
                     children: [
                       Text(
                         'See More Offers',
-                        style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                        style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                           fontWeight: FontWeight.w600,
                           letterSpacing: -0.1,
                         ),
@@ -80,7 +80,7 @@ class MoreOfferScreen extends StatelessWidget {
                                   padding: const EdgeInsets.all(10.0),
                                   child: CustomImage(
                                     image:
-                                        '${global.appInfo.baseUrls.offerImageUrl}/${homeController.seeMoreOfferList[index].image}',
+                                        '${global.appInfo.baseUrls!.offerImageUrl}/${homeController.seeMoreOfferList[index].image}',
                                     height: 50,
                                     fit: BoxFit.contain,
                                   ),
@@ -95,14 +95,14 @@ class MoreOfferScreen extends StatelessWidget {
                                     children: [
                                       Text(
                                         homeController
-                                            .seeMoreOfferList[index].name,
+                                            .seeMoreOfferList[index].name!,
                                         textAlign: TextAlign.start,
                                         style: Get
                                             .theme.primaryTextTheme.titleSmall,
                                       ).translate(),
                                       Text(
                                         homeController.seeMoreOfferList[index]
-                                            .description,
+                                            .description!,
                                         textAlign: TextAlign.center,
                                       ).translate(),
                                     ],
@@ -142,7 +142,7 @@ class MoreOfferScreen extends StatelessWidget {
                               alignment: Alignment.center,
                               child: Text(
                                 homeController
-                                    .seeMoreOfferList[index].buttonText,
+                                    .seeMoreOfferList[index].buttonText!,
                                 style: TextStyle(
                                     color: Get.theme.secondaryHeaderColor,
                                     fontSize: 14,

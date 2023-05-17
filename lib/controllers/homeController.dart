@@ -123,7 +123,7 @@ class HomeController extends GetxController {
       if (global.currentUser.id != null) {
         await getClick();
         await Get.find<AuthController>().getProfile();
-        await Get.find<SearchController>().allInOneSearch();
+        await Get.find<SearchGetController>().allInOneSearch();
       }
     } catch (e) {
       print("Exception - HomeController.dart - _init():" + e.toString());
@@ -186,18 +186,18 @@ class HomeController extends GetxController {
                   // topCategoryList[i].commonList = [];
                   if (topCategoryList[i].ads != []) {
                     List<AdsModel> _tList = topCategoryList[i]
-                        .ads
+                        .ads!
                         .where((element) => element.status == 1)
                         .toList();
                     if (_tList != null && _tList.length > 0) {
                       for (var j = 0; j < _tList.length; j++) {
                         topCategoryList[i].commonList.add(
                               CommonModel(
-                                  name: _tList[j].name,
+                                  name: _tList[j].name!,
                                   image:
-                                      '${global.appInfo.baseUrls.offerImageUrl}/${_tList[j].image}',
-                                  buttonText: _tList[j].buttonText,
-                                  trackingLink: _tList[j].landingPage,
+                                      '${global.appInfo.baseUrls!.offerImageUrl}/${_tList[j].image}',
+                                  buttonText: _tList[j].buttonText!,
+                                  trackingLink: _tList[j].landingPage!,
                                   adId: _tList[j].id.toString(),
                                   from: "ads"),
                             );
@@ -207,7 +207,7 @@ class HomeController extends GetxController {
 
                   if (topCategoryList[i].cuecampaigns != []) {
                     List<CampaignModel> _tList = topCategoryList[i]
-                        .cuecampaigns
+                        .cuecampaigns!
                         .where((element) => element.status == 1)
                         .toList();
 
@@ -215,12 +215,12 @@ class HomeController extends GetxController {
                       for (var k = 0; k < _tList.length; k++) {
                         topCategoryList[i].commonList.add(
                               CommonModel(
-                                  name: _tList[k].name,
+                                  name: _tList[k].name!,
                                   image:
-                                      '${global.appInfo.baseUrls.offerImageUrl}/${_tList[k].image}',
-                                  buttonText: _tList[k].buttonText,
-                                  trackingLink: _tList[k].url,
-                                  campaignId: _tList[k].id,
+                                      '${global.appInfo.baseUrls!.offerImageUrl}/${_tList[k].image}',
+                                  buttonText: _tList[k].buttonText!,
+                                  trackingLink: _tList[k].url!,
+                                  campaignId: _tList[k].id!,
                                   from: "cue"),
                             );
                       }
@@ -229,20 +229,20 @@ class HomeController extends GetxController {
 
                   if (topCategoryList[i].admitedoffers != []) {
                     List<AdmitedOffersModal> _tList = topCategoryList[i]
-                        .admitedoffers
+                        .admitedoffers!
                         .where((element) => element.status == 1)
                         .toList();
                     if (_tList != null && _tList.length > 0) {
                       for (var k = 0; k < _tList.length; k++) {
                         topCategoryList[i].commonList.add(
                               CommonModel(
-                                  name: _tList[k].name,
+                                  name: _tList[k].name!,
                                   image:
-                                      '${global.appInfo.baseUrls.offerImageUrl}/${_tList[k].image}',
+                                      '${global.appInfo.baseUrls!.offerImageUrl}/${_tList[k].image}',
                                   buttonText:
                                       "Grab Now", // topCategoryList[n].admitedoffers[k].buttonText,
-                                  trackingLink: _tList[k].gotourl,
-                                  campaignId: _tList[k].id,
+                                  trackingLink: _tList[k].gotourl!,
+                                  campaignId: _tList[k].id!,
                                   from: "admit"),
                             );
                       }
@@ -336,18 +336,18 @@ class HomeController extends GetxController {
                 // topCategoryList[i].commonList = [];
                 if (topCashbackList[i].ads != []) {
                   List<AdsModel> _tList = topCashbackList[i]
-                      .ads
+                      .ads!
                       .where((element) => element.status == 1)
                       .toList();
                   if (_tList != null && _tList.length > 0) {
                     for (var j = 0; j < _tList.length; j++) {
                       topCashbackList[i].commonList.add(
                             CommonModel(
-                                name: _tList[j].name,
+                                name: _tList[j].name!,
                                 image:
-                                    '${global.appInfo.baseUrls.offerImageUrl}/${_tList[j].image}',
-                                buttonText: _tList[j].buttonText,
-                                trackingLink: _tList[j].landingPage,
+                                    '${global.appInfo.baseUrls!.offerImageUrl}/${_tList[j].image}',
+                                buttonText: _tList[j].buttonText!,
+                                trackingLink: _tList[j].landingPage!,
                                 adId: _tList[j].id.toString(),
                                 from: "ads"),
                           );
@@ -357,19 +357,19 @@ class HomeController extends GetxController {
 
                 if (topCashbackList[i].cuecampaigns != []) {
                   List<CampaignModel> _tList = topCashbackList[i]
-                      .cuecampaigns
+                      .cuecampaigns!
                       .where((element) => element.status == 1)
                       .toList();
                   if (_tList != null && _tList.length > 0) {
                     for (var k = 0; k < _tList.length; k++) {
                       topCashbackList[i].commonList.add(
                             CommonModel(
-                                name: _tList[k].name,
+                                name: _tList[k].name!,
                                 image:
-                                    '${global.appInfo.baseUrls.offerImageUrl}/${_tList[k].image}',
-                                buttonText: _tList[k].buttonText,
-                                trackingLink: _tList[k].url,
-                                campaignId: _tList[k].id,
+                                    '${global.appInfo.baseUrls!.offerImageUrl}/${_tList[k].image}',
+                                buttonText: _tList[k].buttonText!,
+                                trackingLink: _tList[k].url!,
+                                campaignId: _tList[k].id!,
                                 from: "cue"),
                           );
                     }
@@ -378,7 +378,7 @@ class HomeController extends GetxController {
 
                 if (topCashbackList[i].admitedoffers != []) {
                   List<AdmitedOffersModal> _tList = topCashbackList[i]
-                      .admitedoffers
+                      .admitedoffers!
                       .where((element) => element.status == 1)
                       .toList();
 
@@ -386,12 +386,12 @@ class HomeController extends GetxController {
                     for (var p = 0; p < _tList.length; p++) {
                       topCashbackList[i].commonList.add(
                             CommonModel(
-                                name: _tList[p].name,
+                                name: _tList[p].name!,
                                 image:
-                                    '${global.appInfo.baseUrls.offerImageUrl}/${_tList[p].image}',
+                                    '${global.appInfo.baseUrls!.offerImageUrl}/${_tList[p].image}',
                                 buttonText: 'Grab Now',
-                                trackingLink: _tList[p].gotourl,
-                                campaignId: _tList[p].id,
+                                trackingLink: _tList[p].gotourl!,
+                                campaignId: _tList[p].id!,
                                 from: "admit"),
                           );
                     }
@@ -485,17 +485,17 @@ class HomeController extends GetxController {
               for (var i = 0; i < homeAdvList.length; i++) {
                 if (homeAdvList[i].ads != []) {
                   List<AdsModel> _tList = homeAdvList[i]
-                      .ads
+                      .ads!
                       .where((element) => element.status == 1)
                       .toList();
                   if (_tList != null && _tList.length > 0) {
                     for (var j = 0; j < _tList.length; j++) {
                       homeAdvList[i].commonList.add(
                             CommonModel(
-                              name: _tList[j].name,
-                              image: _tList[j].image,
-                              buttonText: _tList[j].buttonText,
-                              trackingLink: _tList[j].landingPage,
+                              name: _tList[j].name!,
+                              image: _tList[j].image!,
+                              buttonText: _tList[j].buttonText!,
+                              trackingLink: _tList[j].landingPage!,
                               adId: _tList[j].id.toString(),
                             ),
                           );
@@ -505,18 +505,18 @@ class HomeController extends GetxController {
 
                 if (homeAdvList[i].cuecampaigns != []) {
                   List<CampaignModel> _tList = homeAdvList[i]
-                      .cuecampaigns
+                      .cuecampaigns!
                       .where((element) => element.status == 1)
                       .toList();
                   if (_tList != null && _tList.length > 0) {
                     for (var k = 0; k < _tList.length; k++) {
                       homeAdvList[i].commonList.add(
                             CommonModel(
-                              name: _tList[k].name,
-                              image: _tList[k].image,
-                              buttonText: _tList[k].buttonText,
-                              trackingLink: _tList[k].url,
-                              campaignId: _tList[k].id,
+                              name: _tList[k].name!,
+                              image: _tList[k].image!,
+                              buttonText: _tList[k].buttonText!,
+                              trackingLink: _tList[k].url!,
+                              campaignId: _tList[k].id!,
                             ),
                           );
                     }
@@ -525,18 +525,18 @@ class HomeController extends GetxController {
 
                 if (homeAdvList[i].admitedoffers != []) {
                   List<AdmitedOffersModal> _tList = homeAdvList[i]
-                      .admitedoffers
+                      .admitedoffers!
                       .where((element) => element.status == 1)
                       .toList();
                   if (_tList != null && _tList.length > 0) {
                     for (var p = 0; p < _tList.length; p++) {
                       homeAdvList[i].commonList.add(
                             CommonModel(
-                                name: _tList[p].name,
-                                image: _tList[p].image,
+                                name: _tList[p].name!,
+                                image: _tList[p].image!,
                                 buttonText: 'Grab Now',
-                                trackingLink: _tList[p].gotourl,
-                                campaignId: _tList[p].id,
+                                trackingLink: _tList[p].gotourl!,
+                                campaignId: _tList[p].id!,
                                 from: "admit"),
                           );
                     }
@@ -582,18 +582,18 @@ class HomeController extends GetxController {
                 for (var i = 0; i < allAdvList.length; i++) {
                   if (allAdvList[i].ads != []) {
                     List<AdsModel> _tList = allAdvList[i]
-                        .ads
+                        .ads!
                         .where((element) => element.status == 1)
                         .toList();
                     if (_tList != null && _tList.length > 0) {
                       for (var j = 0; j < _tList.length; j++) {
                         allAdvList[i].commonList.add(
                               CommonModel(
-                                name: _tList[j].name,
+                                name: _tList[j].name!,
                                 image:
-                                    '${global.appInfo.baseUrls.offerImageUrl}/${_tList[j].image}',
-                                buttonText: _tList[j].buttonText,
-                                trackingLink: _tList[j].landingPage,
+                                    '${global.appInfo.baseUrls!.offerImageUrl}/${_tList[j].image}',
+                                buttonText: _tList[j].buttonText!,
+                                trackingLink: _tList[j].landingPage!,
                                 adId: _tList[j].id.toString(),
                               ),
                             );
@@ -602,19 +602,19 @@ class HomeController extends GetxController {
                   }
                   if (allAdvList[i].cuecampaigns != []) {
                     List<CampaignModel> _tList = allAdvList[i]
-                        .cuecampaigns
+                        .cuecampaigns!
                         .where((element) => element.status == 1)
                         .toList();
                     if (_tList != null && _tList.length > 0) {
                       for (var k = 0; k < _tList.length; k++) {
                         allAdvList[i].commonList.add(
                               CommonModel(
-                                name: _tList[k].name,
+                                name: _tList[k].name!,
                                 image:
-                                    '${global.appInfo.baseUrls.offerImageUrl}/${_tList[k].image}',
-                                buttonText: _tList[k].buttonText,
-                                trackingLink: _tList[k].url,
-                                campaignId: _tList[k].id,
+                                    '${global.appInfo.baseUrls!.offerImageUrl}/${_tList[k].image}',
+                                buttonText: _tList[k].buttonText!,
+                                trackingLink: _tList[k].url!,
+                                campaignId: _tList[k].id!,
                               ),
                             );
                       }
@@ -622,19 +622,19 @@ class HomeController extends GetxController {
                   }
                   if (allAdvList[i].admitedoffers != []) {
                     List<AdmitedOffersModal> _tList = allAdvList[i]
-                        .admitedoffers
+                        .admitedoffers!
                         .where((element) => element.status == 1)
                         .toList();
                     if (_tList != null && _tList.length > 0) {
                       for (var p = 0; p < _tList.length; p++) {
                         allAdvList[i].commonList.add(
                               CommonModel(
-                                  name: _tList[p].name,
+                                  name: _tList[p].name!,
                                   image:
-                                      '${global.appInfo.baseUrls.offerImageUrl}/${_tList[p].image}',
+                                      '${global.appInfo.baseUrls!.offerImageUrl}/${_tList[p].image}',
                                   buttonText: 'Grab Now',
-                                  trackingLink: _tList[p].gotourl,
-                                  campaignId: _tList[p].id,
+                                  trackingLink: _tList[p].gotourl!,
+                                  campaignId: _tList[p].id!,
                                   from: "admit"),
                             );
                       }
@@ -716,7 +716,7 @@ class HomeController extends GetxController {
                 int diff;
                 if (exclusiveOfferList[i].endDate != null) {
                   diff = exclusiveOfferList[i]
-                      .endDate
+                      .endDate!
                       .difference(DateTime.now())
                       .inDays;
                   print(diff);
@@ -752,7 +752,7 @@ class HomeController extends GetxController {
                 int diff;
                 if (newFlashOfferList[i].endDate != null) {
                   diff = newFlashOfferList[i]
-                      .endDate
+                      .endDate!
                       .difference(DateTime.now())
                       .inDays;
                   print(diff);
@@ -924,13 +924,13 @@ class HomeController extends GetxController {
     }
   }
 
-  Future getTrackingLink(String url, String type, {String cId}) async {
+  Future getTrackingLink(String url, String type, {String? cId}) async {
     try {
       createdLink = '';
       if (networkController.connectionStatus.value == 1 ||
           networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
-        await apiHelper.getTrackingLink(url, type, cId: cId).then((response) {
+        await apiHelper.getTrackingLink(url, type, cId: cId!).then((response) {
           Get.back();
           if (response.status == "1") {
             createdLink = response.data;
@@ -1020,13 +1020,13 @@ class HomeController extends GetxController {
   String clickDialogText(ClickModel click) {
     try {
       String value = '';
-      if (DateTime.now().difference(click.createdAt).inDays == 0) {
+      if (DateTime.now().difference(click.createdAt!).inDays == 0) {
         value =
             'All is Well\nit will take upto 72 hours to track your rewards till then keep shopping so #yougetmore ';
-      } else if (DateTime.now().difference(click.createdAt).inDays == 1) {
+      } else if (DateTime.now().difference(click.createdAt!).inDays == 1) {
         value =
             'All is Well\nit will take upto 36 hours to track your rewards till then keep shopping so #yougetmore ';
-      } else if (DateTime.now().difference(click.createdAt).inDays == 2) {
+      } else if (DateTime.now().difference(click.createdAt!).inDays == 2) {
         value =
             'All is Well\nit will take upto 24 hours to track your rewards till then keep shopping so #yougetmore';
       } else {
@@ -1044,15 +1044,15 @@ class HomeController extends GetxController {
   String clickTime(ClickModel click) {
     try {
       String value = '';
-      if (DateTime.now().difference(click.createdAt).inDays > 0) {
-        value = '${DateTime.now().difference(click.createdAt).inDays} day ago';
-      } else if (DateTime.now().difference(click.createdAt).inHours > 0) {
+      if (DateTime.now().difference(click.createdAt!).inDays > 0) {
+        value = '${DateTime.now().difference(click.createdAt!).inDays} day ago';
+      } else if (DateTime.now().difference(click.createdAt!).inHours > 0) {
         value =
-            '${DateTime.now().difference(click.createdAt).inHours} hour ago';
-      } else if (DateTime.now().difference(click.createdAt).inMinutes > 0) {
+            '${DateTime.now().difference(click.createdAt!).inHours} hour ago';
+      } else if (DateTime.now().difference(click.createdAt!).inMinutes > 0) {
         value =
-            '${DateTime.now().difference(click.createdAt).inMinutes} min ago';
-      } else if (DateTime.now().difference(click.createdAt).inSeconds > 0) {
+            '${DateTime.now().difference(click.createdAt!).inMinutes} min ago';
+      } else if (DateTime.now().difference(click.createdAt!).inSeconds > 0) {
         value = 'Just Now';
       }
 

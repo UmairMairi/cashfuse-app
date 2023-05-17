@@ -13,7 +13,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:google_translator/google_translator.dart';
 
 class OfferListScreen extends StatelessWidget {
-  final CategoryModel categoryModel;
+  final CategoryModel? categoryModel;
   OfferListScreen({this.categoryModel});
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -39,9 +39,9 @@ class OfferListScreen extends StatelessWidget {
                 ),
                 title: Text(
                   categoryModel != null
-                      ? categoryModel.name
+                      ? categoryModel!.name!
                       : 'NEW FLASH DEALS - LIVE NOW',
-                  style: Get.theme.primaryTextTheme.titleSmall
+                  style: Get.theme.primaryTextTheme.titleSmall!
                       .copyWith(color: Colors.white),
                 ).translate(),
               ),
@@ -63,18 +63,18 @@ class OfferListScreen extends StatelessWidget {
                                 mainAxisSpacing: 15.0,
                                 childAspectRatio: 1.4,
                               ),
-                              itemCount: categoryModel.commonList.length,
+                              itemCount: categoryModel!.commonList.length,
                               shrinkWrap: true,
                               padding: EdgeInsets.all(10).copyWith(top: 20),
                               itemBuilder: (context, index) {
                                 return InkWell(
                                   onTap: () async {
-                                    if (categoryModel.commonList[index].adId !=
+                                    if (categoryModel!.commonList[index].adId !=
                                             null &&
-                                        categoryModel.commonList[index].adId
+                                        categoryModel!.commonList[index].adId!
                                             .isNotEmpty) {
                                       await homeController.getAdDetails(
-                                          categoryModel.commonList[index].adId);
+                                          categoryModel!.commonList[index].adId!);
                                       Get.to(
                                         () => AdsDetailScreen(
                                           ads: homeController.ads,
@@ -84,7 +84,7 @@ class OfferListScreen extends StatelessWidget {
                                       );
                                     } else {
                                       await homeController.getCampignDetails(
-                                          categoryModel
+                                          categoryModel!
                                               .commonList[index].campaignId
                                               .toString());
                                       Get.to(
@@ -98,26 +98,26 @@ class OfferListScreen extends StatelessWidget {
                                   },
                                   child: OfferWidget(
                                     commonModel:
-                                        categoryModel.commonList[index],
+                                        categoryModel!.commonList[index],
                                     fromList: true,
-                                    domainImage: categoryModel.image,
+                                    domainImage: categoryModel!.image!,
                                   ),
                                 );
                               },
                             )
                           : ListView.builder(
-                              itemCount: categoryModel.commonList.length,
+                              itemCount: categoryModel!.commonList.length,
                               shrinkWrap: true,
                               padding: EdgeInsets.all(10),
                               itemBuilder: (context, index) {
                                 return InkWell(
                                   onTap: () async {
-                                    if (categoryModel.commonList[index].adId !=
+                                    if (categoryModel!.commonList[index].adId !=
                                             null &&
-                                        categoryModel.commonList[index].adId
+                                        categoryModel!.commonList[index].adId!
                                             .isNotEmpty) {
                                       await homeController.getAdDetails(
-                                          categoryModel.commonList[index].adId);
+                                          categoryModel!.commonList[index].adId!);
                                       Get.to(
                                         () => AdsDetailScreen(
                                           ads: homeController.ads,
@@ -127,7 +127,7 @@ class OfferListScreen extends StatelessWidget {
                                       );
                                     } else {
                                       await homeController.getCampignDetails(
-                                          categoryModel
+                                          categoryModel!
                                               .commonList[index].campaignId
                                               .toString());
                                       Get.to(
@@ -141,15 +141,15 @@ class OfferListScreen extends StatelessWidget {
                                   },
                                   child: OfferWidget(
                                     commonModel:
-                                        categoryModel.commonList[index],
+                                        categoryModel!.commonList[index],
                                     fromList: true,
-                                    domainImage: categoryModel.image,
+                                    domainImage: categoryModel!.image!,
                                   ),
                                 );
                               },
                             )
                       : global.getPlatFrom()
-                          ? GridView.builder(
+                          ? GridView.builder( 
                               //controller: homeController.scrollController,
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(

@@ -1,10 +1,10 @@
 class FaqModel {
-  int id;
-  String ques;
-  String ans;
-  String image;
-  DateTime createdAt;
-  DateTime updatedAt;
+  int? id;
+  String? ques;
+  String? ans;
+  String? image;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   FaqModel({
     this.id,

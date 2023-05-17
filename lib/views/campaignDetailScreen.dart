@@ -20,8 +20,8 @@ import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 
 class CampaignDetailScreen extends StatelessWidget {
-  final CampaignModel campaign;
-  final bool fromSeeMore;
+  final CampaignModel? campaign;
+  final bool? fromSeeMore;
   CampaignDetailScreen({this.campaign, this.fromSeeMore});
   HomeController homeController = Get.find<HomeController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -56,11 +56,11 @@ class CampaignDetailScreen extends StatelessWidget {
                                 margin: EdgeInsets.only(bottom: 20),
                                 child: CustomImage(
                                   image:
-                                      '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}',
+                                      '${global.appInfo.baseUrls!.offerImageUrl}/${campaign!.image}',
                                   width: 500,
                                   height: 300,
                                   fit: BoxFit.fill,
-                                  campaign: campaign,
+                                  campaign: campaign!,
                                 ),
                                 // Image.asset(
                                 //   Images.dummyImage,
@@ -77,7 +77,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                     padding: const EdgeInsets.all(4.0),
                                     child: CustomImage(
                                       image:
-                                          '${global.appInfo.baseUrls.partnerImageUrl}/${campaign.partner.image}',
+                                          '${global.appInfo.baseUrls!.partnerImageUrl}/${campaign!.partner!.image}',
                                       height: 30,
                                       width: 60,
                                       fit: BoxFit.contain,
@@ -106,8 +106,8 @@ class CampaignDetailScreen extends StatelessWidget {
                             },
                           ),
                           title: Text(
-                            campaign.partner.name,
-                            style: Get.theme.primaryTextTheme.titleSmall
+                            campaign!.partner!.name!,
+                            style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(color: Colors.white),
                           ).translate(),
                           flexibleSpace: CustomizableSpaceBar(
@@ -121,10 +121,10 @@ class CampaignDetailScreen extends StatelessWidget {
                                         //margin: EdgeInsets.only(bottom: 20),
                                         child: CustomImage(
                                           image:
-                                              '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}',
+                                              '${global.appInfo.baseUrls!.offerImageUrl}/${campaign!.image}',
                                           width: Get.width,
                                           fit: BoxFit.fill,
-                                          campaign: campaign,
+                                          campaign: campaign!,
                                         ),
                                         // Image.asset(
                                         //   Images.dummyImage,
@@ -141,7 +141,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                             padding: const EdgeInsets.all(4.0),
                                             child: CustomImage(
                                               image:
-                                                  '${global.appInfo.baseUrls.partnerImageUrl}/${campaign.partner.image}',
+                                                  '${global.appInfo.baseUrls!.partnerImageUrl}/${campaign!.partner!.image}',
                                               height: 30,
                                               width: 60,
                                               fit: BoxFit.contain,
@@ -159,15 +159,15 @@ class CampaignDetailScreen extends StatelessWidget {
                                     onTap: () async {
                                       if (global.currentUser.id != null) {
                                         await homeController.getTrackingLink(
-                                            campaign.url,
-                                            campaign.affiliatePartner);
+                                            campaign!.url!,
+                                            campaign!.affiliatePartner!);
                                         global.share(
                                           homeController.createdLink.isNotEmpty
                                               ? homeController.createdLink
-                                              : campaign.url,
-                                          campaign.image.isNotEmpty &&
-                                                  !campaign.isImageError
-                                              ? '${global.appInfo.baseUrls.offerImageUrl}/${campaign.image}'
+                                              : campaign!.url!,
+                                          campaign!.image!.isNotEmpty &&
+                                                  !campaign!.isImageError
+                                              ? '${global.appInfo.baseUrls!.offerImageUrl}/${campaign!.image}'
                                               : '',
                                           '',
                                         );
@@ -232,7 +232,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                 height: 40,
                               ),
                               Text(
-                                campaign.name,
+                                campaign!.name!,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontStyle: FontStyle.italic,
@@ -242,7 +242,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                 height: 15,
                               ),
                               HtmlWidget(
-                                campaign.description,
+                                campaign!.description!,
                                 //textAlign: TextAlign.center,
                               ),
                               // Text(
@@ -299,21 +299,21 @@ class CampaignDetailScreen extends StatelessWidget {
                                 onTap: () async {
                                   if (global.currentUser.id != null) {
                                     await homeController.getTrackingLink(
-                                        campaign.url,
-                                        campaign.affiliatePartner);
+                                        campaign!.url!,
+                                        campaign!.affiliatePartner!);
                                     await homeController.addClick(
-                                      campaign.name,
-                                      global.appInfo.baseUrls.offerImageUrl +
+                                      campaign!.name!,
+                                      global.appInfo.baseUrls!.offerImageUrl! +
                                           '/' +
-                                          campaign.image,
+                                          campaign!.image!,
                                       homeController.createdLink.isNotEmpty
                                           ? homeController.createdLink
-                                          : campaign.url,
+                                          : campaign!.url!,
                                     );
                                     global.launchInBrowser(
                                       homeController.createdLink.isNotEmpty
                                           ? homeController.createdLink
-                                          : campaign.url,
+                                          : campaign!.url!,
                                     );
 
                                     // Get.to(
@@ -369,8 +369,8 @@ class CampaignDetailScreen extends StatelessWidget {
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      campaign.buttonText.isNotEmpty
-                                          ? campaign.buttonText
+                                      campaign!.buttonText!.isNotEmpty
+                                          ? campaign!.buttonText!
                                           : 'EARN CASHBACK',
                                       style: TextStyle(
                                           color: Colors.white,
@@ -486,7 +486,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                fromSeeMore
+                                fromSeeMore!
                                     ? SizedBox()
                                     : homeController.seeMoreCampaignList !=
                                                 null &&
@@ -542,7 +542,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                                         BorderRadius.circular(
                                                             10),
                                                     border: Border.all(
-                                                      color: Colors.teal[200],
+                                                      color: Colors.teal[200]!,
                                                       width: 1.5,
                                                     )),
                                                 alignment: Alignment.center,
@@ -569,9 +569,9 @@ class CampaignDetailScreen extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: campaign.partner != null &&
-                  (campaign.partner.leftTab.isNotEmpty ||
-                      campaign.partner.rightTab.isNotEmpty)
+          bottomNavigationBar: campaign!.partner != null &&
+                  (campaign!.partner!.leftTab!.isNotEmpty ||
+                      campaign!.partner!.rightTab!.isNotEmpty)
               ? Container(
                   width: Get.width,
                   alignment: Alignment.center,
@@ -586,8 +586,8 @@ class CampaignDetailScreen extends StatelessWidget {
                       color: Get.theme.primaryColor,
                       child: Row(
                         mainAxisAlignment:
-                            (campaign.partner.leftTab.isNotEmpty &&
-                                    campaign.partner.rightTab.isNotEmpty)
+                            (campaign!.partner!.leftTab!.isNotEmpty &&
+                                    campaign!.partner!.rightTab!.isNotEmpty)
                                 ? MainAxisAlignment.spaceEvenly
                                 : MainAxisAlignment.center,
                         children: [
@@ -603,22 +603,22 @@ class CampaignDetailScreen extends StatelessWidget {
                                       topRight: Radius.circular(15),
                                     ),
                                     child: RatesAndOfferTermsSheetWidget(
-                                      partner: campaign.partner,
+                                      partner: campaign!.partner!,
                                     ),
                                   ),
                                 ),
                               );
                             },
                             child: Text(
-                              campaign.partner.leftTab,
-                              style: Get.theme.primaryTextTheme.titleSmall
+                              campaign!.partner!.leftTab!,
+                              style: Get.theme.primaryTextTheme.titleSmall!
                                   .copyWith(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white),
                             ).translate(),
                           ),
-                          (campaign.partner.leftTab.isNotEmpty &&
-                                  campaign.partner.rightTab.isNotEmpty)
+                          (campaign!.partner!.leftTab!.isNotEmpty &&
+                                  campaign!.partner!.rightTab!.isNotEmpty)
                               ? Icon(
                                   Icons.more_vert,
                                   size: 22,
@@ -635,14 +635,14 @@ class CampaignDetailScreen extends StatelessWidget {
                                     topRight: Radius.circular(15),
                                   ),
                                   child: RatesAndOfferTermsSheetWidget(
-                                    partner: campaign.partner,
+                                    partner: campaign!.partner!,
                                   ),
                                 ),
                               );
                             },
                             child: Text(
-                              campaign.partner.rightTab.camelCase,
-                              style: Get.theme.primaryTextTheme.titleSmall
+                              campaign!.partner!.rightTab!.camelCase!,
+                              style: Get.theme.primaryTextTheme.titleSmall!
                                   .copyWith(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white),

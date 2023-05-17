@@ -1,13 +1,13 @@
 class AdMobKeyModel {
-  int id;
-  int status;
-  String type;
-  String banner;
-  String native;
-  String interstitial;
-  String reward;
-  DateTime createdAt;
-  DateTime updatedAt;
+  int? id;
+  int? status;
+  String? type;
+  String? banner;
+  String? native;
+  String? interstitial;
+  String? reward;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   AdMobKeyModel({
     this.id,

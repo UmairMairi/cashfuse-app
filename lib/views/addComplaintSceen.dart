@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 
 class AddComplaintSceen extends StatelessWidget {
-  final OrderModel orderModel;
+  final OrderModel? orderModel;
   AddComplaintSceen({this.orderModel});
   OrderController orderController = Get.find<OrderController>();
 
@@ -28,7 +28,7 @@ class AddComplaintSceen extends StatelessWidget {
         ),
         title: Text(
           'Add Complaint',
-          style: Get.theme.primaryTextTheme.titleSmall
+          style: Get.theme.primaryTextTheme.titleSmall!
               .copyWith(color: Colors.white),
         ).translate(),
       ),
@@ -57,7 +57,7 @@ class AddComplaintSceen extends StatelessWidget {
         onTap: () {
           if (orderController.complain.text.trim().isNotEmpty) {
             orderController.addOrderComplain(
-                orderModel.id, orderController.complain.text);
+                orderModel!.id!, orderController.complain.text);
           } else {
             showCustomSnackBar('Please add Complaint.');
           }
@@ -69,7 +69,7 @@ class AddComplaintSceen extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             'SUBMIT',
-            style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+            style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w600,
             ),

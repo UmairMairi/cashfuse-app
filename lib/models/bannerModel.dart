@@ -1,18 +1,18 @@
 import 'package:cashfuse/models/offerModel.dart';
 
 class BannerModel {
-  int id;
-  String name;
-  String image;
-  String type;
-  String url;
-  int offerId;
-  int status;
-  String heading;
-  String description;
-  DateTime createdAt;
-  DateTime updatedAt;
-  OfferModel cuelinkoffer;
+  int? id;
+  String? name;
+  String? image;
+  String? type;
+  String? url;
+  int? offerId;
+  int? status;
+  String? heading;
+  String? description;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  OfferModel? cuelinkoffer;
 
   BannerModel({
     this.id,

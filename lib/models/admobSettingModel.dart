@@ -1,10 +1,10 @@
 import 'package:cashfuse/models/adModel.dart';
 
 class AdmobSettingModel {
-  List<AdModel> bannerAdList;
-  List<AdModel> nativeAdList;
-  List<AdModel> interstitialAdList;
-  List<AdModel> rewardsAdList;
+  List<AdModel>? bannerAdList;
+  List<AdModel>? nativeAdList;
+  List<AdModel>? interstitialAdList;
+  List<AdModel>? rewardsAdList;
 
   AdmobSettingModel({
     this.bannerAdList,

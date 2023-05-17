@@ -1,23 +1,23 @@
 import 'package:cashfuse/models/userModel.dart';
 
 class OrderModel {
-  int id;
-  String cId;
-  String logo;
-  String advertisers;
-  String partnerOrderId;
-  String affiliatePartner;
-  String orderAmount;
-  String earningAmount;
-  String orderStatus;
-  int userId;
-  String url;
-  DateTime referDate;
-  DateTime eventDate;
-  DateTime lockingDate;
-  DateTime createdAt;
-  DateTime updatedAt;
-  UserModel user;
+  int? id;
+  String? cId;
+  String? logo;
+  String? advertisers;
+  String? partnerOrderId;
+  String? affiliatePartner;
+  String? orderAmount;
+  String? earningAmount;
+  String? orderStatus;
+  int? userId;
+  String? url;
+  DateTime? referDate;
+  DateTime? eventDate;
+  DateTime? lockingDate;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  UserModel? user;
 
   OrderModel({
     this.id,

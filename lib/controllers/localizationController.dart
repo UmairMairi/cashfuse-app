@@ -13,8 +13,8 @@ class LocalizationController extends GetxController {
 
   void _loadCurrentTheme() async {
     global.sp = await SharedPreferences.getInstance();
-    if (global.sp.getString('languageCode') != null) {
-      languageCode = global.sp.getString('languageCode');
+    if (global.sp!.getString('languageCode') != null) {
+      languageCode = global.sp!.getString('languageCode')!;
     } else {
       languageCode = 'en';
     }
@@ -47,7 +47,7 @@ class LocalizationController extends GetxController {
       } else {
         global.isRTL = false;
       }
-      global.sp.setString('languageCode', languageCode);
+      global.sp!.setString('languageCode', languageCode);
       update();
     } catch (e) {
       print("Exception - LocalizationController.dart - setLanguage():" +

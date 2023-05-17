@@ -2,29 +2,29 @@ import 'package:cashfuse/models/categoryModel.dart';
 import 'package:cashfuse/models/couponModel.dart';
 
 class AdsModel {
-  int id;
-  String adId;
-  String cId;
-  String advName;
-  String advId;
-  String trackingLink;
-  String name;
-  int categoryId;
-  String categoryIds;
-  String description;
-  String image;
-  String buttonText;
-  int partnerId;
-  String affiliatePartner;
-  String landingPage;
-  String type;
-  int status;
-  DateTime createdAt;
-  DateTime updatedAt;
-  int ads;
-  CategoryModel partner;
-  List<Coupon> couponList;
-  bool isImageError = false; //for check image error
+  int? id;
+  String? adId;
+  String? cId;
+  String? advName;
+  String? advId;
+  String? trackingLink;
+  String? name;
+  int? categoryId;
+  String? categoryIds;
+  String? description;
+  String? image;
+  String? buttonText;
+  int? partnerId;
+  String? affiliatePartner;
+  String? landingPage;
+  String? type;
+  int? status;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? ads;
+  CategoryModel? partner;
+  List<Coupon>? couponList;
+  bool? isImageError = false; //for check image error
 
   AdsModel({
     this.id,

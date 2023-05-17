@@ -28,7 +28,7 @@ class MoreAdsScreen extends StatelessWidget {
                   children: [
                     Text(
                       'See More Offers',
-                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                      style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.1,
                       ),
@@ -64,7 +64,7 @@ class MoreAdsScreen extends StatelessWidget {
                           children: [
                             CustomImage(
                               image:
-                                  '${global.appInfo.baseUrls.offerImageUrl}/${homeController.seeMoreAdsList[index].image}',
+                                  '${global.appInfo.baseUrls!.offerImageUrl}/${homeController.seeMoreAdsList[index].image}',
                               height: 50,
                               fit: BoxFit.contain,
                             ),
@@ -75,14 +75,14 @@ class MoreAdsScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      homeController.seeMoreAdsList[index].name,
+                                      homeController.seeMoreAdsList[index].name!,
                                       textAlign: TextAlign.start,
                                       style:
                                           Get.theme.primaryTextTheme.titleSmall,
                                     ).translate(),
                                     Text(
                                       homeController
-                                          .seeMoreAdsList[index].description,
+                                          .seeMoreAdsList[index].description!,
                                       textAlign: TextAlign.start,
                                     ).translate(),
                                   ],
@@ -120,7 +120,7 @@ class MoreAdsScreen extends StatelessWidget {
                                 )),
                             alignment: Alignment.center,
                             child: Text(
-                              homeController.seeMoreAdsList[index].buttonText,
+                              homeController.seeMoreAdsList[index].buttonText!,
                               style: TextStyle(
                                   color: Get.theme.secondaryHeaderColor,
                                   fontSize: 14,

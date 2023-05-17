@@ -17,7 +17,7 @@ import 'package:google_translator/google_translator.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
 class CouponDetailScreen extends StatelessWidget {
-  final Coupon coupon;
+  final Coupon? coupon;
   CouponDetailScreen({this.coupon});
   HomeController homeController = Get.find<HomeController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -44,8 +44,8 @@ class CouponDetailScreen extends StatelessWidget {
                   },
                 ),
                 title: Text(
-                  coupon.name,
-                  style: Get.theme.primaryTextTheme.titleSmall
+                  coupon!.name!,
+                  style: Get.theme.primaryTextTheme.titleSmall!
                       .copyWith(color: Colors.white),
                 ).translate(),
                 actions: [
@@ -54,14 +54,14 @@ class CouponDetailScreen extends StatelessWidget {
                           onTap: () async {
                             if (global.currentUser.id != null) {
                               await homeController.getTrackingLink(
-                                  coupon.url, coupon.affiliatePartner);
+                                  coupon!.url!, coupon!.affiliatePartner!);
                               global.share(
                                 homeController.createdLink.isNotEmpty
                                     ? homeController.createdLink
-                                    : coupon.url,
-                                coupon.bannerImage.isNotEmpty &&
-                                        !coupon.isImageError
-                                    ? '${global.appInfo.baseUrls.couponBannerImageUrl}/${coupon.bannerImage}'
+                                    : coupon!.url!,
+                                coupon!.bannerImage!.isNotEmpty &&
+                                        !coupon!.isImageError
+                                    ? '${global.appInfo.baseUrls!.couponBannerImageUrl}/${coupon!.bannerImage}'
                                     : '',
                                 '',
                               );
@@ -127,7 +127,7 @@ class CouponDetailScreen extends StatelessWidget {
                     'Deal ends in:',
                     style: Get.theme.primaryTextTheme.titleSmall,
                   ).translate(),
-                  coupon.dayDifference != null && coupon.dayDifference > 0
+                  coupon!.dayDifference != null && coupon!.dayDifference! > 0
                       ? Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: SlideCountdownSeparated(
@@ -148,7 +148,7 @@ class CouponDetailScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(3),
                             ),
                             duration: Duration(
-                              days: coupon.dayDifference,
+                              days: coupon!.dayDifference!,
                             ),
                           ),
                         )
@@ -165,7 +165,7 @@ class CouponDetailScreen extends StatelessWidget {
                           children: [
                             CustomImage(
                               image:
-                                  '${global.appInfo.baseUrls.couponBannerImageUrl}/${coupon.bannerImage}',
+                                  '${global.appInfo.baseUrls!.couponBannerImageUrl}/${coupon!.bannerImage}',
                               height: global.getPlatFrom() ? 250 : 200,
                               width: global.getPlatFrom()
                                   ? AppConstants.WEB_MAX_WIDTH / 3
@@ -173,7 +173,7 @@ class CouponDetailScreen extends StatelessWidget {
                               fit: global.getPlatFrom()
                                   ? BoxFit.contain
                                   : BoxFit.fill,
-                              coupon: coupon,
+                              coupon: coupon!,
                             ),
                             // Align(
                             //   alignment: Alignment.topRight,
@@ -211,7 +211,7 @@ class CouponDetailScreen extends StatelessWidget {
                                 padding: const EdgeInsets.all(4.0),
                                 child: CustomImage(
                                   image:
-                                      '${global.appInfo.baseUrls.partnerImageUrl}/${coupon.image}',
+                                      '${global.appInfo.baseUrls!.partnerImageUrl}/${coupon!.image}',
                                   height: 30,
                                   width: 60,
                                   fit: BoxFit.contain,
@@ -220,13 +220,13 @@ class CouponDetailScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        coupon.code != null && coupon.code.isNotEmpty
+                        coupon!.code != null && coupon!.code!.isNotEmpty
                             ? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     'Use Code',
-                                    style: Get.theme.primaryTextTheme.bodyLarge
+                                    style: Get.theme.primaryTextTheme.bodyLarge!
                                         .copyWith(
                                       color: Colors.grey,
                                       fontWeight: FontWeight.w300,
@@ -239,9 +239,9 @@ class CouponDetailScreen extends StatelessWidget {
                                       padding: EdgeInsets.all(10),
                                       color: Get.theme.secondaryHeaderColor,
                                       child: Text(
-                                        coupon.code,
+                                        coupon!.code!,
                                         style: Get
-                                            .theme.primaryTextTheme.titleSmall
+                                            .theme.primaryTextTheme.titleSmall!
                                             .copyWith(
                                           color: Get.theme.secondaryHeaderColor,
                                         ),
@@ -252,7 +252,7 @@ class CouponDetailScreen extends StatelessWidget {
                                     onTap: () {
                                       Clipboard.setData(
                                         ClipboardData(
-                                          text: coupon.code,
+                                          text: coupon!.code!,
                                         ),
                                       ).then((value) {
                                         showCustomSnackBar(
@@ -263,7 +263,7 @@ class CouponDetailScreen extends StatelessWidget {
                                     child: Text(
                                       'Copy Code',
                                       style: Get
-                                          .theme.primaryTextTheme.bodyLarge
+                                          .theme.primaryTextTheme.bodyLarge!
                                           .copyWith(
                                         color: Colors.teal,
                                         fontWeight: FontWeight.w300,
@@ -280,16 +280,16 @@ class CouponDetailScreen extends StatelessWidget {
                           onTap: () async {
                             if (global.currentUser.id != null) {
                               await homeController.getTrackingLink(
-                                  coupon.url, coupon.affiliatePartner);
+                                  coupon!.url!, coupon!.affiliatePartner!);
                               await homeController.addClick(
-                                  coupon.partnerName,
-                                  '${global.appInfo.baseUrls.partnerImageUrl}/${coupon.image}',
-                                  coupon.url);
+                                  coupon!.partnerName!,
+                                  '${global.appInfo.baseUrls!.partnerImageUrl}/${coupon!.image}',
+                                  coupon!.url!);
 
                               global.launchInBrowser(
                                 homeController.createdLink.isNotEmpty
                                     ? homeController.createdLink
-                                    : coupon.url,
+                                    : coupon!.url!,
                               );
                               // Get.to(() => WebViewScreen(
                               //       urlString: coupon.url,
@@ -336,7 +336,7 @@ class CouponDetailScreen extends StatelessWidget {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              coupon.buttonText,
+                              coupon!.buttonText!,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
@@ -362,19 +362,19 @@ class CouponDetailScreen extends StatelessWidget {
                           Text(
                             'About this Coupon',
                             style: global.getPlatFrom()
-                                ? Get.theme.primaryTextTheme.titleMedium
+                                ? Get.theme.primaryTextTheme.titleMedium!
                                     .copyWith(fontWeight: FontWeight.w600)
                                 : Get.theme.primaryTextTheme.titleSmall,
                           ).translate(),
                           Divider(),
                           Text(
-                            coupon.heading,
-                            style: Get.theme.primaryTextTheme.bodyMedium
+                            coupon!.heading!,
+                            style: Get.theme.primaryTextTheme.bodyMedium!
                                 .copyWith(fontWeight: FontWeight.w500),
                           ).translate(),
                           Text(
-                            coupon.description,
-                            style: Get.theme.primaryTextTheme.bodyMedium
+                            coupon!.description!,
+                            style: Get.theme.primaryTextTheme.bodyMedium!
                                 .copyWith(fontWeight: FontWeight.w300),
                           ).translate(),
                         ],

@@ -1,17 +1,17 @@
 class ProductPriceModel {
-  int id;
-  int cashback;
-  int cId;
-  int productId;
-  int serialNumber;
-  String siteName;
-  String siteIcon;
-  int mrp;
-  int price;
-  String url;
-  DateTime createdAt;
-  DateTime updatedAt;
-  int advId;
+  int? id;
+  int? cashback;
+  int? cId;
+  int? productId;
+  int? serialNumber;
+  String? siteName;
+  String? siteIcon;
+  int? mrp;
+  int? price;
+  String? url;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? advId;
 
   ProductPriceModel({
     this.id,

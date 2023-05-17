@@ -18,13 +18,13 @@ import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 
 class AdmitedDetailScreen extends StatefulWidget {
-  final bool fromSeeMore;
-  final AdmitedOffersModal admitedData;
+  final bool? fromSeeMore;
+  final AdmitedOffersModal? admitedData;
   AdmitedDetailScreen({this.fromSeeMore, this.admitedData});
 
   @override
   State<AdmitedDetailScreen> createState() =>
-      _AdmitedDetailScreenState(this.admitedData);
+      _AdmitedDetailScreenState(this.admitedData!);
 }
 
 class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
@@ -73,7 +73,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                 //margin: EdgeInsets.only(bottom: 20),
                                 child: CustomImage(
                                   image:
-                                      '${global.appInfo.baseUrls.offerImageUrl}/${admitedData.image}',
+                                      '${global.appInfo.baseUrls!.offerImageUrl}/${admitedData.image}',
                                   width: 500,
                                   height: 300,
                                   fit: BoxFit.fill,
@@ -94,7 +94,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                     padding: const EdgeInsets.all(4.0),
                                     child: CustomImage(
                                       image:
-                                          '${global.appInfo.baseUrls.partnerImageUrl}/${admitedData.partner.image}',
+                                          '${global.appInfo.baseUrls!.partnerImageUrl}/${admitedData.partner!.image}',
                                       height: 30,
                                       width: 60,
                                       fit: BoxFit.contain,
@@ -126,8 +126,8 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                             },
                           ),
                           title: Text(
-                            admitedData.partner.name,
-                            style: Get.theme.primaryTextTheme.titleSmall
+                            admitedData.partner!.name!,
+                            style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(color: Colors.white),
                           ),
                           flexibleSpace: CustomizableSpaceBar(
@@ -147,7 +147,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                         //margin: EdgeInsets.only(bottom: 20),
                                         child: CustomImage(
                                           image:
-                                              '${global.appInfo.baseUrls.offerImageUrl}/${admitedData.image}',
+                                              '${global.appInfo.baseUrls!.offerImageUrl}/${admitedData.image}',
                                           width: Get.width,
                                           fit: BoxFit.fill,
                                           admitedOffersModal: admitedData,
@@ -167,7 +167,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                             padding: const EdgeInsets.all(4.0),
                                             child: CustomImage(
                                               image:
-                                                  '${global.appInfo.baseUrls.partnerImageUrl}/${admitedData.partner.image}',
+                                                  '${global.appInfo.baseUrls!.partnerImageUrl}/${admitedData.partner!.image}',
                                               height: 30,
                                               width: 60,
                                               fit: BoxFit.contain,
@@ -185,17 +185,17 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                     onTap: () async {
                                       if (global.currentUser.id != null) {
                                         await homeController.getTrackingLink(
-                                          admitedData.gotourl,
-                                          admitedData.affiliatePartner,
+                                          admitedData.gotourl!,
+                                          admitedData.affiliatePartner!,
                                           cId: admitedData.adId.toString(),
                                         );
                                         global.share(
                                           homeController.createdLink.isNotEmpty
                                               ? homeController.createdLink
-                                              : admitedData.gotourl,
-                                          admitedData.image.isNotEmpty &&
-                                                  !admitedData.isImageError
-                                              ? '${global.appInfo.baseUrls.offerImageUrl}/${admitedData.image}'
+                                              : admitedData.gotourl!,
+                                          admitedData.image!.isNotEmpty &&
+                                                  !admitedData.isImageError!
+                                              ? '${global.appInfo.baseUrls!.offerImageUrl}/${admitedData.image}'
                                               : '',
                                           '',
                                         );
@@ -261,7 +261,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                 height: 40,
                               ),
                               Text(
-                                admitedData.name,
+                                admitedData.name!,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontStyle: FontStyle.italic,
@@ -272,12 +272,12 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                               ),
                               FutureBuilder(
                                   future: global
-                                      .translatedText(admitedData.description),
+                                      .translatedText(admitedData.description!),
                                   builder: (context, snapShot) {
                                     return HtmlWidget(
                                       snapShot.data != null
-                                          ? snapShot.data
-                                          : admitedData.description,
+                                          ? snapShot.data!
+                                          : admitedData.description!,
                                     );
                                   }),
                               // Text(
@@ -334,23 +334,23 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                 onTap: () async {
                                   if (global.currentUser.id != null) {
                                     await homeController.getTrackingLink(
-                                        admitedData.gotourl,
-                                        admitedData.affiliatePartner,
+                                        admitedData.gotourl!,
+                                        admitedData.affiliatePartner!,
                                         cId: admitedData.adId.toString());
                                     await homeController.addClick(
-                                      admitedData.name,
-                                      global.appInfo.baseUrls.offerImageUrl +
+                                      admitedData.name!,
+                                      global.appInfo.baseUrls!.offerImageUrl! +
                                           '/' +
-                                          admitedData.image,
+                                          admitedData.image!,
                                       homeController.createdLink.isNotEmpty
                                           ? homeController.createdLink
-                                          : admitedData.gotourl,
+                                          : admitedData.gotourl!,
                                     );
 
                                     global.launchInBrowser(
                                       homeController.createdLink.isNotEmpty
                                           ? homeController.createdLink
-                                          : admitedData.gotourl,
+                                          : admitedData.gotourl!,
                                     );
 
                                     // _admitedOffers
@@ -534,7 +534,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                   ],
                                 ),
                               ),
-                              widget.fromSeeMore
+                              widget.fromSeeMore!
                                   ? SizedBox()
                                   : homeController.seeMoreCampaignList !=
                                               null &&
@@ -593,7 +593,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                                   borderRadius:
                                                       BorderRadius.circular(10),
                                                   border: Border.all(
-                                                    color: Colors.teal[200],
+                                                    color: Colors.teal[200]!,
                                                     width: 1.5,
                                                   )),
                                               alignment: Alignment.center,
@@ -620,10 +620,10 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
             ),
           ),
           bottomNavigationBar: admitedData.partner != null &&
-                      (admitedData.partner.leftTab != null &&
-                          admitedData.partner.leftTab.isNotEmpty) ||
-                  (admitedData.partner.rightTab != null &&
-                      admitedData.partner.rightTab.isNotEmpty)
+                      (admitedData.partner!.leftTab != null &&
+                          admitedData.partner!.leftTab!.isNotEmpty) ||
+                  (admitedData.partner!.rightTab != null &&
+                      admitedData.partner!.rightTab!.isNotEmpty)
               ? Container(
                   width: Get.width,
                   alignment: Alignment.center,
@@ -637,11 +637,11 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                           borderRadius: BorderRadius.zero),
                       color: Get.theme.primaryColor,
                       child: Row(
-                        mainAxisAlignment: (admitedData.partner.leftTab !=
+                        mainAxisAlignment: (admitedData.partner!.leftTab !=
                                         null &&
-                                    admitedData.partner.leftTab.isNotEmpty) ||
-                                (admitedData.partner.rightTab != null &&
-                                    admitedData.partner.rightTab.isNotEmpty)
+                                    admitedData.partner!.leftTab!.isNotEmpty) ||
+                                (admitedData.partner!.rightTab != null &&
+                                    admitedData.partner!.rightTab!.isNotEmpty)
                             ? MainAxisAlignment.spaceEvenly
                             : MainAxisAlignment.center,
                         children: [
@@ -657,24 +657,24 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                       topRight: Radius.circular(15),
                                     ),
                                     child: RatesAndOfferTermsSheetWidget(
-                                      partner: admitedData.partner,
+                                      partner: admitedData.partner!,
                                     ),
                                   ),
                                 ),
                               );
                             },
                             child: Text(
-                              admitedData.partner.leftTab,
-                              style: Get.theme.primaryTextTheme.titleSmall
+                              admitedData.partner!.leftTab!,
+                              style: Get.theme.primaryTextTheme.titleSmall!
                                   .copyWith(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white),
                             ),
                           ),
-                          (admitedData.partner.leftTab != null &&
-                                      admitedData.partner.leftTab.isNotEmpty) ||
-                                  (admitedData.partner.rightTab != null &&
-                                      admitedData.partner.rightTab.isNotEmpty)
+                          (admitedData.partner!.leftTab != null &&
+                                      admitedData.partner!.leftTab!.isNotEmpty) ||
+                                  (admitedData.partner!.rightTab != null &&
+                                      admitedData.partner!.rightTab!.isNotEmpty)
                               ? Icon(
                                   Icons.more_vert,
                                   size: 22,
@@ -691,14 +691,14 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                     topRight: Radius.circular(15),
                                   ),
                                   child: RatesAndOfferTermsSheetWidget(
-                                    partner: admitedData.partner,
+                                    partner: admitedData.partner!,
                                   ),
                                 ),
                               );
                             },
                             child: Text(
-                              admitedData.partner.rightTab.camelCase,
-                              style: Get.theme.primaryTextTheme.titleSmall
+                              admitedData.partner!.rightTab!.camelCase!,
+                              style: Get.theme.primaryTextTheme.titleSmall!
                                   .copyWith(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white),

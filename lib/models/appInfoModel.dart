@@ -3,19 +3,19 @@ import 'package:cashfuse/models/countryModel.dart';
 import 'package:cashfuse/models/languageModel.dart';
 
 class AppInfo {
-  String admob;
-  String facebookAd;
-  String businessName;
-  String logo;
-  String currency;
-  String country;
-  String countryCode;
-  String perOrderReferPercentage;
-  String minimumRedeemValue;
-  BaseUrls baseUrls;
-  List<LanguageModel> languages;
-  List<CountryModel> countries;
-  int countryselection;
+  String? admob;
+  String? facebookAd;
+  String? businessName;
+  String? logo;
+  String? currency;
+  String? country;
+  String? countryCode;
+  String? perOrderReferPercentage;
+  String? minimumRedeemValue;
+  BaseUrls? baseUrls;
+  List<LanguageModel>? languages;
+  List<CountryModel>? countries;
+  int? countryselection;
 
   AppInfo({
     this.admob,

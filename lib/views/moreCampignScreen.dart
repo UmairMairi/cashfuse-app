@@ -26,7 +26,7 @@ class MoreCampignScreen extends StatelessWidget {
                   children: [
                     Text(
                       'See More Offers',
-                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                      style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.1,
                       ),
@@ -62,7 +62,7 @@ class MoreCampignScreen extends StatelessWidget {
                           children: [
                             CustomImage(
                               image:
-                                  '${global.appInfo.baseUrls.offerImageUrl}/${homeController.seeMoreCampaignList[index].image}',
+                                  '${global.appInfo.baseUrls!.offerImageUrl}/${homeController.seeMoreCampaignList[index].image}',
                               height: global.getPlatFrom() ? 50 : 50,
                               width: global.getPlatFrom() ? 100 : 50,
                               fit: BoxFit.fill,
@@ -74,14 +74,14 @@ class MoreCampignScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     homeController
-                                        .seeMoreCampaignList[index].name,
+                                        .seeMoreCampaignList[index].name!,
                                     textAlign: TextAlign.start,
                                     style:
                                         Get.theme.primaryTextTheme.titleSmall,
                                   ).translate(),
                                   Text(
                                     homeController
-                                        .seeMoreCampaignList[index].description,
+                                        .seeMoreCampaignList[index].description!,
                                     textAlign: TextAlign.start,
                                   ).translate(),
                                 ],
@@ -119,7 +119,7 @@ class MoreCampignScreen extends StatelessWidget {
                             alignment: Alignment.center,
                             child: Text(
                               homeController
-                                  .seeMoreCampaignList[index].buttonText,
+                                  .seeMoreCampaignList[index].buttonText!,
                               style: TextStyle(
                                   color: Get.theme.secondaryHeaderColor,
                                   fontSize: 14,

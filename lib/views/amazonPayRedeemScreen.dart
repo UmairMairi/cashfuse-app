@@ -37,7 +37,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                 ),
                 title: Text(
                   'Amazon Pay Redeem',
-                  style: Get.theme.primaryTextTheme.titleSmall
+                  style: Get.theme.primaryTextTheme.titleSmall!
                       .copyWith(color: Colors.white),
                 ).translate(),
               ),
@@ -53,8 +53,8 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                     gradient: LinearGradient(
                       colors: [
-                        Colors.green[800],
-                        Colors.green[800],
+                        Colors.green[800]!,
+                        Colors.green[800]!,
                         Colors.green.withOpacity(0.85),
                       ],
                     ),
@@ -85,20 +85,20 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                         children: [
                           Text(
                             'Account Details',
-                            style: Get.theme.primaryTextTheme.titleMedium
+                            style: Get.theme.primaryTextTheme.titleMedium!
                                 .copyWith(fontWeight: FontWeight.w600),
                           ).translate(),
                           InkWell(
                             onTap: () async {
                               if (paymentController.amazonDetails != null &&
-                                  paymentController.amazonDetails.amazonNo !=
+                                  paymentController.amazonDetails!.amazonNo !=
                                       null) {
                                 if (GetPlatform.isAndroid) {
                                   try {
                                     PhoneNumber phoneNumber =
                                         await PhoneNumberUtil().parse(
                                             paymentController
-                                                .amazonDetails.amazonNo);
+                                                .amazonDetails!.amazonNo!);
                                     authController.coutryCode =
                                         '+' + phoneNumber.countryCode;
                                     contactNo.text = phoneNumber.nationalNumber;
@@ -128,7 +128,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                           Text(
                                             'Add Amazon Account',
                                             style: Get.theme.primaryTextTheme
-                                                .titleLarge
+                                                .titleLarge!
                                                 .copyWith(
                                                     fontWeight:
                                                         FontWeight.w600),
@@ -156,7 +156,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                                 height: 20,
                                                 alignment: Alignment.center,
                                                 child: Text(
-                                                  authController.coutryCode,
+                                                  authController.coutryCode!,
                                                 ),
                                               ),
                                               labelStyle: TextStyle(
@@ -199,7 +199,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                                 Get.back();
                                                 paymentController
                                                     .addAmazonPayDetails(
-                                                       authController.coutryCode + contactNo.text.trim());
+                                                       authController.coutryCode! + contactNo.text.trim());
                                               } else {
                                                 showCustomSnackBar(
                                                     'Please add Number.');
@@ -268,7 +268,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                 return RichText(
                                   text: TextSpan(
                                     text: snapShot.data,
-                                    style: Get.theme.primaryTextTheme.titleSmall
+                                    style: Get.theme.primaryTextTheme.titleSmall!
                                         .copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
@@ -276,9 +276,9 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                     children: <TextSpan>[
                                       TextSpan(
                                         text:
-                                            " ${paymentController.amazonDetails.amazonNo}",
+                                            " ${paymentController.amazonDetails!.amazonNo!}",
                                         style: Get
-                                            .theme.primaryTextTheme.bodySmall
+                                            .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
                                           letterSpacing: -0.2,
                                           fontWeight: FontWeight.w300,

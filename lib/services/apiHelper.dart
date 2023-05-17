@@ -789,7 +789,7 @@ class APIHelper {
     }
   }
 
-  Future<dynamic> getTrackingLink(String url, String type, {String cId}) async {
+  Future<dynamic> getTrackingLink(String url, String type, {String? cId}) async {
     try {
       Response response;
       var dio = Dio();

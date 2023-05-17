@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 ThemeController themeController = Get.find<ThemeController>();
 
-ThemeData nativeTheme({bool darkModeEnabled}) {
+ThemeData nativeTheme({bool? darkModeEnabled}) {
   if (darkModeEnabled == null) {
     darkModeEnabled = false;
   }

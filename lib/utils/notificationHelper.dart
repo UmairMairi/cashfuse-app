@@ -25,9 +25,9 @@ class NotificationHelper {
           defaultPresentSound: true,
           onDidReceiveLocalNotification: (
             int id,
-            String title,
-            String body,
-            String payload,
+            String? title,
+            String? body,
+            String? payload,
           ) async {
             return null;
           });
@@ -40,9 +40,9 @@ class NotificationHelper {
         //Get.find<NotificationController>().getNotificationList();
       });
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-        print("onOpenApp: ${message.notification.title}/${message.notification.body}/${message.notification.titleLocKey}");
+        print("onOpenApp: ${message.notification!.title}/${message.notification!.body}/${message.notification!.titleLocKey}");
         try {
-          if (message.notification.titleLocKey != null && message.notification.titleLocKey.isNotEmpty) {
+          if (message.notification!.titleLocKey != null && message.notification!.titleLocKey!.isNotEmpty) {
             // Get.toNamed(RouteHelper.getOrderDetailsRoute(int.parse(message.notification.titleLocKey)));
             // Get.to(() => OrderDetailsScreen(
             //       orderId: int.parse(message.notification.titleLocKey),
@@ -72,7 +72,7 @@ class NotificationHelper {
 
   static Future onSelectNotification(NotificationResponse payload) async {
     try {
-      if (payload != null && payload.payload.isNotEmpty) {
+      if (payload != null && payload.payload!.isNotEmpty) {
         // Get.toNamed(RouteHelper.getOrderDetailsRoute(int.parse(payload)));
 
       } else {
@@ -83,7 +83,7 @@ class NotificationHelper {
     }
   }
 
-  static Future<String> downloadAndSaveFile(String url, String fileName) async {
+  static Future<String?> downloadAndSaveFile(String url, String fileName) async {
     try {
       final Directory directory = await getApplicationDocumentsDirectory();
       final String filePath = '${directory.path}/$fileName';
@@ -102,7 +102,7 @@ class NotificationHelper {
         String _title;
         String _body;
         String _orderID;
-        String _image;
+        String? _image;
         // if (message.data != null ) {
         //   _title = message.data['title'];
         //   _body = message.data['body'];
@@ -113,20 +113,20 @@ class NotificationHelper {
         //           : '${global.baseUrl}/storage/app/public/notification/${message.data['image']}'
         //       : null;
         // } else {
-        _title = message.notification.title;
-        _body = message.notification.body;
-        _orderID = message.notification.titleLocKey;
+        _title = message.notification!.title!;
+        _body = message.notification!.body!;
+        _orderID = message.notification!.titleLocKey!;
         if (GetPlatform.isAndroid) {
-          _image = (message.notification.android.imageUrl != null && message.notification.android.imageUrl.isNotEmpty)
-              ? message.notification.android.imageUrl.startsWith('http')
-                  ? message.notification.android.imageUrl
-                  : '${global.baseUrl}/storage/app/public/notification/${message.notification.android.imageUrl}'
+          _image = (message.notification!.android!.imageUrl != null && message.notification!.android!.imageUrl!.isNotEmpty)
+              ? message.notification!.android!.imageUrl!.startsWith('http')
+                  ? message.notification!.android!.imageUrl
+                  : '${global.baseUrl}/storage/app/public/notification/${message.notification!.android!.imageUrl}'
               : null;
         } else if (GetPlatform.isIOS) {
-          _image = (message.notification.apple.imageUrl != null && message.notification.apple.imageUrl.isNotEmpty)
-              ? message.notification.apple.imageUrl.startsWith('http')
-                  ? message.notification.apple.imageUrl
-                  : '${global.baseUrl}/storage/app/public/notification/${message.notification.apple.imageUrl}'
+          _image = (message.notification!.apple!.imageUrl != null && message.notification!.apple!.imageUrl!.isNotEmpty)
+              ? message.notification!.apple!.imageUrl!.startsWith('http')
+                  ? message.notification!.apple!.imageUrl
+                  : '${global.baseUrl}/storage/app/public/notification/${message.notification!.apple!.imageUrl}'
               : null;
         }
         //}
@@ -179,10 +179,10 @@ class NotificationHelper {
   }
 
   static Future<void> showBigPictureNotificationHiddenLargeIcon(String title, String body, String orderID, String image, FlutterLocalNotificationsPlugin fln) async {
-    final String largeIconPath = await downloadAndSaveFile(image, 'largeIcon');
-    final String bigPicturePath = await downloadAndSaveFile(image, 'bigPicture');
+    final String? largeIconPath = await downloadAndSaveFile(image, 'largeIcon');
+    final String? bigPicturePath = await downloadAndSaveFile(image, 'bigPicture');
     final BigPictureStyleInformation bigPictureStyleInformation = BigPictureStyleInformation(
-      FilePathAndroidBitmap(bigPicturePath),
+      FilePathAndroidBitmap(bigPicturePath!),
       hideExpandedLargeIcon: true,
       contentTitle: title,
       htmlFormatContentTitle: true,
@@ -192,7 +192,7 @@ class NotificationHelper {
     final AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
       global.appName,
       global.appName,
-      largeIcon: FilePathAndroidBitmap(largeIconPath),
+      largeIcon: FilePathAndroidBitmap(largeIconPath!),
       priority: Priority.max,
       playSound: true,
       styleInformation: bigPictureStyleInformation,

@@ -19,10 +19,10 @@ class ThemeController extends GetxController implements GetxService {
 
   void _loadCurrentTheme() async {
     global.sp = await SharedPreferences.getInstance();
-    if (global.sp.getInt('primaryColor') != null) {
-      int colorVal = global.sp.getInt('primaryColor');
+    if (global.sp!.getInt('primaryColor') != null) {
+      int colorVal = global.sp!.getInt('primaryColor')!;
       _pickColor = Color(colorVal);
-      int secColorVal = global.sp.getInt('secondaryColor');
+      int secColorVal = global.sp!.getInt('secondaryColor')!;
       _pickSecondaryColor = Color(secColorVal);
     } else {
       _pickColor = Color(0xff009688);
@@ -34,14 +34,14 @@ class ThemeController extends GetxController implements GetxService {
 
   void setPickColor(Color color) async {
     _pickColor = color;
-    global.sp.setInt('primaryColor', _pickColor.value);
+    global.sp!.setInt('primaryColor', _pickColor.value);
 
     update();
   }
 
   void setSecondaryPickColor(Color color) async {
     _pickSecondaryColor = color;
-    global.sp.setInt('secondaryColor', _pickSecondaryColor.value);
+    global.sp!.setInt('secondaryColor', _pickSecondaryColor.value);
 
     update();
   }

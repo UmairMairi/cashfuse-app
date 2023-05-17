@@ -19,35 +19,35 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class AllInOneSearchScreen extends StatefulWidget {
-  final Color bgColor;
-  AllInOneSearchScreen({this.bgColor}) : super();
+  // final Color bgColor;
+  AllInOneSearchScreen() : super();
   @override
   _AppTabinationScreenState createState() => new _AppTabinationScreenState();
 }
 
 class _AppTabinationScreenState extends State<AllInOneSearchScreen>
     with TickerProviderStateMixin {
-  TabController _tabController;
+  late TabController _tabController;
   int _currentIndex = 0;
   bool _isDataLoaded = false;
   bool _isWebLoaded = false;
 
-  WebViewController webViewController;
+  late WebViewController webViewController;
   TextEditingController _cSearch = new TextEditingController();
   var _fDismiss = new FocusNode();
   var searchNode = new FocusNode();
 
-  SearchController searchController = Get.find<SearchController>();
+  SearchGetController searchController = Get.find<SearchGetController>();
 
   bool _isDuplicate = false;
 
-  AllInOneSearchDataModel selectedValue;
+  late AllInOneSearchDataModel selectedValue;
 
   _AppTabinationScreenState() : super();
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SearchController>(builder: (controller) {
+    return GetBuilder<SearchGetController>(builder: (controller) {
       return WillPopScope(
         onWillPop: () async {
           if (GetPlatform.isWeb) {
@@ -59,8 +59,8 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
             return false;
           } else {
             if (searchController.addNewTabList2 != null &&
-                searchController.addNewTabList2.length > 0 &&
-                searchController.addNewTabList2[_currentIndex].name !=
+                searchController.addNewTabList2!.length > 0 &&
+                searchController.addNewTabList2![_currentIndex].name !=
                     '+Add Tab') {
               if (await webViewController.canGoBack()) {
                 webViewController.goBack();
@@ -96,22 +96,22 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                     bottomOpacity: 0.0,
                     shape: RoundedRectangleBorder(side: BorderSide.none),
                     backgroundColor: searchController.addNewTabList2 != null &&
-                            searchController.addNewTabList2.length > 0 &&
+                            searchController.addNewTabList2!.length > 0 &&
                             searchController
-                                    .addNewTabList2[_currentIndex].tabColor !=
+                                    .addNewTabList2![_currentIndex].tabColor !=
                                 null &&
-                            searchController.addNewTabList2[_currentIndex]
-                                .tabColor.isNotEmpty
+                            searchController.addNewTabList2![_currentIndex]
+                                .tabColor!.isNotEmpty
                         ? _getColorFromHex(searchController
-                            .addNewTabList2[_currentIndex].tabColor)
+                            .addNewTabList2![_currentIndex].tabColor!)
                         : Get.theme.primaryColor,
                     automaticallyImplyLeading: false,
                     leading: InkWell(
                       onTap: () async {
                         if (searchController.addNewTabList2 != null &&
-                            searchController.addNewTabList2.length > 0 &&
+                            searchController.addNewTabList2!.length > 0 &&
                             searchController
-                                    .addNewTabList2[_currentIndex].name !=
+                                    .addNewTabList2![_currentIndex].name !=
                                 '+Add Tab') {
                           if (await webViewController.canGoBack()) {
                             webViewController.goBack();
@@ -170,7 +170,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
 
                               global.currentUser.id != null &&
                                       searchController.addNewTabList2 != null &&
-                                      searchController.addNewTabList2.length > 0
+                                      searchController.addNewTabList2!.length > 0
                                   ? InkWell(
                                       onTap: () async {
                                         FocusScope.of(context)
@@ -179,19 +179,19 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                         if (_cSearch.text.trim() != null &&
                                             _cSearch.text.trim().isNotEmpty &&
                                             searchController
-                                                    .addNewTabList2[
+                                                    .addNewTabList2![
                                                         _currentIndex]
                                                     .searchUrl !=
                                                 null &&
                                             searchController
-                                                .addNewTabList2[_currentIndex]
-                                                .searchUrl
+                                                .addNewTabList2![_currentIndex]
+                                                .searchUrl!
                                                 .isNotEmpty) {
                                           await webViewController
                                               .loadUrl(searchController
-                                                      .addNewTabList2[
+                                                      .addNewTabList2![
                                                           _currentIndex]
-                                                      .searchUrl +
+                                                      .searchUrl! +
                                                   _cSearch.text.trim())
                                               .then((value) {
                                             FocusScope.of(context)
@@ -215,16 +215,16 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                         onFieldSubmitted: (String val) async {
                           _cSearch.text.trim() != null &&
                                   _cSearch.text.trim().isNotEmpty &&
-                                  searchController.addNewTabList2[_currentIndex]
+                                  searchController.addNewTabList2![_currentIndex]
                                           .searchUrl !=
                                       null &&
-                                  searchController.addNewTabList2[_currentIndex]
-                                      .searchUrl.isNotEmpty
+                                  searchController.addNewTabList2![_currentIndex]
+                                      .searchUrl!.isNotEmpty
                               ? await webViewController.loadUrl(searchController
-                                      .addNewTabList2[_currentIndex].searchUrl +
+                                      .addNewTabList2![_currentIndex].searchUrl! +
                                   _cSearch.text.trim())
                               : await webViewController.loadUrl(searchController
-                                  .addNewTabList2[_currentIndex].trackingUrl);
+                                  .addNewTabList2![_currentIndex].trackingUrl!);
                           _isWebLoaded = false;
                           setState(() {});
                         },
@@ -246,14 +246,14 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                         shape: RoundedRectangleBorder(side: BorderSide.none),
                         backgroundColor: searchController.addNewTabList2 !=
                                     null &&
-                                searchController.addNewTabList2.length > 0 &&
-                                searchController.addNewTabList2[_currentIndex]
+                                searchController.addNewTabList2!.length > 0 &&
+                                searchController.addNewTabList2![_currentIndex]
                                         .tabColor !=
                                     null &&
-                                searchController.addNewTabList2[_currentIndex]
-                                    .tabColor.isNotEmpty
+                                searchController.addNewTabList2![_currentIndex]
+                                    .tabColor!.isNotEmpty
                             ? _getColorFromHex(searchController
-                                .addNewTabList2[_currentIndex].tabColor)
+                                .addNewTabList2![_currentIndex].tabColor!)
                             : Get.theme.primaryColor,
                         automaticallyImplyLeading: false,
 
@@ -308,17 +308,17 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                     if (_cSearch.text.trim() != null &&
                                         _cSearch.text.trim().isNotEmpty &&
                                         searchController
-                                                .addNewTabList2[_currentIndex]
+                                                .addNewTabList2![_currentIndex]
                                                 .searchUrl !=
                                             null &&
                                         searchController
-                                            .addNewTabList2[_currentIndex]
-                                            .searchUrl
+                                            .addNewTabList2![_currentIndex]
+                                            .searchUrl!
                                             .isNotEmpty) {
                                       await webViewController
                                           .loadUrl(searchController
-                                                  .addNewTabList2[_currentIndex]
-                                                  .searchUrl +
+                                                  .addNewTabList2![_currentIndex]
+                                                  .searchUrl! +
                                               _cSearch.text.trim())
                                           .then((value) {
                                         FocusScope.of(context)
@@ -349,22 +349,22 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                 _cSearch.text.trim() != null &&
                                         _cSearch.text.trim().isNotEmpty &&
                                         searchController
-                                                .addNewTabList2[_currentIndex]
+                                                .addNewTabList2![_currentIndex]
                                                 .searchUrl !=
                                             null &&
                                         searchController
-                                            .addNewTabList2[_currentIndex]
-                                            .searchUrl
+                                            .addNewTabList2![_currentIndex]
+                                            .searchUrl!
                                             .isNotEmpty
                                     ? await webViewController.loadUrl(
                                         searchController
-                                                .addNewTabList2[_currentIndex]
-                                                .searchUrl +
+                                                .addNewTabList2![_currentIndex]
+                                                .searchUrl! +
                                             _cSearch.text.trim())
                                     : await webViewController.loadUrl(
                                         searchController
-                                            .addNewTabList2[_currentIndex]
-                                            .trackingUrl);
+                                            .addNewTabList2![_currentIndex]
+                                            .trackingUrl!);
                                 _isWebLoaded = false;
                                 setState(() {});
                               },
@@ -382,7 +382,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                 global.currentUser.id != null
                     ? _isDataLoaded
                         ? searchController.addNewTabList2 != null &&
-                                searchController.addNewTabList2.length > 0
+                                searchController.addNewTabList2!.length > 0
                             ? Expanded(
                                 child: SizedBox(
                                   child: tabCreate(),
@@ -407,7 +407,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                           children: [
                             Text(
                               'Login or signup',
-                              style: Get.theme.primaryTextTheme.displaySmall
+                              style: Get.theme.primaryTextTheme.displaySmall!
                                   .copyWith(
                                 letterSpacing: -1,
                                 fontWeight: FontWeight.w700,
@@ -419,7 +419,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                               child: Text(
                                 'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
                                 textAlign: TextAlign.center,
-                                style: Get.theme.primaryTextTheme.titleSmall
+                                style: Get.theme.primaryTextTheme.titleSmall!
                                     .copyWith(
                                   letterSpacing: -0.2,
                                   fontWeight: FontWeight.w600,
@@ -502,20 +502,20 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
 
   _init() async {
     try {
-      if (global.sp.getString('tabList') != null) {
-        List<dynamic> list = await json.decode(global.sp.getString('tabList'));
+      if (global.sp!.getString('tabList') != null) {
+        List<dynamic> list = await json.decode(global.sp!.getString('tabList')!);
         print(list);
 
         searchController.addNewTabList2 = List<AllInOneSearchDataModel>.from(
             list.map((x) => AllInOneSearchDataModel.fromJson(x)));
         _tabController = new TabController(
-          length: searchController.addNewTabList2.length,
+          length: searchController.addNewTabList2!.length,
           vsync: this,
           initialIndex: _currentIndex,
         );
         if (searchController.addNewTabList != null) {
-          searchController.addNewTabList.clear();
-          searchController.addNewTabList.addAll(searchController.addNewTabList2
+          searchController.addNewTabList!.clear();
+          searchController.addNewTabList!.addAll(searchController.addNewTabList2!
               .where((e) => e.id != null)
               .toList());
         }
@@ -523,7 +523,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
         _tabController.addListener(_tabControllerListener);
       } else {
         if (searchController.addNewTabList2 != null &&
-            searchController.addNewTabList2.length > 0) {
+            searchController.addNewTabList2!.length > 0) {
           // if (searchController.addNewTabList2.length >= 6) {
           //   searchController.addNewTabList2.addAll(searchController.allInOneList.sublist(0, 5));
           // }
@@ -535,7 +535,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
           //   );
           // }
           _tabController = new TabController(
-            length: searchController.addNewTabList2.length,
+            length: searchController.addNewTabList2!.length,
             vsync: this,
             initialIndex: _currentIndex,
           );
@@ -554,11 +554,11 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
   tabCreate() {
     return Scaffold(
         backgroundColor:
-            searchController.addNewTabList2[_currentIndex].tabColor != null &&
+            searchController.addNewTabList2![_currentIndex].tabColor != null &&
                     searchController
-                        .addNewTabList2[_currentIndex].tabColor.isNotEmpty
+                        .addNewTabList2![_currentIndex].tabColor!.isNotEmpty
                 ? _getColorFromHex(
-                    searchController.addNewTabList2[_currentIndex].tabColor)
+                    searchController.addNewTabList2![_currentIndex].tabColor!)
                 : Get.theme.primaryColor,
         //smartAppList[_currentIndex].appHexCode != null ? _getColorFromHex(smartAppList[_currentIndex].appHexCode) : global.defaultColor,
         appBar: _isDataLoaded
@@ -581,7 +581,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                       });
                     },
                     tabs: List<Widget>.generate(
-                        searchController.addNewTabList2.length, (int index) {
+                        searchController.addNewTabList2!.length, (int index) {
                       return new Tab(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -589,7 +589,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                             Padding(
                               padding: const EdgeInsets.only(left: 4),
                               child: Text(
-                                searchController.addNewTabList2[index].name,
+                                searchController.addNewTabList2![index].name!,
                                 style: TextStyle(color: Colors.white),
                               ).translate(),
                             ),
@@ -636,7 +636,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                               child: Text(
                                 'To access this feature, download the app',
                                 textAlign: TextAlign.center,
-                                style: Get.theme.primaryTextTheme.titleLarge
+                                style: Get.theme.primaryTextTheme.titleLarge!
                                     .copyWith(
                                         color: Colors.red,
                                         fontWeight: FontWeight.w600),
@@ -658,7 +658,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                 alignment: Alignment.center,
                                 child: Text(
                                   'Download The App',
-                                  style: Get.theme.primaryTextTheme.titleSmall
+                                  style: Get.theme.primaryTextTheme.titleSmall!
                                       .copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
@@ -677,9 +677,9 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
             : TabBarView(
                 controller: _tabController,
                 physics: NeverScrollableScrollPhysics(),
-                children: List.generate(searchController.addNewTabList2.length,
+                children: List.generate(searchController.addNewTabList2!.length,
                     (index) {
-                  return searchController.addNewTabList2[index].name ==
+                  return searchController.addNewTabList2![index].name ==
                           '+Add Tab'
                       ? Container(
                           color: Colors.white,
@@ -689,7 +689,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   itemCount:
-                                      searchController.addNewTabList.length,
+                                      searchController.addNewTabList!.length,
                                   itemBuilder: (context, i) {
                                     //searchController.addNewTabList2.removeWhere((element) => element.id == null);
                                     return Card(
@@ -700,7 +700,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                           Text(
                                             'TAB ${i + 1}',
                                             style: Get.theme.primaryTextTheme
-                                                .titleMedium
+                                                .titleMedium!
                                                 .copyWith(
                                                     color: Colors.black54),
                                           ).translate(),
@@ -717,11 +717,11 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                                 child: Column(
                                                   children: [
                                                     Text(
-                                                      value.name,
+                                                      value.name!,
                                                       style: Get
                                                           .theme
                                                           .primaryTextTheme
-                                                          .titleMedium
+                                                          .titleMedium!
                                                           .copyWith(
                                                               color: Colors
                                                                   .black54),
@@ -736,10 +736,10 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                             onChanged: (value) {
                                               //searchController.addNewTabList2.add(value);
 
-                                              if (searchController.addNewTabList
+                                              if (searchController.addNewTabList!
                                                       .where((element) =>
                                                           element.name ==
-                                                          value.name)
+                                                          value!.name)
                                                       .toList()
                                                       .length >
                                                   0) {
@@ -749,11 +749,11 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                                 _isDuplicate = false;
                                               }
                                               searchController
-                                                  .addNewTabList[i] = value;
+                                                  .addNewTabList![i] = value!;
 
                                               setState(() {});
                                               print(
-                                                  'searchController.addNewTabList @@@@@@@@@@@@@ ${searchController.addNewTabList.length.toString()}');
+                                                  'searchController.addNewTabList @@@@@@@@@@@@@ ${searchController.addNewTabList!.length.toString()}');
                                             },
                                             underline: SizedBox(),
                                             iconEnabledColor:
@@ -762,9 +762,9 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                                 Get.theme.primaryColor,
                                             hint: Text(
                                               searchController
-                                                  .addNewTabList[i].name,
+                                                  .addNewTabList![i].name!,
                                               style: Get.theme.primaryTextTheme
-                                                  .titleMedium
+                                                  .titleMedium!
                                                   .copyWith(
                                                       color: Colors.black54),
                                             ).translate(),
@@ -772,10 +772,10 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                           InkWell(
                                             onTap: () {
                                               if (searchController
-                                                      .addNewTabList.length >=
+                                                      .addNewTabList!.length >=
                                                   6) {
                                                 //searchController.addNewTabList2.removeWhere((element) => element.id == searchController.addNewTabList[i].id);
-                                                searchController.addNewTabList
+                                                searchController.addNewTabList!
                                                     .removeAt(i);
                                                 // searchController.addNewTabList2.addAll(searchController.addNewTabList);
                                                 // searchController.addNewTabList2.insert(
@@ -826,7 +826,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                               fontSize: 16.0,
                                             );
                                           } else if (searchController
-                                                  .addNewTabList
+                                                  .addNewTabList!
                                                   .where((element) =>
                                                       element.id == null)
                                                   .toList()
@@ -848,18 +848,18 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                             //     builder: (context) => AllInOneSearchScreen(),
                                             //   ),
                                             // );
-                                            searchController.addNewTabList2
+                                            searchController.addNewTabList2!
                                                 .removeWhere((element) =>
                                                     element.id == null);
                                             print(
-                                                'addNewTabList2 ------------------ ${searchController.addNewTabList2.length.toString()}');
+                                                'addNewTabList2 ------------------ ${searchController.addNewTabList2!.length.toString()}');
                                             searchController.addNewTabList2 =
                                                 List.from(searchController
-                                                    .addNewTabList);
+                                                    .addNewTabList!);
                                             print(
-                                                'addNewTabList +++++++++++++ ${searchController.addNewTabList.length.toString()}');
+                                                'addNewTabList +++++++++++++ ${searchController.addNewTabList!.length.toString()}');
                                             print(
-                                                'addNewTabList2 +++++++++++++ ${searchController.addNewTabList2.length.toString()}');
+                                                'addNewTabList2 +++++++++++++ ${searchController.addNewTabList2!.length.toString()}');
                                             //addNewTabList = List.from(addNewTabList2);
                                             // searchController.addNewTabList2.clear();
                                             // searchController.addNewTabList2.addAll(searchController.addNewTabList);
@@ -868,18 +868,18 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
 
                                             //global.sp.setString('tabList', searchController.addNewTabList.map((e) => e.toJson()).toString());
 
-                                            searchController.addNewTabList2
+                                            searchController.addNewTabList2!
                                                 .insert(
                                               searchController
-                                                  .addNewTabList2.length,
+                                                  .addNewTabList2!.length,
                                               AllInOneSearchDataModel(
                                                   name: '+Add Tab'),
                                             );
 
-                                            global.sp.setString(
+                                            global.sp!.setString(
                                                 'tabList',
                                                 jsonEncode(searchController
-                                                        .addNewTabList2
+                                                        .addNewTabList2!
                                                         .map((i) => i.toJson())
                                                         .toList())
                                                     .toString());
@@ -950,15 +950,15 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                       : Stack(
                           alignment: Alignment.center,
                           children: [
-                            searchController.addNewTabList2[index].searchUrl !=
+                            searchController.addNewTabList2![index].searchUrl !=
                                         null &&
-                                    searchController.addNewTabList2[index]
-                                        .searchUrl.isNotEmpty &&
+                                    searchController.addNewTabList2![index]
+                                        .searchUrl!.isNotEmpty &&
                                     _cSearch.text.trim() != null &&
                                     _cSearch.text.trim().isNotEmpty
                                 ? WebView(
                                     initialUrl: searchController
-                                            .addNewTabList2[index].searchUrl +
+                                            .addNewTabList2![index].searchUrl! +
                                         _cSearch.text.trim(),
                                     javascriptMode: JavascriptMode.unrestricted,
                                     allowsInlineMediaPlayback: true,
@@ -979,7 +979,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                   )
                                 : WebView(
                                     initialUrl: searchController
-                                        .addNewTabList2[index].trackingUrl,
+                                        .addNewTabList2![index].trackingUrl,
                                     userAgent:
                                         'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13E233 Safari/601.1',
                                     javascriptMode: JavascriptMode.unrestricted,
@@ -989,7 +989,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
                                       webViewController.clearCache();
                                       webViewController.loadUrl(
                                         searchController
-                                            .addNewTabList2[index].trackingUrl,
+                                            .addNewTabList2![index].trackingUrl!,
                                       );
 
                                       setState(() {});

@@ -1,24 +1,24 @@
 class AllInOneSearchDataModel {
-  int id;
-  int campaignId;
-  String name;
-  String url;
-  String domain;
-  String payoutType;
-  double payout;
-  String image;
-  String category;
-  int categoryId;
-  int status;
-  String buttonText;
-  String affiliatePartner;
-  dynamic description;
-  int campaigns;
-  DateTime createdAt;
-  DateTime updatedAt;
-  String trackingUrl;
-  String tabColor;
-  String searchUrl;
+  int? id;
+  int? campaignId;
+  String? name;
+  String? url;
+  String? domain;
+  String? payoutType;
+  double? payout;
+  String? image;
+  String? category;
+  int? categoryId;
+  int? status;
+  String? buttonText;
+  String? affiliatePartner;
+  String? description;
+  int? campaigns;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  String? trackingUrl;
+  String? tabColor;
+  String? searchUrl;
 
   AllInOneSearchDataModel({
     this.id,
@@ -86,8 +86,8 @@ class AllInOneSearchDataModel {
         "affiliate_partner": affiliatePartner,
         "description": description,
         "campaigns": campaigns,
-        "created_at": createdAt != null ? createdAt.toIso8601String() : null,
-        "updated_at": updatedAt != null ? updatedAt.toIso8601String() : null,
+        "created_at": createdAt != null ? createdAt!.toIso8601String() : null,
+        "updated_at": updatedAt != null ? updatedAt!.toIso8601String() : null,
         "tracking_url": trackingUrl,
         "tab_color": tabColor,
         "search_url": searchUrl,

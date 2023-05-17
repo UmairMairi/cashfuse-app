@@ -37,7 +37,7 @@ class LanguageScreen extends StatelessWidget {
           title: GetBuilder<LocalizationController>(
             builder: (controller) => Text(
               'Language',
-              style: Get.theme.primaryTextTheme.titleSmall
+              style: Get.theme.primaryTextTheme.titleSmall!
                   .copyWith(color: Colors.white),
             ).translate(),
           ),
@@ -45,22 +45,22 @@ class LanguageScreen extends StatelessWidget {
         body: GetBuilder<LocalizationController>(
           builder: (localizationController) {
             return ListView.builder(
-                itemCount: global.appInfo.languages.length,
+                itemCount: global.appInfo.languages!.length,
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) => Column(
                       children: [
                         RadioListTile(
                           onChanged: (val) {
-                            localizationController.setLanguage(val);
+                            localizationController.setLanguage(val!);
                             localizationController.refresh();
                           },
-                          value: global.appInfo.languages[index].languageCode,
+                          value: global.appInfo.languages![index].languageCode,
                           groupValue: localizationController.languageCode,
                           title: Text(
-                              global.appInfo.languages[index].languageName),
+                              global.appInfo.languages![index].languageName!),
                         ),
-                        index != global.appInfo.languages.length - 1
+                        index != global.appInfo.languages!.length - 1
                             ? Divider(
                                 color: Color(0xFFDFE8EF),
                               )

@@ -1,15 +1,15 @@
 import 'package:cashfuse/models/userModel.dart';
 
 class PaymentHistoryModel {
-  int id;
-  int userId;
-  int amount;
-  int approved;
-  DateTime createdAt;
-  DateTime updatedAt;
-  String medium;
-  String mediumDetails;
-  UserModel user;
+  int? id;
+  int? userId;
+  int? amount;
+  int? approved;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  String? medium;
+  String? mediumDetails;
+  UserModel? user;
 
   PaymentHistoryModel({
     this.id,
@@ -44,10 +44,10 @@ class PaymentHistoryModel {
         "user_id": userId,
         "amount": amount,
         "approved": approved,
-        "created_at": createdAt != null ? createdAt.toIso8601String() : null,
-        "updated_at": updatedAt != null ? updatedAt.toIso8601String() : null,
+        "created_at": createdAt != null ? createdAt!.toIso8601String() : null,
+        "updated_at": updatedAt != null ? updatedAt!.toIso8601String() : null,
         "medium": medium,
         "medium_details": mediumDetails,
-        "user": user != null ? user.toJson() : null,
+        "user": user != null ? user!.toJson() : null,
       };
 }

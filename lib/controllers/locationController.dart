@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/models/countryModel.dart';
 import 'package:cashfuse/services/apiHelper.dart';
+import 'package:cashfuse/widget/countrySelectOption.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -52,9 +55,9 @@ class LocationController extends GetxController {
           .then((Position position) async {
         final placemarks = await placemarkFromCoordinates(
             position.latitude, position.longitude);
-        String _country = placemarks[0].country;
+        String _country = placemarks[0].country!;
 
-        List<CountryModel> _tList = global.appInfo.countries
+        List<CountryModel> _tList = global.appInfo.countries!
             .where((element) => element.countryName == _country)
             .toList();
         if (_tList != null && _tList.length > 0) {
@@ -63,10 +66,15 @@ class LocationController extends GetxController {
           _tList.map((e) => e.isSelected = true).toList();
           global.countrySlug = _tList
               .firstWhere((element) => element.countryName == _country)
-              .slug;
-        }else{
+              .slug!;
+
+          await global.sp!
+              .setString('country', json.encode(global.country!.toJson()));
+          await global.sp!.setString('countrySlug', global.countrySlug);
+        } else {
           global.showCountryPopUp = true;
         }
+        homeController.init();
         update();
       }).catchError((e) {
         print("Exceptioin - LocationController.dart - getCurrentLocation():" +

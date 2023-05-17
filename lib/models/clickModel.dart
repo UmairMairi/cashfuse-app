@@ -1,10 +1,10 @@
 class ClickModel {
-  int id;
-  String userId;
-  String name;
-  String image;
-  DateTime createdAt;
-  DateTime updatedAt;
+  int? id;
+  String? userId;
+  String? name;
+  String? image;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   ClickModel({
     this.id,

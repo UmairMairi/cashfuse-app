@@ -1,15 +1,15 @@
 class AdModel {
-  int id;
-  String adId;
-  String placementId;
-  String adType;
-  int status;
-  int location;
-  int clicks;
-  int rewards;
-  String platform;
-  DateTime createdAt;
-  DateTime updatedAt;
+  int? id;
+  String? adId;
+  String? placementId;
+  String? adType;
+  int? status;
+  int? location;
+  int? clicks;
+  int? rewards;
+  String? platform;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   AdModel({
     this.id,

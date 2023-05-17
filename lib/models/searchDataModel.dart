@@ -5,11 +5,11 @@ import 'package:cashfuse/models/commonModel.dart';
 import 'package:cashfuse/models/offerModel.dart';
 
 class SearchDataModel {
-  List<CategoryModel> advertiserList;
-  List<AdsModel> adsList;
-  List<CampaignModel> campaignList;
-  List<OfferModel> offerList;
-  List<CommonModel> commonList = [];
+  List<CategoryModel>? advertiserList;
+  List<AdsModel>? adsList;
+  List<CampaignModel>? campaignList;
+  List<OfferModel>? offerList;
+  List<CommonModel>? commonList = [];
 
   SearchDataModel({
     this.advertiserList,

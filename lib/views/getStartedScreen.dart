@@ -14,7 +14,7 @@ import '../utils/images.dart';
 
 class GetStartedScreen extends StatelessWidget {
   final bool fromMenu;
-  GetStartedScreen({this.fromMenu});
+  GetStartedScreen({required this.fromMenu});
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
@@ -194,7 +194,7 @@ class GetStartedScreen extends StatelessWidget {
                             ),
                             Text(
                               'Login with Apple',
-                              style: Get.theme.primaryTextTheme.titleMedium
+                              style: Get.theme.primaryTextTheme.titleMedium!
                                   .copyWith(
                                 color: Get.theme.secondaryHeaderColor,
                                 fontWeight: FontWeight.w600,
@@ -231,7 +231,7 @@ class GetStartedScreen extends StatelessWidget {
                             ),
                             Text(
                               'Login with Google',
-                              style: Get.theme.primaryTextTheme.titleMedium
+                              style: Get.theme.primaryTextTheme.titleMedium!
                                   .copyWith(
                                 color: Get.theme.secondaryHeaderColor,
                                 fontWeight: FontWeight.w600,
@@ -289,7 +289,7 @@ class GetStartedScreen extends StatelessWidget {
                       ),
                       Text(
                         'Login with Phone',
-                        style: Get.theme.primaryTextTheme.titleMedium.copyWith(
+                        style: Get.theme.primaryTextTheme.titleMedium!.copyWith(
                           color: Get.theme.secondaryHeaderColor,
                           fontWeight: FontWeight.w600,
                         ),
@@ -347,7 +347,7 @@ class GetStartedScreen extends StatelessWidget {
                       ),
                       Text(
                         'Login with Email',
-                        style: Get.theme.primaryTextTheme.titleMedium.copyWith(
+                        style: Get.theme.primaryTextTheme.titleMedium!.copyWith(
                           color: Get.theme.secondaryHeaderColor,
                           fontWeight: FontWeight.w600,
                         ),

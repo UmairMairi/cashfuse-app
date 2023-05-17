@@ -1,16 +1,16 @@
 class CountryModel {
-  int id;
-  int phoneCode;
-  String countryCode;
-  String countryName;
-  String currencyCode;
-  String currencySymbol;
-  String adNetworks;
-  String slug;
-  int status;
-  DateTime createdAt;
-  DateTime updatedAt;
-  bool isSelected = false; // for chnage country selection
+  int? id;
+  int? phoneCode;
+  String? countryCode;
+  String? countryName;
+  String? currencyCode;
+  String? currencySymbol;
+  String? adNetworks;
+  String? slug;
+  int? status;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  bool? isSelected = false; // for chnage country selection
 
   CountryModel({
     this.id,
@@ -50,4 +50,18 @@ class CountryModel {
           e.toString());
     }
   }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "phone_code": phoneCode,
+        "country_code": countryCode,
+        "country_name": countryName,
+        "currency_code": currencyCode,
+        "currency_symbol": currencySymbol,
+        "ad_networks": adNetworks,
+        "slug": slug,
+        "status": status,
+        "created_at": createdAt != null ? createdAt!.toIso8601String() : null,
+        "updated_at": updatedAt != null ? updatedAt!.toIso8601String() : null,
+      };
 }

@@ -27,7 +27,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
           ),
           title: Text(
             'Bank Transfer Redeem',
-            style: Get.theme.primaryTextTheme.titleSmall
+            style: Get.theme.primaryTextTheme.titleSmall!
                 .copyWith(color: Colors.white),
           ).translate(),
         ),
@@ -51,8 +51,8 @@ class AddPaymentDetailScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                     gradient: LinearGradient(
                       colors: [
-                        Colors.purple[800],
-                        Colors.purple[800],
+                        Colors.purple[800]!,
+                        Colors.purple[800]!,
                         Colors.purple.withOpacity(0.85),
                       ],
                     ),
@@ -82,7 +82,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                         children: [
                           Text(
                             'Account Details',
-                            style: Get.theme.primaryTextTheme.titleMedium
+                            style: Get.theme.primaryTextTheme.titleMedium!
                                 .copyWith(fontWeight: FontWeight.w600),
                           ).translate(),
                           InkWell(
@@ -132,7 +132,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                           text: TextSpan(
                                             text: snapShot.data,
                                             style: Get.theme.primaryTextTheme
-                                                .titleSmall
+                                                .titleSmall!
                                                 .copyWith(
                                               letterSpacing: -0.2,
                                               fontWeight: FontWeight.w500,
@@ -140,9 +140,9 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                             children: <TextSpan>[
                                               TextSpan(
                                                 text:
-                                                    " ${paymentController.bankDetails.acHolderName}",
+                                                    " ${paymentController.bankDetails!.acHolderName}",
                                                 style: Get.theme
-                                                    .primaryTextTheme.bodySmall
+                                                    .primaryTextTheme.bodySmall!
                                                     .copyWith(
                                                   letterSpacing: -0.2,
                                                   fontWeight: FontWeight.w300,
@@ -161,7 +161,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                         text: TextSpan(
                                           text: snapShot.data,
                                           style: Get
-                                              .theme.primaryTextTheme.titleSmall
+                                              .theme.primaryTextTheme.titleSmall!
                                               .copyWith(
                                             letterSpacing: -0.2,
                                             fontWeight: FontWeight.w500,
@@ -169,9 +169,9 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                           children: <TextSpan>[
                                             TextSpan(
                                               text:
-                                                  " ${paymentController.bankDetails.acNo}",
+                                                  " ${paymentController.bankDetails!.acNo}",
                                               style: Get.theme.primaryTextTheme
-                                                  .bodySmall
+                                                  .bodySmall!
                                                   .copyWith(
                                                 letterSpacing: -0.2,
                                                 fontWeight: FontWeight.w300,
@@ -189,7 +189,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                         text: TextSpan(
                                           text: snapShot.data,
                                           style: Get
-                                              .theme.primaryTextTheme.titleSmall
+                                              .theme.primaryTextTheme.titleSmall!
                                               .copyWith(
                                             letterSpacing: -0.2,
                                             fontWeight: FontWeight.w500,
@@ -197,9 +197,9 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                           children: <TextSpan>[
                                             TextSpan(
                                               text:
-                                                  " ${paymentController.bankDetails.bankName}",
+                                                  " ${paymentController.bankDetails!.bankName}",
                                               style: Get.theme.primaryTextTheme
-                                                  .bodySmall
+                                                  .bodySmall!
                                                   .copyWith(
                                                 letterSpacing: -0.2,
                                                 fontWeight: FontWeight.w300,
@@ -217,7 +217,7 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                         text: TextSpan(
                                           text: snapShot.data,
                                           style: Get
-                                              .theme.primaryTextTheme.titleSmall
+                                              .theme.primaryTextTheme.titleSmall!
                                               .copyWith(
                                             letterSpacing: -0.2,
                                             fontWeight: FontWeight.w500,
@@ -225,9 +225,9 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                           children: <TextSpan>[
                                             TextSpan(
                                               text: " ${paymentController
-                                                  .bankDetails.ifsc}",
+                                                  .bankDetails!.ifsc}",
                                               style: Get.theme.primaryTextTheme
-                                                  .bodySmall
+                                                  .bodySmall!
                                                   .copyWith(
                                                 letterSpacing: -0.2,
                                                 fontWeight: FontWeight.w300,

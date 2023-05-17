@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 
 class ColorPickerPage extends StatefulWidget {
-  const ColorPickerPage({Key key, this.themeMode}) : super(key: key);
-  final ValueChanged<ThemeMode> themeMode;
+  const ColorPickerPage({this.themeMode}) : super();
+  final ValueChanged<ThemeMode>? themeMode;
 
   @override
   _ColorPickerPageState createState() => _ColorPickerPageState();
@@ -16,11 +16,11 @@ class ColorPickerPage extends StatefulWidget {
 
 class _ColorPickerPageState extends State<ColorPickerPage>
     with SingleTickerProviderStateMixin {
-  TabController tabController;
+  late TabController tabController;
 
   List<Color> fullMaterialColors = [
     Colors.black,
-    Colors.blue[800],
+    Colors.blue[800]!,
     Colors.red,
     Colors.redAccent,
     Colors.pink,
@@ -75,7 +75,7 @@ class _ColorPickerPageState extends State<ColorPickerPage>
             ),
           ),
         );
-        return;
+        return false;
       }),
       child: Scaffold(
           appBar: AppBar(

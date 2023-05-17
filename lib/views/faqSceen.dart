@@ -49,7 +49,7 @@ class FaqScreen extends StatelessWidget {
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'What are you looking for?',
-                          hintStyle: Get.theme.primaryTextTheme.bodySmall
+                          hintStyle: Get.theme.primaryTextTheme.bodySmall!
                               .copyWith(color: Colors.grey, fontSize: 11),
                         ),
                         onFieldSubmitted: (value) {
@@ -58,7 +58,7 @@ class FaqScreen extends StatelessWidget {
                       )
                     : Text(
                         'FAQs',
-                        style: Get.theme.primaryTextTheme.titleLarge
+                        style: Get.theme.primaryTextTheme.titleLarge!
                             .copyWith(color: Colors.white),
                       ).translate(),
                 actions: [
@@ -115,9 +115,9 @@ class FaqScreen extends StatelessWidget {
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                          commonController.faqList[index].ques,
+                                          commonController.faqList[index].ques!,
                                           style: Get
-                                              .theme.primaryTextTheme.bodyMedium
+                                              .theme.primaryTextTheme.bodyMedium!
                                               .copyWith(
                                                   color: Colors.grey[600]),
                                         ).translate(),

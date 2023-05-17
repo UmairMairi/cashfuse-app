@@ -20,8 +20,8 @@ import 'package:google_translator/google_translator.dart';
 import 'admitedOfferDetailScreen.dart';
 
 class CategoryScreen extends StatefulWidget {
-  final String title;
-  final CategoryModel category;
+  final String? title;
+  final CategoryModel? category;
   // CategoryModel category = Get.arguments;
   CategoryScreen({this.category, this.title});
 
@@ -70,8 +70,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 ),
               ),
               title: Text(
-                widget.category != null ? widget.category.name : '',
-                style: Get.theme.primaryTextTheme.titleSmall
+                widget.category != null ? widget.category!.name! : '',
+                style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ).translate(),
             ),
@@ -102,8 +102,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           : SizedBox();
                     },
                   ),
-                  widget.category.commonList != null &&
-                          widget.category.commonList.length > 0
+                  widget.category!.commonList != null &&
+                          widget.category!.commonList.length > 0
                       ? GetBuilder<HomeController>(builder: (controller) {
                           return GridView.builder(
                             gridDelegate:
@@ -113,7 +113,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                   global.getPlatFrom() ? 25 : 15.0,
                               mainAxisSpacing: global.getPlatFrom() ? 25 : 15.0,
                             ),
-                            itemCount: widget.category.commonList.length,
+                            itemCount: widget.category!.commonList.length,
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             padding: EdgeInsets.symmetric(
@@ -121,12 +121,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () async {
-                                  if (widget.category.commonList[index].adId !=
+                                  if (widget.category!.commonList[index].adId !=
                                           null &&
-                                      widget.category.commonList[index].adId
+                                      widget.category!.commonList[index].adId!
                                           .isNotEmpty) {
                                     await homeController.getAdDetails(
-                                        widget.category.commonList[index].adId);
+                                        widget.category!.commonList[index].adId!);
                                     Get.to(
                                       () => AdsDetailScreen(
                                         ads: homeController.ads,
@@ -135,12 +135,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                       routeName: 'detail',
                                     );
                                   } else if (widget
-                                          .category.commonList[index].from
+                                          .category!.commonList[index].from
                                           .toString() ==
                                       "admit") {
                                     await homeController.getAdmitedDetails(
-                                        widget.category.commonList[index]
-                                            .campaignId);
+                                        widget.category!.commonList[index]
+                                            .campaignId!);
 
                                     Get.to(
                                         () => AdmitedDetailScreen(
@@ -173,7 +173,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                     //   });
                                   } else {
                                     await homeController.getCampignDetails(
-                                        widget.category.commonList[index]
+                                        widget.category!.commonList[index]
                                             .campaignId
                                             .toString());
                                     print('jasbhjd');
@@ -190,11 +190,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                     ? WebAdsCampaignWidget(
                                         fromWebHome: false,
                                         commonModel:
-                                            widget.category.commonList[index],
+                                            widget.category!.commonList[index],
                                       )
                                     : AdsCampaignWidget(
                                         commonModel:
-                                            widget.category.commonList[index],
+                                            widget.category!.commonList[index],
                                       ),
                               );
                             },
