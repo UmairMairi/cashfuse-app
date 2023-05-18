@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, unnecessary_null_comparison
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/couponController.dart';
@@ -74,7 +74,7 @@ class WebHomeScreen extends StatelessWidget {
                                 },
                                 child: Text(
                                   'View All >',
-                                  style: Get.theme.primaryTextTheme.bodySmall
+                                  style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                           color: Colors.teal,
                                           fontSize:
@@ -117,7 +117,7 @@ class WebHomeScreen extends StatelessWidget {
                                       child: Text(
                                         'View All >',
                                         style: Get
-                                            .theme.primaryTextTheme.bodySmall
+                                            .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
                                                 color: Colors.teal,
                                                 fontSize: global.getPlatFrom()
@@ -184,7 +184,7 @@ class WebHomeScreen extends StatelessWidget {
                                               Get.to(
                                                 () => OfferDetailScreen(
                                                   offer: couponController
-                                                      .couponList[index].offer,
+                                                      .couponList[index].offer!,
                                                   fromSeeMore: false,
                                                 ),
                                                 routeName: 'offer',
@@ -325,7 +325,7 @@ class WebHomeScreen extends StatelessWidget {
                                                   BorderRadius.circular(10),
                                               child: CustomImage(
                                                 image:
-                                                    '${global.appInfo.baseUrls.offerImageUrl}/${homeController.exclusiveOfferList[index].bannerImage}',
+                                                    '${global.appInfo.baseUrls!.offerImageUrl}/${homeController.exclusiveOfferList[index].bannerImage}',
                                                 height: 170,
                                                 width: Get.width,
                                                 fit: BoxFit.fill,
@@ -347,7 +347,7 @@ class WebHomeScreen extends StatelessWidget {
                                                     const EdgeInsets.all(2.0),
                                                 child: CustomImage(
                                                   image:
-                                                      '${global.appInfo.baseUrls.offerImageUrl}/${homeController.exclusiveOfferList[index].image}',
+                                                      '${global.appInfo.baseUrls!.offerImageUrl}/${homeController.exclusiveOfferList[index].image}',
                                                   height: 30,
                                                   width: 60,
                                                   fit: BoxFit.contain,
@@ -363,7 +363,7 @@ class WebHomeScreen extends StatelessWidget {
                                                   homeController
                                                           .exclusiveOfferList[
                                                               index]
-                                                          .dayDifference >
+                                                          .dayDifference! >
                                                       0
                                               ? Padding(
                                                   padding:
@@ -386,7 +386,7 @@ class WebHomeScreen extends StatelessWidget {
                                                       days: homeController
                                                           .exclusiveOfferList[
                                                               index]
-                                                          .dayDifference,
+                                                          .dayDifference!,
                                                     ),
                                                   ),
                                                 )
@@ -449,7 +449,7 @@ class WebHomeScreen extends StatelessWidget {
                                 },
                                 child: Text(
                                   'View All >',
-                                  style: Get.theme.primaryTextTheme.bodySmall
+                                  style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                           color: Colors.teal,
                                           fontSize:
@@ -490,7 +490,7 @@ class WebHomeScreen extends StatelessWidget {
                                 },
                                 child: Text(
                                   'View All >',
-                                  style: Get.theme.primaryTextTheme.bodySmall
+                                  style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                           color: Colors.teal,
                                           fontSize:
@@ -528,7 +528,7 @@ class WebHomeScreen extends StatelessWidget {
                                 },
                                 child: Text(
                                   'View All >',
-                                  style: Get.theme.primaryTextTheme.bodySmall
+                                  style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                           color: Colors.teal,
                                           fontSize:
@@ -716,7 +716,7 @@ class WebHomeScreen extends StatelessWidget {
                                 },
                                 child: Text(
                                   'View All >',
-                                  style: Get.theme.primaryTextTheme.bodySmall
+                                  style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                           color: Colors.teal,
                                           fontSize:
@@ -754,7 +754,7 @@ class WebHomeScreen extends StatelessWidget {
                                         children: [
                                           Text(
                                             homeController
-                                                .homeAdvList[index].name
+                                                .homeAdvList[index].name!
                                                 .toUpperCase(),
                                             style: TextStyle(
                                               fontSize: global.getPlatFrom()
@@ -779,7 +779,7 @@ class WebHomeScreen extends StatelessWidget {
                                             child: Text(
                                               'View All >',
                                               style: Get.theme.primaryTextTheme
-                                                  .bodySmall
+                                                  .bodySmall!
                                                   .copyWith(
                                                       color: Colors.teal,
                                                       fontSize:
@@ -827,7 +827,7 @@ class WebHomeScreen extends StatelessWidget {
                                                       homeController
                                                           .homeAdvList[index]
                                                           .commonList[i]
-                                                          .adId
+                                                          .adId!
                                                           .isNotEmpty) {
                                                     await homeController
                                                         .getAdDetails(
@@ -835,7 +835,7 @@ class WebHomeScreen extends StatelessWidget {
                                                                 .homeAdvList[
                                                                     index]
                                                                 .commonList[i]
-                                                                .adId);
+                                                                .adId!);
                                                     Get.to(
                                                       () => AdsDetailScreen(
                                                         ads: homeController.ads,
@@ -854,7 +854,7 @@ class WebHomeScreen extends StatelessWidget {
                                                                 .homeAdvList[
                                                                     index]
                                                                 .commonList[i]
-                                                                .campaignId);
+                                                                .campaignId!);
 
                                                     Get.to(
                                                         () =>
@@ -891,7 +891,7 @@ class WebHomeScreen extends StatelessWidget {
                                                       .homeAdvList[index]
                                                       .commonList[i],
                                                   domainImage: homeController
-                                                      .homeAdvList[index].image,
+                                                      .homeAdvList[index].image!,
                                                   fromList: false,
                                                 ),
                                               );

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:intl/intl.dart';
 

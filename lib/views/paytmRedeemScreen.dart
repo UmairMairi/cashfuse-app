@@ -35,7 +35,7 @@ class PaytmRedeemScreen extends StatelessWidget {
           ),
           title: Text(
             'PayTM Redeem',
-            style: Get.theme.primaryTextTheme.titleSmall
+            style: Get.theme.primaryTextTheme.titleSmall!
                 .copyWith(color: Colors.white),
           ).translate(),
         ),
@@ -51,8 +51,8 @@ class PaytmRedeemScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                     gradient: LinearGradient(
                       colors: [
-                        Colors.blue[800],
-                        Colors.blue[800],
+                        Colors.blue[800]!,
+                        Colors.blue[800]!,
                         Colors.blue.withOpacity(0.85),
                       ],
                     ),
@@ -83,20 +83,20 @@ class PaytmRedeemScreen extends StatelessWidget {
                         children: [
                           Text(
                             'Account Details',
-                            style: Get.theme.primaryTextTheme.titleMedium
+                            style: Get.theme.primaryTextTheme.titleMedium!
                                 .copyWith(fontWeight: FontWeight.w600),
                           ).translate(),
                           InkWell(
                             onTap: () async {
                               if (paymentController.payTMDetails != null &&
-                                  paymentController.payTMDetails.paytmNo !=
+                                  paymentController.payTMDetails!.paytmNo !=
                                       null) {
                                 if (GetPlatform.isAndroid) {
                                   try {
                                     PhoneNumber phoneNumber =
                                         await PhoneNumberUtil().parse(
                                             paymentController
-                                                .amazonDetails.amazonNo);
+                                                .amazonDetails!.amazonNo!);
                                     authController.coutryCode =
                                         '+' + phoneNumber.countryCode;
                                     contactNo.text = phoneNumber.nationalNumber;
@@ -126,7 +126,7 @@ class PaytmRedeemScreen extends StatelessWidget {
                                         Text(
                                           'Add PayTM Account',
                                           style: Get
-                                              .theme.primaryTextTheme.titleLarge
+                                              .theme.primaryTextTheme.titleLarge!
                                               .copyWith(
                                                   fontWeight: FontWeight.w600),
                                         ).translate(),
@@ -151,7 +151,7 @@ class PaytmRedeemScreen extends StatelessWidget {
                                               height: 20,
                                               alignment: Alignment.center,
                                               child: Text(
-                                                authController.coutryCode,
+                                                authController.coutryCode!,
                                               ),
                                             ),
                                             contentPadding: EdgeInsets.zero,
@@ -192,7 +192,7 @@ class PaytmRedeemScreen extends StatelessWidget {
                                             if (contactNo.text.isNotEmpty) {
                                               Get.back();
                                               paymentController.addPayTMDetails(
-                                                 authController.coutryCode + contactNo.text.trim());
+                                                 authController.coutryCode! + contactNo.text.trim());
                                             } else {
                                               showCustomSnackBar(
                                                   'Please add Number.');
@@ -258,7 +258,7 @@ class PaytmRedeemScreen extends StatelessWidget {
                                 return RichText(
                                   text: TextSpan(
                                     text: snapShot.data,
-                                    style: Get.theme.primaryTextTheme.titleSmall
+                                    style: Get.theme.primaryTextTheme.titleSmall!
                                         .copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
@@ -266,9 +266,9 @@ class PaytmRedeemScreen extends StatelessWidget {
                                     children: <TextSpan>[
                                       TextSpan(
                                         text:
-                                            " ${paymentController.payTMDetails.paytmNo}",
+                                            " ${paymentController.payTMDetails!.paytmNo}",
                                         style: Get
-                                            .theme.primaryTextTheme.bodySmall
+                                            .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
                                           letterSpacing: -0.2,
                                           fontWeight: FontWeight.w300,

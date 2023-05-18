@@ -28,9 +28,9 @@ Widget bannerImageWidget() {
                         clipBehavior: Clip.none,
                         children: [
                           CustomImage(
-                            image: global.appInfo.baseUrls.notificationBannerImageUrl + '/' + global.bannerImage,
+                            image: global.appInfo.baseUrls!.notificationBannerImageUrl! + '/' + global.bannerImage,
                             fit: BoxFit.contain,
-                            width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 3 : null,
+                            width: global.getPlatFrom() ? (AppConstants.WEB_MAX_WIDTH / 3) : null,
                           ),
                           Positioned(
                             top: !global.getPlatFrom() ? 60 : 10,

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:convert';
 import 'dart:developer';
 
@@ -22,10 +24,10 @@ class AllInOneSearchScreen extends StatefulWidget {
   // final Color bgColor;
   AllInOneSearchScreen() : super();
   @override
-  _AppTabinationScreenState createState() => new _AppTabinationScreenState();
+  _AllInOneSearchScreenState createState() => new _AllInOneSearchScreenState();
 }
 
-class _AppTabinationScreenState extends State<AllInOneSearchScreen>
+class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
     with TickerProviderStateMixin {
   late TabController _tabController;
   int _currentIndex = 0;
@@ -43,7 +45,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
 
   late AllInOneSearchDataModel selectedValue;
 
-  _AppTabinationScreenState() : super();
+  _AllInOneSearchScreenState() : super();
 
   @override
   Widget build(BuildContext context) {
@@ -502,6 +504,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
 
   _init() async {
     try {
+      await searchController.allInOneSearch();
       if (global.sp!.getString('tabList') != null) {
         List<dynamic> list = await json.decode(global.sp!.getString('tabList')!);
         print(list);
@@ -547,7 +550,7 @@ class _AppTabinationScreenState extends State<AllInOneSearchScreen>
         _isDataLoaded = true;
       });
     } catch (e) {
-      print("Exception - apptabinationScreen.dart - _init():" + e.toString());
+      print("Exception - AllInOneSearchScreen.dart - _init():" + e.toString());
     }
   }
 

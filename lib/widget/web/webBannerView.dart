@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -11,7 +13,7 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 
 class WebBannerView extends StatelessWidget {
   final HomeController homeController;
-  WebBannerView({@required this.homeController});
+  WebBannerView({required this.homeController});
 
   Widget build(BuildContext context) {
     final PageController _pageController = PageController();
@@ -54,7 +56,7 @@ class WebBannerView extends StatelessWidget {
                                         // );
                                         global.launchInBrowser(
                                           homeController
-                                              .topBannerList[index * 3].url,
+                                              .topBannerList[index * 3].url!,
                                         );
                                       } else {
                                         Get.dialog(Dialog(
@@ -85,7 +87,7 @@ class WebBannerView extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10),
                                     child: CustomImage(
                                       image:
-                                          '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[index * 3].image}',
+                                          '${global.appInfo.baseUrls!.bannerImageUrl}/${homeController.topBannerList[index * 3].image}',
                                       fit: BoxFit.fill,
                                       height: 220,
                                       //width: AppConstants.WEB_MAX_WIDTH / 4,
@@ -118,7 +120,7 @@ class WebBannerView extends StatelessWidget {
                                                   homeController
                                                       .topBannerList[
                                                           (index * 3) + 1]
-                                                      .url,
+                                                      .url!,
                                                 );
                                               } else {
                                                 Get.dialog(Dialog(
@@ -153,7 +155,7 @@ class WebBannerView extends StatelessWidget {
                                                 BorderRadius.circular(10),
                                             child: CustomImage(
                                               image:
-                                                  '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[(index * 3) + 1].image}',
+                                                  '${global.appInfo.baseUrls!.bannerImageUrl}/${homeController.topBannerList[(index * 3) + 1].image}',
                                               fit: BoxFit.fill,
                                               height: 220,
                                               //width: AppConstants.WEB_MAX_WIDTH / 4,
@@ -184,7 +186,7 @@ class WebBannerView extends StatelessWidget {
                                                 homeController
                                                     .topBannerList[
                                                         (index * 3) + 2]
-                                                    .url,
+                                                    .url!,
                                               );
                                             } else {
                                               Get.dialog(Dialog(
@@ -219,7 +221,7 @@ class WebBannerView extends StatelessWidget {
                                               BorderRadius.circular(10),
                                           child: CustomImage(
                                             image:
-                                                '${global.appInfo.baseUrls.bannerImageUrl}/${homeController.topBannerList[(index * 3) + 2].image}',
+                                                '${global.appInfo.baseUrls!.bannerImageUrl}/${homeController.topBannerList[(index * 3) + 2].image}',
                                             fit: BoxFit.fill,
                                             height: 220,
                                             //width: AppConstants.WEB_MAX_WIDTH / 4,

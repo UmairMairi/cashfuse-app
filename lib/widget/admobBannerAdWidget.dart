@@ -6,7 +6,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdmobBannerAdWidget extends StatefulWidget {
   final String adId;
-  const AdmobBannerAdWidget({Key key, this.adId}) : super(key: key);
+  const AdmobBannerAdWidget({required this.adId}) : super();
 
   @override
   State<AdmobBannerAdWidget> createState() => _AdmobBannerAdWidgetState(this.adId);
@@ -14,7 +14,7 @@ class AdmobBannerAdWidget extends StatefulWidget {
 
 class _AdmobBannerAdWidgetState extends State<AdmobBannerAdWidget> {
   String adId;
-  BannerAd _bannerAd;
+  BannerAd? _bannerAd;
   bool isAdmobBannerAdLoaed1 = false;
   final Completer<BannerAd> bannerCompleter = Completer<BannerAd>();
 
@@ -28,10 +28,10 @@ class _AdmobBannerAdWidgetState extends State<AdmobBannerAdWidget> {
             child: Align(
               alignment: Alignment.center,
               child: SizedBox(
-                width: _bannerAd.size.width.toDouble(),
-                height: _bannerAd.size.height.toDouble(),
+                width: _bannerAd!.size.width.toDouble(),
+                height: _bannerAd!.size.height.toDouble(),
                 child: AdWidget(
-                  ad: _bannerAd,
+                  ad: _bannerAd!,
                 ),
               ),
             ),
@@ -50,7 +50,7 @@ class _AdmobBannerAdWidgetState extends State<AdmobBannerAdWidget> {
   void dispose() {
     super.dispose();
     if (_bannerAd != null) {
-      _bannerAd.dispose();
+      _bannerAd!.dispose();
     }
   }
 
@@ -69,14 +69,14 @@ class _AdmobBannerAdWidgetState extends State<AdmobBannerAdWidget> {
           onAdFailedToLoad: (Ad ad, LoadAdError error) async {
             print('$BannerAd failedToLoad: $error');
             isAdmobBannerAdLoaed1 = false;
-            await _bannerAd.load();
+            await _bannerAd!.load();
             setState(() {});
           },
           onAdOpened: (Ad ad) => print('$BannerAd onAdOpened.'),
           onAdClosed: (Ad ad) => print('$BannerAd onAdClosed.'),
         ),
       );
-      await _bannerAd.load();
+      await _bannerAd!.load();
     } catch (e) {
       print("Exception - AdmobBannerAdWidget.dart - _init():" + e.toString());
     }

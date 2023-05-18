@@ -36,7 +36,7 @@ class ReferEarnScreen extends StatelessWidget {
                 ),
                 title: Text(
                   'Refer & Earn',
-                  style: Get.theme.primaryTextTheme.titleSmall
+                  style: Get.theme.primaryTextTheme.titleSmall!
                       .copyWith(color: Colors.white),
                 ).translate(),
               ),
@@ -61,7 +61,8 @@ class ReferEarnScreen extends StatelessWidget {
                               Text(
                                 "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
                                 textAlign: TextAlign.center,
-                                style: Get.theme.primaryTextTheme.headlineMedium
+                                style: Get
+                                    .theme.primaryTextTheme.headlineMedium!
                                     .copyWith(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,
@@ -73,7 +74,7 @@ class ReferEarnScreen extends StatelessWidget {
                               Text(
                                 'Make your friends join ${global.appName} via your referral link below - No referral code needed',
                                 textAlign: TextAlign.center,
-                                style: Get.theme.primaryTextTheme.titleLarge
+                                style: Get.theme.primaryTextTheme.titleLarge!
                                     .copyWith(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
@@ -154,10 +155,8 @@ class ReferEarnScreen extends StatelessWidget {
                                             text:
                                                 'I recently tried ${global.appName} app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
                                           ).then((value) {
-                                            if (value) {}
-                                          }).onError((error, stackTrace) {
-                                            return error;
-                                          });
+                                            if (value!) {}
+                                          }).onError((error, stackTrace) {});
                                         }
                                       },
                                       child: Container(
@@ -215,7 +214,7 @@ class ReferEarnScreen extends StatelessWidget {
                                     child: Text(
                                       'To access this feature, download the app',
                                       style: Get
-                                          .theme.primaryTextTheme.titleLarge
+                                          .theme.primaryTextTheme.titleLarge!
                                           .copyWith(
                                               color: Colors.red,
                                               fontWeight: FontWeight.w600),
@@ -238,7 +237,7 @@ class ReferEarnScreen extends StatelessWidget {
                                       child: Text(
                                         'Download The App',
                                         style: Get
-                                            .theme.primaryTextTheme.titleSmall
+                                            .theme.primaryTextTheme.titleSmall!
                                             .copyWith(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w600,
@@ -300,7 +299,7 @@ class ReferEarnScreen extends StatelessWidget {
                       Text(
                         'Make your friends join ${global.appName} via your referral link below - No referral code needed',
                         textAlign: TextAlign.center,
-                        style: Get.theme.primaryTextTheme.bodySmall
+                        style: Get.theme.primaryTextTheme.bodySmall!
                             .copyWith(fontWeight: FontWeight.w300),
                       ).translate(),
                       SizedBox(
@@ -316,7 +315,7 @@ class ReferEarnScreen extends StatelessWidget {
                           global.appShareLink.isNotEmpty
                               ? global.appShareLink
                               : 'Link Url',
-                          style: Get.theme.primaryTextTheme.bodySmall
+                          style: Get.theme.primaryTextTheme.bodySmall!
                               .copyWith(fontWeight: FontWeight.w300),
                         ),
                       ),
@@ -344,7 +343,7 @@ class ReferEarnScreen extends StatelessWidget {
                         child: Text(
                           'Tap to Copy',
                           textAlign: TextAlign.center,
-                          style: Get.theme.primaryTextTheme.bodySmall
+                          style: Get.theme.primaryTextTheme.bodySmall!
                               .copyWith(fontWeight: FontWeight.w300),
                         ).translate(),
                       ),
@@ -363,10 +362,8 @@ class ReferEarnScreen extends StatelessWidget {
                                   text:
                                       'I recently tried ${global.appName} app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
                                 ).then((value) {
-                                  if (value) {}
-                                }).onError((error, stackTrace) {
-                                  return error;
-                                });
+                                  if (value!) {}
+                                }).onError((error, stackTrace) {});
                               }
                             },
                             child: Container(
@@ -419,8 +416,8 @@ class ReferEarnScreen extends StatelessWidget {
                                         child: Text(
                                           'To access this feature, download the app',
                                           textAlign: TextAlign.center,
-                                          style: Get
-                                              .theme.primaryTextTheme.titleLarge
+                                          style: Get.theme.primaryTextTheme
+                                              .titleLarge!
                                               .copyWith(
                                                   color: Colors.red,
                                                   fontWeight: FontWeight.w600),
@@ -443,7 +440,7 @@ class ReferEarnScreen extends StatelessWidget {
                                           child: Text(
                                             'Download The App',
                                             style: Get.theme.primaryTextTheme
-                                                .titleSmall
+                                                .titleSmall!
                                                 .copyWith(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w600,

@@ -27,7 +27,7 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
   WebTopBarWidget({this.scaffoldKey});
 
   AuthController authController = Get.find<AuthController>();
@@ -44,7 +44,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
           children: [
             InkWell(
               onTap: () {
-                scaffoldKey.currentState.openDrawer();
+                scaffoldKey!.currentState!.openDrawer();
               },
               child: Padding(
                 padding: const EdgeInsets.only(left: 10),
@@ -70,7 +70,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
             ),
             Expanded(
               flex: 2,
-              child: GetBuilder<SearchController>(builder: (searchController) {
+              child:
+                  GetBuilder<SearchGetController>(builder: (searchController) {
                 return Container(
                   //height: 45,
                   margin: EdgeInsets.symmetric(vertical: 10),
@@ -211,7 +212,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
           child: SizedBox(
             width: 150,
             child: DefaultTextStyle(
-              style: Get.theme.primaryTextTheme.titleSmall,
+              style: Get.theme.primaryTextTheme.titleSmall!,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 child: Column(
@@ -219,10 +220,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        authController.name.text = global.currentUser.name;
-                        authController.email.text = global.currentUser.email;
+                        authController.name.text = global.currentUser.name!;
+                        authController.email.text = global.currentUser.email!;
                         authController.contactNo.text =
-                            global.currentUser.phone;
+                            global.currentUser.phone!;
                         Get.to(
                           () => AccountSettingScreen(),
                           routeName: 'account',
@@ -230,7 +231,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       },
                       child: Text(
                         'Account Settings',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                        style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
                         ),
@@ -246,7 +247,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       },
                       child: Text(
                         'My Earnings',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                        style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
                         ),
@@ -262,7 +263,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       },
                       child: Text(
                         'Payments',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                        style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
                         ),
@@ -278,7 +279,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       },
                       child: Text(
                         'Payment History',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                        style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
                         ),
@@ -294,7 +295,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       },
                       child: Text(
                         'Recents Clicks',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                        style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
                         ),
@@ -310,7 +311,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       },
                       child: Text(
                         'Referral Network',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                        style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
                         ),
@@ -326,7 +327,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       },
                       child: Text(
                         'Get Help',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                        style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
                         ),
@@ -342,7 +343,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       },
                       child: Text(
                         'About Us',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                        style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
                         ),
@@ -358,7 +359,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       },
                       child: Text(
                         'Privacy Policy',
-                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                        style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
                         ),
@@ -375,7 +376,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                             CupertinoDialogAction(
                               child: Text(
                                 'Yes',
-                                style: Get.theme.primaryTextTheme.titleSmall
+                                style: Get.theme.primaryTextTheme.titleSmall!
                                     .copyWith(color: Colors.red),
                               ),
                               onPressed: () {
@@ -391,7 +392,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                             CupertinoDialogAction(
                               child: Text(
                                 'No',
-                                style: Get.theme.primaryTextTheme.titleSmall
+                                style: Get.theme.primaryTextTheme.titleSmall!
                                     .copyWith(color: Colors.blue),
                               ),
                               onPressed: () {
@@ -403,7 +404,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       },
                       child: Text(
                         'Logout',
-                        style: Get.theme.primaryTextTheme.bodyMedium.copyWith(
+                        style: Get.theme.primaryTextTheme.bodyMedium!.copyWith(
                           letterSpacing: -0.5,
                           color: Colors.red,
                           fontWeight: FontWeight.w500,

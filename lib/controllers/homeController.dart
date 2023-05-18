@@ -1,9 +1,10 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:async';
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
-import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/models/admitedoffersModal.dart';
 import 'package:cashfuse/models/adsModel.dart';
 import 'package:cashfuse/models/bannerModel.dart';
@@ -123,7 +124,6 @@ class HomeController extends GetxController {
       if (global.currentUser.id != null) {
         await getClick();
         await Get.find<AuthController>().getProfile();
-        await Get.find<SearchGetController>().allInOneSearch();
       }
     } catch (e) {
       print("Exception - HomeController.dart - _init():" + e.toString());

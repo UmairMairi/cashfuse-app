@@ -9,7 +9,7 @@ import 'package:google_translator/google_translator.dart';
 import 'admitedOfferDetailScreen.dart';
 
 class MoreAdmitedOffers extends StatefulWidget {
-  MoreAdmitedOffers({Key key});
+  MoreAdmitedOffers();
   @override
   State<MoreAdmitedOffers> createState() => _MoreAdmitedOffersState();
 }
@@ -38,7 +38,7 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                   children: [
                     Text(
                       'See More Offers',
-                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                      style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.1,
                       ),
@@ -78,7 +78,7 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                                 children: [
                                   CustomImage(
                                     image:
-                                        '${global.appInfo.baseUrls.offerImageUrl}/${homeController.seeMoreAdsList[index].image}',
+                                        '${global.appInfo.baseUrls!.offerImageUrl}/${homeController.seeMoreAdsList[index].image}',
                                     height: global.getPlatFrom() ? 50 : 50,
                                     width: global.getPlatFrom() ? 100 : 50,
                                     fit: BoxFit.fill,
@@ -91,7 +91,7 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                                       children: [
                                         Text(
                                           homeController
-                                              .seeMoreAdsList[index].name,
+                                              .seeMoreAdsList[index].name!,
                                           textAlign: TextAlign.start,
                                           style: Get.theme.primaryTextTheme
                                               .titleSmall,
@@ -100,7 +100,7 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                                           width: 250,
                                           child: Text(
                                             homeController.seeMoreAdsList[index]
-                                                .description,
+                                                .description!,
                                             maxLines: 3,
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.start,

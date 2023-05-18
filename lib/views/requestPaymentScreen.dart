@@ -36,7 +36,7 @@ class RequestPaymentScreen extends StatelessWidget {
               ),
               title: Text(
                 'Request Payments',
-                style: Get.theme.primaryTextTheme.titleSmall
+                style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ).translate(),
             ),
@@ -63,7 +63,7 @@ class RequestPaymentScreen extends StatelessWidget {
                           children: [
                             Text(
                               'Request Payments',
-                              style: Get.theme.primaryTextTheme.titleLarge
+                              style: Get.theme.primaryTextTheme.titleLarge!
                                   .copyWith(fontSize: 18),
                             ).translate(),
                             SizedBox(
@@ -85,7 +85,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                   ).translate(),
                                   Text(
                                     global.currentUser.earning != null
-                                        ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}'
+                                        ? '${global.appInfo.currency}${global.currentUser.earning!.remEarning}'
                                         : '${global.appInfo.currency}0.00',
                                     style:
                                         Get.theme.primaryTextTheme.titleSmall,
@@ -105,7 +105,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                 ).translate(),
                                 Text(
                                   global.currentUser.earning != null
-                                      ? '${global.appInfo.currency}${global.currentUser.earning.sentForWithdrawal}'
+                                      ? '${global.appInfo.currency}${global.currentUser.earning!.sentForWithdrawal}'
                                       : '${global.appInfo.currency}0.00',
                                   style: Get.theme.primaryTextTheme.titleSmall,
                                 ),
@@ -127,7 +127,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                   ).translate(),
                                   Text(
                                     global.currentUser.earning != null
-                                        ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}'
+                                        ? '${global.appInfo.currency}${global.currentUser.earning!.withdrawal}'
                                         : '${global.appInfo.currency}0.00',
                                     style:
                                         Get.theme.primaryTextTheme.titleSmall,
@@ -144,7 +144,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                 ).translate(),
                                 Text(
                                   global.currentUser.earning != null
-                                      ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}'
+                                      ? '${global.appInfo.currency}${global.currentUser.earning!.totalEarnings}'
                                       : '${global.appInfo.currency}0.00',
                                   style: Get.theme.primaryTextTheme.titleSmall,
                                 ),
@@ -166,7 +166,7 @@ class RequestPaymentScreen extends StatelessWidget {
                         children: [
                           Text(
                             'Redeem',
-                            style: Get.theme.primaryTextTheme.titleLarge
+                            style: Get.theme.primaryTextTheme.titleLarge!
                                 .copyWith(fontSize: 18),
                           ).translate(),
                           SizedBox(
@@ -200,8 +200,8 @@ class RequestPaymentScreen extends StatelessWidget {
                                       begin: Alignment.centerLeft,
                                       end: Alignment.centerRight,
                                       colors: [
-                                        Colors.green[800],
-                                        Colors.green[800],
+                                        Colors.green[800]!,
+                                        Colors.green[800]!,
                                         Colors.green.withOpacity(0.85),
                                       ],
                                     ),
@@ -215,7 +215,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                       Text(
                                         'Amazon Pay',
                                         style: Get
-                                            .theme.primaryTextTheme.titleLarge
+                                            .theme.primaryTextTheme.titleLarge!
                                             .copyWith(
                                           fontSize: 20,
                                           color: Colors.white,
@@ -280,8 +280,8 @@ class RequestPaymentScreen extends StatelessWidget {
                                       begin: Alignment.centerLeft,
                                       end: Alignment.centerRight,
                                       colors: [
-                                        Colors.blue[800],
-                                        Colors.blue[800],
+                                        Colors.blue[800]!,
+                                        Colors.blue[800]!,
                                         Colors.blue.withOpacity(0.85),
                                       ],
                                     ),
@@ -295,7 +295,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                       Text(
                                         'PayTM',
                                         style: Get
-                                            .theme.primaryTextTheme.titleLarge
+                                            .theme.primaryTextTheme.titleLarge!
                                             .copyWith(
                                           fontSize: 20,
                                           color: Colors.white,
@@ -359,8 +359,8 @@ class RequestPaymentScreen extends StatelessWidget {
                                       begin: Alignment.centerLeft,
                                       end: Alignment.centerRight,
                                       colors: [
-                                        Colors.orange[800],
-                                        Colors.orange[800],
+                                        Colors.orange[800]!,
+                                        Colors.orange[800]!,
                                         Colors.orange.withOpacity(0.85),
                                       ],
                                     ),
@@ -374,7 +374,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                       Text(
                                         ' UPI',
                                         style: Get
-                                            .theme.primaryTextTheme.titleLarge
+                                            .theme.primaryTextTheme.titleLarge!
                                             .copyWith(
                                           fontSize: 20,
                                           color: Colors.white,
@@ -439,8 +439,8 @@ class RequestPaymentScreen extends StatelessWidget {
                                       begin: Alignment.centerLeft,
                                       end: Alignment.centerRight,
                                       colors: [
-                                        Colors.purple[800],
-                                        Colors.purple[800],
+                                        Colors.purple[800]!,
+                                        Colors.purple[800]!,
                                         Colors.purple.withOpacity(0.85),
                                       ],
                                     ),
@@ -454,7 +454,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                       Text(
                                         ' Bank Transfer',
                                         style: Get
-                                            .theme.primaryTextTheme.titleLarge
+                                            .theme.primaryTextTheme.titleLarge!
                                             .copyWith(
                                           fontSize: 20,
                                           color: Colors.white,
@@ -519,8 +519,8 @@ class RequestPaymentScreen extends StatelessWidget {
                                       begin: Alignment.centerLeft,
                                       end: Alignment.centerRight,
                                       colors: [
-                                        Colors.blue[900],
-                                        Colors.blue[800],
+                                        Colors.blue[900]!,
+                                        Colors.blue[800]!,
                                         Colors.blue.withOpacity(0.85),
                                       ],
                                     ),
@@ -534,7 +534,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                       Text(
                                         ' PayPal',
                                         style: Get
-                                            .theme.primaryTextTheme.titleLarge
+                                            .theme.primaryTextTheme.titleLarge!
                                             .copyWith(
                                           fontSize: 20,
                                           color: Colors.white,
@@ -591,12 +591,12 @@ class _DiamondBorder extends ShapeBorder {
   }
 
   @override
-  Path getInnerPath(Rect rect, {TextDirection textDirection}) {
-    return getOuterPath(rect, textDirection: textDirection);
+  Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
+    return getOuterPath(rect, textDirection: textDirection!);
   }
 
   @override
-  Path getOuterPath(Rect rect, {TextDirection textDirection}) {
+  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
     return Path()
       ..moveTo(rect.left + rect.width / 2.0, rect.top)
       ..lineTo(rect.right, rect.top + rect.height / 2.0)
@@ -606,11 +606,11 @@ class _DiamondBorder extends ShapeBorder {
   }
 
   @override
-  void paint(Canvas canvas, Rect rect, {TextDirection textDirection}) {}
+  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {}
 
   // This border doesn't support scaling.
   @override
   ShapeBorder scale(double t) {
-    return null;
+    return Border();
   }
 }

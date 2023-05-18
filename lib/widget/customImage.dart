@@ -12,17 +12,17 @@ import 'package:get/get.dart';
 
 class CustomImage extends StatelessWidget {
   final String image;
-  final double height;
-  double width;
-  final BoxFit fit;
-  final String errorImage;
-  final OfferModel offer;
-  final CampaignModel campaign;
-  final AdsModel ads;
-  final Coupon coupon;
-  final AdmitedOffersModal admitedOffersModal;
+  final double? height;
+  double? width;
+  final BoxFit? fit;
+  final String? errorImage;
+  final OfferModel? offer;
+  final CampaignModel? campaign;
+  final AdsModel? ads;
+  final Coupon? coupon;
+  final AdmitedOffersModal? admitedOffersModal;
   CustomImage({
-    @required this.image,
+    required this.image,
     this.height,
     this.width,
     this.fit,
@@ -58,20 +58,20 @@ class CustomImage extends StatelessWidget {
             )),
         errorWidget: (context, url, error) {
           if (offer != null) {
-            offer.isImageError = true;
+            offer!.isImageError = true;
           } else if (campaign != null) {
-            campaign.isImageError = true;
+            campaign!.isImageError = true;
           } else if (ads != null) {
-            ads.isImageError = true;
+            ads!.isImageError = true;
           } else if (coupon != null) {
-            coupon.isImageError = true;
+            coupon!.isImageError = true;
           }else if(admitedOffersModal != null){
-            admitedOffersModal.isImageError = true;
+            admitedOffersModal!.isImageError = true;
           }
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(0),
-              image: DecorationImage(image: AssetImage(errorImage), fit: fit),
+              image: DecorationImage(image: AssetImage(errorImage!), fit: fit),
             ),
           );
         });

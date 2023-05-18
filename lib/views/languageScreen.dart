@@ -16,10 +16,11 @@ class LanguageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        return Get.to(
+        Get.to(
           () => BottomNavigationBarScreen(pageIndex: 4),
           routeName: 'home',
         );
+        return true;
       },
       child: Scaffold(
         appBar: AppBar(

@@ -14,7 +14,7 @@ import '../utils/myColors.dart';
 class ProductDetailsScreen extends StatefulWidget {
   final String title;
   final ProductModel product;
-  ProductDetailsScreen({Key key, this.title, this.product}) : super(key: key);
+  ProductDetailsScreen({required this.title, required this.product}) : super();
 
   @override
   State<ProductDetailsScreen> createState() =>
@@ -39,7 +39,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
         title: Text(
           widget.title,
-          style: Get.theme.primaryTextTheme.titleSmall
+          style: Get.theme.primaryTextTheme.titleSmall!
               .copyWith(color: Colors.white),
         ).translate(),
       ),
@@ -67,7 +67,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ),
                 CarouselSlider(
                   options: CarouselOptions(height: 200.0, autoPlay: true),
-                  items: product.images.map((i) {
+                  items: product.images!.map((i) {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
@@ -80,7 +80,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 ),
                             child: CustomImage(
                               image:
-                                  "${global.appInfo.baseUrls.productImageurl}/$i",
+                                  "${global.appInfo.baseUrls!.productImageurl}/$i",
                               fit: BoxFit.contain,
                             ));
                       },
@@ -204,7 +204,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   return ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: product.productPrices.length,
+                    itemCount: product.productPrices!.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         color: Colors.white,
@@ -216,7 +216,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               children: [
                                 CustomImage(
                                   image:
-                                      "${global.appInfo.baseUrls.productSiteUrl}/${product.productPrices[index].siteIcon}",
+                                      "${global.appInfo.baseUrls!.productSiteUrl}/${product.productPrices![index].siteIcon}",
                                   height: 40,
                                   width: 100,
                                 ),
@@ -224,25 +224,25 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   onTap: () async {
                                     if (global.currentUser.id != null) {
                                       await homeController.getTrackingLink(
-                                          product.productPrices[index].url,
-                                          product.affiliatePartner,
-                                          cId: product.productPrices[index].cId
+                                          product.productPrices![index].url!,
+                                          product.affiliatePartner!,
+                                          cId: product.productPrices![index].cId
                                               .toString());
                                       await homeController.addClick(
-                                        product.productPrices[index].siteName,
-                                        global.appInfo.baseUrls.productSiteUrl +
+                                        product.productPrices![index].siteName!,
+                                        global.appInfo.baseUrls!.productSiteUrl! +
                                             '/' +
                                             product
-                                                .productPrices[index].siteIcon,
+                                                .productPrices![index].siteIcon!,
                                         homeController.createdLink.isNotEmpty
                                             ? homeController.createdLink
-                                            : product.productPrices[index].url,
+                                            : product.productPrices![index].url!,
                                       );
 
                                       global.launchInBrowser(
                                         homeController.createdLink.isNotEmpty
                                             ? homeController.createdLink
-                                            : product.productPrices[index].url,
+                                            : product.productPrices![index].url!,
                                       );
 
                                       // Get.to(
@@ -313,7 +313,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 Column(
                                   children: [
                                     Text(
-                                      "${global.appInfo.currency} ${product.productPrices[index].mrp}",
+                                      "${global.appInfo.currency} ${product.productPrices![index].mrp}",
                                       style: TextStyle(
                                           color: Colors.black54,
                                           fontWeight: FontWeight.w400,
@@ -336,7 +336,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   height: 70,
                                   color: Colors.grey,
                                 ),
-                                product.productPrices[index].cashback == null
+                                product.productPrices![index].cashback == null
                                     ? Container(
                                         width: 70,
                                         child: Text(
@@ -350,7 +350,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     : Column(
                                         children: [
                                           Text(
-                                            "${global.appInfo.currency} ${product.productPrices[index].cashback}",
+                                            "${global.appInfo.currency} ${product.productPrices![index].cashback}",
                                             style: TextStyle(
                                                 color: Mycolors.orange,
                                                 fontWeight: FontWeight.w500,
@@ -376,7 +376,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 Column(
                                   children: [
                                     Text(
-                                      "${global.appInfo.currency} ${product.productPrices[index].price}",
+                                      "${global.appInfo.currency} ${product.productPrices![index].price}",
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w500,

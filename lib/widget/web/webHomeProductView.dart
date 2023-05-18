@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/myColors.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -7,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class WebHomeProductView extends StatelessWidget {
-  WebHomeProductView({Key key}) : super(key: key);
+  WebHomeProductView() : super();
 
   final scrollController = new ScrollController();
 
@@ -89,7 +91,7 @@ class WebHomeProductView extends StatelessWidget {
                                               children: [
                                                 TextSpan(
                                                     text:
-                                                        '(${homeController.productList[index].productPrices.length} Sellers)',
+                                                        '(${homeController.productList[index].productPrices!.length} Sellers)',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -105,7 +107,7 @@ class WebHomeProductView extends StatelessWidget {
                                       //   height: 1,
                                       // ),
                                       Image.network(
-                                        "${global.appInfo.baseUrls.productImageurl}/${homeController.productList[index].image}",
+                                        "${global.appInfo.baseUrls!.productImageurl}/${homeController.productList[index].image}",
                                         // width: 150,
                                         height: 120,
                                         // height: Get.height * 0.15,
@@ -155,7 +157,7 @@ class WebHomeProductView extends StatelessWidget {
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 13, vertical: 3),
                                         child: Text(
-                                          "+ ${global.appInfo.currency} ${homeController.productList[index].productPrices[0].cashback}  REWARDS",
+                                          "+ ${global.appInfo.currency} ${homeController.productList[index].productPrices![0].cashback}  REWARDS",
                                           style: TextStyle(
                                               fontSize: 11,
                                               fontWeight: FontWeight.w700,
@@ -166,7 +168,7 @@ class WebHomeProductView extends StatelessWidget {
                                         padding: const EdgeInsets.only(
                                             top: 8.0, bottom: 8),
                                         child: Text(
-                                          "Final Price ${global.appInfo.currency} ${homeController.productList[index].productPrices[0].price}",
+                                          "Final Price ${global.appInfo.currency} ${homeController.productList[index].productPrices![0].price}",
                                           style: TextStyle(
                                               color: Mycolors.blue,
                                               fontWeight: FontWeight.w600,

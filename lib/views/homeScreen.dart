@@ -1,4 +1,4 @@
-// ignore_for_file: invalid_use_of_protected_member
+// ignore_for_file: invalid_use_of_protected_member, unnecessary_null_comparison
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cashfuse/controllers/adController.dart';

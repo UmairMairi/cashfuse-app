@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 class WebAdsCampaignWidget extends StatelessWidget {
   final CommonModel commonModel;
   final bool fromWebHome;
-  WebAdsCampaignWidget({this.commonModel, this.fromWebHome});
+  WebAdsCampaignWidget({required this.commonModel, required this.fromWebHome});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class WebAdsCampaignWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: commonModel.tagline != null ? MainAxisAlignment.start : MainAxisAlignment.center,
         children: [
-          commonModel.tagline != null && commonModel.tagline.isNotEmpty
+          commonModel.tagline != null && commonModel.tagline!.isNotEmpty
               ? Align(
                   alignment: Alignment.topLeft,
                   child: RotatedBox(
@@ -41,9 +41,9 @@ class WebAdsCampaignWidget extends StatelessWidget {
                         child: RotatedBox(
                           quarterTurns: 45,
                           child: Text(
-                            commonModel.tagline,
+                            commonModel.tagline!,
                             textAlign: TextAlign.center,
-                            style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                            style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                               color: Colors.white,
                               fontSize: 10,
                             ),
@@ -58,10 +58,10 @@ class WebAdsCampaignWidget extends StatelessWidget {
           //   height: 20,
           // ),
           CustomImage(
-            image: commonModel.image,
+            image: commonModel.image!,
             //height: 32,
             height: fromWebHome
-                ? commonModel.tagline != null && commonModel.tagline.isNotEmpty
+                ? commonModel.tagline != null && commonModel.tagline!.isNotEmpty
                     ? 80
                     : 100
                 : 150,
@@ -73,7 +73,7 @@ class WebAdsCampaignWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Text(
-              commonModel.name,
+              commonModel.name!,
               style: Get.theme.primaryTextTheme.titleMedium,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -88,7 +88,7 @@ class WebAdsCampaignWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(2),
             ),
             child: Text(
-              commonModel.buttonText != null ? commonModel.buttonText : 'Grab deal',
+              commonModel.buttonText != null ? commonModel.buttonText! : 'Grab deal',
               style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
             ),
           ),

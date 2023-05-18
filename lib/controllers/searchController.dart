@@ -35,7 +35,7 @@ class SearchGetController extends GetxController {
   @override
   void onInit() async {
     await getTrendingKeywords();
-    // await allInOneSearch();
+
     super.onInit();
   }
 
@@ -47,7 +47,8 @@ class SearchGetController extends GetxController {
   Future getSearchData(String keyword) async {
     try {
       searchString.text = keyword;
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper.search(keyword).then((response) {
           Get.back();
@@ -59,7 +60,8 @@ class SearchGetController extends GetxController {
                   searchData!.commonList!.add(
                     CommonModel(
                       name: searchData!.adsList![j].name!,
-                      image: '${global.appInfo.baseUrls!.offerImageUrl}/${searchData!.adsList![j].image}',
+                      image:
+                          '${global.appInfo.baseUrls!.offerImageUrl}/${searchData!.adsList![j].image}',
                       buttonText: searchData!.adsList![j].buttonText!,
                       trackingLink: searchData!.adsList![j].landingPage!,
                       adId: searchData!.adsList![j].id.toString(),
@@ -73,7 +75,8 @@ class SearchGetController extends GetxController {
                   searchData!.commonList!.add(
                     CommonModel(
                       name: searchData!.campaignList![i].name!,
-                      image: '${global.appInfo.baseUrls!.offerImageUrl}/${searchData!.campaignList![i].image}',
+                      image:
+                          '${global.appInfo.baseUrls!.offerImageUrl}/${searchData!.campaignList![i].image}',
                       buttonText: searchData!.campaignList![i].buttonText!,
                       trackingLink: searchData!.campaignList![i].url!,
                       campaignId: searchData!.campaignList![i].id!,
@@ -85,28 +88,41 @@ class SearchGetController extends GetxController {
               if (searchData!.advertiserList != []) {
                 for (var k = 0; k < searchData!.advertiserList!.length; k++) {
                   if (searchData!.advertiserList![k].ads != []) {
-                    for (var m = 0; m < searchData!.advertiserList![k].ads!.length; m++) {
+                    for (var m = 0;
+                        m < searchData!.advertiserList![k].ads!.length;
+                        m++) {
                       searchData!.advertiserList![k].commonList.add(
                         CommonModel(
                           name: searchData!.advertiserList![k].ads![m].name!,
-                          image: '${global.appInfo.baseUrls!.offerImageUrl}/${searchData!.advertiserList![k].ads![m].image}',
-                          buttonText: searchData!.advertiserList![k].ads![m].buttonText!,
-                          trackingLink: searchData!.advertiserList![k].ads![m].landingPage!,
-                          adId: searchData!.advertiserList![k].ads![m].id.toString(),
+                          image:
+                              '${global.appInfo.baseUrls!.offerImageUrl}/${searchData!.advertiserList![k].ads![m].image}',
+                          buttonText: searchData!
+                              .advertiserList![k].ads![m].buttonText!,
+                          trackingLink: searchData!
+                              .advertiserList![k].ads![m].landingPage!,
+                          adId: searchData!.advertiserList![k].ads![m].id
+                              .toString(),
                         ),
                       );
                     }
                   }
 
                   if (searchData!.advertiserList![k].cuecampaigns != []) {
-                    for (var n = 0; n < searchData!.advertiserList![k].cuecampaigns!.length; n++) {
+                    for (var n = 0;
+                        n < searchData!.advertiserList![k].cuecampaigns!.length;
+                        n++) {
                       searchData!.advertiserList![k].commonList.add(
                         CommonModel(
-                          name: searchData!.advertiserList![k].cuecampaigns![n].name!,
-                          image: '${global.appInfo.baseUrls!.offerImageUrl}/${searchData!.advertiserList![k].cuecampaigns![n].image}',
-                          buttonText: searchData!.advertiserList![k].cuecampaigns![n].buttonText!,
-                          trackingLink: searchData!.advertiserList![k].cuecampaigns![n].url!,
-                          campaignId: searchData!.advertiserList![k].cuecampaigns![n].id!,
+                          name: searchData!
+                              .advertiserList![k].cuecampaigns![n].name!,
+                          image:
+                              '${global.appInfo.baseUrls!.offerImageUrl}/${searchData!.advertiserList![k].cuecampaigns![n].image}',
+                          buttonText: searchData!
+                              .advertiserList![k].cuecampaigns![n].buttonText!,
+                          trackingLink: searchData!
+                              .advertiserList![k].cuecampaigns![n].url!,
+                          campaignId: searchData!
+                              .advertiserList![k].cuecampaigns![n].id!,
                         ),
                       );
                     }
@@ -139,7 +155,8 @@ class SearchGetController extends GetxController {
       }
       update();
     } catch (e) {
-      print("Exception - SearchController.dart - getSearchData():" + e.toString());
+      print("Exception - SearchController.dart - getSearchData():" +
+          e.toString());
     }
   }
 
@@ -147,7 +164,8 @@ class SearchGetController extends GetxController {
     try {
       addNewTabList2 = [];
       addNewTabList = [];
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         await apiHelper.allInOneSearch().then((response) {
           if (response.status == "1") {
             _allInOneList = response.data;
@@ -177,7 +195,8 @@ class SearchGetController extends GetxController {
       }
       update();
     } catch (e) {
-      print("Exception - SearchController.dart - allInOneSearch():" + e.toString());
+      print("Exception - SearchController.dart - allInOneSearch():" +
+          e.toString());
     }
   }
 
@@ -193,10 +212,12 @@ class SearchGetController extends GetxController {
   Future saveTab() async {
     try {
       addNewTabList2!.removeWhere((element) => element.id == null);
-      print('addNewTabList2 ------------------ ${addNewTabList2!.length.toString()}');
+      print(
+          'addNewTabList2 ------------------ ${addNewTabList2!.length.toString()}');
       addNewTabList2 = List.from(addNewTabList!);
       print('addNewTabList +++++++++++++ ${addNewTabList!.length.toString()}');
-      print('addNewTabList2 +++++++++++++ ${addNewTabList2!.length.toString()}');
+      print(
+          'addNewTabList2 +++++++++++++ ${addNewTabList2!.length.toString()}');
       //addNewTabList = List.from(addNewTabList2);
       // searchController.addNewTabList2.clear();
       // searchController.addNewTabList2.addAll(searchController.addNewTabList);
@@ -210,7 +231,10 @@ class SearchGetController extends GetxController {
         AllInOneSearchDataModel(name: '+Add Tab'),
       );
 
-      global.sp!.setString('tabList', jsonEncode(addNewTabList2!.map((i) => i.toJson()).toList()).toString());
+      global.sp!.setString(
+          'tabList',
+          jsonEncode(addNewTabList2!.map((i) => i.toJson()).toList())
+              .toString());
     } catch (e) {
       print("Exception - SearchController.dart - saveTab():" + e.toString());
     }
@@ -218,7 +242,8 @@ class SearchGetController extends GetxController {
 
   Future getTrendingKeywords() async {
     try {
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         await apiHelper.getTrendingKeywords().then((response) {
           if (response.statusCode == 200) {
             _searchKeywordList = response.data;
@@ -231,7 +256,8 @@ class SearchGetController extends GetxController {
       }
       update();
     } catch (e) {
-      print("Exception - SearchController.dart - getTrendingKeywords():" + e.toString());
+      print("Exception - SearchController.dart - getTrendingKeywords():" +
+          e.toString());
     }
   }
 }

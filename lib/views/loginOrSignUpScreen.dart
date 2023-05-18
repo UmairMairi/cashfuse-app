@@ -1,16 +1,18 @@
 import 'package:cashfuse/controllers/authController.dart';
-import 'package:fl_country_code_picker/fl_country_code_picker.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
+// import 'package:intl_phone_field/country_picker_dialog.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 class LoginOrSignUpScreen extends StatelessWidget {
   final bool fromMenu;
   LoginOrSignUpScreen({required this.fromMenu});
 
-  final countryPicker = FlCountryCodePicker();
+  // final countryPicker = FlCountryCodePicker();
 
   @override
   Widget build(BuildContext context) {
@@ -59,40 +61,26 @@ class LoginOrSignUpScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
                 child: SizedBox(
-                  height: 50,
-                  child: TextFormField(
+                  height: 100,
+                  child: IntlPhoneField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    focusNode: authController.phoneFocus,
+                    showCountryFlag: false,
                     controller: authController.contactNo,
-                    cursorColor: Get.theme.primaryColor,
-                    textInputAction: TextInputAction.done,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    initialCountryCode: 'IN',
+                    textAlignVertical: TextAlignVertical.center,
+                    textAlign: TextAlign.start,
                     keyboardType: TextInputType.numberWithOptions(
                         signed: true, decimal: true),
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                    ],
+                    disableLengthCheck: false,
                     decoration: InputDecoration(
-                      labelText: 'Enter phone',
+                      contentPadding: EdgeInsets.zero,
+                      // fillColor: AppColor.WHITE_COLOR,
+                      label: Text('Enter phone'),
                       labelStyle: TextStyle(color: Colors.black),
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      floatingLabelAlignment: FloatingLabelAlignment.start,
-                      contentPadding: EdgeInsets.only(bottom: 5),
-                      prefixIcon: InkWell(
-                        onTap: () async {
-                          final code = await countryPicker.showPicker(
-                            context: context,
-                          );
-                          if (code != null) {
-                            authController.coutryCode = code.dialCode;
-                            authController.update();
-                          }
-                        },
-                        child: Container(
-                          width: 20,
-                          alignment: Alignment.center,
-                          child: Text(
-                            authController.coutryCode!,
-                          ).translate(),
-                        ),
-                      ),
+                      // hintText: MessageConstants.HNT_PHONE_NUMBER,
+                      filled: false,
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
@@ -105,8 +93,74 @@ class LoginOrSignUpScreen extends StatelessWidget {
                           color: Get.theme.primaryColor,
                         ),
                       ),
+                      counterText: "",
                     ),
+                    onChanged: (phone) {
+                      //           authController.update();
+                      // print(phone.completeNumber);
+                      // contactNo = phone.completeNumber;
+                      // phonenumber = phone;
+
+                      // phone.countryCode;
+                    },
+                    // flagsButtonPadding: EdgeInsets.only(left: 15),
+                    dropdownTextStyle: TextStyle(color: Colors.black),
+                    showDropdownIcon: false,
+                    cursorColor: Theme.of(context).primaryColor,
+                    onCountryChanged: (country) {
+                      FocusScope.of(context).unfocus();
+                      authController.coutryCode = '+' + country.dialCode;
+                      authController.update();
+                      print('Country changed to: ' + country.name);
+                    },
                   ),
+                  // TextFormField(
+                  //   controller: authController.contactNo,
+                  //   cursorColor: Get.theme.primaryColor,
+                  //   textInputAction: TextInputAction.done,
+                  //   keyboardType: TextInputType.numberWithOptions(
+                  //       signed: true, decimal: true),
+                  //   inputFormatters: [
+                  //     FilteringTextInputFormatter.digitsOnly,
+                  //   ],
+                  //   decoration: InputDecoration(
+                  //     labelText: 'Enter phone',
+                  //     labelStyle: TextStyle(color: Colors.black),
+                  //     floatingLabelBehavior: FloatingLabelBehavior.always,
+                  //     floatingLabelAlignment: FloatingLabelAlignment.start,
+                  //     contentPadding: EdgeInsets.only(bottom: 5),
+                  //     prefixIcon: InkWell(
+                  //       onTap: () async {
+                  //         final code = await countryPicker.showPicker(
+                  //           context: context,
+                  //         );
+                  //         if (code != null) {
+                  //           authController.coutryCode = code.dialCode;
+                  //           authController.update();
+                  //         }
+                  //       },
+                  //       child: Container(
+                  //         width: 20,
+                  //         alignment: Alignment.center,
+                  //         child: Text(
+                  //           authController.coutryCode!,
+                  //         ).translate(),
+                  //       ),
+                  //     ),
+                  //     focusedBorder: OutlineInputBorder(
+                  //       borderRadius: BorderRadius.circular(10),
+                  //       borderSide: BorderSide(
+                  //         color: Get.theme.primaryColor,
+                  //       ),
+                  //     ),
+                  //     border: OutlineInputBorder(
+                  //       borderRadius: BorderRadius.circular(10),
+                  //       borderSide: BorderSide(
+                  //         color: Get.theme.primaryColor,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ),
               ),
               SizedBox(

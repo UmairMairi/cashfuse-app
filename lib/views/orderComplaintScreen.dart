@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, unnecessary_null_comparison
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/orderController.dart';
@@ -18,7 +18,7 @@ class OrderComplaintScreen extends StatelessWidget {
   bool isSHow = false;
   OrderModel orderModel;
 
-  OrderComplaintScreen({this.orderModel});
+  OrderComplaintScreen({required this.orderModel});
 
   OrderController orderController = Get.find<OrderController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -46,7 +46,7 @@ class OrderComplaintScreen extends StatelessWidget {
                   ),
                   title: Text(
                     'Order Complaints',
-                    style: Get.theme.primaryTextTheme.titleSmall
+                    style: Get.theme.primaryTextTheme.titleSmall!
                         .copyWith(color: Colors.white),
                   ).translate(),
                 ),
@@ -114,7 +114,7 @@ class OrderComplaintScreen extends StatelessWidget {
                                                               style: Get
                                                                   .theme
                                                                   .primaryTextTheme
-                                                                  .titleSmall
+                                                                  .titleSmall!
                                                                   .copyWith(
                                                                 letterSpacing:
                                                                     -0.2,
@@ -130,7 +130,7 @@ class OrderComplaintScreen extends StatelessWidget {
                                                                   style: Get
                                                                       .theme
                                                                       .primaryTextTheme
-                                                                      .titleSmall
+                                                                      .titleSmall!
                                                                       .copyWith(
                                                                     letterSpacing:
                                                                         -0.2,
@@ -161,7 +161,7 @@ class OrderComplaintScreen extends StatelessWidget {
                                                               style: Get
                                                                   .theme
                                                                   .primaryTextTheme
-                                                                  .titleSmall
+                                                                  .titleSmall!
                                                                   .copyWith(
                                                                 letterSpacing:
                                                                     -0.2,
@@ -175,7 +175,7 @@ class OrderComplaintScreen extends StatelessWidget {
                                                                   text: orderController
                                                                           .complainList[
                                                                               index]
-                                                                          .reply
+                                                                          .reply!
                                                                           .isNotEmpty
                                                                       ? orderController
                                                                           .complainList[
@@ -185,7 +185,7 @@ class OrderComplaintScreen extends StatelessWidget {
                                                                   style: Get
                                                                       .theme
                                                                       .primaryTextTheme
-                                                                      .titleSmall
+                                                                      .titleSmall!
                                                                       .copyWith(
                                                                     letterSpacing:
                                                                         -0.2,
@@ -277,7 +277,7 @@ class OrderComplaintScreen extends StatelessWidget {
                                   ),
                                   Text(
                                     'Add Complaint',
-                                    style: Get.theme.primaryTextTheme.titleSmall
+                                    style: Get.theme.primaryTextTheme.titleSmall!
                                         .copyWith(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w600,
@@ -310,7 +310,7 @@ class OrderComplaintScreen extends StatelessWidget {
                                           text: TextSpan(
                                             text: snapShot.data,
                                             style: Get.theme.primaryTextTheme
-                                                .titleSmall
+                                                .titleSmall!
                                                 .copyWith(
                                               letterSpacing: -0.2,
                                               fontWeight: FontWeight.w500,
@@ -320,7 +320,7 @@ class OrderComplaintScreen extends StatelessWidget {
                                                 text:
                                                     "${orderController.complainList[index].complain}",
                                                 style: Get.theme
-                                                    .primaryTextTheme.titleSmall
+                                                    .primaryTextTheme.titleSmall!
                                                     .copyWith(
                                                   letterSpacing: -0.2,
                                                   fontWeight: FontWeight.w300,
@@ -340,7 +340,7 @@ class OrderComplaintScreen extends StatelessWidget {
                                           text: TextSpan(
                                             text: snapShot.data,
                                             style: Get.theme.primaryTextTheme
-                                                .titleSmall
+                                                .titleSmall!
                                                 .copyWith(
                                               letterSpacing: -0.2,
                                               fontWeight: FontWeight.w500,
@@ -349,14 +349,14 @@ class OrderComplaintScreen extends StatelessWidget {
                                               TextSpan(
                                                 text: orderController
                                                         .complainList[index]
-                                                        .reply
+                                                        .reply!
                                                         .isNotEmpty
                                                     ? orderController
                                                         .complainList[index]
                                                         .reply
                                                     : 'Waiting for reply....',
                                                 style: Get.theme
-                                                    .primaryTextTheme.titleSmall
+                                                    .primaryTextTheme.titleSmall!
                                                     .copyWith(
                                                   letterSpacing: -0.2,
                                                   fontWeight: FontWeight.w300,
@@ -391,7 +391,7 @@ class OrderComplaintScreen extends StatelessWidget {
                       ),
                       Text(
                         "You don't have any Complaint",
-                        style: Get.theme.primaryTextTheme.bodyLarge
+                        style: Get.theme.primaryTextTheme.bodyLarge!
                             .copyWith(fontWeight: FontWeight.w300),
                       ).translate(),
                       SizedBox(
@@ -433,7 +433,7 @@ class OrderComplaintScreen extends StatelessWidget {
                           child: Text(
                             'Add Complaint',
                             style:
-                                Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                Get.theme.primaryTextTheme.titleSmall!.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
                             ),
@@ -474,7 +474,7 @@ class OrderComplaintScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       'Add Complaint',
-                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                      style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),

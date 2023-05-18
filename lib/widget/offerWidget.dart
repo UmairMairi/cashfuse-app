@@ -12,10 +12,10 @@ import 'package:google_translator/google_translator.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
 class OfferWidget extends StatelessWidget {
-  final OfferModel offer;
-  final CommonModel commonModel;
-  final String domainImage;
-  final bool fromList;
+  final OfferModel? offer;
+  final CommonModel? commonModel;
+  final String? domainImage;
+  final bool? fromList;
   OfferWidget({this.offer, this.commonModel, this.domainImage, this.fromList});
 
   HomeController homeController = Get.find<HomeController>();
@@ -24,8 +24,8 @@ class OfferWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: global.getPlatFrom() ? 330 : 260,
-      height: fromList ? 250 : 200,
-      margin: fromList ? EdgeInsets.only(top: 15) : EdgeInsets.only(right: 10),
+      height: fromList! ? 250 : 200,
+      margin: fromList! ? EdgeInsets.only(top: 15) : EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -42,8 +42,8 @@ class OfferWidget extends StatelessWidget {
                         topRight: Radius.circular(10),
                       ),
                       child: CustomImage(
-                        image: '${global.appInfo.baseUrls.offerImageUrl}/${commonModel.image}',
-                        height: fromList
+                        image: '${global.appInfo.baseUrls!.offerImageUrl}/${commonModel!.image}',
+                        height: fromList!
                             ? 180
                             : global.getPlatFrom()
                                 ? 170
@@ -59,7 +59,7 @@ class OfferWidget extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: CustomImage(
-                          image: '${global.appInfo.baseUrls.partnerImageUrl}/$domainImage',
+                          image: '${global.appInfo.baseUrls!.partnerImageUrl}/$domainImage',
                           height: 30,
                           width: 60,
                           fit: BoxFit.contain,
@@ -80,7 +80,7 @@ class OfferWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(2),
                         ),
                         child: Text(
-                          commonModel.buttonText.isNotEmpty ? commonModel.buttonText : 'Grab Now',
+                          commonModel!.buttonText!.isNotEmpty ? commonModel!.buttonText! : 'Grab Now',
                           style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
                         ).translate(),
                       ),
@@ -101,8 +101,8 @@ class OfferWidget extends StatelessWidget {
                             topRight: Radius.circular(10),
                           ),
                           child: CustomImage(
-                            image: '${global.appInfo.baseUrls.offerImageUrl}/${offer.bannerImage}',
-                            height: fromList
+                            image: '${global.appInfo.baseUrls!.offerImageUrl}/${offer!.bannerImage}',
+                            height: fromList!
                                 ? 180
                                 : global.getPlatFrom()
                                     ? 170
@@ -118,7 +118,7 @@ class OfferWidget extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: CustomImage(
-                              image: '${global.appInfo.baseUrls.offerImageUrl}/${offer.image}',
+                              image: '${global.appInfo.baseUrls!.offerImageUrl}/${offer!.image}',
                               height: 30,
                               width: 60,
                               fit: BoxFit.contain,
@@ -134,7 +134,7 @@ class OfferWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            offer.dayDifference != null && offer.dayDifference > 0
+                            offer!.dayDifference != null && offer!.dayDifference! > 0
                                 ? SlideCountdown(
                                     slideDirection: SlideDirection.none,
                                     textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
@@ -142,7 +142,7 @@ class OfferWidget extends StatelessWidget {
                                       color: Colors.red[800],
                                       borderRadius: BorderRadius.circular(3),
                                     ),
-                                    duration: Duration(days: offer.dayDifference),
+                                    duration: Duration(days: offer!.dayDifference!),
                                   )
                                 : SizedBox(),
                             Container(
@@ -152,7 +152,7 @@ class OfferWidget extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(2),
                               ),
                               child: Text(
-                                offer.buttonText,
+                                offer!.buttonText!,
                                 style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
                               ).translate(),
                             ),

@@ -8,7 +8,7 @@ import 'package:google_translator/google_translator.dart';
 
 class AdsCampaignWidget extends StatelessWidget {
   final CommonModel commonModel;
-  AdsCampaignWidget({this.commonModel});
+  AdsCampaignWidget({required this.commonModel});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class AdsCampaignWidget extends StatelessWidget {
             ? MainAxisAlignment.start
             : MainAxisAlignment.center,
         children: [
-          commonModel.tagline != null && commonModel.tagline.isNotEmpty
+          commonModel.tagline != null && commonModel.tagline!.isNotEmpty
               ? Align(
                   alignment: Alignment.topLeft,
                   child: RotatedBox(
@@ -65,10 +65,10 @@ class AdsCampaignWidget extends StatelessWidget {
                         child: RotatedBox(
                           quarterTurns: 45,
                           child: Text(
-                            commonModel.tagline,
+                            commonModel.tagline!,
                             textAlign: TextAlign.center,
                             style:
-                                Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                Get.theme.primaryTextTheme.bodySmall!.copyWith(
                               color: Colors.white,
                               fontSize: 10,
                             ),
@@ -82,7 +82,7 @@ class AdsCampaignWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0),
             child: CustomImage(
-              image: commonModel.image,
+              image: commonModel.image!,
               //height: 32,
               height: 70,
 
@@ -94,7 +94,7 @@ class AdsCampaignWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Text(
-              commonModel.name,
+              commonModel.name!,
               style: Get.theme.primaryTextTheme.bodySmall,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -110,7 +110,7 @@ class AdsCampaignWidget extends StatelessWidget {
             ),
             child: Text(
               commonModel.buttonText != null
-                  ? commonModel.buttonText
+                  ? commonModel.buttonText!
                   : 'Grab deal',
               style: TextStyle(
                   color: Colors.white,

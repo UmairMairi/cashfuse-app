@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 
-void showCustomSnackBar(String message, {bool isError = true}) {
+void showCustomSnackBar(String? message, {bool isError = true}) {
   if (message != null && message.isNotEmpty) {
     String _msg = '';
     global.translatedText(message).then((value) {

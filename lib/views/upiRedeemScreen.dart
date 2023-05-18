@@ -32,7 +32,7 @@ class UpiRedeemScreen extends StatelessWidget {
           ),
           title: Text(
             'Upi Redeem',
-            style: Get.theme.primaryTextTheme.titleSmall
+            style: Get.theme.primaryTextTheme.titleSmall!
                 .copyWith(color: Colors.white),
           ).translate(),
         ),
@@ -88,13 +88,13 @@ class UpiRedeemScreen extends StatelessWidget {
                         children: [
                           Text(
                             'Account Details',
-                            style: Get.theme.primaryTextTheme.titleMedium
+                            style: Get.theme.primaryTextTheme.titleMedium!
                                 .copyWith(fontWeight: FontWeight.w600),
                           ).translate(),
                           InkWell(
                             onTap: () {
                               if (paymentController.upiDetails != null) {
-                                upiId.text = paymentController.upiDetails.upi;
+                                upiId.text = paymentController.upiDetails!.upi!;
                               }
                               Get.dialog(
                                 Dialog(
@@ -112,7 +112,7 @@ class UpiRedeemScreen extends StatelessWidget {
                                         Text(
                                           'Add Upi Account',
                                           style: Get
-                                              .theme.primaryTextTheme.titleLarge
+                                              .theme.primaryTextTheme.titleLarge!
                                               .copyWith(
                                                   fontWeight: FontWeight.w600),
                                         ).translate(),
@@ -229,16 +229,16 @@ class UpiRedeemScreen extends StatelessWidget {
                                 return RichText(
                                   text: TextSpan(
                                     text: snapShot.data,
-                                    style: Get.theme.primaryTextTheme.titleSmall
+                                    style: Get.theme.primaryTextTheme.titleSmall!
                                         .copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
                                     ),
                                     children: <TextSpan>[
                                       TextSpan(
-                                        text: " ${paymentController.upiDetails.upi}",
+                                        text: " ${paymentController.upiDetails!.upi}",
                                         style: Get
-                                            .theme.primaryTextTheme.bodySmall
+                                            .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
                                           letterSpacing: -0.2,
                                           fontWeight: FontWeight.w300,

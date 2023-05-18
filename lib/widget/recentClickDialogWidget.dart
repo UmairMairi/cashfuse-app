@@ -13,7 +13,7 @@ import 'package:google_translator/google_translator.dart';
 
 class RecentClickDialogWidget extends StatelessWidget {
   final ClickModel click;
-  RecentClickDialogWidget({this.click});
+  RecentClickDialogWidget({required this.click});
 
   HomeController homeController = Get.find<HomeController>();
 

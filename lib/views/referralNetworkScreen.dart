@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, unnecessary_null_comparison
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/referEarnController.dart';
@@ -42,7 +42,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                 ),
                 title: Text(
                   'My Referrals',
-                  style: Get.theme.primaryTextTheme.titleSmall
+                  style: Get.theme.primaryTextTheme.titleSmall!
                       .copyWith(color: Colors.white),
                 ).translate(),
               ),
@@ -79,7 +79,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                         Text(
                           "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
                           textAlign: TextAlign.center,
-                          style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                          style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.w400,
                           ),
@@ -96,9 +96,9 @@ class ReferralNetworkScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   global.currentUser.earning != null
-                                      ? '${global.appInfo.currency} ${global.currentUser.earning.referralEarning}'
+                                      ? '${global.appInfo.currency} ${global.currentUser.earning!.referralEarning}'
                                       : '${global.appInfo.currency} 0.0',
-                                  style: Get.theme.primaryTextTheme.bodySmall
+                                  style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w300,
@@ -106,7 +106,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                                 ).translate(),
                                 Text(
                                   'Total Referral',
-                                  style: Get.theme.primaryTextTheme.bodySmall
+                                  style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w300,
@@ -115,7 +115,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                                 ).translate(),
                                 Text(
                                   'Cashback Earned',
-                                  style: Get.theme.primaryTextTheme.bodySmall
+                                  style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w300,
@@ -135,7 +135,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   global.totalJoinedCount.toString(),
-                                  style: Get.theme.primaryTextTheme.bodySmall
+                                  style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w500,
@@ -144,7 +144,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                                 ).translate(),
                                 Text(
                                   'Friends Joined',
-                                  style: Get.theme.primaryTextTheme.bodySmall
+                                  style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w300,
@@ -175,7 +175,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                                         childAspectRatio: 5,
                                       ),
                                       itemCount: global
-                                          .currentUser.withdrawalRequest.length,
+                                          .currentUser.withdrawalRequest!.length,
                                       shrinkWrap: true,
                                       padding:
                                           EdgeInsets.all(10).copyWith(top: 20),
@@ -203,14 +203,14 @@ class ReferralNetworkScreen extends StatelessWidget {
                                                     child: CustomImage(
                                                       image: global
                                                               .appInfo
-                                                              .baseUrls
-                                                              .userImageUrl +
+                                                              .baseUrls!
+                                                              .userImageUrl! +
                                                           '/' +
                                                           referEarnController
                                                               .referralUserList[
                                                                   index]
-                                                              .referraluser
-                                                              .userImage,
+                                                              .referraluser!
+                                                              .userImage!,
                                                       // height: 30,
                                                       // width: 30,
                                                       fit: BoxFit.cover,
@@ -220,17 +220,17 @@ class ReferralNetworkScreen extends StatelessWidget {
                                                 ),
                                                 title: Text(referEarnController
                                                     .referralUserList[index]
-                                                    .referraluser
-                                                    .name),
+                                                    .referraluser!
+                                                    .name!),
                                                 subtitle: Text(
                                                   referEarnController
                                                       .referralUserList[index]
-                                                      .referraluser
-                                                      .phone,
+                                                      .referraluser!
+                                                      .phone!,
                                                   style: Get
                                                       .theme
                                                       .primaryTextTheme
-                                                      .bodySmall
+                                                      .bodySmall!
                                                       .copyWith(
                                                           color: Colors.grey,
                                                           letterSpacing: 0.5),
@@ -240,7 +240,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                                                       .dateTimeToDateOnly(
                                                     referEarnController
                                                         .referralUserList[index]
-                                                        .createdAt,
+                                                        .createdAt!,
                                                   ),
                                                 ),
                                               ),
@@ -264,13 +264,13 @@ class ReferralNetworkScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(25),
                                               child: CustomImage(
-                                                image: global.appInfo.baseUrls
-                                                        .userImageUrl +
+                                                image: global.appInfo.baseUrls!
+                                                        .userImageUrl! +
                                                     '/' +
                                                     referEarnController
                                                         .referralUserList[index]
-                                                        .referraluser
-                                                        .userImage,
+                                                        .referraluser!
+                                                        .userImage!,
                                                 // height: 30,
                                                 // width: 30,
                                                 fit: BoxFit.cover,
@@ -280,15 +280,15 @@ class ReferralNetworkScreen extends StatelessWidget {
                                           ),
                                           title: Text(referEarnController
                                               .referralUserList[index]
-                                              .referraluser
-                                              .name),
+                                              .referraluser!
+                                              .name!),
                                           subtitle: Text(
                                             referEarnController
                                                 .referralUserList[index]
-                                                .referraluser
-                                                .phone,
+                                                .referraluser!
+                                                .phone!,
                                             style: Get.theme.primaryTextTheme
-                                                .bodySmall
+                                                .bodySmall!
                                                 .copyWith(
                                                     color: Colors.grey,
                                                     letterSpacing: 0.5),
@@ -297,7 +297,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                                             DateConverter.dateTimeToDateOnly(
                                               referEarnController
                                                   .referralUserList[index]
-                                                  .createdAt,
+                                                  .createdAt!,
                                             ),
                                           ),
                                         ),
@@ -332,7 +332,7 @@ class ReferralNetworkScreen extends StatelessWidget {
                                   child: Text(
                                     "You are now entited to 10% Extra Referral Earnings everytime your friend shops via us! You can earn more if you refer us to more people in your network.",
                                     textAlign: TextAlign.center,
-                                    style: Get.theme.primaryTextTheme.bodySmall
+                                    style: Get.theme.primaryTextTheme.bodySmall!
                                         .copyWith(
                                             fontSize: 11,
                                             color: Colors.black54),
@@ -379,7 +379,7 @@ class ReferralNetworkScreen extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               'REFER & EARN NOW',
-              style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+              style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w600,
               ),

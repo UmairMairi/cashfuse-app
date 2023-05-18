@@ -57,18 +57,12 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         HomeScreen(
           bgColor: colorList[bottomNavIndex!],
         ),
-        SearchScreen(
-          bgColor: colorList[bottomNavIndex!],
-        ),
+        SearchScreen(),
         AllInOneSearchScreen(
-          // bgColor: colorList[bottomNavIndex!],
-        ),
-        RecentClickScreen(
-          bgColor: colorList[bottomNavIndex!],
-        ),
-        ProfileScreen(
-          bgColor: colorList[bottomNavIndex!],
-        ),
+            // bgColor: colorList[bottomNavIndex!],
+            ),
+        RecentClickScreen(),
+        ProfileScreen(),
       ];
 
   @override

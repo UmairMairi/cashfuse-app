@@ -66,9 +66,9 @@ class HomeWebCategoryView extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        hm.topCategoryList[index].name.toUpperCase(),
+                                        hm.topCategoryList[index].name!.toUpperCase(),
                                         textAlign: TextAlign.center,
-                                        style: Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                        style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: Colors.black,
@@ -78,7 +78,7 @@ class HomeWebCategoryView extends StatelessWidget {
                                         height: 10,
                                       ),
                                       CustomImage(
-                                        image: '${global.appInfo.baseUrls.categoryImageUrl}/${hm.topCategoryList[index].image}',
+                                        image: '${global.appInfo.baseUrls!.categoryImageUrl}/${hm.topCategoryList[index].image}',
                                         height: 60,
                                       ),
                                     ],

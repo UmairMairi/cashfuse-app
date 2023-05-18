@@ -1,5 +1,6 @@
 // import 'package:cashfuse/controllers/splashController.dart';
 import 'dart:convert';
+import 'package:google_translator/google_translator.dart';
 
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -12,7 +13,7 @@ import 'package:get/get.dart';
 HomeController homeController = Get.find<HomeController>();
 
 class CountrySelectWidget extends StatefulWidget {
-  const CountrySelectWidget({Key key}) : super(key: key);
+  const CountrySelectWidget() : super();
 
   @override
   State<CountrySelectWidget> createState() => _CountrySelectWidgetState();
@@ -62,13 +63,13 @@ class _CountrySelectWidgetState extends State<CountrySelectWidget> {
                       ? Text(
                           'No offers available in your country.',
                           style:
-                              Get.theme.primaryTextTheme.titleMedium.copyWith(
+                              Get.theme.primaryTextTheme.titleMedium!.copyWith(
                             fontWeight: FontWeight.w600,
                             color: Colors.red,
                             height: 1.2,
                           ),
                           textAlign: TextAlign.center,
-                        )
+                        ).translate()
                       : SizedBox(),
                   global.country == null &&
                           global.countrySlug.isEmpty &&
@@ -87,20 +88,20 @@ class _CountrySelectWidgetState extends State<CountrySelectWidget> {
                           child: Text(
                             'Please select country from below list',
                             style:
-                                Get.theme.primaryTextTheme.bodySmall.copyWith(
+                                Get.theme.primaryTextTheme.bodySmall!.copyWith(
                               // fontWeight: FontWeight.w600,
                               color: Colors.red,
                               height: 1.2,
                             ),
                             textAlign: TextAlign.center,
-                          ),
+                          ).translate(),
                         )
                       : SizedBox(),
                   global.appInfo.countryselection == 1
                       ? ListView.builder(
                           padding: EdgeInsets.only(top: 5),
                           shrinkWrap: true,
-                          itemCount: global.appInfo.countries.length,
+                          itemCount: global.appInfo.countries!.length,
                           itemBuilder: (context, index) {
                             return Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,21 +109,21 @@ class _CountrySelectWidgetState extends State<CountrySelectWidget> {
                                 Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Text(global
-                                      .appInfo.countries[index].countryName),
+                                      .appInfo.countries![index].countryName!),
                                 ),
                                 Radio(
                                   groupValue: global.country,
-                                  value: global.appInfo.countries[index],
+                                  value: global.appInfo.countries![index],
                                   onChanged: (value) async {
                                     if (value != null) {
                                       Get.to(() => BottomNavigationBarScreen(),
                                           preventDuplicates: false,
                                           routeName: 'home');
                                       global.country = value;
-                                      global.appInfo.countries
+                                      global.appInfo.countries!
                                           .map((e) => e.isSelected = false)
                                           .toList();
-                                      global.appInfo.countries[index]
+                                      global.appInfo.countries![index]
                                           .isSelected = true;
 
                                       global.showCountryPopUp = false;
@@ -130,10 +131,10 @@ class _CountrySelectWidgetState extends State<CountrySelectWidget> {
                                       setState(() {});
 
                                       global.country = value;
-                                      global.countrySlug = global.country.slug;
-                                      await global.sp.setString('country',
-                                          json.encode(global.country.toJson()));
-                                      await global.sp.setString(
+                                      global.countrySlug = global.country!.slug!;
+                                      await global.sp!.setString('country',
+                                          json.encode(global.country!.toJson()));
+                                      await global.sp!.setString(
                                           'countrySlug', global.countrySlug);
 
                                       setState(() {});

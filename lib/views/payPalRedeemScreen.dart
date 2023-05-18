@@ -32,7 +32,7 @@ class PayPalRedeemScreen extends StatelessWidget {
           ),
           title: Text(
             'PayPal Redeem',
-            style: Get.theme.primaryTextTheme.titleSmall
+            style: Get.theme.primaryTextTheme.titleSmall!
                 .copyWith(color: Colors.white),
           ).translate(),
         ),
@@ -48,8 +48,8 @@ class PayPalRedeemScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                     gradient: LinearGradient(
                       colors: [
-                        Colors.blue[900],
-                        Colors.blue[800],
+                        Colors.blue[900]!,
+                        Colors.blue[800]!,
                         Colors.blue.withOpacity(0.85),
                       ],
                     ),
@@ -80,14 +80,14 @@ class PayPalRedeemScreen extends StatelessWidget {
                         children: [
                           Text(
                             'Account Details',
-                            style: Get.theme.primaryTextTheme.titleMedium
+                            style: Get.theme.primaryTextTheme.titleMedium!
                                 .copyWith(fontWeight: FontWeight.w600),
                           ).translate(),
                           InkWell(
                             onTap: () {
                               if (paymentController.payPalDetails != null) {
                                 payPalId.text =
-                                    paymentController.payPalDetails.payPalEmail;
+                                    paymentController.payPalDetails!.payPalEmail!;
                               }
                               Get.dialog(
                                 Dialog(
@@ -105,7 +105,7 @@ class PayPalRedeemScreen extends StatelessWidget {
                                         Text(
                                           'Add PayPal Account',
                                           style: Get
-                                              .theme.primaryTextTheme.titleLarge
+                                              .theme.primaryTextTheme.titleLarge!
                                               .copyWith(
                                                   fontWeight: FontWeight.w600),
                                         ).translate(),
@@ -228,7 +228,7 @@ class PayPalRedeemScreen extends StatelessWidget {
                                 return RichText(
                                   text: TextSpan(
                                     text: snapShot.data,
-                                    style: Get.theme.primaryTextTheme.titleSmall
+                                    style: Get.theme.primaryTextTheme.titleSmall!
                                         .copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
@@ -236,9 +236,9 @@ class PayPalRedeemScreen extends StatelessWidget {
                                     children: <TextSpan>[
                                       TextSpan(
                                         text:
-                                            " ${paymentController.payPalDetails.payPalEmail}",
+                                            " ${paymentController.payPalDetails!.payPalEmail}",
                                         style: Get
-                                            .theme.primaryTextTheme.bodySmall
+                                            .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
                                           letterSpacing: -0.2,
                                           fontWeight: FontWeight.w300,

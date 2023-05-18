@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, unnecessary_null_comparison
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/views/helpDetailSceen.dart';

@@ -9,7 +9,7 @@ import 'package:google_translator/google_translator.dart';
 
 class CouponWidget extends StatelessWidget {
   final Coupon coupon;
-  CouponWidget({this.coupon});
+  CouponWidget({required this.coupon});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class CouponWidget extends StatelessWidget {
             height: 105,
             decoration: DottedDecoration(
               borderRadius: BorderRadius.circular(9),
-              color: Colors.grey[400],
+              color: Colors.grey[400]!,
               strokeWidth: 1.5,
               shape: Shape.box,
             ),
@@ -42,7 +42,7 @@ class CouponWidget extends StatelessWidget {
                   children: [
                     CustomImage(
                       image:
-                          '${global.appInfo.baseUrls.partnerImageUrl}/${coupon.image}',
+                          '${global.appInfo.baseUrls!.partnerImageUrl}/${coupon.image}',
                       height: 35,
                       width: 70,
                       fit: BoxFit.contain,
@@ -54,8 +54,8 @@ class CouponWidget extends StatelessWidget {
                     SizedBox(
                       width: 160,
                       child: Text(
-                        coupon.name,
-                        style: Get.theme.primaryTextTheme.titleMedium.copyWith(
+                        coupon.name!,
+                        style: Get.theme.primaryTextTheme.titleMedium!.copyWith(
                           fontWeight: FontWeight.w600,
                           color: Get.theme.primaryColor,
                         ),
@@ -66,8 +66,8 @@ class CouponWidget extends StatelessWidget {
                     SizedBox(
                       width: 160,
                       child: Text(
-                        coupon.heading,
-                        style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
+                        coupon.heading!,
+                        style: Get.theme.primaryTextTheme.bodyLarge!.copyWith(
                           color: Colors.grey[500],
                         ),
                         maxLines: 1,
@@ -100,13 +100,13 @@ class CouponWidget extends StatelessWidget {
                         ),
                         alignment: Alignment.center,
                         child: Text(
-                          coupon.code != null && coupon.code.isNotEmpty
+                          coupon.code != null && coupon.code!.isNotEmpty
                               ? 'See code'
                               : coupon.buttonText != null &&
-                                      coupon.buttonText.isNotEmpty
-                                  ? coupon.buttonText
+                                      coupon.buttonText!.isNotEmpty
+                                  ? coupon.buttonText!
                                   : 'Grab Now',
-                          style: Get.theme.primaryTextTheme.titleSmall
+                          style: Get.theme.primaryTextTheme.titleSmall!
                               .copyWith(color: Colors.white),
                         ).translate(),
                       ),
@@ -120,7 +120,7 @@ class CouponWidget extends StatelessWidget {
         Positioned(
           right: 120,
           child: DottedLine(
-            dashColor: Colors.grey[400],
+            dashColor: Colors.grey[400]!,
             direction: Axis.vertical,
             dashGapLength: 6,
             lineThickness: 1.2,
@@ -140,7 +140,7 @@ class CouponWidget extends StatelessWidget {
               width: 30,
               decoration: DottedDecoration(
                 strokeWidth: 1,
-                color: Colors.grey[400],
+                color: Colors.grey[400]!,
                 shape: Shape.circle,
               ),
             ),
@@ -159,7 +159,7 @@ class CouponWidget extends StatelessWidget {
               width: 30,
               decoration: DottedDecoration(
                 strokeWidth: 1,
-                color: Colors.grey[400],
+                color: Colors.grey[400]!,
                 shape: Shape.circle,
               ),
             ),

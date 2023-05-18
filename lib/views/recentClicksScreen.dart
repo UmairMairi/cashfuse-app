@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, unnecessary_null_comparison
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
@@ -19,8 +19,8 @@ import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 
 class RecentClickScreen extends StatelessWidget {
-  final Color bgColor;
-  RecentClickScreen({this.bgColor});
+  
+  RecentClickScreen();
   HomeController homeController = Get.find<HomeController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -70,7 +70,7 @@ class RecentClickScreen extends StatelessWidget {
                                 CupertinoDialogAction(
                                   child: Text(
                                     'Yes',
-                                    style: Get.theme.primaryTextTheme.titleSmall
+                                    style: Get.theme.primaryTextTheme.titleSmall!
                                         .copyWith(color: Colors.red),
                                   ).translate(),
                                   onPressed: () {
@@ -81,7 +81,7 @@ class RecentClickScreen extends StatelessWidget {
                                 CupertinoDialogAction(
                                   child: Text(
                                     'No',
-                                    style: Get.theme.primaryTextTheme.titleSmall
+                                    style: Get.theme.primaryTextTheme.titleSmall!
                                         .copyWith(color: Colors.blue),
                                   ).translate(),
                                   onPressed: () {
@@ -151,7 +151,7 @@ class RecentClickScreen extends StatelessWidget {
                                                             image: homeController
                                                                 .recentClickList[
                                                                     index]
-                                                                .image,
+                                                                .image!,
                                                             height: 30,
                                                             width: 60,
                                                             fit: BoxFit.contain,
@@ -168,7 +168,7 @@ class RecentClickScreen extends StatelessWidget {
                                                         style: Get
                                                             .theme
                                                             .primaryTextTheme
-                                                            .bodySmall
+                                                            .bodySmall!
                                                             .copyWith(
                                                           fontWeight:
                                                               FontWeight.w300,
@@ -190,7 +190,7 @@ class RecentClickScreen extends StatelessWidget {
                                                         style: Get
                                                             .theme
                                                             .primaryTextTheme
-                                                            .bodyMedium
+                                                            .bodyMedium!
                                                             .copyWith(
                                                           fontWeight:
                                                               FontWeight.w300,
@@ -207,7 +207,7 @@ class RecentClickScreen extends StatelessWidget {
                                                               right: 20),
                                                       child: DottedLine(
                                                         dashColor:
-                                                            Colors.grey[350],
+                                                            Colors.grey[350]!,
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -257,7 +257,7 @@ class RecentClickScreen extends StatelessWidget {
                                                               style: Get
                                                                   .theme
                                                                   .primaryTextTheme
-                                                                  .bodySmall
+                                                                  .bodySmall!
                                                                   .copyWith(
                                                                 color:
                                                                     Colors.teal,
@@ -312,7 +312,7 @@ class RecentClickScreen extends StatelessWidget {
                                                 child: CustomImage(
                                                   image: homeController
                                                       .recentClickList[index]
-                                                      .image,
+                                                      .image!,
                                                   height: 30,
                                                   width: 60,
                                                   fit: BoxFit.contain,
@@ -325,7 +325,7 @@ class RecentClickScreen extends StatelessWidget {
                                                   homeController
                                                       .recentClickList[index]),
                                               style: Get.theme.primaryTextTheme
-                                                  .bodySmall
+                                                  .bodySmall!
                                                   .copyWith(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.grey[600],
@@ -341,7 +341,7 @@ class RecentClickScreen extends StatelessWidget {
                                             child: Text(
                                               'Did you shop on ${homeController.recentClickList[index].name}?',
                                               style: Get.theme.primaryTextTheme
-                                                  .bodyMedium
+                                                  .bodyMedium!
                                                   .copyWith(
                                                 fontWeight: FontWeight.w300,
                                               ),
@@ -354,7 +354,7 @@ class RecentClickScreen extends StatelessWidget {
                                             padding: const EdgeInsets.only(
                                                 left: 20, right: 20),
                                             child: DottedLine(
-                                              dashColor: Colors.grey[350],
+                                              dashColor: Colors.grey[350]!,
                                             ),
                                           ),
                                           SizedBox(
@@ -393,7 +393,7 @@ class RecentClickScreen extends StatelessWidget {
                                                     style: Get
                                                         .theme
                                                         .primaryTextTheme
-                                                        .bodySmall
+                                                        .bodySmall!
                                                         .copyWith(
                                                       color: Colors.teal,
                                                     ),
@@ -435,7 +435,7 @@ class RecentClickScreen extends StatelessWidget {
                                     child: Text(
                                       "Don't stop, just shop!",
                                       style: Get
-                                          .theme.primaryTextTheme.titleMedium
+                                          .theme.primaryTextTheme.titleMedium!
                                           .copyWith(
                                               fontWeight: FontWeight.w500),
                                     ).translate(),

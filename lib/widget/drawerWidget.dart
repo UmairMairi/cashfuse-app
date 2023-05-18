@@ -1,3 +1,4 @@
+import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/accountSettingScreen.dart';
@@ -13,7 +14,10 @@ import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:phone_number/phone_number.dart';
 import 'package:store_redirect/store_redirect.dart';
+
+AuthController authController = Get.find<AuthController>();
 
 class DrawerWidget extends StatelessWidget {
   @override
@@ -35,14 +39,14 @@ class DrawerWidget extends StatelessWidget {
                             CircleAvatar(
                               radius: 60,
                               backgroundColor: Colors.white,
-                              child: global.currentUser.userImage.isNotEmpty
+                              child: global.currentUser.userImage!.isNotEmpty
                                   ? ClipRRect(
                                       borderRadius: BorderRadius.circular(60),
                                       child: CustomImage(
-                                        image: global
-                                                .appInfo.baseUrls.userImageUrl +
+                                        image: global.appInfo.baseUrls!
+                                                .userImageUrl! +
                                             '/' +
-                                            global.currentUser.userImage,
+                                            global.currentUser.userImage!,
                                         // height: 30,
                                         // width: 30,
                                         fit: BoxFit.cover,
@@ -60,19 +64,19 @@ class DrawerWidget extends StatelessWidget {
                             SizedBox(
                               height: 20,
                             ),
-                            global.currentUser.name.isNotEmpty
+                            global.currentUser.name!.isNotEmpty
                                 ? Text(
-                                    global.currentUser.name,
+                                    global.currentUser.name!,
                                     style: Get
-                                        .theme.primaryTextTheme.titleMedium
+                                        .theme.primaryTextTheme.titleMedium!
                                         .copyWith(color: Colors.white),
                                   ).translate()
                                 : SizedBox(),
                             Text(
-                              global.currentUser.email.isNotEmpty
-                                  ? global.currentUser.email
-                                  : global.currentUser.phone,
-                              style: Get.theme.primaryTextTheme.bodySmall
+                              global.currentUser.email!.isNotEmpty
+                                  ? global.currentUser.email!
+                                  : global.currentUser.phone!,
+                              style: Get.theme.primaryTextTheme.bodySmall!
                                   .copyWith(color: Colors.white),
                             ).translate(),
                             Expanded(child: SizedBox()),
@@ -85,7 +89,7 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       'Pending',
                                       style: Get
-                                          .theme.primaryTextTheme.bodySmall
+                                          .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
                                         color: Colors.white,
                                         fontSize: 11,
@@ -94,11 +98,11 @@ class DrawerWidget extends StatelessWidget {
                                     ).translate(),
                                     Text(
                                       global.currentUser.earning != null
-                                          ? '${global.appInfo.currency}${global.currentUser.earning.pendingEarning}'
+                                          ? '${global.appInfo.currency}${global.currentUser.earning!.pendingEarning}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
                                       style: Get
-                                          .theme.primaryTextTheme.titleSmall
+                                          .theme.primaryTextTheme.titleSmall!
                                           .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
@@ -120,7 +124,7 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       'Approved',
                                       style: Get
-                                          .theme.primaryTextTheme.bodySmall
+                                          .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
                                         color: Colors.white,
                                         letterSpacing: 0,
@@ -129,11 +133,11 @@ class DrawerWidget extends StatelessWidget {
                                     ).translate(),
                                     Text(
                                       global.currentUser.earning != null
-                                          ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}'
+                                          ? '${global.appInfo.currency}${global.currentUser.earning!.remEarning}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
                                       style: Get
-                                          .theme.primaryTextTheme.titleSmall
+                                          .theme.primaryTextTheme.titleSmall!
                                           .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
@@ -155,7 +159,7 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       'Redeemed',
                                       style: Get
-                                          .theme.primaryTextTheme.bodySmall
+                                          .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
                                         color: Colors.white,
                                         letterSpacing: 0,
@@ -164,11 +168,11 @@ class DrawerWidget extends StatelessWidget {
                                     ).translate(),
                                     Text(
                                       global.currentUser.earning != null
-                                          ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}'
+                                          ? '${global.appInfo.currency}${global.currentUser.earning!.withdrawal}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
                                       style: Get
-                                          .theme.primaryTextTheme.titleSmall
+                                          .theme.primaryTextTheme.titleSmall!
                                           .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
@@ -191,7 +195,7 @@ class DrawerWidget extends StatelessWidget {
                                       'Rewards',
                                       textAlign: TextAlign.center,
                                       style: Get
-                                          .theme.primaryTextTheme.bodySmall
+                                          .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
                                         color: Colors.white,
                                         letterSpacing: 0,
@@ -200,11 +204,11 @@ class DrawerWidget extends StatelessWidget {
                                     ).translate(),
                                     Text(
                                       global.currentUser.earning != null
-                                          ? '${global.appInfo.currency}${global.currentUser.earning.rewardEarning}'
+                                          ? '${global.appInfo.currency}${global.currentUser.earning!.rewardEarning}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
                                       style: Get
-                                          .theme.primaryTextTheme.titleSmall
+                                          .theme.primaryTextTheme.titleSmall!
                                           .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
@@ -229,14 +233,14 @@ class DrawerWidget extends StatelessWidget {
                               leading: CircleAvatar(
                                 radius: 25,
                                 backgroundColor: Colors.white,
-                                child: global.currentUser.userImage.isNotEmpty
+                                child: global.currentUser.userImage!.isNotEmpty
                                     ? ClipRRect(
                                         borderRadius: BorderRadius.circular(25),
                                         child: CustomImage(
-                                          image: global.appInfo.baseUrls
-                                                  .userImageUrl +
+                                          image: global.appInfo.baseUrls!
+                                                  .userImageUrl! +
                                               '/' +
-                                              global.currentUser.userImage,
+                                              global.currentUser.userImage!,
                                           // height: 30,
                                           // width: 30,
                                           fit: BoxFit.cover,
@@ -251,35 +255,59 @@ class DrawerWidget extends StatelessWidget {
                                         ),
                                       ),
                               ),
-                              title: global.currentUser.name.isNotEmpty
+                              title: global.currentUser.name!.isNotEmpty
                                   ? Text(
-                                      global.currentUser.name,
+                                      global.currentUser.name!,
                                       style: Get
-                                          .theme.primaryTextTheme.titleMedium
+                                          .theme.primaryTextTheme.titleMedium!
                                           .copyWith(color: Colors.white),
                                     )
-                                  : global.currentUser.phone.isNotEmpty
+                                  : global.currentUser.phone!.isNotEmpty
                                       ? Text(
-                                          global.currentUser.phone,
+                                          global.currentUser.phone!,
                                           style: Get
-                                              .theme.primaryTextTheme.bodySmall
+                                              .theme.primaryTextTheme.bodySmall!
                                               .copyWith(color: Colors.white),
                                         )
                                       : SizedBox(),
-                              subtitle: global.currentUser.name.isEmpty
+                              subtitle: global.currentUser.name!.isEmpty
                                   ? SizedBox()
                                   : Text(
-                                      global.currentUser.email.isNotEmpty
-                                          ? global.currentUser.email
-                                          : global.currentUser.phone,
+                                      global.currentUser.email!.isNotEmpty
+                                          ? global.currentUser.email!
+                                          : global.currentUser.phone!,
                                       style: Get
-                                          .theme.primaryTextTheme.bodySmall
+                                          .theme.primaryTextTheme.bodySmall!
                                           .copyWith(color: Colors.white),
                                     ),
-                              trailing: global.currentUser.name.isNotEmpty
+                              trailing: global.currentUser.name!.isNotEmpty
                                   ? SizedBox()
                                   : InkWell(
-                                      onTap: () {
+                                      onTap: () async {
+                                        authController.name.text =
+                                            global.currentUser.name!;
+                                        authController.email.text =
+                                            global.currentUser.email!;
+                                        authController.contactNo.text =
+                                            global.currentUser.phone!;
+                                        if (global.currentUser.phone != null) {
+                                          if (GetPlatform.isAndroid) {
+                                            try {
+                                              PhoneNumber phoneNumber =
+                                                  await PhoneNumberUtil().parse(
+                                                      global
+                                                          .currentUser.phone!);
+                                              authController.coutryCode =
+                                                  '+' + phoneNumber.countryCode;
+                                              authController.contactNo.text =
+                                                  phoneNumber.nationalNumber;
+                                            } catch (e) {
+                                              print(
+                                                  "Exception - ProfileScreen.dart - PhoneNumberUtil():" +
+                                                      e.toString());
+                                            }
+                                          }
+                                        }
                                         Get.to(
                                           () => AccountSettingScreen(),
                                           routeName: 'account',
@@ -300,7 +328,7 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       'Pending',
                                       style: Get
-                                          .theme.primaryTextTheme.bodySmall
+                                          .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
                                         color: Colors.white,
                                         fontSize: 11,
@@ -309,11 +337,11 @@ class DrawerWidget extends StatelessWidget {
                                     ).translate(),
                                     Text(
                                       global.currentUser.earning != null
-                                          ? '${global.appInfo.currency}${global.currentUser.earning.pendingEarning}'
+                                          ? '${global.appInfo.currency}${global.currentUser.earning!.pendingEarning}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
                                       style: Get
-                                          .theme.primaryTextTheme.titleSmall
+                                          .theme.primaryTextTheme.titleSmall!
                                           .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
@@ -335,7 +363,7 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       'Approved',
                                       style: Get
-                                          .theme.primaryTextTheme.bodySmall
+                                          .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
                                         color: Colors.white,
                                         letterSpacing: 0,
@@ -344,11 +372,11 @@ class DrawerWidget extends StatelessWidget {
                                     ).translate(),
                                     Text(
                                       global.currentUser.earning != null
-                                          ? '${global.appInfo.currency}${global.currentUser.earning.remEarning}'
+                                          ? '${global.appInfo.currency}${global.currentUser.earning!.remEarning}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
                                       style: Get
-                                          .theme.primaryTextTheme.titleSmall
+                                          .theme.primaryTextTheme.titleSmall!
                                           .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
@@ -370,7 +398,7 @@ class DrawerWidget extends StatelessWidget {
                                     Text(
                                       'Redeemed',
                                       style: Get
-                                          .theme.primaryTextTheme.bodySmall
+                                          .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
                                         color: Colors.white,
                                         letterSpacing: 0,
@@ -379,11 +407,11 @@ class DrawerWidget extends StatelessWidget {
                                     ).translate(),
                                     Text(
                                       global.currentUser.earning != null
-                                          ? '${global.appInfo.currency}${global.currentUser.earning.withdrawal}'
+                                          ? '${global.appInfo.currency}${global.currentUser.earning!.withdrawal}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
                                       style: Get
-                                          .theme.primaryTextTheme.titleSmall
+                                          .theme.primaryTextTheme.titleSmall!
                                           .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
@@ -406,7 +434,7 @@ class DrawerWidget extends StatelessWidget {
                                       'Rewards',
                                       textAlign: TextAlign.center,
                                       style: Get
-                                          .theme.primaryTextTheme.bodySmall
+                                          .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
                                         color: Colors.white,
                                         letterSpacing: 0,
@@ -415,11 +443,11 @@ class DrawerWidget extends StatelessWidget {
                                     ).translate(),
                                     Text(
                                       global.currentUser.earning != null
-                                          ? '${global.appInfo.currency}${global.currentUser.earning.rewardEarning}'
+                                          ? '${global.appInfo.currency}${global.currentUser.earning!.rewardEarning}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
                                       style: Get
-                                          .theme.primaryTextTheme.titleSmall
+                                          .theme.primaryTextTheme.titleSmall!
                                           .copyWith(
                                         color: Colors.white,
                                         fontSize: 12,
@@ -459,8 +487,27 @@ class DrawerWidget extends StatelessWidget {
                 //   ),
                 // ),
                 InkWell(
-                  onTap: () {
+                  onTap: () async {
                     Get.back();
+                    authController.name.text = global.currentUser.name!;
+                    authController.email.text = global.currentUser.email!;
+                    authController.contactNo.text = global.currentUser.phone!;
+                    if (global.currentUser.phone != null) {
+                      if (GetPlatform.isAndroid) {
+                        try {
+                          PhoneNumber phoneNumber = await PhoneNumberUtil()
+                              .parse(global.currentUser.phone!);
+                          authController.coutryCode =
+                              '+' + phoneNumber.countryCode;
+                          authController.contactNo.text =
+                              phoneNumber.nationalNumber;
+                        } catch (e) {
+                          print(
+                              "Exception - ProfileScreen.dart - PhoneNumberUtil():" +
+                                  e.toString());
+                        }
+                      }
+                    }
                     Get.to(
                       () => AccountSettingScreen(),
                       routeName: 'account',
@@ -482,7 +529,7 @@ class DrawerWidget extends StatelessWidget {
                         ),
                         Text(
                           'My Account',
-                          style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
+                          style: Get.theme.primaryTextTheme.bodyLarge!.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
@@ -516,7 +563,7 @@ class DrawerWidget extends StatelessWidget {
                         ),
                         Text(
                           'All Categories',
-                          style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
+                          style: Get.theme.primaryTextTheme.bodyLarge!.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
@@ -550,7 +597,7 @@ class DrawerWidget extends StatelessWidget {
                         ),
                         Text(
                           'Redeem Cashback',
-                          style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
+                          style: Get.theme.primaryTextTheme.bodyLarge!.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
@@ -584,7 +631,7 @@ class DrawerWidget extends StatelessWidget {
                         ),
                         Text(
                           'All in one search',
-                          style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
+                          style: Get.theme.primaryTextTheme.bodyLarge!.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
@@ -642,10 +689,8 @@ class DrawerWidget extends StatelessWidget {
                               text:
                                   'I recently tried ${global.appName} app & highly recommend it! You get extra Cashback on top of all retailer discounts.\n Try it out: ${global.appShareLink}',
                             ).then((value) {
-                              if (value) {}
-                            }).onError((error, stackTrace) {
-                              return error;
-                            });
+                              if (value!) {}
+                            }).onError((error, stackTrace) {});
                           }
                         },
                         child: Padding(
@@ -664,7 +709,7 @@ class DrawerWidget extends StatelessWidget {
                               ),
                               Text(
                                 'Share The App',
-                                style: Get.theme.primaryTextTheme.bodyLarge
+                                style: Get.theme.primaryTextTheme.bodyLarge!
                                     .copyWith(
                                   letterSpacing: 0,
                                   fontWeight: FontWeight.w300,
@@ -701,7 +746,7 @@ class DrawerWidget extends StatelessWidget {
                               ),
                               Text(
                                 'Rate the App',
-                                style: Get.theme.primaryTextTheme.bodyLarge
+                                style: Get.theme.primaryTextTheme.bodyLarge!
                                     .copyWith(
                                   letterSpacing: 0,
                                   fontWeight: FontWeight.w300,
@@ -737,7 +782,7 @@ class DrawerWidget extends StatelessWidget {
                         ),
                         Text(
                           'Get Help',
-                          style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
+                          style: Get.theme.primaryTextTheme.bodyLarge!.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
@@ -756,7 +801,7 @@ class DrawerWidget extends StatelessWidget {
                 Text(
                   'Login or signup',
                   textAlign: TextAlign.center,
-                  style: Get.theme.primaryTextTheme.headlineSmall.copyWith(
+                  style: Get.theme.primaryTextTheme.headlineSmall!.copyWith(
                     letterSpacing: -1,
                     height: 0.99,
                     fontWeight: FontWeight.w700,
@@ -766,9 +811,9 @@ class DrawerWidget extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Text(
-                    'We will send a SMS to verify',
+                    'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
                     textAlign: TextAlign.center,
-                    style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                    style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                       letterSpacing: -0.2,
                       fontWeight: FontWeight.w600,
                     ),

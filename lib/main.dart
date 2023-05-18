@@ -62,7 +62,9 @@ void main() async {
 Future fetchLinkData() async {
   var link = await FirebaseDynamicLinks.instance.getInitialLink();
 
-  handleLinkData(link!);
+  if (link != null) {
+    handleLinkData(link);
+  }
 
   dynamicLinks.onLink.listen((dynamicLinkData) {
     handleLinkData(dynamicLinkData);

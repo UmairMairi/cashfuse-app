@@ -13,8 +13,7 @@ import 'product_Details.dart';
 class ViewAllProductScreen extends StatefulWidget {
   final String title;
   final List<ProductModel> productList;
-  ViewAllProductScreen({Key key, this.title, this.productList})
-      : super(key: key);
+  ViewAllProductScreen({required this.title, required this.productList}) : super();
 
   @override
   State<ViewAllProductScreen> createState() =>
@@ -42,7 +41,7 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
               ),
               title: Text(
                 title,
-                style: Get.theme.primaryTextTheme.titleSmall
+                style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ).translate(),
             ),
@@ -120,7 +119,7 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                                       children: [
                                         TextSpan(
                                             text:
-                                                '(${productList[index].productPrices.length} Sellers)',
+                                                '(${productList[index].productPrices!.length} Sellers)',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 10,
@@ -135,7 +134,7 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                           height: 1,
                         ),
                         Image.network(
-                          "${global.appInfo.baseUrls.productImageurl}/${productList[index].image}",
+                          "${global.appInfo.baseUrls!.productImageurl}/${productList[index].image}",
                           height: 120,
                           fit: BoxFit.contain,
                         ),
@@ -179,7 +178,7 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                           padding:
                               EdgeInsets.symmetric(horizontal: 13, vertical: 3),
                           child: Text(
-                            "+ ${global.appInfo.currency} ${productList[index].productPrices[0].cashback}  REWARDS",
+                            "+ ${global.appInfo.currency} ${productList[index].productPrices![0].cashback}  REWARDS",
                             style: TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w600,
@@ -189,7 +188,7 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0, bottom: 8),
                           child: Text(
-                            "Final Price ${global.appInfo.currency} ${productList[index].productPrices[0].price}",
+                            "Final Price ${global.appInfo.currency} ${productList[index].productPrices![0].price}",
                             style: TextStyle(
                                 color: Mycolors.blue,
                                 fontWeight: FontWeight.w600,

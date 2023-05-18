@@ -36,7 +36,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
               ),
               title: Text(
                 'Privacy Policy',
-                style: Get.theme.primaryTextTheme.titleSmall
+                style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ).translate(),
             ),
@@ -57,7 +57,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                 future: global.translatedText(commonController.privacyPolicy),
                 builder: (context, snapShot) {
                   return HtmlWidget(
-                    snapShot.data != null ? snapShot.data : '',
+                    snapShot.data != null ? snapShot.data! : '',
                   );
                 }),
           ),

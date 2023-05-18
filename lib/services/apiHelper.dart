@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:developer';
 import 'dart:io';
 
@@ -901,7 +903,7 @@ class APIHelper {
   }
 
   Future<dynamic> updateProfile(
-      String name, String phone, String email, File userImage) async {
+      String name, String phone, String email, File? userImage) async {
     try {
       Response response;
       var dio = Dio();

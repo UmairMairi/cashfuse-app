@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, unnecessary_null_comparison
 
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/searchController.dart';
@@ -22,9 +22,9 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
 class SearchScreen extends StatelessWidget {
-  final Color bgColor;
-  SearchScreen({this.bgColor});
-  SearchController searchController = Get.find<SearchController>();
+  
+  SearchScreen();
+  SearchGetController searchController = Get.find<SearchGetController>();
   HomeController homeController = Get.find<HomeController>();
 
   @override
@@ -51,7 +51,7 @@ class SearchScreen extends StatelessWidget {
         title: TextFormField(
           controller: searchController.searchString,
           cursorColor: Colors.orange,
-          style: Get.theme.primaryTextTheme.bodySmall
+          style: Get.theme.primaryTextTheme.bodySmall!
               .copyWith(color: Colors.black),
           decoration: InputDecoration(
             suffix: searchController.searchString.text.isNotEmpty
@@ -69,7 +69,7 @@ class SearchScreen extends StatelessWidget {
                 : SizedBox(),
             border: InputBorder.none,
             hintText: 'What do you want to buy today?',
-            hintStyle: Get.theme.primaryTextTheme.bodySmall
+            hintStyle: Get.theme.primaryTextTheme.bodySmall!
                 .copyWith(color: Colors.black.withOpacity(0.4)),
           ),
           onEditingComplete: () {
@@ -78,11 +78,11 @@ class SearchScreen extends StatelessWidget {
           },
         ),
       ),
-      body: GetBuilder<SearchController>(builder: (controller) {
+      body: GetBuilder<SearchGetController>(builder: (controller) {
         return searchController.searchData != null
-            ? searchController.searchData.advertiserList.isEmpty &&
-                    searchController.searchData.commonList.isEmpty &&
-                    searchController.searchData.offerList.isEmpty
+            ? searchController.searchData!.advertiserList!.isEmpty &&
+                    searchController.searchData!.commonList!.isEmpty &&
+                    searchController.searchData!.offerList!.isEmpty
                 ? Center(
                     child: Text('No data found')
                         .translate(),
@@ -91,9 +91,9 @@ class SearchScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        searchController.searchData.advertiserList != null &&
+                        searchController.searchData!.advertiserList != null &&
                                 searchController
-                                        .searchData.advertiserList.length >
+                                        .searchData!.advertiserList!.length >
                                     0
                             ? Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -104,9 +104,9 @@ class SearchScreen extends StatelessWidget {
                                 ).translate(),
                               )
                             : SizedBox(),
-                        searchController.searchData.advertiserList != null &&
+                        searchController.searchData!.advertiserList != null &&
                                 searchController
-                                        .searchData.advertiserList.length >
+                                        .searchData!.advertiserList!.length >
                                     0
                             ? SizedBox(
                                 height: 155,
@@ -114,7 +114,7 @@ class SearchScreen extends StatelessWidget {
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
                                   itemCount: searchController
-                                      .searchData.advertiserList.length,
+                                      .searchData!.advertiserList!.length,
                                   padding: EdgeInsets.symmetric(horizontal: 10),
                                   itemBuilder: (context, index) {
                                     return InkWell(
@@ -122,8 +122,8 @@ class SearchScreen extends StatelessWidget {
                                         Get.to(
                                           () => CategoryScreen(
                                             category: searchController
-                                                .searchData
-                                                .advertiserList[index],
+                                                .searchData!
+                                                .advertiserList![index],
                                           ),
                                           routeName: 'category',
                                         );
@@ -135,16 +135,16 @@ class SearchScreen extends StatelessWidget {
                                           width: 155,
                                           child: AdsCampaignWidget(
                                             commonModel: CommonModel(
-                                              name: searchController.searchData
-                                                  .advertiserList[index].name,
+                                              name: searchController.searchData!
+                                                  .advertiserList![index].name,
                                               image:
-                                                  '${global.appInfo.baseUrls.partnerImageUrl}/${searchController.searchData.advertiserList[index].image}',
+                                                  '${global.appInfo.baseUrls!.partnerImageUrl}/${searchController.searchData!.advertiserList![index].image}',
                                               tagline: searchController
-                                                  .searchData
-                                                  .advertiserList[index]
+                                                  .searchData!
+                                                  .advertiserList![index]
                                                   .tagline,
-                                              adId: searchController.searchData
-                                                  .advertiserList[index].id
+                                              adId: searchController.searchData!
+                                                  .advertiserList![index].id
                                                   .toString(),
                                             ),
                                           ),
@@ -155,8 +155,8 @@ class SearchScreen extends StatelessWidget {
                                 ),
                               )
                             : SizedBox(),
-                        searchController.searchData.commonList != null &&
-                                searchController.searchData.commonList.length >
+                        searchController.searchData!.commonList != null &&
+                                searchController.searchData!.commonList!.length >
                                     0
                             ? Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -167,8 +167,8 @@ class SearchScreen extends StatelessWidget {
                                 ).translate(),
                               )
                             : SizedBox(),
-                        searchController.searchData.commonList != null &&
-                                searchController.searchData.commonList.length >
+                        searchController.searchData!.commonList != null &&
+                                searchController.searchData!.commonList!.length >
                                     0
                             ? SizedBox(
                                 height: 155,
@@ -176,22 +176,22 @@ class SearchScreen extends StatelessWidget {
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
                                   itemCount: searchController
-                                      .searchData.commonList.length,
+                                      .searchData!.commonList!.length,
                                   padding: EdgeInsets.symmetric(horizontal: 10),
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                       onTap: () async {
-                                        if (searchController.searchData
-                                                    .commonList[index].adId !=
+                                        if (searchController.searchData!
+                                                    .commonList![index].adId !=
                                                 null &&
                                             searchController
-                                                .searchData
-                                                .commonList[index]
-                                                .adId
+                                                .searchData!
+                                                .commonList![index]
+                                                .adId!
                                                 .isNotEmpty) {
                                           await homeController.getAdDetails(
-                                              searchController.searchData
-                                                  .commonList[index].adId);
+                                              searchController.searchData!
+                                                  .commonList![index].adId!);
                                           Get.to(
                                             () => AdsDetailScreen(
                                               ads: homeController.ads,
@@ -203,8 +203,8 @@ class SearchScreen extends StatelessWidget {
                                           await homeController
                                               .getCampignDetails(
                                                   searchController
-                                                      .searchData
-                                                      .commonList[index]
+                                                      .searchData!
+                                                      .commonList![index]
                                                       .campaignId
                                                       .toString());
                                           Get.to(
@@ -223,7 +223,7 @@ class SearchScreen extends StatelessWidget {
                                           width: 155,
                                           child: AdsCampaignWidget(
                                             commonModel: searchController
-                                                .searchData.commonList[index],
+                                                .searchData!.commonList![index],
                                           ),
                                         ),
                                       ),
@@ -232,13 +232,13 @@ class SearchScreen extends StatelessWidget {
                                 ),
                               )
                             : SizedBox(),
-                        searchController.searchData.offerList != null &&
-                                searchController.searchData.offerList.length > 0
+                        searchController.searchData!.offerList != null &&
+                                searchController.searchData!.offerList!.length > 0
                             ? SizedBox(
                                 height: global.getPlatFrom() ? 260 : 230,
                                 child: ListView.builder(
                                   itemCount: searchController
-                                      .searchData.offerList.length,
+                                      .searchData!.offerList!.length,
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
                                   padding: const EdgeInsets.symmetric(
@@ -248,7 +248,7 @@ class SearchScreen extends StatelessWidget {
                                       onTap: () async {
                                         await homeController.getOfferDetails(
                                             searchController
-                                                .searchData.offerList[index].id
+                                                .searchData!.offerList![index].id
                                                 .toString());
                                         Get.to(
                                           () => OfferDetailScreen(
@@ -260,7 +260,7 @@ class SearchScreen extends StatelessWidget {
                                       },
                                       child: OfferWidget(
                                         offer: searchController
-                                            .searchData.offerList[index],
+                                            .searchData!.offerList![index],
                                         fromList: false,
                                       ),
                                     );
@@ -292,11 +292,11 @@ class SearchScreen extends StatelessWidget {
                           return InkWell(
                             onTap: () {
                               searchController.getSearchData(searchController
-                                  .searchKeywordList[index].name);
+                                  .searchKeywordList[index].name!);
                             },
                             child: Chip(
                               label: Text(
-                                searchController.searchKeywordList[index].name,
+                                searchController.searchKeywordList[index].name!,
                               ),
                             ),
                           );
@@ -333,7 +333,7 @@ class SearchScreen extends StatelessWidget {
                                       child: Text(
                                         'View All >',
                                         style: Get
-                                            .theme.primaryTextTheme.bodySmall
+                                            .theme.primaryTextTheme.bodySmall!
                                             .copyWith(color: Colors.teal),
                                       ).translate(),
                                     )
@@ -379,7 +379,7 @@ class SearchScreen extends StatelessWidget {
                                                       .topCashbackList[index]
                                                       .name,
                                                   image:
-                                                      '${global.appInfo.baseUrls.partnerImageUrl}/${hmController.topCashbackList[index].image}',
+                                                      '${global.appInfo.baseUrls!.partnerImageUrl}/${hmController.topCashbackList[index].image}',
                                                   tagline: hmController
                                                       .topCashbackList[index]
                                                       .tagline,
@@ -480,7 +480,7 @@ class SearchScreen extends StatelessWidget {
                                                             10),
                                                     child: CustomImage(
                                                       image:
-                                                          '${global.appInfo.baseUrls.offerImageUrl}/${hmCon.exclusiveOfferList[index].bannerImage}',
+                                                          '${global.appInfo.baseUrls!.offerImageUrl}/${hmCon.exclusiveOfferList[index].bannerImage}',
                                                       height: 165,
                                                       width: Get.width,
                                                       fit: BoxFit.fill,
@@ -504,7 +504,7 @@ class SearchScreen extends StatelessWidget {
                                                               2.0),
                                                       child: CustomImage(
                                                         image:
-                                                            '${global.appInfo.baseUrls.offerImageUrl}/${hmCon.exclusiveOfferList[index].image}',
+                                                            '${global.appInfo.baseUrls!.offerImageUrl}/${hmCon.exclusiveOfferList[index].image}',
                                                         height: 30,
                                                         width: 60,
                                                         fit: BoxFit.contain,
@@ -518,7 +518,7 @@ class SearchScreen extends StatelessWidget {
                                                         hmCon
                                                                 .exclusiveOfferList[
                                                                     index]
-                                                                .dayDifference >
+                                                                .dayDifference! >
                                                             0
                                                     ? Padding(
                                                         padding:
@@ -548,7 +548,7 @@ class SearchScreen extends StatelessWidget {
                                                             days: hmCon
                                                                 .exclusiveOfferList[
                                                                     index]
-                                                                .dayDifference,
+                                                                .dayDifference!,
                                                           ),
                                                         ),
                                                       )

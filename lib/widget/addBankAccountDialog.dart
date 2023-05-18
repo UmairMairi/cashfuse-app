@@ -27,10 +27,10 @@ class AddBankAccountDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (paymentController.bankDetails != null) {
-      name.text = paymentController.bankDetails.acHolderName;
-      accountNo.text = paymentController.bankDetails.acNo;
-      bankName.text = paymentController.bankDetails.bankName;
-      ifscCode.text = paymentController.bankDetails.ifsc;
+      name.text = paymentController.bankDetails!.acHolderName!;
+      accountNo.text = paymentController.bankDetails!.acNo!;
+      bankName.text = paymentController.bankDetails!.bankName!;
+      ifscCode.text = paymentController.bankDetails!.ifsc!;
     }
     return Container(
       height: 410,
@@ -47,7 +47,7 @@ class AddBankAccountDialog extends StatelessWidget {
           // ),
           Text(
             'Add Bank Account',
-            style: Get.theme.primaryTextTheme.titleLarge
+            style: Get.theme.primaryTextTheme.titleLarge!
                 .copyWith(fontWeight: FontWeight.w600),
           ).translate(),
 

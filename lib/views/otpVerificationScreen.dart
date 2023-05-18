@@ -6,11 +6,11 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 
 class OtpVerificationScreen extends StatelessWidget {
-  final String verificationCode;
+  final String? verificationCode;
   final bool fromMenu;
   final bool isEmail;
 
-  OtpVerificationScreen({this.verificationCode, this.fromMenu, this.isEmail});
+  OtpVerificationScreen({this.verificationCode, required this.fromMenu, required this.isEmail});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class OtpVerificationScreen extends StatelessWidget {
                 child: Text(
                   'Enter 6 digit code we have sent you',
                   textAlign: TextAlign.left,
-                  style: Get.theme.primaryTextTheme.displaySmall.copyWith(
+                  style: Get.theme.primaryTextTheme.displaySmall!.copyWith(
                     height: 1.2,
                     letterSpacing: -1,
                     fontWeight: FontWeight.w700,
@@ -56,7 +56,7 @@ class OtpVerificationScreen extends StatelessWidget {
                       !isEmail
                           ? 'Code sent to ${authController.coutryCode} ${authController.contactNo.text}'
                           : 'Code sent to ${authController.email.text}',
-                      style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                      style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                         letterSpacing: -0.2,
                         fontWeight: FontWeight.w500,
                       ),
@@ -80,7 +80,7 @@ class OtpVerificationScreen extends StatelessWidget {
                         FocusScope.of(context).requestFocus(FocusNode());
                         if (!isEmail) {
                           await authController.checkOTP(
-                              verificationCode, fromMenu);
+                              verificationCode!, fromMenu);
                         } else {
                           await authController.verifyEmail(fromMenu);
                         }
@@ -118,7 +118,7 @@ class OtpVerificationScreen extends StatelessWidget {
                   : InkWell(
                       onTap: () async {
                         if (!isEmail) {
-                          await authController.resendOtp();
+                          await authController.resendOtp(fromMenu);
                         } else {
                           await authController.sendEmail(fromMenu);
                         }
@@ -129,14 +129,14 @@ class OtpVerificationScreen extends StatelessWidget {
                           text: TextSpan(
                             text: "Haven't receive the OTP ?",
                             style:
-                                Get.theme.primaryTextTheme.titleSmall.copyWith(
+                                Get.theme.primaryTextTheme.titleSmall!.copyWith(
                               letterSpacing: -0.2,
                               fontWeight: FontWeight.w600,
                             ),
                             children: <TextSpan>[
                               TextSpan(
                                 text: ' Resend',
-                                style: Get.theme.primaryTextTheme.titleSmall
+                                style: Get.theme.primaryTextTheme.titleSmall!
                                     .copyWith(
                                   letterSpacing: -0.2,
                                   fontWeight: FontWeight.w500,
@@ -157,7 +157,7 @@ class OtpVerificationScreen extends StatelessWidget {
         bottomNavigationBar: InkWell(
           onTap: () async {
             if (!isEmail) {
-              await authController.checkOTP(verificationCode, fromMenu);
+              await authController.checkOTP(verificationCode!, fromMenu);
             } else {
               await authController.verifyEmail(fromMenu);
             }

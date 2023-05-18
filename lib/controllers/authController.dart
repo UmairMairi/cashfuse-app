@@ -1,4 +1,4 @@
-// ignore_for_file: implementation_imports
+// ignore_for_file: implementation_imports, unnecessary_null_comparison, body_might_complete_normally_catch_error
 
 import 'dart:async';
 import 'dart:convert';
@@ -20,7 +20,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'dart:math' as math;
 import 'package:crypto/src/sha256.dart' as sha;
@@ -68,6 +68,8 @@ class AuthController extends GetxController {
       global.sp!.remove('currentUser');
       global.currentUser = new UserModel();
       contactNo.clear();
+      email.clear();
+      otp.clear();
       googleSignIn.signOut();
 
       update();
@@ -245,7 +247,7 @@ class AuthController extends GetxController {
             if (fromMenu) {
               await Get.find<HomeController>().getClick();
               await getProfile();
-              await searchController.allInOneSearch();
+
               if (!GetPlatform.isWeb) {
                 await global.referAndEarn();
               }
@@ -332,8 +334,10 @@ class AuthController extends GetxController {
         AppleIDAuthorizationScopes.email,
         AppleIDAuthorizationScopes.fullName
       ], nonce: nonce)
-          .catchError((e) {
-        print("error $e");
+          .catchError((err) {
+        print('Error: $err'); // Prints 401.
+      }, test: (error) {
+        return error is int && error >= 400;
       });
 
       final oauthCredential = provider.credential(
@@ -371,7 +375,7 @@ class AuthController extends GetxController {
             if (fromMenu) {
               await Get.find<HomeController>().getClick();
               await getProfile();
-              await searchController.allInOneSearch();
+
               if (!GetPlatform.isWeb) {
                 await global.referAndEarn();
               }
@@ -461,7 +465,7 @@ class AuthController extends GetxController {
               if (fromMenu) {
                 await Get.find<HomeController>().getClick();
                 await getProfile();
-                await searchController.allInOneSearch();
+
                 if (!GetPlatform.isWeb) {
                   await global.referAndEarn();
                 }
@@ -505,7 +509,7 @@ class AuthController extends GetxController {
               if (fromMenu) {
                 await Get.find<HomeController>().getClick();
                 await getProfile();
-                await searchController.allInOneSearch();
+
                 if (!GetPlatform.isWeb) {
                   await global.referAndEarn();
                 }
@@ -527,12 +531,11 @@ class AuthController extends GetxController {
     }
   }
 
-  Future resendOtp() async {
+  Future resendOtp(bool fromMenu) async {
     try {
       stopTimer();
       FirebaseAuth auth = FirebaseAuth.instance;
-      await auth
-          .verifyPhoneNumber(
+      await auth.verifyPhoneNumber(
         phoneNumber: coutryCode! + contactNo.text,
         verificationCompleted: (AuthCredential authCredential) async {},
         verificationFailed: (e) {
@@ -544,6 +547,7 @@ class AuthController extends GetxController {
           Navigator.of(Get.context!).push(
             MaterialPageRoute(
               builder: (context) => OtpVerificationScreen(
+                fromMenu: fromMenu,
                 verificationCode: verificationId,
                 isEmail: false,
               ),
@@ -553,41 +557,36 @@ class AuthController extends GetxController {
         codeAutoRetrievalTimeout: (String verificationId) {
           verificationId = verificationId;
         },
-      )
-          .onError((error, stackTrace) {
-        showCustomSnackBar(error.message.toString());
-        log(error.message.toString());
-      });
+      );
     } catch (e) {
       print("Exception - authController.dart - resendOtp():" + e.toString());
     }
   }
 
-  Future updateProfile(File userImage) async {
+  Future updateProfile(File? userImage) async {
     try {
       if (networkController.connectionStatus.value == 1 ||
           networkController.connectionStatus.value == 2) {
-        if (email.text.trim().isNotEmpty) {
-          Get.dialog(CustomLoader(), barrierDismissible: false);
-          await apiHelper
-              .updateProfile(name.text.trim(), contactNo.text,
-                  email.text.trim(), userImage)
-              .then((response) async {
-            Get.back();
-            if (response != null) {
-              if (response.statusCode == 200) {
-                showCustomSnackBar(response.message, isError: false);
-                await getProfile();
-              } else {
-                showCustomSnackBar(response.message);
-              }
+        Get.dialog(CustomLoader(), barrierDismissible: false);
+        await apiHelper
+            .updateProfile(
+                name.text.trim(), contactNo.text, email.text.trim(), userImage != null ? userImage : null)
+            .then((response) async {
+          Get.back();
+          if (response != null) {
+            if (response.statusCode == 200) {
+              showCustomSnackBar(response.message, isError: false);
+              await getProfile();
             } else {
-              showCustomSnackBar('Email has been already taken');
+              showCustomSnackBar(response.message);
             }
-          });
-        } else {
-          showCustomSnackBar('Please enter Email.');
-        }
+          } else {
+            showCustomSnackBar('Email has been already taken');
+          }
+        });
+        // } else {
+        //   showCustomSnackBar('Please enter Email.');
+        // }
       } else {
         showCustomSnackBar(AppConstants.NO_INTERNET);
       }

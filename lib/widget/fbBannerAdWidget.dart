@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class FbBannerAdWidget extends StatelessWidget {
   final String adId;
-  const FbBannerAdWidget({Key key, this.adId}) : super(key: key);
+  const FbBannerAdWidget({required this.adId}) : super();
 
   @override
   Widget build(BuildContext context) {

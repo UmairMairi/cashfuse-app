@@ -1,5 +1,5 @@
 import 'package:cashfuse/controllers/authController.dart';
-import 'package:fl_country_code_picker/fl_country_code_picker.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -8,8 +8,6 @@ import 'package:google_translator/google_translator.dart';
 class LoginWithEmailScreen extends StatelessWidget {
   final bool fromMenu;
   LoginWithEmailScreen({required this.fromMenu});
-
-  final countryPicker = FlCountryCodePicker();
 
   @override
   Widget build(BuildContext context) {

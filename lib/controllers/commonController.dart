@@ -9,9 +9,9 @@ import 'package:get/get.dart';
 class CommonController extends GetxController with GetTickerProviderStateMixin {
   APIHelper apiHelper = new APIHelper();
   NetworkController networkController = Get.find<NetworkController>();
-  List<FaqModel> _faqList = [];
+  List<FaqModel> faqList = [];
   List<FaqModel> _mainFaqList = [];
-  List<FaqModel> get faqList => _faqList;
+  // List<FaqModel> get faqList => _faqList;
   String aboutUs = '';
   String privacyPolicy = '';
 
@@ -46,7 +46,7 @@ class CommonController extends GetxController with GetTickerProviderStateMixin {
       if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
         await apiHelper.getFaqs().then((response) {
           if (response.status == "1") {
-            _faqList = response.data;
+            faqList = response.data;
             _mainFaqList = response.data;
             update();
           } else {
@@ -82,10 +82,10 @@ class CommonController extends GetxController with GetTickerProviderStateMixin {
       isfaqLoaded = false;
       update();
       if (searchString.text.trim().isEmpty) {
-        _faqList = List.from(_mainFaqList);
+        faqList = List.from(_mainFaqList);
       } else {
         if (_mainFaqList.length > 0) {
-          _faqList = List.from(
+          faqList = List.from(
             _mainFaqList
                 .where((e) => ((e.ques!.isNotEmpty &&
                         e.ques!.toLowerCase().split(' ').toString().split('?').toString().contains(

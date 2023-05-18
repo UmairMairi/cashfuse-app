@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/models/commonModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -61,7 +63,7 @@ class HomeWebTopCashbackView extends StatelessWidget {
                                     fromWebHome: true,
                                     commonModel: CommonModel(
                                       name: hmController.topCashbackList[index].name,
-                                      image: '${global.appInfo.baseUrls.partnerImageUrl}/${hmController.topCashbackList[index].image}',
+                                      image: '${global.appInfo.baseUrls!.partnerImageUrl}/${hmController.topCashbackList[index].image}',
                                       tagline: hmController.topCashbackList[index].tagline,
                                       adId: hmController.topCashbackList[index].id.toString(),
                                     ),

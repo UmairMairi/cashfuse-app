@@ -7,9 +7,9 @@ import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 
 class RatesAndOfferTermsSheetWidget extends StatelessWidget {
-  final bool isOffer;
+  
   final CategoryModel partner;
-  RatesAndOfferTermsSheetWidget({this.isOffer, this.partner});
+  RatesAndOfferTermsSheetWidget({required this.partner});
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +41,9 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                       children: [
                         Text(
                           homeController.isOffer
-                              ? partner.rightTab
-                              : partner.leftTab,
-                          style: Get.theme.primaryTextTheme.titleSmall.copyWith(
+                              ? partner.rightTab!
+                              : partner.leftTab!,
+                          style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                             fontWeight: FontWeight.w600,
                             letterSpacing: -0.1,
                           ),
@@ -69,16 +69,16 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                   // ),
                   homeController.isOffer
                       ? HtmlWidget(
-                          partner.rightTabDesc,
+                          partner.rightTabDesc!,
                         )
                       : Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: HtmlWidget(
-                            partner.leftTabDesc,
+                            partner.leftTabDesc!,
                           ),
                         ),
 
-                  (partner.leftTab.isEmpty || partner.rightTab.isEmpty)
+                  (partner.leftTab!.isEmpty || partner.rightTab!.isEmpty)
                       ? SizedBox()
                       : SizedBox(
                           height: 50,
@@ -96,8 +96,8 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                                         .setIsOffer(false);
                                   },
                                   child: Text(
-                                    partner.leftTab,
-                                    style: Get.theme.primaryTextTheme.titleSmall
+                                    partner.leftTab!,
+                                    style: Get.theme.primaryTextTheme.titleSmall!
                                         .copyWith(
                                             fontWeight: FontWeight.w400,
                                             color: Colors.white),
@@ -113,8 +113,8 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                                     homeController.setIsOffer(true);
                                   },
                                   child: Text(
-                                    partner.rightTab,
-                                    style: Get.theme.primaryTextTheme.titleSmall
+                                    partner.rightTab!,
+                                    style: Get.theme.primaryTextTheme.titleSmall!
                                         .copyWith(
                                             fontWeight: FontWeight.w400,
                                             color: Colors.white),

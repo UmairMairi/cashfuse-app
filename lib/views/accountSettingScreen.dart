@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:developer';
+
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/imageController.dart';
@@ -9,7 +11,8 @@ import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:cashfuse/widget/drawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
-import 'package:fl_country_code_picker/fl_country_code_picker.dart';
+import 'package:email_validator/email_validator.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +20,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:phone_number/phone_number.dart';
 
 class AccountSettingScreen extends StatelessWidget {
@@ -30,10 +34,9 @@ class AccountSettingScreen extends StatelessWidget {
   AuthController authController = Get.find<AuthController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final countryPicker = FlCountryCodePicker();
-
   @override
   Widget build(BuildContext context) {
+    log(authController.coutryCode!);
     return GetBuilder<AuthController>(builder: (auth) {
       return GetBuilder<ImageControlller>(builder: (imageControlller) {
         return Scaffold(
@@ -329,61 +332,131 @@ class AccountSettingScreen extends StatelessWidget {
                           SizedBox(
                             height: 10,
                           ),
-                          TextFormField(
-                            controller: authController.contactNo,
-                            cursorColor: Get.theme.primaryColor,
-                            textInputAction: TextInputAction.done,
-                            keyboardType: TextInputType.numberWithOptions(
-                                signed: true, decimal: true),
-                            textAlignVertical: TextAlignVertical.center,
-                            textAlign: TextAlign.start,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.zero,
-                              hintText: '9999999999',
-                              hintStyle: Get.theme.primaryTextTheme.bodySmall!
-                                  .copyWith(color: Colors.grey[400]),
-                              focusColor: Get.theme.primaryColor,
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: fnumberFocus.hasFocus
-                                    ? Get.theme.primaryColor
-                                    : Colors.grey,
-                              )),
-                              border: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: fnumberFocus.hasFocus
-                                    ? Get.theme.primaryColor
-                                    : Colors.grey,
-                              )),
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: fnumberFocus.hasFocus
-                                    ? Get.theme.primaryColor
-                                    : Colors.grey,
-                              )),
-                              prefixIcon: InkWell(
-                                onTap: () async {
-                                  final code = await countryPicker.showPicker(
-                                    context: context,
-                                  );
-                                  if (code != null) {
-                                    authController.coutryCode = code.dialCode;
-                                    authController.update();
-                                  }
-                                },
-                                child: Container(
-                                  width: 20,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    authController.coutryCode!,
-                                  ),
-                                ),
+                          SizedBox(
+                            // height: 100,
+                            child: IntlPhoneField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              focusNode: authController.phoneFocus,
+                              showCountryFlag: false,
+                              controller: authController.contactNo,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              initialCountryCode: 'IN',
+                              textAlignVertical: TextAlignVertical.center,
+                              textAlign: TextAlign.start,
+                              keyboardType: TextInputType.numberWithOptions(
+                                  signed: true, decimal: true),
+                              disableLengthCheck: false,
+
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.zero,
+                                // fillColor: AppColor.WHITE_COLOR,
+                                // label: Text('Enter phone'),
+                                // labelStyle: TextStyle(color: Colors.black),
+                                // hintText: MessageConstants.HNT_PHONE_NUMBER,
+                                filled: false,
+                                focusColor: Get.theme.primaryColor,
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                  color: fnumberFocus.hasFocus
+                                      ? Get.theme.primaryColor
+                                      : Colors.grey,
+                                )),
+                                border: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                  color: fnumberFocus.hasFocus
+                                      ? Get.theme.primaryColor
+                                      : Colors.grey,
+                                )),
+                                enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                  color: fnumberFocus.hasFocus
+                                      ? Get.theme.primaryColor
+                                      : Colors.grey,
+                                )),
+                                counterText: "",
                               ),
+                              onChanged: (phone) {
+                                authController.coutryCode = phone.countryCode;
+                                authController.update();
+                                //           authController.update();
+                                // print(phone.completeNumber);
+                                // contactNo = phone.completeNumber;
+                                // phonenumber = phone;
+
+                                // phone.countryCode;
+                              },
+
+                              flagsButtonMargin: EdgeInsets.zero,
+                              flagsButtonPadding: EdgeInsets.zero,
+                              // flagsButtonPadding: EdgeInsets.only(left: 15),
+                              dropdownTextStyle: TextStyle(color: Colors.black),
+                              showDropdownIcon: false,
+                              cursorColor: Theme.of(context).primaryColor,
+                              onCountryChanged: (country) {
+                                FocusScope.of(context).unfocus();
+
+                                print('Country changed to: ' + country.name);
+                              },
                             ),
                           ),
+                          // TextFormField(
+                          //   controller: authController.contactNo,
+                          //   cursorColor: Get.theme.primaryColor,
+                          //   textInputAction: TextInputAction.done,
+                          //   keyboardType: TextInputType.numberWithOptions(
+                          //       signed: true, decimal: true),
+                          //   textAlignVertical: TextAlignVertical.center,
+                          //   textAlign: TextAlign.start,
+                          //   inputFormatters: [
+                          //     FilteringTextInputFormatter.digitsOnly,
+                          //   ],
+                          //   decoration: InputDecoration(
+                          //     contentPadding: EdgeInsets.zero,
+                          //     hintText: '9999999999',
+                          //     hintStyle: Get.theme.primaryTextTheme.bodySmall!
+                          //         .copyWith(color: Colors.grey[400]),
+                          //     focusColor: Get.theme.primaryColor,
+                          //     focusedBorder: UnderlineInputBorder(
+                          //         borderSide: BorderSide(
+                          //       color: fnumberFocus.hasFocus
+                          //           ? Get.theme.primaryColor
+                          //           : Colors.grey,
+                          //     )),
+                          //     border: UnderlineInputBorder(
+                          //         borderSide: BorderSide(
+                          //       color: fnumberFocus.hasFocus
+                          //           ? Get.theme.primaryColor
+                          //           : Colors.grey,
+                          //     )),
+                          //     enabledBorder: UnderlineInputBorder(
+                          //         borderSide: BorderSide(
+                          //       color: fnumberFocus.hasFocus
+                          //           ? Get.theme.primaryColor
+                          //           : Colors.grey,
+                          //     )),
+                          //     prefixIcon: InkWell(
+                          //       onTap: () async {
+                          //         final code = await countryPicker.showPicker(
+                          //           context: context,
+                          //         );
+                          //         if (code != null) {
+                          //           authController.coutryCode = code.dialCode;
+                          //           authController.update();
+                          //         }
+                          //       },
+                          //       child: Container(
+                          //         width: 20,
+                          //         alignment: Alignment.center,
+                          //         child: Text(
+                          //           authController.coutryCode!,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                           // TextFormField(
                           //   focusNode: fnumberFocus,
                           //   controller: authController.contactNo,
@@ -506,8 +579,8 @@ class AccountSettingScreen extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () async {
-                  String _numberWithCountryCode =
-                      authController.coutryCode! + authController.contactNo.text;
+                  String _numberWithCountryCode = authController.coutryCode! +
+                      authController.contactNo.text;
                   bool _isValid = GetPlatform.isAndroid ? false : true;
                   if (GetPlatform.isAndroid) {
                     try {
@@ -525,9 +598,18 @@ class AccountSettingScreen extends StatelessWidget {
                   }
                   if (!_isValid) {
                     showCustomSnackBar('Invalid phone number');
-                  } else {
+                  } else if (authController.name.text.isEmpty) {
+                    showCustomSnackBar('Please Enter name.');
+                  } else if (authController.email.text.isEmpty) {
+                    showCustomSnackBar('Please Enter email.');
+                  } else if (!EmailValidator.validate(
+                      authController.email.text)) {
+                    showCustomSnackBar('Please Enter valid email.');
+                  } else if (imageControlller.imageFile != null) {
                     await authController
                         .updateProfile(imageControlller.imageFile!);
+                  } else {
+                    await authController.updateProfile(null);
                   }
                 },
                 child: Align(

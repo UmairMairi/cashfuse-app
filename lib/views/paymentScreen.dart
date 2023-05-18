@@ -33,7 +33,7 @@ class PaymentScreen extends StatelessWidget {
               ),
               title: Text(
                 'Payments',
-                style: Get.theme.primaryTextTheme.titleSmall
+                style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ).translate(),
             ),
@@ -42,7 +42,7 @@ class PaymentScreen extends StatelessWidget {
         child: SizedBox(
           width: AppConstants.WEB_MAX_WIDTH,
           child: GetBuilder<PaymentController>(builder: (controller) {
-            return global.currentUser.withdrawalRequest.length > 0
+            return global.currentUser.withdrawalRequest!.length > 0
                 ? global.getPlatFrom()
                     ? Column(
                         children: [
@@ -58,7 +58,7 @@ class PaymentScreen extends StatelessWidget {
                                     childAspectRatio: 5,
                                   ),
                                   itemCount: global
-                                      .currentUser.withdrawalRequest.length,
+                                      .currentUser.withdrawalRequest!.length,
                                   shrinkWrap: true,
                                   padding: EdgeInsets.all(10).copyWith(top: 20),
                                   itemBuilder: (context, index) {
@@ -74,34 +74,34 @@ class PaymentScreen extends StatelessWidget {
                                         leading: Image.asset(
                                           global
                                                       .currentUser
-                                                      .withdrawalRequest[index]
+                                                      .withdrawalRequest![index]
                                                       .medium ==
                                                   'UPI'
                                               ? Images.upi
                                               : global
                                                           .currentUser
-                                                          .withdrawalRequest[
+                                                          .withdrawalRequest![
                                                               index]
                                                           .medium ==
                                                       'Bank'
                                                   ? Images.bank
                                                   : global
                                                               .currentUser
-                                                              .withdrawalRequest[
+                                                              .withdrawalRequest![
                                                                   index]
                                                               .medium ==
                                                           'Amazon'
                                                       ? Images.Amazon_pay
                                                       : global
                                                                   .currentUser
-                                                                  .withdrawalRequest[
+                                                                  .withdrawalRequest![
                                                                       index]
                                                                   .medium ==
                                                               'Paytm'
                                                           ? Images.paytm
                                                           : global
                                                                       .currentUser
-                                                                      .withdrawalRequest[
+                                                                      .withdrawalRequest![
                                                                           index]
                                                                       .medium ==
                                                                   'Paypal'
@@ -113,10 +113,10 @@ class PaymentScreen extends StatelessWidget {
                                         title: Row(
                                           children: [
                                             Text(
-                                              global.appInfo.currency +
+                                              global.appInfo.currency! +
                                                   global
                                                       .currentUser
-                                                      .withdrawalRequest[index]
+                                                      .withdrawalRequest![index]
                                                       .amount
                                                       .toString(),
                                             ).translate(),
@@ -126,8 +126,8 @@ class PaymentScreen extends StatelessWidget {
                                           DateConverter.formatDate(
                                             global
                                                 .currentUser
-                                                .withdrawalRequest[index]
-                                                .createdAt,
+                                                .withdrawalRequest![index]
+                                                .createdAt!,
                                           ),
                                           style: Get
                                               .theme.primaryTextTheme.bodySmall,
@@ -139,14 +139,14 @@ class PaymentScreen extends StatelessWidget {
                                           decoration: BoxDecoration(
                                             color: global
                                                         .currentUser
-                                                        .withdrawalRequest[
+                                                        .withdrawalRequest![
                                                             index]
                                                         .approved ==
                                                     1
                                                 ? Colors.green
                                                 : global
                                                             .currentUser
-                                                            .withdrawalRequest[
+                                                            .withdrawalRequest![
                                                                 index]
                                                             .approved ==
                                                         2
@@ -156,28 +156,28 @@ class PaymentScreen extends StatelessWidget {
                                           child: Text(
                                             global
                                                         .currentUser
-                                                        .withdrawalRequest[
+                                                        .withdrawalRequest![
                                                             index]
                                                         .approved ==
                                                     1
                                                 ? 'Approved'
                                                 : global
                                                             .currentUser
-                                                            .withdrawalRequest[
+                                                            .withdrawalRequest![
                                                                 index]
                                                             .approved ==
                                                         2
                                                     ? 'Rejected'
                                                     : global
                                                                 .currentUser
-                                                                .withdrawalRequest[
+                                                                .withdrawalRequest![
                                                                     index]
                                                                 .approved ==
                                                             0
                                                         ? 'Pending'
                                                         : '',
                                             style: Get.theme.primaryTextTheme
-                                                .titleSmall
+                                                .titleSmall!
                                                 .copyWith(color: Colors.white),
                                           ).translate(),
                                         ),
@@ -189,7 +189,7 @@ class PaymentScreen extends StatelessWidget {
                         ],
                       )
                     : ListView.builder(
-                        itemCount: global.currentUser.withdrawalRequest.length,
+                        itemCount: global.currentUser.withdrawalRequest!.length,
                         shrinkWrap: true,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -197,32 +197,32 @@ class PaymentScreen extends StatelessWidget {
                           return Card(
                             child: ListTile(
                               leading: Image.asset(
-                                global.currentUser.withdrawalRequest[index]
+                                global.currentUser.withdrawalRequest![index]
                                             .medium ==
                                         'UPI'
                                     ? Images.upi
                                     : global
                                                 .currentUser
-                                                .withdrawalRequest[index]
+                                                .withdrawalRequest![index]
                                                 .medium ==
                                             'Bank'
                                         ? Images.bank
                                         : global
                                                     .currentUser
-                                                    .withdrawalRequest[index]
+                                                    .withdrawalRequest![index]
                                                     .medium ==
                                                 'Amazon'
                                             ? Images.Amazon_pay
                                             : global
                                                         .currentUser
-                                                        .withdrawalRequest[
+                                                        .withdrawalRequest![
                                                             index]
                                                         .medium ==
                                                     'Paytm'
                                                 ? Images.paytm
                                                 : global
                                                             .currentUser
-                                                            .withdrawalRequest[
+                                                            .withdrawalRequest![
                                                                 index]
                                                             .medium ==
                                                         'Paypal'
@@ -234,17 +234,17 @@ class PaymentScreen extends StatelessWidget {
                               title: Row(
                                 children: [
                                   Text(
-                                    global.appInfo.currency +
+                                    global.appInfo.currency! +
                                         global.currentUser
-                                            .withdrawalRequest[index].amount
+                                            .withdrawalRequest![index].amount
                                             .toString(),
                                   ).translate(),
                                 ],
                               ),
                               subtitle: Text(
                                 DateConverter.formatDate(
-                                  global.currentUser.withdrawalRequest[index]
-                                      .createdAt,
+                                  global.currentUser.withdrawalRequest![index]
+                                      .createdAt!,
                                 ),
                                 style: Get.theme.primaryTextTheme.bodySmall,
                               ).translate(),
@@ -255,37 +255,37 @@ class PaymentScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   color: global
                                               .currentUser
-                                              .withdrawalRequest[index]
+                                              .withdrawalRequest![index]
                                               .approved ==
                                           1
                                       ? Colors.green
                                       : global
                                                   .currentUser
-                                                  .withdrawalRequest[index]
+                                                  .withdrawalRequest![index]
                                                   .approved ==
                                               2
                                           ? Colors.red
                                           : Colors.orange,
                                 ),
                                 child: Text(
-                                  global.currentUser.withdrawalRequest[index]
+                                  global.currentUser.withdrawalRequest![index]
                                               .approved ==
                                           1
                                       ? 'Approved'
                                       : global
                                                   .currentUser
-                                                  .withdrawalRequest[index]
+                                                  .withdrawalRequest![index]
                                                   .approved ==
                                               2
                                           ? 'Rejected'
                                           : global
                                                       .currentUser
-                                                      .withdrawalRequest[index]
+                                                      .withdrawalRequest![index]
                                                       .approved ==
                                                   0
                                               ? 'Pending'
                                               : '',
-                                  style: Get.theme.primaryTextTheme.titleSmall
+                                  style: Get.theme.primaryTextTheme.titleSmall!
                                       .copyWith(color: Colors.white),
                                 ).translate(),
                               ),

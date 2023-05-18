@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/dateConverter.dart';
@@ -27,7 +29,7 @@ class PaymentHistoryScreen extends StatelessWidget {
               ),
               title: Text(
                 'Payment History',
-                style: Get.theme.primaryTextTheme.titleSmall
+                style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ).translate(),
             ),
@@ -120,7 +122,7 @@ class PaymentHistoryScreen extends StatelessWidget {
                                               DateConverter.formatDate(
                                                 controller
                                                     .paymentHistoryList[index]
-                                                    .createdAt,
+                                                    .createdAt!,
                                               ),
                                             ).translate(),
                                             trailing: Container(
@@ -163,7 +165,7 @@ class PaymentHistoryScreen extends StatelessWidget {
                                                             ? 'Pending'
                                                             : '',
                                                 style: Get.theme
-                                                    .primaryTextTheme.titleSmall
+                                                    .primaryTextTheme.titleSmall!
                                                     .copyWith(
                                                         color: Colors.white),
                                               ).translate(),
@@ -217,7 +219,7 @@ class PaymentHistoryScreen extends StatelessWidget {
                                   title: Row(
                                     children: [
                                       Text(
-                                        global.appInfo.currency +
+                                        global.appInfo.currency! +
                                             controller.paymentHistoryList[index]
                                                 .amount
                                                 .toString(),
@@ -227,7 +229,7 @@ class PaymentHistoryScreen extends StatelessWidget {
                                   subtitle: Text(
                                     DateConverter.formatDate(
                                       controller
-                                          .paymentHistoryList[index].createdAt,
+                                          .paymentHistoryList[index].createdAt!,
                                     ),
                                     style: Get.theme.primaryTextTheme.bodySmall,
                                   ).translate(),
@@ -264,7 +266,7 @@ class PaymentHistoryScreen extends StatelessWidget {
                                                   ? 'Pending'
                                                   : '',
                                       style: Get
-                                          .theme.primaryTextTheme.titleSmall
+                                          .theme.primaryTextTheme.titleSmall!
                                           .copyWith(color: Colors.white),
                                     ).translate(),
                                   ),
