@@ -8,7 +8,6 @@ import 'package:cashfuse/utils/global.dart' as global;
 // import 'package:video_player/video_player.dart';
 
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
 import '../utils/images.dart';
 
@@ -192,14 +191,21 @@ class GetStartedScreen extends StatelessWidget {
                             SizedBox(
                               width: 5,
                             ),
-                            Text(
-                              'Login with Apple',
-                              style: Get.theme.primaryTextTheme.titleMedium!
-                                  .copyWith(
-                                color: Get.theme.secondaryHeaderColor,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ).translate(),
+                            FutureBuilder(
+                              future: global.translatedText('Login with Apple'),
+                              builder: (context, snapshot) {
+                                return Text(
+                                  snapshot.data != null
+                                      ? snapshot.data!
+                                      : 'Login with Apple',
+                                  style: Get.theme.primaryTextTheme.titleMedium!
+                                      .copyWith(
+                                    color: Get.theme.secondaryHeaderColor,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                );
+                              },
+                            ),
                           ],
                         ),
                       ),
@@ -229,14 +235,22 @@ class GetStartedScreen extends StatelessWidget {
                             SizedBox(
                               width: 5,
                             ),
-                            Text(
-                              'Login with Google',
-                              style: Get.theme.primaryTextTheme.titleMedium!
-                                  .copyWith(
-                                color: Get.theme.secondaryHeaderColor,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ).translate(),
+                            FutureBuilder(
+                              future:
+                                  global.translatedText('Login with Google'),
+                              builder: (context, snapshot) {
+                                return Text(
+                                  snapshot.data != null
+                                      ? snapshot.data!
+                                      : 'Login with Google',
+                                  style: Get.theme.primaryTextTheme.titleMedium!
+                                      .copyWith(
+                                    color: Get.theme.secondaryHeaderColor,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                );
+                              },
+                            ),
                           ],
                         ),
                       ),
@@ -287,13 +301,21 @@ class GetStartedScreen extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                      Text(
-                        'Login with Phone',
-                        style: Get.theme.primaryTextTheme.titleMedium!.copyWith(
-                          color: Get.theme.secondaryHeaderColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ).translate(),
+                      FutureBuilder(
+                        future: global.translatedText('Login with Phone'),
+                        builder: (context, snapshot) {
+                          return Text(
+                            snapshot.data != null
+                                ? snapshot.data!
+                                : 'Login with Phone',
+                            style: Get.theme.primaryTextTheme.titleMedium!
+                                .copyWith(
+                              color: Get.theme.secondaryHeaderColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -345,13 +367,21 @@ class GetStartedScreen extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                      Text(
-                        'Login with Email',
-                        style: Get.theme.primaryTextTheme.titleMedium!.copyWith(
-                          color: Get.theme.secondaryHeaderColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ).translate(),
+                      FutureBuilder(
+                        future: global.translatedText('Login with Email'),
+                        builder: (context, snapshot) {
+                          return Text(
+                            snapshot.data != null
+                                ? snapshot.data!
+                                : 'Login with Email',
+                            style: Get.theme.primaryTextTheme.titleMedium!
+                                .copyWith(
+                              color: Get.theme.secondaryHeaderColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -367,13 +397,18 @@ class GetStartedScreen extends StatelessWidget {
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 15, top: 10),
-                        child: Text(
-                          'Skip',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Get.theme.secondaryHeaderColor,
-                              fontSize: 16),
-                        ).translate(),
+                        child: FutureBuilder(
+                          future: global.translatedText('Skip'),
+                          builder: (context, snapshot) {
+                            return Text(
+                              snapshot.data != null ? snapshot.data! : 'Skip',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Get.theme.secondaryHeaderColor,
+                                  fontSize: 16),
+                            );
+                          },
+                        ),
                       ),
                     )
             ],

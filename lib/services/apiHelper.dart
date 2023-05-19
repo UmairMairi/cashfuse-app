@@ -302,8 +302,7 @@ class APIHelper {
     try {
       Response response;
       var dio = Dio();
-      response = await dio.get(
-          '${global.baseUrl}${AppConstants.CASHBACK_URI}',
+      response = await dio.get('${global.baseUrl}${AppConstants.CASHBACK_URI}',
           options: Options(
             headers: await global.getApiHeaders(false),
           ));
@@ -791,7 +790,8 @@ class APIHelper {
     }
   }
 
-  Future<dynamic> getTrackingLink(String url, String type, {String? cId}) async {
+  Future<dynamic> getTrackingLink(String url, String type,
+      {String? cId}) async {
     try {
       Response response;
       var dio = Dio();
@@ -1449,6 +1449,30 @@ class APIHelper {
     } catch (e) {
       print("Exception -  apiHelper.dart - verifyIFSC():" + e.toString());
       return false;
+    }
+  }
+
+  Future<dynamic> getAddressFromGeocode(double lat, double lng) async {
+    try {
+      Response response;
+      var dio = Dio();
+      response = await dio.get(
+        "https://nominatim.openstreetmap.org/reverse?lat=$lat&lon=$lng&format=json",
+        // headers: await global.getApiHeaders(false),
+      );
+      print('done : $response');
+      dynamic recordList;
+      if (response.statusCode == 200) {
+        recordList = response.data;
+      } else {
+        recordList = null;
+      }
+      // print(
+      //     '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstant.GET_REGION_URI}\n${response.body}');
+      return getDioResult(response, recordList);
+    } catch (e) {
+      print("Exception -  apiHelper.dart - getAddressFromGeocode():" +
+          e.toString());
     }
   }
 }

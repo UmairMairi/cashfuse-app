@@ -20,6 +20,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:intl_phone_field/countries.dart';
 
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'dart:math' as math;
@@ -49,12 +50,21 @@ class AuthController extends GetxController {
 
   SearchGetController searchController = Get.put(SearchGetController());
 
+  Country? country;
+
   @override
   void onInit() async {
-    coutryCode = global.appInfo.countryCode != null &&
-            global.appInfo.countryCode!.isNotEmpty
-        ? global.appInfo.countryCode
-        : '+91';
+    coutryCode =
+        global.appInfo.phoneCode != null && global.appInfo.phoneCode!.isNotEmpty
+            ? global.appInfo.phoneCode
+            : '+91';
+    country = Country(
+        name: global.appInfo.country!,
+        flag: '',
+        code: global.appInfo.countryCode!,
+        dialCode: global.appInfo.phoneCode!,
+        minLength: 0,
+        maxLength: 0);
     super.onInit();
   }
 
@@ -569,8 +579,8 @@ class AuthController extends GetxController {
           networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper
-            .updateProfile(
-                name.text.trim(), contactNo.text, email.text.trim(), userImage != null ? userImage : null)
+            .updateProfile(name.text.trim(), contactNo.text, email.text.trim(),
+                userImage != null ? userImage : null)
             .then((response) async {
           Get.back();
           if (response != null) {

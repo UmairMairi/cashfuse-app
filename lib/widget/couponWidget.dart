@@ -5,7 +5,6 @@ import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
 class CouponWidget extends StatelessWidget {
   final Coupon coupon;
@@ -92,24 +91,59 @@ class CouponWidget extends StatelessWidget {
                       bottom: 5,
                       right: 5,
                       child: Container(
-                        height: 40,
-                        width: 90,
-                        decoration: BoxDecoration(
-                          color: Get.theme.secondaryHeaderColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          coupon.code != null && coupon.code!.isNotEmpty
-                              ? 'See code'
-                              : coupon.buttonText != null &&
-                                      coupon.buttonText!.isNotEmpty
-                                  ? coupon.buttonText!
-                                  : 'Grab Now',
-                          style: Get.theme.primaryTextTheme.titleSmall!
-                              .copyWith(color: Colors.white),
-                        ).translate(),
-                      ),
+                          height: 40,
+                          width: 90,
+                          decoration: BoxDecoration(
+                            color: Get.theme.secondaryHeaderColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          alignment: Alignment.center,
+                          child: FutureBuilder(
+                            future: global.translatedText(
+                                coupon.code != null && coupon.code!.isNotEmpty
+                                    ? 'See code'
+                                    : coupon.buttonText != null &&
+                                            coupon.buttonText!.isNotEmpty
+                                        ? coupon.buttonText!
+                                        : 'Grab Now'),
+                            builder: (context, snapshot) {
+                              return Text(
+                                snapshot.data != null
+                                    ? snapshot.data!
+                                    : coupon.code != null &&
+                                            coupon.code!.isNotEmpty
+                                        ? 'See code'
+                                        : coupon.buttonText != null &&
+                                                coupon.buttonText!.isNotEmpty
+                                            ? coupon.buttonText!
+                                            : 'Grab Now',
+                                style: Get.theme.primaryTextTheme.titleSmall!
+                                    .copyWith(color: Colors.white),
+                              );
+                            },
+                          )
+                          // GetPlatform.isWeb
+                          //     ? Text(
+                          //         coupon.code != null && coupon.code!.isNotEmpty
+                          //             ? 'See code'
+                          //             : coupon.buttonText != null &&
+                          //                     coupon.buttonText!.isNotEmpty
+                          //                 ? coupon.buttonText!
+                          //                 : 'Grab Now',
+                          //         style: Get.theme.primaryTextTheme.titleSmall!
+                          //             .copyWith(color: Colors.white),
+                          //       )
+                          //     : Text(
+                          //         coupon.code != null && coupon.code!.isNotEmpty
+                          //             ? 'See code'
+                          //             : coupon.buttonText != null &&
+                          //                     coupon.buttonText!.isNotEmpty
+                          //                 ? coupon.buttonText!
+                          //                 : 'Grab Now',
+                          //         style: Get.theme.primaryTextTheme.titleSmall!
+                          //             .copyWith(color: Colors.white),
+                          //       ).translate(),
+                          ),
                     ),
                   ],
                 )

@@ -2,9 +2,9 @@ import 'package:cashfuse/controllers/authController.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
+
 // import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
@@ -38,24 +38,38 @@ class LoginOrSignUpScreen extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text(
-                  'Login or signup',
-                  style: Get.theme.primaryTextTheme.displaySmall!.copyWith(
-                    letterSpacing: -1,
-                    height: 1.2,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ).translate(),
+                child: FutureBuilder(
+                  future: global.translatedText('Login or signup'),
+                  builder: (context, snapshot) {
+                    return Text(
+                      snapshot.data != null
+                          ? snapshot.data!
+                          : 'Login or signup',
+                      style: Get.theme.primaryTextTheme.displaySmall!.copyWith(
+                        letterSpacing: -1,
+                        height: 1.2,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    );
+                  },
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Text(
-                  'We will send a SMS to verify',
-                  style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                    letterSpacing: -0.2,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ).translate(),
+                child: FutureBuilder(
+                  future: global.translatedText('We will send a SMS to verify'),
+                  builder: (context, snapshot) {
+                    return Text(
+                      snapshot.data != null
+                          ? snapshot.data!
+                          : 'We will send a SMS to verify',
+                      style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                        letterSpacing: -0.2,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    );
+                  },
+                ),
               ),
               Padding(
                 padding:
@@ -68,7 +82,7 @@ class LoginOrSignUpScreen extends StatelessWidget {
                     showCountryFlag: false,
                     controller: authController.contactNo,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    initialCountryCode: 'IN',
+                    // initialCountryCode: authController.country!.code,
                     textAlignVertical: TextAlignVertical.center,
                     textAlign: TextAlign.start,
                     keyboardType: TextInputType.numberWithOptions(
@@ -109,6 +123,7 @@ class LoginOrSignUpScreen extends StatelessWidget {
                     cursorColor: Theme.of(context).primaryColor,
                     onCountryChanged: (country) {
                       FocusScope.of(context).unfocus();
+                      authController.country = country;
                       authController.coutryCode = '+' + country.dialCode;
                       authController.update();
                       print('Country changed to: ' + country.name);
@@ -187,13 +202,18 @@ class LoginOrSignUpScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 alignment: Alignment.center,
-                child: Text(
-                  'Continue',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600),
-                ).translate(),
+                child: FutureBuilder(
+                  future: global.translatedText('Continue'),
+                  builder: (context, snapshot) {
+                    return Text(
+                      'Continue',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
+                    );
+                  },
+                ),
               ),
             ),
           ],

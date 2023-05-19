@@ -1,8 +1,12 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:convert';
+
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
+import 'package:cashfuse/controllers/couponController.dart';
+import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
@@ -31,6 +35,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
   WebTopBarWidget({this.scaffoldKey});
 
   AuthController authController = Get.find<AuthController>();
+  HomeController homeController = Get.find<HomeController>();
+  CouponController couponController = Get.find<CouponController>();
 
   @override
   Widget build(BuildContext context) {
@@ -118,6 +124,285 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
               }),
             ),
             Expanded(child: SizedBox()),
+
+            // global.country != null
+            //     ? StatefulBuilder(
+            //         builder: (BuildContext context, StateSetter setState) =>
+            //             InkWell(
+            //           focusColor: Colors.transparent,
+            //           hoverColor: Colors.transparent,
+            //           splashColor: Colors.transparent,
+            //           highlightColor: Colors.transparent,
+            //           onTap: () {
+            //             if (global.appInfo.countryselection == 1) {
+            //               global.showCountryPopUp = true;
+
+            //               setState(() {});
+
+            //               // homeController.setCountryPopUp(true);
+            //               // homeController.refresh();
+
+            //               Get.to(
+            //                 () => BottomNavigationBarScreen(),
+            //                 preventDuplicates: false,
+            //                 routeName: 'home',
+            //               );
+
+            //               // Get.dialog(Dialog(child: CountrySelectWidget()));
+            //               // CountrySelectWidget();
+            //               // Get.dialog(
+            //               //   Dialog(
+            //               //     alignment: Alignment.topRight,
+            //               //     backgroundColor: Colors.transparent,
+            //               //     insetPadding:
+            //               //         EdgeInsets.only(top: 50, right: 20),
+            //               //     child: SizedBox(
+            //               //       width: Get.width / 2,
+            //               //       child: Column(
+            //               //         crossAxisAlignment:
+            //               //             CrossAxisAlignment.end,
+            //               //         // mainAxisAlignment: MainAxisAlignment.start,
+            //               //         // alignment: Alignment.topCenter,
+            //               //         // clipBehavior: Clip.none,
+            //               //         children: [
+            //               //           Align(
+            //               //             alignment: Alignment.topRight,
+            //               //             child: InkWell(
+            //               //               onTap: () async {
+            //               //                 Get.back();
+            //               //               },
+            //               //               child: CircleAvatar(
+            //               //                 radius: 15,
+            //               //                 child: Icon(
+            //               //                   Icons.close,
+            //               //                   color: Colors.black,
+            //               //                   size: 20,
+            //               //                 ),
+            //               //                 backgroundColor: Colors.white,
+            //               //               ),
+            //               //             ),
+            //               //           ),
+            //               //           StatefulBuilder(
+            //               //             builder: (BuildContext context,
+            //               //                     StateSetter setState) =>
+            //               //                 Container(
+            //               //               margin: EdgeInsets.only(top: 20),
+            //               //               color: Colors.white,
+            //               //               child: ListView.builder(
+            //               //                 padding: EdgeInsets.zero,
+            //               //                 shrinkWrap: true,
+            //               //                 itemCount: global
+            //               //                     .appInfo.countries.length,
+            //               //                 itemBuilder: (context, index) {
+            //               //                   return Column(
+            //               //                     children: [
+            //               //                       Row(
+            //               //                         mainAxisAlignment:
+            //               //                             MainAxisAlignment
+            //               //                                 .spaceBetween,
+            //               //                         children: [
+            //               //                           Padding(
+            //               //                             padding:
+            //               //                                 const EdgeInsets
+            //               //                                     .all(10.0),
+            //               //                             child: Text(global
+            //               //                                 .appInfo
+            //               //                                 .countries[
+            //               //                                     index]
+            //               //                                 .countryName),
+            //               //                           ),
+            //               //                           Radio(
+            //               //                             groupValue:
+            //               //                                 global.country,
+            //               //                             value: global
+            //               //                                     .appInfo
+            //               //                                     .countries[
+            //               //                                 index],
+            //               //                             onChanged: (value) {
+            //               //                               if (value !=
+            //               //                                   null) {
+            //               //                                 global.country =
+            //               //                                     value;
+            //               //                                 global.appInfo
+            //               //                                     .countries
+            //               //                                     .map((e) =>
+            //               //                                         e.isSelected =
+            //               //                                             false)
+            //               //                                     .toList();
+            //               //                                 global
+            //               //                                     .appInfo
+            //               //                                     .countries[
+            //               //                                         index]
+            //               //                                     .isSelected = true;
+
+            //               //                                 setState(() {});
+            //               //                                 Navigator.of(
+            //               //                                         context)
+            //               //                                     .pop(global
+            //               //                                         .country);
+            //               //                               }
+            //               //                             },
+            //               //                           )
+            //               //                         ],
+            //               //                       ),
+            //               //                       Divider(
+            //               //                         height: 0,
+            //               //                         thickness: 0.5,
+            //               //                       ),
+            //               //                     ],
+            //               //                   );
+            //               //                 },
+            //               //               ),
+            //               //             ),
+            //               //           ),
+            //               //           // Positioned(
+            //               //           //    top: !global.getPlatFrom() ? -50 : 10,
+            //               //           //   // right: -7,
+            //               //           //   child: InkWell(
+            //               //           //     onTap: () async {
+            //               //           //       Get.back();
+            //               //           //     },
+            //               //           //     child: CircleAvatar(
+            //               //           //       radius: 15,
+            //               //           //       child: Icon(
+            //               //           //         Icons.close,
+            //               //           //         color: Colors.black,
+            //               //           //         size: 20,
+            //               //           //       ),
+            //               //           //       backgroundColor: Colors.grey[400],
+            //               //           //     ),
+            //               //           //   ),
+            //               //           // ),
+            //               //         ],
+            //               //       ),
+            //               //     ),
+            //               //   ),
+            //               //   barrierDismissible: false,
+            //               // ).then((value) async {
+            //               //   if (value != null) {
+            //               //     global.country = value;
+            //               //     global.countrySlug = global.country.slug;
+            //               //     homeController.topBannerList = [];
+            //               //     homeController.topCategoryList = [];
+            //               //     couponController.couponList = [];
+            //               //     homeController.topCashbackList = [];
+            //               //     homeController.exclusiveOfferList = [];
+            //               //     homeController.productList = [];
+            //               //     homeController.trendingProductList = [];
+            //               //     homeController.newFlashOfferList = [];
+            //               //     homeController.homeAdvList = [];
+            //               //     homeController.allAdvList = [];
+
+            //               //     setState(() {});
+
+            //               //     await homeController.init();
+            //               //   }
+            //               // });
+            //             }
+            //           },
+            //           child: Container(
+            //             width: 35,
+            //             height: 35,
+            //             margin: EdgeInsets.only(right: 10),
+            //             alignment: Alignment.center,
+            //             decoration: BoxDecoration(
+            //               color: Get.theme.primaryColor,
+            //               borderRadius: BorderRadius.circular(10),
+            //               border:
+            //                   Border.all(color: Get.theme.secondaryHeaderColor),
+            //             ),
+            //             child: Text(
+            //               global.country!.countryCode!,
+            //               style: TextStyle(color: Colors.white),
+            //             ),
+            //           ),
+            //         ),
+            //       )
+            //     : SizedBox(),
+global.country != null ?
+            GetBuilder<HomeController>(
+              builder: (controller) => PopupMenuButton(
+                onSelected: (value) async {
+                  if (global.appInfo.countryselection == 1) {
+                    Get.to(() => BottomNavigationBarScreen(),
+                        preventDuplicates: false, routeName: 'home');
+                    global.country = value;
+                    global.appInfo.countries!
+                        .map((e) => e.isSelected = false)
+                        .toList();
+                    // global.appInfo.countries![index].isSelected = true;
+
+                    global.showCountryPopUp = false;
+
+                    homeController.update();
+
+                    global.country = value;
+                    global.countrySlug = global.country!.slug!;
+                    await global.sp!.setString(
+                        'country', json.encode(global.country!.toJson()));
+                    await global.sp!
+                        .setString('countrySlug', global.countrySlug);
+
+                    homeController.update();
+
+                    homeController.topBannerList = [];
+                    homeController.topCategoryList = [];
+                    couponController.couponList = [];
+                    homeController.topCashbackList = [];
+                    homeController.exclusiveOfferList = [];
+                    homeController.productList = [];
+                    homeController.trendingProductList = [];
+                    homeController.newFlashOfferList = [];
+                    homeController.homeAdvList = [];
+                    homeController.allAdvList = [];
+                    await couponController.getCouponList();
+                    await homeController.init();
+
+                    homeController.update();
+                  }
+                },
+                position: PopupMenuPosition.under,
+                padding: EdgeInsets.zero,
+                child: Container(
+                  width: 35,
+                  height: 35,
+                  margin: EdgeInsets.only(right: 10),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Get.theme.primaryColor,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Get.theme.secondaryHeaderColor),
+                  ),
+                  child: Text(
+                    global.country!.countryCode!,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                itemBuilder: (context) {
+                  return List.generate(global.appInfo.countries!.length,
+                      (index) {
+                    return PopupMenuItem(
+                      height: 40,
+                      value: global.appInfo.countries![index],
+                      padding: EdgeInsets.zero,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Text(
+                                global.appInfo.countries![index].countryName!),
+                          ),
+                          Divider(
+                            height: 0,
+                          ),
+                        ],
+                      ),
+                    );
+                  });
+                },
+              ),
+            ) : SizedBox(),
             InkWell(
               onTap: () {
                 Get.to(

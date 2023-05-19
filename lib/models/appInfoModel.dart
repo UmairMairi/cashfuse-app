@@ -9,6 +9,7 @@ class AppInfo {
   String? logo;
   String? currency;
   String? country;
+  String? phoneCode;
   String? countryCode;
   String? perOrderReferPercentage;
   String? minimumRedeemValue;
@@ -38,8 +39,10 @@ class AppInfo {
       businessName = json["business_name"] != null ? json["business_name"] : '';
       logo = json["logo"] != null ? json["logo"] : '';
       country = json["country"] != null ? json["country"].toString() : '';
-      countryCode =
+      phoneCode =
           json["phone_code"] != null ? json["phone_code"].toString() : '';
+      countryCode =
+          json["country_code"] != null ? json["country_code"].toString() : '';
       currency = json["currency"] != null ? json["currency"] : '';
       perOrderReferPercentage = json["per_order_refer_percentage"] != null
           ? json["per_order_refer_percentage"]

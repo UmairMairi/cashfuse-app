@@ -15,7 +15,6 @@ import 'package:cashfuse/widget/web/webAdsCampaignWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
 import 'admitedOfferDetailScreen.dart';
 
@@ -69,11 +68,21 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   Icons.arrow_back,
                 ),
               ),
-              title: Text(
-                widget.category != null ? widget.category!.name! : '',
-                style: Get.theme.primaryTextTheme.titleSmall!
-                    .copyWith(color: Colors.white),
-              ).translate(),
+              title: FutureBuilder(
+                future: global.translatedText(
+                    widget.category != null ? widget.category!.name! : ''),
+                builder: (context, snapshot) {
+                  return Text(
+                    snapshot.data != null
+                        ? snapshot.data!
+                        : widget.category != null
+                            ? widget.category!.name!
+                            : '',
+                    style: Get.theme.primaryTextTheme.titleSmall!
+                        .copyWith(color: Colors.white),
+                  );
+                },
+              ),
             ),
       body: GetBuilder<AdController>(builder: (adController) {
         return SingleChildScrollView(
@@ -125,8 +134,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                           null &&
                                       widget.category!.commonList[index].adId!
                                           .isNotEmpty) {
-                                    await homeController.getAdDetails(
-                                        widget.category!.commonList[index].adId!);
+                                    await homeController.getAdDetails(widget
+                                        .category!.commonList[index].adId!);
                                     Get.to(
                                       () => AdsDetailScreen(
                                         ads: homeController.ads,
@@ -203,11 +212,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       : SizedBox(
                           // height: Get.height,
                           child: Center(
-                            child: Text(
-                              'No data found.',
-                              textAlign: TextAlign.center,
-                            ).translate(),
-                          ),
+                              child: FutureBuilder(
+                            future: global.translatedText('No data found.'),
+                            builder: (context, snapshot) {
+                              return Text(
+                                snapshot.data != null
+                                    ? snapshot.data!
+                                    : 'No data found.',
+                                textAlign: TextAlign.center,
+                              );
+                            },
+                          )),
                         ),
                 ],
               ),

@@ -343,7 +343,7 @@ class AccountSettingScreen extends StatelessWidget {
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly
                               ],
-                              initialCountryCode: 'IN',
+                              initialCountryCode: auth.country!.code,
                               textAlignVertical: TextAlignVertical.center,
                               textAlign: TextAlign.start,
                               keyboardType: TextInputType.numberWithOptions(

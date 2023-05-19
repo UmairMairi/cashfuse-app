@@ -1,16 +1,18 @@
 // import 'package:cashfuse/controllers/splashController.dart';
 import 'dart:convert';
-import 'package:google_translator/google_translator.dart';
 
+import 'package:cashfuse/controllers/couponController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_translator/google_translator.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 
 HomeController homeController = Get.find<HomeController>();
+CouponController couponController = Get.find<CouponController>();
 
 class CountrySelectWidget extends StatefulWidget {
   const CountrySelectWidget() : super();
@@ -49,7 +51,7 @@ class _CountrySelectWidgetState extends State<CountrySelectWidget> {
               ),
             ),
             Container(
-              width: Get.width / 1.3,
+              width: global.getPlatFrom() ? Get.width / 4 : Get.width / 1.3,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               margin: EdgeInsets.symmetric(vertical: 20),
               decoration: BoxDecoration(
@@ -131,9 +133,12 @@ class _CountrySelectWidgetState extends State<CountrySelectWidget> {
                                       setState(() {});
 
                                       global.country = value;
-                                      global.countrySlug = global.country!.slug!;
-                                      await global.sp!.setString('country',
-                                          json.encode(global.country!.toJson()));
+                                      global.countrySlug =
+                                          global.country!.slug!;
+                                      await global.sp!.setString(
+                                          'country',
+                                          json.encode(
+                                              global.country!.toJson()));
                                       await global.sp!.setString(
                                           'countrySlug', global.countrySlug);
 
@@ -141,7 +146,7 @@ class _CountrySelectWidgetState extends State<CountrySelectWidget> {
 
                                       homeController.topBannerList = [];
                                       homeController.topCategoryList = [];
-                                      // couponController.couponList = [];
+                                      couponController.couponList = [];
                                       homeController.topCashbackList = [];
                                       homeController.exclusiveOfferList = [];
                                       homeController.productList = [];
@@ -149,7 +154,7 @@ class _CountrySelectWidgetState extends State<CountrySelectWidget> {
                                       homeController.newFlashOfferList = [];
                                       homeController.homeAdvList = [];
                                       homeController.allAdvList = [];
-
+                                      await couponController.getCouponList();
                                       await homeController.init();
 
                                       setState(() {});

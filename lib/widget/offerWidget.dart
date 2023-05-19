@@ -8,7 +8,7 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
+
 import 'package:slide_countdown/slide_countdown.dart';
 
 class OfferWidget extends StatelessWidget {
@@ -42,7 +42,8 @@ class OfferWidget extends StatelessWidget {
                         topRight: Radius.circular(10),
                       ),
                       child: CustomImage(
-                        image: '${global.appInfo.baseUrls!.offerImageUrl}/${commonModel!.image}',
+                        image:
+                            '${global.appInfo.baseUrls!.offerImageUrl}/${commonModel!.image}',
                         height: fromList!
                             ? 180
                             : global.getPlatFrom()
@@ -59,7 +60,8 @@ class OfferWidget extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: CustomImage(
-                          image: '${global.appInfo.baseUrls!.partnerImageUrl}/$domainImage',
+                          image:
+                              '${global.appInfo.baseUrls!.partnerImageUrl}/$domainImage',
                           height: 30,
                           width: 60,
                           fit: BoxFit.contain,
@@ -73,17 +75,34 @@ class OfferWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: Get.theme.secondaryHeaderColor,
-                          borderRadius: BorderRadius.circular(2),
-                        ),
-                        child: Text(
-                          commonModel!.buttonText!.isNotEmpty ? commonModel!.buttonText! : 'Grab Now',
-                          style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
-                        ).translate(),
-                      ),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: Get.theme.secondaryHeaderColor,
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                          child: FutureBuilder(
+                            future: global.translatedText(
+                              commonModel!.buttonText!.isNotEmpty
+                                  ? commonModel!.buttonText!
+                                  : 'Grab Now',
+                            ),
+                            builder: (context, snapshot) {
+                              return Text(
+                                snapshot.data != null
+                                    ? snapshot.data!
+                                    : commonModel!.buttonText!.isNotEmpty
+                                        ? commonModel!.buttonText!
+                                        : 'Grab Now',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500),
+                              );
+                            },
+                          )),
                     ],
                   ),
                 ),
@@ -101,7 +120,8 @@ class OfferWidget extends StatelessWidget {
                             topRight: Radius.circular(10),
                           ),
                           child: CustomImage(
-                            image: '${global.appInfo.baseUrls!.offerImageUrl}/${offer!.bannerImage}',
+                            image:
+                                '${global.appInfo.baseUrls!.offerImageUrl}/${offer!.bannerImage}',
                             height: fromList!
                                 ? 180
                                 : global.getPlatFrom()
@@ -118,7 +138,8 @@ class OfferWidget extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: CustomImage(
-                              image: '${global.appInfo.baseUrls!.offerImageUrl}/${offer!.image}',
+                              image:
+                                  '${global.appInfo.baseUrls!.offerImageUrl}/${offer!.image}',
                               height: 30,
                               width: 60,
                               fit: BoxFit.contain,
@@ -134,27 +155,44 @@ class OfferWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            offer!.dayDifference != null && offer!.dayDifference! > 0
+                            offer!.dayDifference != null &&
+                                    offer!.dayDifference! > 0
                                 ? SlideCountdown(
                                     slideDirection: SlideDirection.none,
-                                    textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
+                                    textStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w600),
                                     decoration: BoxDecoration(
                                       color: Colors.red[800],
                                       borderRadius: BorderRadius.circular(3),
                                     ),
-                                    duration: Duration(days: offer!.dayDifference!),
+                                    duration:
+                                        Duration(days: offer!.dayDifference!),
                                   )
                                 : SizedBox(),
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 6),
                               decoration: BoxDecoration(
                                 color: Get.theme.secondaryHeaderColor,
                                 borderRadius: BorderRadius.circular(2),
                               ),
-                              child: Text(
-                                offer!.buttonText!,
-                                style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
-                              ).translate(),
+                              child: FutureBuilder(
+                                future:
+                                    global.translatedText(offer!.buttonText!),
+                                builder: (context, snapshot) {
+                                  return Text(
+                                    snapshot.data != null
+                                        ? snapshot.data!
+                                        : offer!.buttonText!,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500),
+                                  );
+                                },
+                              ),
                             ),
                           ],
                         ),

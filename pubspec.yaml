@@ -91,8 +91,9 @@ dependencies:
   geolocator: ^9.0.2
   geocoding: ^2.1.0
   email_validator: ^2.1.17
-  phone_number: ^1.0.0
+  phone_number: ^2.0.0
   intl_phone_field: ^3.1.0
+  google_geocoding_api: ^1.2.0
   
 
   #IMAGE

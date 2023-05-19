@@ -202,15 +202,18 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                           );
                         } else if (index == 2) {
                           if (_isAllInOneIndex == false) {
-                            translator
-                                .translate(tabList[index],
-                                    to: localizationController.languageCode)
-                                .then(
-                              (value) {
-                                tabList[index] = value.text;
-                                setState(() {});
-                              },
-                            );
+                            Future.delayed(Duration.zero).then((value) {
+                              translator
+                                  .translate(tabList[index],
+                                      to: localizationController.languageCode)
+                                  .then(
+                                (value) {
+                                  tabList[index] = value.text;
+                                  setState(() {});
+                                },
+                              );
+                            });
+
                             _isAllInOneIndex = true;
                           }
                           return TabItem(
@@ -225,15 +228,18 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                           );
                         } else if (index == 3) {
                           if (_isRecentClickIndex == false) {
-                            translator
-                                .translate(tabList[index],
-                                    to: localizationController.languageCode)
-                                .then(
-                              (value) {
-                                tabList[index] = value.text;
-                                setState(() {});
-                              },
-                            );
+                            Future.delayed(Duration.zero).then((value) {
+                              translator
+                                  .translate(tabList[index],
+                                      to: localizationController.languageCode)
+                                  .then(
+                                (value) {
+                                  tabList[index] = value.text;
+                                  setState(() {});
+                                },
+                              );
+                            });
+
                             _isRecentClickIndex = true;
                           }
                           return TabItem(
@@ -248,15 +254,18 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                           );
                         } else {
                           if (_isProfileIndex == false) {
-                            translator
-                                .translate(tabList[index],
-                                    to: localizationController.languageCode)
-                                .then(
-                              (value) {
-                                tabList[index] = value.text;
-                                setState(() {});
-                              },
-                            );
+                            Future.delayed(Duration.zero).then((value) {
+                              translator
+                                  .translate(tabList[index],
+                                      to: localizationController.languageCode)
+                                  .then(
+                                (value) {
+                                  tabList[index] = value.text;
+                                  setState(() {});
+                                },
+                              );
+                            });
+
                             _isProfileIndex = true;
                           }
                           return TabItem(

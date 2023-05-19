@@ -95,26 +95,41 @@ class MyApp extends StatelessWidget {
     return GetBuilder<LocalizationController>(
       builder: (localizationController) =>
           GetBuilder<ThemeController>(builder: (themeController) {
-        return GoogleTranslatorInit(global.languageApiKey,
-            translateFrom: Locale(
-                localizationController.languageCode == 'en' ? 'hi' : 'en'),
-            translateTo: Locale(localizationController.languageCode),
-            automaticDetection: true, builder: () {
-          return GetMaterialApp(
-            navigatorKey: Get.key,
-            textDirection: global.isRTL ? TextDirection.rtl : TextDirection.ltr,
-            debugShowCheckedModeBanner: false,
-            enableLog: true,
-            theme: nativeTheme(),
-            initialBinding: NetworkBinding(),
-            title: global.appName,
-            home: global.getPlatFrom()
-                ? BottomNavigationBarScreen()
-                : GetPlatform.isWeb
-                    ? HomeScreen()
-                    : SplashScreen(),
-          );
-        });
+        return GetPlatform.isWeb
+            ? GetMaterialApp(
+                navigatorKey: Get.key,
+                debugShowCheckedModeBanner: false,
+                enableLog: true,
+                theme: nativeTheme(),
+                initialBinding: NetworkBinding(),
+                title: global.appName,
+                home: global.getPlatFrom()
+                    ? BottomNavigationBarScreen()
+                    : GetPlatform.isWeb
+                        ? HomeScreen()
+                        : SplashScreen(),
+              )
+            : GoogleTranslatorInit(global.languageApiKey,
+                translateFrom: Locale(
+                    localizationController.languageCode == 'en' ? 'hi' : 'en'),
+                translateTo: Locale(localizationController.languageCode),
+                automaticDetection: true, builder: () {
+                return GetMaterialApp(
+                  navigatorKey: Get.key,
+                  textDirection:
+                      global.isRTL ? TextDirection.rtl : TextDirection.ltr,
+                  debugShowCheckedModeBanner: false,
+                  enableLog: true,
+                  theme: nativeTheme(),
+                  initialBinding: NetworkBinding(),
+                  title: global.appName,
+                  home: global.getPlatFrom()
+                      ? BottomNavigationBarScreen()
+                      : GetPlatform.isWeb
+                          ? HomeScreen()
+                          : SplashScreen(),
+                );
+              });
       }),
     );
   }

@@ -4,6 +4,8 @@ import 'dart:developer';
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
+import 'package:cashfuse/controllers/couponController.dart';
+import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/locationController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/controllers/referEarnController.dart';
@@ -70,6 +72,15 @@ class SplashController extends GetxController {
         await apiHelper.getAppInfo().then((response) async {
           if (response.statusCode == 200) {
             global.appInfo = response.data;
+            if (global.sp!.getString('country') != null &&
+                  global.sp!.getString('countrySlug') != null) {
+                global.country = CountryModel.fromJson(
+                    json.decode(global.sp!.getString("country")!));
+
+                global.countrySlug = global.sp!.getString('countrySlug')!;
+              } else {
+                await Get.find<LocationController>().getLocationPermission();
+              }
             if (global.sp!.getString('currentUser') != null) {
               global.currentUser = UserModel.fromJson(
                   json.decode(global.sp!.getString("currentUser")!));
@@ -87,6 +98,8 @@ class SplashController extends GetxController {
                 Get.to(() => BottomNavigationBarScreen(), routeName: 'initial');
               }
             }
+            Get.find<HomeController>().init();
+            Get.find<CouponController>().getCouponList();
             await apiHelper.getBannerNotification().then((result) {
               if (result.statusCode == 200) {
                 if (result.data != null) {

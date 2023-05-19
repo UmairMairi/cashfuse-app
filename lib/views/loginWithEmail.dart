@@ -1,7 +1,7 @@
 import 'package:cashfuse/controllers/authController.dart';
 
 import 'package:flutter/material.dart';
-
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 
@@ -32,13 +32,20 @@ class LoginWithEmailScreen extends StatelessWidget {
                 ),
               ),
               Center(
-                child: Text(
-                  'Login or signup',
-                  style: Get.theme.primaryTextTheme.displaySmall!.copyWith(
-                    letterSpacing: -1,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ).translate(),
+                child: FutureBuilder(
+                  future: global.translatedText('Login or signup'),
+                  builder: (context, snapshot) {
+                    return Text(
+                      snapshot.data != null
+                          ? snapshot.data!
+                          : 'Login or signup',
+                      style: Get.theme.primaryTextTheme.displaySmall!.copyWith(
+                        letterSpacing: -1,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    );
+                  },
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
