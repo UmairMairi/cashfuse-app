@@ -18,12 +18,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:phone_number/phone_number.dart';
 
-class AccountSettingScreen extends StatelessWidget {
+class WebAccountSettingScreen extends StatelessWidget {
   final fnameFocus = new FocusNode();
   final femailFocus = new FocusNode();
   final fnumberFocus = new FocusNode();
@@ -61,7 +61,7 @@ class AccountSettingScreen extends StatelessWidget {
                     'Account Settings',
                     style: Get.theme.primaryTextTheme.titleLarge!
                         .copyWith(color: Colors.white),
-                  ).translate(),
+                  ),
                 ),
           body: Center(
             child: Container(
@@ -164,7 +164,7 @@ class AccountSettingScreen extends StatelessWidget {
                                           .copyWith(
                                         color: Colors.grey,
                                       ),
-                                    ).translate(),
+                                    ),
                                     actions: [
                                       InkWell(
                                         onTap: () async {
@@ -179,7 +179,7 @@ class AccountSettingScreen extends StatelessWidget {
                                             'Take Picture',
                                             style: Get.theme.primaryTextTheme
                                                 .titleMedium,
-                                          ).translate(),
+                                          ),
                                         ),
                                       ),
                                       InkWell(
@@ -195,7 +195,7 @@ class AccountSettingScreen extends StatelessWidget {
                                             'Image from Gallery',
                                             style: Get.theme.primaryTextTheme
                                                 .titleMedium,
-                                          ).translate(),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -205,7 +205,7 @@ class AccountSettingScreen extends StatelessWidget {
                                         style: Get
                                             .theme.primaryTextTheme.titleMedium!
                                             .copyWith(color: Colors.red),
-                                      ).translate(),
+                                      ),
                                       onPressed: () {
                                         Get.back();
                                       },
@@ -238,7 +238,7 @@ class AccountSettingScreen extends StatelessWidget {
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w300),
-                          ).translate(),
+                          ),
                           TextFormField(
                             focusNode: fnameFocus,
                             controller: authController.name,
@@ -280,7 +280,7 @@ class AccountSettingScreen extends StatelessWidget {
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w300),
-                          ).translate(),
+                          ),
                           SizedBox(
                             height: 10,
                           ),
@@ -328,7 +328,7 @@ class AccountSettingScreen extends StatelessWidget {
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w300),
-                          ).translate(),
+                          ),
                           SizedBox(
                             height: 10,
                           ),
@@ -343,7 +343,7 @@ class AccountSettingScreen extends StatelessWidget {
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly
                               ],
-                              initialCountryCode: auth.country!.code,
+                              // initialCountryCode: auth.country!.code,
                               textAlignVertical: TextAlignVertical.center,
                               textAlign: TextAlign.start,
                               keyboardType: TextInputType.numberWithOptions(
@@ -520,7 +520,7 @@ class AccountSettingScreen extends StatelessWidget {
                                         style: Get
                                             .theme.primaryTextTheme.titleSmall!
                                             .copyWith(color: Colors.red),
-                                      ).translate(),
+                                      ),
                                       onPressed: () {
                                         authController.removeUserfromDb();
                                       },
@@ -531,7 +531,7 @@ class AccountSettingScreen extends StatelessWidget {
                                         style: Get
                                             .theme.primaryTextTheme.titleSmall!
                                             .copyWith(color: Colors.blue),
-                                      ).translate(),
+                                      ),
                                       onPressed: () {
                                         Get.back();
                                       },
@@ -633,7 +633,7 @@ class AccountSettingScreen extends StatelessWidget {
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),
-                    ).translate(),
+                    ),
                   ),
                 ),
               ),

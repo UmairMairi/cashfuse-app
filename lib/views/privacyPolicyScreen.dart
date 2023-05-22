@@ -2,7 +2,7 @@
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/commonController.dart';
-import 'package:cashfuse/widget/drawerWidget.dart';
+import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
@@ -19,7 +19,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      drawer: global.getPlatFrom() ? DrawerWidget() : null,
+      drawer: global.getPlatFrom() ? WebDrawerWidget() : null,
       appBar: global.getPlatFrom()
           ? WebTopBarWidget(
               scaffoldKey: scaffoldKey,
@@ -34,11 +34,17 @@ class PrivacyPolicyScreen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: Text(
-                'Privacy Policy',
-                style: Get.theme.primaryTextTheme.titleSmall!
-                    .copyWith(color: Colors.white),
-              ).translate(),
+              title: GetPlatform.isWeb
+                  ? Text(
+                      'Privacy Policy',
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    )
+                  : Text(
+                      'Privacy Policy',
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    ).translate(),
             ),
       body: GetBuilder<CommonController>(builder: (controller) {
         return Center(

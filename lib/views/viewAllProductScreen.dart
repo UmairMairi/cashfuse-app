@@ -1,6 +1,7 @@
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/models/productModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/views/webScreen/webProductDetailMobileView.dart';
 import 'package:cashfuse/views/webScreen/webProductDetails.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,8 @@ import 'product_Details.dart';
 class ViewAllProductScreen extends StatefulWidget {
   final String title;
   final List<ProductModel> productList;
-  ViewAllProductScreen({required this.title, required this.productList}) : super();
+  ViewAllProductScreen({required this.title, required this.productList})
+      : super();
 
   @override
   State<ViewAllProductScreen> createState() =>
@@ -39,11 +41,17 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                   Icons.arrow_back,
                 ),
               ),
-              title: Text(
-                title,
-                style: Get.theme.primaryTextTheme.titleSmall!
-                    .copyWith(color: Colors.white),
-              ).translate(),
+              title: GetPlatform.isWeb
+                  ? Text(
+                      title,
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    )
+                  : Text(
+                      title,
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    ).translate(),
             ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -83,6 +91,14 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => WebProductDetailsScreen(
+                                    title: "LATEST PRODUCTS",
+                                    product: productList[index],
+                                  )));
+                    } else if (GetPlatform.isWeb) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WebProductDetailsMobileView(
                                     title: "LATEST PRODUCTS",
                                     product: productList[index],
                                   )));
@@ -163,13 +179,21 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                          child: Text(
-                            "${productList[index].name} ",
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 10),
-                          ).translate(),
+                          child: GetPlatform.isWeb
+                              ? Text(
+                                  "${productList[index].name} ",
+                                  style: TextStyle(
+                                      color: Colors.black54,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 10),
+                                )
+                              : Text(
+                                  "${productList[index].name} ",
+                                  style: TextStyle(
+                                      color: Colors.black54,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 10),
+                                ).translate(),
                         ),
                         Container(
                           decoration: BoxDecoration(
@@ -177,23 +201,39 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                               border: Border.all(color: Mycolors.orange)),
                           padding:
                               EdgeInsets.symmetric(horizontal: 13, vertical: 3),
-                          child: Text(
-                            "+ ${global.appInfo.currency} ${productList[index].productPrices![0].cashback}  REWARDS",
-                            style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w600,
-                                color: Mycolors.orange),
-                          ).translate(),
+                          child: GetPlatform.isWeb
+                              ? Text(
+                                  "+ ${global.appInfo.currency} ${productList[index].productPrices![0].cashback}  REWARDS",
+                                  style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600,
+                                      color: Mycolors.orange),
+                                )
+                              : Text(
+                                  "+ ${global.appInfo.currency} ${productList[index].productPrices![0].cashback}  REWARDS",
+                                  style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600,
+                                      color: Mycolors.orange),
+                                ).translate(),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                          child: Text(
-                            "Final Price ${global.appInfo.currency} ${productList[index].productPrices![0].price}",
-                            style: TextStyle(
-                                color: Mycolors.blue,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12),
-                          ).translate(),
+                          child: GetPlatform.isWeb
+                              ? Text(
+                                  "Final Price ${global.appInfo.currency} ${productList[index].productPrices![0].price}",
+                                  style: TextStyle(
+                                      color: Mycolors.blue,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),
+                                )
+                              : Text(
+                                  "Final Price ${global.appInfo.currency} ${productList[index].productPrices![0].price}",
+                                  style: TextStyle(
+                                      color: Mycolors.blue,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),
+                                ).translate(),
                         ),
                       ],
                     ),

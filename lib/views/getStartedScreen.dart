@@ -26,7 +26,7 @@ class GetStartedScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         key: scaffoldKey,
-        // drawer: global.getPlatFrom() ? DrawerWidget() : null,
+        // drawer: global.getPlatFrom() ? WebDrawerWidget() : null,
         appBar: fromMenu
             ? AppBar(
                 elevation: 0,

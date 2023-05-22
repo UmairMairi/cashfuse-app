@@ -1,5 +1,6 @@
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/views/campaignDetailScreen.dart';
+import 'package:cashfuse/views/webScreen/webCampaignDetailScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,13 +25,23 @@ class MoreCampignScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'See More Offers',
-                      style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: -0.1,
-                      ),
-                    ).translate(),
+                    GetPlatform.isWeb
+                        ? Text(
+                            'See More Offers',
+                            style:
+                                Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: -0.1,
+                            ),
+                          )
+                        : Text(
+                            'See More Offers',
+                            style:
+                                Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: -0.1,
+                            ),
+                          ).translate(),
                     InkWell(
                       onTap: () {
                         Get.back();
@@ -72,18 +83,34 @@ class MoreCampignScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    homeController
-                                        .seeMoreCampaignList[index].name!,
-                                    textAlign: TextAlign.start,
-                                    style:
-                                        Get.theme.primaryTextTheme.titleSmall,
-                                  ).translate(),
-                                  Text(
-                                    homeController
-                                        .seeMoreCampaignList[index].description!,
-                                    textAlign: TextAlign.start,
-                                  ).translate(),
+                                  GetPlatform.isWeb
+                                      ? Text(
+                                          homeController
+                                              .seeMoreCampaignList[index].name!,
+                                          textAlign: TextAlign.start,
+                                          style: Get.theme.primaryTextTheme
+                                              .titleSmall,
+                                        )
+                                      : Text(
+                                          homeController
+                                              .seeMoreCampaignList[index].name!,
+                                          textAlign: TextAlign.start,
+                                          style: Get.theme.primaryTextTheme
+                                              .titleSmall,
+                                        ).translate(),
+                                  GetPlatform.isWeb
+                                      ? Text(
+                                          homeController
+                                              .seeMoreCampaignList[index]
+                                              .description!,
+                                          textAlign: TextAlign.start,
+                                        )
+                                      : Text(
+                                          homeController
+                                              .seeMoreCampaignList[index]
+                                              .description!,
+                                          textAlign: TextAlign.start,
+                                        ).translate(),
                                 ],
                               ),
                             ),
@@ -95,14 +122,25 @@ class MoreCampignScreen extends StatelessWidget {
                             await homeController.getCampignDetails(
                                 homeController.seeMoreCampaignList[index].id
                                     .toString());
-                            Get.to(
-                              () => CampaignDetailScreen(
-                                campaign: homeController.campaign,
-                                fromSeeMore: true,
-                              ),
-                              preventDuplicates: false,
-                              routeName: 'detail',
-                            );
+                            if (GetPlatform.isWeb) {
+                              Get.to(
+                                () => WebCampaignDetailScreen(
+                                  campaign: homeController.campaign,
+                                  fromSeeMore: true,
+                                ),
+                                preventDuplicates: false,
+                                routeName: 'detail',
+                              );
+                            } else {
+                              Get.to(
+                                () => CampaignDetailScreen(
+                                  campaign: homeController.campaign,
+                                  fromSeeMore: true,
+                                ),
+                                preventDuplicates: false,
+                                routeName: 'detail',
+                              );
+                            }
                           },
                           child: Container(
                             width: Get.width / 2,
@@ -117,14 +155,23 @@ class MoreCampignScreen extends StatelessWidget {
                                   width: 1,
                                 )),
                             alignment: Alignment.center,
-                            child: Text(
-                              homeController
-                                  .seeMoreCampaignList[index].buttonText!,
-                              style: TextStyle(
-                                  color: Get.theme.secondaryHeaderColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600),
-                            ).translate(),
+                            child: GetPlatform.isWeb
+                                ? Text(
+                                    homeController
+                                        .seeMoreCampaignList[index].buttonText!,
+                                    style: TextStyle(
+                                        color: Get.theme.secondaryHeaderColor,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
+                                  )
+                                : Text(
+                                    homeController
+                                        .seeMoreCampaignList[index].buttonText!,
+                                    style: TextStyle(
+                                        color: Get.theme.secondaryHeaderColor,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
+                                  ).translate(),
                           ),
                         ),
                         Container(

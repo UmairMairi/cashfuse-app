@@ -49,13 +49,21 @@ class LoginWithEmailScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Text(
-                  'We will send a SMS to verify',
-                  style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                    letterSpacing: -0.2,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ).translate(),
+                child: GetPlatform.isWeb
+                    ? Text(
+                        'We will send a SMS to verify',
+                        style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                          letterSpacing: -0.2,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    : Text(
+                        'We will send a SMS to verify',
+                        style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                          letterSpacing: -0.2,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ).translate(),
               ),
               Padding(
                 padding:
@@ -132,13 +140,21 @@ class LoginWithEmailScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 alignment: Alignment.center,
-                child: Text(
-                  'Continue',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600),
-                ).translate(),
+                child: GetPlatform.isWeb
+                    ? Text(
+                        'Continue',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600),
+                      )
+                    : Text(
+                        'Continue',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600),
+                      ).translate(),
               ),
             ),
           ],

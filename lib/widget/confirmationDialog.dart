@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 
 void showConfirmationDialog(BuildContext context, String title, String content,
@@ -6,12 +7,20 @@ void showConfirmationDialog(BuildContext context, String title, String content,
   showCupertinoDialog(
     context: context,
     builder: (context) => CupertinoAlertDialog(
-      title: Text(
-        title,
-      ).translate(),
-      content: Text(
-        content,
-      ).translate(),
+      title: GetPlatform.isWeb
+          ? Text(
+              title,
+            )
+          : Text(
+              title,
+            ).translate(),
+      content: GetPlatform.isWeb
+          ? Text(
+              content,
+            )
+          : Text(
+              content,
+            ).translate(),
       actions: actions,
     ),
   );

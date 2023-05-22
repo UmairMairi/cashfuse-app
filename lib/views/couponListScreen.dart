@@ -4,6 +4,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/couponController.dart';
 import 'package:cashfuse/views/couponDetailScreen.dart';
 import 'package:cashfuse/views/offerDetailScreen.dart';
+import 'package:cashfuse/views/webScreen/webCouponDetailScreen.dart';
 import 'package:cashfuse/widget/couponWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -29,11 +30,17 @@ class CouponListScreen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: Text(
-                'Coupons of the day'.toUpperCase(),
-                style: Get.theme.primaryTextTheme.titleSmall!
-                    .copyWith(color: Colors.white),
-              ).translate(),
+              title: GetPlatform.isWeb
+                  ? Text(
+                      'Coupons of the day'.toUpperCase(),
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    )
+                  : Text(
+                      'Coupons of the day'.toUpperCase(),
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    ).translate(),
             ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -68,13 +75,23 @@ class CouponListScreen extends StatelessWidget {
                       preventDuplicates: false,
                     );
                   } else {
-                    Get.to(
-                      () => CouponDetailScreen(
-                        coupon: couponController.couponList[index],
-                      ),
-                      routeName: 'coupon',
-                      preventDuplicates: false,
-                    );
+                    if (GetPlatform.isWeb) {
+                      Get.to(
+                        () => WebCouponDetailScreen(
+                          coupon: couponController.couponList[index],
+                        ),
+                        routeName: 'coupon',
+                        preventDuplicates: false,
+                      );
+                    } else {
+                      Get.to(
+                        () => CouponDetailScreen(
+                          coupon: couponController.couponList[index],
+                        ),
+                        routeName: 'coupon',
+                        preventDuplicates: false,
+                      );
+                    }
                   }
                 },
                 child: Padding(

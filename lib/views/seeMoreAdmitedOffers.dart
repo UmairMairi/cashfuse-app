@@ -1,5 +1,6 @@
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/views/webScreen/webAdmitedOfferDetailScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 
@@ -114,23 +115,24 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                               InkWell(
                                 onTap: () async {
                                   Get.back();
-                                  //    await homeController.getCampignDetails(homeController.seeMoreCampaignList[index].id.toString());
-                                  // Get.to(
-                                  //       () => CampaignDetailScreen(
-                                  //     campaign: homeController.campaign,
-                                  //     fromSeeMore: true,
-                                  //   ),
-                                  //   preventDuplicates: false,
-                                  //   routeName: 'detail',
-                                  // );
 
-                                  Get.to(
-                                      () => AdmitedDetailScreen(
-                                          fromSeeMore: true,
-                                          admitedData:
-                                              homeController.admitedOffer),
-                                      preventDuplicates: false,
-                                      routeName: 'detail');
+                                  if (GetPlatform.isWeb) {
+                                    Get.to(
+                                        () => WebAdmitedDetailScreen(
+                                            fromSeeMore: true,
+                                            admitedData:
+                                                homeController.admitedOffer),
+                                        preventDuplicates: false,
+                                        routeName: 'detail');
+                                  } else {
+                                    Get.to(
+                                        () => AdmitedDetailScreen(
+                                            fromSeeMore: true,
+                                            admitedData:
+                                                homeController.admitedOffer),
+                                        preventDuplicates: false,
+                                        routeName: 'detail');
+                                  }
                                 },
                                 child: Container(
                                   width: Get.width / 2,

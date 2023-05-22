@@ -10,7 +10,8 @@ class OtpVerificationScreen extends StatelessWidget {
   final bool fromMenu;
   final bool isEmail;
 
-  OtpVerificationScreen({this.verificationCode, required this.fromMenu, required this.isEmail});
+  OtpVerificationScreen(
+      {this.verificationCode, required this.fromMenu, required this.isEmail});
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +37,27 @@ class OtpVerificationScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Text(
-                  'Enter 6 digit code we have sent you',
-                  textAlign: TextAlign.left,
-                  style: Get.theme.primaryTextTheme.displaySmall!.copyWith(
-                    height: 1.2,
-                    letterSpacing: -1,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ).translate(),
+                child: GetPlatform.isWeb
+                    ? Text(
+                        'Enter 6 digit code we have sent you',
+                        textAlign: TextAlign.left,
+                        style:
+                            Get.theme.primaryTextTheme.displaySmall!.copyWith(
+                          height: 1.2,
+                          letterSpacing: -1,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      )
+                    : Text(
+                        'Enter 6 digit code we have sent you',
+                        textAlign: TextAlign.left,
+                        style:
+                            Get.theme.primaryTextTheme.displaySmall!.copyWith(
+                          height: 1.2,
+                          letterSpacing: -1,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ).translate(),
               ),
               Padding(
                 padding:
@@ -52,15 +65,27 @@ class OtpVerificationScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      !isEmail
-                          ? 'Code sent to ${authController.coutryCode} ${authController.contactNo.text}'
-                          : 'Code sent to ${authController.email.text}',
-                      style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                        letterSpacing: -0.2,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ).translate(),
+                    GetPlatform.isWeb
+                        ? Text(
+                            !isEmail
+                                ? 'Code sent to ${authController.coutryCode} ${authController.contactNo.text}'
+                                : 'Code sent to ${authController.email.text}',
+                            style:
+                                Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                              letterSpacing: -0.2,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )
+                        : Text(
+                            !isEmail
+                                ? 'Code sent to ${authController.coutryCode} ${authController.contactNo.text}'
+                                : 'Code sent to ${authController.email.text}',
+                            style:
+                                Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                              letterSpacing: -0.2,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ).translate(),
                   ],
                 ),
               ),
@@ -111,9 +136,13 @@ class OtpVerificationScreen extends StatelessWidget {
               authController.seconds != 0
                   ? Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Text(
-                        "Wait 00 : ${authController.seconds.toString().padLeft(2, '0')}",
-                      ).translate(),
+                      child: GetPlatform.isWeb
+                          ? Text(
+                              "Wait 00 : ${authController.seconds.toString().padLeft(2, '0')}",
+                            )
+                          : Text(
+                              "Wait 00 : ${authController.seconds.toString().padLeft(2, '0')}",
+                            ).translate(),
                     )
                   : InkWell(
                       onTap: () async {
@@ -172,13 +201,21 @@ class OtpVerificationScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             alignment: Alignment.center,
-            child: Text(
-              'Continue',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600),
-            ).translate(),
+            child: GetPlatform.isWeb
+                ? Text(
+                    'Continue',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  )
+                : Text(
+                    'Continue',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  ).translate(),
           ),
         ),
       );

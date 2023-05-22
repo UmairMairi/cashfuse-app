@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
 
 class RatesAndOfferTermsSheetWidget extends StatelessWidget {
-  
   final CategoryModel partner;
   RatesAndOfferTermsSheetWidget({required this.partner});
 
@@ -39,15 +38,27 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          homeController.isOffer
-                              ? partner.rightTab!
-                              : partner.leftTab!,
-                          style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: -0.1,
-                          ),
-                        ).translate(),
+                        GetPlatform.isWeb
+                            ? Text(
+                                homeController.isOffer
+                                    ? partner.rightTab!
+                                    : partner.leftTab!,
+                                style: Get.theme.primaryTextTheme.titleSmall!
+                                    .copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: -0.1,
+                                ),
+                              )
+                            : Text(
+                                homeController.isOffer
+                                    ? partner.rightTab!
+                                    : partner.leftTab!,
+                                style: Get.theme.primaryTextTheme.titleSmall!
+                                    .copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: -0.1,
+                                ),
+                              ).translate(),
                         InkWell(
                           onTap: () {
                             Get.back();
@@ -95,13 +106,23 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                                     Get.find<HomeController>()
                                         .setIsOffer(false);
                                   },
-                                  child: Text(
-                                    partner.leftTab!,
-                                    style: Get.theme.primaryTextTheme.titleSmall!
-                                        .copyWith(
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white),
-                                  ).translate(),
+                                  child: GetPlatform.isWeb
+                                      ? Text(
+                                          partner.leftTab!,
+                                          style: Get.theme.primaryTextTheme
+                                              .titleSmall!
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.white),
+                                        )
+                                      : Text(
+                                          partner.leftTab!,
+                                          style: Get.theme.primaryTextTheme
+                                              .titleSmall!
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.white),
+                                        ).translate(),
                                 ),
                                 Icon(
                                   Icons.more_vert,
@@ -112,13 +133,23 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                                   onTap: () {
                                     homeController.setIsOffer(true);
                                   },
-                                  child: Text(
-                                    partner.rightTab!,
-                                    style: Get.theme.primaryTextTheme.titleSmall!
-                                        .copyWith(
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white),
-                                  ).translate(),
+                                  child: GetPlatform.isWeb
+                                      ? Text(
+                                          partner.rightTab!,
+                                          style: Get.theme.primaryTextTheme
+                                              .titleSmall!
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.white),
+                                        )
+                                      : Text(
+                                          partner.rightTab!,
+                                          style: Get.theme.primaryTextTheme
+                                              .titleSmall!
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.white),
+                                        ).translate(),
                                 ),
                               ],
                             ),

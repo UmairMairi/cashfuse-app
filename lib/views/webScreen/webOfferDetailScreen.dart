@@ -16,13 +16,12 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
-class OfferDetailScreen extends StatelessWidget {
+class WebOfferDetailScreen extends StatelessWidget {
   final OfferModel offer;
   final bool fromSeeMore;
-  
-  OfferDetailScreen({required this.offer, required this.fromSeeMore});
+
+  WebOfferDetailScreen({required this.offer, required this.fromSeeMore});
 
   HomeController homeController = Get.find<HomeController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -61,7 +60,7 @@ class OfferDetailScreen extends StatelessWidget {
                     offer.name!,
                     style: Get.theme.primaryTextTheme.titleSmall!
                         .copyWith(color: Colors.white),
-                  ).translate(),
+                  ),
                   actions: [
                     !GetPlatform.isWeb
                         ? InkWell(
@@ -109,7 +108,7 @@ class OfferDetailScreen extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  Text('Share').translate(),
+                                  Text('Share'),
                                   CircleAvatar(
                                     radius: 12,
                                     backgroundColor: Colors.green[700],
@@ -251,7 +250,7 @@ class OfferDetailScreen extends StatelessWidget {
                                       color: Colors.white,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600),
-                                ).translate(),
+                                ),
                               ),
                             ),
                           ],
@@ -273,7 +272,7 @@ class OfferDetailScreen extends StatelessWidget {
                               Text(
                                 offer.name!,
                                 style: Get.theme.primaryTextTheme.titleSmall,
-                              ).translate(),
+                              ),
                               HtmlWidget(
                                 offer.description!,
                                 //style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
@@ -341,12 +340,12 @@ class OfferDetailScreen extends StatelessWidget {
                                           style: TextStyle(
                                               fontWeight: FontWeight.w300,
                                               fontSize: 13),
-                                        ).translate(),
+                                        ),
                                         Text(
                                           'Today',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600),
-                                        ).translate(),
+                                        ),
                                       ],
                                     ),
                                     SizedBox(
@@ -363,12 +362,12 @@ class OfferDetailScreen extends StatelessWidget {
                                           style: TextStyle(
                                               fontWeight: FontWeight.w300,
                                               fontSize: 13),
-                                        ).translate(),
+                                        ),
                                         Text(
                                           '24 hours',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600),
-                                        ).translate(),
+                                        ),
                                       ],
                                     )
                                   ],
@@ -433,7 +432,7 @@ class OfferDetailScreen extends StatelessWidget {
                                                   color: Colors.teal[200],
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w400),
-                                            ).translate(),
+                                            ),
                                           ),
                                         )
                                       : SizedBox(),
@@ -490,7 +489,7 @@ class OfferDetailScreen extends StatelessWidget {
                                 .copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: Colors.white),
-                          ).translate(),
+                          ),
                         ),
                         (offer.partner!.leftTab!.isNotEmpty &&
                                 offer.partner!.rightTab!.isNotEmpty)
@@ -522,7 +521,7 @@ class OfferDetailScreen extends StatelessWidget {
                                 .copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: Colors.white),
-                          ).translate(),
+                          ),
                         ),
                       ],
                     ),

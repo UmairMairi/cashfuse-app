@@ -64,15 +64,25 @@ class AdsCampaignWidget extends StatelessWidget {
                         padding: EdgeInsets.only(top: 5),
                         child: RotatedBox(
                           quarterTurns: 45,
-                          child: Text(
-                            commonModel.tagline!,
-                            textAlign: TextAlign.center,
-                            style:
-                                Get.theme.primaryTextTheme.bodySmall!.copyWith(
-                              color: Colors.white,
-                              fontSize: 10,
-                            ),
-                          ).translate(),
+                          child: GetPlatform.isWeb
+                              ? Text(
+                                  commonModel.tagline!,
+                                  textAlign: TextAlign.center,
+                                  style: Get.theme.primaryTextTheme.bodySmall!
+                                      .copyWith(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                  ),
+                                )
+                              : Text(
+                                  commonModel.tagline!,
+                                  textAlign: TextAlign.center,
+                                  style: Get.theme.primaryTextTheme.bodySmall!
+                                      .copyWith(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                  ),
+                                ).translate(),
                         ),
                       ),
                     ),
@@ -93,13 +103,21 @@ class AdsCampaignWidget extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Text(
-              commonModel.name!,
-              style: Get.theme.primaryTextTheme.bodySmall,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-            ).translate(),
+            child: GetPlatform.isWeb
+                ? Text(
+                    commonModel.name!,
+                    style: Get.theme.primaryTextTheme.bodySmall,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                  )
+                : Text(
+                    commonModel.name!,
+                    style: Get.theme.primaryTextTheme.bodySmall,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                  ).translate(),
           ),
           Container(
             margin: EdgeInsets.only(top: 10),
@@ -108,15 +126,25 @@ class AdsCampaignWidget extends StatelessWidget {
               color: Get.theme.secondaryHeaderColor,
               borderRadius: BorderRadius.circular(2),
             ),
-            child: Text(
-              commonModel.buttonText != null
-                  ? commonModel.buttonText!
-                  : 'Grab deal',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                  fontWeight: FontWeight.w600),
-            ).translate(),
+            child: GetPlatform.isWeb
+                ? Text(
+                    commonModel.buttonText != null
+                        ? commonModel.buttonText!
+                        : 'Grab deal',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600),
+                  )
+                : Text(
+                    commonModel.buttonText != null
+                        ? commonModel.buttonText!
+                        : 'Grab deal',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600),
+                  ).translate(),
           ),
           // InkWell(
           //   onTap: () {

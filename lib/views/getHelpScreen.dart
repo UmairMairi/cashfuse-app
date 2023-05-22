@@ -4,7 +4,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/commonController.dart';
 import 'package:cashfuse/views/helpDetailSceen.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/drawerWidget.dart';
+import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,7 +21,7 @@ class GetHelpScreen extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       resizeToAvoidBottomInset: false,
-      drawer: global.getPlatFrom() ? DrawerWidget() : null,
+      drawer: global.getPlatFrom() ? WebDrawerWidget() : null,
       appBar: global.getPlatFrom()
           ? WebTopBarWidget(
               scaffoldKey: scaffoldKey,
@@ -35,11 +35,17 @@ class GetHelpScreen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: Text(
-                'Get Help',
-                style: Get.theme.primaryTextTheme.titleSmall!
-                    .copyWith(color: Colors.white),
-              ).translate(),
+              title: GetPlatform.isWeb
+                  ? Text(
+                      'Get Help',
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    )
+                  : Text(
+                      'Get Help',
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    ).translate(),
             ),
       body: Center(
         child: SizedBox(
@@ -174,15 +180,25 @@ class GetHelpScreen extends StatelessWidget {
                                         //   ),
                                         //   //),
                                         // ),
-                                        Text(
-                                          controller.faqList[index].ques!,
-                                          textAlign: TextAlign.center,
-                                          style: global.getPlatFrom()
-                                              ? Get.theme.primaryTextTheme
-                                                  .titleMedium
-                                              : Get.theme.primaryTextTheme
-                                                  .titleSmall,
-                                        ).translate(),
+                                        GetPlatform.isWeb
+                                            ? Text(
+                                                controller.faqList[index].ques!,
+                                                textAlign: TextAlign.center,
+                                                style: global.getPlatFrom()
+                                                    ? Get.theme.primaryTextTheme
+                                                        .titleMedium
+                                                    : Get.theme.primaryTextTheme
+                                                        .titleSmall,
+                                              )
+                                            : Text(
+                                                controller.faqList[index].ques!,
+                                                textAlign: TextAlign.center,
+                                                style: global.getPlatFrom()
+                                                    ? Get.theme.primaryTextTheme
+                                                        .titleMedium
+                                                    : Get.theme.primaryTextTheme
+                                                        .titleSmall,
+                                              ).translate(),
                                       ],
                                     ),
                                   ),
@@ -191,10 +207,15 @@ class GetHelpScreen extends StatelessWidget {
                             )
                           : Expanded(
                               child: Center(
-                                child: Text(
-                                  'No Data found.',
-                                  style: TextStyle(color: Colors.white),
-                                ).translate(),
+                                child: GetPlatform.isWeb
+                                    ? Text(
+                                        'No Data found.',
+                                        style: TextStyle(color: Colors.white),
+                                      )
+                                    : Text(
+                                        'No Data found.',
+                                        style: TextStyle(color: Colors.white),
+                                      ).translate(),
                               ),
                             )
                       : GridView.builder(

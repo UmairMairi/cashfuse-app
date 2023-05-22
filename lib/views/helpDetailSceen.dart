@@ -26,22 +26,35 @@ class HelpDetailSceen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: Text(
-                faq.ques!,
-                style: Get.theme.primaryTextTheme.titleSmall!.copyWith(color: Colors.white),
-              ).translate(),
+              title: GetPlatform.isWeb
+                  ? Text(
+                      faq.ques!,
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    )
+                  : Text(
+                      faq.ques!,
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    ).translate(),
             ),
       body: GetBuilder<CommonController>(builder: (controller) {
         return Center(
           child: Container(
-            width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 3 : AppConstants.WEB_MAX_WIDTH,
+            width: global.getPlatFrom()
+                ? AppConstants.WEB_MAX_WIDTH / 3
+                : AppConstants.WEB_MAX_WIDTH,
             color: Colors.white,
             height: Get.height,
-            margin: global.getPlatFrom() ? EdgeInsets.zero : EdgeInsets.all(10).copyWith(bottom: 0),
+            margin: global.getPlatFrom()
+                ? EdgeInsets.zero
+                : EdgeInsets.all(10).copyWith(bottom: 0),
             child: SingleChildScrollView(
               child: HtmlWidget(
                 faq.ans!,
-                textStyle: global.getPlatFrom() ? Get.theme.primaryTextTheme.titleSmall : null,
+                textStyle: global.getPlatFrom()
+                    ? Get.theme.primaryTextTheme.titleSmall
+                    : null,
               ),
             ),
           ),

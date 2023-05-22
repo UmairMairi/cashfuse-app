@@ -1,5 +1,6 @@
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/addBankDetailScreen.dart';
 import 'package:cashfuse/views/amazonPayRedeemScreen.dart';
@@ -10,10 +11,8 @@ import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cashfuse/utils/global.dart' as global;
-import 'package:google_translator/google_translator.dart';
 
-class RequestPaymentScreen extends StatelessWidget {
+class WebRequestPaymentScreen extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,7 @@ class RequestPaymentScreen extends StatelessWidget {
                 'Request Payments',
                 style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
-              ).translate(),
+              ),
             ),
       body: Center(
         child: SizedBox(
@@ -65,7 +64,7 @@ class RequestPaymentScreen extends StatelessWidget {
                               'Request Payments',
                               style: Get.theme.primaryTextTheme.titleLarge!
                                   .copyWith(fontSize: 18),
-                            ).translate(),
+                            ),
                             SizedBox(
                               height: global.getPlatFrom() ? 30 : 0,
                             ),
@@ -82,7 +81,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                       color: Colors.black,
                                       fontWeight: FontWeight.w300,
                                     ),
-                                  ).translate(),
+                                  ),
                                   Text(
                                     global.currentUser.earning != null
                                         ? '${global.appInfo.currency}${global.currentUser.earning!.remEarning}'
@@ -102,7 +101,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                     color: Colors.black,
                                     fontWeight: FontWeight.w300,
                                   ),
-                                ).translate(),
+                                ),
                                 Text(
                                   global.currentUser.earning != null
                                       ? '${global.appInfo.currency}${global.currentUser.earning!.sentForWithdrawal}'
@@ -124,7 +123,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                       color: Colors.black,
                                       fontWeight: FontWeight.w300,
                                     ),
-                                  ).translate(),
+                                  ),
                                   Text(
                                     global.currentUser.earning != null
                                         ? '${global.appInfo.currency}${global.currentUser.earning!.withdrawal}'
@@ -141,7 +140,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                 Text(
                                   'Total Earnings',
                                   style: Get.theme.primaryTextTheme.titleSmall,
-                                ).translate(),
+                                ),
                                 Text(
                                   global.currentUser.earning != null
                                       ? '${global.appInfo.currency}${global.currentUser.earning!.totalEarnings}'
@@ -168,7 +167,7 @@ class RequestPaymentScreen extends StatelessWidget {
                             'Redeem',
                             style: Get.theme.primaryTextTheme.titleLarge!
                                 .copyWith(fontSize: 18),
-                          ).translate(),
+                          ),
                           SizedBox(
                             height: 10,
                           ),
@@ -220,7 +219,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                           fontSize: 20,
                                           color: Colors.white,
                                         ),
-                                      ).translate(),
+                                      ),
                                       Card(
                                         margin: EdgeInsets.zero,
                                         color: Colors.white,
@@ -300,7 +299,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                           fontSize: 20,
                                           color: Colors.white,
                                         ),
-                                      ).translate(),
+                                      ),
                                       Card(
                                         margin: EdgeInsets.zero,
                                         color: Colors.white,
@@ -379,7 +378,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                           fontSize: 20,
                                           color: Colors.white,
                                         ),
-                                      ).translate(),
+                                      ),
                                       Card(
                                         margin: EdgeInsets.zero,
                                         color: Colors.white,
@@ -459,7 +458,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                           fontSize: 20,
                                           color: Colors.white,
                                         ),
-                                      ).translate(),
+                                      ),
                                       Card(
                                         margin: EdgeInsets.zero,
                                         color: Colors.white,
@@ -539,7 +538,7 @@ class RequestPaymentScreen extends StatelessWidget {
                                           fontSize: 20,
                                           color: Colors.white,
                                         ),
-                                      ).translate(),
+                                      ),
                                       Card(
                                         margin: EdgeInsets.zero,
                                         color: Colors.white,

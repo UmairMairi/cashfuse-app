@@ -6,7 +6,7 @@ import 'package:cashfuse/models/commonModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/categoryScreen.dart';
 import 'package:cashfuse/widget/adsCampaignWidget.dart';
-import 'package:cashfuse/widget/drawerWidget.dart';
+import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webAdsCampaignWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +39,7 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
     return GetBuilder<HomeController>(builder: (homeController1) {
       return Scaffold(
         key: scaffoldKey,
-        drawer: global.getPlatFrom() ? DrawerWidget() : null,
+        drawer: global.getPlatFrom() ? WebDrawerWidget() : null,
         appBar: global.getPlatFrom()
             ? WebTopBarWidget(
                 scaffoldKey: scaffoldKey,
@@ -53,11 +53,17 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
                     Icons.arrow_back,
                   ),
                 ),
-                title: Text(
-                  title!,
-                  style: Get.theme.primaryTextTheme.titleSmall!
-                      .copyWith(color: Colors.white),
-                ).translate(),
+                title: GetPlatform.isWeb
+                    ? Text(
+                        title!,
+                        style: Get.theme.primaryTextTheme.titleSmall!
+                            .copyWith(color: Colors.white),
+                      )
+                    : Text(
+                        title!,
+                        style: Get.theme.primaryTextTheme.titleSmall!
+                            .copyWith(color: Colors.white),
+                      ).translate(),
               ),
         body: Align(
           alignment: Alignment.topCenter,
@@ -67,7 +73,7 @@ class AdsCampaignWidgetListScreen extends StatelessWidget {
               trackVisibility: true,
               interactive: true,
               thumbVisibility: true,
-               controller: topCashBackScrollController,
+              controller: topCashBackScrollController,
               child: GridView.builder(
                 controller: topCashBackScrollController,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

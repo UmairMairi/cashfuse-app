@@ -1,20 +1,19 @@
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cashfuse/constants/appConstant.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
-import 'package:cashfuse/views/myOrdersScreen.dart';
-import 'package:cashfuse/views/requestPaymentScreen.dart';
+import 'package:cashfuse/views/webScreen/webMyOrdersScreen.dart';
+import 'package:cashfuse/views/webScreen/webRequestPaymentScreen.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:cashfuse/utils/global.dart' as global;
 
-class MyEarningSceen extends StatelessWidget {
+class WebMyEarningSceen extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -40,7 +39,7 @@ class MyEarningSceen extends StatelessWidget {
                 'My Earnings',
                 style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
-              ).translate(),
+              ),
             ),
       body: Column(
         children: [
@@ -74,7 +73,7 @@ class MyEarningSceen extends StatelessWidget {
                             children: [
                               Text(
                                 'Total Earnings',
-                              ).translate(),
+                              ),
                               InkWell(
                                 onTap: () {
                                   showAlignedDialog(
@@ -101,7 +100,7 @@ class MyEarningSceen extends StatelessWidget {
                                 : '${global.appInfo.currency} 0.00',
                             style: Get.theme.primaryTextTheme.headlineSmall!
                                 .copyWith(fontWeight: FontWeight.w600),
-                          ).translate(),
+                          ),
                           trailing: Card(
                             elevation: 5,
                             shape: RoundedRectangleBorder(
@@ -147,7 +146,7 @@ class MyEarningSceen extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                               letterSpacing: -0.5,
                             ),
-                          ).translate(),
+                          ),
                         )
                       ],
                     ),
@@ -167,7 +166,7 @@ class MyEarningSceen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           Get.to(
-                            () => MyOrdersScreen(),
+                            () => WebMyOrdersScreen(),
                             routeName: 'myorders',
                           );
                         },
@@ -206,7 +205,7 @@ class MyEarningSceen extends StatelessWidget {
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
                                           ),
-                                        ).translate(),
+                                        ),
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 10),
@@ -226,7 +225,7 @@ class MyEarningSceen extends StatelessWidget {
                                                   .copyWith(
                                                 color: Colors.white,
                                               ),
-                                            ).translate(),
+                                            ),
                                             CircleAvatar(
                                               radius: 6,
                                               backgroundColor: Colors.white,
@@ -320,7 +319,7 @@ class MyEarningSceen extends StatelessWidget {
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
                                           ),
-                                        ).translate(),
+                                        ),
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 10),
@@ -340,7 +339,7 @@ class MyEarningSceen extends StatelessWidget {
                                                   .copyWith(
                                                 color: Colors.white,
                                               ),
-                                            ).translate(),
+                                            ),
                                             CircleAvatar(
                                               radius: 6,
                                               backgroundColor: Colors.white,
@@ -390,7 +389,7 @@ class MyEarningSceen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(() => RequestPaymentScreen(),
+                          Get.to(() => WebRequestPaymentScreen(),
                               routeName: 'request-payment');
                         },
                         child: Card(
@@ -428,7 +427,7 @@ class MyEarningSceen extends StatelessWidget {
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
                                           ),
-                                        ).translate(),
+                                        ),
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 10),
@@ -448,7 +447,7 @@ class MyEarningSceen extends StatelessWidget {
                                                   .copyWith(
                                                 color: Colors.white,
                                               ),
-                                            ).translate(),
+                                            ),
                                             CircleAvatar(
                                               radius: 6,
                                               backgroundColor: Colors.white,
@@ -538,7 +537,7 @@ class MyEarningSceen extends StatelessWidget {
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
                                           ),
-                                        ).translate(),
+                                        ),
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 10),
@@ -558,7 +557,7 @@ class MyEarningSceen extends StatelessWidget {
                                                   .copyWith(
                                                 color: Colors.white,
                                               ),
-                                            ).translate(),
+                                            ),
                                             CircleAvatar(
                                               radius: 6,
                                               backgroundColor: Colors.white,
@@ -664,7 +663,7 @@ class MyEarningSceen extends StatelessWidget {
                       Text(
                         'Your total eanings and amount includes your Cashback + Rewards + Refferal amount.',
                         style: Get.theme.primaryTextTheme.bodyMedium,
-                      ).translate(),
+                      ),
                     ],
                   ),
                 ),

@@ -2,7 +2,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/dateConverter.dart';
 import 'package:cashfuse/utils/images.dart';
-import 'package:cashfuse/widget/drawerWidget.dart';
+import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +16,7 @@ class PaymentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      drawer: global.getPlatFrom() ? DrawerWidget() : null,
+      drawer: global.getPlatFrom() ? WebDrawerWidget() : null,
       appBar: global.getPlatFrom()
           ? WebTopBarWidget(
               scaffoldKey: scaffoldKey,
@@ -31,11 +31,17 @@ class PaymentScreen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: Text(
-                'Payments',
-                style: Get.theme.primaryTextTheme.titleSmall!
-                    .copyWith(color: Colors.white),
-              ).translate(),
+              title: GetPlatform.isWeb
+                  ? Text(
+                      'Payments',
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    )
+                  : Text(
+                      'Payments',
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    ).translate(),
             ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -119,7 +125,7 @@ class PaymentScreen extends StatelessWidget {
                                                       .withdrawalRequest![index]
                                                       .amount
                                                       .toString(),
-                                            ).translate(),
+                                            ),
                                           ],
                                         ),
                                         subtitle: Text(
@@ -131,7 +137,7 @@ class PaymentScreen extends StatelessWidget {
                                           ),
                                           style: Get
                                               .theme.primaryTextTheme.bodySmall,
-                                        ).translate(),
+                                        ),
                                         trailing: Container(
                                           width: 80,
                                           height: 40,
@@ -179,7 +185,7 @@ class PaymentScreen extends StatelessWidget {
                                             style: Get.theme.primaryTextTheme
                                                 .titleSmall!
                                                 .copyWith(color: Colors.white),
-                                          ).translate(),
+                                          ),
                                         ),
                                       ),
                                     );
@@ -238,7 +244,7 @@ class PaymentScreen extends StatelessWidget {
                                         global.currentUser
                                             .withdrawalRequest![index].amount
                                             .toString(),
-                                  ).translate(),
+                                  ),
                                 ],
                               ),
                               subtitle: Text(
@@ -247,7 +253,7 @@ class PaymentScreen extends StatelessWidget {
                                       .createdAt!,
                                 ),
                                 style: Get.theme.primaryTextTheme.bodySmall,
-                              ).translate(),
+                              ),
                               trailing: Container(
                                 width: 80,
                                 height: 40,
@@ -267,36 +273,72 @@ class PaymentScreen extends StatelessWidget {
                                           ? Colors.red
                                           : Colors.orange,
                                 ),
-                                child: Text(
-                                  global.currentUser.withdrawalRequest![index]
-                                              .approved ==
-                                          1
-                                      ? 'Approved'
-                                      : global
-                                                  .currentUser
-                                                  .withdrawalRequest![index]
-                                                  .approved ==
-                                              2
-                                          ? 'Rejected'
-                                          : global
-                                                      .currentUser
-                                                      .withdrawalRequest![index]
-                                                      .approved ==
-                                                  0
-                                              ? 'Pending'
-                                              : '',
-                                  style: Get.theme.primaryTextTheme.titleSmall!
-                                      .copyWith(color: Colors.white),
-                                ).translate(),
+                                child: GetPlatform.isWeb
+                                    ? Text(
+                                        global
+                                                    .currentUser
+                                                    .withdrawalRequest![index]
+                                                    .approved ==
+                                                1
+                                            ? 'Approved'
+                                            : global
+                                                        .currentUser
+                                                        .withdrawalRequest![
+                                                            index]
+                                                        .approved ==
+                                                    2
+                                                ? 'Rejected'
+                                                : global
+                                                            .currentUser
+                                                            .withdrawalRequest![
+                                                                index]
+                                                            .approved ==
+                                                        0
+                                                    ? 'Pending'
+                                                    : '',
+                                        style: Get
+                                            .theme.primaryTextTheme.titleSmall!
+                                            .copyWith(color: Colors.white),
+                                      )
+                                    : Text(
+                                        global
+                                                    .currentUser
+                                                    .withdrawalRequest![index]
+                                                    .approved ==
+                                                1
+                                            ? 'Approved'
+                                            : global
+                                                        .currentUser
+                                                        .withdrawalRequest![
+                                                            index]
+                                                        .approved ==
+                                                    2
+                                                ? 'Rejected'
+                                                : global
+                                                            .currentUser
+                                                            .withdrawalRequest![
+                                                                index]
+                                                            .approved ==
+                                                        0
+                                                    ? 'Pending'
+                                                    : '',
+                                        style: Get
+                                            .theme.primaryTextTheme.titleSmall!
+                                            .copyWith(color: Colors.white),
+                                      ).translate(),
                               ),
                             ),
                           );
                         },
                       )
                 : Center(
-                    child: Text(
-                      'No data found',
-                    ).translate(),
+                    child: GetPlatform.isWeb
+                        ? Text(
+                            'No data found',
+                          )
+                        : Text(
+                            'No data found',
+                          ).translate(),
                   );
           }),
         ),

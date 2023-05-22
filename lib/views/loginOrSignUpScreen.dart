@@ -1,9 +1,11 @@
+import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:get/get.dart';
+import 'package:intl_phone_field/country_picker_dialog.dart';
 
 // import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -77,6 +79,7 @@ class LoginOrSignUpScreen extends StatelessWidget {
                 child: SizedBox(
                   height: 100,
                   child: IntlPhoneField(
+                    pickerDialogStyle: PickerDialogStyle(width: AppConstants.WEB_MAX_WIDTH / 2),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     focusNode: authController.phoneFocus,
                     showCountryFlag: false,

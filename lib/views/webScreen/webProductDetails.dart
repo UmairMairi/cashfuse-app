@@ -9,7 +9,6 @@ import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
 class WebProductDetailsScreen extends StatefulWidget {
   final String title;
@@ -93,7 +92,8 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                                 .productPrices![index].cId
                                                 .toString());
                                         await homeController.addClick(
-                                          product.productPrices![index].siteName!,
+                                          product
+                                              .productPrices![index].siteName!,
                                           global.appInfo.baseUrls!
                                                   .productSiteUrl! +
                                               '/' +
@@ -162,7 +162,7 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
                                             fontSize: 13),
-                                      ).translate(),
+                                      ),
                                     ),
                                   )
                                 ],
@@ -189,14 +189,14 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                             color: Colors.black54,
                                             fontWeight: FontWeight.w400,
                                             fontSize: 12),
-                                      ).translate(),
+                                      ),
                                       Text(
                                         "Seller price",
                                         style: TextStyle(
                                             color: Colors.black54,
                                             fontWeight: FontWeight.w400,
                                             fontSize: 12),
-                                      ).translate(),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(
@@ -216,7 +216,7 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                                 color: Colors.black54,
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 12),
-                                          ).translate(),
+                                          ),
                                         )
                                       : Column(
                                           children: [
@@ -226,14 +226,14 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                                   color: Mycolors.orange,
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 12),
-                                            ).translate(),
+                                            ),
                                             Text(
                                               "CashBack",
                                               style: TextStyle(
                                                   color: Colors.black54,
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 12),
-                                            ).translate(),
+                                            ),
                                           ],
                                         ),
                                   SizedBox(
@@ -252,14 +252,14 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                             color: Colors.black,
                                             fontWeight: FontWeight.w500,
                                             fontSize: 12),
-                                      ).translate(),
+                                      ),
                                       Text(
                                         "Best Price",
                                         style: TextStyle(
                                             color: Colors.black54,
                                             fontWeight: FontWeight.w400,
                                             fontSize: 12),
-                                      ).translate(),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(

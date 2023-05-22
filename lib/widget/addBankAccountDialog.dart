@@ -45,11 +45,17 @@ class AddBankAccountDialog extends StatelessWidget {
           // SizedBox(
           //   height: 20,
           // ),
-          Text(
-            'Add Bank Account',
-            style: Get.theme.primaryTextTheme.titleLarge!
-                .copyWith(fontWeight: FontWeight.w600),
-          ).translate(),
+          GetPlatform.isWeb
+              ? Text(
+                  'Add Bank Account',
+                  style: Get.theme.primaryTextTheme.titleLarge!
+                      .copyWith(fontWeight: FontWeight.w600),
+                )
+              : Text(
+                  'Add Bank Account',
+                  style: Get.theme.primaryTextTheme.titleLarge!
+                      .copyWith(fontWeight: FontWeight.w600),
+                ).translate(),
 
           StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) => Padding(

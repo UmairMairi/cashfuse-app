@@ -1,25 +1,24 @@
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
-import 'package:cashfuse/views/accountSettingScreen.dart';
 import 'package:cashfuse/views/allInOneSearchScreen.dart';
 import 'package:cashfuse/views/allcategoriesScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
-import 'package:cashfuse/views/requestPaymentScreen.dart';
+import 'package:cashfuse/views/webScreen/webAccountSettingScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:phone_number/phone_number.dart';
 import 'package:store_redirect/store_redirect.dart';
 
+import '../../views/webScreen/webRequestPaymentScreen.dart';
+
 AuthController authController = Get.find<AuthController>();
 
-class DrawerWidget extends StatelessWidget {
+class WebDrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -309,7 +308,7 @@ class DrawerWidget extends StatelessWidget {
                                           }
                                         }
                                         Get.to(
-                                          () => AccountSettingScreen(),
+                                          () => WebAccountSettingScreen(),
                                           routeName: 'account',
                                         );
                                       },
@@ -334,7 +333,7 @@ class DrawerWidget extends StatelessWidget {
                                         fontSize: 11,
                                         letterSpacing: 0,
                                       ),
-                                    ).translate(),
+                                    ),
                                     Text(
                                       global.currentUser.earning != null
                                           ? '${global.appInfo.currency}${global.currentUser.earning!.pendingEarning}'
@@ -369,7 +368,7 @@ class DrawerWidget extends StatelessWidget {
                                         letterSpacing: 0,
                                         fontSize: 11,
                                       ),
-                                    ).translate(),
+                                    ),
                                     Text(
                                       global.currentUser.earning != null
                                           ? '${global.appInfo.currency}${global.currentUser.earning!.remEarning}'
@@ -404,7 +403,7 @@ class DrawerWidget extends StatelessWidget {
                                         letterSpacing: 0,
                                         fontSize: 11,
                                       ),
-                                    ).translate(),
+                                    ),
                                     Text(
                                       global.currentUser.earning != null
                                           ? '${global.appInfo.currency}${global.currentUser.earning!.withdrawal}'
@@ -440,7 +439,7 @@ class DrawerWidget extends StatelessWidget {
                                         letterSpacing: 0,
                                         fontSize: 11,
                                       ),
-                                    ).translate(),
+                                    ),
                                     Text(
                                       global.currentUser.earning != null
                                           ? '${global.appInfo.currency}${global.currentUser.earning!.rewardEarning}'
@@ -509,7 +508,7 @@ class DrawerWidget extends StatelessWidget {
                       }
                     }
                     Get.to(
-                      () => AccountSettingScreen(),
+                      () => WebAccountSettingScreen(),
                       routeName: 'account',
                     );
                   },
@@ -534,7 +533,7 @@ class DrawerWidget extends StatelessWidget {
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
                           ),
-                        ).translate(),
+                        ),
                       ],
                     ),
                   ),
@@ -568,7 +567,7 @@ class DrawerWidget extends StatelessWidget {
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
                           ),
-                        ).translate(),
+                        ),
                       ],
                     ),
                   ),
@@ -577,7 +576,7 @@ class DrawerWidget extends StatelessWidget {
                   onTap: () {
                     Get.back();
                     Get.to(
-                      () => RequestPaymentScreen(),
+                      () => WebRequestPaymentScreen(),
                       routeName: 'request-payment',
                     );
                   },
@@ -602,7 +601,7 @@ class DrawerWidget extends StatelessWidget {
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
                           ),
-                        ).translate(),
+                        ),
                       ],
                     ),
                   ),
@@ -636,7 +635,7 @@ class DrawerWidget extends StatelessWidget {
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
                           ),
-                        ).translate(),
+                        ),
                       ],
                     ),
                   ),
@@ -715,7 +714,7 @@ class DrawerWidget extends StatelessWidget {
                                   fontWeight: FontWeight.w300,
                                   color: Colors.black.withOpacity(0.6),
                                 ),
-                              ).translate(),
+                              ),
                             ],
                           ),
                         ),
@@ -752,7 +751,7 @@ class DrawerWidget extends StatelessWidget {
                                   fontWeight: FontWeight.w300,
                                   color: Colors.black.withOpacity(0.6),
                                 ),
-                              ).translate(),
+                              ),
                             ],
                           ),
                         ),
@@ -787,7 +786,7 @@ class DrawerWidget extends StatelessWidget {
                             fontWeight: FontWeight.w300,
                             color: Colors.black.withOpacity(0.6),
                           ),
-                        ).translate(),
+                        ),
                       ],
                     ),
                   ),
@@ -806,7 +805,7 @@ class DrawerWidget extends StatelessWidget {
                     height: 0.99,
                     fontWeight: FontWeight.w700,
                   ),
-                ).translate(),
+                ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -817,7 +816,7 @@ class DrawerWidget extends StatelessWidget {
                       letterSpacing: -0.2,
                       fontWeight: FontWeight.w600,
                     ),
-                  ).translate(),
+                  ),
                 ),
                 InkWell(
                   onTap: () async {
@@ -877,7 +876,7 @@ class DrawerWidget extends StatelessWidget {
                           color: Colors.white,
                           fontSize: 14,
                           fontWeight: FontWeight.w600),
-                    ).translate(),
+                    ),
                   ),
                 ),
               ],

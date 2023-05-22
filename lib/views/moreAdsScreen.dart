@@ -1,10 +1,10 @@
 import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/adsDetailScreen.dart';
+import 'package:cashfuse/views/webScreen/webAdsDetailScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cashfuse/utils/global.dart' as global;
-
 import 'package:google_translator/google_translator.dart';
 
 class MoreAdsScreen extends StatelessWidget {
@@ -75,7 +75,8 @@ class MoreAdsScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      homeController.seeMoreAdsList[index].name!,
+                                      homeController
+                                          .seeMoreAdsList[index].name!,
                                       textAlign: TextAlign.start,
                                       style:
                                           Get.theme.primaryTextTheme.titleSmall,
@@ -97,14 +98,25 @@ class MoreAdsScreen extends StatelessWidget {
                             await homeController.getAdDetails(homeController
                                 .seeMoreAdsList[index].id
                                 .toString());
-                            Get.to(
-                              () => AdsDetailScreen(
-                                ads: homeController.ads,
-                                fromSeeMore: true,
-                              ),
-                              preventDuplicates: false,
-                              routeName: 'detail',
-                            );
+                            if (GetPlatform.isWeb) {
+                              Get.to(
+                                () => WebAdsDetailScreen(
+                                  ads: homeController.ads,
+                                  fromSeeMore: true,
+                                ),
+                                preventDuplicates: false,
+                                routeName: 'detail',
+                              );
+                            } else {
+                              Get.to(
+                                () => AdsDetailScreen(
+                                  ads: homeController.ads,
+                                  fromSeeMore: true,
+                                ),
+                                preventDuplicates: false,
+                                routeName: 'detail',
+                              );
+                            }
                           },
                           child: Container(
                             width: Get.width / 2,

@@ -5,7 +5,7 @@ import 'package:cashfuse/controllers/orderController.dart';
 import 'package:cashfuse/models/orderModel.dart';
 import 'package:cashfuse/views/addComplaintSceen.dart';
 import 'package:cashfuse/views/faqSceen.dart';
-import 'package:cashfuse/widget/drawerWidget.dart';
+import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +29,7 @@ class OrderComplaintScreen extends StatelessWidget {
       return SafeArea(
         child: Scaffold(
           key: scaffoldKey,
-          drawer: global.getPlatFrom() ? DrawerWidget() : null,
+          drawer: global.getPlatFrom() ? WebDrawerWidget() : null,
           appBar: global.getPlatFrom()
               ? WebTopBarWidget(
                   scaffoldKey: scaffoldKey,

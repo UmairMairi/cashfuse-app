@@ -6,6 +6,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/offerDetailScreen.dart';
+import 'package:cashfuse/views/webScreen/webOfferDetailScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -75,7 +76,7 @@ class WebBannerView extends StatelessWidget {
                                             .toString(),
                                       );
                                       Get.to(
-                                        () => OfferDetailScreen(
+                                        () => WebOfferDetailScreen(
                                           offer: homeController.offer,
                                           fromSeeMore: false,
                                         ),

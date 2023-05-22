@@ -11,7 +11,6 @@ import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/aboutUsScreen.dart';
-import 'package:cashfuse/views/accountSettingScreen.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
@@ -22,11 +21,12 @@ import 'package:cashfuse/views/paymentScreen.dart';
 import 'package:cashfuse/views/privacyPolicyScreen.dart';
 import 'package:cashfuse/views/recentClicksScreen.dart';
 import 'package:cashfuse/views/referralNetworkScreen.dart';
-import 'package:cashfuse/views/searchScreen.dart';
+import 'package:cashfuse/views/webScreen/webAccountSettingScreen.dart';
+import 'package:cashfuse/views/webScreen/webMyEarningScreen.dart';
+import 'package:cashfuse/views/webScreen/webSearchScreen.dart';
 import 'package:cashfuse/widget/confirmationDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -99,7 +99,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           Dialog(
                             child: SizedBox(
                               width: AppConstants.WEB_MAX_WIDTH,
-                              child: SearchScreen(),
+                              child: WebSearchScreen(),
                             ),
                           ),
                           barrierDismissible: false);
@@ -319,90 +319,93 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
             //         ),
             //       )
             //     : SizedBox(),
-global.country != null ?
-            GetBuilder<HomeController>(
-              builder: (controller) => PopupMenuButton(
-                onSelected: (value) async {
-                  if (global.appInfo.countryselection == 1) {
-                    Get.to(() => BottomNavigationBarScreen(),
-                        preventDuplicates: false, routeName: 'home');
-                    global.country = value;
-                    global.appInfo.countries!
-                        .map((e) => e.isSelected = false)
-                        .toList();
-                    // global.appInfo.countries![index].isSelected = true;
+            global.country != null
+                ? GetBuilder<HomeController>(
+                    builder: (controller) => PopupMenuButton(
+                      onSelected: (value) async {
+                        if (global.appInfo.countryselection == 1) {
+                          Get.to(() => BottomNavigationBarScreen(),
+                              preventDuplicates: false, routeName: 'home');
+                          global.country = value;
+                          global.appInfo.countries!
+                              .map((e) => e.isSelected = false)
+                              .toList();
+                          // global.appInfo.countries![index].isSelected = true;
 
-                    global.showCountryPopUp = false;
+                          global.showCountryPopUp = false;
 
-                    homeController.update();
+                          homeController.update();
 
-                    global.country = value;
-                    global.countrySlug = global.country!.slug!;
-                    await global.sp!.setString(
-                        'country', json.encode(global.country!.toJson()));
-                    await global.sp!
-                        .setString('countrySlug', global.countrySlug);
+                          global.country = value;
+                          global.countrySlug = global.country!.slug!;
+                          await global.sp!.setString(
+                              'country', json.encode(global.country!.toJson()));
+                          await global.sp!
+                              .setString('countrySlug', global.countrySlug);
 
-                    homeController.update();
+                          homeController.update();
 
-                    homeController.topBannerList = [];
-                    homeController.topCategoryList = [];
-                    couponController.couponList = [];
-                    homeController.topCashbackList = [];
-                    homeController.exclusiveOfferList = [];
-                    homeController.productList = [];
-                    homeController.trendingProductList = [];
-                    homeController.newFlashOfferList = [];
-                    homeController.homeAdvList = [];
-                    homeController.allAdvList = [];
-                    await couponController.getCouponList();
-                    await homeController.init();
+                          homeController.topBannerList = [];
+                          homeController.topCategoryList = [];
+                          couponController.couponList = [];
+                          homeController.topCashbackList = [];
+                          homeController.exclusiveOfferList = [];
+                          homeController.productList = [];
+                          homeController.trendingProductList = [];
+                          homeController.newFlashOfferList = [];
+                          homeController.homeAdvList = [];
+                          homeController.allAdvList = [];
+                          await couponController.getCouponList();
+                          await homeController.init();
 
-                    homeController.update();
-                  }
-                },
-                position: PopupMenuPosition.under,
-                padding: EdgeInsets.zero,
-                child: Container(
-                  width: 35,
-                  height: 35,
-                  margin: EdgeInsets.only(right: 10),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Get.theme.primaryColor,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Get.theme.secondaryHeaderColor),
-                  ),
-                  child: Text(
-                    global.country!.countryCode!,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                itemBuilder: (context) {
-                  return List.generate(global.appInfo.countries!.length,
-                      (index) {
-                    return PopupMenuItem(
-                      height: 40,
-                      value: global.appInfo.countries![index],
+                          homeController.update();
+                        }
+                      },
+                      position: PopupMenuPosition.under,
                       padding: EdgeInsets.zero,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Text(
-                                global.appInfo.countries![index].countryName!),
-                          ),
-                          Divider(
-                            height: 0,
-                          ),
-                        ],
+                      child: Container(
+                        width: 35,
+                        height: 35,
+                        margin: EdgeInsets.only(right: 10),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Get.theme.primaryColor,
+                          borderRadius: BorderRadius.circular(10),
+                          border:
+                              Border.all(color: Get.theme.secondaryHeaderColor),
+                        ),
+                        child: Text(
+                          global.country!.countryCode!,
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
-                    );
-                  });
-                },
-              ),
-            ) : SizedBox(),
+                      itemBuilder: (context) {
+                        return List.generate(global.appInfo.countries!.length,
+                            (index) {
+                          return PopupMenuItem(
+                            height: 40,
+                            value: global.appInfo.countries![index],
+                            padding: EdgeInsets.zero,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Text(global
+                                      .appInfo.countries![index].countryName!),
+                                ),
+                                Divider(
+                                  height: 0,
+                                ),
+                              ],
+                            ),
+                          );
+                        });
+                      },
+                    ),
+                  )
+                : SizedBox(),
             InkWell(
               onTap: () {
                 Get.to(
@@ -505,12 +508,13 @@ global.country != null ?
                   children: [
                     InkWell(
                       onTap: () {
+                        Get.back();
                         authController.name.text = global.currentUser.name!;
                         authController.email.text = global.currentUser.email!;
                         authController.contactNo.text =
                             global.currentUser.phone!;
                         Get.to(
-                          () => AccountSettingScreen(),
+                          () => WebAccountSettingScreen(),
                           routeName: 'account',
                         );
                       },
@@ -525,8 +529,9 @@ global.country != null ?
                     Divider(),
                     InkWell(
                       onTap: () {
+                        Get.back();
                         Get.to(
-                          () => MyEarningSceen(),
+                          () => WebMyEarningSceen(),
                           routeName: 'earning',
                         );
                       },
@@ -541,6 +546,7 @@ global.country != null ?
                     Divider(),
                     InkWell(
                       onTap: () {
+                        Get.back();
                         Get.to(
                           () => PaymentScreen(),
                           routeName: 'payment',
@@ -557,6 +563,7 @@ global.country != null ?
                     Divider(),
                     InkWell(
                       onTap: () {
+                        Get.back();
                         Get.to(
                           () => PaymentHistoryScreen(),
                           routeName: 'payment-history',
@@ -573,6 +580,7 @@ global.country != null ?
                     Divider(),
                     InkWell(
                       onTap: () {
+                        Get.back();
                         Get.to(
                           () => RecentClickScreen(),
                           routeName: 'recent-clicks',
@@ -589,6 +597,7 @@ global.country != null ?
                     Divider(),
                     InkWell(
                       onTap: () {
+                        Get.back();
                         Get.to(
                           () => ReferralNetworkScreen(),
                           routeName: 'referral-network',
@@ -605,6 +614,7 @@ global.country != null ?
                     Divider(),
                     InkWell(
                       onTap: () {
+                        Get.back();
                         Get.to(
                           () => GetHelpScreen(),
                           routeName: 'faq',
@@ -621,6 +631,7 @@ global.country != null ?
                     Divider(),
                     InkWell(
                       onTap: () {
+                        Get.back();
                         Get.to(
                           () => AboutUsScreen(),
                           routeName: 'about',
@@ -637,6 +648,7 @@ global.country != null ?
                     Divider(),
                     InkWell(
                       onTap: () {
+                        Get.back();
                         Get.to(
                           () => PrivacyPolicyScreen(),
                           routeName: 'privacy',
@@ -653,6 +665,7 @@ global.country != null ?
                     Divider(),
                     InkWell(
                       onTap: () {
+                        Get.back();
                         showConfirmationDialog(
                           context,
                           'Logout',

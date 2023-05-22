@@ -8,7 +8,7 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/faqSceen.dart';
 import 'package:cashfuse/views/referEarnScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/drawerWidget.dart';
+import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,7 @@ class ReferralNetworkScreen extends StatelessWidget {
     return GetBuilder<ReferEarnController>(builder: (controller) {
       return Scaffold(
         key: scaffoldKey,
-        drawer: global.getPlatFrom() ? DrawerWidget() : null,
+        drawer: global.getPlatFrom() ? WebDrawerWidget() : null,
         backgroundColor: Colors.white,
         appBar: global.getPlatFrom()
             ? WebTopBarWidget(
@@ -40,11 +40,17 @@ class ReferralNetworkScreen extends StatelessWidget {
                     Icons.arrow_back,
                   ),
                 ),
-                title: Text(
-                  'My Referrals',
-                  style: Get.theme.primaryTextTheme.titleSmall!
-                      .copyWith(color: Colors.white),
-                ).translate(),
+                title: GetPlatform.isWeb
+                    ? Text(
+                        'My Referrals',
+                        style: Get.theme.primaryTextTheme.titleSmall!
+                            .copyWith(color: Colors.white),
+                      )
+                    : Text(
+                        'My Referrals',
+                        style: Get.theme.primaryTextTheme.titleSmall!
+                            .copyWith(color: Colors.white),
+                      ).translate(),
               ),
         floatingActionButton: InkWell(
           onTap: () {
@@ -64,7 +70,9 @@ class ReferralNetworkScreen extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  width: Get.width,
+                  width: global.getPlatFrom()
+                      ? AppConstants.WEB_MAX_WIDTH / 2
+                      : Get.width,
                   color: Color(0xFF1A8FB9),
                   height: global.getPlatFrom() ? 160 : 140,
                   alignment: Alignment.center,
@@ -76,14 +84,25 @@ class ReferralNetworkScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
-                          textAlign: TextAlign.center,
-                          style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ).translate(),
+                        GetPlatform.isWeb
+                            ? Text(
+                                "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
+                                textAlign: TextAlign.center,
+                                style: Get.theme.primaryTextTheme.bodySmall!
+                                    .copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              )
+                            : Text(
+                                "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
+                                textAlign: TextAlign.center,
+                                style: Get.theme.primaryTextTheme.bodySmall!
+                                    .copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ).translate(),
                         SizedBox(
                           height: 10,
                         ),
@@ -103,25 +122,49 @@ class ReferralNetworkScreen extends StatelessWidget {
                                     color: Colors.white,
                                     fontWeight: FontWeight.w300,
                                   ),
-                                ).translate(),
-                                Text(
-                                  'Total Referral',
-                                  style: Get.theme.primaryTextTheme.bodySmall!
-                                      .copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w300,
-                                    letterSpacing: -0.5,
-                                  ),
-                                ).translate(),
-                                Text(
-                                  'Cashback Earned',
-                                  style: Get.theme.primaryTextTheme.bodySmall!
-                                      .copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w300,
-                                    letterSpacing: -0.2,
-                                  ),
-                                ).translate(),
+                                ),
+                                GetPlatform.isWeb
+                                    ? Text(
+                                        'Total Referral',
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall!
+                                            .copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w300,
+                                          letterSpacing: -0.5,
+                                        ),
+                                      )
+                                    : Text(
+                                        'Total Referral',
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall!
+                                            .copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w300,
+                                          letterSpacing: -0.5,
+                                        ),
+                                      ).translate(),
+                                GetPlatform.isWeb
+                                    ? Text(
+                                        'Cashback Earned',
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall!
+                                            .copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w300,
+                                          letterSpacing: -0.2,
+                                        ),
+                                      )
+                                    : Text(
+                                        'Cashback Earned',
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall!
+                                            .copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w300,
+                                          letterSpacing: -0.2,
+                                        ),
+                                      ).translate(),
                               ],
                             ),
                             Container(
@@ -141,16 +184,28 @@ class ReferralNetworkScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                     letterSpacing: -0.2,
                                   ),
-                                ).translate(),
-                                Text(
-                                  'Friends Joined',
-                                  style: Get.theme.primaryTextTheme.bodySmall!
-                                      .copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w300,
-                                    letterSpacing: -0.2,
-                                  ),
-                                ).translate(),
+                                ),
+                                GetPlatform.isWeb
+                                    ? Text(
+                                        'Friends Joined',
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall!
+                                            .copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w300,
+                                          letterSpacing: -0.2,
+                                        ),
+                                      )
+                                    : Text(
+                                        'Friends Joined',
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall!
+                                            .copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w300,
+                                          letterSpacing: -0.2,
+                                        ),
+                                      ).translate(),
                               ],
                             ),
                           ],
@@ -174,8 +229,8 @@ class ReferralNetworkScreen extends StatelessWidget {
                                         mainAxisSpacing: 15.0,
                                         childAspectRatio: 5,
                                       ),
-                                      itemCount: global
-                                          .currentUser.withdrawalRequest!.length,
+                                      itemCount: global.currentUser
+                                          .withdrawalRequest!.length,
                                       shrinkWrap: true,
                                       padding:
                                           EdgeInsets.all(10).copyWith(top: 20),
@@ -318,25 +373,44 @@ class ReferralNetworkScreen extends StatelessWidget {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Text(
-                                  'There is no Refferal Earnings',
-                                  textAlign: TextAlign.center,
-                                  style: Get.theme.primaryTextTheme.bodyMedium,
-                                ).translate(),
+                                GetPlatform.isWeb
+                                    ? Text(
+                                        'There is no Refferal Earnings',
+                                        textAlign: TextAlign.center,
+                                        style: Get
+                                            .theme.primaryTextTheme.bodyMedium,
+                                      )
+                                    : Text(
+                                        'There is no Refferal Earnings',
+                                        textAlign: TextAlign.center,
+                                        style: Get
+                                            .theme.primaryTextTheme.bodyMedium,
+                                      ).translate(),
                                 SizedBox(
                                   height: 5,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20),
-                                  child: Text(
-                                    "You are now entited to 10% Extra Referral Earnings everytime your friend shops via us! You can earn more if you refer us to more people in your network.",
-                                    textAlign: TextAlign.center,
-                                    style: Get.theme.primaryTextTheme.bodySmall!
-                                        .copyWith(
-                                            fontSize: 11,
-                                            color: Colors.black54),
-                                  ).translate(),
+                                  child: GetPlatform.isWeb
+                                      ? Text(
+                                          "You are now entited to 10% Extra Referral Earnings everytime your friend shops via us! You can earn more if you refer us to more people in your network.",
+                                          textAlign: TextAlign.center,
+                                          style: Get
+                                              .theme.primaryTextTheme.bodySmall!
+                                              .copyWith(
+                                                  fontSize: 11,
+                                                  color: Colors.black54),
+                                        )
+                                      : Text(
+                                          "You are now entited to 10% Extra Referral Earnings everytime your friend shops via us! You can earn more if you refer us to more people in your network.",
+                                          textAlign: TextAlign.center,
+                                          style: Get
+                                              .theme.primaryTextTheme.bodySmall!
+                                              .copyWith(
+                                                  fontSize: 11,
+                                                  color: Colors.black54),
+                                        ).translate(),
                                 ),
                               ],
                             )
@@ -364,27 +438,53 @@ class ReferralNetworkScreen extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: InkWell(
-          onTap: () {
-            Get.back();
-            Get.to(
-              () => ReferEarnScreen(),
-              routeName: 'refer',
-            );
-          },
-          child: Container(
-            height: 40,
-            width: Get.width,
-            color: Get.theme.secondaryHeaderColor,
-            alignment: Alignment.center,
-            child: Text(
-              'REFER & EARN NOW',
-              style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InkWell(
+              onTap: () {
+                Get.back();
+                Get.to(
+                  () => ReferEarnScreen(),
+                  routeName: 'refer',
+                );
+              },
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  height: 40,
+                  width: global.getPlatFrom()
+                      ? AppConstants.WEB_MAX_WIDTH / 2
+                      : Get.width,
+                  decoration: BoxDecoration(
+                    color: Get.theme.secondaryHeaderColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                  child: GetPlatform.isWeb
+                      ? Text(
+                          'REFER & EARN NOW',
+                          style:
+                              Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      : Text(
+                          'REFER & EARN NOW',
+                          style:
+                              Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ).translate(),
+                ),
               ),
-            ).translate(),
-          ),
+            ),
+          ],
         ),
       );
     });

@@ -13,10 +13,9 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
-class MyOrdersScreen extends StatelessWidget {
+class WebMyOrdersScreen extends StatelessWidget {
   OrderController orderController = Get.find<OrderController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -43,7 +42,7 @@ class MyOrdersScreen extends StatelessWidget {
                 'My Orders',
                 style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
-              ).translate(),
+              ),
             ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -671,7 +670,7 @@ class MyOrdersScreen extends StatelessWidget {
                                               title: Text(orderController
                                                       .orderList[index]
                                                       .advertisers!)
-                                                  .translate(),
+                                                  ,
                                               trailing: InkWell(
                                                 onTap: () async {
                                                   await orderController
@@ -710,7 +709,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                       color: Get
                                                           .theme.primaryColor,
                                                     ),
-                                                  ).translate(),
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -799,7 +798,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                                     ? Colors.green
                                                                     : Colors.red,
                                                           ),
-                                                        ).translate(),
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
@@ -906,7 +905,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                         ? Colors.black
                                                         : Colors.grey,
                                                   ),
-                                                ).translate(),
+                                                ),
                                               ),
                                               Expanded(child: SizedBox()),
                                               orderController.orderList[index]
@@ -1013,7 +1012,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                             ? Colors.black
                                                             : Colors.grey,
                                                       ),
-                                                    ).translate(),
+                                                    ),
                                                   ),
                                                   Expanded(child: SizedBox()),
                                                   orderController
@@ -1102,7 +1101,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                         ? Colors.black
                                                         : Colors.grey,
                                                   ),
-                                                ).translate(),
+                                                ),
                                               ),
                                               Expanded(child: SizedBox()),
                                               orderController.orderList[index]
@@ -1155,7 +1154,7 @@ class MyOrdersScreen extends StatelessWidget {
                                           .theme.primaryTextTheme.titleMedium!
                                           .copyWith(
                                               fontWeight: FontWeight.w500),
-                                    ).translate(),
+                                    ),
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
@@ -1170,7 +1169,7 @@ class MyOrdersScreen extends StatelessWidget {
                                       "Once you shop via ${global.appName}, your order details will appear here within 72 hours.",
                                       textAlign: TextAlign.center,
                                       //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
-                                    ).translate(),
+                                    ),
                             ),
                             InkWell(
                               onTap: () async {
@@ -1208,7 +1207,7 @@ class MyOrdersScreen extends StatelessWidget {
                                             color: Colors.white,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w600),
-                                      ).translate(),
+                                      ),
                               ),
                             ),
                           ],

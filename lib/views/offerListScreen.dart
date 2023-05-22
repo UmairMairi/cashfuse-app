@@ -4,7 +4,10 @@ import 'package:cashfuse/models/categoryModel.dart';
 import 'package:cashfuse/views/adsDetailScreen.dart';
 import 'package:cashfuse/views/campaignDetailScreen.dart';
 import 'package:cashfuse/views/offerDetailScreen.dart';
-import 'package:cashfuse/widget/drawerWidget.dart';
+import 'package:cashfuse/views/webScreen/webAdsDetailScreen.dart';
+import 'package:cashfuse/views/webScreen/webCampaignDetailScreen.dart';
+import 'package:cashfuse/views/webScreen/webOfferDetailScreen.dart';
+import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/offerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +26,7 @@ class OfferListScreen extends StatelessWidget {
     return GetBuilder<HomeController>(builder: (homeController) {
       return Scaffold(
         key: scaffoldKey,
-        drawer: global.getPlatFrom() ? DrawerWidget() : null,
+        drawer: global.getPlatFrom() ? WebDrawerWidget() : null,
         appBar: global.getPlatFrom()
             ? WebTopBarWidget(
                 scaffoldKey: scaffoldKey,
@@ -37,13 +40,21 @@ class OfferListScreen extends StatelessWidget {
                     Icons.arrow_back,
                   ),
                 ),
-                title: Text(
-                  categoryModel != null
-                      ? categoryModel!.name!
-                      : 'NEW FLASH DEALS - LIVE NOW',
-                  style: Get.theme.primaryTextTheme.titleSmall!
-                      .copyWith(color: Colors.white),
-                ).translate(),
+                title: GetPlatform.isWeb
+                    ? Text(
+                        categoryModel != null
+                            ? categoryModel!.name!
+                            : 'NEW FLASH DEALS - LIVE NOW',
+                        style: Get.theme.primaryTextTheme.titleSmall!
+                            .copyWith(color: Colors.white),
+                      )
+                    : Text(
+                        categoryModel != null
+                            ? categoryModel!.name!
+                            : 'NEW FLASH DEALS - LIVE NOW',
+                        style: Get.theme.primaryTextTheme.titleSmall!
+                            .copyWith(color: Colors.white),
+                      ).translate(),
               ),
         body: Align(
           alignment: Alignment.topCenter,
@@ -74,9 +85,10 @@ class OfferListScreen extends StatelessWidget {
                                         categoryModel!.commonList[index].adId!
                                             .isNotEmpty) {
                                       await homeController.getAdDetails(
-                                          categoryModel!.commonList[index].adId!);
+                                          categoryModel!
+                                              .commonList[index].adId!);
                                       Get.to(
-                                        () => AdsDetailScreen(
+                                        () => WebAdsDetailScreen(
                                           ads: homeController.ads,
                                           fromSeeMore: false,
                                         ),
@@ -88,7 +100,7 @@ class OfferListScreen extends StatelessWidget {
                                               .commonList[index].campaignId
                                               .toString());
                                       Get.to(
-                                        () => CampaignDetailScreen(
+                                        () => WebCampaignDetailScreen(
                                           campaign: homeController.campaign,
                                           fromSeeMore: false,
                                         ),
@@ -117,26 +129,48 @@ class OfferListScreen extends StatelessWidget {
                                         categoryModel!.commonList[index].adId!
                                             .isNotEmpty) {
                                       await homeController.getAdDetails(
-                                          categoryModel!.commonList[index].adId!);
-                                      Get.to(
-                                        () => AdsDetailScreen(
-                                          ads: homeController.ads,
-                                          fromSeeMore: false,
-                                        ),
-                                        routeName: 'detail',
-                                      );
+                                          categoryModel!
+                                              .commonList[index].adId!);
+
+                                      if (GetPlatform.isWeb) {
+                                        Get.to(
+                                          () => WebAdsDetailScreen(
+                                            ads: homeController.ads,
+                                            fromSeeMore: false,
+                                          ),
+                                          routeName: 'detail',
+                                        );
+                                      } else {
+                                        Get.to(
+                                          () => AdsDetailScreen(
+                                            ads: homeController.ads,
+                                            fromSeeMore: false,
+                                          ),
+                                          routeName: 'detail',
+                                        );
+                                      }
                                     } else {
                                       await homeController.getCampignDetails(
                                           categoryModel!
                                               .commonList[index].campaignId
                                               .toString());
-                                      Get.to(
-                                        () => CampaignDetailScreen(
-                                          campaign: homeController.campaign,
-                                          fromSeeMore: false,
-                                        ),
-                                        routeName: 'detail',
-                                      );
+                                      if (GetPlatform.isWeb) {
+                                        Get.to(
+                                          () => WebCampaignDetailScreen(
+                                            campaign: homeController.campaign,
+                                            fromSeeMore: false,
+                                          ),
+                                          routeName: 'detail',
+                                        );
+                                      } else {
+                                        Get.to(
+                                          () => CampaignDetailScreen(
+                                            campaign: homeController.campaign,
+                                            fromSeeMore: false,
+                                          ),
+                                          routeName: 'detail',
+                                        );
+                                      }
                                     }
                                   },
                                   child: OfferWidget(
@@ -149,7 +183,7 @@ class OfferListScreen extends StatelessWidget {
                               },
                             )
                       : global.getPlatFrom()
-                          ? GridView.builder( 
+                          ? GridView.builder(
                               //controller: homeController.scrollController,
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
@@ -170,7 +204,7 @@ class OfferListScreen extends StatelessWidget {
                                           .toString(),
                                     );
                                     Get.to(
-                                      () => OfferDetailScreen(
+                                      () => WebOfferDetailScreen(
                                         offer: homeController.offer,
                                         fromSeeMore: false,
                                       ),
@@ -197,13 +231,27 @@ class OfferListScreen extends StatelessWidget {
                                       homeController.newFlashOfferList[index].id
                                           .toString(),
                                     );
-                                    Get.to(
+
+                                    if(GetPlatform.isWeb){
+                                      Get.to(
+                                      () => WebOfferDetailScreen(
+                                        offer: homeController.offer,
+                                        fromSeeMore: false,
+                                      ),
+                                      routeName: 'offer',
+                                    );
+
+                                    }else{
+                                      Get.to(
                                       () => OfferDetailScreen(
                                         offer: homeController.offer,
                                         fromSeeMore: false,
                                       ),
                                       routeName: 'offer',
                                     );
+
+                                    }
+                                    
                                   },
                                   child: OfferWidget(
                                     offer:

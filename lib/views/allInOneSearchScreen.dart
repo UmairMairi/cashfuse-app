@@ -172,7 +172,8 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
 
                               global.currentUser.id != null &&
                                       searchController.addNewTabList2 != null &&
-                                      searchController.addNewTabList2!.length > 0
+                                      searchController.addNewTabList2!.length >
+                                          0
                                   ? InkWell(
                                       onTap: () async {
                                         FocusScope.of(context)
@@ -217,13 +218,17 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                         onFieldSubmitted: (String val) async {
                           _cSearch.text.trim() != null &&
                                   _cSearch.text.trim().isNotEmpty &&
-                                  searchController.addNewTabList2![_currentIndex]
+                                  searchController
+                                          .addNewTabList2![_currentIndex]
                                           .searchUrl !=
                                       null &&
-                                  searchController.addNewTabList2![_currentIndex]
-                                      .searchUrl!.isNotEmpty
+                                  searchController
+                                      .addNewTabList2![_currentIndex]
+                                      .searchUrl!
+                                      .isNotEmpty
                               ? await webViewController.loadUrl(searchController
-                                      .addNewTabList2![_currentIndex].searchUrl! +
+                                      .addNewTabList2![_currentIndex]
+                                      .searchUrl! +
                                   _cSearch.text.trim())
                               : await webViewController.loadUrl(searchController
                                   .addNewTabList2![_currentIndex].trackingUrl!);
@@ -319,7 +324,8 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                             .isNotEmpty) {
                                       await webViewController
                                           .loadUrl(searchController
-                                                  .addNewTabList2![_currentIndex]
+                                                  .addNewTabList2![
+                                                      _currentIndex]
                                                   .searchUrl! +
                                               _cSearch.text.trim())
                                           .then((value) {
@@ -506,7 +512,8 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
     try {
       await searchController.allInOneSearch();
       if (global.sp!.getString('tabList') != null) {
-        List<dynamic> list = await json.decode(global.sp!.getString('tabList')!);
+        List<dynamic> list =
+            await json.decode(global.sp!.getString('tabList')!);
         print(list);
 
         searchController.addNewTabList2 = List<AllInOneSearchDataModel>.from(
@@ -518,7 +525,8 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
         );
         if (searchController.addNewTabList != null) {
           searchController.addNewTabList!.clear();
-          searchController.addNewTabList!.addAll(searchController.addNewTabList2!
+          searchController.addNewTabList!.addAll(searchController
+              .addNewTabList2!
               .where((e) => e.id != null)
               .toList());
         }
@@ -591,10 +599,17 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 4),
-                              child: Text(
-                                searchController.addNewTabList2![index].name!,
-                                style: TextStyle(color: Colors.white),
-                              ).translate(),
+                              child: GetPlatform.isWeb
+                                  ? Text(
+                                      searchController
+                                          .addNewTabList2![index].name!,
+                                      style: TextStyle(color: Colors.white),
+                                    )
+                                  : Text(
+                                      searchController
+                                          .addNewTabList2![index].name!,
+                                      style: TextStyle(color: Colors.white),
+                                    ).translate(),
                             ),
                             // Padding(
                             //   padding: const EdgeInsets.only(left: 4),
@@ -643,7 +658,7 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                     .copyWith(
                                         color: Colors.red,
                                         fontWeight: FontWeight.w600),
-                              ).translate(),
+                              ),
                             ),
                             InkWell(
                               onTap: () {
@@ -666,7 +681,7 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
                                   ),
-                                ).translate(),
+                                ),
                               ),
                             ),
                           ],
@@ -739,7 +754,8 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                             onChanged: (value) {
                                               //searchController.addNewTabList2.add(value);
 
-                                              if (searchController.addNewTabList!
+                                              if (searchController
+                                                      .addNewTabList!
                                                       .where((element) =>
                                                           element.name ==
                                                           value!.name)
@@ -991,8 +1007,8 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                       webViewController = controller;
                                       webViewController.clearCache();
                                       webViewController.loadUrl(
-                                        searchController
-                                            .addNewTabList2![index].trackingUrl!,
+                                        searchController.addNewTabList2![index]
+                                            .trackingUrl!,
                                       );
 
                                       setState(() {});

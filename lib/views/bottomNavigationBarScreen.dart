@@ -9,6 +9,8 @@ import 'package:cashfuse/views/homeScreen.dart';
 import 'package:cashfuse/views/profileScreen.dart';
 import 'package:cashfuse/views/recentClicksScreen.dart';
 import 'package:cashfuse/views/searchScreen.dart';
+import 'package:cashfuse/views/webScreen/webProfileMobileView.dart';
+import 'package:cashfuse/views/webScreen/webSearchScreen.dart';
 import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
@@ -57,12 +59,12 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         HomeScreen(
           bgColor: colorList[bottomNavIndex!],
         ),
-        SearchScreen(),
+        GetPlatform.isWeb ? WebSearchScreen() : SearchScreen(),
         AllInOneSearchScreen(
             // bgColor: colorList[bottomNavIndex!],
             ),
         RecentClickScreen(),
-        ProfileScreen(),
+        GetPlatform.isWeb ? WebProfileMobileView() : ProfileScreen(),
       ];
 
   @override

@@ -27,11 +27,17 @@ class PaymentHistoryScreen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: Text(
-                'Payment History',
-                style: Get.theme.primaryTextTheme.titleSmall!
-                    .copyWith(color: Colors.white),
-              ).translate(),
+              title: GetPlatform.isWeb
+                  ? Text(
+                      'Payment History',
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    )
+                  : Text(
+                      'Payment History',
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    ).translate(),
             ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -115,7 +121,7 @@ class PaymentHistoryScreen extends StatelessWidget {
                                                       .paymentHistoryList[index]
                                                       .amount
                                                       .toString(),
-                                                ).translate(),
+                                                ),
                                               ],
                                             ),
                                             subtitle: Text(
@@ -124,7 +130,7 @@ class PaymentHistoryScreen extends StatelessWidget {
                                                     .paymentHistoryList[index]
                                                     .createdAt!,
                                               ),
-                                            ).translate(),
+                                            ),
                                             trailing: Container(
                                               width: 80,
                                               height: 40,
@@ -164,11 +170,13 @@ class PaymentHistoryScreen extends StatelessWidget {
                                                                 0
                                                             ? 'Pending'
                                                             : '',
-                                                style: Get.theme
-                                                    .primaryTextTheme.titleSmall!
+                                                style: Get
+                                                    .theme
+                                                    .primaryTextTheme
+                                                    .titleSmall!
                                                     .copyWith(
                                                         color: Colors.white),
-                                              ).translate(),
+                                              ),
                                             ),
                                           ),
                                         );
@@ -223,7 +231,7 @@ class PaymentHistoryScreen extends StatelessWidget {
                                             controller.paymentHistoryList[index]
                                                 .amount
                                                 .toString(),
-                                      ).translate(),
+                                      ),
                                     ],
                                   ),
                                   subtitle: Text(
@@ -232,7 +240,7 @@ class PaymentHistoryScreen extends StatelessWidget {
                                           .paymentHistoryList[index].createdAt!,
                                     ),
                                     style: Get.theme.primaryTextTheme.bodySmall,
-                                  ).translate(),
+                                  ),
                                   trailing: Container(
                                     width: 80,
                                     height: 40,
@@ -249,35 +257,64 @@ class PaymentHistoryScreen extends StatelessWidget {
                                               ? Colors.red
                                               : Colors.orange,
                                     ),
-                                    child: Text(
-                                      controller.paymentHistoryList[index]
-                                                  .approved ==
-                                              1
-                                          ? 'Approved'
-                                          : controller.paymentHistoryList[index]
-                                                      .approved ==
-                                                  2
-                                              ? 'Rejected'
-                                              : controller
-                                                          .paymentHistoryList[
-                                                              index]
-                                                          .approved ==
-                                                      0
-                                                  ? 'Pending'
-                                                  : '',
-                                      style: Get
-                                          .theme.primaryTextTheme.titleSmall!
-                                          .copyWith(color: Colors.white),
-                                    ).translate(),
+                                    child: GetPlatform.isWeb
+                                        ? Text(
+                                            controller.paymentHistoryList[index]
+                                                        .approved ==
+                                                    1
+                                                ? 'Approved'
+                                                : controller
+                                                            .paymentHistoryList[
+                                                                index]
+                                                            .approved ==
+                                                        2
+                                                    ? 'Rejected'
+                                                    : controller
+                                                                .paymentHistoryList[
+                                                                    index]
+                                                                .approved ==
+                                                            0
+                                                        ? 'Pending'
+                                                        : '',
+                                            style: Get.theme.primaryTextTheme
+                                                .titleSmall!
+                                                .copyWith(color: Colors.white),
+                                          )
+                                        : Text(
+                                            controller.paymentHistoryList[index]
+                                                        .approved ==
+                                                    1
+                                                ? 'Approved'
+                                                : controller
+                                                            .paymentHistoryList[
+                                                                index]
+                                                            .approved ==
+                                                        2
+                                                    ? 'Rejected'
+                                                    : controller
+                                                                .paymentHistoryList[
+                                                                    index]
+                                                                .approved ==
+                                                            0
+                                                        ? 'Pending'
+                                                        : '',
+                                            style: Get.theme.primaryTextTheme
+                                                .titleSmall!
+                                                .copyWith(color: Colors.white),
+                                          ).translate(),
                                   ),
                                 ),
                               );
                             },
                           )
                     : Center(
-                        child: Text(
-                          'No data found',
-                        ).translate(),
+                        child: GetPlatform.isWeb
+                            ? Text(
+                                'No data found',
+                              )
+                            : Text(
+                                'No data found',
+                              ).translate(),
                       )
                 : Center(
                     child: CircularProgressIndicator(),

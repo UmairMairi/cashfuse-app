@@ -23,22 +23,30 @@ class PaytmRedeemScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<PaymentController>(builder: (controller) {
       return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back,
-            ),
-          ),
-          title: Text(
-            'PayTM Redeem',
-            style: Get.theme.primaryTextTheme.titleSmall!
-                .copyWith(color: Colors.white),
-          ).translate(),
-        ),
+        appBar: global.getPlatFrom()
+            ? null
+            : AppBar(
+                elevation: 0,
+                leading: InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                  ),
+                ),
+                title: GetPlatform.isWeb
+                    ? Text(
+                        'PayTM Redeem',
+                        style: Get.theme.primaryTextTheme.titleSmall!
+                            .copyWith(color: Colors.white),
+                      )
+                    : Text(
+                        'PayTM Redeem',
+                        style: Get.theme.primaryTextTheme.titleSmall!
+                            .copyWith(color: Colors.white),
+                      ).translate(),
+              ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(15.0),
@@ -81,11 +89,17 @@ class PaytmRedeemScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            'Account Details',
-                            style: Get.theme.primaryTextTheme.titleMedium!
-                                .copyWith(fontWeight: FontWeight.w600),
-                          ).translate(),
+                          GetPlatform.isWeb
+                              ? Text(
+                                  'Account Details',
+                                  style: Get.theme.primaryTextTheme.titleMedium!
+                                      .copyWith(fontWeight: FontWeight.w600),
+                                )
+                              : Text(
+                                  'Account Details',
+                                  style: Get.theme.primaryTextTheme.titleMedium!
+                                      .copyWith(fontWeight: FontWeight.w600),
+                                ).translate(),
                           InkWell(
                             onTap: () async {
                               if (paymentController.payTMDetails != null &&
@@ -123,13 +137,27 @@ class PaytmRedeemScreen extends StatelessWidget {
                                         // SizedBox(
                                         //   height: 20,
                                         // ),
-                                        Text(
-                                          'Add PayTM Account',
-                                          style: Get
-                                              .theme.primaryTextTheme.titleLarge!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w600),
-                                        ).translate(),
+                                        GetPlatform.isWeb
+                                            ? Text(
+                                                'Add PayTM Account',
+                                                style: Get
+                                                    .theme
+                                                    .primaryTextTheme
+                                                    .titleLarge!
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                              )
+                                            : Text(
+                                                'Add PayTM Account',
+                                                style: Get
+                                                    .theme
+                                                    .primaryTextTheme
+                                                    .titleLarge!
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                              ).translate(),
                                         TextFormField(
                                           focusNode: fContactNo,
                                           controller: contactNo,
@@ -192,7 +220,8 @@ class PaytmRedeemScreen extends StatelessWidget {
                                             if (contactNo.text.isNotEmpty) {
                                               Get.back();
                                               paymentController.addPayTMDetails(
-                                                 authController.coutryCode! + contactNo.text.trim());
+                                                  authController.coutryCode! +
+                                                      contactNo.text.trim());
                                             } else {
                                               showCustomSnackBar(
                                                   'Please add Number.');
@@ -211,16 +240,33 @@ class PaytmRedeemScreen extends StatelessWidget {
                                                   BorderRadius.circular(5),
                                             ),
                                             alignment: Alignment.center,
-                                            child: Text(
-                                              paymentController.payTMDetails !=
-                                                      null
-                                                  ? 'edit'.toUpperCase()
-                                                  : 'add'.toUpperCase() + '+',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600),
-                                            ).translate(),
+                                            child: GetPlatform.isWeb
+                                                ? Text(
+                                                    paymentController
+                                                                .payTMDetails !=
+                                                            null
+                                                        ? 'edit'.toUpperCase()
+                                                        : 'add'.toUpperCase() +
+                                                            '+',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  )
+                                                : Text(
+                                                    paymentController
+                                                                .payTMDetails !=
+                                                            null
+                                                        ? 'edit'.toUpperCase()
+                                                        : 'add'.toUpperCase() +
+                                                            '+',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ).translate(),
                                           ),
                                         ),
                                       ],
@@ -238,15 +284,25 @@ class PaytmRedeemScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               alignment: Alignment.center,
-                              child: Text(
-                                paymentController.payTMDetails != null
-                                    ? 'edit'.toUpperCase()
-                                    : '${'add'.toUpperCase()} +',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600),
-                              ).translate(),
+                              child: GetPlatform.isWeb
+                                  ? Text(
+                                      paymentController.payTMDetails != null
+                                          ? 'edit'.toUpperCase()
+                                          : '${'add'.toUpperCase()} +',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600),
+                                    )
+                                  : Text(
+                                      paymentController.payTMDetails != null
+                                          ? 'edit'.toUpperCase()
+                                          : '${'add'.toUpperCase()} +',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600),
+                                    ).translate(),
                             ),
                           ),
                         ],
@@ -258,7 +314,8 @@ class PaytmRedeemScreen extends StatelessWidget {
                                 return RichText(
                                   text: TextSpan(
                                     text: snapShot.data,
-                                    style: Get.theme.primaryTextTheme.titleSmall!
+                                    style: Get
+                                        .theme.primaryTextTheme.titleSmall!
                                         .copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
@@ -301,13 +358,21 @@ class PaytmRedeemScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   alignment: Alignment.center,
-                  child: Text(
-                    'Send Withdrawal Request',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600),
-                  ).translate(),
+                  child: GetPlatform.isWeb
+                      ? Text(
+                          'Send Withdrawal Request',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600),
+                        )
+                      : Text(
+                          'Send Withdrawal Request',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600),
+                        ).translate(),
                 ),
               )
             : SizedBox(),

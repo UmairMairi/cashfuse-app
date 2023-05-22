@@ -7,7 +7,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/categoryScreen.dart';
 import 'package:cashfuse/widget/admobNativeAdWidget.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/drawerWidget.dart';
+import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/fbNativeAdWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +38,7 @@ class AllCategoriesScreen extends StatelessWidget {
 
     return Scaffold(
       key: scaffoldKey,
-      drawer: global.getPlatFrom() ? DrawerWidget() : null,
+      drawer: global.getPlatFrom() ? WebDrawerWidget() : null,
       appBar: global.getPlatFrom()
           ? WebTopBarWidget(
               scaffoldKey: scaffoldKey,
@@ -53,11 +53,17 @@ class AllCategoriesScreen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: Text(
-                'All Categories',
-                style: Get.theme.primaryTextTheme.titleSmall!
-                    .copyWith(color: Colors.white),
-              ).translate(),
+              title: GetPlatform.isWeb
+                  ? Text(
+                      'All Categories',
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    )
+                  : Text(
+                      'All Categories',
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    ).translate(),
             ),
       body: GetBuilder<HomeController>(builder: (controller) {
         return Align(
@@ -109,19 +115,37 @@ class AllCategoriesScreen extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 5),
-                                      child: Text(
-                                        controller.topCategoryList[index].name!
-                                            .toUpperCase(),
-                                        textAlign: TextAlign.center,
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall!
-                                            .copyWith(
-                                          fontSize:
-                                              global.getPlatFrom() ? 16 : 10,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black,
-                                        ),
-                                      ).translate(),
+                                      child: GetPlatform.isWeb
+                                          ? Text(
+                                              controller
+                                                  .topCategoryList[index].name!
+                                                  .toUpperCase(),
+                                              textAlign: TextAlign.center,
+                                              style: Get.theme.primaryTextTheme
+                                                  .bodySmall!
+                                                  .copyWith(
+                                                fontSize: global.getPlatFrom()
+                                                    ? 16
+                                                    : 10,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.black,
+                                              ),
+                                            )
+                                          : Text(
+                                              controller
+                                                  .topCategoryList[index].name!
+                                                  .toUpperCase(),
+                                              textAlign: TextAlign.center,
+                                              style: Get.theme.primaryTextTheme
+                                                  .bodySmall!
+                                                  .copyWith(
+                                                fontSize: global.getPlatFrom()
+                                                    ? 16
+                                                    : 10,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.black,
+                                              ),
+                                            ).translate(),
                                     ),
                                     SizedBox(
                                       height: global.getPlatFrom() ? 15 : 5,

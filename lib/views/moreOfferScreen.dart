@@ -2,6 +2,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/offerDetailScreen.dart';
+import 'package:cashfuse/views/webScreen/webOfferDetailScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,13 +34,23 @@ class MoreOfferScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'See More Offers',
-                        style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: -0.1,
-                        ),
-                      ).translate(),
+                      GetPlatform.isWeb
+                          ? Text(
+                              'See More Offers',
+                              style: Get.theme.primaryTextTheme.titleSmall!
+                                  .copyWith(
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: -0.1,
+                              ),
+                            )
+                          : Text(
+                              'See More Offers',
+                              style: Get.theme.primaryTextTheme.titleSmall!
+                                  .copyWith(
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: -0.1,
+                              ),
+                            ).translate(),
                       InkWell(
                         onTap: () {
                           Get.back();
@@ -93,18 +104,36 @@ class MoreOfferScreen extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        homeController
-                                            .seeMoreOfferList[index].name!,
-                                        textAlign: TextAlign.start,
-                                        style: Get
-                                            .theme.primaryTextTheme.titleSmall,
-                                      ).translate(),
-                                      Text(
-                                        homeController.seeMoreOfferList[index]
-                                            .description!,
-                                        textAlign: TextAlign.center,
-                                      ).translate(),
+                                      GetPlatform.isWeb
+                                          ? Text(
+                                              homeController
+                                                  .seeMoreOfferList[index]
+                                                  .name!,
+                                              textAlign: TextAlign.start,
+                                              style: Get.theme.primaryTextTheme
+                                                  .titleSmall,
+                                            )
+                                          : Text(
+                                              homeController
+                                                  .seeMoreOfferList[index]
+                                                  .name!,
+                                              textAlign: TextAlign.start,
+                                              style: Get.theme.primaryTextTheme
+                                                  .titleSmall,
+                                            ).translate(),
+                                      GetPlatform.isWeb
+                                          ? Text(
+                                              homeController
+                                                  .seeMoreOfferList[index]
+                                                  .description!,
+                                              textAlign: TextAlign.center,
+                                            )
+                                          : Text(
+                                              homeController
+                                                  .seeMoreOfferList[index]
+                                                  .description!,
+                                              textAlign: TextAlign.center,
+                                            ).translate(),
                                     ],
                                   ),
                                 ),
@@ -118,14 +147,25 @@ class MoreOfferScreen extends StatelessWidget {
                                   homeController.seeMoreOfferList[index].id
                                       .toString());
 
-                              Get.to(
-                                () => OfferDetailScreen(
-                                  fromSeeMore: true,
-                                  offer: homeController.offer,
-                                ),
-                                preventDuplicates: false,
-                                routeName: 'offer',
-                              );
+                              if (GetPlatform.isWeb) {
+                                Get.to(
+                                  () => WebOfferDetailScreen(
+                                    fromSeeMore: true,
+                                    offer: homeController.offer,
+                                  ),
+                                  preventDuplicates: false,
+                                  routeName: 'offer',
+                                );
+                              } else {
+                                Get.to(
+                                  () => OfferDetailScreen(
+                                    fromSeeMore: true,
+                                    offer: homeController.offer,
+                                  ),
+                                  preventDuplicates: false,
+                                  routeName: 'offer',
+                                );
+                              }
                             },
                             child: Container(
                               width: Get.width / 2,
@@ -140,14 +180,23 @@ class MoreOfferScreen extends StatelessWidget {
                                     width: 1,
                                   )),
                               alignment: Alignment.center,
-                              child: Text(
-                                homeController
-                                    .seeMoreOfferList[index].buttonText!,
-                                style: TextStyle(
-                                    color: Get.theme.secondaryHeaderColor,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600),
-                              ).translate(),
+                              child: GetPlatform.isWeb
+                                  ? Text(
+                                      homeController
+                                          .seeMoreOfferList[index].buttonText!,
+                                      style: TextStyle(
+                                          color: Get.theme.secondaryHeaderColor,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600),
+                                    )
+                                  : Text(
+                                      homeController
+                                          .seeMoreOfferList[index].buttonText!,
+                                      style: TextStyle(
+                                          color: Get.theme.secondaryHeaderColor,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600),
+                                    ).translate(),
                             ),
                           ),
                           Container(

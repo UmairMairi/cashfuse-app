@@ -2,7 +2,7 @@
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/views/helpDetailSceen.dart';
-import 'package:cashfuse/widget/drawerWidget.dart';
+import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,7 +23,7 @@ class FaqScreen extends StatelessWidget {
     return GetBuilder<CommonController>(builder: (controller) {
       return Scaffold(
         key: scaffoldKey,
-        drawer: global.getPlatFrom() ? DrawerWidget() : null,
+        drawer: global.getPlatFrom() ? WebDrawerWidget() : null,
         appBar: global.getPlatFrom()
             ? WebTopBarWidget(
                 scaffoldKey: scaffoldKey,
@@ -56,11 +56,17 @@ class FaqScreen extends StatelessWidget {
                           commonController.faqLocalSearch();
                         },
                       )
-                    : Text(
-                        'FAQs',
-                        style: Get.theme.primaryTextTheme.titleLarge!
-                            .copyWith(color: Colors.white),
-                      ).translate(),
+                    : GetPlatform.isWeb
+                        ? Text(
+                            'FAQs',
+                            style: Get.theme.primaryTextTheme.titleLarge!
+                                .copyWith(color: Colors.white),
+                          )
+                        : Text(
+                            'FAQs',
+                            style: Get.theme.primaryTextTheme.titleLarge!
+                                .copyWith(color: Colors.white),
+                          ).translate(),
                 actions: [
                   InkWell(
                     onTap: () {
@@ -114,13 +120,29 @@ class FaqScreen extends StatelessWidget {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          commonController.faqList[index].ques!,
-                                          style: Get
-                                              .theme.primaryTextTheme.bodyMedium!
-                                              .copyWith(
-                                                  color: Colors.grey[600]),
-                                        ).translate(),
+                                        child: GetPlatform.isWeb
+                                            ? Text(
+                                                commonController
+                                                    .faqList[index].ques!,
+                                                style: Get
+                                                    .theme
+                                                    .primaryTextTheme
+                                                    .bodyMedium!
+                                                    .copyWith(
+                                                        color:
+                                                            Colors.grey[600]),
+                                              )
+                                            : Text(
+                                                commonController
+                                                    .faqList[index].ques!,
+                                                style: Get
+                                                    .theme
+                                                    .primaryTextTheme
+                                                    .bodyMedium!
+                                                    .copyWith(
+                                                        color:
+                                                            Colors.grey[600]),
+                                              ).translate(),
                                       ),
                                       Divider(
                                         color: Colors.grey,
@@ -132,9 +154,13 @@ class FaqScreen extends StatelessWidget {
                               },
                             )
                           : Center(
-                              child: Text(
-                                'No data found',
-                              ).translate(),
+                              child: GetPlatform.isWeb
+                                  ? Text(
+                                      'No data found',
+                                    )
+                                  : Text(
+                                      'No data found',
+                                    ).translate(),
                             )
                       : ListView.builder(
                           shrinkWrap: true,

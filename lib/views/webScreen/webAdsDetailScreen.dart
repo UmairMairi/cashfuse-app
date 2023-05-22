@@ -2,11 +2,10 @@
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
-import 'package:cashfuse/models/campaignModel.dart';
+import 'package:cashfuse/models/adsModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/getStartedScreen.dart';
-import 'package:cashfuse/views/loginOrSignUpScreen.dart';
-import 'package:cashfuse/views/moreCampignScreen.dart';
+import 'package:cashfuse/views/moreAdsScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
@@ -17,13 +16,13 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
-class CampaignDetailScreen extends StatelessWidget {
-  final CampaignModel? campaign;
+class WebAdsDetailScreen extends StatelessWidget {
+  final AdsModel? ads;
   final bool? fromSeeMore;
-  CampaignDetailScreen({this.campaign, this.fromSeeMore});
+  WebAdsDetailScreen({this.ads, this.fromSeeMore});
   HomeController homeController = Get.find<HomeController>();
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -53,14 +52,14 @@ class CampaignDetailScreen extends StatelessWidget {
                                 color: Colors.white,
                                 width: AppConstants.WEB_MAX_WIDTH,
                                 alignment: Alignment.center,
-                                margin: EdgeInsets.only(bottom: 20),
+                                //margin: EdgeInsets.only(bottom: 20),
                                 child: CustomImage(
                                   image:
-                                      '${global.appInfo.baseUrls!.offerImageUrl}/${campaign!.image}',
+                                      '${global.appInfo.baseUrls!.offerImageUrl}/${ads!.image}',
                                   width: 500,
                                   height: 300,
                                   fit: BoxFit.fill,
-                                  campaign: campaign!,
+                                  ads: ads!,
                                 ),
                                 // Image.asset(
                                 //   Images.dummyImage,
@@ -68,23 +67,25 @@ class CampaignDetailScreen extends StatelessWidget {
                                 //   fit: BoxFit.cover,
                                 // ),
                               ),
-                              Positioned(
-                                bottom: -30,
-                                child: Card(
-                                  color: Colors.white,
-                                  margin: EdgeInsets.all(10),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: CustomImage(
-                                      image:
-                                          '${global.appInfo.baseUrls!.partnerImageUrl}/${campaign!.partner!.image}',
-                                      height: 30,
-                                      width: 60,
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-                                ),
-                              )
+                              ads!.partner != null
+                                  ? Positioned(
+                                      bottom: -30,
+                                      child: Card(
+                                        color: Colors.white,
+                                        margin: EdgeInsets.all(10),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: CustomImage(
+                                            image:
+                                                '${global.appInfo.baseUrls!.partnerImageUrl}/${ads!.partner!.image}',
+                                            height: 30,
+                                            width: 60,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : SizedBox()
                             ],
                           ),
                         )
@@ -106,10 +107,10 @@ class CampaignDetailScreen extends StatelessWidget {
                             },
                           ),
                           title: Text(
-                            campaign!.partner!.name!,
+                            ads!.partner != null ? ads!.partner!.name! : '',
                             style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(color: Colors.white),
-                          ).translate(),
+                          ),
                           flexibleSpace: CustomizableSpaceBar(
                               builder: (context, scrollingRate) {
                             return (scrollingRate != 1.0)
@@ -121,10 +122,10 @@ class CampaignDetailScreen extends StatelessWidget {
                                         //margin: EdgeInsets.only(bottom: 20),
                                         child: CustomImage(
                                           image:
-                                              '${global.appInfo.baseUrls!.offerImageUrl}/${campaign!.image}',
+                                              '${global.appInfo.baseUrls!.offerImageUrl}/${ads!.image}',
                                           width: Get.width,
                                           fit: BoxFit.fill,
-                                          campaign: campaign!,
+                                          ads: ads!,
                                         ),
                                         // Image.asset(
                                         //   Images.dummyImage,
@@ -132,23 +133,26 @@ class CampaignDetailScreen extends StatelessWidget {
                                         //   fit: BoxFit.cover,
                                         // ),
                                       ),
-                                      Positioned(
-                                        bottom: -30,
-                                        child: Card(
-                                          color: Colors.white,
-                                          margin: EdgeInsets.all(10),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(4.0),
-                                            child: CustomImage(
-                                              image:
-                                                  '${global.appInfo.baseUrls!.partnerImageUrl}/${campaign!.partner!.image}',
-                                              height: 30,
-                                              width: 60,
-                                              fit: BoxFit.contain,
-                                            ),
-                                          ),
-                                        ),
-                                      )
+                                      ads!.partner != null
+                                          ? Positioned(
+                                              bottom: -30,
+                                              child: Card(
+                                                color: Colors.white,
+                                                margin: EdgeInsets.all(10),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: CustomImage(
+                                                    image:
+                                                        '${global.appInfo.baseUrls!.partnerImageUrl}/${ads!.partner!.image}',
+                                                    height: 30,
+                                                    width: 60,
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          : SizedBox()
                                     ],
                                   )
                                 : SizedBox();
@@ -159,15 +163,15 @@ class CampaignDetailScreen extends StatelessWidget {
                                     onTap: () async {
                                       if (global.currentUser.id != null) {
                                         await homeController.getTrackingLink(
-                                            campaign!.url!,
-                                            campaign!.affiliatePartner!);
+                                            ads!.landingPage!,
+                                            ads!.affiliatePartner!,
+                                            cId: ads!.cId!);
                                         global.share(
                                           homeController.createdLink.isNotEmpty
                                               ? homeController.createdLink
-                                              : campaign!.url!,
-                                          campaign!.image!.isNotEmpty &&
-                                                  !campaign!.isImageError
-                                              ? '${global.appInfo.baseUrls!.offerImageUrl}/${campaign!.image}'
+                                              : ads!.landingPage!,
+                                          ads!.image!.isNotEmpty
+                                              ? '${global.appInfo.baseUrls!.offerImageUrl}/${ads!.image}'
                                               : '',
                                           '',
                                         );
@@ -202,7 +206,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                       ),
                                       child: Row(
                                         children: [
-                                          Text('Share').translate(),
+                                          Text('Share'),
                                           CircleAvatar(
                                             radius: 12,
                                             backgroundColor: Colors.green[700],
@@ -222,6 +226,7 @@ class CampaignDetailScreen extends StatelessWidget {
                   SliverFillRemaining(
                     fillOverscroll: true,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
                           color: Colors.white,
@@ -232,21 +237,25 @@ class CampaignDetailScreen extends StatelessWidget {
                                 height: 40,
                               ),
                               Text(
-                                campaign!.name!,
+                                ads!.name!,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontStyle: FontStyle.italic,
                                     color: Get.theme.primaryColor),
-                              ).translate(),
+                              ),
                               SizedBox(
                                 height: 15,
                               ),
-                              HtmlWidget(
-                                campaign!.description!,
-                                //textAlign: TextAlign.center,
+                              Align(
+                                alignment: Alignment.center,
+                                child: HtmlWidget(
+                                  ads!.description!,
+
+                                  //textAlign: TextAlign.center,
+                                ),
                               ),
                               // Text(
-                              //   offer.terms,
+                              //   ads.terms,
                               //   textAlign: TextAlign.center,
                               // ),
                               // SizedBox(
@@ -257,7 +266,7 @@ class CampaignDetailScreen extends StatelessWidget {
                               //   textAlign: TextAlign.center,
                               //   style: TextStyle(fontWeight: FontWeight.w600),
                               // ),
-                              // homeController.countTimer(DateTime.now(), offer.endDate) != null
+                              // homeController.countTimer(DateTime.now(), ads.endDate) != null
                               //     ? Container(
                               //         decoration: BoxDecoration(
                               //           color: Colors.grey[100],
@@ -299,35 +308,37 @@ class CampaignDetailScreen extends StatelessWidget {
                                 onTap: () async {
                                   if (global.currentUser.id != null) {
                                     await homeController.getTrackingLink(
-                                        campaign!.url!,
-                                        campaign!.affiliatePartner!);
+                                        ads!.landingPage!,
+                                        ads!.affiliatePartner!,
+                                        cId: ads!.cId!);
                                     await homeController.addClick(
-                                      campaign!.name!,
+                                      ads!.advName!,
                                       global.appInfo.baseUrls!.offerImageUrl! +
                                           '/' +
-                                          campaign!.image!,
+                                          ads!.image!,
                                       homeController.createdLink.isNotEmpty
                                           ? homeController.createdLink
-                                          : campaign!.url!,
+                                          : ads!.landingPage!,
                                     );
+
                                     global.launchInBrowser(
                                       homeController.createdLink.isNotEmpty
                                           ? homeController.createdLink
-                                          : campaign!.url!,
+                                          : ads!.landingPage!,
                                     );
 
                                     // Get.to(
                                     //   () => WebViewScreen(
-                                    //     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
-                                    //     isCliked: global.clickedList.contains(campaign.name),
-                                    //     couponList: campaign.couponList,
-                                    //     partner: campaign.partner,
-                                    //     brandName: campaign.name,
+                                    //     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
+                                    //     isCliked: global.clickedList.contains(ads.advName),
+                                    //     couponList: ads.couponList,
+                                    //     partner: ads.partner,
+                                    //     brandName: ads.advName,
                                     //   ),
                                     // ).then((value) {
-                                    //   if (global.clickedList.contains(campaign.name)) {
+                                    //   if (global.clickedList.contains(ads.advName)) {
                                     //   } else {
-                                    //     global.clickedList.add(campaign.name);
+                                    //     global.clickedList.add(ads.advName);
                                     //   }
                                     // });
                                   } else {
@@ -335,7 +346,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                       Get.dialog(Dialog(
                                         child: SizedBox(
                                           width: Get.width / 3,
-                                          child: LoginOrSignUpScreen(
+                                          child: GetStartedScreen(
                                             fromMenu: true,
                                           ),
                                         ),
@@ -355,10 +366,10 @@ class CampaignDetailScreen extends StatelessWidget {
                                   width: Get.width,
                                   alignment: Alignment.center,
                                   child: Container(
-                                    height: 45,
                                     width: global.getPlatFrom()
                                         ? Get.width / 3
                                         : Get.width,
+                                    height: 45,
                                     margin: EdgeInsets.symmetric(
                                         horizontal: 30, vertical: 15),
                                     padding: EdgeInsets.symmetric(
@@ -369,14 +380,12 @@ class CampaignDetailScreen extends StatelessWidget {
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      campaign!.buttonText!.isNotEmpty
-                                          ? campaign!.buttonText!
-                                          : 'EARN CASHBACK',
+                                      ads!.buttonText!,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600),
-                                    ).translate(),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -453,12 +462,12 @@ class CampaignDetailScreen extends StatelessWidget {
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13),
-                                          ).translate(),
+                                          ),
                                           Text(
                                             'Today',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
-                                          ).translate(),
+                                          ),
                                         ],
                                       ),
                                       SizedBox(
@@ -475,89 +484,59 @@ class CampaignDetailScreen extends StatelessWidget {
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13),
-                                          ).translate(),
+                                          ),
                                           Text(
                                             '24 hours',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
-                                          ).translate(),
+                                          ),
                                         ],
                                       )
                                     ],
                                   ),
                                 ),
-                                fromSeeMore!
-                                    ? SizedBox()
-                                    : homeController.seeMoreCampaignList !=
-                                                null &&
-                                            homeController.seeMoreCampaignList
-                                                    .length >
-                                                0
-                                        ? InkWell(
-                                            onTap: () async {
-                                              //await homeController.getMoreCampaign(campaign.id.toString());
-                                              global.getPlatFrom()
-                                                  ? Get.dialog(
-                                                      Dialog(
-                                                        child: SizedBox(
-                                                          height: 500,
-                                                          width: 500,
-                                                          child:
-                                                              MoreCampignScreen(),
-                                                        ),
-                                                      ),
-                                                    )
-                                                  : Get.bottomSheet(
-                                                      ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius.only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  15),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  15),
-                                                        ),
-                                                        child:
-                                                            MoreCampignScreen(),
-                                                      ),
-                                                    );
-                                            },
-                                            child: Container(
-                                              width: Get.width,
-                                              alignment: Alignment.center,
-                                              color: Colors.white,
-                                              child: Container(
-                                                width: global.getPlatFrom()
-                                                    ? Get.width / 3
-                                                    : Get.width,
-                                                height: 45,
-                                                margin: EdgeInsets.symmetric(
-                                                    horizontal: 30,
-                                                    vertical: 15),
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 7, vertical: 8),
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                      color: Colors.teal[200]!,
-                                                      width: 1.5,
-                                                    )),
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                  'See More Offers  >',
-                                                  style: TextStyle(
-                                                      color: Colors.teal[200],
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ).translate(),
+                                homeController.seeMoreAdsList != null &&
+                                        homeController.seeMoreAdsList.length > 0
+                                    ? InkWell(
+                                        onTap: () async {
+                                          //await homeController.getMoreAds(ads.id.toString());
+                                          Get.bottomSheet(
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(15),
+                                                topRight: Radius.circular(15),
                                               ),
+                                              child: MoreAdsScreen(),
                                             ),
-                                          )
-                                        : SizedBox(),
+                                          );
+                                        },
+                                        child: Container(
+                                          width: global.getPlatFrom()
+                                              ? Get.width / 3
+                                              : Get.width,
+                                          height: 45,
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 30, vertical: 15),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 7, vertical: 8),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                color: Colors.teal[200]!,
+                                                width: 1.5,
+                                              )),
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'See More Offers  >',
+                                            style: TextStyle(
+                                                color: Colors.teal[200],
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ),
+                                      )
+                                    : SizedBox(),
                               ],
                             ),
                           ),
@@ -569,87 +548,77 @@ class CampaignDetailScreen extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: campaign!.partner != null &&
-                  (campaign!.partner!.leftTab!.isNotEmpty ||
-                      campaign!.partner!.rightTab!.isNotEmpty)
-              ? Container(
-                  width: Get.width,
-                  alignment: Alignment.center,
+          bottomNavigationBar: ads!.partner != null &&
+                  (ads!.partner!.leftTab!.isNotEmpty ||
+                      ads!.partner!.rightTab!.isNotEmpty)
+              ? SizedBox(
                   height: 50,
-                  child: SizedBox(
-                    height: 50,
-                    width: AppConstants.WEB_MAX_WIDTH,
-                    child: Card(
-                      margin: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero),
-                      color: Get.theme.primaryColor,
-                      child: Row(
-                        mainAxisAlignment:
-                            (campaign!.partner!.leftTab!.isNotEmpty &&
-                                    campaign!.partner!.rightTab!.isNotEmpty)
-                                ? MainAxisAlignment.spaceEvenly
-                                : MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Get.find<HomeController>().setIsOffer(false);
-                              Get.bottomSheet(
-                                SizedBox(
-                                  width: AppConstants.WEB_MAX_WIDTH,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(15),
-                                      topRight: Radius.circular(15),
-                                    ),
-                                    child: RatesAndOfferTermsSheetWidget(
-                                      partner: campaign!.partner!,
-                                    ),
-                                  ),
+                  child: Card(
+                    margin: EdgeInsets.zero,
+                    shape:
+                        RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                    color: Get.theme.primaryColor,
+                    child: Row(
+                      mainAxisAlignment: (ads!.partner!.leftTab!.isNotEmpty &&
+                              ads!.partner!.rightTab!.isNotEmpty)
+                          ? MainAxisAlignment.spaceEvenly
+                          : MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Get.find<HomeController>().setIsOffer(false);
+                            Get.bottomSheet(
+                              ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15),
                                 ),
-                              );
-                            },
-                            child: Text(
-                              campaign!.partner!.leftTab!,
-                              style: Get.theme.primaryTextTheme.titleSmall!
-                                  .copyWith(
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white),
-                            ).translate(),
-                          ),
-                          (campaign!.partner!.leftTab!.isNotEmpty &&
-                                  campaign!.partner!.rightTab!.isNotEmpty)
-                              ? Icon(
-                                  Icons.more_vert,
-                                  size: 22,
-                                  color: Colors.white.withOpacity(0.3),
-                                )
-                              : SizedBox(),
-                          InkWell(
-                            onTap: () {
-                              Get.find<HomeController>().setIsOffer(true);
-                              Get.bottomSheet(
-                                ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(15),
-                                    topRight: Radius.circular(15),
-                                  ),
-                                  child: RatesAndOfferTermsSheetWidget(
-                                    partner: campaign!.partner!,
-                                  ),
+                                child: RatesAndOfferTermsSheetWidget(
+                                  partner: ads!.partner!,
                                 ),
-                              );
-                            },
-                            child: Text(
-                              campaign!.partner!.rightTab!.camelCase!,
-                              style: Get.theme.primaryTextTheme.titleSmall!
-                                  .copyWith(
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white),
-                            ).translate(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            ads!.partner!.leftTab!,
+                            style: Get.theme.primaryTextTheme.titleSmall!
+                                .copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white),
                           ),
-                        ],
-                      ),
+                        ),
+                        (ads!.partner!.leftTab!.isNotEmpty &&
+                                ads!.partner!.rightTab!.isNotEmpty)
+                            ? Icon(
+                                Icons.more_vert,
+                                size: 22,
+                                color: Colors.white.withOpacity(0.3),
+                              )
+                            : SizedBox(),
+                        InkWell(
+                          onTap: () {
+                            Get.find<HomeController>().setIsOffer(true);
+                            Get.bottomSheet(
+                              ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15),
+                                ),
+                                child: RatesAndOfferTermsSheetWidget(
+                                  partner: ads!.partner!,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            ads!.partner!.rightTab!,
+                            style: Get.theme.primaryTextTheme.titleSmall!
+                                .copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 )

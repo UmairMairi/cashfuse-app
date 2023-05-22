@@ -17,12 +17,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
-class CampaignDetailScreen extends StatelessWidget {
+class WebCampaignDetailScreen extends StatelessWidget {
   final CampaignModel? campaign;
   final bool? fromSeeMore;
-  CampaignDetailScreen({this.campaign, this.fromSeeMore});
+  WebCampaignDetailScreen({this.campaign, this.fromSeeMore});
   HomeController homeController = Get.find<HomeController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -68,23 +67,25 @@ class CampaignDetailScreen extends StatelessWidget {
                                 //   fit: BoxFit.cover,
                                 // ),
                               ),
-                              Positioned(
-                                bottom: -30,
-                                child: Card(
-                                  color: Colors.white,
-                                  margin: EdgeInsets.all(10),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: CustomImage(
-                                      image:
-                                          '${global.appInfo.baseUrls!.partnerImageUrl}/${campaign!.partner!.image}',
-                                      height: 30,
-                                      width: 60,
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-                                ),
-                              )
+                              campaign!.partner != null
+                                  ? Positioned(
+                                      bottom: -30,
+                                      child: Card(
+                                        color: Colors.white,
+                                        margin: EdgeInsets.all(10),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: CustomImage(
+                                            image:
+                                                '${global.appInfo.baseUrls!.partnerImageUrl}/${campaign!.partner!.image}',
+                                            height: 30,
+                                            width: 60,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : SizedBox()
                             ],
                           ),
                         )
@@ -106,10 +107,12 @@ class CampaignDetailScreen extends StatelessWidget {
                             },
                           ),
                           title: Text(
-                            campaign!.partner!.name!,
+                            campaign!.partner != null
+                                ? campaign!.partner!.name!
+                                : '',
                             style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(color: Colors.white),
-                          ).translate(),
+                          ),
                           flexibleSpace: CustomizableSpaceBar(
                               builder: (context, scrollingRate) {
                             return (scrollingRate != 1.0)
@@ -132,23 +135,26 @@ class CampaignDetailScreen extends StatelessWidget {
                                         //   fit: BoxFit.cover,
                                         // ),
                                       ),
-                                      Positioned(
-                                        bottom: -30,
-                                        child: Card(
-                                          color: Colors.white,
-                                          margin: EdgeInsets.all(10),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(4.0),
-                                            child: CustomImage(
-                                              image:
-                                                  '${global.appInfo.baseUrls!.partnerImageUrl}/${campaign!.partner!.image}',
-                                              height: 30,
-                                              width: 60,
-                                              fit: BoxFit.contain,
-                                            ),
-                                          ),
-                                        ),
-                                      )
+                                      campaign!.partner != null
+                                          ? Positioned(
+                                              bottom: -30,
+                                              child: Card(
+                                                color: Colors.white,
+                                                margin: EdgeInsets.all(10),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: CustomImage(
+                                                    image:
+                                                        '${global.appInfo.baseUrls!.partnerImageUrl}/${campaign!.partner!.image}',
+                                                    height: 30,
+                                                    width: 60,
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          : SizedBox(),
                                     ],
                                   )
                                 : SizedBox();
@@ -202,7 +208,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                       ),
                                       child: Row(
                                         children: [
-                                          Text('Share').translate(),
+                                          Text('Share'),
                                           CircleAvatar(
                                             radius: 12,
                                             backgroundColor: Colors.green[700],
@@ -237,7 +243,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontStyle: FontStyle.italic,
                                     color: Get.theme.primaryColor),
-                              ).translate(),
+                              ),
                               SizedBox(
                                 height: 15,
                               ),
@@ -376,7 +382,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                           color: Colors.white,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600),
-                                    ).translate(),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -453,12 +459,12 @@ class CampaignDetailScreen extends StatelessWidget {
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13),
-                                          ).translate(),
+                                          ),
                                           Text(
                                             'Today',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
-                                          ).translate(),
+                                          ),
                                         ],
                                       ),
                                       SizedBox(
@@ -475,12 +481,12 @@ class CampaignDetailScreen extends StatelessWidget {
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13),
-                                          ).translate(),
+                                          ),
                                           Text(
                                             '24 hours',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
-                                          ).translate(),
+                                          ),
                                         ],
                                       )
                                     ],
@@ -553,7 +559,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                                       fontSize: 14,
                                                       fontWeight:
                                                           FontWeight.w400),
-                                                ).translate(),
+                                                ),
                                               ),
                                             ),
                                           )
@@ -615,7 +621,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                   .copyWith(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white),
-                            ).translate(),
+                            ),
                           ),
                           (campaign!.partner!.leftTab!.isNotEmpty &&
                                   campaign!.partner!.rightTab!.isNotEmpty)
@@ -646,7 +652,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                   .copyWith(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white),
-                            ).translate(),
+                            ),
                           ),
                         ],
                       ),

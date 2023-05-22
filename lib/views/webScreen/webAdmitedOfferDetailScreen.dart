@@ -2,11 +2,9 @@
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
-import 'package:cashfuse/models/campaignModel.dart';
+import 'package:cashfuse/models/admitedoffersModal.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/getStartedScreen.dart';
-import 'package:cashfuse/views/loginOrSignUpScreen.dart';
-import 'package:cashfuse/views/moreCampignScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
@@ -17,14 +15,32 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
-class CampaignDetailScreen extends StatelessWidget {
-  final CampaignModel? campaign;
+class WebAdmitedDetailScreen extends StatefulWidget {
   final bool? fromSeeMore;
-  CampaignDetailScreen({this.campaign, this.fromSeeMore});
+  final AdmitedOffersModal? admitedData;
+  WebAdmitedDetailScreen({this.fromSeeMore, this.admitedData});
+
+  @override
+  State<WebAdmitedDetailScreen> createState() =>
+      _WebAdmitedDetailScreenState(this.admitedData!);
+}
+
+class _WebAdmitedDetailScreenState extends State<WebAdmitedDetailScreen> {
   HomeController homeController = Get.find<HomeController>();
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  AdmitedOffersModal admitedData;
+  double _scrollingRate = 0.0;
+
+  _WebAdmitedDetailScreenState(this.admitedData) : super();
+
+  @override
+  void initState() {
+    // _admitedOffers = Provider.of(context, listen: false);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,14 +69,14 @@ class CampaignDetailScreen extends StatelessWidget {
                                 color: Colors.white,
                                 width: AppConstants.WEB_MAX_WIDTH,
                                 alignment: Alignment.center,
-                                margin: EdgeInsets.only(bottom: 20),
+                                //margin: EdgeInsets.only(bottom: 20),
                                 child: CustomImage(
                                   image:
-                                      '${global.appInfo.baseUrls!.offerImageUrl}/${campaign!.image}',
+                                      '${global.appInfo.baseUrls!.offerImageUrl}/${admitedData.image}',
                                   width: 500,
                                   height: 300,
                                   fit: BoxFit.fill,
-                                  campaign: campaign!,
+                                  admitedOffersModal: admitedData,
                                 ),
                                 // Image.asset(
                                 //   Images.dummyImage,
@@ -77,7 +93,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                     padding: const EdgeInsets.all(4.0),
                                     child: CustomImage(
                                       image:
-                                          '${global.appInfo.baseUrls!.partnerImageUrl}/${campaign!.partner!.image}',
+                                          '${global.appInfo.baseUrls!.partnerImageUrl}/${admitedData.partner!.image}',
                                       height: 30,
                                       width: 60,
                                       fit: BoxFit.contain,
@@ -95,7 +111,10 @@ class CampaignDetailScreen extends StatelessWidget {
                           floating: true,
                           pinned: true,
                           elevation: 0,
-                          backgroundColor: Get.theme.primaryColor,
+                          backgroundColor: _scrollingRate == 1.0
+                              ? Get.theme.primaryColor
+                              : Colors.transparent,
+                          // backgroundColor: Get.theme.primaryColor,
                           leading: IconButton(
                             icon: Icon(
                               Icons.arrow_back,
@@ -106,12 +125,18 @@ class CampaignDetailScreen extends StatelessWidget {
                             },
                           ),
                           title: Text(
-                            campaign!.partner!.name!,
+                            admitedData.partner!.name!,
                             style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(color: Colors.white),
-                          ).translate(),
+                          ),
                           flexibleSpace: CustomizableSpaceBar(
                               builder: (context, scrollingRate) {
+                            Future.delayed(Duration.zero).then(
+                              (value) {
+                                _scrollingRate = scrollingRate;
+                                setState(() {});
+                              },
+                            );
                             return (scrollingRate != 1.0)
                                 ? Stack(
                                     alignment: Alignment.bottomCenter,
@@ -121,10 +146,10 @@ class CampaignDetailScreen extends StatelessWidget {
                                         //margin: EdgeInsets.only(bottom: 20),
                                         child: CustomImage(
                                           image:
-                                              '${global.appInfo.baseUrls!.offerImageUrl}/${campaign!.image}',
+                                              '${global.appInfo.baseUrls!.offerImageUrl}/${admitedData.image}',
                                           width: Get.width,
                                           fit: BoxFit.fill,
-                                          campaign: campaign!,
+                                          admitedOffersModal: admitedData,
                                         ),
                                         // Image.asset(
                                         //   Images.dummyImage,
@@ -141,7 +166,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                             padding: const EdgeInsets.all(4.0),
                                             child: CustomImage(
                                               image:
-                                                  '${global.appInfo.baseUrls!.partnerImageUrl}/${campaign!.partner!.image}',
+                                                  '${global.appInfo.baseUrls!.partnerImageUrl}/${admitedData.partner!.image}',
                                               height: 30,
                                               width: 60,
                                               fit: BoxFit.contain,
@@ -159,15 +184,17 @@ class CampaignDetailScreen extends StatelessWidget {
                                     onTap: () async {
                                       if (global.currentUser.id != null) {
                                         await homeController.getTrackingLink(
-                                            campaign!.url!,
-                                            campaign!.affiliatePartner!);
+                                          admitedData.gotourl!,
+                                          admitedData.affiliatePartner!,
+                                          cId: admitedData.adId.toString(),
+                                        );
                                         global.share(
                                           homeController.createdLink.isNotEmpty
                                               ? homeController.createdLink
-                                              : campaign!.url!,
-                                          campaign!.image!.isNotEmpty &&
-                                                  !campaign!.isImageError
-                                              ? '${global.appInfo.baseUrls!.offerImageUrl}/${campaign!.image}'
+                                              : admitedData.gotourl!,
+                                          admitedData.image!.isNotEmpty &&
+                                                  !admitedData.isImageError!
+                                              ? '${global.appInfo.baseUrls!.offerImageUrl}/${admitedData.image}'
                                               : '',
                                           '',
                                         );
@@ -202,7 +229,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                       ),
                                       child: Row(
                                         children: [
-                                          Text('Share').translate(),
+                                          Text('Share'),
                                           CircleAvatar(
                                             radius: 12,
                                             backgroundColor: Colors.green[700],
@@ -219,12 +246,13 @@ class CampaignDetailScreen extends StatelessWidget {
                                 : SizedBox()
                           ],
                         ),
-                  SliverFillRemaining(
-                    fillOverscroll: true,
+                  SliverToBoxAdapter(
+                    // fillOverscroll: true,
                     child: Column(
                       children: [
                         Container(
                           color: Colors.white,
+                          padding: EdgeInsets.symmetric(horizontal: 10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -232,19 +260,25 @@ class CampaignDetailScreen extends StatelessWidget {
                                 height: 40,
                               ),
                               Text(
-                                campaign!.name!,
+                                admitedData.name!,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontStyle: FontStyle.italic,
                                     color: Get.theme.primaryColor),
-                              ).translate(),
+                              ),
                               SizedBox(
                                 height: 15,
                               ),
-                              HtmlWidget(
-                                campaign!.description!,
-                                //textAlign: TextAlign.center,
-                              ),
+                              FutureBuilder(
+                                  future: global
+                                      .translatedText(admitedData.description!),
+                                  builder: (context, snapShot) {
+                                    return HtmlWidget(
+                                      snapShot.data != null
+                                          ? snapShot.data!
+                                          : admitedData.description!,
+                                    );
+                                  }),
                               // Text(
                               //   offer.terms,
                               //   textAlign: TextAlign.center,
@@ -299,22 +333,39 @@ class CampaignDetailScreen extends StatelessWidget {
                                 onTap: () async {
                                   if (global.currentUser.id != null) {
                                     await homeController.getTrackingLink(
-                                        campaign!.url!,
-                                        campaign!.affiliatePartner!);
+                                        admitedData.gotourl!,
+                                        admitedData.affiliatePartner!,
+                                        cId: admitedData.adId.toString());
                                     await homeController.addClick(
-                                      campaign!.name!,
+                                      admitedData.name!,
                                       global.appInfo.baseUrls!.offerImageUrl! +
                                           '/' +
-                                          campaign!.image!,
+                                          admitedData.image!,
                                       homeController.createdLink.isNotEmpty
                                           ? homeController.createdLink
-                                          : campaign!.url!,
+                                          : admitedData.gotourl!,
                                     );
+
                                     global.launchInBrowser(
                                       homeController.createdLink.isNotEmpty
                                           ? homeController.createdLink
-                                          : campaign!.url!,
+                                          : admitedData.gotourl!,
                                     );
+
+                                    // _admitedOffers
+                                    //     .admitedGetLink(
+                                    //         widget.admitedData['gotourl']
+                                    //             .toString(),
+                                    //         "admitad",
+                                    //         widget.admitedData['ad_id']
+                                    //             .toString())
+                                    //     .then((value) {
+                                    //   print('ahjbshjdbhjsabd');
+                                    //   print('${value['tracking_link']}');
+                                    //   global.launchInBrowser(
+                                    //     value['tracking_link'],
+                                    //   );
+                                    // });
 
                                     // Get.to(
                                     //   () => WebViewScreen(
@@ -335,7 +386,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                       Get.dialog(Dialog(
                                         child: SizedBox(
                                           width: Get.width / 3,
-                                          child: LoginOrSignUpScreen(
+                                          child: GetStartedScreen(
                                             fromMenu: true,
                                           ),
                                         ),
@@ -369,197 +420,195 @@ class CampaignDetailScreen extends StatelessWidget {
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      campaign!.buttonText!.isNotEmpty
-                                          ? campaign!.buttonText!
-                                          : 'EARN CASHBACK',
+                                      "Grab Now",
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600),
-                                    ).translate(),
+                                    ),
                                   ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        Expanded(
-                          child: Container(
-                            color: Colors.white,
-                            margin: EdgeInsets.only(top: 10),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundColor:
-                                          Get.theme.secondaryHeaderColor,
-                                      radius: 10,
-                                      child: CircleAvatar(
-                                        radius: 7,
-                                        backgroundColor: Colors.white,
-                                      ),
+                        Container(
+                          color: Colors.white,
+                          margin: EdgeInsets.only(top: 10),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  CircleAvatar(
+                                    backgroundColor:
+                                        Get.theme.secondaryHeaderColor,
+                                    radius: 10,
+                                    child: CircleAvatar(
+                                      radius: 7,
+                                      backgroundColor: Colors.white,
                                     ),
-                                    Stack(
-                                      alignment: Alignment.center,
-                                      children: [
-                                        DottedLine(
-                                          lineLength: 130,
-                                          dashColor: Colors.grey,
-                                        ),
-                                        Card(
-                                          margin: EdgeInsets.zero,
-                                          elevation: 0,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.zero),
-                                          child: Text(
-                                            '>>',
-                                            style: TextStyle(
-                                                color: Colors.grey,
-                                                fontSize: 20,
-                                                letterSpacing: -5),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    CircleAvatar(
-                                      backgroundColor:
-                                          Get.theme.secondaryHeaderColor,
-                                      radius: 10,
-                                      child: CircleAvatar(
-                                        radius: 7,
-                                        backgroundColor: Colors.white,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 40),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                  ),
+                                  Stack(
+                                    alignment: Alignment.center,
                                     children: [
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Purchase',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: 13),
-                                          ).translate(),
-                                          Text(
-                                            'Today',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600),
-                                          ).translate(),
-                                        ],
+                                      DottedLine(
+                                        lineLength: 130,
+                                        dashColor: Colors.grey,
                                       ),
-                                      SizedBox(
-                                        width: 50,
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Cashback tracks in',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: 13),
-                                          ).translate(),
-                                          Text(
-                                            '24 hours',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600),
-                                          ).translate(),
-                                        ],
+                                      Card(
+                                        margin: EdgeInsets.zero,
+                                        elevation: 0,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.zero),
+                                        child: Text(
+                                          '>>',
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 20,
+                                              letterSpacing: -5),
+                                        ),
                                       )
                                     ],
                                   ),
+                                  CircleAvatar(
+                                    backgroundColor:
+                                        Get.theme.secondaryHeaderColor,
+                                    radius: 10,
+                                    child: CircleAvatar(
+                                      radius: 7,
+                                      backgroundColor: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 40),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Purchase',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w300,
+                                              fontSize: 13),
+                                        ),
+                                        Text(
+                                          'Today',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: 50,
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Cashback tracks in',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w300,
+                                              fontSize: 13),
+                                        ),
+                                        Text(
+                                          '24 hours',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ],
+                                    )
+                                  ],
                                 ),
-                                fromSeeMore!
-                                    ? SizedBox()
-                                    : homeController.seeMoreCampaignList !=
-                                                null &&
-                                            homeController.seeMoreCampaignList
-                                                    .length >
-                                                0
-                                        ? InkWell(
-                                            onTap: () async {
-                                              //await homeController.getMoreCampaign(campaign.id.toString());
-                                              global.getPlatFrom()
-                                                  ? Get.dialog(
-                                                      Dialog(
-                                                        child: SizedBox(
-                                                          height: 500,
-                                                          width: 500,
-                                                          child:
-                                                              MoreCampignScreen(),
-                                                        ),
+                              ),
+                              widget.fromSeeMore!
+                                  ? SizedBox()
+                                  : homeController.seeMoreCampaignList !=
+                                              null &&
+                                          homeController
+                                                  .seeMoreCampaignList.length >
+                                              0
+                                      ? InkWell(
+                                          onTap: () async {
+                                            //await homeController.getMoreCampaign(campaign.id.toString());
+                                            global.getPlatFrom()
+                                                ? Get.dialog(
+                                                    Dialog(
+                                                      child: SizedBox(
+                                                        height: 500,
+                                                        width: 500,
+                                                        // child:
+                                                        //     MoreAdmitedOffers(
+                                                        //   id: widget
+                                                        //       .admitedData['id']
+                                                        //       .toString(),
+                                                        // ),
                                                       ),
-                                                    )
-                                                  : Get.bottomSheet(
-                                                      ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius.only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  15),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  15),
-                                                        ),
-                                                        child:
-                                                            MoreCampignScreen(),
+                                                    ),
+                                                  )
+                                                : Get.bottomSheet(
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(15),
+                                                        topRight:
+                                                            Radius.circular(15),
                                                       ),
-                                                    );
-                                            },
+                                                      // child: MoreAdmitedOffers(
+                                                      //   id: widget
+                                                      //       .admitedData['id']
+                                                      //       .toString(),
+                                                      // ),
+                                                    ),
+                                                  );
+                                          },
+                                          child: Container(
+                                            width: Get.width,
+                                            alignment: Alignment.center,
+                                            color: Colors.white,
                                             child: Container(
-                                              width: Get.width,
+                                              width: global.getPlatFrom()
+                                                  ? Get.width / 3
+                                                  : Get.width,
+                                              height: 45,
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: 30, vertical: 15),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 7, vertical: 8),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                    color: Colors.teal[200]!,
+                                                    width: 1.5,
+                                                  )),
                                               alignment: Alignment.center,
-                                              color: Colors.white,
-                                              child: Container(
-                                                width: global.getPlatFrom()
-                                                    ? Get.width / 3
-                                                    : Get.width,
-                                                height: 45,
-                                                margin: EdgeInsets.symmetric(
-                                                    horizontal: 30,
-                                                    vertical: 15),
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 7, vertical: 8),
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                      color: Colors.teal[200]!,
-                                                      width: 1.5,
-                                                    )),
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                  'See More Offers  >',
-                                                  style: TextStyle(
-                                                      color: Colors.teal[200],
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ).translate(),
+                                              child: Text(
+                                                'See More Offers  >',
+                                                style: TextStyle(
+                                                    color: Colors.teal[200],
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
                                             ),
-                                          )
-                                        : SizedBox(),
-                              ],
-                            ),
+                                          ),
+                                        )
+                                      : SizedBox(),
+                            ],
                           ),
                         ),
                       ],
@@ -569,9 +618,11 @@ class CampaignDetailScreen extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: campaign!.partner != null &&
-                  (campaign!.partner!.leftTab!.isNotEmpty ||
-                      campaign!.partner!.rightTab!.isNotEmpty)
+          bottomNavigationBar: admitedData.partner != null &&
+                      (admitedData.partner!.leftTab != null &&
+                          admitedData.partner!.leftTab!.isNotEmpty) ||
+                  (admitedData.partner!.rightTab != null &&
+                      admitedData.partner!.rightTab!.isNotEmpty)
               ? Container(
                   width: Get.width,
                   alignment: Alignment.center,
@@ -585,11 +636,13 @@ class CampaignDetailScreen extends StatelessWidget {
                           borderRadius: BorderRadius.zero),
                       color: Get.theme.primaryColor,
                       child: Row(
-                        mainAxisAlignment:
-                            (campaign!.partner!.leftTab!.isNotEmpty &&
-                                    campaign!.partner!.rightTab!.isNotEmpty)
-                                ? MainAxisAlignment.spaceEvenly
-                                : MainAxisAlignment.center,
+                        mainAxisAlignment: (admitedData.partner!.leftTab !=
+                                        null &&
+                                    admitedData.partner!.leftTab!.isNotEmpty) ||
+                                (admitedData.partner!.rightTab != null &&
+                                    admitedData.partner!.rightTab!.isNotEmpty)
+                            ? MainAxisAlignment.spaceEvenly
+                            : MainAxisAlignment.center,
                         children: [
                           InkWell(
                             onTap: () {
@@ -603,22 +656,25 @@ class CampaignDetailScreen extends StatelessWidget {
                                       topRight: Radius.circular(15),
                                     ),
                                     child: RatesAndOfferTermsSheetWidget(
-                                      partner: campaign!.partner!,
+                                      partner: admitedData.partner!,
                                     ),
                                   ),
                                 ),
                               );
                             },
                             child: Text(
-                              campaign!.partner!.leftTab!,
+                              admitedData.partner!.leftTab!,
                               style: Get.theme.primaryTextTheme.titleSmall!
                                   .copyWith(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white),
-                            ).translate(),
+                            ),
                           ),
-                          (campaign!.partner!.leftTab!.isNotEmpty &&
-                                  campaign!.partner!.rightTab!.isNotEmpty)
+                          (admitedData.partner!.leftTab != null &&
+                                      admitedData
+                                          .partner!.leftTab!.isNotEmpty) ||
+                                  (admitedData.partner!.rightTab != null &&
+                                      admitedData.partner!.rightTab!.isNotEmpty)
                               ? Icon(
                                   Icons.more_vert,
                                   size: 22,
@@ -635,18 +691,18 @@ class CampaignDetailScreen extends StatelessWidget {
                                     topRight: Radius.circular(15),
                                   ),
                                   child: RatesAndOfferTermsSheetWidget(
-                                    partner: campaign!.partner!,
+                                    partner: admitedData.partner!,
                                   ),
                                 ),
                               );
                             },
                             child: Text(
-                              campaign!.partner!.rightTab!.camelCase!,
+                              admitedData.partner!.rightTab!.camelCase!,
                               style: Get.theme.primaryTextTheme.titleSmall!
                                   .copyWith(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white),
-                            ).translate(),
+                            ),
                           ),
                         ],
                       ),

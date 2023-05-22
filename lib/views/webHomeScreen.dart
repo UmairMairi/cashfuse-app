@@ -5,16 +5,16 @@ import 'package:cashfuse/controllers/couponController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
-import 'package:cashfuse/views/admitedOfferDetailScreen.dart';
 import 'package:cashfuse/views/adsCampaignWidgetListScreen.dart';
-import 'package:cashfuse/views/adsDetailScreen.dart';
 import 'package:cashfuse/views/allcategoriesScreen.dart';
-import 'package:cashfuse/views/campaignDetailScreen.dart';
-import 'package:cashfuse/views/couponDetailScreen.dart';
 import 'package:cashfuse/views/couponListScreen.dart';
 import 'package:cashfuse/views/offerDetailScreen.dart';
 import 'package:cashfuse/views/offerListScreen.dart';
 import 'package:cashfuse/views/viewAllProductScreen.dart';
+import 'package:cashfuse/views/webScreen/webAdmitedOfferDetailScreen.dart';
+import 'package:cashfuse/views/webScreen/webAdsDetailScreen.dart';
+import 'package:cashfuse/views/webScreen/webCampaignDetailScreen.dart';
+import 'package:cashfuse/views/webScreen/webCouponDetailScreen.dart';
 import 'package:cashfuse/widget/couponWidget.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/offerWidget.dart';
@@ -24,7 +24,6 @@ import 'package:cashfuse/widget/web/webBannerView.dart';
 import 'package:cashfuse/widget/web/webFooterWidget.dart';
 import 'package:cashfuse/widget/web/webHomeProductView.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:slide_countdown/slide_countdown.dart';
@@ -191,7 +190,7 @@ class WebHomeScreen extends StatelessWidget {
                                               );
                                             } else {
                                               Get.to(
-                                                () => CouponDetailScreen(
+                                                () => WebCouponDetailScreen(
                                                   coupon: couponController
                                                       .couponList[index],
                                                 ),
@@ -837,7 +836,7 @@ class WebHomeScreen extends StatelessWidget {
                                                                 .commonList[i]
                                                                 .adId!);
                                                     Get.to(
-                                                      () => AdsDetailScreen(
+                                                      () => WebAdsDetailScreen(
                                                         ads: homeController.ads,
                                                         fromSeeMore: false,
                                                       ),
@@ -858,7 +857,7 @@ class WebHomeScreen extends StatelessWidget {
 
                                                     Get.to(
                                                         () =>
-                                                            AdmitedDetailScreen(
+                                                            WebAdmitedDetailScreen(
                                                               admitedData:
                                                                   homeController
                                                                       .admitedOffer,
@@ -877,7 +876,7 @@ class WebHomeScreen extends StatelessWidget {
                                                                 .toString());
                                                     Get.to(
                                                       () =>
-                                                          CampaignDetailScreen(
+                                                          WebCampaignDetailScreen(
                                                         campaign: homeController
                                                             .campaign,
                                                         fromSeeMore: false,
@@ -891,7 +890,8 @@ class WebHomeScreen extends StatelessWidget {
                                                       .homeAdvList[index]
                                                       .commonList[i],
                                                   domainImage: homeController
-                                                      .homeAdvList[index].image!,
+                                                      .homeAdvList[index]
+                                                      .image!,
                                                   fromList: false,
                                                 ),
                                               );

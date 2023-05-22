@@ -20,22 +20,30 @@ class UpiRedeemScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<PaymentController>(builder: (controller) {
       return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back,
-            ),
-          ),
-          title: Text(
-            'Upi Redeem',
-            style: Get.theme.primaryTextTheme.titleSmall!
-                .copyWith(color: Colors.white),
-          ).translate(),
-        ),
+        appBar: global.getPlatFrom()
+            ? null
+            : AppBar(
+                elevation: 0,
+                leading: InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                  ),
+                ),
+                title: GetPlatform.isWeb
+                    ? Text(
+                        'Upi Redeem',
+                        style: Get.theme.primaryTextTheme.titleSmall!
+                            .copyWith(color: Colors.white),
+                      )
+                    : Text(
+                        'Upi Redeem',
+                        style: Get.theme.primaryTextTheme.titleSmall!
+                            .copyWith(color: Colors.white),
+                      ).translate(),
+              ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(15.0),
@@ -86,11 +94,17 @@ class UpiRedeemScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            'Account Details',
-                            style: Get.theme.primaryTextTheme.titleMedium!
-                                .copyWith(fontWeight: FontWeight.w600),
-                          ).translate(),
+                          GetPlatform.isWeb
+                              ? Text(
+                                  'Account Details',
+                                  style: Get.theme.primaryTextTheme.titleMedium!
+                                      .copyWith(fontWeight: FontWeight.w600),
+                                )
+                              : Text(
+                                  'Account Details',
+                                  style: Get.theme.primaryTextTheme.titleMedium!
+                                      .copyWith(fontWeight: FontWeight.w600),
+                                ).translate(),
                           InkWell(
                             onTap: () {
                               if (paymentController.upiDetails != null) {
@@ -109,13 +123,27 @@ class UpiRedeemScreen extends StatelessWidget {
                                     ),
                                     child: Column(
                                       children: [
-                                        Text(
-                                          'Add Upi Account',
-                                          style: Get
-                                              .theme.primaryTextTheme.titleLarge!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w600),
-                                        ).translate(),
+                                        GetPlatform.isWeb
+                                            ? Text(
+                                                'Add Upi Account',
+                                                style: Get
+                                                    .theme
+                                                    .primaryTextTheme
+                                                    .titleLarge!
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                              )
+                                            : Text(
+                                                'Add Upi Account',
+                                                style: Get
+                                                    .theme
+                                                    .primaryTextTheme
+                                                    .titleLarge!
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                              ).translate(),
                                         TextFormField(
                                           focusNode: fUpiId,
                                           controller: upiId,
@@ -181,16 +209,31 @@ class UpiRedeemScreen extends StatelessWidget {
                                                   BorderRadius.circular(5),
                                             ),
                                             alignment: Alignment.center,
-                                            child: Text(
-                                              paymentController.upiDetails !=
-                                                      null
-                                                  ? 'edit'.toUpperCase()
-                                                  : '${'add'.toUpperCase()} +',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600),
-                                            ).translate(),
+                                            child: GetPlatform.isWeb
+                                                ? Text(
+                                                    paymentController
+                                                                .upiDetails !=
+                                                            null
+                                                        ? 'edit'.toUpperCase()
+                                                        : '${'add'.toUpperCase()} +',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  )
+                                                : Text(
+                                                    paymentController
+                                                                .upiDetails !=
+                                                            null
+                                                        ? 'edit'.toUpperCase()
+                                                        : '${'add'.toUpperCase()} +',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ).translate(),
                                           ),
                                         ),
                                       ],
@@ -209,15 +252,25 @@ class UpiRedeemScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               alignment: Alignment.center,
-                              child: Text(
-                                paymentController.upiDetails != null
-                                    ? 'edit'.toUpperCase()
-                                    : '${'add'.toUpperCase()} +',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600),
-                              ).translate(),
+                              child: GetPlatform.isWeb
+                                  ? Text(
+                                      paymentController.upiDetails != null
+                                          ? 'edit'.toUpperCase()
+                                          : '${'add'.toUpperCase()} +',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600),
+                                    )
+                                  : Text(
+                                      paymentController.upiDetails != null
+                                          ? 'edit'.toUpperCase()
+                                          : '${'add'.toUpperCase()} +',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600),
+                                    ).translate(),
                             ),
                           ),
                         ],
@@ -229,14 +282,16 @@ class UpiRedeemScreen extends StatelessWidget {
                                 return RichText(
                                   text: TextSpan(
                                     text: snapShot.data,
-                                    style: Get.theme.primaryTextTheme.titleSmall!
+                                    style: Get
+                                        .theme.primaryTextTheme.titleSmall!
                                         .copyWith(
                                       letterSpacing: -0.2,
                                       fontWeight: FontWeight.w500,
                                     ),
                                     children: <TextSpan>[
                                       TextSpan(
-                                        text: " ${paymentController.upiDetails!.upi}",
+                                        text:
+                                            " ${paymentController.upiDetails!.upi}",
                                         style: Get
                                             .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
@@ -271,13 +326,21 @@ class UpiRedeemScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   alignment: Alignment.center,
-                  child: Text(
-                    'Send Withdrawal Request',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600),
-                  ).translate(),
+                  child: GetPlatform.isWeb
+                      ? Text(
+                          'Send Withdrawal Request',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600),
+                        )
+                      : Text(
+                          'Send Withdrawal Request',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600),
+                        ).translate(),
                 ),
               )
             : SizedBox(),

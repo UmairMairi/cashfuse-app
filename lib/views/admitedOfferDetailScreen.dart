@@ -5,8 +5,9 @@ import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/models/admitedoffersModal.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/getStartedScreen.dart';
+import 'package:cashfuse/views/seeMoreAdmitedOffers.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/drawerWidget.dart';
+import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:customizable_space_bar/customizable_space_bar.dart';
@@ -49,7 +50,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
       return SafeArea(
         child: Scaffold(
           key: scaffoldKey,
-          drawer: global.getPlatFrom() ? DrawerWidget() : null,
+          drawer: global.getPlatFrom() ? WebDrawerWidget() : null,
           appBar: global.getPlatFrom()
               ? WebTopBarWidget(
                   scaffoldKey: scaffoldKey,
@@ -536,10 +537,9 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                               ),
                               widget.fromSeeMore!
                                   ? SizedBox()
-                                  : homeController.seeMoreCampaignList !=
-                                              null &&
+                                  : homeController.seeMoreAdmitedList != null &&
                                           homeController
-                                                  .seeMoreCampaignList.length >
+                                                  .seeMoreAdmitedList.length >
                                               0
                                       ? InkWell(
                                           onTap: () async {
@@ -550,12 +550,8 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                                       child: SizedBox(
                                                         height: 500,
                                                         width: 500,
-                                                        // child:
-                                                        //     MoreAdmitedOffers(
-                                                        //   id: widget
-                                                        //       .admitedData['id']
-                                                        //       .toString(),
-                                                        // ),
+                                                        child:
+                                                            MoreAdmitedOffers(),
                                                       ),
                                                     ),
                                                   )
@@ -568,11 +564,8 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                                         topRight:
                                                             Radius.circular(15),
                                                       ),
-                                                      // child: MoreAdmitedOffers(
-                                                      //   id: widget
-                                                      //       .admitedData['id']
-                                                      //       .toString(),
-                                                      // ),
+                                                      child:
+                                                          MoreAdmitedOffers(),
                                                     ),
                                                   );
                                           },
@@ -672,7 +665,8 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                             ),
                           ),
                           (admitedData.partner!.leftTab != null &&
-                                      admitedData.partner!.leftTab!.isNotEmpty) ||
+                                      admitedData
+                                          .partner!.leftTab!.isNotEmpty) ||
                                   (admitedData.partner!.rightTab != null &&
                                       admitedData.partner!.rightTab!.isNotEmpty)
                               ? Icon(
