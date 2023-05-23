@@ -61,7 +61,7 @@ class HomeScreen extends StatelessWidget {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  HomeController homeController = Get.find<HomeController>();
+  HomeController homeController = Get.put(HomeController());
 
   CouponController couponController = Get.find<CouponController>();
 
@@ -1555,7 +1555,7 @@ class HomeScreen extends StatelessWidget {
                                                                           child:
                                                                               RichText(
                                                                             text:
-                                                                                TextSpan(text: snapShot.data, style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w500, fontSize: 10), children: [
+                                                                                TextSpan(text: snapShot.data != null ? snapShot.data! : 'Price Compared ', style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w500, fontSize: 10), children: [
                                                                               TextSpan(text: ' (${homeController.productList[index].productPrices!.length} Sellers)', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 10, color: Colors.blueAccent.shade400)),
                                                                             ]),
                                                                           ),

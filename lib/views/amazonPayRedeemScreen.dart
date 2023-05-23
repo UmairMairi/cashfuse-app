@@ -4,6 +4,7 @@ import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -36,8 +37,8 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                   ),
                 ),
                 title: GetPlatform.isWeb
-                    ? Text(
-                        'Amazon Pay Redeem',
+                    ? TranslationTextWidget(
+                        text: 'Amazon Pay Redeem',
                         style: Get.theme.primaryTextTheme.titleSmall!
                             .copyWith(color: Colors.white),
                       )
@@ -90,8 +91,8 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GetPlatform.isWeb
-                              ? Text(
-                                  'Account Details',
+                              ? TranslationTextWidget(
+                                  text: 'Account Details',
                                   style: Get.theme.primaryTextTheme.titleMedium!
                                       .copyWith(fontWeight: FontWeight.w600),
                                 )
@@ -138,8 +139,8 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           GetPlatform.isWeb
-                                              ? Text(
-                                                  'Add Amazon Account',
+                                              ? TranslationTextWidget(
+                                                  text: 'Add Amazon Account',
                                                   style: Get
                                                       .theme
                                                       .primaryTextTheme
@@ -247,8 +248,8 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                               ),
                                               alignment: Alignment.center,
                                               child: GetPlatform.isWeb
-                                                  ? Text(
-                                                      paymentController
+                                                  ? TranslationTextWidget(
+                                                      text: paymentController
                                                                   .amazonDetails !=
                                                               null
                                                           ? 'edit'.toUpperCase()
@@ -292,8 +293,9 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: GetPlatform.isWeb
-                                  ? Text(
-                                      paymentController.amazonDetails != null
+                                  ? TranslationTextWidget(
+                                      text: paymentController.amazonDetails !=
+                                              null
                                           ? 'edit'.toUpperCase()
                                           : 'add'.toUpperCase() + '+',
                                       style: TextStyle(
@@ -366,8 +368,8 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                   ),
                   alignment: Alignment.center,
                   child: GetPlatform.isWeb
-                      ? Text(
-                          'Send Withdrawal Request',
+                      ? TranslationTextWidget(
+                          text: 'Send Withdrawal Request',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,

@@ -7,6 +7,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/categoryScreen.dart';
 import 'package:cashfuse/widget/admobNativeAdWidget.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/fbNativeAdWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
@@ -54,8 +55,8 @@ class AllCategoriesScreen extends StatelessWidget {
                 ),
               ),
               title: GetPlatform.isWeb
-                  ? Text(
-                      'All Categories',
+                  ? TranslationTextWidget(
+                      text: 'All Categories',
                       style: Get.theme.primaryTextTheme.titleSmall!
                           .copyWith(color: Colors.white),
                     )
@@ -116,8 +117,8 @@ class AllCategoriesScreen extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 5),
                                       child: GetPlatform.isWeb
-                                          ? Text(
-                                              controller
+                                          ? TranslationTextWidget(
+                                              text: controller
                                                   .topCategoryList[index].name!
                                                   .toUpperCase(),
                                               textAlign: TextAlign.center,

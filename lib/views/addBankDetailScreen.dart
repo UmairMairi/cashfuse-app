@@ -3,6 +3,7 @@
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/addBankAccountDialog.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -28,8 +29,8 @@ class AddPaymentDetailScreen extends StatelessWidget {
                   ),
                 ),
                 title: GetPlatform.isWeb
-                    ? Text(
-                        'Bank Transfer Redeem',
+                    ? TranslationTextWidget(
+                        text: 'Bank Transfer Redeem',
                         style: Get.theme.primaryTextTheme.titleSmall!
                             .copyWith(color: Colors.white),
                       )
@@ -89,8 +90,8 @@ class AddPaymentDetailScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GetPlatform.isWeb
-                              ? Text(
-                                  'Account Details',
+                              ? TranslationTextWidget(
+                                  text: 'Account Details',
                                   style: Get.theme.primaryTextTheme.titleMedium!
                                       .copyWith(fontWeight: FontWeight.w600),
                                 )
@@ -120,10 +121,11 @@ class AddPaymentDetailScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: GetPlatform.isWeb
-                                  ? Text(
-                                      paymentController.bankDetails != null
-                                          ? 'edit'.toUpperCase()
-                                          : 'add'.toUpperCase(),
+                                  ? TranslationTextWidget(
+                                      text:
+                                          paymentController.bankDetails != null
+                                              ? 'edit'.toUpperCase()
+                                              : 'add'.toUpperCase(),
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
@@ -287,8 +289,8 @@ class AddPaymentDetailScreen extends StatelessWidget {
                   ),
                   alignment: Alignment.center,
                   child: GetPlatform.isWeb
-                      ? Text(
-                          'Send Withdrawal Request',
+                      ? TranslationTextWidget(
+                          text: 'Send Withdrawal Request',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,

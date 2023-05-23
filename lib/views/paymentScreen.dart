@@ -2,6 +2,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/dateConverter.dart';
 import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +33,8 @@ class PaymentScreen extends StatelessWidget {
                 ),
               ),
               title: GetPlatform.isWeb
-                  ? Text(
-                      'Payments',
+                  ? TranslationTextWidget(
+                      text: 'Payments',
                       style: Get.theme.primaryTextTheme.titleSmall!
                           .copyWith(color: Colors.white),
                     )
@@ -159,8 +160,8 @@ class PaymentScreen extends StatelessWidget {
                                                     ? Colors.red
                                                     : Colors.orange,
                                           ),
-                                          child: Text(
-                                            global
+                                          child: TranslationTextWidget(
+                                            text: global
                                                         .currentUser
                                                         .withdrawalRequest![
                                                             index]
@@ -274,8 +275,8 @@ class PaymentScreen extends StatelessWidget {
                                           : Colors.orange,
                                 ),
                                 child: GetPlatform.isWeb
-                                    ? Text(
-                                        global
+                                    ? TranslationTextWidget(
+                                        text: global
                                                     .currentUser
                                                     .withdrawalRequest![index]
                                                     .approved ==
@@ -333,8 +334,8 @@ class PaymentScreen extends StatelessWidget {
                       )
                 : Center(
                     child: GetPlatform.isWeb
-                        ? Text(
-                            'No data found',
+                        ? TranslationTextWidget(
+                            text: 'No data found',
                           )
                         : Text(
                             'No data found',

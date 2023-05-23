@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, invalid_use_of_protected_member
 
 import 'dart:convert';
 
@@ -7,6 +7,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/couponController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/controllers/localizationController.dart';
 import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
@@ -25,6 +26,7 @@ import 'package:cashfuse/views/webScreen/webAccountSettingScreen.dart';
 import 'package:cashfuse/views/webScreen/webMyEarningScreen.dart';
 import 'package:cashfuse/views/webScreen/webSearchScreen.dart';
 import 'package:cashfuse/widget/confirmationDialog.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -124,201 +126,39 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
               }),
             ),
             Expanded(child: SizedBox()),
-
-            // global.country != null
-            //     ? StatefulBuilder(
-            //         builder: (BuildContext context, StateSetter setState) =>
-            //             InkWell(
-            //           focusColor: Colors.transparent,
-            //           hoverColor: Colors.transparent,
-            //           splashColor: Colors.transparent,
-            //           highlightColor: Colors.transparent,
-            //           onTap: () {
-            //             if (global.appInfo.countryselection == 1) {
-            //               global.showCountryPopUp = true;
-
-            //               setState(() {});
-
-            //               // homeController.setCountryPopUp(true);
-            //               // homeController.refresh();
-
-            //               Get.to(
-            //                 () => BottomNavigationBarScreen(),
-            //                 preventDuplicates: false,
-            //                 routeName: 'home',
-            //               );
-
-            //               // Get.dialog(Dialog(child: CountrySelectWidget()));
-            //               // CountrySelectWidget();
-            //               // Get.dialog(
-            //               //   Dialog(
-            //               //     alignment: Alignment.topRight,
-            //               //     backgroundColor: Colors.transparent,
-            //               //     insetPadding:
-            //               //         EdgeInsets.only(top: 50, right: 20),
-            //               //     child: SizedBox(
-            //               //       width: Get.width / 2,
-            //               //       child: Column(
-            //               //         crossAxisAlignment:
-            //               //             CrossAxisAlignment.end,
-            //               //         // mainAxisAlignment: MainAxisAlignment.start,
-            //               //         // alignment: Alignment.topCenter,
-            //               //         // clipBehavior: Clip.none,
-            //               //         children: [
-            //               //           Align(
-            //               //             alignment: Alignment.topRight,
-            //               //             child: InkWell(
-            //               //               onTap: () async {
-            //               //                 Get.back();
-            //               //               },
-            //               //               child: CircleAvatar(
-            //               //                 radius: 15,
-            //               //                 child: Icon(
-            //               //                   Icons.close,
-            //               //                   color: Colors.black,
-            //               //                   size: 20,
-            //               //                 ),
-            //               //                 backgroundColor: Colors.white,
-            //               //               ),
-            //               //             ),
-            //               //           ),
-            //               //           StatefulBuilder(
-            //               //             builder: (BuildContext context,
-            //               //                     StateSetter setState) =>
-            //               //                 Container(
-            //               //               margin: EdgeInsets.only(top: 20),
-            //               //               color: Colors.white,
-            //               //               child: ListView.builder(
-            //               //                 padding: EdgeInsets.zero,
-            //               //                 shrinkWrap: true,
-            //               //                 itemCount: global
-            //               //                     .appInfo.countries.length,
-            //               //                 itemBuilder: (context, index) {
-            //               //                   return Column(
-            //               //                     children: [
-            //               //                       Row(
-            //               //                         mainAxisAlignment:
-            //               //                             MainAxisAlignment
-            //               //                                 .spaceBetween,
-            //               //                         children: [
-            //               //                           Padding(
-            //               //                             padding:
-            //               //                                 const EdgeInsets
-            //               //                                     .all(10.0),
-            //               //                             child: Text(global
-            //               //                                 .appInfo
-            //               //                                 .countries[
-            //               //                                     index]
-            //               //                                 .countryName),
-            //               //                           ),
-            //               //                           Radio(
-            //               //                             groupValue:
-            //               //                                 global.country,
-            //               //                             value: global
-            //               //                                     .appInfo
-            //               //                                     .countries[
-            //               //                                 index],
-            //               //                             onChanged: (value) {
-            //               //                               if (value !=
-            //               //                                   null) {
-            //               //                                 global.country =
-            //               //                                     value;
-            //               //                                 global.appInfo
-            //               //                                     .countries
-            //               //                                     .map((e) =>
-            //               //                                         e.isSelected =
-            //               //                                             false)
-            //               //                                     .toList();
-            //               //                                 global
-            //               //                                     .appInfo
-            //               //                                     .countries[
-            //               //                                         index]
-            //               //                                     .isSelected = true;
-
-            //               //                                 setState(() {});
-            //               //                                 Navigator.of(
-            //               //                                         context)
-            //               //                                     .pop(global
-            //               //                                         .country);
-            //               //                               }
-            //               //                             },
-            //               //                           )
-            //               //                         ],
-            //               //                       ),
-            //               //                       Divider(
-            //               //                         height: 0,
-            //               //                         thickness: 0.5,
-            //               //                       ),
-            //               //                     ],
-            //               //                   );
-            //               //                 },
-            //               //               ),
-            //               //             ),
-            //               //           ),
-            //               //           // Positioned(
-            //               //           //    top: !global.getPlatFrom() ? -50 : 10,
-            //               //           //   // right: -7,
-            //               //           //   child: InkWell(
-            //               //           //     onTap: () async {
-            //               //           //       Get.back();
-            //               //           //     },
-            //               //           //     child: CircleAvatar(
-            //               //           //       radius: 15,
-            //               //           //       child: Icon(
-            //               //           //         Icons.close,
-            //               //           //         color: Colors.black,
-            //               //           //         size: 20,
-            //               //           //       ),
-            //               //           //       backgroundColor: Colors.grey[400],
-            //               //           //     ),
-            //               //           //   ),
-            //               //           // ),
-            //               //         ],
-            //               //       ),
-            //               //     ),
-            //               //   ),
-            //               //   barrierDismissible: false,
-            //               // ).then((value) async {
-            //               //   if (value != null) {
-            //               //     global.country = value;
-            //               //     global.countrySlug = global.country.slug;
-            //               //     homeController.topBannerList = [];
-            //               //     homeController.topCategoryList = [];
-            //               //     couponController.couponList = [];
-            //               //     homeController.topCashbackList = [];
-            //               //     homeController.exclusiveOfferList = [];
-            //               //     homeController.productList = [];
-            //               //     homeController.trendingProductList = [];
-            //               //     homeController.newFlashOfferList = [];
-            //               //     homeController.homeAdvList = [];
-            //               //     homeController.allAdvList = [];
-
-            //               //     setState(() {});
-
-            //               //     await homeController.init();
-            //               //   }
-            //               // });
-            //             }
-            //           },
-            //           child: Container(
-            //             width: 35,
-            //             height: 35,
-            //             margin: EdgeInsets.only(right: 10),
-            //             alignment: Alignment.center,
-            //             decoration: BoxDecoration(
-            //               color: Get.theme.primaryColor,
-            //               borderRadius: BorderRadius.circular(10),
-            //               border:
-            //                   Border.all(color: Get.theme.secondaryHeaderColor),
-            //             ),
-            //             child: Text(
-            //               global.country!.countryCode!,
-            //               style: TextStyle(color: Colors.white),
-            //             ),
-            //           ),
-            //         ),
-            //       )
-            //     : SizedBox(),
+            global.appInfo.languages != null &&
+                    global.appInfo.languages!.length > 0
+                ? GetBuilder<LocalizationController>(
+                    builder: (localizationController) {
+                    return Card(
+                      elevation: 5,
+                      margin: EdgeInsets.only(top: 20, right: 10, bottom: 20),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: DropdownButton(
+                        value: localizationController.languageCode,
+                        alignment: AlignmentDirectional.center,
+                        elevation: 0,
+                        underline: SizedBox(),
+                        borderRadius: BorderRadius.circular(10),
+                        items: List.generate(global.appInfo.languages!.length,
+                            (index) {
+                          return DropdownMenuItem(
+                              alignment: AlignmentDirectional.center,
+                              value:
+                                  global.appInfo.languages![index].languageCode,
+                              child: Text(global
+                                  .appInfo.languages![index].languageName!));
+                        }),
+                        onChanged: (value) {
+                          localizationController.setLanguage(value!);
+                          localizationController.refresh();
+                        },
+                      ),
+                    );
+                  })
+                : SizedBox(),
             global.country != null
                 ? GetBuilder<HomeController>(
                     builder: (controller) => PopupMenuButton(
@@ -415,7 +255,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
               },
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Text('How It Works'),
+                child: TranslationTextWidget(text: 'How It Works'),
               ),
             ),
             VerticalDivider(
@@ -441,8 +281,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       child: Row(
                         children: [
                           Icon(Icons.person),
-                          Text(
-                            '  My Account',
+                          TranslationTextWidget(
+                            text: '  My Account',
                           ),
                         ],
                       ),
@@ -464,7 +304,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('Login or signup'),
+                      child: TranslationTextWidget(text: 'signup'),
                     ),
                   ),
             global.currentUser.id != null
@@ -518,8 +358,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'account',
                         );
                       },
-                      child: Text(
-                        'Account Settings',
+                      child: TranslationTextWidget(
+                        text: 'Account Settings',
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -535,8 +375,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'earning',
                         );
                       },
-                      child: Text(
-                        'My Earnings',
+                      child: TranslationTextWidget(
+                        text: 'My Earnings',
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -552,8 +392,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'payment',
                         );
                       },
-                      child: Text(
-                        'Payments',
+                      child: TranslationTextWidget(
+                        text: 'Payments',
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -569,8 +409,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'payment-history',
                         );
                       },
-                      child: Text(
-                        'Payment History',
+                      child: TranslationTextWidget(
+                        text: 'Payment History',
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -586,8 +426,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'recent-clicks',
                         );
                       },
-                      child: Text(
-                        'Recents Clicks',
+                      child: TranslationTextWidget(
+                        text: 'Recents Clicks',
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -603,8 +443,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'referral-network',
                         );
                       },
-                      child: Text(
-                        'Referral Network',
+                      child: TranslationTextWidget(
+                        text: 'Referral Network',
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -620,8 +460,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'faq',
                         );
                       },
-                      child: Text(
-                        'Get Help',
+                      child: TranslationTextWidget(
+                        text: 'Get Help',
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -637,8 +477,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'about',
                         );
                       },
-                      child: Text(
-                        'About Us',
+                      child: TranslationTextWidget(
+                        text: 'About Us',
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -654,8 +494,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'privacy',
                         );
                       },
-                      child: Text(
-                        'Privacy Policy',
+                      child: TranslationTextWidget(
+                        text: 'Privacy Policy',
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -672,8 +512,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           'Are you sure you want to logout ?',
                           [
                             CupertinoDialogAction(
-                              child: Text(
-                                'Yes',
+                              child: TranslationTextWidget(
+                                text: 'Yes',
                                 style: Get.theme.primaryTextTheme.titleSmall!
                                     .copyWith(color: Colors.red),
                               ),
@@ -688,8 +528,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                               },
                             ),
                             CupertinoDialogAction(
-                              child: Text(
-                                'No',
+                              child: TranslationTextWidget(
+                                text: 'No',
                                 style: Get.theme.primaryTextTheme.titleSmall!
                                     .copyWith(color: Colors.blue),
                               ),
@@ -700,8 +540,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           ],
                         );
                       },
-                      child: Text(
-                        'Logout',
+                      child: TranslationTextWidget(
+                        text: 'Logout',
                         style: Get.theme.primaryTextTheme.bodyMedium!.copyWith(
                           letterSpacing: -0.5,
                           color: Colors.red,

@@ -7,6 +7,7 @@ import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/webScreen/webAccountSettingScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
@@ -85,8 +86,8 @@ class WebDrawerWidget extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'Pending',
+                                    TranslationTextWidget(
+                                      text: 'Pending',
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -95,8 +96,8 @@ class WebDrawerWidget extends StatelessWidget {
                                         letterSpacing: 0,
                                       ),
                                     ),
-                                    Text(
-                                      global.currentUser.earning != null
+                                    TranslationTextWidget(
+                                      text: global.currentUser.earning != null
                                           ? '${global.appInfo.currency}${global.currentUser.earning!.pendingEarning}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
@@ -120,8 +121,8 @@ class WebDrawerWidget extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'Approved',
+                                    TranslationTextWidget(
+                                      text: 'Approved',
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -130,8 +131,8 @@ class WebDrawerWidget extends StatelessWidget {
                                         fontSize: 11,
                                       ),
                                     ),
-                                    Text(
-                                      global.currentUser.earning != null
+                                    TranslationTextWidget(
+                                      text: global.currentUser.earning != null
                                           ? '${global.appInfo.currency}${global.currentUser.earning!.remEarning}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
@@ -155,8 +156,8 @@ class WebDrawerWidget extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'Redeemed',
+                                    TranslationTextWidget(
+                                      text: 'Redeemed',
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -165,8 +166,8 @@ class WebDrawerWidget extends StatelessWidget {
                                         fontSize: 11,
                                       ),
                                     ),
-                                    Text(
-                                      global.currentUser.earning != null
+                                    TranslationTextWidget(
+                                      text: global.currentUser.earning != null
                                           ? '${global.appInfo.currency}${global.currentUser.earning!.withdrawal}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
@@ -190,8 +191,8 @@ class WebDrawerWidget extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'Rewards',
+                                    TranslationTextWidget(
+                                      text: 'Rewards',
                                       textAlign: TextAlign.center,
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
@@ -201,8 +202,8 @@ class WebDrawerWidget extends StatelessWidget {
                                         fontSize: 11,
                                       ),
                                     ),
-                                    Text(
-                                      global.currentUser.earning != null
+                                    TranslationTextWidget(
+                                      text: global.currentUser.earning != null
                                           ? '${global.appInfo.currency}${global.currentUser.earning!.rewardEarning}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
@@ -256,14 +257,14 @@ class WebDrawerWidget extends StatelessWidget {
                               ),
                               title: global.currentUser.name!.isNotEmpty
                                   ? Text(
-                                      global.currentUser.name!,
+                                       global.currentUser.name!,
                                       style: Get
                                           .theme.primaryTextTheme.titleMedium!
                                           .copyWith(color: Colors.white),
                                     )
                                   : global.currentUser.phone!.isNotEmpty
                                       ? Text(
-                                          global.currentUser.phone!,
+                                           global.currentUser.phone!,
                                           style: Get
                                               .theme.primaryTextTheme.bodySmall!
                                               .copyWith(color: Colors.white),
@@ -272,7 +273,7 @@ class WebDrawerWidget extends StatelessWidget {
                               subtitle: global.currentUser.name!.isEmpty
                                   ? SizedBox()
                                   : Text(
-                                      global.currentUser.email!.isNotEmpty
+                                       global.currentUser.email!.isNotEmpty
                                           ? global.currentUser.email!
                                           : global.currentUser.phone!,
                                       style: Get
@@ -324,8 +325,8 @@ class WebDrawerWidget extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'Pending',
+                                    TranslationTextWidget(
+                                      text: 'Pending',
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -334,8 +335,8 @@ class WebDrawerWidget extends StatelessWidget {
                                         letterSpacing: 0,
                                       ),
                                     ),
-                                    Text(
-                                      global.currentUser.earning != null
+                                    TranslationTextWidget(
+                                      text: global.currentUser.earning != null
                                           ? '${global.appInfo.currency}${global.currentUser.earning!.pendingEarning}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
@@ -359,8 +360,8 @@ class WebDrawerWidget extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'Approved',
+                                    TranslationTextWidget(
+                                      text: 'Approved',
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -369,8 +370,8 @@ class WebDrawerWidget extends StatelessWidget {
                                         fontSize: 11,
                                       ),
                                     ),
-                                    Text(
-                                      global.currentUser.earning != null
+                                    TranslationTextWidget(
+                                      text: global.currentUser.earning != null
                                           ? '${global.appInfo.currency}${global.currentUser.earning!.remEarning}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
@@ -394,8 +395,8 @@ class WebDrawerWidget extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'Redeemed',
+                                    TranslationTextWidget(
+                                      text: 'Redeemed',
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -404,8 +405,8 @@ class WebDrawerWidget extends StatelessWidget {
                                         fontSize: 11,
                                       ),
                                     ),
-                                    Text(
-                                      global.currentUser.earning != null
+                                    TranslationTextWidget(
+                                      text: global.currentUser.earning != null
                                           ? '${global.appInfo.currency}${global.currentUser.earning!.withdrawal}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
@@ -429,8 +430,8 @@ class WebDrawerWidget extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'Rewards',
+                                    TranslationTextWidget(
+                                      text: 'Rewards',
                                       textAlign: TextAlign.center,
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
@@ -440,8 +441,8 @@ class WebDrawerWidget extends StatelessWidget {
                                         fontSize: 11,
                                       ),
                                     ),
-                                    Text(
-                                      global.currentUser.earning != null
+                                    TranslationTextWidget(
+                                      text: global.currentUser.earning != null
                                           ? '${global.appInfo.currency}${global.currentUser.earning!.rewardEarning}'
                                           : '${global.appInfo.currency}0.00',
                                       textAlign: TextAlign.center,
@@ -458,7 +459,8 @@ class WebDrawerWidget extends StatelessWidget {
                             ),
                           ],
                         )
-                        //: Text('Welcome!'),
+                        //: TranslationTextWidget(
+                        // text:'Welcome!'),
                         ),
                 // InkWell(
                 //   onTap: () {},
@@ -473,7 +475,8 @@ class WebDrawerWidget extends StatelessWidget {
                 //         SizedBox(
                 //           width: 20,
                 //         ),
-                //         Text(
+                //         TranslationTextWidget(
+                // text:
                 //           'Home',
                 //           style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                 //             letterSpacing: 0,
@@ -526,8 +529,8 @@ class WebDrawerWidget extends StatelessWidget {
                         SizedBox(
                           width: 20,
                         ),
-                        Text(
-                          'My Account',
+                        TranslationTextWidget(
+                          text: 'My Account',
                           style: Get.theme.primaryTextTheme.bodyLarge!.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
@@ -560,8 +563,8 @@ class WebDrawerWidget extends StatelessWidget {
                         SizedBox(
                           width: 20,
                         ),
-                        Text(
-                          'All Categories',
+                        TranslationTextWidget(
+                          text: 'All Categories',
                           style: Get.theme.primaryTextTheme.bodyLarge!.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
@@ -594,8 +597,8 @@ class WebDrawerWidget extends StatelessWidget {
                         SizedBox(
                           width: 20,
                         ),
-                        Text(
-                          'Redeem Cashback',
+                        TranslationTextWidget(
+                          text: 'Redeem Cashback',
                           style: Get.theme.primaryTextTheme.bodyLarge!.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
@@ -628,8 +631,8 @@ class WebDrawerWidget extends StatelessWidget {
                         SizedBox(
                           width: 20,
                         ),
-                        Text(
-                          'All in one search',
+                        TranslationTextWidget(
+                          text: 'All in one search',
                           style: Get.theme.primaryTextTheme.bodyLarge!.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
@@ -665,7 +668,8 @@ class WebDrawerWidget extends StatelessWidget {
                 //         SizedBox(
                 //           width: 20,
                 //         ),
-                //         Text(
+                //         TranslationTextWidget(
+                // text:
                 //           'How ${global.appName} works?',
                 //           style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
                 //             letterSpacing: 0,
@@ -706,8 +710,8 @@ class WebDrawerWidget extends StatelessWidget {
                               SizedBox(
                                 width: 20,
                               ),
-                              Text(
-                                'Share The App',
+                              TranslationTextWidget(
+                                text: 'Share The App',
                                 style: Get.theme.primaryTextTheme.bodyLarge!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -743,8 +747,8 @@ class WebDrawerWidget extends StatelessWidget {
                               SizedBox(
                                 width: 20,
                               ),
-                              Text(
-                                'Rate the App',
+                              TranslationTextWidget(
+                                text: 'Rate the App',
                                 style: Get.theme.primaryTextTheme.bodyLarge!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -779,8 +783,8 @@ class WebDrawerWidget extends StatelessWidget {
                         SizedBox(
                           width: 20,
                         ),
-                        Text(
-                          'Get Help',
+                        TranslationTextWidget(
+                          text: 'Get Help',
                           style: Get.theme.primaryTextTheme.bodyLarge!.copyWith(
                             letterSpacing: 0,
                             fontWeight: FontWeight.w300,
@@ -797,8 +801,8 @@ class WebDrawerWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Login or signup',
+                TranslationTextWidget(
+                  text: 'Login or signup',
                   textAlign: TextAlign.center,
                   style: Get.theme.primaryTextTheme.headlineSmall!.copyWith(
                     letterSpacing: -1,
@@ -809,8 +813,9 @@ class WebDrawerWidget extends StatelessWidget {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  child: Text(
-                    'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
+                  child: TranslationTextWidget(
+                    text:
+                        'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
                     textAlign: TextAlign.center,
                     style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                       letterSpacing: -0.2,
@@ -870,8 +875,8 @@ class WebDrawerWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     alignment: Alignment.center,
-                    child: Text(
-                      'Continue'.toUpperCase(),
+                    child: TranslationTextWidget(
+                      text: 'Continue'.toUpperCase(),
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 14,

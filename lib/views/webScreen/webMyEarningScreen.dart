@@ -6,6 +6,7 @@ import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/webScreen/webMyOrdersScreen.dart';
 import 'package:cashfuse/views/webScreen/webRequestPaymentScreen.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -35,8 +36,8 @@ class WebMyEarningSceen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: Text(
-                'My Earnings',
+              title: TranslationTextWidget(
+                text: 'My Earnings',
                 style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ),
@@ -71,8 +72,8 @@ class WebMyEarningSceen extends StatelessWidget {
                         ListTile(
                           title: Row(
                             children: [
-                              Text(
-                                'Total Earnings',
+                              TranslationTextWidget(
+                                text: 'Total Earnings',
                               ),
                               InkWell(
                                 onTap: () {
@@ -138,8 +139,9 @@ class WebMyEarningSceen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10),
-                          child: Text(
-                            'Earning will show here within 24 hours of your shopping via ${global.appName}.',
+                          child: TranslationTextWidget(
+                            text:
+                                'Earning will show here within 24 hours of your shopping via ${global.appName}.',
                             style:
                                 Get.theme.primaryTextTheme.bodyLarge!.copyWith(
                               color: Colors.grey[600],
@@ -196,10 +198,10 @@ class WebMyEarningSceen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          'My Order Details',
-                                          style: Get
-                                              .theme.primaryTextTheme.titleSmall!
+                                        TranslationTextWidget(
+                                          text: 'My Order Details',
+                                          style: Get.theme.primaryTextTheme
+                                              .titleSmall!
                                               .copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
@@ -218,8 +220,8 @@ class WebMyEarningSceen extends StatelessWidget {
                                         ),
                                         Row(
                                           children: [
-                                            Text(
-                                              'View More',
+                                            TranslationTextWidget(
+                                              text: 'View More',
                                               style: Get.theme.primaryTextTheme
                                                   .titleSmall!
                                                   .copyWith(
@@ -310,10 +312,10 @@ class WebMyEarningSceen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          'Recents Clicks',
-                                          style: Get
-                                              .theme.primaryTextTheme.titleSmall!
+                                        TranslationTextWidget(
+                                          text: 'Recents Clicks',
+                                          style: Get.theme.primaryTextTheme
+                                              .titleSmall!
                                               .copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
@@ -332,8 +334,8 @@ class WebMyEarningSceen extends StatelessWidget {
                                         ),
                                         Row(
                                           children: [
-                                            Text(
-                                              'View More',
+                                            TranslationTextWidget(
+                                              text: 'View More',
                                               style: Get.theme.primaryTextTheme
                                                   .titleSmall!
                                                   .copyWith(
@@ -418,10 +420,10 @@ class WebMyEarningSceen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          'Request Payments',
-                                          style: Get
-                                              .theme.primaryTextTheme.titleSmall!
+                                        TranslationTextWidget(
+                                          text: 'Request Payments',
+                                          style: Get.theme.primaryTextTheme
+                                              .titleSmall!
                                               .copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
@@ -440,8 +442,8 @@ class WebMyEarningSceen extends StatelessWidget {
                                         ),
                                         Row(
                                           children: [
-                                            Text(
-                                              'View More',
+                                            TranslationTextWidget(
+                                              text: 'View More',
                                               style: Get.theme.primaryTextTheme
                                                   .titleSmall!
                                                   .copyWith(
@@ -528,10 +530,10 @@ class WebMyEarningSceen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          'Get Help',
-                                          style: Get
-                                              .theme.primaryTextTheme.titleSmall!
+                                        TranslationTextWidget(
+                                          text: 'Get Help',
+                                          style: Get.theme.primaryTextTheme
+                                              .titleSmall!
                                               .copyWith(
                                             color: Colors.white,
                                             fontSize: 18,
@@ -550,8 +552,8 @@ class WebMyEarningSceen extends StatelessWidget {
                                         ),
                                         Row(
                                           children: [
-                                            Text(
-                                              'View More',
+                                            TranslationTextWidget(
+                                              text: 'View More',
                                               style: Get.theme.primaryTextTheme
                                                   .titleSmall!
                                                   .copyWith(
@@ -660,8 +662,9 @@ class WebMyEarningSceen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Text(
-                        'Your total eanings and amount includes your Cashback + Rewards + Refferal amount.',
+                      TranslationTextWidget(
+                        text:
+                            'Your total eanings and amount includes your Cashback + Rewards + Refferal amount.',
                         style: Get.theme.primaryTextTheme.bodyMedium,
                       ),
                     ],

@@ -1,6 +1,7 @@
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/models/categoryModel.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
@@ -39,8 +40,8 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GetPlatform.isWeb
-                            ? Text(
-                                homeController.isOffer
+                            ? TranslationTextWidget(
+                                text: homeController.isOffer
                                     ? partner.rightTab!
                                     : partner.leftTab!,
                                 style: Get.theme.primaryTextTheme.titleSmall!
@@ -107,8 +108,8 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                                         .setIsOffer(false);
                                   },
                                   child: GetPlatform.isWeb
-                                      ? Text(
-                                          partner.leftTab!,
+                                      ? TranslationTextWidget(
+                                          text: partner.leftTab!,
                                           style: Get.theme.primaryTextTheme
                                               .titleSmall!
                                               .copyWith(
@@ -134,8 +135,8 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                                     homeController.setIsOffer(true);
                                   },
                                   child: GetPlatform.isWeb
-                                      ? Text(
-                                          partner.rightTab!,
+                                      ? TranslationTextWidget(
+                                          text: partner.rightTab!,
                                           style: Get.theme.primaryTextTheme
                                               .titleSmall!
                                               .copyWith(

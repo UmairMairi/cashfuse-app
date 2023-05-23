@@ -2,6 +2,7 @@ import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/views/campaignDetailScreen.dart';
 import 'package:cashfuse/views/webScreen/webCampaignDetailScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -26,8 +27,8 @@ class MoreCampignScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GetPlatform.isWeb
-                        ? Text(
-                            'See More Offers',
+                        ? TranslationTextWidget(
+                            text: 'See More Offers',
                             style:
                                 Get.theme.primaryTextTheme.titleSmall!.copyWith(
                               fontWeight: FontWeight.w600,
@@ -84,8 +85,8 @@ class MoreCampignScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   GetPlatform.isWeb
-                                      ? Text(
-                                          homeController
+                                      ? TranslationTextWidget(
+                                          text: homeController
                                               .seeMoreCampaignList[index].name!,
                                           textAlign: TextAlign.start,
                                           style: Get.theme.primaryTextTheme
@@ -99,8 +100,8 @@ class MoreCampignScreen extends StatelessWidget {
                                               .titleSmall,
                                         ).translate(),
                                   GetPlatform.isWeb
-                                      ? Text(
-                                          homeController
+                                      ? TranslationTextWidget(
+                                          text: homeController
                                               .seeMoreCampaignList[index]
                                               .description!,
                                           textAlign: TextAlign.start,
@@ -156,8 +157,8 @@ class MoreCampignScreen extends StatelessWidget {
                                 )),
                             alignment: Alignment.center,
                             child: GetPlatform.isWeb
-                                ? Text(
-                                    homeController
+                                ? TranslationTextWidget(
+                                    text: homeController
                                         .seeMoreCampaignList[index].buttonText!,
                                     style: TextStyle(
                                         color: Get.theme.secondaryHeaderColor,

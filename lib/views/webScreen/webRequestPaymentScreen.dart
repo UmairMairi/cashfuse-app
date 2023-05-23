@@ -7,6 +7,7 @@ import 'package:cashfuse/views/amazonPayRedeemScreen.dart';
 import 'package:cashfuse/views/payPalRedeemScreen.dart';
 import 'package:cashfuse/views/paytmRedeemScreen.dart';
 import 'package:cashfuse/views/upiRedeemScreen.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +34,8 @@ class WebRequestPaymentScreen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: Text(
-                'Request Payments',
+              title: TranslationTextWidget(
+                text: 'Request Payments',
                 style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ),
@@ -60,8 +61,8 @@ class WebRequestPaymentScreen extends StatelessWidget {
                         padding: EdgeInsets.all(15),
                         child: Column(
                           children: [
-                            Text(
-                              'Request Payments',
+                            TranslationTextWidget(
+                              text: 'Request Payments',
                               style: Get.theme.primaryTextTheme.titleLarge!
                                   .copyWith(fontSize: 18),
                             ),
@@ -75,8 +76,8 @@ class WebRequestPaymentScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'Remaining Earning',
+                                  TranslationTextWidget(
+                                    text: 'Remaining Earning',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w300,
@@ -95,8 +96,8 @@ class WebRequestPaymentScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  'Send Withdrawal Request',
+                                TranslationTextWidget(
+                                  text: 'Send Withdrawal Request',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w300,
@@ -117,8 +118,8 @@ class WebRequestPaymentScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'Successful Withdrawal',
+                                  TranslationTextWidget(
+                                    text: 'Successful Withdrawal',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w300,
@@ -137,8 +138,8 @@ class WebRequestPaymentScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  'Total Earnings',
+                                TranslationTextWidget(
+                                  text: 'Total Earnings',
                                   style: Get.theme.primaryTextTheme.titleSmall,
                                 ),
                                 Text(
@@ -163,8 +164,8 @@ class WebRequestPaymentScreen extends StatelessWidget {
                       padding: EdgeInsets.all(15),
                       child: Column(
                         children: [
-                          Text(
-                            'Redeem',
+                          TranslationTextWidget(
+                            text: 'Redeem',
                             style: Get.theme.primaryTextTheme.titleLarge!
                                 .copyWith(fontSize: 18),
                           ),
@@ -211,8 +212,8 @@ class WebRequestPaymentScreen extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        'Amazon Pay',
+                                      TranslationTextWidget(
+                                        text: 'Amazon Pay',
                                         style: Get
                                             .theme.primaryTextTheme.titleLarge!
                                             .copyWith(
@@ -291,8 +292,8 @@ class WebRequestPaymentScreen extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        'PayTM',
+                                      TranslationTextWidget(
+                                        text: 'PayTM',
                                         style: Get
                                             .theme.primaryTextTheme.titleLarge!
                                             .copyWith(
@@ -370,8 +371,8 @@ class WebRequestPaymentScreen extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        ' UPI',
+                                      TranslationTextWidget(
+                                        text: ' UPI',
                                         style: Get
                                             .theme.primaryTextTheme.titleLarge!
                                             .copyWith(
@@ -450,8 +451,8 @@ class WebRequestPaymentScreen extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        ' Bank Transfer',
+                                      TranslationTextWidget(
+                                        text: ' Bank Transfer',
                                         style: Get
                                             .theme.primaryTextTheme.titleLarge!
                                             .copyWith(
@@ -530,8 +531,8 @@ class WebRequestPaymentScreen extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        ' PayPal',
+                                      TranslationTextWidget(
+                                        text: ' PayPal',
                                         style: Get
                                             .theme.primaryTextTheme.titleLarge!
                                             .copyWith(

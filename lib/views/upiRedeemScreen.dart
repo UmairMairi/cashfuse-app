@@ -3,6 +3,7 @@
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,8 +34,8 @@ class UpiRedeemScreen extends StatelessWidget {
                   ),
                 ),
                 title: GetPlatform.isWeb
-                    ? Text(
-                        'Upi Redeem',
+                    ? TranslationTextWidget(
+                        text: 'Upi Redeem',
                         style: Get.theme.primaryTextTheme.titleSmall!
                             .copyWith(color: Colors.white),
                       )
@@ -95,8 +96,8 @@ class UpiRedeemScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GetPlatform.isWeb
-                              ? Text(
-                                  'Account Details',
+                              ? TranslationTextWidget(
+                                  text: 'Account Details',
                                   style: Get.theme.primaryTextTheme.titleMedium!
                                       .copyWith(fontWeight: FontWeight.w600),
                                 )
@@ -124,8 +125,8 @@ class UpiRedeemScreen extends StatelessWidget {
                                     child: Column(
                                       children: [
                                         GetPlatform.isWeb
-                                            ? Text(
-                                                'Add Upi Account',
+                                            ? TranslationTextWidget(
+                                                text: 'Add Upi Account',
                                                 style: Get
                                                     .theme
                                                     .primaryTextTheme
@@ -210,8 +211,8 @@ class UpiRedeemScreen extends StatelessWidget {
                                             ),
                                             alignment: Alignment.center,
                                             child: GetPlatform.isWeb
-                                                ? Text(
-                                                    paymentController
+                                                ? TranslationTextWidget(
+                                                    text: paymentController
                                                                 .upiDetails !=
                                                             null
                                                         ? 'edit'.toUpperCase()
@@ -253,8 +254,8 @@ class UpiRedeemScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: GetPlatform.isWeb
-                                  ? Text(
-                                      paymentController.upiDetails != null
+                                  ? TranslationTextWidget(
+                                      text: paymentController.upiDetails != null
                                           ? 'edit'.toUpperCase()
                                           : '${'add'.toUpperCase()} +',
                                       style: TextStyle(
@@ -327,8 +328,8 @@ class UpiRedeemScreen extends StatelessWidget {
                   ),
                   alignment: Alignment.center,
                   child: GetPlatform.isWeb
-                      ? Text(
-                          'Send Withdrawal Request',
+                      ? TranslationTextWidget(
+                          text: 'Send Withdrawal Request',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,

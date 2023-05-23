@@ -273,7 +273,7 @@ class APIHelper {
     }
   }
 
-  Future<dynamic> getTopCategories(int page) async {
+  Future<dynamic> getTopCategory(int page) async {
     try {
       Response response;
       var dio = Dio();
@@ -294,7 +294,7 @@ class APIHelper {
           '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstants.CAEGORY_URI}\n${response.data}');
       return getDioResult(response, recordList);
     } catch (e) {
-      print("Exception -  apiHelper.dart - getTopCategories():" + e.toString());
+      print("Exception -  apiHelper.dart - getTopCategory():" + e.toString());
     }
   }
 

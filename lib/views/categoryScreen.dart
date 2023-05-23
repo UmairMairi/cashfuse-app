@@ -12,6 +12,7 @@ import 'package:cashfuse/views/webScreen/webAdsDetailScreen.dart';
 import 'package:cashfuse/views/webScreen/webCampaignDetailScreen.dart';
 import 'package:cashfuse/widget/admobNativeAdWidget.dart';
 import 'package:cashfuse/widget/adsCampaignWidget.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/fbNativeAdWidget.dart';
 import 'package:cashfuse/widget/web/webAdsCampaignWidget.dart';
@@ -71,21 +72,25 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   Icons.arrow_back,
                 ),
               ),
-              title: FutureBuilder(
-                future: global.translatedText(
-                    widget.category != null ? widget.category!.name! : ''),
-                builder: (context, snapshot) {
-                  return Text(
-                    snapshot.data != null
-                        ? snapshot.data!
-                        : widget.category != null
-                            ? widget.category!.name!
-                            : '',
-                    style: Get.theme.primaryTextTheme.titleSmall!
-                        .copyWith(color: Colors.white),
-                  );
-                },
-              ),
+              title: TranslationTextWidget(
+                  text: widget.category != null ? widget.category!.name! : '',
+                  style: Get.theme.primaryTextTheme.titleSmall!
+                      .copyWith(color: Colors.white)),
+              // FutureBuilder(
+              //   future: global.translatedText(
+              //       widget.category != null ? widget.category!.name! : ''),
+              //   builder: (context, snapshot) {
+              //     return Text(
+              //       snapshot.data != null
+              //           ? snapshot.data!
+              //           : widget.category != null
+              //               ? widget.category!.name!
+              //               : '',
+              //       style: Get.theme.primaryTextTheme.titleSmall!
+              //           .copyWith(color: Colors.white),
+              //     );
+              //   },
+              // ),
             ),
       body: GetBuilder<AdController>(builder: (adController) {
         return SingleChildScrollView(
@@ -258,16 +263,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       : SizedBox(
                           // height: Get.height,
                           child: Center(
-                              child: FutureBuilder(
-                            future: global.translatedText('No data found.'),
-                            builder: (context, snapshot) {
-                              return Text(
-                                snapshot.data != null
-                                    ? snapshot.data!
-                                    : 'No data found.',
-                                textAlign: TextAlign.center,
-                              );
-                            },
+                              child: TranslationTextWidget(
+                            text: 'No data found.',
+                            textAlign: TextAlign.center,
                           )),
                         ),
                 ],

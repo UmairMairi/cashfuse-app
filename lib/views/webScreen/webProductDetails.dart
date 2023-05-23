@@ -6,6 +6,7 @@ import 'package:cashfuse/utils/myColors.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -156,8 +157,8 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                         borderRadius: BorderRadius.circular(5),
                                         color: Colors.black,
                                       ),
-                                      child: Text(
-                                        "Grab Now",
+                                      child: TranslationTextWidget(
+                                        text: "Grab Now",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
@@ -190,8 +191,8 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                             fontWeight: FontWeight.w400,
                                             fontSize: 12),
                                       ),
-                                      Text(
-                                        "Seller price",
+                                      TranslationTextWidget(
+                                        text: "Seller price",
                                         style: TextStyle(
                                             color: Colors.black54,
                                             fontWeight: FontWeight.w400,
@@ -210,8 +211,8 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                   product.productPrices![index].cashback == null
                                       ? Container(
                                           width: 70,
-                                          child: Text(
-                                            "This is the best Price",
+                                          child: TranslationTextWidget(
+                                            text: "This is the best Price",
                                             style: TextStyle(
                                                 color: Colors.black54,
                                                 fontWeight: FontWeight.w400,
@@ -227,7 +228,8 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 12),
                                             ),
-                                            Text(
+                                            TranslationTextWidget(
+                                text:
                                               "CashBack",
                                               style: TextStyle(
                                                   color: Colors.black54,
@@ -253,7 +255,8 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                             fontWeight: FontWeight.w500,
                                             fontSize: 12),
                                       ),
-                                      Text(
+                                      TranslationTextWidget(
+                                text:
                                         "Best Price",
                                         style: TextStyle(
                                             color: Colors.black54,

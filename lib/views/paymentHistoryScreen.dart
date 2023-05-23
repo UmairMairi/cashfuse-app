@@ -4,6 +4,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/dateConverter.dart';
 import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,8 +29,8 @@ class PaymentHistoryScreen extends StatelessWidget {
                 ),
               ),
               title: GetPlatform.isWeb
-                  ? Text(
-                      'Payment History',
+                  ? TranslationTextWidget(
+                      text: 'Payment History',
                       style: Get.theme.primaryTextTheme.titleSmall!
                           .copyWith(color: Colors.white),
                     )
@@ -150,8 +151,8 @@ class PaymentHistoryScreen extends StatelessWidget {
                                                         ? Colors.red
                                                         : Colors.orange,
                                               ),
-                                              child: Text(
-                                                controller
+                                              child: TranslationTextWidget(
+                                                text: controller
                                                             .paymentHistoryList[
                                                                 index]
                                                             .approved ==
@@ -258,8 +259,10 @@ class PaymentHistoryScreen extends StatelessWidget {
                                               : Colors.orange,
                                     ),
                                     child: GetPlatform.isWeb
-                                        ? Text(
-                                            controller.paymentHistoryList[index]
+                                        ? TranslationTextWidget(
+                                            text: controller
+                                                        .paymentHistoryList[
+                                                            index]
                                                         .approved ==
                                                     1
                                                 ? 'Approved'
@@ -309,8 +312,8 @@ class PaymentHistoryScreen extends StatelessWidget {
                           )
                     : Center(
                         child: GetPlatform.isWeb
-                            ? Text(
-                                'No data found',
+                            ? TranslationTextWidget(
+                                text: 'No data found',
                               )
                             : Text(
                                 'No data found',

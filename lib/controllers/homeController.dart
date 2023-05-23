@@ -75,6 +75,8 @@ class HomeController extends GetxController {
   int webBottomIndex = 0;
   int bannerIndex = 0;
   int page = 1;
+  int catPage = 0;
+
   var isMoreDataAvailable = true.obs;
   var isAllDataLoaded = false.obs;
   var isClickDataLoaded = false.obs;
@@ -91,11 +93,6 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-  void setcatListIndex(int val) {
-    catPageListIndex = val;
-    update();
-  }
-
   bool isExist = false;
 
   init() async {
@@ -108,6 +105,7 @@ class HomeController extends GetxController {
           }
         });
       }
+      // catPage = 1;
       await getTopBanners();
 
       await getTopCategories();
@@ -165,12 +163,15 @@ class HomeController extends GetxController {
       isCategoryLoaded = false;
       if (networkController.connectionStatus.value == 1 ||
           networkController.connectionStatus.value == 2) {
-        if (topCategoryList.length > 0) {
-          page++;
+        if (topCategoryList != null &&
+            topCategoryList != [] &&
+            topCategoryList.length > 0) {
+          catPage++;
         } else {
-          page = 1;
+          catPage = 1;
         }
-        await apiHelper.getTopCategories(page).then((response) {
+
+        await apiHelper.getTopCategory(catPage).then((response) {
           if (response.status == "1") {
             List<CategoryModel> _tCatList = response.data;
             if (_tCatList.isEmpty) {
@@ -641,52 +642,6 @@ class HomeController extends GetxController {
                     }
                   }
                 }
-                // for (var n = 0; n < allAdvList.length; n++) {
-                //   allAdvList[n].commonList = [];
-                //   if (allAdvList[n].cuecampaigns != []) {
-                //     List<CampaignModel> _tList = allAdvList[n]
-                //         .cuecampaigns
-                //         .where((element) => element.status == 1)
-                //         .toList();
-                //     if (_tList != null && _tList.length > 0) {
-                //       for (var k = 0; k < _tList.length; k++) {
-                //         allAdvList[n].commonList.add(
-                //               CommonModel(
-                //                 name: _tList[k].name,
-                //                 image:
-                //                     '${global.appInfo.baseUrls.offerImageUrl}/${_tList[k].image}',
-                //                 buttonText: _tList[k].buttonText,
-                //                 trackingLink: _tList[k].url,
-                //                 campaignId: _tList[k].id,
-                //               ),
-                //             );
-                //       }
-                //     }
-                //   }
-                // }
-                // for (var m = 0; m < allAdvList.length; m++) {
-                //   allAdvList[m].commonList = [];
-                //   if (allAdvList[m].admitedoffers != []) {
-                //     List<AdmitedOffersModal> _tList = allAdvList[m]
-                //         .admitedoffers
-                //         .where((element) => element.status == 1)
-                //         .toList();
-                //     if (_tList != null && _tList.length > 0) {
-                //       for (var p = 0; p < _tList.length; p++) {
-                //         allAdvList[m].commonList.add(
-                //               CommonModel(
-                //                   name: _tList[p].name,
-                //                   image:
-                //                       '${global.appInfo.baseUrls.offerImageUrl}/${_tList[p].image}',
-                //                   buttonText: 'Grab Now',
-                //                   trackingLink: _tList[p].gotourl,
-                //                   campaignId: _tList[p].id,
-                //                   from: "admit"),
-                //             );
-                //       }
-                //     }
-                //   }
-                // }
               }
             }
 

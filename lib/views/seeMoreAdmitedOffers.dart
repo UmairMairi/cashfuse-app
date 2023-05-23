@@ -2,10 +2,9 @@ import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/webScreen/webAdmitedOfferDetailScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
 import 'admitedOfferDetailScreen.dart';
 
@@ -37,13 +36,13 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'See More Offers',
+                    TranslationTextWidget(
+                      text: 'See More Offers',
                       style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.1,
                       ),
-                    ).translate(),
+                    ),
                     InkWell(
                       onTap: () {
                         Get.back();
@@ -64,7 +63,7 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
               ),
               homeController.seeMoreAdsList.length == 0
                   ? Center(
-                      child: Text("No More Offers").translate(),
+                      child: TranslationTextWidget(text: "No More Offers"),
                     )
                   : Expanded(
                       child: ListView.builder(
@@ -90,22 +89,23 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          homeController
+                                        TranslationTextWidget(
+                                          text: homeController
                                               .seeMoreAdsList[index].name!,
                                           textAlign: TextAlign.start,
                                           style: Get.theme.primaryTextTheme
                                               .titleSmall,
-                                        ).translate(),
+                                        ),
                                         Container(
                                           width: 250,
-                                          child: Text(
-                                            homeController.seeMoreAdsList[index]
+                                          child: TranslationTextWidget(
+                                            text: homeController
+                                                .seeMoreAdsList[index]
                                                 .description!,
                                             maxLines: 3,
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.start,
-                                          ).translate(),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -147,13 +147,13 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                                         width: 1,
                                       )),
                                   alignment: Alignment.center,
-                                  child: Text(
-                                    "Grob Now",
+                                  child: TranslationTextWidget(
+                                    text: "Grob Now",
                                     style: TextStyle(
                                         color: Get.theme.secondaryHeaderColor,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600),
-                                  ).translate(),
+                                  ),
                                 ),
                               ),
                               Container(

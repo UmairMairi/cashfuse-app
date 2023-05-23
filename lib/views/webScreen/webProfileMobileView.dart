@@ -620,9 +620,10 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                                 ),
                               ),
                             ),
-                      GetPlatform.isWeb
-                          ? SizedBox()
-                          : InkWell(
+                      // GetPlatform.isWeb
+                      //     ? SizedBox()
+                      //     : 
+                          InkWell(
                               onTap: () {
                                 global.showInterstitialAd();
                                 Get.to(

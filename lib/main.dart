@@ -5,7 +5,6 @@
 import 'dart:io';
 
 import 'package:cashfuse/controllers/couponController.dart';
-import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/localizationController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/controllers/splashController.dart';
@@ -51,7 +50,7 @@ void main() async {
   if (GetPlatform.isWeb) {
     Get.put(NetworkController());
     Get.put(SplashController());
-    Get.put(HomeController());
+    // Get.put(HomeController());
 
     Get.put(CouponController());
   }
@@ -123,11 +122,7 @@ class MyApp extends StatelessWidget {
                   theme: nativeTheme(),
                   initialBinding: NetworkBinding(),
                   title: global.appName,
-                  home: global.getPlatFrom()
-                      ? BottomNavigationBarScreen()
-                      : GetPlatform.isWeb
-                          ? HomeScreen()
-                          : SplashScreen(),
+                  home: SplashScreen(),
                 );
               });
       }),

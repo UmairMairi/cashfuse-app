@@ -1,6 +1,7 @@
 import 'package:cashfuse/models/commonModel.dart';
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,7 +41,8 @@ class WebAdsCampaignWidget extends StatelessWidget {
                         padding: EdgeInsets.only(top: 5),
                         child: RotatedBox(
                           quarterTurns: 45,
-                          child: Text(
+                          child: TranslationTextWidget(
+                                text:
                             commonModel.tagline!,
                             textAlign: TextAlign.center,
                             style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
@@ -72,9 +74,10 @@ class WebAdsCampaignWidget extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Text(
+            child: TranslationTextWidget(
+                                text:
               commonModel.name!,
-              style: Get.theme.primaryTextTheme.titleMedium,
+              style: Get.theme.primaryTextTheme.titleMedium!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
@@ -87,7 +90,8 @@ class WebAdsCampaignWidget extends StatelessWidget {
               color: Get.theme.secondaryHeaderColor,
               borderRadius: BorderRadius.circular(2),
             ),
-            child: Text(
+            child: TranslationTextWidget(
+                                text:
               commonModel.buttonText != null ? commonModel.buttonText! : 'Grab deal',
               style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
             ),
@@ -105,7 +109,8 @@ class WebAdsCampaignWidget extends StatelessWidget {
           //     padding: EdgeInsets.only(top: 10),
           //     //height: 20,
           //     //alignment: Alignment.center,
-          //     child: Text(
+          //     child: TranslationTextWidget(
+                                // text:
           //       'Rewards Rates & Terms',
           //       textAlign: TextAlign.center,
           //       style: Get.theme.primaryTextTheme.bodySmall.copyWith(

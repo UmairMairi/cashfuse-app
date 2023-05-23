@@ -8,6 +8,7 @@ import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/moreOfferScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
@@ -56,7 +57,8 @@ class WebOfferDetailScreen extends StatelessWidget {
                       Get.back();
                     },
                   ),
-                  title: Text(
+                  title: TranslationTextWidget(
+                                text:
                     offer.name!,
                     style: Get.theme.primaryTextTheme.titleSmall!
                         .copyWith(color: Colors.white),
@@ -108,7 +110,8 @@ class WebOfferDetailScreen extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  Text('Share'),
+                                  TranslationTextWidget(
+                                text:'Share'),
                                   CircleAvatar(
                                     radius: 12,
                                     backgroundColor: Colors.green[700],
@@ -244,7 +247,8 @@ class WebOfferDetailScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(2),
                                 ),
                                 alignment: Alignment.center,
-                                child: Text(
+                                child: TranslationTextWidget(
+                                text:
                                   offer.buttonText!,
                                   style: TextStyle(
                                       color: Colors.white,
@@ -269,7 +273,8 @@ class WebOfferDetailScreen extends StatelessWidget {
                                 ? CrossAxisAlignment.center
                                 : CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              TranslationTextWidget(
+                                text:
                                 offer.name!,
                                 style: Get.theme.primaryTextTheme.titleSmall,
                               ),
@@ -302,7 +307,8 @@ class WebOfferDetailScreen extends StatelessWidget {
                                         elevation: 0,
                                         shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.zero),
-                                        child: Text(
+                                        child: TranslationTextWidget(
+                                text:
                                           '>>',
                                           style: TextStyle(
                                               color: Colors.grey,
@@ -335,13 +341,15 @@ class WebOfferDetailScreen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Text(
+                                        TranslationTextWidget(
+                                text:
                                           'Purchase',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w300,
                                               fontSize: 13),
                                         ),
-                                        Text(
+                                        TranslationTextWidget(
+                                text:
                                           'Today',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600),
@@ -357,13 +365,15 @@ class WebOfferDetailScreen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Text(
+                                        TranslationTextWidget(
+                                text:
                                           'Cashback tracks in',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w300,
                                               fontSize: 13),
                                         ),
-                                        Text(
+                                        TranslationTextWidget(
+                                text:
                                           '24 hours',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600),
@@ -426,7 +436,8 @@ class WebOfferDetailScreen extends StatelessWidget {
                                                   width: 1.5,
                                                 )),
                                             alignment: Alignment.center,
-                                            child: Text(
+                                            child: TranslationTextWidget(
+                                text:
                                               'See More Offers  >',
                                               style: TextStyle(
                                                   color: Colors.teal[200],
@@ -483,7 +494,8 @@ class WebOfferDetailScreen extends StatelessWidget {
                               ),
                             );
                           },
-                          child: Text(
+                          child: TranslationTextWidget(
+                                text:
                             offer.partner!.leftTab!,
                             style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(
@@ -515,7 +527,8 @@ class WebOfferDetailScreen extends StatelessWidget {
                               isScrollControlled: true,
                             );
                           },
-                          child: Text(
+                          child: TranslationTextWidget(
+                                text:
                             offer.partner!.rightTab!,
                             style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(

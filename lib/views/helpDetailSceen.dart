@@ -1,6 +1,7 @@
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/commonController.dart';
 import 'package:cashfuse/models/faqModel.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
@@ -27,8 +28,8 @@ class HelpDetailSceen extends StatelessWidget {
                 ),
               ),
               title: GetPlatform.isWeb
-                  ? Text(
-                      faq.ques!,
+                  ? TranslationTextWidget(
+                      text: faq.ques!,
                       style: Get.theme.primaryTextTheme.titleSmall!
                           .copyWith(color: Colors.white),
                     )

@@ -25,6 +25,7 @@ import 'package:cashfuse/widget/adsCampaignWidget.dart';
 import 'package:cashfuse/widget/couponWidget.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/offerWidget.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -204,8 +205,8 @@ class WebHomeMobileView extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'TOP CATEGORIES',
+                              TranslationTextWidget(
+                                text: 'TOP CATEGORIES',
                                 style: TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,
@@ -213,6 +214,23 @@ class WebHomeMobileView extends StatelessWidget {
                                   letterSpacing: -0.3,
                                 ),
                               ),
+                              // FutureBuilder(
+                              //   future: global.translatedText('TOP CATEGORIES'),
+                              //   builder: (context, snapshot) {
+                              //     return TranslationTextWidget(
+
+                              //       snapshot.data != null
+                              //           ? snapshot.data!
+                              //           : 'TOP CATEGORIES',
+                              //       style: TextStyle(
+                              //         fontSize: 13,
+                              //         fontWeight: FontWeight.w600,
+                              //         color: Colors.black.withOpacity(0.79),
+                              //         letterSpacing: -0.3,
+                              //       ),
+                              //     );
+                              //   },
+                              // ),
                               InkWell(
                                 onTap: () {
                                   Get.to(
@@ -220,8 +238,8 @@ class WebHomeMobileView extends StatelessWidget {
                                     routeName: 'allCategory',
                                   );
                                 },
-                                child: Text(
-                                  'View All >',
+                                child: TranslationTextWidget(
+                                  text: 'View All >',
                                   style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                           color: Colors.teal,
@@ -271,8 +289,8 @@ class WebHomeMobileView extends StatelessWidget {
                                         CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
-                                        homeController
+                                      TranslationTextWidget(
+                                        text: homeController
                                             .topCategoryList[index].name!
                                             .toUpperCase(),
                                         textAlign: TextAlign.center,
@@ -332,8 +350,8 @@ class WebHomeMobileView extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Coupons of the day'.toUpperCase(),
+                              TranslationTextWidget(
+                                text: 'Coupons of the day'.toUpperCase(),
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -349,8 +367,8 @@ class WebHomeMobileView extends StatelessWidget {
                                           routeName: 'coupons',
                                         );
                                       },
-                                      child: Text(
-                                        'View All >',
+                                      child: TranslationTextWidget(
+                                        text: 'View All >',
                                         style: Get
                                             .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
@@ -446,8 +464,8 @@ class WebHomeMobileView extends StatelessWidget {
                       ? Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 6, vertical: 15),
-                          child: Text(
-                            'EXCLUSIVE OFFERS FOR YOU',
+                          child: TranslationTextWidget(
+                            text: 'EXCLUSIVE OFFERS FOR YOU',
                             style: TextStyle(
                               fontSize: global.getPlatFrom() ? 16 : 13,
                               fontWeight: FontWeight.w600,
@@ -605,8 +623,8 @@ class WebHomeMobileView extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'TOP CASHBACK STORES',
+                              TranslationTextWidget(
+                                text: 'TOP CASHBACK STORES',
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -623,8 +641,8 @@ class WebHomeMobileView extends StatelessWidget {
                                     routeName: 'all',
                                   );
                                 },
-                                child: Text(
-                                  'View All >',
+                                child: TranslationTextWidget(
+                                  text: 'View All >',
                                   style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                           color: Colors.teal,
@@ -721,8 +739,8 @@ class WebHomeMobileView extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "LATEST PRODUCTS",
+                              TranslationTextWidget(
+                                text: "LATEST PRODUCTS",
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -742,8 +760,8 @@ class WebHomeMobileView extends StatelessWidget {
                                                     homeController.productList,
                                               )));
                                 },
-                                child: Text(
-                                  'View All >',
+                                child: TranslationTextWidget(
+                                  text: 'View All >',
                                   style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                           color: Colors.teal,
@@ -887,8 +905,9 @@ class WebHomeMobileView extends StatelessWidget {
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 8.0, bottom: 8),
-                                              child: Text(
-                                                "${homeController.productList[index].name} ",
+                                              child: TranslationTextWidget(
+                                                text:
+                                                    "${homeController.productList[index].name} ",
                                                 style: TextStyle(
                                                     color: Colors.black54,
                                                     fontWeight: FontWeight.w500,
@@ -902,8 +921,9 @@ class WebHomeMobileView extends StatelessWidget {
                                                       color: Mycolors.orange)),
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 13, vertical: 3),
-                                              child: Text(
-                                                "+ ${global.appInfo.currency} ${homeController.productList[index].productPrices![0].cashback}  REWARDS",
+                                              child: TranslationTextWidget(
+                                                text:
+                                                    "+ ${global.appInfo.currency} ${homeController.productList[index].productPrices![0].cashback}  REWARDS",
                                                 style: TextStyle(
                                                     fontSize: 11,
                                                     fontWeight: FontWeight.w700,
@@ -913,8 +933,9 @@ class WebHomeMobileView extends StatelessWidget {
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 8.0, bottom: 8),
-                                              child: Text(
-                                                "Final Price ${global.appInfo.currency} ${homeController.productList[index].productPrices![0].price}",
+                                              child: TranslationTextWidget(
+                                                text:
+                                                    "Final Price ${global.appInfo.currency} ${homeController.productList[index].productPrices![0].price}",
                                                 style: TextStyle(
                                                     color: Mycolors.blue,
                                                     fontWeight: FontWeight.w600,
@@ -936,8 +957,8 @@ class WebHomeMobileView extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'NEW FLASH DEALS - LIVE NOW',
+                              TranslationTextWidget(
+                                text: 'NEW FLASH DEALS - LIVE NOW',
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -952,8 +973,8 @@ class WebHomeMobileView extends StatelessWidget {
                                     routeName: 'all',
                                   );
                                 },
-                                child: Text(
-                                  'View All >',
+                                child: TranslationTextWidget(
+                                  text: 'View All >',
                                   style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                           color: Colors.teal,
@@ -1063,8 +1084,8 @@ class WebHomeMobileView extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "TRENDING PRODUCTS",
+                              TranslationTextWidget(
+                                text: "TRENDING PRODUCTS",
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -1084,8 +1105,8 @@ class WebHomeMobileView extends StatelessWidget {
                                                     .trendingProductList,
                                               )));
                                 },
-                                child: Text(
-                                  'View All >',
+                                child: TranslationTextWidget(
+                                  text: 'View All >',
                                   style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                           color: Colors.teal,
@@ -1134,11 +1155,12 @@ class WebHomeMobileView extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                       onTap: () {
-                                        Get.to(() => WebProductDetailsMobileView(
-                                              title: "TOP SELLING PRODUCT",
-                                              product: homeController
-                                                  .productList[index],
-                                            ));
+                                        Get.to(
+                                            () => WebProductDetailsMobileView(
+                                                  title: "TOP SELLING PRODUCT",
+                                                  product: homeController
+                                                      .productList[index],
+                                                ));
                                       },
                                       child: Container(
                                         width: 150,
@@ -1229,8 +1251,9 @@ class WebHomeMobileView extends StatelessWidget {
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 8.0, bottom: 8),
-                                              child: Text(
-                                                "${homeController.trendingProductList[index].name} ",
+                                              child: TranslationTextWidget(
+                                                text:
+                                                    "${homeController.trendingProductList[index].name} ",
                                                 style: TextStyle(
                                                     color: Colors.black54,
                                                     fontWeight: FontWeight.w500,
@@ -1244,8 +1267,9 @@ class WebHomeMobileView extends StatelessWidget {
                                                       color: Mycolors.orange)),
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 13, vertical: 3),
-                                              child: Text(
-                                                "+ ${global.appInfo.currency} ${homeController.trendingProductList[index].productPrices![0].cashback}  REWARDS",
+                                              child: TranslationTextWidget(
+                                                text:
+                                                    "+ ${global.appInfo.currency} ${homeController.trendingProductList[index].productPrices![0].cashback}  REWARDS",
                                                 style: TextStyle(
                                                     fontSize: 11,
                                                     fontWeight: FontWeight.w700,
@@ -1255,8 +1279,9 @@ class WebHomeMobileView extends StatelessWidget {
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 8.0, bottom: 8),
-                                              child: Text(
-                                                "Final Price ${global.appInfo.currency} ${homeController.trendingProductList[index].productPrices![0].price}",
+                                              child: TranslationTextWidget(
+                                                text:
+                                                    "Final Price ${global.appInfo.currency} ${homeController.trendingProductList[index].productPrices![0].price}",
                                                 style: TextStyle(
                                                     color: Mycolors.blue,
                                                     fontWeight: FontWeight.w600,
@@ -1294,8 +1319,8 @@ class WebHomeMobileView extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            homeController
+                                          TranslationTextWidget(
+                                            text: homeController
                                                 .homeAdvList[index].name!
                                                 .toUpperCase(),
                                             style: TextStyle(
@@ -1318,8 +1343,8 @@ class WebHomeMobileView extends StatelessWidget {
                                                 routeName: 'all',
                                               );
                                             },
-                                            child: Text(
-                                              'View All >',
+                                            child: TranslationTextWidget(
+                                              text: 'View All >',
                                               style: Get.theme.primaryTextTheme
                                                   .bodySmall!
                                                   .copyWith(

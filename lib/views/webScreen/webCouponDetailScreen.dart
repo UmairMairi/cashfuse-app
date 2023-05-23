@@ -7,6 +7,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -48,69 +49,6 @@ class WebCouponDetailScreen extends StatelessWidget {
                   style: Get.theme.primaryTextTheme.titleSmall!
                       .copyWith(color: Colors.white),
                 ),
-                actions: [
-                  !GetPlatform.isWeb
-                      ? InkWell(
-                          onTap: () async {
-                            if (global.currentUser.id != null) {
-                              await homeController.getTrackingLink(
-                                  coupon!.url!, coupon!.affiliatePartner!);
-                              global.share(
-                                homeController.createdLink.isNotEmpty
-                                    ? homeController.createdLink
-                                    : coupon!.url!,
-                                coupon!.bannerImage!.isNotEmpty &&
-                                        !coupon!.isImageError
-                                    ? '${global.appInfo.baseUrls!.couponBannerImageUrl}/${coupon!.bannerImage}'
-                                    : '',
-                                '',
-                              );
-                            } else {
-                              if (global.getPlatFrom()) {
-                                Get.dialog(Dialog(
-                                  child: SizedBox(
-                                    width: Get.width / 3,
-                                    child: GetStartedScreen(
-                                      fromMenu: true,
-                                    ),
-                                  ),
-                                ));
-                              } else {
-                                Get.to(
-                                  () => GetStartedScreen(
-                                    fromMenu: true,
-                                  ),
-                                  routeName: 'login',
-                                );
-                              }
-                            }
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 12)
-                                .copyWith(right: 10),
-                            padding: EdgeInsets.only(left: 10, right: 3),
-                            decoration: BoxDecoration(
-                              color: Colors.green[500],
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Row(
-                              children: [
-                                Text('Share'),
-                                CircleAvatar(
-                                  radius: 12,
-                                  backgroundColor: Colors.green[700],
-                                  child: Icon(
-                                    Icons.share_outlined,
-                                    color: Colors.white,
-                                    size: 15,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                      : SizedBox()
-                ],
               ),
         body: SingleChildScrollView(
           child: Center(
@@ -123,8 +61,8 @@ class WebCouponDetailScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  Text(
-                    'Deal ends in:',
+                  TranslationTextWidget(
+                    text: 'Deal ends in:',
                     style: Get.theme.primaryTextTheme.titleSmall,
                   ),
                   coupon!.dayDifference != null && coupon!.dayDifference! > 0
@@ -224,7 +162,8 @@ class WebCouponDetailScreen extends StatelessWidget {
                             ? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                TranslationTextWidget(
+                                text:
                                     'Use Code',
                                     style: Get.theme.primaryTextTheme.bodyLarge!
                                         .copyWith(
@@ -260,7 +199,8 @@ class WebCouponDetailScreen extends StatelessWidget {
                                         );
                                       });
                                     },
-                                    child: Text(
+                                    child: TranslationTextWidget(
+                                text:
                                       'Copy Code',
                                       style: Get
                                           .theme.primaryTextTheme.bodyLarge!
@@ -272,7 +212,8 @@ class WebCouponDetailScreen extends StatelessWidget {
                                   )
                                 ],
                               )
-                            : Text(
+                            : TranslationTextWidget(
+                                text:
                                 '*Coupon code not required',
                                 style: TextStyle(color: Colors.red),
                               ),
@@ -335,7 +276,8 @@ class WebCouponDetailScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(2),
                             ),
                             alignment: Alignment.center,
-                            child: Text(
+                            child: TranslationTextWidget(
+                                text:
                               coupon!.buttonText!,
                               style: TextStyle(
                                   color: Colors.white,
@@ -359,7 +301,8 @@ class WebCouponDetailScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          TranslationTextWidget(
+                                text:
                             'About this Coupon',
                             style: global.getPlatFrom()
                                 ? Get.theme.primaryTextTheme.titleMedium!
@@ -367,12 +310,14 @@ class WebCouponDetailScreen extends StatelessWidget {
                                 : Get.theme.primaryTextTheme.titleSmall,
                           ),
                           Divider(),
-                          Text(
+                         TranslationTextWidget(
+                                text:
                             coupon!.heading!,
                             style: Get.theme.primaryTextTheme.bodyMedium!
                                 .copyWith(fontWeight: FontWeight.w500),
                           ),
-                          Text(
+                          TranslationTextWidget(
+                                text:
                             coupon!.description!,
                             style: Get.theme.primaryTextTheme.bodyMedium!
                                 .copyWith(fontWeight: FontWeight.w300),

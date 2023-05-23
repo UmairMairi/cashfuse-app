@@ -4,6 +4,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/commonController.dart';
 import 'package:cashfuse/views/helpDetailSceen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -36,8 +37,8 @@ class GetHelpScreen extends StatelessWidget {
                 ),
               ),
               title: GetPlatform.isWeb
-                  ? Text(
-                      'Get Help',
+                  ? TranslationTextWidget(
+                      text: 'Get Help',
                       style: Get.theme.primaryTextTheme.titleSmall!
                           .copyWith(color: Colors.white),
                     )
@@ -181,8 +182,9 @@ class GetHelpScreen extends StatelessWidget {
                                         //   //),
                                         // ),
                                         GetPlatform.isWeb
-                                            ? Text(
-                                                controller.faqList[index].ques!,
+                                            ? TranslationTextWidget(
+                                                text: controller
+                                                    .faqList[index].ques!,
                                                 textAlign: TextAlign.center,
                                                 style: global.getPlatFrom()
                                                     ? Get.theme.primaryTextTheme
@@ -208,8 +210,8 @@ class GetHelpScreen extends StatelessWidget {
                           : Expanded(
                               child: Center(
                                 child: GetPlatform.isWeb
-                                    ? Text(
-                                        'No Data found.',
+                                    ? TranslationTextWidget(
+                                        text: 'No Data found.',
                                         style: TextStyle(color: Colors.white),
                                       )
                                     : Text(

@@ -5,7 +5,6 @@ import 'dart:developer';
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/couponController.dart';
-import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/locationController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/controllers/referEarnController.dart';
@@ -98,7 +97,7 @@ class SplashController extends GetxController {
                 Get.to(() => BottomNavigationBarScreen(), routeName: 'initial');
               }
             }
-            Get.find<HomeController>().init();
+            // Get.find<HomeController>().init();
             Get.find<CouponController>().getCouponList();
             await apiHelper.getBannerNotification().then((result) {
               if (result.statusCode == 200) {

@@ -3,6 +3,7 @@
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,8 +34,8 @@ class PayPalRedeemScreen extends StatelessWidget {
                   ),
                 ),
                 title: GetPlatform.isWeb
-                    ? Text(
-                        'PayPal Redeem',
+                    ? TranslationTextWidget(
+                        text: 'PayPal Redeem',
                         style: Get.theme.primaryTextTheme.titleSmall!
                             .copyWith(color: Colors.white),
                       )
@@ -87,8 +88,8 @@ class PayPalRedeemScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GetPlatform.isWeb
-                              ? Text(
-                                  'Account Details',
+                              ? TranslationTextWidget(
+                                  text: 'Account Details',
                                   style: Get.theme.primaryTextTheme.titleMedium!
                                       .copyWith(fontWeight: FontWeight.w600),
                                 )
@@ -117,8 +118,8 @@ class PayPalRedeemScreen extends StatelessWidget {
                                     child: Column(
                                       children: [
                                         GetPlatform.isWeb
-                                            ? Text(
-                                                'Add PayPal Account',
+                                            ? TranslationTextWidget(
+                                                text: 'Add PayPal Account',
                                                 style: Get
                                                     .theme
                                                     .primaryTextTheme
@@ -209,8 +210,8 @@ class PayPalRedeemScreen extends StatelessWidget {
                                             ),
                                             alignment: Alignment.center,
                                             child: GetPlatform.isWeb
-                                                ? Text(
-                                                    paymentController
+                                                ? TranslationTextWidget(
+                                                    text: paymentController
                                                                 .payPalDetails !=
                                                             null
                                                         ? 'edit'.toUpperCase()
@@ -254,8 +255,9 @@ class PayPalRedeemScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: GetPlatform.isWeb
-                                  ? Text(
-                                      paymentController.payPalDetails != null
+                                  ? TranslationTextWidget(
+                                      text: paymentController.payPalDetails !=
+                                              null
                                           ? 'edit'.toUpperCase()
                                           : 'add'.toUpperCase() + '+',
                                       style: TextStyle(
@@ -328,8 +330,8 @@ class PayPalRedeemScreen extends StatelessWidget {
                   ),
                   alignment: Alignment.center,
                   child: GetPlatform.isWeb
-                      ? Text(
-                          'Send Withdrawal Request',
+                      ? TranslationTextWidget(
+                          text: 'Send Withdrawal Request',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,

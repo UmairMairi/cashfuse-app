@@ -8,6 +8,7 @@ import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/widget/confirmationDialog.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/recentClickDialogWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
@@ -52,8 +53,8 @@ class RecentClickScreen extends StatelessWidget {
                   ),
                 ),
                 title: GetPlatform.isWeb
-                    ? Text(
-                        'Recents Clicks',
+                    ? TranslationTextWidget(
+                        text: 'Recents Clicks',
                         style: Get.theme.primaryTextTheme.titleSmall,
                       )
                     : Text(
@@ -72,24 +73,24 @@ class RecentClickScreen extends StatelessWidget {
                               'Are you sure, You want to delete clicks older than 10 days ?',
                               [
                                 CupertinoDialogAction(
-                                  child: Text(
-                                    'Yes',
+                                  child: TranslationTextWidget(
+                                    text: 'Yes',
                                     style: Get
                                         .theme.primaryTextTheme.titleSmall!
                                         .copyWith(color: Colors.red),
-                                  ).translate(),
+                                  ),
                                   onPressed: () {
                                     Get.back();
                                     homeController.deleteClicks();
                                   },
                                 ),
                                 CupertinoDialogAction(
-                                  child: Text(
-                                    'No',
+                                  child: TranslationTextWidget(
+                                    text: 'No',
                                     style: Get
                                         .theme.primaryTextTheme.titleSmall!
                                         .copyWith(color: Colors.blue),
-                                  ).translate(),
+                                  ),
                                   onPressed: () {
                                     Get.back();
                                   },
@@ -191,8 +192,10 @@ class RecentClickScreen extends StatelessWidget {
                                                           const EdgeInsets.only(
                                                               left: 20,
                                                               right: 20),
-                                                      child: Text(
-                                                        'Did you shop on ${homeController.recentClickList[index].name}?',
+                                                      child:
+                                                          TranslationTextWidget(
+                                                        text:
+                                                            'Did you shop on ${homeController.recentClickList[index].name}?',
                                                         style: Get
                                                             .theme
                                                             .primaryTextTheme
@@ -255,8 +258,8 @@ class RecentClickScreen extends StatelessWidget {
                                                               MainAxisAlignment
                                                                   .start,
                                                           children: [
-                                                            Text(
-                                                              'Yes I Did',
+                                                            TranslationTextWidget(
+                                                              text: 'Yes I Did',
                                                               textAlign:
                                                                   TextAlign
                                                                       .center,
@@ -326,37 +329,17 @@ class RecentClickScreen extends StatelessWidget {
                                                 ),
                                               ),
                                             ),
-                                            trailing: GetPlatform.isWeb
-                                                ? Text(
-                                                    homeController.clickTime(
-                                                        homeController
-                                                                .recentClickList[
-                                                            index]),
-                                                    style: Get
-                                                        .theme
-                                                        .primaryTextTheme
-                                                        .bodySmall!
-                                                        .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.w300,
-                                                      color: Colors.grey[600],
-                                                    ),
-                                                  )
-                                                : Text(
-                                                    homeController.clickTime(
-                                                        homeController
-                                                                .recentClickList[
-                                                            index]),
-                                                    style: Get
-                                                        .theme
-                                                        .primaryTextTheme
-                                                        .bodySmall!
-                                                        .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.w300,
-                                                      color: Colors.grey[600],
-                                                    ),
-                                                  ).translate(),
+                                            trailing: Text(
+                                              homeController.clickTime(
+                                                  homeController
+                                                      .recentClickList[index]),
+                                              style: Get.theme.primaryTextTheme
+                                                  .bodySmall!
+                                                  .copyWith(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.grey[600],
+                                              ),
+                                            ),
                                           ),
                                           SizedBox(
                                             height: 25,
@@ -365,8 +348,9 @@ class RecentClickScreen extends StatelessWidget {
                                             padding: const EdgeInsets.only(
                                                 left: 20, right: 20),
                                             child: GetPlatform.isWeb
-                                                ? Text(
-                                                    'Did you shop on ${homeController.recentClickList[index].name}?',
+                                                ? TranslationTextWidget(
+                                                    text:
+                                                        'Did you shop on ${homeController.recentClickList[index].name}?',
                                                     style: Get
                                                         .theme
                                                         .primaryTextTheme
@@ -429,8 +413,8 @@ class RecentClickScreen extends StatelessWidget {
                                                     MainAxisAlignment.start,
                                                 children: [
                                                   GetPlatform.isWeb
-                                                      ? Text(
-                                                          'Yes I Did',
+                                                      ? TranslationTextWidget(
+                                                          text: 'Yes I Did',
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: Get
@@ -488,8 +472,8 @@ class RecentClickScreen extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),
                                     child: GetPlatform.isWeb
-                                        ? Text(
-                                            "Don't stop, just shop!",
+                                        ? TranslationTextWidget(
+                                            text: "Don't stop, just shop!",
                                             style: Get.theme.primaryTextTheme
                                                 .titleMedium!
                                                 .copyWith(
@@ -509,8 +493,9 @@ class RecentClickScreen extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 15),
                                     child: GetPlatform.isWeb
-                                        ? Text(
-                                            "When you visit any of the sites on ${global.appName}, it will record your click and display on it.",
+                                        ? TranslationTextWidget(
+                                            text:
+                                                "When you visit any of the sites on ${global.appName}, it will record your click and display on it.",
                                             textAlign: TextAlign.center,
                                             //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
                                           )
@@ -543,8 +528,8 @@ class RecentClickScreen extends StatelessWidget {
                                       ),
                                       alignment: Alignment.center,
                                       child: GetPlatform.isWeb
-                                          ? Text(
-                                              'SEE BEST DEALS',
+                                          ? TranslationTextWidget(
+                                              text: 'SEE BEST DEALS',
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 14,
@@ -583,8 +568,9 @@ class RecentClickScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 15),
                             child: GetPlatform.isWeb
-                                ? Text(
-                                    'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
+                                ? TranslationTextWidget(
+                                    text:
+                                        'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
                                     textAlign: TextAlign.center,
                                     //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
                                   )
@@ -633,8 +619,8 @@ class RecentClickScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: GetPlatform.isWeb
-                                  ? Text(
-                                      'Login or signup',
+                                  ? TranslationTextWidget(
+                                      text: 'Login or signup',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,

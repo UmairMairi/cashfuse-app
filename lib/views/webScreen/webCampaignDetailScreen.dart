@@ -8,6 +8,7 @@ import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/moreCampignScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
@@ -106,8 +107,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                               Get.back();
                             },
                           ),
-                          title: Text(
-                            campaign!.partner != null
+                          title: TranslationTextWidget(
+                            text: campaign!.partner != null
                                 ? campaign!.partner!.name!
                                 : '',
                             style: Get.theme.primaryTextTheme.titleSmall!
@@ -208,7 +209,7 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                       ),
                                       child: Row(
                                         children: [
-                                          Text('Share'),
+                                          TranslationTextWidget(text: 'Share'),
                                           CircleAvatar(
                                             radius: 12,
                                             backgroundColor: Colors.green[700],
@@ -237,8 +238,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                               SizedBox(
                                 height: 40,
                               ),
-                              Text(
-                                campaign!.name!,
+                              TranslationTextWidget(
+                                text: campaign!.name!,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontStyle: FontStyle.italic,
@@ -247,18 +248,25 @@ class WebCampaignDetailScreen extends StatelessWidget {
                               SizedBox(
                                 height: 15,
                               ),
-                              HtmlWidget(
-                                campaign!.description!,
-                                //textAlign: TextAlign.center,
+                              FutureBuilder(
+                                future: global.translatedText(campaign!.description!),
+                                builder: (context, snapshot) {
+                                  return HtmlWidget(
+                                    snapshot.data != null ? snapshot.data! : '',
+                                    //textAlign: TextAlign.center,
+                                  );
+                                },
                               ),
-                              // Text(
+                              // TranslationTextWidget(
+                              // text:
                               //   offer.terms,
                               //   textAlign: TextAlign.center,
                               // ),
                               // SizedBox(
                               //   height: 15,
                               // ),
-                              // Text(
+                              // TranslationTextWidget(
+                              // text:
                               //   'Free at home Skin Assessment in 5 min Personalized Regime',
                               //   textAlign: TextAlign.center,
                               //   style: TextStyle(fontWeight: FontWeight.w600),
@@ -272,7 +280,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                               //         padding: EdgeInsets.all(15),
                               //         child: Column(
                               //           children: [
-                              //             Text(
+                              //             TranslationTextWidget(
+                              // text:
                               //               'Just for You',
                               //               style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                               //                 color: Colors.red,
@@ -374,8 +383,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     alignment: Alignment.center,
-                                    child: Text(
-                                      campaign!.buttonText!.isNotEmpty
+                                    child: TranslationTextWidget(
+                                      text: campaign!.buttonText!.isNotEmpty
                                           ? campaign!.buttonText!
                                           : 'EARN CASHBACK',
                                       style: TextStyle(
@@ -420,8 +429,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                           elevation: 0,
                                           shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.zero),
-                                          child: Text(
-                                            '>>',
+                                          child: TranslationTextWidget(
+                                            text: '>>',
                                             style: TextStyle(
                                                 color: Colors.grey,
                                                 fontSize: 20,
@@ -454,14 +463,14 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          Text(
-                                            'Purchase',
+                                          TranslationTextWidget(
+                                            text: 'Purchase',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13),
                                           ),
-                                          Text(
-                                            'Today',
+                                          TranslationTextWidget(
+                                            text: 'Today',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -476,14 +485,14 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          Text(
-                                            'Cashback tracks in',
+                                          TranslationTextWidget(
+                                            text: 'Cashback tracks in',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13),
                                           ),
-                                          Text(
-                                            '24 hours',
+                                          TranslationTextWidget(
+                                            text: '24 hours',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -552,8 +561,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                                       width: 1.5,
                                                     )),
                                                 alignment: Alignment.center,
-                                                child: Text(
-                                                  'See More Offers  >',
+                                                child: TranslationTextWidget(
+                                                  text: 'See More Offers  >',
                                                   style: TextStyle(
                                                       color: Colors.teal[200],
                                                       fontSize: 14,
@@ -615,8 +624,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: Text(
-                              campaign!.partner!.leftTab!,
+                            child: TranslationTextWidget(
+                              text: campaign!.partner!.leftTab!,
                               style: Get.theme.primaryTextTheme.titleSmall!
                                   .copyWith(
                                       fontWeight: FontWeight.w400,
@@ -646,8 +655,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: Text(
-                              campaign!.partner!.rightTab!.camelCase!,
+                            child: TranslationTextWidget(
+                              text: campaign!.partner!.rightTab!.camelCase!,
                               style: Get.theme.primaryTextTheme.titleSmall!
                                   .copyWith(
                                       fontWeight: FontWeight.w400,

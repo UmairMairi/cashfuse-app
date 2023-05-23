@@ -7,13 +7,10 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/moreAdsScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
-import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:customizable_space_bar/customizable_space_bar.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
@@ -24,115 +21,62 @@ class AdsDetailScreen extends StatelessWidget {
   AdsDetailScreen({this.ads, this.fromSeeMore});
   HomeController homeController = Get.find<HomeController>();
 
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (homeController1) {
       return SafeArea(
         child: Scaffold(
-          key: scaffoldKey,
-          drawer: global.getPlatFrom() ? WebDrawerWidget() : null,
-          appBar: global.getPlatFrom()
-              ? WebTopBarWidget(
-                  scaffoldKey: scaffoldKey,
-                )
-              : null,
           body: Center(
             child: SizedBox(
               width: AppConstants.WEB_MAX_WIDTH,
               child: CustomScrollView(
                 slivers: [
-                  global.getPlatFrom()
-                      ? SliverToBoxAdapter(
-                          child: Stack(
-                            alignment: Alignment.bottomCenter,
-                            clipBehavior: Clip.none,
-                            children: [
-                              Container(
-                                color: Colors.white,
-                                width: AppConstants.WEB_MAX_WIDTH,
-                                alignment: Alignment.center,
-                                //margin: EdgeInsets.only(bottom: 20),
-                                child: CustomImage(
-                                  image:
-                                      '${global.appInfo.baseUrls!.offerImageUrl}/${ads!.image}',
-                                  width: 500,
-                                  height: 300,
-                                  fit: BoxFit.fill,
-                                  ads: ads!,
-                                ),
-                                // Image.asset(
-                                //   Images.dummyImage,
-                                //   width: Get.width,
-                                //   fit: BoxFit.cover,
-                                // ),
-                              ),
-                              Positioned(
-                                bottom: -30,
-                                child: Card(
-                                  color: Colors.white,
-                                  margin: EdgeInsets.all(10),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: CustomImage(
-                                      image:
-                                          '${global.appInfo.baseUrls!.partnerImageUrl}/${ads!.partner!.image}',
-                                      height: 30,
-                                      width: 60,
-                                      fit: BoxFit.contain,
-                                    ),
+                  SliverAppBar(
+                    expandedHeight: 170,
+                    collapsedHeight: 50.0,
+                    toolbarHeight: 50,
+                    floating: true,
+                    pinned: true,
+                    elevation: 0,
+                    backgroundColor: Get.theme.primaryColor,
+                    leading: IconButton(
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        Get.back();
+                      },
+                    ),
+                    title: Text(
+                      ads!.partner != null ? ads!.partner!.name! : '',
+                      style: Get.theme.primaryTextTheme.titleSmall!
+                          .copyWith(color: Colors.white),
+                    ).translate(),
+                    flexibleSpace:
+                        CustomizableSpaceBar(builder: (context, scrollingRate) {
+                      return (scrollingRate != 1.0)
+                          ? Stack(
+                              alignment: Alignment.bottomCenter,
+                              clipBehavior: Clip.none,
+                              children: [
+                                Container(
+                                  //margin: EdgeInsets.only(bottom: 20),
+                                  child: CustomImage(
+                                    image:
+                                        '${global.appInfo.baseUrls!.offerImageUrl}/${ads!.image}',
+                                    width: Get.width,
+                                    fit: BoxFit.fill,
+                                    ads: ads!,
                                   ),
+                                  // Image.asset(
+                                  //   Images.dummyImage,
+                                  //   width: Get.width,
+                                  //   fit: BoxFit.cover,
+                                  // ),
                                 ),
-                              )
-                            ],
-                          ),
-                        )
-                      : SliverAppBar(
-                          expandedHeight: 170,
-                          collapsedHeight: 50.0,
-                          toolbarHeight: 50,
-                          floating: true,
-                          pinned: true,
-                          elevation: 0,
-                          backgroundColor: Get.theme.primaryColor,
-                          leading: IconButton(
-                            icon: Icon(
-                              Icons.arrow_back,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {
-                              Get.back();
-                            },
-                          ),
-                          title: Text(
-                            ads!.partner!.name!,
-                            style: Get.theme.primaryTextTheme.titleSmall!
-                                .copyWith(color: Colors.white),
-                          ).translate(),
-                          flexibleSpace: CustomizableSpaceBar(
-                              builder: (context, scrollingRate) {
-                            return (scrollingRate != 1.0)
-                                ? Stack(
-                                    alignment: Alignment.bottomCenter,
-                                    clipBehavior: Clip.none,
-                                    children: [
-                                      Container(
-                                        //margin: EdgeInsets.only(bottom: 20),
-                                        child: CustomImage(
-                                          image:
-                                              '${global.appInfo.baseUrls!.offerImageUrl}/${ads!.image}',
-                                          width: Get.width,
-                                          fit: BoxFit.fill,
-                                          ads: ads!,
-                                        ),
-                                        // Image.asset(
-                                        //   Images.dummyImage,
-                                        //   width: Get.width,
-                                        //   fit: BoxFit.cover,
-                                        // ),
-                                      ),
-                                      Positioned(
+                                ads!.partner != null
+                                    ? Positioned(
                                         bottom: -30,
                                         child: Card(
                                           color: Colors.white,
@@ -149,76 +93,73 @@ class AdsDetailScreen extends StatelessWidget {
                                           ),
                                         ),
                                       )
-                                    ],
-                                  )
-                                : SizedBox();
-                          }),
-                          actions: [
-                            !GetPlatform.isWeb
-                                ? InkWell(
-                                    onTap: () async {
-                                      if (global.currentUser.id != null) {
-                                        await homeController.getTrackingLink(
-                                            ads!.landingPage!,
-                                            ads!.affiliatePartner!,
-                                            cId: ads!.cId!);
-                                        global.share(
-                                          homeController.createdLink.isNotEmpty
-                                              ? homeController.createdLink
-                                              : ads!.landingPage!,
-                                          ads!.image!.isNotEmpty
-                                              ? '${global.appInfo.baseUrls!.offerImageUrl}/${ads!.image}'
-                                              : '',
-                                          '',
-                                        );
-                                      } else {
-                                        if (global.getPlatFrom()) {
-                                          Get.dialog(Dialog(
-                                            child: SizedBox(
-                                              width: Get.width / 3,
-                                              child: GetStartedScreen(
-                                                fromMenu: true,
-                                              ),
-                                            ),
-                                          ));
-                                        } else {
-                                          Get.to(
-                                            () => GetStartedScreen(
-                                              fromMenu: true,
-                                            ),
-                                            routeName: 'login',
-                                          );
-                                        }
-                                      }
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.symmetric(
-                                          vertical: 10, horizontal: 10),
-                                      padding:
-                                          EdgeInsets.only(left: 10, right: 3),
-                                      decoration: BoxDecoration(
-                                        color: Colors.green[500],
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Text('Share').translate(),
-                                          CircleAvatar(
-                                            radius: 12,
-                                            backgroundColor: Colors.green[700],
-                                            child: Icon(
-                                              Icons.share_outlined,
-                                              color: Colors.white,
-                                              size: 15,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                : SizedBox()
-                          ],
+                                    : SizedBox()
+                              ],
+                            )
+                          : SizedBox();
+                    }),
+                    actions: [
+                      InkWell(
+                        onTap: () async {
+                          if (global.currentUser.id != null) {
+                            await homeController.getTrackingLink(
+                                ads!.landingPage!, ads!.affiliatePartner!,
+                                cId: ads!.cId!);
+                            global.share(
+                              homeController.createdLink.isNotEmpty
+                                  ? homeController.createdLink
+                                  : ads!.landingPage!,
+                              ads!.image!.isNotEmpty
+                                  ? '${global.appInfo.baseUrls!.offerImageUrl}/${ads!.image}'
+                                  : '',
+                              '',
+                            );
+                          } else {
+                            if (global.getPlatFrom()) {
+                              Get.dialog(Dialog(
+                                child: SizedBox(
+                                  width: Get.width / 3,
+                                  child: GetStartedScreen(
+                                    fromMenu: true,
+                                  ),
+                                ),
+                              ));
+                            } else {
+                              Get.to(
+                                () => GetStartedScreen(
+                                  fromMenu: true,
+                                ),
+                                routeName: 'login',
+                              );
+                            }
+                          }
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          padding: EdgeInsets.only(left: 10, right: 3),
+                          decoration: BoxDecoration(
+                            color: Colors.green[500],
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Row(
+                            children: [
+                              Text('Share').translate(),
+                              CircleAvatar(
+                                radius: 12,
+                                backgroundColor: Colors.green[700],
+                                child: Icon(
+                                  Icons.share_outlined,
+                                  color: Colors.white,
+                                  size: 15,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
+                      ),
+                    ],
+                  ),
                   SliverFillRemaining(
                     fillOverscroll: true,
                     child: Column(
@@ -304,7 +245,8 @@ class AdsDetailScreen extends StatelessWidget {
                                 onTap: () async {
                                   if (global.currentUser.id != null) {
                                     await homeController.getTrackingLink(
-                                        ads!.landingPage!, ads!.affiliatePartner!,
+                                        ads!.landingPage!,
+                                        ads!.affiliatePartner!,
                                         cId: ads!.cId!);
                                     await homeController.addClick(
                                       ads!.advName!,
@@ -337,23 +279,12 @@ class AdsDetailScreen extends StatelessWidget {
                                     //   }
                                     // });
                                   } else {
-                                    if (global.getPlatFrom()) {
-                                      Get.dialog(Dialog(
-                                        child: SizedBox(
-                                          width: Get.width / 3,
-                                          child: GetStartedScreen(
-                                            fromMenu: true,
-                                          ),
-                                        ),
-                                      ));
-                                    } else {
-                                      Get.to(
-                                        () => GetStartedScreen(
-                                          fromMenu: true,
-                                        ),
-                                        routeName: 'login',
-                                      );
-                                    }
+                                    Get.to(
+                                      () => GetStartedScreen(
+                                        fromMenu: true,
+                                      ),
+                                      routeName: 'login',
+                                    );
                                   }
                                 },
                                 child: Container(
@@ -361,9 +292,7 @@ class AdsDetailScreen extends StatelessWidget {
                                   width: Get.width,
                                   alignment: Alignment.center,
                                   child: Container(
-                                    width: global.getPlatFrom()
-                                        ? Get.width / 3
-                                        : Get.width,
+                                    width: Get.width,
                                     height: 45,
                                     margin: EdgeInsets.symmetric(
                                         horizontal: 30, vertical: 15),

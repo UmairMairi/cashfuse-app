@@ -15,13 +15,13 @@ import 'package:cashfuse/views/webScreen/webOfferDetailScreen.dart';
 import 'package:cashfuse/widget/adsCampaignWidget.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/offerWidget.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
 class WebSearchScreen extends StatelessWidget {
-  
   WebSearchScreen();
   SearchGetController searchController = Get.find<SearchGetController>();
   HomeController homeController = Get.find<HomeController>();
@@ -83,8 +83,7 @@ class WebSearchScreen extends StatelessWidget {
                     searchController.searchData!.commonList!.isEmpty &&
                     searchController.searchData!.offerList!.isEmpty
                 ? Center(
-                    child: Text('No data found')
-                        ,
+                    child: TranslationTextWidget(text: 'No data found'),
                   )
                 : SingleChildScrollView(
                     child: Column(
@@ -97,8 +96,8 @@ class WebSearchScreen extends StatelessWidget {
                             ? Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 10),
-                                child: Text(
-                                  'in Stores',
+                                child: TranslationTextWidget(
+                                  text: 'in Stores',
                                   style: Get.theme.primaryTextTheme.titleSmall,
                                 ),
                               )
@@ -155,19 +154,21 @@ class WebSearchScreen extends StatelessWidget {
                               )
                             : SizedBox(),
                         searchController.searchData!.commonList != null &&
-                                searchController.searchData!.commonList!.length >
+                                searchController
+                                        .searchData!.commonList!.length >
                                     0
                             ? Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 10),
-                                child: Text(
-                                  'in Offers & Deals',
+                                child: TranslationTextWidget(
+                                  text: 'in Offers & Deals',
                                   style: Get.theme.primaryTextTheme.titleSmall,
                                 ),
                               )
                             : SizedBox(),
                         searchController.searchData!.commonList != null &&
-                                searchController.searchData!.commonList!.length >
+                                searchController
+                                        .searchData!.commonList!.length >
                                     0
                             ? SizedBox(
                                 height: 155,
@@ -232,7 +233,8 @@ class WebSearchScreen extends StatelessWidget {
                               )
                             : SizedBox(),
                         searchController.searchData!.offerList != null &&
-                                searchController.searchData!.offerList!.length > 0
+                                searchController.searchData!.offerList!.length >
+                                    0
                             ? SizedBox(
                                 height: global.getPlatFrom() ? 260 : 230,
                                 child: ListView.builder(
@@ -246,8 +248,8 @@ class WebSearchScreen extends StatelessWidget {
                                     return InkWell(
                                       onTap: () async {
                                         await homeController.getOfferDetails(
-                                            searchController
-                                                .searchData!.offerList![index].id
+                                            searchController.searchData!
+                                                .offerList![index].id
                                                 .toString());
                                         Get.to(
                                           () => WebOfferDetailScreen(
@@ -278,8 +280,8 @@ class WebSearchScreen extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Text(
-                          'Trending Keywords',
+                        child: TranslationTextWidget(
+                          text: 'Trending Keywords',
                           style: Get.theme.primaryTextTheme.titleSmall,
                         ),
                       ),
@@ -311,8 +313,8 @@ class WebSearchScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      'TOP CASHBACK STORES',
+                                    TranslationTextWidget(
+                                      text: 'TOP CASHBACK STORES',
                                       style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
@@ -329,8 +331,8 @@ class WebSearchScreen extends StatelessWidget {
                                           routeName: 'all',
                                         );
                                       },
-                                      child: Text(
-                                        'View All >',
+                                      child: TranslationTextWidget(
+                                        text: 'View All >',
                                         style: Get
                                             .theme.primaryTextTheme.bodySmall!
                                             .copyWith(color: Colors.teal),
@@ -424,8 +426,8 @@ class WebSearchScreen extends StatelessWidget {
                             ? Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 6, vertical: 15),
-                                child: Text(
-                                  'EXCLUSIVE OFFERS FOR YOU',
+                                child: TranslationTextWidget(
+                                  text: 'EXCLUSIVE OFFERS FOR YOU',
                                   style: TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,

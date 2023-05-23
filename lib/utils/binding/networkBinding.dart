@@ -2,7 +2,6 @@ import 'package:cashfuse/controllers/adController.dart';
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/commonController.dart';
 import 'package:cashfuse/controllers/couponController.dart';
-import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/imageController.dart';
 import 'package:cashfuse/controllers/localizationController.dart';
 import 'package:cashfuse/controllers/locationController.dart';
@@ -21,7 +20,7 @@ class NetworkBinding extends Bindings {
     Get.put(ThemeController());
     Get.lazyPut<NetworkController>(() => NetworkController(), fenix: true);
     Get.put(SplashController());
-    Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
+    // Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
     Get.lazyPut<AuthController>(() => AuthController(), fenix: true);
 
     Get.lazyPut<CommonController>(() => CommonController(), fenix: true);

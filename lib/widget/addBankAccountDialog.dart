@@ -3,6 +3,7 @@
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/services/apiHelper.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -46,8 +47,8 @@ class AddBankAccountDialog extends StatelessWidget {
           //   height: 20,
           // ),
           GetPlatform.isWeb
-              ? Text(
-                  'Add Bank Account',
+              ? TranslationTextWidget(
+                  text: 'Add Bank Account',
                   style: Get.theme.primaryTextTheme.titleLarge!
                       .copyWith(fontWeight: FontWeight.w600),
                 )
@@ -279,8 +280,8 @@ class AddBankAccountDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
               ),
               alignment: Alignment.center,
-              child: Text(
-                '${'add'.toUpperCase()} +',
+              child: TranslationTextWidget(
+                text: '${'add'.toUpperCase()} +',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

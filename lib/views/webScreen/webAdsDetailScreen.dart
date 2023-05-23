@@ -17,6 +17,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 
+import '../../widget/translationTextWidget.dart';
+
 class WebAdsDetailScreen extends StatelessWidget {
   final AdsModel? ads;
   final bool? fromSeeMore;
@@ -106,8 +108,9 @@ class WebAdsDetailScreen extends StatelessWidget {
                               Get.back();
                             },
                           ),
-                          title: Text(
-                            ads!.partner != null ? ads!.partner!.name! : '',
+                          title: TranslationTextWidget(
+                            text:
+                                ads!.partner != null ? ads!.partner!.name! : '',
                             style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(color: Colors.white),
                           ),
@@ -206,7 +209,7 @@ class WebAdsDetailScreen extends StatelessWidget {
                                       ),
                                       child: Row(
                                         children: [
-                                          Text('Share'),
+                                          TranslationTextWidget(text: 'Share'),
                                           CircleAvatar(
                                             radius: 12,
                                             backgroundColor: Colors.green[700],
@@ -236,8 +239,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                               SizedBox(
                                 height: 40,
                               ),
-                              Text(
-                                ads!.name!,
+                              TranslationTextWidget(
+                                text: ads!.name!,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontStyle: FontStyle.italic,
@@ -248,20 +251,30 @@ class WebAdsDetailScreen extends StatelessWidget {
                               ),
                               Align(
                                 alignment: Alignment.center,
-                                child: HtmlWidget(
-                                  ads!.description!,
+                                child: FutureBuilder(
+                                  future:
+                                      global.translatedText(ads!.description!),
+                                  builder: (context, snapshot) {
+                                    return HtmlWidget(
+                                      snapshot.data != null
+                                          ? snapshot.data!
+                                          : '',
 
-                                  //textAlign: TextAlign.center,
+                                      //textAlign: TextAlign.center,
+                                    );
+                                  },
                                 ),
                               ),
-                              // Text(
+                              // TranslationTextWidget(
+                              // text:
                               //   ads.terms,
                               //   textAlign: TextAlign.center,
                               // ),
                               // SizedBox(
                               //   height: 15,
                               // ),
-                              // Text(
+                              // TranslationTextWidget(
+                              // text:
                               //   'Free at home Skin Assessment in 5 min Personalized Regime',
                               //   textAlign: TextAlign.center,
                               //   style: TextStyle(fontWeight: FontWeight.w600),
@@ -275,7 +288,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                               //         padding: EdgeInsets.all(15),
                               //         child: Column(
                               //           children: [
-                              //             Text(
+                              //             TranslationTextWidget(
+                              // text:
                               //               'Just for You',
                               //               style: Get.theme.primaryTextTheme.titleSmall.copyWith(
                               //                 color: Colors.red,
@@ -379,8 +393,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     alignment: Alignment.center,
-                                    child: Text(
-                                      ads!.buttonText!,
+                                    child: TranslationTextWidget(
+                                      text: ads!.buttonText!,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
@@ -423,8 +437,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                                           elevation: 0,
                                           shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.zero),
-                                          child: Text(
-                                            '>>',
+                                          child: TranslationTextWidget(
+                                            text: '>>',
                                             style: TextStyle(
                                                 color: Colors.grey,
                                                 fontSize: 20,
@@ -457,14 +471,14 @@ class WebAdsDetailScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          Text(
-                                            'Purchase',
+                                          TranslationTextWidget(
+                                            text: 'Purchase',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13),
                                           ),
-                                          Text(
-                                            'Today',
+                                          TranslationTextWidget(
+                                            text: 'Today',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -479,14 +493,14 @@ class WebAdsDetailScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          Text(
-                                            'Cashback tracks in',
+                                          TranslationTextWidget(
+                                            text: 'Cashback tracks in',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13),
                                           ),
-                                          Text(
-                                            '24 hours',
+                                          TranslationTextWidget(
+                                            text: '24 hours',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -527,8 +541,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                                                 width: 1.5,
                                               )),
                                           alignment: Alignment.center,
-                                          child: Text(
-                                            'See More Offers  >',
+                                          child: TranslationTextWidget(
+                                            text: 'See More Offers  >',
                                             style: TextStyle(
                                                 color: Colors.teal[200],
                                                 fontSize: 14,
@@ -579,8 +593,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                               ),
                             );
                           },
-                          child: Text(
-                            ads!.partner!.leftTab!,
+                          child: TranslationTextWidget(
+                            text: ads!.partner!.leftTab!,
                             style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(
                                     fontWeight: FontWeight.w400,
@@ -610,8 +624,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                               ),
                             );
                           },
-                          child: Text(
-                            ads!.partner!.rightTab!,
+                          child: TranslationTextWidget(
+                            text: ads!.partner!.rightTab!,
                             style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(
                                     fontWeight: FontWeight.w400,

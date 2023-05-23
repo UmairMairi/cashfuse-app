@@ -18,6 +18,7 @@ import 'package:cashfuse/views/webScreen/webCouponDetailScreen.dart';
 import 'package:cashfuse/widget/couponWidget.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/offerWidget.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/homeWebCategoryView.dart';
 import 'package:cashfuse/widget/web/homeWebTopCashbackView.dart';
 import 'package:cashfuse/widget/web/webBannerView.dart';
@@ -55,8 +56,8 @@ class WebHomeScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'TOP CATEGORIES',
+                              TranslationTextWidget(
+                                text: 'TOP CATEGORIES',
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -71,8 +72,8 @@ class WebHomeScreen extends StatelessWidget {
                                     routeName: 'allcategory',
                                   );
                                 },
-                                child: Text(
-                                  'View All >',
+                                child: TranslationTextWidget(
+                                  text: 'View All >',
                                   style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                           color: Colors.teal,
@@ -96,8 +97,8 @@ class WebHomeScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Coupons of the day'.toUpperCase(),
+                              TranslationTextWidget(
+                                text: 'Coupons of the day'.toUpperCase(),
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -113,8 +114,8 @@ class WebHomeScreen extends StatelessWidget {
                                           routeName: 'coupon',
                                         );
                                       },
-                                      child: Text(
-                                        'View All >',
+                                      child: TranslationTextWidget(
+                                        text: 'View All >',
                                         style: Get
                                             .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
@@ -268,8 +269,8 @@ class WebHomeScreen extends StatelessWidget {
                       ? Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 6, vertical: 15),
-                          child: Text(
-                            'EXCLUSIVE OFFERS FOR YOU',
+                          child: TranslationTextWidget(
+                            text: 'EXCLUSIVE OFFERS FOR YOU',
                             style: TextStyle(
                               fontSize: global.getPlatFrom() ? 16 : 13,
                               fontWeight: FontWeight.w600,
@@ -428,8 +429,8 @@ class WebHomeScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'TOP CASHBACK STORES',
+                              TranslationTextWidget(
+                                text: 'TOP CASHBACK STORES',
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -446,8 +447,8 @@ class WebHomeScreen extends StatelessWidget {
                                     routeName: 'all',
                                   );
                                 },
-                                child: Text(
-                                  'View All >',
+                                child: TranslationTextWidget(
+                                  text: 'View All >',
                                   style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                           color: Colors.teal,
@@ -468,8 +469,8 @@ class WebHomeScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "LATEST PRODUCTS",
+                              TranslationTextWidget(
+                                text: "LATEST PRODUCTS",
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -487,8 +488,8 @@ class WebHomeScreen extends StatelessWidget {
                                     routeName: 'all',
                                   );
                                 },
-                                child: Text(
-                                  'View All >',
+                                child: TranslationTextWidget(
+                                  text: 'View All >',
                                   style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                           color: Colors.teal,
@@ -509,8 +510,8 @@ class WebHomeScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'NEW FLASH DEALS - LIVE NOW',
+                              TranslationTextWidget(
+                                text: 'NEW FLASH DEALS - LIVE NOW',
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -525,8 +526,8 @@ class WebHomeScreen extends StatelessWidget {
                                     routeName: 'all',
                                   );
                                 },
-                                child: Text(
-                                  'View All >',
+                                child: TranslationTextWidget(
+                                  text: 'View All >',
                                   style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                           color: Colors.teal,
@@ -693,8 +694,8 @@ class WebHomeScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "TRENDING PRODUCTS",
+                              TranslationTextWidget(
+                                text: "TRENDING PRODUCTS",
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -713,8 +714,8 @@ class WebHomeScreen extends StatelessWidget {
                                     routeName: 'all',
                                   );
                                 },
-                                child: Text(
-                                  'View All >',
+                                child: TranslationTextWidget(
+                                  text: 'View All >',
                                   style: Get.theme.primaryTextTheme.bodySmall!
                                       .copyWith(
                                           color: Colors.teal,
@@ -751,8 +752,8 @@ class WebHomeScreen extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            homeController
+                                          TranslationTextWidget(
+                                            text: homeController
                                                 .homeAdvList[index].name!
                                                 .toUpperCase(),
                                             style: TextStyle(
@@ -775,8 +776,8 @@ class WebHomeScreen extends StatelessWidget {
                                                 routeName: 'all',
                                               );
                                             },
-                                            child: Text(
-                                              'View All >',
+                                            child: TranslationTextWidget(
+                                              text: 'View All >',
                                               style: Get.theme.primaryTextTheme
                                                   .bodySmall!
                                                   .copyWith(
@@ -840,7 +841,7 @@ class WebHomeScreen extends StatelessWidget {
                                                         ads: homeController.ads,
                                                         fromSeeMore: false,
                                                       ),
-                                                      routeName: 'detail',
+                                                      routeName: 'ads-detail',
                                                     );
                                                   } else if (homeController
                                                           .homeAdvList[index]
@@ -864,7 +865,7 @@ class WebHomeScreen extends StatelessWidget {
                                                               fromSeeMore:
                                                                   false,
                                                             ),
-                                                        routeName: 'detail');
+                                                        routeName: 'admitad-detail');
                                                   } else {
                                                     await homeController
                                                         .getCampignDetails(
@@ -881,7 +882,7 @@ class WebHomeScreen extends StatelessWidget {
                                                             .campaign,
                                                         fromSeeMore: false,
                                                       ),
-                                                      routeName: 'detail',
+                                                      routeName: 'campaign-detail',
                                                     );
                                                   }
                                                 },

@@ -5,13 +5,11 @@ import 'dart:convert';
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/models/countryModel.dart';
 import 'package:cashfuse/services/apiHelper.dart';
-import 'package:cashfuse/widget/countrySelectOption.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-
 import 'package:permission_handler/permission_handler.dart';
-import 'package:cashfuse/utils/global.dart' as global;
 
 class LocationController extends GetxController {
   NetworkController networkController = Get.put(NetworkController());
@@ -94,7 +92,7 @@ class LocationController extends GetxController {
           global.showCountryPopUp = true;
         }
 
-        homeController.init();
+        // await homeController.init();
         update();
       }).catchError((e) {
         print("Exceptioin - LocationController.dart - getCurrentLocation():" +

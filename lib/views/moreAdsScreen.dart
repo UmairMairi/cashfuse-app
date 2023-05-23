@@ -3,9 +3,9 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/adsDetailScreen.dart';
 import 'package:cashfuse/views/webScreen/webAdsDetailScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
 class MoreAdsScreen extends StatelessWidget {
   @override
@@ -26,13 +26,14 @@ class MoreAdsScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    TranslationTextWidget(
+                                text:
                       'See More Offers',
                       style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.1,
                       ),
-                    ).translate(),
+                    ),
                     InkWell(
                       onTap: () {
                         Get.back();
@@ -74,18 +75,20 @@ class MoreAdsScreen extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    TranslationTextWidget(
+                                text:
                                       homeController
                                           .seeMoreAdsList[index].name!,
                                       textAlign: TextAlign.start,
                                       style:
                                           Get.theme.primaryTextTheme.titleSmall,
-                                    ).translate(),
-                                    Text(
+                                    ),
+                                    TranslationTextWidget(
+                                text:
                                       homeController
                                           .seeMoreAdsList[index].description!,
                                       textAlign: TextAlign.start,
-                                    ).translate(),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -131,13 +134,14 @@ class MoreAdsScreen extends StatelessWidget {
                                   width: 1,
                                 )),
                             alignment: Alignment.center,
-                            child: Text(
+                            child: TranslationTextWidget(
+                                text:
                               homeController.seeMoreAdsList[index].buttonText!,
                               style: TextStyle(
                                   color: Get.theme.secondaryHeaderColor,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600),
-                            ).translate(),
+                            ),
                           ),
                         ),
                         Container(
@@ -150,7 +154,8 @@ class MoreAdsScreen extends StatelessWidget {
                     // Column(
                     //   crossAxisAlignment: CrossAxisAlignment.start,
                     //   children: [
-                    //     Text(
+                    //     TranslationTextWidget(
+                                // text:
                     //       'Expires in 15 days',
                     //       style: TextStyle(
                     //         fontSize: 11,
@@ -159,9 +164,11 @@ class MoreAdsScreen extends StatelessWidget {
                     //     ),
                     //     Padding(
                     //       padding: const EdgeInsets.symmetric(vertical: 10),
-                    //       child: Text('Earn upto 6% Cashback on all Myntra Orders + 24% Bonus Cashback (Once per user)'),
+                    //       child: TranslationTextWidget(
+                                // text:'Earn upto 6% Cashback on all Myntra Orders + 24% Bonus Cashback (Once per user)'),
                     //     ),
-                    //     Text(
+                    //     TranslationTextWidget(
+                                // text:
                     //       'See Details',
                     //       style: TextStyle(
                     //         fontSize: 10,
@@ -180,7 +187,8 @@ class MoreAdsScreen extends StatelessWidget {
                     //             width: 1,
                     //           )),
                     //       alignment: Alignment.center,
-                    //       child: Text(
+                    //       child: TranslationTextWidget(
+                                // text:
                     //         'ACTIVATE CASHBACK',
                     //         style: TextStyle(color: Get.theme.secondaryHeaderColor, fontSize: 14, fontWeight: FontWeight.w600),
                     //       ),

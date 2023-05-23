@@ -11,6 +11,7 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -651,8 +652,9 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 20, horizontal: 15),
-                              child: Text(
-                                'To access this feature, download the app',
+                              child: TranslationTextWidget(
+                                text:
+                                    'To access this feature, download the app',
                                 textAlign: TextAlign.center,
                                 style: Get.theme.primaryTextTheme.titleLarge!
                                     .copyWith(
@@ -674,8 +676,8 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                 width: AppConstants.WEB_MAX_WIDTH / 4,
                                 color: Get.theme.secondaryHeaderColor,
                                 alignment: Alignment.center,
-                                child: Text(
-                                  'Download The App',
+                                child: TranslationTextWidget(
+                                  text: 'Download The App',
                                   style: Get.theme.primaryTextTheme.titleSmall!
                                       .copyWith(
                                     color: Colors.white,

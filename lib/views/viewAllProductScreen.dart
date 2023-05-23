@@ -3,6 +3,7 @@ import 'package:cashfuse/models/productModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/webScreen/webProductDetailMobileView.dart';
 import 'package:cashfuse/views/webScreen/webProductDetails.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,8 +43,8 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                 ),
               ),
               title: GetPlatform.isWeb
-                  ? Text(
-                      title,
+                  ? TranslationTextWidget(
+                      text: title,
                       style: Get.theme.primaryTextTheme.titleSmall!
                           .copyWith(color: Colors.white),
                     )
@@ -180,8 +181,8 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0, bottom: 8),
                           child: GetPlatform.isWeb
-                              ? Text(
-                                  "${productList[index].name} ",
+                              ? TranslationTextWidget(
+                                  text: "${productList[index].name} ",
                                   style: TextStyle(
                                       color: Colors.black54,
                                       fontWeight: FontWeight.w500,
@@ -202,8 +203,9 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                           padding:
                               EdgeInsets.symmetric(horizontal: 13, vertical: 3),
                           child: GetPlatform.isWeb
-                              ? Text(
-                                  "+ ${global.appInfo.currency} ${productList[index].productPrices![0].cashback}  REWARDS",
+                              ? TranslationTextWidget(
+                                  text:
+                                      "+ ${global.appInfo.currency} ${productList[index].productPrices![0].cashback}  REWARDS",
                                   style: TextStyle(
                                       fontSize: 11,
                                       fontWeight: FontWeight.w600,
@@ -220,8 +222,9 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0, bottom: 8),
                           child: GetPlatform.isWeb
-                              ? Text(
-                                  "Final Price ${global.appInfo.currency} ${productList[index].productPrices![0].price}",
+                              ? TranslationTextWidget(
+                                  text:
+                                      "Final Price ${global.appInfo.currency} ${productList[index].productPrices![0].price}",
                                   style: TextStyle(
                                       color: Mycolors.blue,
                                       fontWeight: FontWeight.w600,

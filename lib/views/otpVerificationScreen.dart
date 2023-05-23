@@ -1,9 +1,9 @@
 import 'package:cashfuse/controllers/authController.dart';
+import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:cashfuse/utils/global.dart' as global;
 
 class OtpVerificationScreen extends StatelessWidget {
   final String? verificationCode;
@@ -36,56 +36,31 @@ class OtpVerificationScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: GetPlatform.isWeb
-                    ? Text(
-                        'Enter 6 digit code we have sent you',
-                        textAlign: TextAlign.left,
-                        style:
-                            Get.theme.primaryTextTheme.displaySmall!.copyWith(
-                          height: 1.2,
-                          letterSpacing: -1,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      )
-                    : Text(
-                        'Enter 6 digit code we have sent you',
-                        textAlign: TextAlign.left,
-                        style:
-                            Get.theme.primaryTextTheme.displaySmall!.copyWith(
-                          height: 1.2,
-                          letterSpacing: -1,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ).translate(),
-              ),
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: TranslationTextWidget(
+                    text: 'Enter 6 digit code we have sent you',
+                    textAlign: TextAlign.left,
+                    style: Get.theme.primaryTextTheme.displaySmall!.copyWith(
+                      height: 1.2,
+                      letterSpacing: -1,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  )),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GetPlatform.isWeb
-                        ? Text(
-                            !isEmail
-                                ? 'Code sent to ${authController.coutryCode} ${authController.contactNo.text}'
-                                : 'Code sent to ${authController.email.text}',
-                            style:
-                                Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                              letterSpacing: -0.2,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          )
-                        : Text(
-                            !isEmail
-                                ? 'Code sent to ${authController.coutryCode} ${authController.contactNo.text}'
-                                : 'Code sent to ${authController.email.text}',
-                            style:
-                                Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                              letterSpacing: -0.2,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ).translate(),
+                    TranslationTextWidget(
+                      text: !isEmail
+                          ? 'Code sent to ${authController.coutryCode} ${authController.contactNo.text}'
+                          : 'Code sent to ${authController.email.text}',
+                      style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                        letterSpacing: -0.2,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -136,13 +111,10 @@ class OtpVerificationScreen extends StatelessWidget {
               authController.seconds != 0
                   ? Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: GetPlatform.isWeb
-                          ? Text(
-                              "Wait 00 : ${authController.seconds.toString().padLeft(2, '0')}",
-                            )
-                          : Text(
-                              "Wait 00 : ${authController.seconds.toString().padLeft(2, '0')}",
-                            ).translate(),
+                      child: TranslationTextWidget(
+                        text:
+                            "Wait 00 : ${authController.seconds.toString().padLeft(2, '0')}",
+                      ),
                     )
                   : InkWell(
                       onTap: () async {
@@ -201,21 +173,13 @@ class OtpVerificationScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             alignment: Alignment.center,
-            child: GetPlatform.isWeb
-                ? Text(
-                    'Continue',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600),
-                  )
-                : Text(
-                    'Continue',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600),
-                  ).translate(),
+            child: TranslationTextWidget(
+              text: 'Continue',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600),
+            ),
           ),
         ),
       );

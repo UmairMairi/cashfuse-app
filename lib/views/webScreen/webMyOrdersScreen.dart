@@ -8,6 +8,7 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/orderComplaintScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -38,8 +39,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: Text(
-                'My Orders',
+              title: TranslationTextWidget(
+                text: 'My Orders',
                 style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ),
@@ -129,8 +130,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                           width: 50,
                                                         ),
                                                         //),
-                                                        title: Text(
-                                                            orderController
+                                                        title: TranslationTextWidget(
+                                                            text: orderController
                                                                 .orderList[
                                                                     index]
                                                                 .advertisers!),
@@ -175,8 +176,10 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                                     .primaryColor,
                                                               ),
                                                             ),
-                                                            child: Text(
-                                                              'Raise Complaint',
+                                                            child:
+                                                                TranslationTextWidget(
+                                                              text:
+                                                                  'Raise Complaint',
                                                               style: TextStyle(
                                                                 fontSize: 10,
                                                                 color: Get.theme
@@ -241,8 +244,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                                             : Colors.red,
                                                                     size: 20,
                                                                   ),
-                                                                  Text(
-                                                                    orderController.orderList[index].orderStatus ==
+                                                                  TranslationTextWidget(
+                                                                    text: orderController.orderList[index].orderStatus ==
                                                                             0.toString()
                                                                         ? 'Purchase Tracked'
                                                                         : orderController.orderList[index].orderStatus == 1.toString()
@@ -344,8 +347,10 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                               const EdgeInsets
                                                                       .only(
                                                                   left: 10),
-                                                          child: Text(
-                                                            'Clicked Tracked',
+                                                          child:
+                                                              TranslationTextWidget(
+                                                            text:
+                                                                'Clicked Tracked',
                                                             style: TextStyle(
                                                               fontWeight:
                                                                   FontWeight
@@ -456,8 +461,10 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                                   const EdgeInsets
                                                                           .only(
                                                                       left: 10),
-                                                              child: Text(
-                                                                'Purchase Tracked',
+                                                              child:
+                                                                  TranslationTextWidget(
+                                                                text:
+                                                                    'Purchase Tracked',
                                                                 style:
                                                                     TextStyle(
                                                                   fontWeight:
@@ -564,8 +571,9 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                               const EdgeInsets
                                                                       .only(
                                                                   left: 10),
-                                                          child: Text(
-                                                            orderController
+                                                          child:
+                                                              TranslationTextWidget(
+                                                            text: orderController
                                                                         .orderList[
                                                                             index]
                                                                         .orderStatus ==
@@ -667,10 +675,10 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                 width: 50,
                                               ),
                                               //),
-                                              title: Text(orderController
+                                              title: TranslationTextWidget(
+                                                  text: orderController
                                                       .orderList[index]
-                                                      .advertisers!)
-                                                  ,
+                                                      .advertisers!),
                                               trailing: InkWell(
                                                 onTap: () async {
                                                   await orderController
@@ -702,8 +710,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                           .theme.primaryColor,
                                                     ),
                                                   ),
-                                                  child: Text(
-                                                    'Raise Complaint',
+                                                  child: TranslationTextWidget(
+                                                    text: 'Raise Complaint',
                                                     style: TextStyle(
                                                       fontSize: 10,
                                                       color: Get
@@ -768,8 +776,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                                   : Colors.red,
                                                           size: 20,
                                                         ),
-                                                        Text(
-                                                          orderController
+                                                        TranslationTextWidget(
+                                                          text: orderController
                                                                       .orderList[
                                                                           index]
                                                                       .orderStatus ==
@@ -882,8 +890,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     left: 10),
-                                                child: Text(
-                                                  'Clicked Tracked',
+                                                child: TranslationTextWidget(
+                                                  text: 'Clicked Tracked',
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 12,
@@ -986,8 +994,9 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                     padding:
                                                         const EdgeInsets.only(
                                                             left: 10),
-                                                    child: Text(
-                                                      'Purchase Tracked',
+                                                    child:
+                                                        TranslationTextWidget(
+                                                      text: 'Purchase Tracked',
                                                       style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -1083,8 +1092,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     left: 10),
-                                                child: Text(
-                                                  orderController
+                                                child: TranslationTextWidget(
+                                                  text: orderController
                                                               .orderList[index]
                                                               .orderStatus ==
                                                           2.toString()
@@ -1141,8 +1150,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child: GetPlatform.isWeb
-                                  ? Text(
-                                      'There is where it all happens!',
+                                  ? TranslationTextWidget(
+                                      text: 'There is where it all happens!',
                                       style: Get
                                           .theme.primaryTextTheme.titleMedium!
                                           .copyWith(
@@ -1160,8 +1169,9 @@ class WebMyOrdersScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 15),
                               child: GetPlatform.isWeb
-                                  ? Text(
-                                      "Once you shop via ${global.appName}, your order details will appear here within 72 hours.",
+                                  ? TranslationTextWidget(
+                                      text:
+                                          "Once you shop via ${global.appName}, your order details will appear here within 72 hours.",
                                       textAlign: TextAlign.center,
                                       //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
                                     )
@@ -1194,8 +1204,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                 ),
                                 alignment: Alignment.center,
                                 child: GetPlatform.isWeb
-                                    ? Text(
-                                        'SEE BEST DEALS',
+                                    ? TranslationTextWidget(
+                                        text: 'SEE BEST DEALS',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 14,

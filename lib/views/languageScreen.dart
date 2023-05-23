@@ -1,13 +1,11 @@
 // ignore_for_file: invalid_use_of_protected_member
 
 import 'package:cashfuse/controllers/localizationController.dart';
-import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
-
-import 'package:flutter/material.dart';
 import 'package:cashfuse/utils/global.dart' as global;
-
+import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
 class LanguageScreen extends StatelessWidget {
   LanguageScreen();
@@ -36,11 +34,11 @@ class LanguageScreen extends StatelessWidget {
             ),
           ),
           title: GetBuilder<LocalizationController>(
-            builder: (controller) => Text(
-              'Language',
+            builder: (controller) => TranslationTextWidget(
+              text: 'Language',
               style: Get.theme.primaryTextTheme.titleSmall!
                   .copyWith(color: Colors.white),
-            ).translate(),
+            ),
           ),
         ),
         body: GetBuilder<LocalizationController>(

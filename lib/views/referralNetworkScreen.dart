@@ -8,6 +8,7 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/faqSceen.dart';
 import 'package:cashfuse/views/referEarnScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -41,8 +42,8 @@ class ReferralNetworkScreen extends StatelessWidget {
                   ),
                 ),
                 title: GetPlatform.isWeb
-                    ? Text(
-                        'My Referrals',
+                    ? TranslationTextWidget(
+                        text: 'My Referrals',
                         style: Get.theme.primaryTextTheme.titleSmall!
                             .copyWith(color: Colors.white),
                       )
@@ -85,8 +86,9 @@ class ReferralNetworkScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GetPlatform.isWeb
-                            ? Text(
-                                "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
+                            ? TranslationTextWidget(
+                                text:
+                                    "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
                                 textAlign: TextAlign.center,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
@@ -124,8 +126,8 @@ class ReferralNetworkScreen extends StatelessWidget {
                                   ),
                                 ),
                                 GetPlatform.isWeb
-                                    ? Text(
-                                        'Total Referral',
+                                    ? TranslationTextWidget(
+                                        text: 'Total Referral',
                                         style: Get
                                             .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
@@ -145,8 +147,8 @@ class ReferralNetworkScreen extends StatelessWidget {
                                         ),
                                       ).translate(),
                                 GetPlatform.isWeb
-                                    ? Text(
-                                        'Cashback Earned',
+                                    ? TranslationTextWidget(
+                                        text: 'Cashback Earned',
                                         style: Get
                                             .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
@@ -186,8 +188,8 @@ class ReferralNetworkScreen extends StatelessWidget {
                                   ),
                                 ),
                                 GetPlatform.isWeb
-                                    ? Text(
-                                        'Friends Joined',
+                                    ? TranslationTextWidget(
+                                        text: 'Friends Joined',
                                         style: Get
                                             .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
@@ -374,8 +376,8 @@ class ReferralNetworkScreen extends StatelessWidget {
                                   height: 20,
                                 ),
                                 GetPlatform.isWeb
-                                    ? Text(
-                                        'There is no Refferal Earnings',
+                                    ? TranslationTextWidget(
+                                        text: 'There is no Refferal Earnings',
                                         textAlign: TextAlign.center,
                                         style: Get
                                             .theme.primaryTextTheme.bodyMedium,
@@ -393,8 +395,9 @@ class ReferralNetworkScreen extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20),
                                   child: GetPlatform.isWeb
-                                      ? Text(
-                                          "You are now entited to 10% Extra Referral Earnings everytime your friend shops via us! You can earn more if you refer us to more people in your network.",
+                                      ? TranslationTextWidget(
+                                          text:
+                                              "You are now entited to 10% Extra Referral Earnings everytime your friend shops via us! You can earn more if you refer us to more people in your network.",
                                           textAlign: TextAlign.center,
                                           style: Get
                                               .theme.primaryTextTheme.bodySmall!
@@ -465,8 +468,8 @@ class ReferralNetworkScreen extends StatelessWidget {
                   ),
                   alignment: Alignment.center,
                   child: GetPlatform.isWeb
-                      ? Text(
-                          'REFER & EARN NOW',
+                      ? TranslationTextWidget(
+                          text: 'REFER & EARN NOW',
                           style:
                               Get.theme.primaryTextTheme.titleSmall!.copyWith(
                             color: Colors.white,

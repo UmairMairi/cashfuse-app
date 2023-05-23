@@ -2,6 +2,7 @@ import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/referEarnController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -35,8 +36,8 @@ class ReferEarnScreen extends StatelessWidget {
                   ),
                 ),
                 title: GetPlatform.isWeb
-                    ? Text(
-                        'Refer & Earn',
+                    ? TranslationTextWidget(
+                        text: 'Refer & Earn',
                         style: Get.theme.primaryTextTheme.titleSmall!
                             .copyWith(color: Colors.white),
                       )
@@ -64,8 +65,9 @@ class ReferEarnScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
+                              TranslationTextWidget(
+                                text:
+                                    "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
                                 textAlign: TextAlign.center,
                                 style: Get
                                     .theme.primaryTextTheme.headlineMedium!
@@ -77,8 +79,9 @@ class ReferEarnScreen extends StatelessWidget {
                               SizedBox(
                                 height: 20,
                               ),
-                              Text(
-                                'Make your friends join ${global.appName} via your referral link below - No referral code needed',
+                              TranslationTextWidget(
+                                text:
+                                    'Make your friends join ${global.appName} via your referral link below - No referral code needed',
                                 textAlign: TextAlign.center,
                                 style: Get.theme.primaryTextTheme.titleLarge!
                                     .copyWith(
@@ -110,8 +113,8 @@ class ReferEarnScreen extends StatelessWidget {
                                       padding: const EdgeInsets.all(15.0),
                                       child: Row(
                                         children: [
-                                          Text(
-                                            'Your Referral Link : ',
+                                          TranslationTextWidget(
+                                            text: 'Your Referral Link : ',
                                           ),
                                           Expanded(
                                             child: Container(
@@ -135,8 +138,9 @@ class ReferEarnScreen extends StatelessWidget {
                                                         .primaryTextTheme
                                                         .titleSmall,
                                                   ),
-                                                  Text(
-                                                    'Copy Link'.toUpperCase(),
+                                                  TranslationTextWidget(
+                                                    text: 'Copy Link'
+                                                        .toUpperCase(),
                                                     style: Get
                                                         .theme
                                                         .primaryTextTheme
@@ -178,8 +182,8 @@ class ReferEarnScreen extends StatelessWidget {
                                                 BorderRadius.circular(10),
                                           ),
                                           alignment: Alignment.center,
-                                          child: Text(
-                                            'Invite Now',
+                                          child: TranslationTextWidget(
+                                            text: 'Invite Now',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 14,
@@ -217,8 +221,9 @@ class ReferEarnScreen extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 20),
-                                    child: Text(
-                                      'To access this feature, download the app',
+                                    child: TranslationTextWidget(
+                                      text:
+                                          'To access this feature, download the app',
                                       style: Get
                                           .theme.primaryTextTheme.titleLarge!
                                           .copyWith(
@@ -240,8 +245,8 @@ class ReferEarnScreen extends StatelessWidget {
                                       width: AppConstants.WEB_MAX_WIDTH / 4,
                                       color: Get.theme.secondaryHeaderColor,
                                       alignment: Alignment.center,
-                                      child: Text(
-                                        'Download The App',
+                                      child: TranslationTextWidget(
+                                        text: 'Download The App',
                                         style: Get
                                             .theme.primaryTextTheme.titleSmall!
                                             .copyWith(
@@ -281,8 +286,9 @@ class ReferEarnScreen extends StatelessWidget {
                               height: 20,
                             ),
                             GetPlatform.isWeb
-                                ? Text(
-                                    "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
+                                ? TranslationTextWidget(
+                                    text:
+                                        "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
                                     textAlign: TextAlign.center,
                                     style:
                                         Get.theme.primaryTextTheme.titleSmall,
@@ -303,8 +309,8 @@ class ReferEarnScreen extends StatelessWidget {
                         height: 20,
                       ),
                       GetPlatform.isWeb
-                          ? Text(
-                              'Your Referal Link',
+                          ? TranslationTextWidget(
+                              text: 'Your Referal Link',
                               textAlign: TextAlign.center,
                               style: Get.theme.primaryTextTheme.titleSmall,
                             )
@@ -317,8 +323,9 @@ class ReferEarnScreen extends StatelessWidget {
                         height: 20,
                       ),
                       GetPlatform.isWeb
-                          ? Text(
-                              'Make your friends join ${global.appName} via your referral link below - No referral code needed',
+                          ? TranslationTextWidget(
+                              text:
+                                  'Make your friends join ${global.appName} via your referral link below - No referral code needed',
                               textAlign: TextAlign.center,
                               style: Get.theme.primaryTextTheme.bodySmall!
                                   .copyWith(fontWeight: FontWeight.w300),
@@ -368,8 +375,8 @@ class ReferEarnScreen extends StatelessWidget {
                           }
                         },
                         child: GetPlatform.isWeb
-                            ? Text(
-                                'Tap to Copy',
+                            ? TranslationTextWidget(
+                                text: 'Tap to Copy',
                                 textAlign: TextAlign.center,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(fontWeight: FontWeight.w300),
@@ -412,8 +419,8 @@ class ReferEarnScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: GetPlatform.isWeb
-                                  ? Text(
-                                      'Invite Now',
+                                  ? TranslationTextWidget(
+                                      text: 'Invite Now',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
@@ -456,8 +463,9 @@ class ReferEarnScreen extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 20, horizontal: 15),
                                         child: GetPlatform.isWeb
-                                            ? Text(
-                                                'To access this feature, download the app',
+                                            ? TranslationTextWidget(
+                                                text:
+                                                    'To access this feature, download the app',
                                                 textAlign: TextAlign.center,
                                                 style: Get
                                                     .theme
@@ -496,8 +504,8 @@ class ReferEarnScreen extends StatelessWidget {
                                           color: Get.theme.secondaryHeaderColor,
                                           alignment: Alignment.center,
                                           child: GetPlatform.isWeb
-                                              ? Text(
-                                                  'Download The App',
+                                              ? TranslationTextWidget(
+                                                  text: 'Download The App',
                                                   style: Get
                                                       .theme
                                                       .primaryTextTheme

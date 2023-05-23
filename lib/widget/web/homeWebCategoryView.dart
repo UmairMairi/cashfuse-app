@@ -2,6 +2,7 @@ import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/categoryScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
@@ -14,7 +15,10 @@ class HomeWebCategoryView extends StatelessWidget {
       return Row(
         children: [
           InkWell(
-            onTap: () => scrollController.animateTo(scrollController.initialScrollOffset, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+            onTap: () => scrollController.animateTo(
+                scrollController.initialScrollOffset,
+                duration: Duration(seconds: 1),
+                curve: Curves.easeInOut),
             child: Container(
               width: 30,
               height: 80,
@@ -37,11 +41,15 @@ class HomeWebCategoryView extends StatelessWidget {
                   ? Stack(
                       children: [
                         StatefulBuilder(
-                          builder: (BuildContext context, StateSetter setState) => ListView.builder(
+                          builder:
+                              (BuildContext context, StateSetter setState) =>
+                                  ListView.builder(
                             shrinkWrap: true,
                             controller: scrollController,
                             scrollDirection: Axis.horizontal,
-                            itemCount: hm.topCategoryList.length > 10 ? 10 : hm.topCategoryList.length,
+                            itemCount: hm.topCategoryList.length > 10
+                                ? 10
+                                : hm.topCategoryList.length,
                             padding: const EdgeInsets.symmetric(horizontal: 6),
                             itemBuilder: (context, index) {
                               return InkWell(
@@ -62,13 +70,17 @@ class HomeWebCategoryView extends StatelessWidget {
                                     color: Colors.white,
                                   ),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
-                                        hm.topCategoryList[index].name!.toUpperCase(),
+                                      TranslationTextWidget(
+                                        text: hm.topCategoryList[index].name!
+                                            .toUpperCase(),
                                         textAlign: TextAlign.center,
-                                        style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall!
+                                            .copyWith(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: Colors.black,
@@ -78,7 +90,8 @@ class HomeWebCategoryView extends StatelessWidget {
                                         height: 10,
                                       ),
                                       CustomImage(
-                                        image: '${global.appInfo.baseUrls!.categoryImageUrl}/${hm.topCategoryList[index].image}',
+                                        image:
+                                            '${global.appInfo.baseUrls!.categoryImageUrl}/${hm.topCategoryList[index].image}',
                                         height: 60,
                                       ),
                                     ],
@@ -121,7 +134,10 @@ class HomeWebCategoryView extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () => scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+            onTap: () => scrollController.animateTo(
+                scrollController.position.maxScrollExtent,
+                duration: Duration(seconds: 1),
+                curve: Curves.easeInOut),
             child: Container(
               width: 30,
               height: 80,

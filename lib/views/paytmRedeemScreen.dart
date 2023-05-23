@@ -4,6 +4,7 @@ import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -36,8 +37,8 @@ class PaytmRedeemScreen extends StatelessWidget {
                   ),
                 ),
                 title: GetPlatform.isWeb
-                    ? Text(
-                        'PayTM Redeem',
+                    ? TranslationTextWidget(
+                        text: 'PayTM Redeem',
                         style: Get.theme.primaryTextTheme.titleSmall!
                             .copyWith(color: Colors.white),
                       )
@@ -90,8 +91,8 @@ class PaytmRedeemScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GetPlatform.isWeb
-                              ? Text(
-                                  'Account Details',
+                              ? TranslationTextWidget(
+                                  text: 'Account Details',
                                   style: Get.theme.primaryTextTheme.titleMedium!
                                       .copyWith(fontWeight: FontWeight.w600),
                                 )
@@ -138,8 +139,8 @@ class PaytmRedeemScreen extends StatelessWidget {
                                         //   height: 20,
                                         // ),
                                         GetPlatform.isWeb
-                                            ? Text(
-                                                'Add PayTM Account',
+                                            ? TranslationTextWidget(
+                                                text: 'Add PayTM Account',
                                                 style: Get
                                                     .theme
                                                     .primaryTextTheme
@@ -241,8 +242,8 @@ class PaytmRedeemScreen extends StatelessWidget {
                                             ),
                                             alignment: Alignment.center,
                                             child: GetPlatform.isWeb
-                                                ? Text(
-                                                    paymentController
+                                                ? TranslationTextWidget(
+                                                    text: paymentController
                                                                 .payTMDetails !=
                                                             null
                                                         ? 'edit'.toUpperCase()
@@ -285,10 +286,11 @@ class PaytmRedeemScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: GetPlatform.isWeb
-                                  ? Text(
-                                      paymentController.payTMDetails != null
-                                          ? 'edit'.toUpperCase()
-                                          : '${'add'.toUpperCase()} +',
+                                  ? TranslationTextWidget(
+                                      text:
+                                          paymentController.payTMDetails != null
+                                              ? 'edit'.toUpperCase()
+                                              : '${'add'.toUpperCase()} +',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
@@ -359,8 +361,8 @@ class PaytmRedeemScreen extends StatelessWidget {
                   ),
                   alignment: Alignment.center,
                   child: GetPlatform.isWeb
-                      ? Text(
-                          'Send Withdrawal Request',
+                      ? TranslationTextWidget(
+                          text: 'Send Withdrawal Request',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,

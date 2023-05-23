@@ -4,6 +4,7 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/aboutUsScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/privacyPolicyScreen.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -30,11 +31,13 @@ class WebFooterWidget extends StatelessWidget {
                           children: [
                             Text(
                               '${global.appName}',
-                              style: TextStyle(fontSize: 28, color: Colors.white),
+                              style:
+                                  TextStyle(fontSize: 28, color: Colors.white),
                             ),
                             Text(
                               '',
-                              style: TextStyle(fontSize: 11, color: Colors.white),
+                              style:
+                                  TextStyle(fontSize: 11, color: Colors.white),
                             ),
                           ],
                         ),
@@ -44,8 +47,8 @@ class WebFooterWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
-                          'Quick Links',
+                        TranslationTextWidget(
+                          text: 'Quick Links',
                           style: TextStyle(fontSize: 28, color: Colors.white),
                         ),
                         SizedBox(
@@ -59,8 +62,8 @@ class WebFooterWidget extends StatelessWidget {
                             );
                           },
                           behavior: HitTestBehavior.opaque,
-                          child: Text(
-                            'About Us',
+                          child: TranslationTextWidget(
+                            text: 'About Us',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
@@ -75,8 +78,8 @@ class WebFooterWidget extends StatelessWidget {
                             );
                           },
                           behavior: HitTestBehavior.opaque,
-                          child: Text(
-                            'Get Help',
+                          child: TranslationTextWidget(
+                            text: 'Get Help',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
@@ -91,8 +94,8 @@ class WebFooterWidget extends StatelessWidget {
                             );
                           },
                           behavior: HitTestBehavior.opaque,
-                          child: Text(
-                            'Privacy Policy',
+                          child: TranslationTextWidget(
+                            text: 'Privacy Policy',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
@@ -102,8 +105,8 @@ class WebFooterWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(
-                            'Download our app',
+                          TranslationTextWidget(
+                            text: 'Download our app',
                             style: TextStyle(fontSize: 28, color: Colors.white),
                           ),
                           SizedBox(
@@ -115,12 +118,16 @@ class WebFooterWidget extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  launchUrl(Uri.parse('https://play.google.com/store/apps/details?id=${global.appPackageName}'));
+                                  launchUrl(Uri.parse(
+                                      'https://play.google.com/store/apps/details?id=${global.appPackageName}'));
                                 },
                                 behavior: HitTestBehavior.opaque,
                                 child: Container(
-                                  decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(5)),
-                                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                  decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
                                   child: Row(
                                     children: [
                                       Image.asset(
@@ -132,15 +139,20 @@ class WebFooterWidget extends StatelessWidget {
                                         width: 5,
                                       ),
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            'Get it on',
-                                            style: TextStyle(fontSize: 14, color: Colors.white),
+                                          TranslationTextWidget(
+                                            text: 'Get it on',
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.white),
                                           ),
-                                          Text(
-                                            'Play Store',
-                                            style: TextStyle(fontSize: 18, color: Colors.white),
+                                          TranslationTextWidget(
+                                            text: 'Play Store',
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                color: Colors.white),
                                           )
                                         ],
                                       )
@@ -153,12 +165,16 @@ class WebFooterWidget extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  launchUrl(Uri.parse('https://apps.apple.com/in/app/cashfuse/id'));
+                                  launchUrl(Uri.parse(
+                                      'https://apps.apple.com/in/app/cashfuse/id'));
                                 },
                                 behavior: HitTestBehavior.opaque,
                                 child: Container(
-                                  decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(5)),
-                                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                  decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
                                   child: Row(
                                     children: [
                                       Image.asset(
@@ -170,15 +186,20 @@ class WebFooterWidget extends StatelessWidget {
                                         width: 5,
                                       ),
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            'Get it on',
-                                            style: TextStyle(fontSize: 14, color: Colors.white),
+                                          TranslationTextWidget(
+                                            text: 'Get it on',
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.white),
                                           ),
-                                          Text(
-                                            'App Store',
-                                            style: TextStyle(fontSize: 18, color: Colors.white),
+                                          TranslationTextWidget(
+                                            text: 'App Store',
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                color: Colors.white),
                                           )
                                         ],
                                       )
@@ -198,9 +219,10 @@ class WebFooterWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(
-                              'Contact Us',
-                              style: TextStyle(fontSize: 28, color: Colors.white),
+                            TranslationTextWidget(
+                              text: 'Contact Us',
+                              style:
+                                  TextStyle(fontSize: 28, color: Colors.white),
                             ),
                             SizedBox(
                               height: 10,
@@ -218,7 +240,8 @@ class WebFooterWidget extends StatelessWidget {
                                     padding: const EdgeInsets.only(left: 5.0),
                                     child: Text(
                                       'New Delhi Railway Station,New Delhi',
-                                      style: TextStyle(fontSize: 16, color: Colors.white),
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.white),
                                     ),
                                   ),
                                 ),
@@ -239,7 +262,8 @@ class WebFooterWidget extends StatelessWidget {
                                   padding: const EdgeInsets.only(left: 5.0),
                                   child: Text(
                                     'support@codefuse.org',
-                                    style: TextStyle(fontSize: 16, color: Colors.white),
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.white),
                                   ),
                                 ),
                               ],
@@ -259,7 +283,8 @@ class WebFooterWidget extends StatelessWidget {
                                   padding: const EdgeInsets.only(left: 5.0),
                                   child: Text(
                                     '0xxxxxxxxxxx',
-                                    style: TextStyle(fontSize: 16, color: Colors.white),
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.white),
                                   ),
                                 ),
                               ],
