@@ -54,7 +54,7 @@ class OtpVerificationScreen extends StatelessWidget {
                   children: [
                     TranslationTextWidget(
                       text: !isEmail
-                          ? 'Code sent to ${authController.coutryCode} ${authController.contactNo.text}'
+                          ? 'Code sent to ${authController.coutryDialCode} ${authController.contactNo.text}'
                           : 'Code sent to ${authController.email.text}',
                       style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                         letterSpacing: -0.2,

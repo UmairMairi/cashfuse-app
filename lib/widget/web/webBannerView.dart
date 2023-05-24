@@ -48,12 +48,6 @@ class WebBannerView extends StatelessWidget {
                                             .topBannerList[index * 3].type ==
                                         'url') {
                                       if (global.currentUser.id != null) {
-                                        // Get.to(
-                                        //   () => WebViewScreen(
-                                        //     urlString: homeController.topBannerList[index].url,
-                                        //     brandName: homeController.topBannerList[index].name,
-                                        //   ),
-                                        // );
                                         global.launchInBrowser(
                                           homeController
                                               .topBannerList[index * 3].url!,
@@ -110,12 +104,6 @@ class WebBannerView extends StatelessWidget {
                                                 'url') {
                                               if (global.currentUser.id !=
                                                   null) {
-                                                // Get.to(
-                                                //   () => WebViewScreen(
-                                                //     urlString: homeController.topBannerList[index].url,
-                                                //     brandName: homeController.topBannerList[index].name,
-                                                //   ),
-                                                // );
                                                 global.launchInBrowser(
                                                   homeController
                                                       .topBannerList[
@@ -176,12 +164,6 @@ class WebBannerView extends StatelessWidget {
                                                   .type ==
                                               'url') {
                                             if (global.currentUser.id != null) {
-                                              // Get.to(
-                                              //   () => WebViewScreen(
-                                              //     urlString: homeController.topBannerList[index].url,
-                                              //     brandName: homeController.topBannerList[index].name,
-                                              //   ),
-                                              // );
                                               global.launchInBrowser(
                                                 homeController
                                                     .topBannerList[

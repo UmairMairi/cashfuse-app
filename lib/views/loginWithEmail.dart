@@ -75,31 +75,12 @@ class LoginWithEmailScreen extends StatelessWidget {
                     cursorColor: Get.theme.primaryColor,
                     textInputAction: TextInputAction.done,
                     keyboardType: TextInputType.emailAddress,
-                    inputFormatters: [],
                     decoration: InputDecoration(
                       labelText: 'Enter email',
                       labelStyle: TextStyle(color: Colors.black),
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       floatingLabelAlignment: FloatingLabelAlignment.start,
                       contentPadding: EdgeInsets.only(bottom: 5, left: 15),
-                      // prefixIcon: InkWell(
-                      //   onTap: () async {
-                      //     final code = await countryPicker.showPicker(
-                      //       context: context,
-                      //     );
-                      //     if (code != null) {
-                      //       authController.coutryCode = code.dialCode;
-                      //       authController.update();
-                      //     }
-                      //   },
-                      //   child: Container(
-                      //     width: 20,
-                      //     alignment: Alignment.center,
-                      //     child: Text(
-                      //       authController.coutryCode,
-                      //     ),
-                      //   ),
-                      // ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(

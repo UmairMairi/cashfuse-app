@@ -20,7 +20,9 @@ class WebAdsCampaignWidget extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: commonModel.tagline != null ? MainAxisAlignment.start : MainAxisAlignment.center,
+        mainAxisAlignment: commonModel.tagline != null
+            ? MainAxisAlignment.start
+            : MainAxisAlignment.center,
         children: [
           commonModel.tagline != null && commonModel.tagline!.isNotEmpty
               ? Align(
@@ -28,7 +30,8 @@ class WebAdsCampaignWidget extends StatelessWidget {
                   child: RotatedBox(
                     quarterTurns: -45,
                     child: ClipPath(
-                      clipper: MultiplePointsClipper(Sides.bottom, heightOfPoint: 10, numberOfPoints: 1),
+                      clipper: MultiplePointsClipper(Sides.bottom,
+                          heightOfPoint: 10, numberOfPoints: 1),
                       child: Container(
                         width: 20,
                         height: 135,
@@ -42,10 +45,10 @@ class WebAdsCampaignWidget extends StatelessWidget {
                         child: RotatedBox(
                           quarterTurns: 45,
                           child: TranslationTextWidget(
-                                text:
-                            commonModel.tagline!,
+                            text: commonModel.tagline!,
                             textAlign: TextAlign.center,
-                            style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
+                            style:
+                                Get.theme.primaryTextTheme.bodySmall!.copyWith(
                               color: Colors.white,
                               fontSize: 10,
                             ),
@@ -75,8 +78,7 @@ class WebAdsCampaignWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: TranslationTextWidget(
-                                text:
-              commonModel.name!,
+              text: commonModel.name!,
               style: Get.theme.primaryTextTheme.titleMedium!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -91,35 +93,15 @@ class WebAdsCampaignWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(2),
             ),
             child: TranslationTextWidget(
-                                text:
-              commonModel.buttonText != null ? commonModel.buttonText! : 'Grab deal',
-              style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
+              text: commonModel.buttonText != null
+                  ? commonModel.buttonText!
+                  : 'Grab deal',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600),
             ),
           ),
-          // InkWell(
-          //   onTap: () {
-          //     Get.to(
-          //       () => RatesAndTermScreen(
-          //         commonModel: commonModel,
-          //       ),
-          //       transition: Transition.rightToLeft,
-          //     );
-          //   },
-          //   child: Padding(
-          //     padding: EdgeInsets.only(top: 10),
-          //     //height: 20,
-          //     //alignment: Alignment.center,
-          //     child: TranslationTextWidget(
-                                // text:
-          //       'Rewards Rates & Terms',
-          //       textAlign: TextAlign.center,
-          //       style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-          //         color: Colors.teal,
-          //         fontSize: 10,
-          //       ),
-          //     ),
-          //   ),
-          // )
         ],
       ),
     );

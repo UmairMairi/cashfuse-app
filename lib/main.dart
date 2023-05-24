@@ -38,7 +38,6 @@ void main() async {
 
   if (!GetPlatform.isWeb) {
     await NotificationHelper.initialize();
-    //MobileAds.instance.initialize();
 
     MobileAds.instance.initialize();
   }
@@ -50,7 +49,7 @@ void main() async {
   if (GetPlatform.isWeb) {
     Get.put(NetworkController());
     Get.put(SplashController());
-    // Get.put(HomeController());
+    // Get.lazyPut<HomeController>(() => HomeController());
 
     Get.put(CouponController());
   }

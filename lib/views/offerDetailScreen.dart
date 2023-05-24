@@ -21,7 +21,7 @@ import 'package:google_translator/google_translator.dart';
 class OfferDetailScreen extends StatelessWidget {
   final OfferModel offer;
   final bool fromSeeMore;
-  
+
   OfferDetailScreen({required this.offer, required this.fromSeeMore});
 
   HomeController homeController = Get.find<HomeController>();
@@ -195,22 +195,6 @@ class OfferDetailScreen extends StatelessWidget {
                                         ? homeController.createdLink
                                         : offer.url!,
                                   );
-
-                                  // Get.to(
-                                  //   () => WebViewScreen(
-                                  //     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : offer.url,
-                                  //     isCliked: global.clickedList.contains(offer.campaignName),
-                                  //     couponList: offer.couponList,
-                                  //     partner: offer.partner,
-                                  //     brandName: offer.campaignName,
-                                  //   ),
-                                  // ).then((value) {
-                                  //   if (global.clickedList.contains(offer.campaignName)) {
-                                  //   } else {
-                                  //     global.clickedList.add(offer.campaignName);
-                                  //     global.sp.setStringList('clickedList', global.clickedList);
-                                  //   }
-                                  // });
                                 } else {
                                   if (global.getPlatFrom()) {
                                     Get.dialog(Dialog(

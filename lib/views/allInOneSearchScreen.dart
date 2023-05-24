@@ -795,14 +795,9 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                               if (searchController
                                                       .addNewTabList!.length >=
                                                   6) {
-                                                //searchController.addNewTabList2.removeWhere((element) => element.id == searchController.addNewTabList[i].id);
                                                 searchController.addNewTabList!
                                                     .removeAt(i);
-                                                // searchController.addNewTabList2.addAll(searchController.addNewTabList);
-                                                // searchController.addNewTabList2.insert(
-                                                //   searchController.addNewTabList.length,
-                                                //   AllInOneSearchDataModel(name: '+Add Tab'),
-                                                // );
+
                                                 setState(() {});
                                               } else {
                                                 Fluttertoast.showToast(
@@ -863,12 +858,6 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                               fontSize: 16.0,
                                             );
                                           } else {
-                                            //await searchController.saveTab();
-                                            // Navigator.of(context).pushReplacement(
-                                            //   MaterialPageRoute(
-                                            //     builder: (context) => AllInOneSearchScreen(),
-                                            //   ),
-                                            // );
                                             searchController.addNewTabList2!
                                                 .removeWhere((element) =>
                                                     element.id == null);
@@ -881,13 +870,6 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                                 'addNewTabList +++++++++++++ ${searchController.addNewTabList!.length.toString()}');
                                             print(
                                                 'addNewTabList2 +++++++++++++ ${searchController.addNewTabList2!.length.toString()}');
-                                            //addNewTabList = List.from(addNewTabList2);
-                                            // searchController.addNewTabList2.clear();
-                                            // searchController.addNewTabList2.addAll(searchController.addNewTabList);
-                                            // searchController.addNewTabList.clear();
-                                            // searchController.addNewTabList.addAll(searchController.addNewTabList2);
-
-                                            //global.sp.setString('tabList', searchController.addNewTabList.map((e) => e.toJson()).toString());
 
                                             searchController.addNewTabList2!
                                                 .insert(
@@ -1044,18 +1026,4 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
       return Color(int.parse("0x$hexColor"));
     }
   }
-
-  // Widget _shimmerWidget() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(10),
-  //     child: Shimmer.fromColors(
-  //       baseColor: Colors.grey[300],
-  //       highlightColor: Colors.grey[100],
-  //       child: Text(
-  //         'Loading....',
-  //         style: Theme.of(context).primaryTextTheme.caption.copyWith(fontWeight: FontWeight.w500),
-  //       ),
-  //     ),
-  //   );
-  // }
 }

@@ -13,16 +13,12 @@ import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:email_validator/email_validator.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:get/get.dart';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:phone_number/phone_number.dart';
 
 class WebAccountSettingScreen extends StatelessWidget {
   final fnameFocus = new FocusNode();
@@ -37,7 +33,6 @@ class WebAccountSettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log(authController.coutryCode!);
     return GetBuilder<AuthController>(builder: (auth) {
       return GetBuilder<ImageControlller>(builder: (imageControlller) {
         return Scaffold(
@@ -76,27 +71,6 @@ class WebAccountSettingScreen extends StatelessWidget {
                     bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: Column(
                   children: [
-                    // Container(
-                    //   color: Get.theme.primaryColor,
-                    //   child: TabBar(
-                    //     controller: commonController.tabController,
-                    //     indicatorColor: Colors.white,
-                    //     labelColor: Colors.white,
-                    //     unselectedLabelColor: Colors.white,
-                    //     onTap: (index) => commonController.setTabIndex(index),
-                    //     tabs: [
-                    //       Tab(
-                    //         text: 'Personal Details',
-                    //       ),
-                    //       Tab(
-                    //         text: 'Change Password',
-                    //       )
-                    //     ],
-                    //   ),
-                    // ),
-                    // commonController.tabController.index == 0
-                    //     ?
-
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
                       child: Stack(
@@ -228,7 +202,6 @@ class WebAccountSettingScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
@@ -336,27 +309,34 @@ class WebAccountSettingScreen extends StatelessWidget {
                           SizedBox(
                             // height: 100,
                             child: IntlPhoneField(
+                              // readOnly: global.currentUser.phone != null &&
+                              //         global.currentUser.phone!.isNotEmpty
+                              //     ? true
+                              //     : false,
+
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               focusNode: authController.phoneFocus,
                               showCountryFlag: false,
+                              style: TextStyle(color: Colors.black),
+
                               controller: authController.contactNo,
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly
                               ],
-                              // initialCountryCode: auth.country!.code,
+                              initialCountryCode: global.countryCode,
                               textAlignVertical: TextAlignVertical.center,
                               textAlign: TextAlign.start,
                               keyboardType: TextInputType.numberWithOptions(
                                   signed: true, decimal: true),
                               disableLengthCheck: false,
+                              enabled: global.currentUser.phone != null &&
+                                      global.currentUser.phone!.isNotEmpty
+                                  ? false
+                                  : true,
 
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsets.zero,
-                                // fillColor: AppColor.WHITE_COLOR,
-                                // label: Text('Enter phone'),
-                                // labelStyle: TextStyle(color: Colors.black),
-                                // hintText: MessageConstants.HNT_PHONE_NUMBER,
+                                contentPadding: EdgeInsets.only(bottom: 8),
                                 filled: false,
                                 focusColor: Get.theme.primaryColor,
                                 focusedBorder: UnderlineInputBorder(
@@ -377,128 +357,38 @@ class WebAccountSettingScreen extends StatelessWidget {
                                       ? Get.theme.primaryColor
                                       : Colors.grey,
                                 )),
+                                hintText: '9999999999',
+                                hintStyle: TextStyle(color: Colors.grey[400]),
                                 counterText: "",
                               ),
                               onChanged: (phone) {
-                                authController.coutryCode = phone.countryCode;
+                                authController.isNumberChange = true;
                                 authController.update();
-                                //           authController.update();
-                                // print(phone.completeNumber);
-                                // contactNo = phone.completeNumber;
-                                // phonenumber = phone;
-
-                                // phone.countryCode;
                               },
 
                               flagsButtonMargin: EdgeInsets.zero,
                               flagsButtonPadding: EdgeInsets.zero,
-                              // flagsButtonPadding: EdgeInsets.only(left: 15),
+
                               dropdownTextStyle: TextStyle(color: Colors.black),
                               showDropdownIcon: false,
                               cursorColor: Theme.of(context).primaryColor,
                               onCountryChanged: (country) {
                                 FocusScope.of(context).unfocus();
 
+                                authController.coutryDialCode =
+                                    '+' + country.dialCode;
+
+                                global.countryCode = country.code;
+
+                                log(authController.isNumberChange.toString());
+
+                                global.sp!
+                                    .setString('countryCode', country.code);
+                                authController.update();
                                 print('Country changed to: ' + country.name);
                               },
                             ),
                           ),
-                          // TextFormField(
-                          //   controller: authController.contactNo,
-                          //   cursorColor: Get.theme.primaryColor,
-                          //   textInputAction: TextInputAction.done,
-                          //   keyboardType: TextInputType.numberWithOptions(
-                          //       signed: true, decimal: true),
-                          //   textAlignVertical: TextAlignVertical.center,
-                          //   textAlign: TextAlign.start,
-                          //   inputFormatters: [
-                          //     FilteringTextInputFormatter.digitsOnly,
-                          //   ],
-                          //   decoration: InputDecoration(
-                          //     contentPadding: EdgeInsets.zero,
-                          //     hintText: '9999999999',
-                          //     hintStyle: Get.theme.primaryTextTheme.bodySmall!
-                          //         .copyWith(color: Colors.grey[400]),
-                          //     focusColor: Get.theme.primaryColor,
-                          //     focusedBorder: UnderlineInputBorder(
-                          //         borderSide: BorderSide(
-                          //       color: fnumberFocus.hasFocus
-                          //           ? Get.theme.primaryColor
-                          //           : Colors.grey,
-                          //     )),
-                          //     border: UnderlineInputBorder(
-                          //         borderSide: BorderSide(
-                          //       color: fnumberFocus.hasFocus
-                          //           ? Get.theme.primaryColor
-                          //           : Colors.grey,
-                          //     )),
-                          //     enabledBorder: UnderlineInputBorder(
-                          //         borderSide: BorderSide(
-                          //       color: fnumberFocus.hasFocus
-                          //           ? Get.theme.primaryColor
-                          //           : Colors.grey,
-                          //     )),
-                          //     prefixIcon: InkWell(
-                          //       onTap: () async {
-                          //         final code = await countryPicker.showPicker(
-                          //           context: context,
-                          //         );
-                          //         if (code != null) {
-                          //           authController.coutryCode = code.dialCode;
-                          //           authController.update();
-                          //         }
-                          //       },
-                          //       child: Container(
-                          //         width: 20,
-                          //         alignment: Alignment.center,
-                          //         child: Text(
-                          //           authController.coutryCode!,
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
-                          // TextFormField(
-                          //   focusNode: fnumberFocus,
-                          //   controller: authController.contactNo,
-                          //   readOnly: global.currentUser.phone != null &&
-                          //           global.currentUser.phone.isNotEmpty
-                          //       ? true
-                          //       : false,
-                          //   scrollPadding: EdgeInsets.zero,
-                          //   cursorColor: Get.theme.primaryColor,
-                          //   textInputAction: TextInputAction.done,
-                          //   keyboardType: TextInputType.numberWithOptions(
-                          //       signed: true, decimal: true),
-                          //   inputFormatters: [
-                          //     FilteringTextInputFormatter.digitsOnly,
-                          //   ],
-                          //   decoration: InputDecoration(
-                          //     contentPadding: EdgeInsets.zero,
-                          //     hintText: '9999999999',
-                          //     hintStyle: Get.theme.primaryTextTheme.bodySmall
-                          //         .copyWith(color: Colors.grey[400]),
-                          //     focusColor: Get.theme.primaryColor,
-                          //     focusedBorder: UnderlineInputBorder(
-                          //         borderSide: BorderSide(
-                          //       color: fnumberFocus.hasFocus
-                          //           ? Get.theme.primaryColor
-                          //           : Colors.grey,
-                          //     )),
-                          //     border: UnderlineInputBorder(
-                          //         borderSide: BorderSide(
-                          //       color: fnumberFocus.hasFocus
-                          //           ? Get.theme.primaryColor
-                          //           : Colors.grey,
-                          //     )),
-                          //     enabledBorder: UnderlineInputBorder(
-                          //         borderSide: BorderSide(
-                          //       color: fnumberFocus.hasFocus
-                          //           ? Get.theme.primaryColor
-                          //           : Colors.grey,
-                          //     )),
-                          //   ),
-                          // ),
                           SizedBox(
                             height: 20,
                           ),
@@ -580,32 +470,36 @@ class WebAccountSettingScreen extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () async {
-                  String _numberWithCountryCode = authController.coutryCode! +
-                      authController.contactNo.text;
-                  bool _isValid = GetPlatform.isAndroid ? false : true;
-                  if (GetPlatform.isAndroid) {
-                    try {
-                      PhoneNumber phoneNumber =
-                          await PhoneNumberUtil().parse(_numberWithCountryCode);
-                      _numberWithCountryCode = '+' +
-                          phoneNumber.countryCode +
-                          phoneNumber.nationalNumber;
-                      _isValid = true;
-                    } catch (e) {
-                      print(
-                          "Exception - LoginWithPhoneScreen.dart - PhoneNumberUtil():" +
-                              e.toString());
-                    }
-                  }
-                  if (!_isValid) {
-                    showCustomSnackBar('Invalid phone number');
-                  } else if (authController.name.text.isEmpty) {
+                  // String _numberWithCountryCode =
+                  //     authController.coutryDialCode! +
+                  //         authController.contactNo.text;
+                  // bool _isValid = GetPlatform.isAndroid ? false : true;
+                  // if (GetPlatform.isAndroid) {
+                  //   try {
+                  //     PhoneNumber phoneNumber =
+                  //         await PhoneNumberUtil().parse(_numberWithCountryCode);
+                  //     _numberWithCountryCode = '+' +
+                  //         phoneNumber.countryCode +
+                  //         phoneNumber.nationalNumber;
+                  //     _isValid = true;
+                  //   } catch (e) {
+                  //     print(
+                  //         "Exception - LoginWithPhoneScreen.dart - PhoneNumberUtil():" +
+                  //             e.toString());
+                  //   }
+                  // }
+                  // if (!_isValid) {
+                  //   showCustomSnackBar('Invalid phone number');
+                  // } else
+                  if (authController.name.text.isEmpty) {
                     showCustomSnackBar('Please Enter name.');
                   } else if (authController.email.text.isEmpty) {
                     showCustomSnackBar('Please Enter email.');
                   } else if (!EmailValidator.validate(
                       authController.email.text)) {
                     showCustomSnackBar('Please Enter valid email.');
+                  } else if (authController.contactNo.text.isEmpty) {
+                    showCustomSnackBar('Please Enter phone.');
                   } else if (imageControlller.imageFile != null) {
                     await authController
                         .updateProfile(imageControlller.imageFile!);

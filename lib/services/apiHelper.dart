@@ -1458,7 +1458,6 @@ class APIHelper {
       var dio = Dio();
       response = await dio.get(
         "https://nominatim.openstreetmap.org/reverse?lat=$lat&lon=$lng&format=json",
-        // headers: await global.getApiHeaders(false),
       );
       print('done : $response');
       dynamic recordList;
@@ -1467,8 +1466,6 @@ class APIHelper {
       } else {
         recordList = null;
       }
-      // print(
-      //     '====> API Response: [${response.statusCode}] ${global.baseUrl}${AppConstant.GET_REGION_URI}\n${response.body}');
       return getDioResult(response, recordList);
     } catch (e) {
       print("Exception -  apiHelper.dart - getAddressFromGeocode():" +

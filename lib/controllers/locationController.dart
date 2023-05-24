@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/models/countryModel.dart';
 import 'package:cashfuse/services/apiHelper.dart';
@@ -92,7 +93,7 @@ class LocationController extends GetxController {
           global.showCountryPopUp = true;
         }
 
-        // await homeController.init();
+        await Get.find<HomeController>().init();
         update();
       }).catchError((e) {
         print("Exceptioin - LocationController.dart - getCurrentLocation():" +
@@ -103,82 +104,4 @@ class LocationController extends GetxController {
           e.toString());
     }
   }
-
-  Future<dynamic> getAddressFromGeocode() async {
-    try {
-      // final api = GoogleGeocodingApi('AIzaSyDbLaa85zHKSvm1oChRb6xdXyC-kSTiWXU',
-      //     isLogged: true);
-      // final reversedSearchResults = await api.reverse(
-      //   '42.360083,-71.05888',
-      //   language: 'en',
-      // );
-
-      // log(reversedSearchResults.results.toString());
-      // if (networkController.connectionStatus.value == 1 ||
-      //     networkController.connectionStatus.value == 2) {
-      //   await apiHelper.getAddressFromGeocode().then((response) {
-      //     if (response.status == "OK") {
-      //       global.currentLocation = response.recordList['results'][0]
-      //               ['formatted_address']
-      //           .toString();
-      //       update();
-      //       global.sp!.setString('currentLocation', global.currentLocation);
-      //     } else {
-      //       showCustomSnackBar(response.message);
-      //     }
-      //   });
-      // } else {
-      //   showCustomSnackBar(AppConstant.NO_INTERNET);
-      // }
-    } catch (e) {
-      print(
-          "Exception -  base.dart - getLocationFromAddress():" + e.toString());
-      return null;
-    }
-  }
-
-  // Future getAddressFromGeocode() async {
-  // addressResult = [];
-  // final coordinates = new Coordinates(latitude, longitude);
-  // final placemarks = await placemarkFromCoordinates(global.lat!, global.lng!);
-  // global.currentLocation = placemarks[0].street == "" ||
-  //         placemarks[0].name == ""
-  //     ? "${placemarks[0].locality},${placemarks[0].administrativeArea},${placemarks[0].country}"
-  //     : "${placemarks[0].street},${placemarks[0].name},${placemarks[0].locality},${placemarks[0].administrativeArea},${placemarks[0].country}";
-  // // await getAreaFromPincode(placemarks[0].postalCode!);
-  // finalAddress = placemarks[0].country == "India"
-  //     ? address
-  //     : "No restaurants available at this location at the moment. please select a different location";
-  // // await getAdderessDataFromPostalCode2(placemarks[0].postalCode!);
-
-  // lat2 = latitude;
-  // lng2 = longitude;
-  // setState(() {});
-
-  // global.pincode = placemarks[0].postalCode!;
-  // update();
-  // await getRegionId();
-  // }
-
-  // Future getRegionId() async {
-  //   try {
-  //     if (networkController.connectionStatus.value == 1 ||
-  //         networkController.connectionStatus.value == 2) {
-  //       await apiHelper.getRegionId().then((response) {
-  //         if (response.statusCode == "200") {
-  //           global.regionId = response.recordList['data'];
-  //           update();
-  //           global.sp!.setString('regionId', global.regionId.toString());
-  //         } else {
-  //           showCustomSnackBar(response.message);
-  //         }
-  //       });
-  //     } else {
-  //       showCustomSnackBar(AppConstant.NO_INTERNET);
-  //     }
-  //   } catch (e) {
-  //     print("Exception - LocationController.dart - getRegionId():" +
-  //         e.toString());
-  //   }
-  // }
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
@@ -15,10 +17,13 @@ import 'package:cashfuse/views/webScreen/webAccountSettingScreen.dart';
 import 'package:cashfuse/views/webScreen/webMyEarningScreen.dart';
 import 'package:cashfuse/widget/confirmationDialog.dart';
 import 'package:cashfuse/widget/customImage.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
-import 'package:phone_number/phone_number.dart';
+import 'package:phone_numbers_parser/phone_numbers_parser.dart';
+// import 'package:phone_number/phone_number.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:store_redirect/store_redirect.dart';
 
@@ -58,8 +63,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                 Icons.arrow_back,
               ),
             ),
-            title: Text(
-              global.currentUser.id != null ? 'Profile' : '',
+            title: TranslationTextWidget(
+              text: global.currentUser.id != null ? 'Profile' : '',
               style: Get.theme.primaryTextTheme.titleSmall!
                   .copyWith(color: Colors.white),
             ),
@@ -69,252 +74,180 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                   child: Column(
                     children: [
                       Container(
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          color: Get.theme.primaryColor,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                leading: CircleAvatar(
-                                  radius: 25,
-                                  backgroundColor: Colors.white,
-                                  child: global
-                                          .currentUser.userImage!.isNotEmpty
-                                      ? ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(25),
-                                          child: CustomImage(
-                                            image: global.appInfo.baseUrls!
-                                                    .userImageUrl! +
-                                                '/' +
-                                                global.currentUser.userImage!,
-                                            // height: 30,
-                                            // width: 30,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        )
-                                      : ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(25),
-                                          child: Image.asset(
-                                            Images.user,
-                                            //height: 30,
-                                            fit: BoxFit.cover,
-                                          ),
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        color: Get.theme.primaryColor,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              leading: CircleAvatar(
+                                radius: 25,
+                                backgroundColor: Colors.white,
+                                child: global.currentUser.userImage!.isNotEmpty
+                                    ? ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: CustomImage(
+                                          image: global.appInfo.baseUrls!
+                                                  .userImageUrl! +
+                                              '/' +
+                                              global.currentUser.userImage!,
+                                          // height: 30,
+                                          // width: 30,
+                                          fit: BoxFit.cover,
                                         ),
-                                ),
-                                title: Text(
-                                  global.currentUser.name!,
-                                  style: Get.theme.primaryTextTheme.titleMedium!
-                                      .copyWith(color: Colors.white),
-                                ),
-                                subtitle: Text(
-                                  global.currentUser.email!.isNotEmpty
-                                      ? global.currentUser.email!
-                                      : global.currentUser.phone!,
-                                  style: Get.theme.primaryTextTheme.bodySmall!
-                                      .copyWith(color: Colors.white),
-                                ),
+                                      )
+                                    : ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Image.asset(
+                                          Images.user,
+                                          //height: 30,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Pending',
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall!
-                                            .copyWith(
-                                          color: Colors.white,
-                                          fontSize: 11,
-                                          letterSpacing: 0,
-                                        ),
-                                      ),
-                                      Text(
-                                        global.currentUser.earning != null
-                                            ? '${global.appInfo.currency}${global.currentUser.earning!.pendingEarning}'
-                                            : '${global.appInfo.currency}0.00',
-                                        textAlign: TextAlign.center,
-                                        style: Get
-                                            .theme.primaryTextTheme.titleSmall!
-                                            .copyWith(color: Colors.white),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 50,
-                                    child: VerticalDivider(
-                                      // width: 2,
-                                      // thickness: 2,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Approved',
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall!
-                                            .copyWith(
-                                          color: Colors.white,
-                                          letterSpacing: 0,
-                                          fontSize: 11,
-                                        ),
-                                      ),
-                                      Text(
-                                        global.currentUser.earning != null
-                                            ? '${global.appInfo.currency}${global.currentUser.earning!.remEarning}'
-                                            : '${global.appInfo.currency}0.00',
-                                        textAlign: TextAlign.center,
-                                        style: Get
-                                            .theme.primaryTextTheme.titleSmall!
-                                            .copyWith(color: Colors.white),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 50,
-                                    child: VerticalDivider(
-                                      // width: 2,
-                                      // thickness: 2,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Redeemed',
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall!
-                                            .copyWith(
-                                          color: Colors.white,
-                                          letterSpacing: 0,
-                                          fontSize: 11,
-                                        ),
-                                      ),
-                                      Text(
-                                        global.currentUser.earning != null
-                                            ? '${global.appInfo.currency}${global.currentUser.earning!.withdrawal}'
-                                            : '${global.appInfo.currency}0.00',
-                                        textAlign: TextAlign.center,
-                                        style: Get
-                                            .theme.primaryTextTheme.titleSmall!
-                                            .copyWith(color: Colors.white),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 50,
-                                    child: VerticalDivider(
-                                      // width: 2,
-                                      // thickness: 2,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Rewards',
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall!
-                                            .copyWith(
-                                          color: Colors.white,
-                                          letterSpacing: 0,
-                                          fontSize: 11,
-                                        ),
-                                      ),
-                                      Text(
-                                        global.currentUser.earning != null
-                                            ? '${global.appInfo.currency}${global.currentUser.earning!.rewardEarning}'
-                                            : '${global.appInfo.currency}0.00',
-                                        textAlign: TextAlign.center,
-                                        style: Get
-                                            .theme.primaryTextTheme.titleSmall!
-                                            .copyWith(color: Colors.white),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                              title: Text(
+                                global.currentUser.name!,
+                                style: Get.theme.primaryTextTheme.titleMedium!
+                                    .copyWith(color: Colors.white),
                               ),
-                            ],
-                          )
-                          //: Text('Welcome!'),
-                          ),
-                      // Container(
-                      //   color: Get.theme.primaryColor,
-                      //   padding: EdgeInsets.only(left: 20, top: 5, right: 20),
-                      //   child: Column(
-                      //     crossAxisAlignment: CrossAxisAlignment.start,
-                      //     children: [
-                      //       Text(
-                      //         'Hello ' + global.currentUser.name,
-                      //         style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-                      //       ),
-                      //       SizedBox(
-                      //         height: 10,
-                      //       ),
-                      //       Divider(
-                      //         color: Colors.white.withOpacity(0.2),
-                      //         height: 0,
-                      //         thickness: 1.2,
-                      //       ),
-                      //       SizedBox(
-                      //         height: 10,
-                      //       ),
-                      //       Row(
-                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //         children: [
-                      //           Column(
-                      //             crossAxisAlignment: CrossAxisAlignment.start,
-                      //             children: [
-                      //               Text(
-                      //                 'Total Cashback:',
-                      //                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                      //                   color: Colors.white,
-                      //                   fontSize: 11,
-                      //                 ),
-                      //               ),
-                      //               Text(
-                      //                 global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency}0.00',
-                      //                 style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-                      //               ),
-                      //             ],
-                      //           ),
-                      //           // Column(
-                      //           //   crossAxisAlignment: CrossAxisAlignment.start,
-                      //           //   children: [
-                      //           //     Text(
-                      //           //       'Total Rewards:',
-                      //           //       style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                      //           //         color: Colors.white,
-                      //           //         fontSize: 11,
-                      //           //       ),
-                      //           //     ),
-                      //           //     Text(
-                      //           //       '${global.appInfo.currency}0.00',
-                      //           //       style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-                      //           //     ),
-                      //           //   ],
-                      //           // )
-                      //         ],
-                      //       ),
-                      //       SizedBox(
-                      //         height: 10,
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
+                              subtitle: Text(
+                                global.currentUser.email!.isNotEmpty
+                                    ? global.currentUser.email!
+                                    : global.currentUser.phone!,
+                                style: Get.theme.primaryTextTheme.bodySmall!
+                                    .copyWith(color: Colors.white),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    TranslationTextWidget(
+                                      text: 'Pending',
+                                      style: Get
+                                          .theme.primaryTextTheme.bodySmall!
+                                          .copyWith(
+                                        color: Colors.white,
+                                        fontSize: 11,
+                                        letterSpacing: 0,
+                                      ),
+                                    ),
+                                    Text(
+                                      global.currentUser.earning != null
+                                          ? '${global.appInfo.currency}${global.currentUser.earning!.pendingEarning}'
+                                          : '${global.appInfo.currency}0.00',
+                                      textAlign: TextAlign.center,
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall!
+                                          .copyWith(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                  child: VerticalDivider(
+                                    // width: 2,
+                                    // thickness: 2,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    TranslationTextWidget(
+                                      text: 'Approved',
+                                      style: Get
+                                          .theme.primaryTextTheme.bodySmall!
+                                          .copyWith(
+                                        color: Colors.white,
+                                        letterSpacing: 0,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                    Text(
+                                      global.currentUser.earning != null
+                                          ? '${global.appInfo.currency}${global.currentUser.earning!.remEarning}'
+                                          : '${global.appInfo.currency}0.00',
+                                      textAlign: TextAlign.center,
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall!
+                                          .copyWith(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                  child: VerticalDivider(
+                                    // width: 2,
+                                    // thickness: 2,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    TranslationTextWidget(
+                                      text: 'Redeemed',
+                                      style: Get
+                                          .theme.primaryTextTheme.bodySmall!
+                                          .copyWith(
+                                        color: Colors.white,
+                                        letterSpacing: 0,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                    Text(
+                                      global.currentUser.earning != null
+                                          ? '${global.appInfo.currency}${global.currentUser.earning!.withdrawal}'
+                                          : '${global.appInfo.currency}0.00',
+                                      textAlign: TextAlign.center,
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall!
+                                          .copyWith(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                  child: VerticalDivider(
+                                    // width: 2,
+                                    // thickness: 2,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    TranslationTextWidget(
+                                      text: 'Rewards',
+                                      style: Get
+                                          .theme.primaryTextTheme.bodySmall!
+                                          .copyWith(
+                                        color: Colors.white,
+                                        letterSpacing: 0,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                    Text(
+                                      global.currentUser.earning != null
+                                          ? '${global.appInfo.currency}${global.currentUser.earning!.rewardEarning}'
+                                          : '${global.appInfo.currency}0.00',
+                                      textAlign: TextAlign.center,
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall!
+                                          .copyWith(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
                       InkWell(
                         onTap: () async {
                           global.showInterstitialAd();
@@ -323,22 +256,17 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                           authController.email.text = global.currentUser.email!;
                           authController.contactNo.text =
                               global.currentUser.phone!;
-                          if (global.currentUser.phone != null) {
-                            if (GetPlatform.isAndroid) {
-                              try {
-                                PhoneNumber phoneNumber =
-                                    await PhoneNumberUtil()
-                                        .parse(global.currentUser.phone!);
-                                authController.coutryCode =
-                                    '+' + phoneNumber.countryCode;
-                                authController.contactNo.text =
-                                    phoneNumber.nationalNumber;
-                              } catch (e) {
-                                print(
-                                    "Exception - ProfileScreen.dart - PhoneNumberUtil():" +
-                                        e.toString());
-                              }
-                            }
+                          if (global.currentUser.phone != null &&
+                              global.currentUser.phone!.isNotEmpty) {
+                            final phoneNumber =
+                                PhoneNumber.parse(global.currentUser.phone!);
+
+                            authController.coutryDialCode =
+                                '+' + phoneNumber.countryCode;
+
+                            authController.contactNo.text = phoneNumber.nsn;
+
+                            log(phoneNumber.countryCode);
                           }
                           Get.to(
                             () => WebAccountSettingScreen(),
@@ -361,8 +289,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              Text(
-                                'Account Settings',
+                              TranslationTextWidget(
+                                text: 'Account Settings',
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -397,8 +325,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              Text(
-                                'My Earnings',
+                              TranslationTextWidget(
+                                text: 'My Earnings',
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -429,8 +357,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              Text(
-                                'Payments',
+                              TranslationTextWidget(
+                                text: 'Payments',
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -465,8 +393,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              Text(
-                                'Payment History',
+                              TranslationTextWidget(
+                                text: 'Payment History',
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -501,8 +429,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              Text(
-                                'Recents Clicks',
+                              TranslationTextWidget(
+                                text: 'Recents Clicks',
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -533,8 +461,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              Text(
-                                'Referral Network',
+                              TranslationTextWidget(
+                                text: 'Referral Network',
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -569,8 +497,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              Text(
-                                'Get Help',
+                              TranslationTextWidget(
+                                text: 'Get Help',
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -607,8 +535,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                                     SizedBox(
                                       width: 20,
                                     ),
-                                    Text(
-                                      'Theme',
+                                    TranslationTextWidget(
+                                      text: 'Theme',
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -622,44 +550,43 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                             ),
                       // GetPlatform.isWeb
                       //     ? SizedBox()
-                      //     : 
-                          InkWell(
-                              onTap: () {
-                                global.showInterstitialAd();
-                                Get.to(
-                                  () => LanguageScreen(),
-                                  routeName: 'language',
-                                );
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                child: Row(
-                                  children: [
-                                    // Icon(
-                                    //   Icons.,
-                                    //   color: Get.theme.iconTheme.color,
-                                    // ),
-                                    Image.asset(
-                                      Images.languages,
-                                      height: 20,
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Text(
-                                      'Language',
-                                      style: Get
-                                          .theme.primaryTextTheme.bodySmall!
-                                          .copyWith(
-                                        letterSpacing: 0,
-                                        color: Colors.black.withOpacity(0.75),
-                                      ),
-                                    ),
-                                  ],
+                      //     :
+                      InkWell(
+                        onTap: () {
+                          global.showInterstitialAd();
+                          Get.to(
+                            () => LanguageScreen(),
+                            routeName: 'language',
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          child: Row(
+                            children: [
+                              // Icon(
+                              //   Icons.,
+                              //   color: Get.theme.iconTheme.color,
+                              // ),
+                              Image.asset(
+                                Images.languages,
+                                height: 20,
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              TranslationTextWidget(
+                                text: 'Language',
+                                style: Get.theme.primaryTextTheme.bodySmall!
+                                    .copyWith(
+                                  letterSpacing: 0,
+                                  color: Colors.black.withOpacity(0.75),
                                 ),
                               ),
-                            ),
+                            ],
+                          ),
+                        ),
+                      ),
 
                       Divider(
                         height: 0,
@@ -684,8 +611,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                                     SizedBox(
                                       width: 20,
                                     ),
-                                    Text(
-                                      'Rate us',
+                                    TranslationTextWidget(
+                                      text: 'Rate us',
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -725,8 +652,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              Text(
-                                'About Us',
+                              TranslationTextWidget(
+                                text: 'About Us',
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -761,8 +688,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              Text(
-                                'Privacy Policy',
+                              TranslationTextWidget(
+                                text: 'Privacy Policy',
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -781,8 +708,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                             'Are you sure you want to Signout?',
                             [
                               CupertinoDialogAction(
-                                child: Text(
-                                  'Yes',
+                                child: TranslationTextWidget(
+                                  text: 'Yes',
                                   style: Get.theme.primaryTextTheme.titleSmall!
                                       .copyWith(color: Colors.red),
                                 ),
@@ -793,8 +720,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                                 },
                               ),
                               CupertinoDialogAction(
-                                child: Text(
-                                  'No',
+                                child: TranslationTextWidget(
+                                  text: 'No',
                                   style: Get.theme.primaryTextTheme.titleSmall!
                                       .copyWith(color: Colors.blue),
                                 ),
@@ -817,8 +744,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              Text(
-                                'Signout',
+                              TranslationTextWidget(
+                                text: 'Signout',
                                 style: Get.theme.primaryTextTheme.bodyMedium!
                                     .copyWith(
                                   letterSpacing: -0.5,
@@ -838,8 +765,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'Login or signup',
+                      TranslationTextWidget(
+                        text: 'Login or signup',
                         style:
                             Get.theme.primaryTextTheme.displaySmall!.copyWith(
                           letterSpacing: -1,
@@ -848,8 +775,9 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Text(
-                          'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
+                        child: TranslationTextWidget(
+                          text:
+                              'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
                           textAlign: TextAlign.center,
                           style:
                               Get.theme.primaryTextTheme.titleSmall!.copyWith(
@@ -866,20 +794,11 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                                   width: Get.width / 3,
                                   child: GetStartedScreen(
                                     fromMenu: true,
-                                  )
-                                  // LoginOrSignUpScreen(
-                                  //   fromMenu: true,
-                                  // ),
-                                  ),
+                                  )),
                             ));
                           } else {
                             Get.to(
-                              () =>
-                                  //  LoginScreen(),
-                                  //     LoginOrSignUpScreen(
-                                  //   fromMenu: true,
-                                  // ),
-                                  GetStartedScreen(
+                              () => GetStartedScreen(
                                 fromMenu: true,
                               ),
                               routeName: 'login',
@@ -898,8 +817,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           alignment: Alignment.center,
-                          child: Text(
-                            'Continue'.toUpperCase(),
+                          child: TranslationTextWidget(
+                            text: 'Continue'.toUpperCase(),
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,

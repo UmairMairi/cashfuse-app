@@ -295,40 +295,6 @@ class WebFooterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Row(
-                //       mainAxisSize: MainAxisSize.min,
-                //       children: [
-                //         Row(
-                //           mainAxisAlignment: MainAxisAlignment.start,
-                //           mainAxisSize: MainAxisSize.min,
-                //           children: [
-                //             GestureDetector(
-                //               onTap: () {
-                //                 //_launchURL('https://www.facebook.com/');
-                //               },
-                //               behavior: HitTestBehavior.opaque,
-                //               child: ClipOval(
-                //                   child: CustomImage(
-                //                 height: 45,
-                //                 width: 45,
-                //                 fit: BoxFit.cover,
-                //                 image: 'assets/image/facebook.jpg',
-                //                 errorImage: Images.logo,
-                //               )),
-                //             ),
-                //             SizedBox(
-                //               width: 5,
-                //             ),
-                //           ],
-                //         )
-                //       ],
-                //     ),
-                //     Text('Copyright @ Codefuse', style: TextStyle(fontSize: 16, color: Colors.white))
-                //   ],
-                // )
               ],
             )),
         Container(

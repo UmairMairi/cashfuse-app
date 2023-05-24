@@ -129,22 +129,6 @@ class SearchGetController extends GetxController {
                   }
                 }
               }
-
-              // for (var n = 0; n < _topCategoryList.length; n++) {
-              //   if (_topCategoryList[n].cuecampaigns != []) {
-              //     for (var k = 0; k < _topCategoryList[n].cuecampaigns.length; k++) {
-              //       _topCategoryList[n].commonList.add(
-              //             CommonModel(
-              //               name: _topCategoryList[n].cuecampaigns[k].name,
-              //               image: _topCategoryList[n].cuecampaigns[k].image,
-              //               buttonText: _topCategoryList[n].cuecampaigns[k].buttonText,
-              //               trackingLink: _topCategoryList[n].cuecampaigns[k].url,
-              //               campaignId: _topCategoryList[n].cuecampaigns[k].id,
-              //             ),
-              //           );
-              //     }
-              //   }
-              // }
             }
           } else {
             showCustomSnackBar(response.message);
@@ -218,13 +202,6 @@ class SearchGetController extends GetxController {
       print('addNewTabList +++++++++++++ ${addNewTabList!.length.toString()}');
       print(
           'addNewTabList2 +++++++++++++ ${addNewTabList2!.length.toString()}');
-      //addNewTabList = List.from(addNewTabList2);
-      // searchController.addNewTabList2.clear();
-      // searchController.addNewTabList2.addAll(searchController.addNewTabList);
-      // searchController.addNewTabList.clear();
-      // searchController.addNewTabList.addAll(searchController.addNewTabList2);
-
-      //global.sp.setString('tabList', searchController.addNewTabList.map((e) => e.toJson()).toString());
 
       addNewTabList2!.insert(
         addNewTabList2!.length,

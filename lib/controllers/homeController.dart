@@ -105,24 +105,27 @@ class HomeController extends GetxController {
           }
         });
       }
-      // catPage = 1;
-      await getTopBanners();
 
-      await getTopCategories();
-      await getTopCashBack();
-      await getProducts();
-      await getTrendingProducts();
+      if (global.country != null) {
+        await getTopBanners();
 
-      await getExclusiveOffers();
+        await getTopCategories();
+        await getTopCashBack();
+        await getProducts();
+        await getTrendingProducts();
 
-      await getNewFlashOffers();
-      await getHomeAdv();
+        await getExclusiveOffers();
 
-      await getAllAdv();
-      if (global.currentUser.id != null) {
-        await getClick();
-        await Get.find<AuthController>().getProfile();
+        await getNewFlashOffers();
+        await getHomeAdv();
+
+        await getAllAdv();
+        if (global.currentUser.id != null) {
+          await getClick();
+          await Get.find<AuthController>().getProfile();
+        }
       }
+      // catPage = 1;
     } catch (e) {
       print("Exception - HomeController.dart - _init():" + e.toString());
     }
@@ -240,8 +243,7 @@ class HomeController extends GetxController {
                                   name: _tList[k].name!,
                                   image:
                                       '${global.appInfo.baseUrls!.offerImageUrl}/${_tList[k].image}',
-                                  buttonText:
-                                      "Grab Now", // topCategoryList[n].admitedoffers[k].buttonText,
+                                  buttonText: "Grab Now",
                                   trackingLink: _tList[k].gotourl!,
                                   campaignId: _tList[k].id!,
                                   from: "admit"),
@@ -250,56 +252,6 @@ class HomeController extends GetxController {
                     }
                   }
                 }
-                // for (var n = 0; n < topCategoryList.length; n++) {
-                //   // topCategoryList[n].commonList = [];
-                //   if (topCategoryList[n].cuecampaigns != []) {
-                //     List<CampaignModel> _tList = topCategoryList[n]
-                //         .cuecampaigns
-                //         .where((element) => element.status == 1)
-                //         .toList();
-
-                //     if (_tList != null && _tList.length > 0) {
-                //       for (var k = 0; k < _tList.length; k++) {
-                //         topCategoryList[n].commonList.add(
-                //               CommonModel(
-                //                   name: _tList[k].name,
-                //                   image:
-                //                       '${global.appInfo.baseUrls.offerImageUrl}/${_tList[k].image}',
-                //                   buttonText: _tList[k].buttonText,
-                //                   trackingLink: _tList[k].url,
-                //                   campaignId: _tList[k].id,
-                //                   from: "cue"),
-                //             );
-                //       }
-                //     }
-                //   }
-                //   if (topCategoryList[n].admitedoffers != []) {
-                //     List<AdmitedOffersModal> _tList = topCategoryList[n]
-                //         .admitedoffers
-                //         .where((element) => element.status == 1)
-                //         .toList();
-                //     if (_tList != null && _tList.length > 0) {
-                //       for (var k = 0; k < _tList.length; k++) {
-                //         topCategoryList[n].commonList.add(
-                //               CommonModel(
-                //                   name: _tList[k].name,
-                //                   image:
-                //                       '${global.appInfo.baseUrls.offerImageUrl}/${_tList[k].image}',
-                //                   buttonText:
-                //                       "Grab Now", // topCategoryList[n].admitedoffers[k].buttonText,
-                //                   trackingLink: _tList[k].gotourl,
-                //                   campaignId: _tList[k].id,
-                //                   from: "admit"),
-                //             );
-                //       }
-                //     }
-                //   }
-                //   // if (topCategoryList[n].commonList.length > 0) {
-                //   //   for (var t = 0; t < topCategoryList[n].commonList.length; n++) {
-                //   //     topCategoryList[n].commonList.insert((t * 3) + 3, CommonModel(name: 'Ad'));
-                //   //   }
-                //   // }
-                // }
               }
             }
           } else {
@@ -399,63 +351,6 @@ class HomeController extends GetxController {
                   }
                 }
               }
-              // for (var n = 0; n < topCashbackList.length; n++) {
-              //   // topCategoryList[n].commonList = [];
-              //   if (topCashbackList[n].cuecampaigns != []) {
-              //     List<CampaignModel> _tList = topCashbackList[n]
-              //         .cuecampaigns
-              //         .where((element) => element.status == 1)
-              //         .toList();
-              //     if (_tList != null && _tList.length > 0) {
-              //       for (var k = 0; k < _tList.length; k++) {
-              //         topCashbackList[n].commonList.add(
-              //               CommonModel(
-              //                   name: _tList[k].name,
-              //                   image:
-              //                       '${global.appInfo.baseUrls.offerImageUrl}/${_tList[k].image}',
-              //                   buttonText: _tList[k].buttonText,
-              //                   trackingLink: _tList[k].url,
-              //                   campaignId: _tList[k].id,
-              //                   from: "cue"),
-              //             );
-              //       }
-              //     }
-              //   }
-              //   // if (topCategoryList[n].commonList.length > 0) {
-              //   //   for (var t = 0; t < topCategoryList[n].commonList.length; t++) {
-              //   //     topCategoryList[n].commonList.insert((t * 3) + 3, CommonModel(name: 'Ad'));
-              //   //   }
-              //   // }
-              // }
-              // for (var m = 0; m < topCashbackList.length; m++) {
-              //   // topCategoryList[m].commonList = [];
-              //   if (topCashbackList[m].admitedoffers != []) {
-              //     List<AdmitedOffersModal> _tList = topCashbackList[m]
-              //         .admitedoffers
-              //         .where((element) => element.status == 1)
-              //         .toList();
-
-              //     if (_tList != null && _tList.length > 0) {
-              //       for (var p = 0; p < _tList.length; p++) {
-              //         topCashbackList[m].commonList.add(
-              //               CommonModel(
-              //                   name: _tList[p].name,
-              //                   image:
-              //                       '${global.appInfo.baseUrls.offerImageUrl}/${_tList[p].image}',
-              //                   buttonText: 'Grab Now',
-              //                   trackingLink: _tList[p].gotourl,
-              //                   campaignId: _tList[p].id,
-              //                   from: "admit"),
-              //             );
-              //       }
-              //     }
-              //   }
-              //   // if (topCategoryList[n].commonList.length > 0) {
-              //   //   for (var t = 0; t < topCategoryList[n].commonList.length; t++) {
-              //   //     topCategoryList[n].commonList.insert((t * 3) + 3, CommonModel(name: 'Ad'));
-              //   //   }
-              //   // }
-              // }
             }
           } else {
             showCustomSnackBar(response.message);
@@ -739,16 +634,6 @@ class HomeController extends GetxController {
           if (response.status == "1") {
             topBannerList = response.data;
 
-            // if (topBannerList.length > 0) {
-            //   for (var i = 0; i < topBannerList.length; i++) {
-            //     //if (i == topBannerList.length / 3) {
-            //     topBannerList.insert(
-            //       (i * 3) + 3,
-            //       BannerModel(name: 'Ad'),
-            //     );
-            //     //}
-            //   }
-            // }
             update();
           } else {
             showCustomSnackBar(response.message);
@@ -766,20 +651,6 @@ class HomeController extends GetxController {
           "Exception - HomeController.dart - getTopBanners():" + e.toString());
     }
   }
-
-  // int countTimer(DateTime startTime, DateTime endTime) {
-  //   try {
-  //     int diff;
-  //     if (startTime != null && endTime != null) {
-  //       diff = endTime.difference(startTime).inDays;
-  //       print(diff);
-  //     }
-  //     return diff > 0 ? diff : null;
-  //   } catch (e) {
-  //     print("Exception - HomeController.dart - countTimer():" + e.toString());
-  //     return null;
-  //   }
-  // }
 
   Future getOfferDetails(String offerId) async {
     try {

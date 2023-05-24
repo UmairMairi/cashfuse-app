@@ -53,21 +53,12 @@ class UpiRedeemScreen extends StatelessWidget {
                 Container(
                   height: 120,
                   width: Get.width,
-                  //padding: EdgeInsets.symmetric(horizontal: 70, vertical: 28),
                   decoration: BoxDecoration(
-                    // image: DecorationImage(
-                    //   image: AssetImage(
-                    //     Images.Amazon_pay,
-                    //   ),
-                    //   fit: BoxFit.contain,
-                    //   scale: 20,
-                    // ),
                     borderRadius: BorderRadius.circular(5),
                     gradient: LinearGradient(
                       colors: [
                         Colors.deepOrange,
                         Colors.yellow,
-                        //Color(0xFF6285E3),
                       ],
                     ),
                   ),

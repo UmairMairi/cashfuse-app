@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
@@ -12,7 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:phone_number/phone_number.dart';
+import 'package:phone_numbers_parser/phone_numbers_parser.dart';
+
 import 'package:store_redirect/store_redirect.dart';
 
 import '../../views/webScreen/webRequestPaymentScreen.dart';
@@ -257,14 +260,14 @@ class WebDrawerWidget extends StatelessWidget {
                               ),
                               title: global.currentUser.name!.isNotEmpty
                                   ? Text(
-                                       global.currentUser.name!,
+                                      global.currentUser.name!,
                                       style: Get
                                           .theme.primaryTextTheme.titleMedium!
                                           .copyWith(color: Colors.white),
                                     )
                                   : global.currentUser.phone!.isNotEmpty
                                       ? Text(
-                                           global.currentUser.phone!,
+                                          global.currentUser.phone!,
                                           style: Get
                                               .theme.primaryTextTheme.bodySmall!
                                               .copyWith(color: Colors.white),
@@ -273,7 +276,7 @@ class WebDrawerWidget extends StatelessWidget {
                               subtitle: global.currentUser.name!.isEmpty
                                   ? SizedBox()
                                   : Text(
-                                       global.currentUser.email!.isNotEmpty
+                                      global.currentUser.email!.isNotEmpty
                                           ? global.currentUser.email!
                                           : global.currentUser.phone!,
                                       style: Get
@@ -291,22 +294,16 @@ class WebDrawerWidget extends StatelessWidget {
                                         authController.contactNo.text =
                                             global.currentUser.phone!;
                                         if (global.currentUser.phone != null) {
-                                          if (GetPlatform.isAndroid) {
-                                            try {
-                                              PhoneNumber phoneNumber =
-                                                  await PhoneNumberUtil().parse(
-                                                      global
-                                                          .currentUser.phone!);
-                                              authController.coutryCode =
-                                                  '+' + phoneNumber.countryCode;
-                                              authController.contactNo.text =
-                                                  phoneNumber.nationalNumber;
-                                            } catch (e) {
-                                              print(
-                                                  "Exception - ProfileScreen.dart - PhoneNumberUtil():" +
-                                                      e.toString());
-                                            }
-                                          }
+                                          final phoneNumber = PhoneNumber.parse(
+                                              global.currentUser.phone!);
+
+                                          authController.coutryDialCode =
+                                              '+' + phoneNumber.countryCode;
+
+                                          authController.contactNo.text =
+                                              phoneNumber.nsn;
+
+                                          log(phoneNumber.countryCode);
                                         }
                                         Get.to(
                                           () => WebAccountSettingScreen(),
@@ -422,8 +419,6 @@ class WebDrawerWidget extends StatelessWidget {
                                 SizedBox(
                                   height: 50,
                                   child: VerticalDivider(
-                                    // width: 2,
-                                    // thickness: 2,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -458,57 +453,24 @@ class WebDrawerWidget extends StatelessWidget {
                               ],
                             ),
                           ],
-                        )
-                        //: TranslationTextWidget(
-                        // text:'Welcome!'),
-                        ),
-                // InkWell(
-                //   onTap: () {},
-                //   child: Padding(
-                //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                //     child: Row(
-                //       children: [
-                //         Icon(
-                //           Icons.home_outlined,
-                //           color: Colors.black.withOpacity(0.5),
-                //         ),
-                //         SizedBox(
-                //           width: 20,
-                //         ),
-                //         TranslationTextWidget(
-                // text:
-                //           'Home',
-                //           style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
-                //             letterSpacing: 0,
-                //             fontWeight: FontWeight.w300,
-                //             color: Colors.black.withOpacity(0.6),
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
+                        )),
                 InkWell(
                   onTap: () async {
                     Get.back();
                     authController.name.text = global.currentUser.name!;
                     authController.email.text = global.currentUser.email!;
                     authController.contactNo.text = global.currentUser.phone!;
-                    if (global.currentUser.phone != null) {
-                      if (GetPlatform.isAndroid) {
-                        try {
-                          PhoneNumber phoneNumber = await PhoneNumberUtil()
-                              .parse(global.currentUser.phone!);
-                          authController.coutryCode =
-                              '+' + phoneNumber.countryCode;
-                          authController.contactNo.text =
-                              phoneNumber.nationalNumber;
-                        } catch (e) {
-                          print(
-                              "Exception - ProfileScreen.dart - PhoneNumberUtil():" +
-                                  e.toString());
-                        }
-                      }
+                    if (global.currentUser.phone != null &&
+                        global.currentUser.phone!.isNotEmpty) {
+                      final phoneNumber =
+                          PhoneNumber.parse(global.currentUser.phone!);
+
+                      authController.coutryDialCode =
+                          '+' + phoneNumber.countryCode;
+
+                      authController.contactNo.text = phoneNumber.nsn;
+
+                      log(phoneNumber.countryCode);
                     }
                     Get.to(
                       () => WebAccountSettingScreen(),
@@ -643,44 +605,6 @@ class WebDrawerWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                // InkWell(
-                //   onTap: () {
-                //     Get.back();
-                //     Get.to(
-                //       () => GetStartedScreen(
-                //         fromSplash: false,
-                //       ),
-                //       routeName: 'get-started',
-                //     );
-                //   },
-                //   child: Padding(
-                //     padding: EdgeInsets.symmetric(
-                //       horizontal: global.getPlatFrom() ? 25 : 20,
-                //       vertical: global.getPlatFrom() ? 20 : 10,
-                //     ),
-                //     child: Row(
-                //       children: [
-                //         Icon(
-                //           Icons.info_outline,
-                //           color: Colors.black.withOpacity(0.5),
-                //         ),
-                //         SizedBox(
-                //           width: 20,
-                //         ),
-                //         TranslationTextWidget(
-                // text:
-                //           'How ${global.appName} works?',
-                //           style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
-                //             letterSpacing: 0,
-                //             fontWeight: FontWeight.w300,
-                //             color: Colors.black.withOpacity(0.6),
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
                 Divider(),
                 !GetPlatform.isWeb
                     ? InkWell(
@@ -843,19 +767,9 @@ class WebDrawerWidget extends StatelessWidget {
                             child: GetStartedScreen(
                               fromMenu: true,
                             ),
-                            // LoginOrSignUpScreen(
-                            //   fromMenu: true,
-                            // ),
                           ),
                         ));
                       } else {
-                        // Get.to(
-                        //   () => LoginScreen(),
-                        //   //     LoginOrSignUpScreen(
-                        //   //   fromMenu: true,
-                        //   // ),
-                        //   routeName: 'login',
-                        // );
                         Get.to(
                           () => GetStartedScreen(
                             fromMenu: true,

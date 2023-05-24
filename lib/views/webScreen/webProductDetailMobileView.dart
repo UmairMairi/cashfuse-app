@@ -12,14 +12,16 @@ import 'package:get/get.dart';
 class WebProductDetailsMobileView extends StatefulWidget {
   final String title;
   final ProductModel product;
-  WebProductDetailsMobileView({required this.title, required this.product}) : super();
+  WebProductDetailsMobileView({required this.title, required this.product})
+      : super();
 
   @override
   State<WebProductDetailsMobileView> createState() =>
       _WebProductDetailsMobileViewState(this.product);
 }
 
-class _WebProductDetailsMobileViewState extends State<WebProductDetailsMobileView> {
+class _WebProductDetailsMobileViewState
+    extends State<WebProductDetailsMobileView> {
   ProductModel product;
   _WebProductDetailsMobileViewState(this.product) : super();
 
@@ -50,16 +52,6 @@ class _WebProductDetailsMobileViewState extends State<WebProductDetailsMobileVie
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Container(
-                //   margin: EdgeInsets.only(left: 15, top: 10, bottom: 10),
-                //   child: Text(
-                //     product.name,
-                //     style: TextStyle(
-                //         fontSize: 14,
-                //         color: Colors.black87,
-                //         fontWeight: FontWeight.w600),
-                //   ),
-                // ),
                 SizedBox(
                   height: 10,
                 ),
@@ -88,7 +80,6 @@ class _WebProductDetailsMobileViewState extends State<WebProductDetailsMobileVie
                 SizedBox(
                   height: 10,
                 ),
-
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                   color: Colors.grey.shade300,
@@ -151,21 +142,6 @@ class _WebProductDetailsMobileViewState extends State<WebProductDetailsMobileVie
                                             : product
                                                 .productPrices![index].url!,
                                       );
-
-                                      // Get.to(
-                                      //   () => WebViewScreen(
-                                      //     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
-                                      //     isCliked: global.clickedList.contains(ads.advName),
-                                      //     couponList: ads.couponList,
-                                      //     partner: ads.partner,
-                                      //     brandName: ads.advName,
-                                      //   ),
-                                      // ).then((value) {
-                                      //   if (global.clickedList.contains(ads.advName)) {
-                                      //   } else {
-                                      //     global.clickedList.add(ads.advName);
-                                      //   }
-                                      // });
                                     } else {
                                       if (global.getPlatFrom()) {
                                         Get.dialog(Dialog(

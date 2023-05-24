@@ -11,7 +11,6 @@ class CommonController extends GetxController with GetTickerProviderStateMixin {
   NetworkController networkController = Get.find<NetworkController>();
   List<FaqModel> faqList = [];
   List<FaqModel> _mainFaqList = [];
-  // List<FaqModel> get faqList => _faqList;
   String aboutUs = '';
   String privacyPolicy = '';
 

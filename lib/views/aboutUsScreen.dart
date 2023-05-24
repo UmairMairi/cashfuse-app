@@ -66,11 +66,6 @@ class AboutUsScreen extends StatelessWidget {
                     );
                   }),
             ),
-            // SingleChildScrollView(
-            //   child: HtmlWidget(
-            //     commonController.aboutUs,
-            //   ),
-            // ),
           ),
         );
       }),

@@ -4,11 +4,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+import 'dart:math' as math;
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
-
+import 'package:cashfuse/controllers/searchController.dart';
 import 'package:cashfuse/models/userModel.dart';
 import 'package:cashfuse/services/apiHelper.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -16,21 +17,17 @@ import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/otpVerificationScreen.dart';
 import 'package:cashfuse/widget/customLoader.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
+import 'package:crypto/src/sha256.dart' as sha;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:intl_phone_field/countries.dart';
-
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'dart:math' as math;
-import 'package:crypto/src/sha256.dart' as sha;
-import 'package:cashfuse/controllers/searchController.dart';
 
 class AuthController extends GetxController {
   APIHelper apiHelper = new APIHelper();
   NetworkController networkController = Get.find<NetworkController>();
-  String? coutryCode;
+  String? coutryDialCode;
   var otp = TextEditingController();
   final FocusNode phoneFocus = FocusNode();
   var contactNo = TextEditingController();
@@ -39,7 +36,7 @@ class AuthController extends GetxController {
   int seconds = 60;
   Timer? timer;
   String? status;
-
+  bool isNumberChange = false;
   UserCredential? userCredential;
   OAuthProvider provider = OAuthProvider("apple.com");
 
@@ -50,21 +47,8 @@ class AuthController extends GetxController {
 
   SearchGetController searchController = Get.put(SearchGetController());
 
-  Country? country;
-
   @override
   void onInit() async {
-    coutryCode =
-        global.appInfo.phoneCode != null && global.appInfo.phoneCode!.isNotEmpty
-            ? global.appInfo.phoneCode
-            : '+91';
-    country = Country(
-        name: global.appInfo.country!,
-        flag: '',
-        code: global.appInfo.countryCode!,
-        dialCode: global.appInfo.phoneCode!,
-        minLength: 0,
-        maxLength: 0);
     super.onInit();
   }
 
@@ -76,11 +60,13 @@ class AuthController extends GetxController {
   Future logout() async {
     try {
       global.sp!.remove('currentUser');
+      global.sp!.remove('countryCode');
       global.currentUser = new UserModel();
       contactNo.clear();
       email.clear();
       otp.clear();
       googleSignIn.signOut();
+      global.countryCode = global.appInfo.countryCode!;
 
       update();
     } catch (e) {
@@ -96,7 +82,7 @@ class AuthController extends GetxController {
           if (contactNo.text.length >= 7) {
             Get.dialog(CustomLoader(), barrierDismissible: false);
             await apiHelper
-                .loginOrRegister(coutryCode! + contactNo.text)
+                .loginOrRegister(coutryDialCode! + contactNo.text)
                 .then((response) async {
               if (response.statusCode == 200) {
                 await sendOTP(fromMenu);
@@ -173,7 +159,7 @@ class AuthController extends GetxController {
         FirebaseAuth auth = FirebaseAuth.instance;
         Get.back();
         ConfirmationResult confirmationResult =
-            await auth.signInWithPhoneNumber(coutryCode! + contactNo.text);
+            await auth.signInWithPhoneNumber(coutryDialCode! + contactNo.text);
         if (confirmationResult.verificationId != null) {
           Get.dialog(Dialog(
             child: SizedBox(
@@ -188,7 +174,7 @@ class AuthController extends GetxController {
         }
       } else {
         await FirebaseAuth.instance.verifyPhoneNumber(
-          phoneNumber: coutryCode! + contactNo.text,
+          phoneNumber: coutryDialCode! + contactNo.text,
           verificationCompleted: (PhoneAuthCredential credential) {
             otp.text = credential.smsCode!;
             update();
@@ -273,57 +259,8 @@ class AuthController extends GetxController {
     }
   }
 
-  // Future facebookLogin(bool fromMenu) async {
-  //   print("FaceBook");
-  //   // global.showOnlyLoaderDialog(Get.context);
-  //   try {
-  //     final result =
-  //         await FacebookAuth.i.login(permissions: ['public_profile', 'email']);
-  //     if (result.status == LoginStatus.success) {
-  //       final OAuthCredential facebookAuthCredential =
-  //           FacebookAuthProvider.credential(result.accessToken.token);
-  //       // global.hideLoader();
-  //       // var userData = await FacebookAuth.i.getUserData();
-  //       // print(userData);
-  //       // print(userData["email"]);
-  //       //user secrate
-  //       // ignore: prefer_typing_uninitialized_variables
-  //       var cred;
-  //       if (facebookAuthCredential.accessToken != null) {
-  //         cred = await FirebaseAuth.instance
-  //             .signInWithCredential(facebookAuthCredential);
-  //         // oAuthAccessToken = facebookAuthCredential.accessToken;
-  //         // oAuthProviderName = 'facebook';
-  //         // oAuthUserId = cred.user!.uid;
-  //         // oAuthUserName = cred.user!.displayName;
-  //         // oAuthUserPicUrl = cred.user!.photoURL;
-  //         // isOAuth = true;
-  //       }
-  //       // await signupController.checkEmailContact(cred.user.providerData[0].email, null, callId: 3);
-  //       // cEmail.text = cred.user.providerData[0].email;
-  //       update();
-  //       // global.showOnlyLoaderDialog(Get.context);
-  //       // await signIn();
-  //       // global.hideLoader();
-  //       // global.getCurrentUser();
-  //       // if (global.currentUser!.fristName != null && global.currentUser!.fristName != "") {
-  //       //   Get.off(() => BottomNavigationWidget(
-  //       //         a: a,
-  //       //         o: o,
-  //       //       ));
-  //       // } else {
-  //       //   Get.off(() => EditProfileScreen());
-  //       // }
-  //       // await signupController.checkEmailContact(cred.user.providerData[0].email, signupController.cPhone.text, callId: 3);
-  //     }
-  //   } catch (e) {
-  //     print('Exception in facebookLogin:$e');
-  //   }
-  // }
-
   Future signInWithApple(bool fromMenu) async {
     try {
-      // global.showOnlyLoaderDialog(Get.context);
       String generateNonce([int length = 32]) {
         const charset =
             '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
@@ -459,7 +396,7 @@ class AuthController extends GetxController {
           networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper
-            .verifyOtp(coutryCode! + contactNo.text, status)
+            .verifyOtp(coutryDialCode! + contactNo.text, status)
             .then((response) async {
           Get.back();
           if (response != null) {
@@ -546,7 +483,7 @@ class AuthController extends GetxController {
       stopTimer();
       FirebaseAuth auth = FirebaseAuth.instance;
       await auth.verifyPhoneNumber(
-        phoneNumber: coutryCode! + contactNo.text,
+        phoneNumber: coutryDialCode! + contactNo.text,
         verificationCompleted: (AuthCredential authCredential) async {},
         verificationFailed: (e) {
           showCustomSnackBar(e.message.toString());
@@ -579,7 +516,12 @@ class AuthController extends GetxController {
           networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
         await apiHelper
-            .updateProfile(name.text.trim(), contactNo.text, email.text.trim(),
+            .updateProfile(
+                name.text.trim(),
+                isNumberChange
+                    ? coutryDialCode! + contactNo.text
+                    : global.currentUser.phone!,
+                email.text.trim(),
                 userImage != null ? userImage : null)
             .then((response) async {
           Get.back();

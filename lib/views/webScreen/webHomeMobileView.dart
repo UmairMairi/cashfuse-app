@@ -214,23 +214,6 @@ class WebHomeMobileView extends StatelessWidget {
                                   letterSpacing: -0.3,
                                 ),
                               ),
-                              // FutureBuilder(
-                              //   future: global.translatedText('TOP CATEGORIES'),
-                              //   builder: (context, snapshot) {
-                              //     return TranslationTextWidget(
-
-                              //       snapshot.data != null
-                              //           ? snapshot.data!
-                              //           : 'TOP CATEGORIES',
-                              //       style: TextStyle(
-                              //         fontSize: 13,
-                              //         fontWeight: FontWeight.w600,
-                              //         color: Colors.black.withOpacity(0.79),
-                              //         letterSpacing: -0.3,
-                              //       ),
-                              //     );
-                              //   },
-                              // ),
                               InkWell(
                                 onTap: () {
                                   Get.to(
@@ -387,7 +370,7 @@ class WebHomeMobileView extends StatelessWidget {
                       ? couponController.couponList != null &&
                               couponController.couponList.length > 0
                           ? SizedBox(
-                              height: 100,
+                              height: 101,
                               child: ListView.builder(
                                 controller: couponScrollController,
                                 padding:
@@ -867,37 +850,6 @@ class WebHomeMobileView extends StatelessWidget {
                                                 height: 120,
                                                 image:
                                                     "${global.appInfo.baseUrls!.productImageurl}/${homeController.productList[index].image}"),
-                                            // Padding(
-                                            //   padding:
-                                            //       const EdgeInsets
-                                            //               .only(
-                                            //           top: 8.0,
-                                            //           bottom: 8),
-                                            //   child: RichText(
-                                            //     text: TextSpan(
-                                            //         text: "Brand: ",
-                                            //         style: TextStyle(
-                                            //             color: Colors
-                                            //                 .black54,
-                                            //             fontWeight:
-                                            //                 FontWeight
-                                            //                     .w500,
-                                            //             fontSize: 10),
-                                            //         children: [
-                                            //           TextSpan(
-                                            //               text:
-                                            //                   '${homeController.productList[index].name} ',
-                                            //               style: TextStyle(
-                                            //                   fontWeight:
-                                            //                       FontWeight
-                                            //                           .w600,
-                                            //                   fontSize:
-                                            //                       10,
-                                            //                   color: Colors
-                                            //                       .black)),
-                                            //         ]),
-                                            //   ),
-                                            // ),
                                             Container(
                                               color: Colors.grey.shade400,
                                               height: 1,
@@ -1213,37 +1165,6 @@ class WebHomeMobileView extends StatelessWidget {
                                                 height: 120,
                                                 image:
                                                     "${global.appInfo.baseUrls!.productImageurl}/${homeController.trendingProductList[index].image}"),
-                                            // Padding(
-                                            //   padding:
-                                            //       const EdgeInsets
-                                            //               .only(
-                                            //           top: 8.0,
-                                            //           bottom: 8),
-                                            //   child: RichText(
-                                            //     text: TextSpan(
-                                            //         text: "Brand: ",
-                                            //         style: TextStyle(
-                                            //             color: Colors
-                                            //                 .black54,
-                                            //             fontWeight:
-                                            //                 FontWeight
-                                            //                     .w500,
-                                            //             fontSize: 10),
-                                            //         children: [
-                                            //           TextSpan(
-                                            //               text:
-                                            //                   '${homeController.trendingProductList[index].name} ',
-                                            //               style: TextStyle(
-                                            //                   fontWeight:
-                                            //                       FontWeight
-                                            //                           .w600,
-                                            //                   fontSize:
-                                            //                       10,
-                                            //                   color: Colors
-                                            //                       .black)),
-                                            //         ]),
-                                            //   ),
-                                            // ),
                                             Container(
                                               color: Colors.grey.shade400,
                                               height: 1,

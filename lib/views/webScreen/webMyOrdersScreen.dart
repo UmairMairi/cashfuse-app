@@ -102,19 +102,7 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                       ListTile(
                                                         contentPadding:
                                                             EdgeInsets.zero,
-                                                        leading:
-                                                            // Container(
-                                                            //   width: 50,
-                                                            //   decoration: BoxDecoration(
-                                                            //     shape: BoxShape.circle,
-                                                            //     color: Colors.white,
-                                                            //     border: Border.all(
-                                                            //       color: Colors.grey[400],
-                                                            //     ),
-                                                            //   ),
-                                                            //   padding: EdgeInsets.all(2),
-                                                            //   child:
-                                                            CustomImage(
+                                                        leading: CustomImage(
                                                           image: global
                                                                   .appInfo
                                                                   .baseUrls!
@@ -266,41 +254,6 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                                 ],
                                                               ),
                                                             ),
-                                                            // orderController.orderList[index].url.isNotEmpty
-                                                            //     ? InkWell(
-                                                            //         onTap: () {
-                                                            //           Get.to(() => WebViewScreen(
-                                                            //                 brandName: orderController.orderList[index].advertisers,
-                                                            //                 urlString: orderController.orderList[index].url,
-                                                            //               ));
-                                                            //         },
-                                                            //         child: Container(
-                                                            //           margin: EdgeInsets.only(left: 10),
-                                                            //           padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-                                                            //           decoration: BoxDecoration(
-                                                            //             color: Colors.grey[200],
-                                                            //             borderRadius: BorderRadius.circular(15),
-                                                            //           ),
-                                                            //           child: Row(
-                                                            //             children: [
-                                                            //               Icon(
-                                                            //                 Icons.local_offer,
-                                                            //                 textDirection: TextDirection.rtl,
-                                                            //                 color: Colors.black54,
-                                                            //                 size: 20,
-                                                            //               ),
-                                                            //               Text(
-                                                            //                 AppLocalizations.of(context).shopping,
-                                                            //                 style: TextStyle(
-                                                            //                   fontSize: 10,
-                                                            //                   color: Colors.black54,
-                                                            //                 ),
-                                                            //               ),
-                                                            //             ],
-                                                            //           ),
-                                                            //         ),
-                                                            //       )
-                                                            //     : SizedBox(),
                                                           ],
                                                         ),
                                                       )
@@ -317,8 +270,6 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                 child: Column(
                                                   mainAxisSize:
                                                       MainAxisSize.min,
-                                                  // mainAxisAlignment: MainAxisAlignment.start,
-                                                  // crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Row(
                                                       children: [
@@ -652,19 +603,7 @@ class WebMyOrdersScreen extends StatelessWidget {
                                           children: [
                                             ListTile(
                                               contentPadding: EdgeInsets.zero,
-                                              leading:
-                                                  // Container(
-                                                  //   width: 50,
-                                                  //   decoration: BoxDecoration(
-                                                  //     shape: BoxShape.circle,
-                                                  //     color: Colors.white,
-                                                  //     border: Border.all(
-                                                  //       color: Colors.grey[400],
-                                                  //     ),
-                                                  //   ),
-                                                  //   padding: EdgeInsets.all(2),
-                                                  //   child:
-                                                  CustomImage(
+                                              leading: CustomImage(
                                                 image: global.appInfo.baseUrls!
                                                         .partnerImageUrl! +
                                                     '/' +
@@ -810,41 +749,6 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                       ],
                                                     ),
                                                   ),
-                                                  // orderController.orderList[index].url.isNotEmpty
-                                                  //     ? InkWell(
-                                                  //         onTap: () {
-                                                  //           Get.to(() => WebViewScreen(
-                                                  //                 brandName: orderController.orderList[index].advertisers,
-                                                  //                 urlString: orderController.orderList[index].url,
-                                                  //               ));
-                                                  //         },
-                                                  //         child: Container(
-                                                  //           margin: EdgeInsets.only(left: 10),
-                                                  //           padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-                                                  //           decoration: BoxDecoration(
-                                                  //             color: Colors.grey[200],
-                                                  //             borderRadius: BorderRadius.circular(15),
-                                                  //           ),
-                                                  //           child: Row(
-                                                  //             children: [
-                                                  //               Icon(
-                                                  //                 Icons.local_offer,
-                                                  //                 textDirection: TextDirection.rtl,
-                                                  //                 color: Colors.black54,
-                                                  //                 size: 20,
-                                                  //               ),
-                                                  //               Text(
-                                                  //                 AppLocalizations.of(context).shopping,
-                                                  //                 style: TextStyle(
-                                                  //                   fontSize: 10,
-                                                  //                   color: Colors.black54,
-                                                  //                 ),
-                                                  //               ),
-                                                  //             ],
-                                                  //           ),
-                                                  //         ),
-                                                  //       )
-                                                  //     : SizedBox(),
                                                 ],
                                               ),
                                             )
@@ -860,8 +764,6 @@ class WebMyOrdersScreen extends StatelessWidget {
                                           EdgeInsets.all(10).copyWith(top: 20),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
-                                        // mainAxisAlignment: MainAxisAlignment.start,
-                                        // crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Row(
                                             children: [

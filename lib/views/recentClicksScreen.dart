@@ -557,13 +557,6 @@ class RecentClickScreen extends StatelessWidget {
                             Images.Click_image,
                             height: 150,
                           ),
-                          // Padding(
-                          //   padding: const EdgeInsets.only(top: 10),
-                          //   child: Text(
-                          //     AppLocalizations.of(context).profile_desc,
-                          //     style: Get.theme.primaryTextTheme.titleMedium.copyWith(fontWeight: FontWeight.w500),
-                          //   ),
-                          // ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 15),
@@ -572,12 +565,10 @@ class RecentClickScreen extends StatelessWidget {
                                     text:
                                         'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
                                     textAlign: TextAlign.center,
-                                    //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
                                   )
                                 : Text(
                                     'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
                                     textAlign: TextAlign.center,
-                                    //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
                                   ).translate(),
                           ),
                           InkWell(
@@ -598,19 +589,12 @@ class RecentClickScreen extends StatelessWidget {
                                   ),
                                   routeName: 'login',
                                 );
-                                // Get.to(
-                                //   () =>LoginScreen(),
-                                //   //     LoginOrSignUpScreen(
-                                //   //   fromMenu: true,
-                                //   // ),
-                                //   routeName: 'login',
-                                // );
+                              
                               }
                             },
                             child: Container(
                               height: 45,
                               width: Get.width / 2.5,
-                              //margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                               padding: EdgeInsets.symmetric(
                                   horizontal: 7, vertical: 8),
                               decoration: BoxDecoration(

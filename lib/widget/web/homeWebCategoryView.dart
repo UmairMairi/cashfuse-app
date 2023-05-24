@@ -101,12 +101,6 @@ class HomeWebCategoryView extends StatelessWidget {
                             },
                           ),
                         ),
-
-                        //: SizedBox(),
-                        // listIndex != ((hm.topCategoryList.length / 2).ceil() - 1)
-                        //     ?
-
-                        //: SizedBox(),
                       ],
                     )
                   : ListView.builder(

@@ -259,65 +259,10 @@ class WebAdsDetailScreen extends StatelessWidget {
                                       snapshot.data != null
                                           ? snapshot.data!
                                           : '',
-
-                                      //textAlign: TextAlign.center,
                                     );
                                   },
                                 ),
                               ),
-                              // TranslationTextWidget(
-                              // text:
-                              //   ads.terms,
-                              //   textAlign: TextAlign.center,
-                              // ),
-                              // SizedBox(
-                              //   height: 15,
-                              // ),
-                              // TranslationTextWidget(
-                              // text:
-                              //   'Free at home Skin Assessment in 5 min Personalized Regime',
-                              //   textAlign: TextAlign.center,
-                              //   style: TextStyle(fontWeight: FontWeight.w600),
-                              // ),
-                              // homeController.countTimer(DateTime.now(), ads.endDate) != null
-                              //     ? Container(
-                              //         decoration: BoxDecoration(
-                              //           color: Colors.grey[100],
-                              //           borderRadius: BorderRadius.circular(10),
-                              //         ),
-                              //         padding: EdgeInsets.all(15),
-                              //         child: Column(
-                              //           children: [
-                              //             TranslationTextWidget(
-                              // text:
-                              //               'Just for You',
-                              //               style: Get.theme.primaryTextTheme.titleSmall.copyWith(
-                              //                 color: Colors.red,
-                              //               ),
-                              //             ),
-                              //             Padding(
-                              //               padding: const EdgeInsets.symmetric(vertical: 10),
-                              //               child: SlideCountdownSeparated(
-                              //                 separatorType: SeparatorType.symbol,
-                              //                 durationTitle: DurationTitle(
-                              //                   hours: 'hr',
-                              //                   minutes: 'min',
-                              //                   seconds: 'sec',
-                              //                   days: 'day',
-                              //                 ),
-                              //                 slideDirection: SlideDirection.none,
-                              //                 textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
-                              //                 decoration: BoxDecoration(
-                              //                   color: Colors.red[800],
-                              //                   borderRadius: BorderRadius.circular(3),
-                              //                 ),
-                              //                 duration: Duration(days: homeController.countTimer(DateTime.now(), offer.endDate)),
-                              //               ),
-                              //             ),
-                              //           ],
-                              //         ),
-                              //       )
-                              //     : SizedBox(),
                               InkWell(
                                 onTap: () async {
                                   if (global.currentUser.id != null) {
@@ -340,21 +285,6 @@ class WebAdsDetailScreen extends StatelessWidget {
                                           ? homeController.createdLink
                                           : ads!.landingPage!,
                                     );
-
-                                    // Get.to(
-                                    //   () => WebViewScreen(
-                                    //     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
-                                    //     isCliked: global.clickedList.contains(ads.advName),
-                                    //     couponList: ads.couponList,
-                                    //     partner: ads.partner,
-                                    //     brandName: ads.advName,
-                                    //   ),
-                                    // ).then((value) {
-                                    //   if (global.clickedList.contains(ads.advName)) {
-                                    //   } else {
-                                    //     global.clickedList.add(ads.advName);
-                                    //   }
-                                    // });
                                   } else {
                                     if (global.getPlatFrom()) {
                                       Get.dialog(Dialog(

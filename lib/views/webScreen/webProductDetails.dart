@@ -34,12 +34,9 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
         alignment: Alignment.topCenter,
         child: SizedBox(
           width: AppConstants.WEB_MAX_WIDTH,
-          // height: Get.height,
           child: Padding(
             padding: const EdgeInsets.only(top: 40),
             child: Row(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
                   child: CarouselSlider(
@@ -112,21 +109,6 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                               : product
                                                   .productPrices![index].url!,
                                         );
-
-                                        // Get.to(
-                                        //   () => WebViewScreen(
-                                        //     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
-                                        //     isCliked: global.clickedList.contains(ads.advName),
-                                        //     couponList: ads.couponList,
-                                        //     partner: ads.partner,
-                                        //     brandName: ads.advName,
-                                        //   ),
-                                        // ).then((value) {
-                                        //   if (global.clickedList.contains(ads.advName)) {
-                                        //   } else {
-                                        //     global.clickedList.add(ads.advName);
-                                        //   }
-                                        // });
                                       } else {
                                         if (global.getPlatFrom()) {
                                           Get.dialog(Dialog(
@@ -229,8 +211,7 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                                   fontSize: 12),
                                             ),
                                             TranslationTextWidget(
-                                text:
-                                              "CashBack",
+                                              text: "CashBack",
                                               style: TextStyle(
                                                   color: Colors.black54,
                                                   fontWeight: FontWeight.w400,
@@ -256,8 +237,7 @@ class _WebProductDetailsScreenState extends State<WebProductDetailsScreen> {
                                             fontSize: 12),
                                       ),
                                       TranslationTextWidget(
-                                text:
-                                        "Best Price",
+                                        text: "Best Price",
                                         style: TextStyle(
                                             color: Colors.black54,
                                             fontWeight: FontWeight.w400,

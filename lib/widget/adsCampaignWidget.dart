@@ -17,28 +17,7 @@ class AdsCampaignWidget extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
-      child:
-          // commonModel.name == 'Ad'
-          //     ? FacebookNativeAd(
-          //         keepAlive: true,
-          //         placementId: "VID_HD_16_9_46S_APP_INSTALL#536153035214384_536880055141682",
-          //         adType: NativeAdType.NATIVE_AD_VERTICAL,
-          //         // width: Get.width,
-          //         // height: 300,
-          //         backgroundColor: Colors.blue,
-          //         titleColor: Colors.white,
-          //         descriptionColor: Colors.white,
-          //         buttonColor: Colors.deepPurple,
-          //         buttonTitleColor: Colors.white,
-          //         buttonBorderColor: Colors.white,
-          //         listener: (result, value) {
-          //           print("Native Ad: $result --> $value");
-          //         },
-          //         keepExpandedWhileLoading: true,
-          //         expandAnimationDuraion: 1000,
-          //       )
-          //:
-          Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: commonModel.tagline != null
             ? MainAxisAlignment.start
@@ -146,29 +125,6 @@ class AdsCampaignWidget extends StatelessWidget {
                         fontWeight: FontWeight.w600),
                   ).translate(),
           ),
-          // InkWell(
-          //   onTap: () {
-          //     Get.to(
-          //       () => RatesAndTermScreen(
-          //         commonModel: commonModel,
-          //       ),
-          //       transition: Transition.rightToLeft,
-          //     );
-          //   },
-          //   child: Padding(
-          //     padding: EdgeInsets.only(top: 10),
-          //     //height: 20,
-          //     //alignment: Alignment.center,
-          //     child: Text(
-          //       'Rewards Rates & Terms',
-          //       textAlign: TextAlign.center,
-          //       style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-          //         color: Colors.teal,
-          //         fontSize: 10,
-          //       ),
-          //     ),
-          //   ),
-          // )
         ],
       ),
     );

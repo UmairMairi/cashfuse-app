@@ -17,6 +17,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/homeScreen.dart';
+import 'package:cashfuse/widget/countrySelectOption.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
@@ -71,15 +72,23 @@ class SplashController extends GetxController {
         await apiHelper.getAppInfo().then((response) async {
           if (response.statusCode == 200) {
             global.appInfo = response.data;
+            if (global.sp!.getString('countryCode') != null) {
+              global.countryCode = global.sp!.getString('countryCode')!;
+            } else {
+              global.countryCode = global.appInfo.countryCode!;
+            }
             if (global.sp!.getString('country') != null &&
-                  global.sp!.getString('countrySlug') != null) {
-                global.country = CountryModel.fromJson(
-                    json.decode(global.sp!.getString("country")!));
+                global.sp!.getString('countrySlug') != null) {
+              global.country = CountryModel.fromJson(
+                  json.decode(global.sp!.getString("country")!));
 
-                global.countrySlug = global.sp!.getString('countrySlug')!;
-              } else {
-                await Get.find<LocationController>().getLocationPermission();
-              }
+              global.countrySlug = global.sp!.getString('countrySlug')!;
+            } else {
+              await Get.find<LocationController>().getLocationPermission();
+            }
+
+            await homeController.init();
+
             if (global.sp!.getString('currentUser') != null) {
               global.currentUser = UserModel.fromJson(
                   json.decode(global.sp!.getString("currentUser")!));
@@ -130,6 +139,11 @@ class SplashController extends GetxController {
           await apiHelper.getAppInfo().then((response) async {
             if (response.statusCode == 200) {
               global.appInfo = response.data;
+              if (global.sp!.getString('countryCode') != null) {
+                global.countryCode = global.sp!.getString('countryCode')!;
+              } else {
+                global.countryCode = global.appInfo.countryCode!;
+              }
 
               if (global.sp!.getString('country') != null &&
                   global.sp!.getString('countrySlug') != null) {

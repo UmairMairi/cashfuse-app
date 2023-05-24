@@ -53,12 +53,6 @@ class CouponListScreen extends StatelessWidget {
                     childAspectRatio: 3)
                 : SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1, childAspectRatio: 3),
-            // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            //   crossAxisCount: global.getPlatFrom() ? 4 : 1,
-            //   // crossAxisSpacing: 15.0,
-            //   // mainAxisSpacing: 15.0,
-            //   childAspectRatio: global.getPlatFrom() ? 3 : 3,
-            // ),
             itemCount: couponController.couponList.length,
             shrinkWrap: true,
             padding: EdgeInsets.symmetric(horizontal: 0, vertical: 20),

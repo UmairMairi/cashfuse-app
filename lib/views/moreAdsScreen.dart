@@ -27,8 +27,7 @@ class MoreAdsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TranslationTextWidget(
-                                text:
-                      'See More Offers',
+                      text: 'See More Offers',
                       style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.1,
@@ -76,16 +75,14 @@ class MoreAdsScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     TranslationTextWidget(
-                                text:
-                                      homeController
+                                      text: homeController
                                           .seeMoreAdsList[index].name!,
                                       textAlign: TextAlign.start,
                                       style:
                                           Get.theme.primaryTextTheme.titleSmall,
                                     ),
                                     TranslationTextWidget(
-                                text:
-                                      homeController
+                                      text: homeController
                                           .seeMoreAdsList[index].description!,
                                       textAlign: TextAlign.start,
                                     ),
@@ -135,8 +132,8 @@ class MoreAdsScreen extends StatelessWidget {
                                 )),
                             alignment: Alignment.center,
                             child: TranslationTextWidget(
-                                text:
-                              homeController.seeMoreAdsList[index].buttonText!,
+                              text: homeController
+                                  .seeMoreAdsList[index].buttonText!,
                               style: TextStyle(
                                   color: Get.theme.secondaryHeaderColor,
                                   fontSize: 14,
@@ -151,55 +148,6 @@ class MoreAdsScreen extends StatelessWidget {
                         ),
                       ],
                     );
-                    // Column(
-                    //   crossAxisAlignment: CrossAxisAlignment.start,
-                    //   children: [
-                    //     TranslationTextWidget(
-                                // text:
-                    //       'Expires in 15 days',
-                    //       style: TextStyle(
-                    //         fontSize: 11,
-                    //         color: Colors.grey,
-                    //       ),
-                    //     ),
-                    //     Padding(
-                    //       padding: const EdgeInsets.symmetric(vertical: 10),
-                    //       child: TranslationTextWidget(
-                                // text:'Earn upto 6% Cashback on all Myntra Orders + 24% Bonus Cashback (Once per user)'),
-                    //     ),
-                    //     TranslationTextWidget(
-                                // text:
-                    //       'See Details',
-                    //       style: TextStyle(
-                    //         fontSize: 10,
-                    //         color: Colors.blue,
-                    //       ),
-                    //     ),
-                    //     Container(
-                    //       width: Get.width / 2,
-                    //       height: 45,
-                    //       margin: EdgeInsets.only(top: 10, bottom: 10),
-                    //       padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-                    //       decoration: BoxDecoration(
-                    //           borderRadius: BorderRadius.circular(5),
-                    //           border: Border.all(
-                    //             color: Get.theme.secondaryHeaderColor,
-                    //             width: 1,
-                    //           )),
-                    //       alignment: Alignment.center,
-                    //       child: TranslationTextWidget(
-                                // text:
-                    //         'ACTIVATE CASHBACK',
-                    //         style: TextStyle(color: Get.theme.secondaryHeaderColor, fontSize: 14, fontWeight: FontWeight.w600),
-                    //       ),
-                    //     ),
-                    //     Container(
-                    //       height: 10,
-                    //       margin: EdgeInsets.symmetric(vertical: 10),
-                    //       color: Colors.grey[200],
-                    //     ),
-                    //   ],
-                    // );
                   },
                 ),
               ),

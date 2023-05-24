@@ -46,10 +46,6 @@ class CouponWidget extends StatelessWidget {
                       width: 70,
                       fit: BoxFit.contain,
                     ),
-                    // Image.asset(
-                    //   Images.amazon,
-                    //   width: 70,
-                    // ),
                     SizedBox(
                       width: 160,
                       child: Text(
@@ -121,29 +117,7 @@ class CouponWidget extends StatelessWidget {
                                     .copyWith(color: Colors.white),
                               );
                             },
-                          )
-                          // GetPlatform.isWeb
-                          //     ? Text(
-                          //         coupon.code != null && coupon.code!.isNotEmpty
-                          //             ? 'See code'
-                          //             : coupon.buttonText != null &&
-                          //                     coupon.buttonText!.isNotEmpty
-                          //                 ? coupon.buttonText!
-                          //                 : 'Grab Now',
-                          //         style: Get.theme.primaryTextTheme.titleSmall!
-                          //             .copyWith(color: Colors.white),
-                          //       )
-                          //     : Text(
-                          //         coupon.code != null && coupon.code!.isNotEmpty
-                          //             ? 'See code'
-                          //             : coupon.buttonText != null &&
-                          //                     coupon.buttonText!.isNotEmpty
-                          //                 ? coupon.buttonText!
-                          //                 : 'Grab Now',
-                          //         style: Get.theme.primaryTextTheme.titleSmall!
-                          //             .copyWith(color: Colors.white),
-                          //       ).translate(),
-                          ),
+                          )),
                     ),
                   ],
                 )

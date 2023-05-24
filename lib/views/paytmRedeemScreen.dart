@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:developer';
+
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/images.dart';
@@ -11,11 +13,12 @@ import 'package:get/get.dart';
 
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:google_translator/google_translator.dart';
-import 'package:phone_number/phone_number.dart';
+import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 class PaytmRedeemScreen extends StatelessWidget {
   final fContactNo = new FocusNode();
   var contactNo = TextEditingController();
+  String countryCode = '';
 
   PaymentController paymentController = Get.find<PaymentController>();
   AuthController authController = Get.find<AuthController>();
@@ -103,24 +106,20 @@ class PaytmRedeemScreen extends StatelessWidget {
                                 ).translate(),
                           InkWell(
                             onTap: () async {
-                              if (paymentController.payTMDetails != null &&
-                                  paymentController.payTMDetails!.paytmNo !=
-                                      null) {
-                                if (GetPlatform.isAndroid) {
-                                  try {
-                                    PhoneNumber phoneNumber =
-                                        await PhoneNumberUtil().parse(
-                                            paymentController
-                                                .amazonDetails!.amazonNo!);
-                                    authController.coutryCode =
-                                        '+' + phoneNumber.countryCode;
-                                    contactNo.text = phoneNumber.nationalNumber;
-                                  } catch (e) {
-                                    print(
-                                        "Exception - PaytmRedeemScreen.dart - PhoneNumberUtil():" +
-                                            e.toString());
-                                  }
-                                }
+                              if (paymentController.payTMDetails != null && paymentController.payTMDetails!.paytmNo !=
+                                      null &&
+                                  paymentController
+                                      .payTMDetails!.paytmNo!.isNotEmpty) {
+                                final phoneNumber = PhoneNumber.parse(
+                                    paymentController.payTMDetails!.paytmNo!);
+
+                                countryCode = '+' + phoneNumber.countryCode;
+
+                                contactNo.text = phoneNumber.nsn;
+
+                                log(phoneNumber.countryCode);
+                              } else {
+                                countryCode = authController.coutryDialCode!;
                               }
                               Get.dialog(
                                 Dialog(
@@ -180,7 +179,7 @@ class PaytmRedeemScreen extends StatelessWidget {
                                               height: 20,
                                               alignment: Alignment.center,
                                               child: Text(
-                                                authController.coutryCode!,
+                                                countryCode,
                                               ),
                                             ),
                                             contentPadding: EdgeInsets.zero,
@@ -221,7 +220,7 @@ class PaytmRedeemScreen extends StatelessWidget {
                                             if (contactNo.text.isNotEmpty) {
                                               Get.back();
                                               paymentController.addPayTMDetails(
-                                                  authController.coutryCode! +
+                                                  countryCode +
                                                       contactNo.text.trim());
                                             } else {
                                               showCustomSnackBar(

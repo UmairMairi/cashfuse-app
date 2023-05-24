@@ -58,7 +58,6 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
         alignment: Alignment.topCenter,
         child: SizedBox(
           width: AppConstants.WEB_MAX_WIDTH,
-          // height: 285,
           child: GridView.builder(
             gridDelegate: global.getPlatFrom()
                 ? SliverGridDelegateWithMaxCrossAxisExtent(
@@ -80,13 +79,6 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
             itemBuilder: (context, index) {
               return InkWell(
                   onTap: () {
-                    // Get.to(
-                    //       () => CategoryScreen(
-                    //     category: homeController.topCashbackList[index],
-                    //   ),
-                    //   routeName: 'category',
-                    // );
-
                     if (global.getPlatFrom()) {
                       Navigator.push(
                           context,
@@ -155,25 +147,6 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                           height: 120,
                           fit: BoxFit.contain,
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                        //   child: RichText(
-                        //     text: TextSpan(
-                        //         text: "Brand: ",
-                        //         style: TextStyle(
-                        //             color: Colors.black54,
-                        //             fontWeight: FontWeight.w500,
-                        //             fontSize: 10),
-                        //         children: [
-                        //           TextSpan(
-                        //               text: '${productList[index].name} ',
-                        //               style: TextStyle(
-                        //                   fontWeight: FontWeight.w600,
-                        //                   fontSize: 10,
-                        //                   color: Colors.black)),
-                        //         ]),
-                        //   ),
-                        // ),
                         Container(
                           color: Colors.grey.shade400,
                           height: 1,

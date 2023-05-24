@@ -50,12 +50,19 @@ class HelpDetailSceen extends StatelessWidget {
             margin: global.getPlatFrom()
                 ? EdgeInsets.zero
                 : EdgeInsets.all(10).copyWith(bottom: 0),
+                padding: EdgeInsets.all(10),
             child: SingleChildScrollView(
-              child: HtmlWidget(
-                faq.ans!,
-                textStyle: global.getPlatFrom()
-                    ? Get.theme.primaryTextTheme.titleSmall
-                    : null,
+              child: FutureBuilder(
+                initialData: '',
+                future: global.translatedText(faq.ans!),
+                builder: (context, snapshot) {
+                  return HtmlWidget(
+                    snapshot.data!,
+                    textStyle: global.getPlatFrom()
+                        ? Get.theme.primaryTextTheme.titleSmall
+                        : null,
+                  );
+                },
               ),
             ),
           ),

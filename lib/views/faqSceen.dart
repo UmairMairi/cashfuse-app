@@ -2,6 +2,7 @@
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/views/helpDetailSceen.dart';
+import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -57,8 +58,8 @@ class FaqScreen extends StatelessWidget {
                         },
                       )
                     : GetPlatform.isWeb
-                        ? Text(
-                            'FAQs',
+                        ? TranslationTextWidget(
+                            text: 'FAQs',
                             style: Get.theme.primaryTextTheme.titleLarge!
                                 .copyWith(color: Colors.white),
                           )
@@ -121,8 +122,8 @@ class FaqScreen extends StatelessWidget {
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: GetPlatform.isWeb
-                                            ? Text(
-                                                commonController
+                                            ? TranslationTextWidget(
+                                                text: commonController
                                                     .faqList[index].ques!,
                                                 style: Get
                                                     .theme
@@ -155,8 +156,8 @@ class FaqScreen extends StatelessWidget {
                             )
                           : Center(
                               child: GetPlatform.isWeb
-                                  ? Text(
-                                      'No data found',
+                                  ? TranslationTextWidget(
+                                      text: 'No data found',
                                     )
                                   : Text(
                                       'No data found',

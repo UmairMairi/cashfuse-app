@@ -52,16 +52,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Container(
-                //   margin: EdgeInsets.only(left: 15, top: 10, bottom: 10),
-                //   child: Text(
-                //     product.name,
-                //     style: TextStyle(
-                //         fontSize: 14,
-                //         color: Colors.black87,
-                //         fontWeight: FontWeight.w600),
-                //   ),
-                // ),
                 SizedBox(
                   height: 10,
                 ),
@@ -90,7 +80,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 SizedBox(
                   height: 10,
                 ),
-
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                   color: Colors.grey.shade300,
@@ -153,21 +142,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                             : product
                                                 .productPrices![index].url!,
                                       );
-
-                                      // Get.to(
-                                      //   () => WebViewScreen(
-                                      //     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : ads.landingPage,
-                                      //     isCliked: global.clickedList.contains(ads.advName),
-                                      //     couponList: ads.couponList,
-                                      //     partner: ads.partner,
-                                      //     brandName: ads.advName,
-                                      //   ),
-                                      // ).then((value) {
-                                      //   if (global.clickedList.contains(ads.advName)) {
-                                      //   } else {
-                                      //     global.clickedList.add(ads.advName);
-                                      //   }
-                                      // });
                                     } else {
                                       if (global.getPlatFrom()) {
                                         Get.dialog(Dialog(

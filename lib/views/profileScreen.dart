@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
@@ -20,7 +22,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_translator/google_translator.dart';
-import 'package:phone_number/phone_number.dart';
+import 'package:phone_numbers_parser/phone_numbers_parser.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:store_redirect/store_redirect.dart';
 
@@ -81,7 +84,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 leading: CircleAvatar(
                                   radius: 25,
                                   backgroundColor: Colors.white,
-                                  child: global.currentUser.userImage!.isNotEmpty
+                                  child: global
+                                          .currentUser.userImage!.isNotEmpty
                                       ? ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(25),
@@ -249,97 +253,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ],
                               ),
                             ],
-                          )
-                          //: Text('Welcome!'),
-                          ),
-                      // Container(
-                      //   color: Get.theme.primaryColor,
-                      //   padding: EdgeInsets.only(left: 20, top: 5, right: 20),
-                      //   child: Column(
-                      //     crossAxisAlignment: CrossAxisAlignment.start,
-                      //     children: [
-                      //       Text(
-                      //         'Hello ' + global.currentUser.name,
-                      //         style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-                      //       ),
-                      //       SizedBox(
-                      //         height: 10,
-                      //       ),
-                      //       Divider(
-                      //         color: Colors.white.withOpacity(0.2),
-                      //         height: 0,
-                      //         thickness: 1.2,
-                      //       ),
-                      //       SizedBox(
-                      //         height: 10,
-                      //       ),
-                      //       Row(
-                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //         children: [
-                      //           Column(
-                      //             crossAxisAlignment: CrossAxisAlignment.start,
-                      //             children: [
-                      //               Text(
-                      //                 'Total Cashback:',
-                      //                 style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                      //                   color: Colors.white,
-                      //                   fontSize: 11,
-                      //                 ),
-                      //               ),
-                      //               Text(
-                      //                 global.currentUser.earning != null ? '${global.appInfo.currency}${global.currentUser.earning.totalEarnings}' : '${global.appInfo.currency}0.00',
-                      //                 style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-                      //               ),
-                      //             ],
-                      //           ),
-                      //           // Column(
-                      //           //   crossAxisAlignment: CrossAxisAlignment.start,
-                      //           //   children: [
-                      //           //     Text(
-                      //           //       'Total Rewards:',
-                      //           //       style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                      //           //         color: Colors.white,
-                      //           //         fontSize: 11,
-                      //           //       ),
-                      //           //     ),
-                      //           //     Text(
-                      //           //       '${global.appInfo.currency}0.00',
-                      //           //       style: Get.theme.primaryTextTheme.titleSmall.copyWith(color: Colors.white),
-                      //           //     ),
-                      //           //   ],
-                      //           // )
-                      //         ],
-                      //       ),
-                      //       SizedBox(
-                      //         height: 10,
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
+                          )),
                       InkWell(
                         onTap: () async {
                           global.showInterstitialAd();
+
+                          log(global.currentUser.toJson().toString());
 
                           authController.name.text = global.currentUser.name!;
                           authController.email.text = global.currentUser.email!;
                           authController.contactNo.text =
                               global.currentUser.phone!;
-                          if (global.currentUser.phone != null) {
-                            if (GetPlatform.isAndroid) {
-                              try {
-                                PhoneNumber phoneNumber =
-                                    await PhoneNumberUtil()
-                                        .parse(global.currentUser.phone!);
-                                authController.coutryCode =
-                                    '+' + phoneNumber.countryCode;
-                                authController.contactNo.text =
-                                    phoneNumber.nationalNumber;
-                              } catch (e) {
-                                print(
-                                    "Exception - ProfileScreen.dart - PhoneNumberUtil():" +
-                                        e.toString());
-                              }
-                            }
+                          if (global.currentUser.phone != null &&
+                              global.currentUser.phone!.isNotEmpty) {
+                            final phoneNumber =
+                                PhoneNumber.parse(global.currentUser.phone!);
+
+                            authController.coutryDialCode =
+                                '+' + phoneNumber.countryCode;
+
+                            authController.contactNo.text = phoneNumber.nsn;
+
+                            log(phoneNumber.countryCode);
                           }
                           Get.to(
                             () => AccountSettingScreen(),
@@ -478,7 +413,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                       ),
-
                       InkWell(
                         onTap: () {
                           global.showInterstitialAd();
@@ -654,7 +588,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                       ),
-
                       Divider(
                         height: 0,
                       ),
@@ -834,7 +767,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       Text(
                         'Login or signup',
-                        style: Get.theme.primaryTextTheme.displaySmall!.copyWith(
+                        style:
+                            Get.theme.primaryTextTheme.displaySmall!.copyWith(
                           letterSpacing: -1,
                           fontWeight: FontWeight.w700,
                         ),
@@ -844,7 +778,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Text(
                           'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
                           textAlign: TextAlign.center,
-                          style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                          style:
+                              Get.theme.primaryTextTheme.titleSmall!.copyWith(
                             letterSpacing: -0.2,
                             fontWeight: FontWeight.w600,
                           ),

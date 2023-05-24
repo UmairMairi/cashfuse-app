@@ -76,21 +76,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   text: widget.category != null ? widget.category!.name! : '',
                   style: Get.theme.primaryTextTheme.titleSmall!
                       .copyWith(color: Colors.white)),
-              // FutureBuilder(
-              //   future: global.translatedText(
-              //       widget.category != null ? widget.category!.name! : ''),
-              //   builder: (context, snapshot) {
-              //     return Text(
-              //       snapshot.data != null
-              //           ? snapshot.data!
-              //           : widget.category != null
-              //               ? widget.category!.name!
-              //               : '',
-              //       style: Get.theme.primaryTextTheme.titleSmall!
-              //           .copyWith(color: Colors.white),
-              //     );
-              //   },
-              // ),
             ),
       body: GetBuilder<AdController>(builder: (adController) {
         return SingleChildScrollView(

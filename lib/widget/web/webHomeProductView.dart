@@ -103,39 +103,11 @@ class WebHomeProductView extends StatelessWidget {
                                         ),
                                       ),
                                       Divider(),
-                                      // Container(
-                                      //   color: Colors.grey.shade400,
-                                      //   height: 1,
-                                      // ),
                                       Image.network(
                                         "${global.appInfo.baseUrls!.productImageurl}/${homeController.productList[index].image}",
-                                        // width: 150,
                                         height: 120,
-                                        // height: Get.height * 0.15,
                                         fit: BoxFit.contain,
                                       ),
-                                      // Padding(
-                                      //   padding: const EdgeInsets.only(
-                                      //       top: 8.0, bottom: 8),
-                                      //   child: RichText(
-                                      //     text: TextSpan(
-                                      //         text: "Brand: ",
-                                      //         style: TextStyle(
-                                      //             color: Colors.black54,
-                                      //             fontWeight: FontWeight.w500,
-                                      //             fontSize: 10),
-                                      //         children: [
-                                      //           TextSpan(
-                                      //               text:
-                                      //                   '${homeController.productList[index].name} ',
-                                      //               style: TextStyle(
-                                      //                   fontWeight:
-                                      //                       FontWeight.w600,
-                                      //                   fontSize: 12,
-                                      //                   color: Colors.black)),
-                                      //         ]),
-                                      //   ),
-                                      // ),
                                       Divider(
                                         height: 0,
                                       ),

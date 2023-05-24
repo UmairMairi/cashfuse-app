@@ -536,7 +536,6 @@ class MyOrdersScreen extends StatelessWidget {
                               child: Text(
                                 "Once you shop via ${global.appName}, your order details will appear here within 72 hours.",
                                 textAlign: TextAlign.center,
-                                //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
                               ).translate(),
                             ),
                             InkWell(

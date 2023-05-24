@@ -58,109 +58,8 @@ class GetStartedScreen extends StatelessWidget {
             ),
           ),
         ),
-        // Stack(
-        //   alignment: Alignment.bottomCenter,
-        //   children: [
-        //     Container(
-        //       height: MediaQuery.of(context).size.height,
-        //       width: global.getPlatFrom() ? AppConstants.WEB_MAX_WIDTH / 2 : null,
-        //       child: VideoPlayer(
-        //         splash.videoPlayerController,
-        //       ),
-        //     ),
-        //     !fromSplash
-        //         ? InkWell(
-        //             onTap: () {
-        //               Get.back();
-        //             },
-        //             child: Align(
-        //               alignment: Alignment.topLeft,
-        //               child: Padding(
-        //                 padding: EdgeInsets.only(left: 10, top: 40),
-        //                 child: Icon(
-        //                   Icons.arrow_back,
-        //                   size: 26,
-        //                   color: Colors.white,
-        //                 ),
-        //               ),
-        //             ),
-        //           )
-        //         : SizedBox(),
-        //     Align(
-        //       alignment: Alignment.topCenter,
-        //       child: Padding(
-        //         padding: const EdgeInsets.only(top: 70),
-        //         child: Text(
-        //           AppLocalizations.of(context).see_how_to,
-        //           style: Get.theme.primaryTextTheme.headlineSmall.copyWith(
-        //             letterSpacing: -1.5,
-        //             fontWeight: FontWeight.w400,
-        //             color: GetPlatform.isWeb ? Colors.black : Colors.white,
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //     Align(
-        //       alignment: Alignment.topCenter,
-        //       child: Padding(
-        //         padding: const EdgeInsets.only(top: 100),
-        //         child: Text(
-        //           AppLocalizations.of(context).earn_cashback,
-        //           style: Get.theme.primaryTextTheme.displaySmall.copyWith(
-        //             letterSpacing: -2,
-        //             fontWeight: FontWeight.w500,
-        //             color: GetPlatform.isWeb ? Colors.black : Colors.white,
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //     Align(
-        //       alignment: Alignment.center,
-        //       child: IconButton(
-        //         onPressed: () {
-        //           splash.playPauseVideo();
-        //         },
-        //         icon: Icon(
-        //           splash.videoPlayerController.value.isPlaying ? Icons.pause_circle_outline_rounded : Icons.play_circle_outline,
-        //           color: Colors.white,
-        //           size: 60,
-        //         ),
-        //       ),
-        //     ),
 
-        //   ],
-        // );
-        // }),
         bottomNavigationBar:
-            // fromSplash
-            //     ? InkWell(
-            //         onTap: () async {
-            //           Get.to(
-            //             () => LoginOrSignUpScreen(
-            //               fromMenu: false,
-            //             ),
-            //             routeName: 'login',
-            //           );
-            //         },
-            //         child: Container(
-            //           height: 50,
-            //           margin: EdgeInsets.all(20),
-            //           width: MediaQuery.of(context).size.width,
-            //           alignment: Alignment.center,
-            //           decoration: BoxDecoration(
-            //             color: Get.theme.primaryColor,
-            //             borderRadius: BorderRadius.circular(10),
-            //           ),
-            //           child: Text(
-            //             AppLocalizations.of(context).login_or_signup,
-            //             style: Get.theme.primaryTextTheme.bodyLarge.copyWith(
-            //               color: Colors.white,
-            //               fontWeight: FontWeight.w500,
-            //             ),
-            //           ),
-            //         ),
-            //       )
-            //     : SizedBox(),
             GetBuilder<AuthController>(builder: (authController) {
           return Column(
             mainAxisSize: MainAxisSize.min,
@@ -169,8 +68,6 @@ class GetStartedScreen extends StatelessWidget {
                   ? InkWell(
                       onTap: () async {
                         await authController.signInWithApple(fromMenu);
-
-                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
                       },
                       child: Container(
                         height: 50,

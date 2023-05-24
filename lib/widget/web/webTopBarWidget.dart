@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable, invalid_use_of_protected_member
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cashfuse/constants/appConstant.dart';
@@ -31,6 +32,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState>? scaffoldKey;
@@ -106,21 +108,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           ),
                           barrierDismissible: false);
                     },
-                    onFieldSubmitted: (text) {
-                      //   _actionSearch(searchController, true);
-                      //   showDialog(
-                      //     context: context,
-                      //     builder: (con) => Dialog(
-                      //       insetPadding: EdgeInsets.only(top: 70, bottom: 50, left: 50),
-                      //       child: SizedBox(
-                      //         width: 550,
-                      //         child: WebSearchResultWidget(
-                      //           searchText: _searchController.text.trim(),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   );
-                    },
+                    onFieldSubmitted: (text) {},
                   ),
                 );
               }),
@@ -152,6 +140,10 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                                   .appInfo.languages![index].languageName!));
                         }),
                         onChanged: (value) {
+                          Get.back();
+                          Get.to(() => BottomNavigationBarScreen(),
+                              preventDuplicates: false, routeName: 'home');
+                          homeController.update();
                           localizationController.setLanguage(value!);
                           localizationController.refresh();
                         },
@@ -353,6 +345,18 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                         authController.email.text = global.currentUser.email!;
                         authController.contactNo.text =
                             global.currentUser.phone!;
+                        if (global.currentUser.phone != null &&
+                            global.currentUser.phone!.isNotEmpty) {
+                          final phoneNumber =
+                              PhoneNumber.parse(global.currentUser.phone!);
+
+                          authController.coutryDialCode =
+                              '+' + phoneNumber.countryCode;
+
+                          authController.contactNo.text = phoneNumber.nsn;
+
+                          log(phoneNumber.countryCode);
+                        }
                         Get.to(
                           () => WebAccountSettingScreen(),
                           routeName: 'account',
@@ -512,8 +516,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           'Are you sure you want to logout ?',
                           [
                             CupertinoDialogAction(
-                              child: TranslationTextWidget(
-                                text: 'Yes',
+                              child: Text(
+                                'Yes',
                                 style: Get.theme.primaryTextTheme.titleSmall!
                                     .copyWith(color: Colors.red),
                               ),
@@ -522,14 +526,14 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                                 authController.logout();
                                 Get.offAll(
                                   () => BottomNavigationBarScreen(),
-                                  //preventDuplicates: false,
+                                  // preventDuplicates: false,
                                   routeName: 'home',
                                 );
                               },
                             ),
                             CupertinoDialogAction(
-                              child: TranslationTextWidget(
-                                text: 'No',
+                              child: Text(
+                                'No',
                                 style: Get.theme.primaryTextTheme.titleSmall!
                                     .copyWith(color: Colors.blue),
                               ),

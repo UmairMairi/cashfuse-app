@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:developer';
+
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/images.dart';
@@ -11,11 +13,12 @@ import 'package:get/get.dart';
 
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:google_translator/google_translator.dart';
-import 'package:phone_number/phone_number.dart';
+import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 class AmazonPayRedeemScreen extends StatelessWidget {
   final fContactNo = new FocusNode();
   var contactNo = TextEditingController();
+  String countryCode = '';
 
   PaymentController paymentController = Get.find<PaymentController>();
   AuthController authController = Get.find<AuthController>();
@@ -105,22 +108,18 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                             onTap: () async {
                               if (paymentController.amazonDetails != null &&
                                   paymentController.amazonDetails!.amazonNo !=
-                                      null) {
-                                if (GetPlatform.isAndroid) {
-                                  try {
-                                    PhoneNumber phoneNumber =
-                                        await PhoneNumberUtil().parse(
-                                            paymentController
-                                                .amazonDetails!.amazonNo!);
-                                    authController.coutryCode =
-                                        '+' + phoneNumber.countryCode;
-                                    contactNo.text = phoneNumber.nationalNumber;
-                                  } catch (e) {
-                                    print(
-                                        "Exception - AmazonPayRedeemScreen.dart - PhoneNumberUtil():" +
-                                            e.toString());
-                                  }
-                                }
+                                      null &&
+                                  paymentController
+                                      .amazonDetails!.amazonNo!.isNotEmpty) {
+                                final phoneNumber = PhoneNumber.parse(
+                                    paymentController.amazonDetails!.amazonNo!);
+
+                                contactNo.text = phoneNumber.nsn;
+                                countryCode = '+' + phoneNumber.countryCode;
+
+                                log(phoneNumber.countryCode);
+                              } else {
+                                countryCode = authController.coutryDialCode!;
                               }
                               Get.dialog(
                                 Dialog(
@@ -182,7 +181,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                                 height: 20,
                                                 alignment: Alignment.center,
                                                 child: Text(
-                                                  authController.coutryCode!,
+                                                  countryCode,
                                                 ),
                                               ),
                                               labelStyle: TextStyle(
@@ -225,8 +224,7 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                                 Get.back();
                                                 paymentController
                                                     .addAmazonPayDetails(
-                                                        authController
-                                                                .coutryCode! +
+                                                        countryCode +
                                                             contactNo.text
                                                                 .trim());
                                               } else {

@@ -147,40 +147,6 @@ class GetHelpScreen extends StatelessWidget {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        // Card(
-                                        //   elevation: 5,
-                                        //   shape: RoundedRectangleBorder(
-                                        //     borderRadius: BorderRadius.circular(25),
-                                        //   ),
-                                        //   child: Padding(
-                                        //     padding: const EdgeInsets.all(12.0),
-                                        //     child:
-                                        //         // ShaderMask(
-                                        //         //   blendMode: BlendMode.srcIn,
-                                        //         //   shaderCallback: (Rect bounds) {
-                                        //         //     return LinearGradient(
-                                        //         //       colors: [
-                                        //         //         Color(0xFFBC53E1),
-                                        //         //         Color(0xFF6285E3),
-                                        //         //       ],
-                                        //         //       begin: Alignment.topLeft,
-                                        //         //       end: Alignment.bottomRight,
-                                        //         //     ).createShader(bounds);
-                                        //         //   },
-                                        //         //   child:
-                                        //         CustomImage(
-                                        //       image: '${global.appInfo.baseUrls.faqImageUrl}/${controller.faqList[index].image}',
-                                        //       height: 25,
-                                        //       //width: Get.width,
-                                        //       fit: BoxFit.contain,
-                                        //     ),
-                                        //     // Image.asset(
-                                        //     //   Images.cube,
-                                        //     //   height: 25,
-                                        //     // ),
-                                        //   ),
-                                        //   //),
-                                        // ),
                                         GetPlatform.isWeb
                                             ? TranslationTextWidget(
                                                 text: controller

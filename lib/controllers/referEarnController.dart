@@ -21,7 +21,10 @@ class ReferEarnController extends GetxController {
       await global.referAndEarn();
     }
 
-    await getReferralUsers();
+    if (global.currentUser.id != null) {
+      await getReferralUsers();
+    }
+
     super.onInit();
   }
 
@@ -33,7 +36,8 @@ class ReferEarnController extends GetxController {
   Future getReferralUsers() async {
     try {
       isDataLoaded = false;
-      if (networkController.connectionStatus.value == 1 || networkController.connectionStatus.value == 2) {
+      if (networkController.connectionStatus.value == 1 ||
+          networkController.connectionStatus.value == 2) {
         await apiHelper.getReferralUsers().then((response) {
           if (response.statusCode == 200) {
             _referralUserList = response.data;
@@ -47,7 +51,8 @@ class ReferEarnController extends GetxController {
       isDataLoaded = true;
       update();
     } catch (e) {
-      print("Exception - referEarnController.dart - getReferralUsers():" + e.toString());
+      print("Exception - referEarnController.dart - getReferralUsers():" +
+          e.toString());
     }
   }
 }

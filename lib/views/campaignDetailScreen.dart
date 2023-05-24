@@ -173,58 +173,7 @@ class CampaignDetailScreen extends StatelessWidget {
                               ),
                               HtmlWidget(
                                 campaign!.description!,
-                                //textAlign: TextAlign.center,
                               ),
-                              // Text(
-                              //   offer.terms,
-                              //   textAlign: TextAlign.center,
-                              // ),
-                              // SizedBox(
-                              //   height: 15,
-                              // ),
-                              // Text(
-                              //   'Free at home Skin Assessment in 5 min Personalized Regime',
-                              //   textAlign: TextAlign.center,
-                              //   style: TextStyle(fontWeight: FontWeight.w600),
-                              // ),
-                              // homeController.countTimer(DateTime.now(), offer.endDate) != null
-                              //     ? Container(
-                              //         decoration: BoxDecoration(
-                              //           color: Colors.grey[100],
-                              //           borderRadius: BorderRadius.circular(10),
-                              //         ),
-                              //         padding: EdgeInsets.all(15),
-                              //         child: Column(
-                              //           children: [
-                              //             Text(
-                              //               'Just for You',
-                              //               style: Get.theme.primaryTextTheme.titleSmall.copyWith(
-                              //                 color: Colors.red,
-                              //               ),
-                              //             ),
-                              //             Padding(
-                              //               padding: const EdgeInsets.symmetric(vertical: 10),
-                              //               child: SlideCountdownSeparated(
-                              //                 separatorType: SeparatorType.symbol,
-                              //                 durationTitle: DurationTitle(
-                              //                   hours: 'hr',
-                              //                   minutes: 'min',
-                              //                   seconds: 'sec',
-                              //                   days: 'day',
-                              //                 ),
-                              //                 slideDirection: SlideDirection.none,
-                              //                 textStyle: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
-                              //                 decoration: BoxDecoration(
-                              //                   color: Colors.red[800],
-                              //                   borderRadius: BorderRadius.circular(3),
-                              //                 ),
-                              //                 duration: Duration(days: homeController.countTimer(DateTime.now(), offer.endDate)),
-                              //               ),
-                              //             ),
-                              //           ],
-                              //         ),
-                              //       )
-                              //     : SizedBox(),
                               InkWell(
                                 onTap: () async {
                                   if (global.currentUser.id != null) {
@@ -245,21 +194,6 @@ class CampaignDetailScreen extends StatelessWidget {
                                           ? homeController.createdLink
                                           : campaign!.url!,
                                     );
-
-                                    // Get.to(
-                                    //   () => WebViewScreen(
-                                    //     urlString: homeController.createdLink.isNotEmpty ? homeController.createdLink : campaign.url,
-                                    //     isCliked: global.clickedList.contains(campaign.name),
-                                    //     couponList: campaign.couponList,
-                                    //     partner: campaign.partner,
-                                    //     brandName: campaign.name,
-                                    //   ),
-                                    // ).then((value) {
-                                    //   if (global.clickedList.contains(campaign.name)) {
-                                    //   } else {
-                                    //     global.clickedList.add(campaign.name);
-                                    //   }
-                                    // });
                                   } else {
                                     Get.to(
                                       () => GetStartedScreen(

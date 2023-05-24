@@ -175,35 +175,6 @@ class CouponDetailScreen extends StatelessWidget {
                                   : BoxFit.fill,
                               coupon: coupon!,
                             ),
-                            // Align(
-                            //   alignment: Alignment.topRight,
-                            //   child: RotatedBox(
-                            //     quarterTurns: 45,
-                            //     child: ClipPath(
-                            //       clipper: MultiplePointsClipper(Sides.bottom, heightOfPoint: 10, numberOfPoints: 1),
-                            //       child: Container(
-                            //         width: 20,
-                            //         height: 140,
-                            //         decoration: BoxDecoration(
-                            //           color: Colors.red[600],
-                            //         ),
-                            //         alignment: Alignment.topCenter,
-                            //         padding: EdgeInsets.only(bottom: 5, top: 5),
-                            //         child: RotatedBox(
-                            //           quarterTurns: -45,
-                            //           child: Text(
-                            //             'LOWEST PRICE GURRENTY',
-                            //             textAlign: TextAlign.center,
-                            //             style: Get.theme.primaryTextTheme.bodySmall.copyWith(
-                            //               color: Colors.white,
-                            //               fontSize: 10,
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
                             Card(
                               color: Colors.white,
                               margin: EdgeInsets.all(10),
@@ -291,16 +262,6 @@ class CouponDetailScreen extends StatelessWidget {
                                     ? homeController.createdLink
                                     : coupon!.url!,
                               );
-                              // Get.to(() => WebViewScreen(
-                              //       urlString: coupon.url,
-                              //       brandName: coupon.partnerName,
-                              //     )).then((value) {
-                              //   if (global.clickedList.contains(coupon.partnerName)) {
-                              //   } else {
-                              //     global.clickedList.add(coupon.partnerName);
-                              //     global.sp.setStringList('clickedList', global.clickedList);
-                              //   }
-                              // });
                             } else {
                               if (global.getPlatFrom()) {
                                 Get.dialog(Dialog(
@@ -350,7 +311,6 @@ class CouponDetailScreen extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-
                   Container(
                     width: global.getPlatFrom() ? Get.width / 3 : Get.width,
                     color: Colors.white,
@@ -381,167 +341,6 @@ class CouponDetailScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Container(
-                  //   color: Colors.white,
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(10.0),
-                  //     child: Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Text(
-                  //           'Important Information',
-                  //           style: Get.theme.primaryTextTheme.titleSmall,
-                  //         ),
-                  //         Divider(),
-                  //         ListTile(
-                  //           contentPadding: EdgeInsets.zero,
-                  //           horizontalTitleGap: 10,
-                  //           minLeadingWidth: 0,
-                  //           leading: CircleAvatar(
-                  //             radius: 3,
-                  //             backgroundColor: Colors.black54,
-                  //           ),
-                  //           title: Text(
-                  //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
-                  //           ),
-                  //         ),
-                  //         ListTile(
-                  //           contentPadding: EdgeInsets.zero,
-                  //           horizontalTitleGap: 10,
-                  //           minLeadingWidth: 0,
-                  //           leading: CircleAvatar(
-                  //             radius: 3,
-                  //             backgroundColor: Colors.black54,
-                  //           ),
-                  //           title: Text(
-                  //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  // SizedBox(
-                  //   height: 10,
-                  // ),
-                  // Container(
-                  //   color: Colors.white,
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(10.0),
-                  //     child: Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Text(
-                  //           '${global.appName} Rewards Details',
-                  //           style: Get.theme.primaryTextTheme.titleSmall,
-                  //         ),
-                  //         Divider(),
-                  //         ListTile(
-                  //           contentPadding: EdgeInsets.zero,
-                  //           horizontalTitleGap: 10,
-                  //           minLeadingWidth: 0,
-                  //           leading: CircleAvatar(
-                  //             radius: 3,
-                  //             backgroundColor: Colors.black54,
-                  //           ),
-                  //           title: Text(
-                  //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
-                  //           ),
-                  //         ),
-                  //         ListTile(
-                  //           contentPadding: EdgeInsets.zero,
-                  //           horizontalTitleGap: 10,
-                  //           minLeadingWidth: 0,
-                  //           leading: CircleAvatar(
-                  //             radius: 3,
-                  //             backgroundColor: Colors.black54,
-                  //           ),
-                  //           title: Text(
-                  //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
-                  //           ),
-                  //         ),
-                  //         ListTile(
-                  //           contentPadding: EdgeInsets.zero,
-                  //           horizontalTitleGap: 10,
-                  //           minLeadingWidth: 0,
-                  //           leading: CircleAvatar(
-                  //             radius: 3,
-                  //             backgroundColor: Colors.black54,
-                  //           ),
-                  //           title: Text(
-                  //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
-                  //           ),
-                  //         )
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  // SizedBox(
-                  //   height: 10,
-                  // ),
-                  // Container(
-                  //   color: Colors.white,
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(10.0),
-                  //     child: Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Text(
-                  //           'How to get this offer',
-                  //           style: Get.theme.primaryTextTheme.titleSmall,
-                  //         ),
-                  //         Divider(),
-                  //         ListTile(
-                  //           contentPadding: EdgeInsets.zero,
-                  //           horizontalTitleGap: 10,
-                  //           minLeadingWidth: 0,
-                  //           leading: CircleAvatar(
-                  //             radius: 3,
-                  //             backgroundColor: Colors.black54,
-                  //           ),
-                  //           title: Text(
-                  //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
-                  //           ),
-                  //         ),
-                  //         ListTile(
-                  //           contentPadding: EdgeInsets.zero,
-                  //           horizontalTitleGap: 10,
-                  //           minLeadingWidth: 0,
-                  //           leading: CircleAvatar(
-                  //             radius: 3,
-                  //             backgroundColor: Colors.black54,
-                  //           ),
-                  //           title: Text(
-                  //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
-                  //           ),
-                  //         ),
-                  //         ListTile(
-                  //           contentPadding: EdgeInsets.zero,
-                  //           horizontalTitleGap: 10,
-                  //           minLeadingWidth: 0,
-                  //           leading: CircleAvatar(
-                  //             radius: 3,
-                  //             backgroundColor: Colors.black54,
-                  //           ),
-                  //           title: Text(
-                  //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  //             style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
-                  //           ),
-                  //         )
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  // SizedBox(
-                  //   height: 10,
-                  // ),
                 ],
               ),
             ),
