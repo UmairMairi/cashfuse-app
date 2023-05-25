@@ -27,6 +27,8 @@ class SplashController extends GetxController {
   APIHelper apiHelper = new APIHelper();
   NetworkController networkController = Get.find<NetworkController>();
 
+  LocationController locationController = Get.put(LocationController());
+
   @override
   void onInit() async {
     try {
@@ -84,7 +86,7 @@ class SplashController extends GetxController {
 
               global.countrySlug = global.sp!.getString('countrySlug')!;
             } else {
-              await Get.find<LocationController>().getLocationPermission();
+              await locationController.getLocationPermission();
             }
 
             await homeController.init();

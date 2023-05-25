@@ -50,6 +50,10 @@ class AuthController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    if (coutryDialCode == null && coutryDialCode == '') {
+      coutryDialCode = global.appInfo.phoneCode;
+    }
+    update();
   }
 
   @override

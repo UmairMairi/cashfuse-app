@@ -24,6 +24,7 @@ class CountrySelectWidget extends StatefulWidget {
 class _CountrySelectWidgetState extends State<CountrySelectWidget> {
   @override
   Widget build(BuildContext context) {
+    // log(homeController.isHomeDataLoaded().toString());
     return Scaffold(
       backgroundColor: Colors.black.withOpacity(0.2),
       body: Center(
@@ -61,18 +62,6 @@ class _CountrySelectWidgetState extends State<CountrySelectWidget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  global.country == null && global.countrySlug.isEmpty
-                      ? TranslationTextWidget(
-                          text: 'No offers available in your country.',
-                          style:
-                              Get.theme.primaryTextTheme.titleMedium!.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.red,
-                            height: 1.2,
-                          ),
-                          textAlign: TextAlign.center,
-                        )
-                      : SizedBox(),
                   global.country == null &&
                           global.countrySlug.isEmpty &&
                           global.appInfo.countryselection == 1
@@ -118,7 +107,7 @@ class _CountrySelectWidgetState extends State<CountrySelectWidget> {
                                   value: global.appInfo.countries![index],
                                   onChanged: (value) async {
                                     if (value != null) {
-                                      Get.to(() => BottomNavigationBarScreen(),
+                                       Get.to(() => BottomNavigationBarScreen(),
                                           preventDuplicates: false,
                                           routeName: 'home');
                                       global.country = value;
@@ -129,6 +118,7 @@ class _CountrySelectWidgetState extends State<CountrySelectWidget> {
                                           .isSelected = true;
 
                                       global.showCountryPopUp = false;
+                                      homeController.isDataAvailable = false;
 
                                       setState(() {});
 
@@ -154,10 +144,12 @@ class _CountrySelectWidgetState extends State<CountrySelectWidget> {
                                       homeController.newFlashOfferList = [];
                                       homeController.homeAdvList = [];
                                       homeController.allAdvList = [];
+
                                       await couponController.getCouponList();
                                       await homeController.init();
 
                                       setState(() {});
+                                     
                                     }
                                   },
                                 )

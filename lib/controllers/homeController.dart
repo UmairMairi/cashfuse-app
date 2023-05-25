@@ -86,6 +86,8 @@ class HomeController extends GetxController {
 
   int catPageListIndex = 0;
 
+  bool isDataAvailable = false;
+
   @override
   void onInit() async {
     init();
@@ -128,6 +130,31 @@ class HomeController extends GetxController {
       // catPage = 1;
     } catch (e) {
       print("Exception - HomeController.dart - _init():" + e.toString());
+    }
+  }
+
+  bool isHomeDataLoaded() {
+    try {
+      if (topBannerList != null &&
+          topBannerList.length > 0 &&
+          topCategoryList != null &&
+          topCashbackList.length > 0 &&
+          topCashbackList != null &&
+          topCashbackList.length > 0 &&
+          productList != null &&
+          productList.length > 0 &&
+          trendingProductList != null &&
+          trendingProductList.length > 0 &&
+          homeAdvList != null &&
+          homeAdvList.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print("Exception - HomeController.dart - isHomeDataLoaded():" +
+          e.toString());
+      return true;
     }
   }
 
@@ -182,6 +209,17 @@ class HomeController extends GetxController {
               isAllDataLoaded.value = true;
             } else {
               topCategoryList.addAll(_tCatList);
+
+              if (global.country != null &&
+                  global.countrySlug.isNotEmpty &&
+                  topCategoryList != null &&
+                  topCategoryList.length > 0) {
+                isDataAvailable = true;
+              } else if (isDataAvailable) {
+                isDataAvailable = true;
+              } else {
+                isDataAvailable = false;
+              }
 
               update();
 
@@ -283,6 +321,17 @@ class HomeController extends GetxController {
           if (response.status == "1") {
             topCashbackList = response.data;
 
+            if (global.country != null &&
+                global.countrySlug.isNotEmpty &&
+                topCashbackList != null &&
+                topCashbackList.length > 0) {
+              isDataAvailable = true;
+            } else if (isDataAvailable) {
+              isDataAvailable = true;
+            } else {
+              isDataAvailable = false;
+            }
+
             update();
             if (topCashbackList != []) {
               for (var i = 0; i < topCashbackList.length; i++) {
@@ -376,6 +425,17 @@ class HomeController extends GetxController {
         await apiHelper.getHomeAdv().then((response) {
           if (response.status == "1") {
             homeAdvList = response.data;
+
+            if (global.country != null &&
+                global.countrySlug.isNotEmpty &&
+                homeAdvList != null &&
+                homeAdvList.length > 0) {
+              isDataAvailable = true;
+            } else if (isDataAvailable) {
+              isDataAvailable = true;
+            } else {
+              isDataAvailable = false;
+            }
 
             if (homeAdvList != []) {
               for (var i = 0; i < homeAdvList.length; i++) {
@@ -561,6 +621,18 @@ class HomeController extends GetxController {
         await apiHelper.getExclusiveOffers().then((response) {
           if (response.status == "1") {
             exclusiveOfferList = response.data;
+
+            if (global.country != null &&
+                global.countrySlug.isNotEmpty &&
+                exclusiveOfferList != null &&
+                exclusiveOfferList.length > 0) {
+              isDataAvailable = true;
+            } else if (isDataAvailable) {
+              isDataAvailable = true;
+            } else {
+              isDataAvailable = false;
+            }
+
             if (exclusiveOfferList != null && exclusiveOfferList.length > 0) {
               for (var i = 0; i < exclusiveOfferList.length; i++) {
                 int diff;
@@ -597,6 +669,18 @@ class HomeController extends GetxController {
         await apiHelper.getNewFlashOffers().then((response) {
           if (response.status == "1") {
             newFlashOfferList = response.data;
+
+            if (global.country != null &&
+                global.countrySlug.isNotEmpty &&
+                newFlashOfferList != null &&
+                newFlashOfferList.length > 0) {
+              isDataAvailable = true;
+            } else if (isDataAvailable) {
+              isDataAvailable = true;
+            } else {
+              isDataAvailable = false;
+            }
+
             if (newFlashOfferList != null && newFlashOfferList.length > 0) {
               for (var i = 0; i < newFlashOfferList.length; i++) {
                 int diff;
@@ -633,6 +717,17 @@ class HomeController extends GetxController {
         await apiHelper.getTopBanners().then((response) {
           if (response.status == "1") {
             topBannerList = response.data;
+
+            if (global.country != null &&
+                global.countrySlug.isNotEmpty &&
+                topBannerList != null &&
+                topBannerList.length > 0) {
+              isDataAvailable = true;
+            } else if (isDataAvailable) {
+              isDataAvailable = true;
+            } else {
+              isDataAvailable = false;
+            }
 
             update();
           } else {
@@ -990,6 +1085,16 @@ class HomeController extends GetxController {
           //Get.back();
           if (response.status == "1") {
             productList = response.data;
+            if (global.country != null &&
+                global.countrySlug.isNotEmpty &&
+                productList != null &&
+                productList.length > 0) {
+              isDataAvailable = true;
+            } else if (isDataAvailable) {
+              isDataAvailable = true;
+            } else {
+              isDataAvailable = false;
+            }
           } else {
             showCustomSnackBar(response.message);
           }
@@ -1013,6 +1118,17 @@ class HomeController extends GetxController {
           //Get.back();
           if (response.status == "1") {
             trendingProductList = response.data;
+
+            if (global.country != null &&
+                global.countrySlug.isNotEmpty &&
+                trendingProductList != null &&
+                trendingProductList.length > 0) {
+              isDataAvailable = true;
+            } else if (isDataAvailable) {
+              isDataAvailable = true;
+            } else {
+              isDataAvailable = false;
+            }
           } else {
             showCustomSnackBar(response.message);
           }

@@ -165,6 +165,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           // global.appInfo.countries![index].isSelected = true;
 
                           global.showCountryPopUp = false;
+                          homeController.isDataAvailable = false;
 
                           homeController.update();
 

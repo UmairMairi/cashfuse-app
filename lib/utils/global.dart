@@ -27,10 +27,7 @@ import 'package:universal_html/html.dart' as html;
 String appName = "Cashfuse";
 String appPackageName = 'com.cashfuse.app';
 
-String baseUrl =
-// "https://adminpanel.cashoppi.in/api";
-    'https://cash.codefuse.org/multicountry/api';
-// 'https://cash.codefuse.org/admin/api';
+String baseUrl = 'https://cash.codefuse.org/admin/api';
 
 String webConfigurationKey =
     "BGPWwFL-u-5K7CdmI7bW1Qav23aJxTUFtksG5SDigWG3M2J1-pqgwY-qB1fMQlRJepzlqq9Qv8rDUqk4v9Ph584";

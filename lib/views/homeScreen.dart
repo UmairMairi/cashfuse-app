@@ -2348,7 +2348,43 @@ class HomeScreen extends StatelessWidget {
                               ));
                         });
                       }),
+            // else
+            //   Center(
+            //     child: Text(
+            //       'No offers available in your country.',
+            //       style: Get.theme.primaryTextTheme.titleMedium!.copyWith(
+            //         fontWeight: FontWeight.w600,
+            //         color: Colors.red,
+            //         height: 1.2,
+            //       ),
+            //       textAlign: TextAlign.center,
+            //     ),
+            //   ),
             bannerImageWidget(),
+            !global.getPlatFrom()
+                ? GetBuilder<HomeController>(
+                    builder: (controller) {
+                      if (homeController.isDataAvailable)
+                        return SizedBox();
+                      else
+                        return Center(
+                          child: Text(
+                            'No offers available in your country.',
+                            style: Get.theme.primaryTextTheme.titleMedium!
+                                .copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.red,
+                              height: 1.2,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        );
+                    },
+                  )
+                : SizedBox(),
+
+            // else
+            //  ,
             global.showCountryPopUp ? CountrySelectWidget() : SizedBox(),
           ],
         ));
