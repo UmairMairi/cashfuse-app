@@ -86,11 +86,11 @@ class HomeController extends GetxController {
 
   int catPageListIndex = 0;
 
-  bool isDataAvailable = false;
+  bool isDataAvailable = true;
 
   @override
   void onInit() async {
-    init();
+   await init();
 
     super.onInit();
   }

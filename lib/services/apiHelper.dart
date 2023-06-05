@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_null_comparison
 
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -1452,21 +1453,22 @@ class APIHelper {
     }
   }
 
-  Future<dynamic> getAddressFromGeocode(double lat, double lng) async {
+  Future<dynamic> getAddressFromGeocode() async {
     try {
       Response response;
       var dio = Dio();
       response = await dio.get(
-        "https://nominatim.openstreetmap.org/reverse?lat=$lat&lon=$lng&format=json",
+        // "https://nominatim.openstreetmap.org/reverse?lat=$lat&lon=$lng&format=json",
+        "https://geolocation-db.com/json/",
       );
       print('done : $response');
       dynamic recordList;
       if (response.statusCode == 200) {
-        recordList = response.data;
+        recordList = json.decode(response.data)['country_name'];
       } else {
         recordList = null;
       }
-      return getDioResult(response, recordList);
+      return recordList;
     } catch (e) {
       print("Exception -  apiHelper.dart - getAddressFromGeocode():" +
           e.toString());

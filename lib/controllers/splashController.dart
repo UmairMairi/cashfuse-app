@@ -4,7 +4,6 @@ import 'dart:developer';
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/authController.dart';
-import 'package:cashfuse/controllers/couponController.dart';
 import 'package:cashfuse/controllers/locationController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/controllers/referEarnController.dart';
@@ -23,6 +22,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../widget/web/webDrawerWidget.dart';
+
 class SplashController extends GetxController {
   APIHelper apiHelper = new APIHelper();
   NetworkController networkController = Get.find<NetworkController>();
@@ -33,9 +34,14 @@ class SplashController extends GetxController {
   void onInit() async {
     try {
       if (GetPlatform.isWeb) {
+        await webInit();
+
+        Get.put(SearchGetController());
+        Get.put(ReferEarnController());
         global.appDeviceId = await FirebaseMessaging.instance.getToken(
           vapidKey: global.webConfigurationKey,
         );
+        log(global.appDeviceId!);
       } else {
         global.appDeviceId = await FirebaseMessaging.instance.getToken();
       }
@@ -43,11 +49,7 @@ class SplashController extends GetxController {
       print("Exception - SplashController.dart - onInit():" + e.toString());
     }
 
-    if (GetPlatform.isWeb) {
-      await webInit();
-      Get.put(SearchGetController());
-      Get.put(ReferEarnController());
-    } else {
+    if (!GetPlatform.isWeb) {
       await init();
     }
 
@@ -68,7 +70,7 @@ class SplashController extends GetxController {
     try {
       global.sp = await SharedPreferences.getInstance();
 
-      log(global.appDeviceId!);
+      
       if (networkController.connectionStatus.value == 1 ||
           networkController.connectionStatus.value == 2) {
         await apiHelper.getAppInfo().then((response) async {
@@ -79,6 +81,11 @@ class SplashController extends GetxController {
             } else {
               global.countryCode = global.appInfo.countryCode!;
             }
+            if (authController.coutryDialCode != null &&
+                authController.coutryDialCode!.isNotEmpty) {
+            } else {
+              authController.coutryDialCode = global.appInfo.phoneCode;
+            }
             if (global.sp!.getString('country') != null &&
                 global.sp!.getString('countrySlug') != null) {
               global.country = CountryModel.fromJson(
@@ -88,8 +95,6 @@ class SplashController extends GetxController {
             } else {
               await locationController.getLocationPermission();
             }
-
-            await homeController.init();
 
             if (global.sp!.getString('currentUser') != null) {
               global.currentUser = UserModel.fromJson(
@@ -108,8 +113,10 @@ class SplashController extends GetxController {
                 Get.to(() => BottomNavigationBarScreen(), routeName: 'initial');
               }
             }
-            // Get.find<HomeController>().init();
-            Get.find<CouponController>().getCouponList();
+
+            await homeController.init();
+            await couponController.getCouponList();
+
             await apiHelper.getBannerNotification().then((result) {
               if (result.statusCode == 200) {
                 if (result.data != null) {
@@ -169,21 +176,12 @@ class SplashController extends GetxController {
                   routeName: 'home',
                 );
               } else {
-                if (GetPlatform.isWeb) {
-                  Get.to(
-                    () => BottomNavigationBarScreen(
-                      pageIndex: 0,
-                    ),
-                    routeName: 'home',
-                  );
-                } else {
-                  Get.off(
-                    () => GetStartedScreen(
-                      fromMenu: false,
-                    ),
-                    routeName: 'get-started',
-                  );
-                }
+                Get.off(
+                  () => GetStartedScreen(
+                    fromMenu: false,
+                  ),
+                  routeName: 'get-started',
+                );
               }
 
               await apiHelper.getBannerNotification().then((result) {

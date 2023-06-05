@@ -49,9 +49,8 @@ void main() async {
   if (GetPlatform.isWeb) {
     Get.put(NetworkController());
     Get.put(SplashController());
-    // Get.lazyPut<HomeController>(() => HomeController());
-
     Get.put(CouponController());
+    // Get.lazyPut<HomeController>(() => HomeController());
   }
 
   runApp(MyApp());
@@ -102,11 +101,14 @@ class MyApp extends StatelessWidget {
                 initialBinding: NetworkBinding(),
                 title: global.appName,
                 home: global.getPlatFrom()
-                    ? BottomNavigationBarScreen()
-                    : GetPlatform.isWeb
-                        ? HomeScreen()
-                        : SplashScreen(),
-              )
+                    ? HomeScreen()
+                    : BottomNavigationBarScreen()
+                // global.getPlatFrom()
+                //     ? BottomNavigationBarScreen()
+                //     : GetPlatform.isWeb
+                //         ? HomeScreen()
+                //         : SplashScreen(),
+                )
             : GoogleTranslatorInit(global.languageApiKey,
                 translateFrom: Locale(
                     localizationController.languageCode == 'en' ? 'hi' : 'en'),
