@@ -8,13 +8,11 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/faqSceen.dart';
 import 'package:cashfuse/views/referEarnScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class ReferralNetworkScreen extends StatelessWidget {
@@ -41,17 +39,11 @@ class ReferralNetworkScreen extends StatelessWidget {
                     Icons.arrow_back,
                   ),
                 ),
-                title: GetPlatform.isWeb
-                    ? TranslationTextWidget(
-                        text: 'My Referrals',
-                        style: Get.theme.primaryTextTheme.titleSmall!
-                            .copyWith(color: Colors.white),
-                      )
-                    : Text(
-                        'My Referrals',
-                        style: Get.theme.primaryTextTheme.titleSmall!
-                            .copyWith(color: Colors.white),
-                      ).translate(),
+                title: Text(
+                  AppLocalizations.of(context)!.my_referrals,
+                  style: Get.theme.primaryTextTheme.titleSmall!
+                      .copyWith(color: Colors.white),
+                ),
               ),
         floatingActionButton: InkWell(
           onTap: () {
@@ -85,26 +77,14 @@ class ReferralNetworkScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        GetPlatform.isWeb
-                            ? TranslationTextWidget(
-                                text:
-                                    "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
-                                textAlign: TextAlign.center,
-                                style: Get.theme.primaryTextTheme.bodySmall!
-                                    .copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              )
-                            : Text(
-                                "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
-                                textAlign: TextAlign.center,
-                                style: Get.theme.primaryTextTheme.bodySmall!
-                                    .copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ).translate(),
+                        Text(
+                          "Invite friends & earn flat ${global.appInfo.perOrderReferPercentage}% of their Cashback amount, EVERYTIME they shop!",
+                          textAlign: TextAlign.center,
+                          style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                         SizedBox(
                           height: 10,
                         ),
@@ -125,48 +105,24 @@ class ReferralNetworkScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w300,
                                   ),
                                 ),
-                                GetPlatform.isWeb
-                                    ? TranslationTextWidget(
-                                        text: 'Total Referral',
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall!
-                                            .copyWith(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w300,
-                                          letterSpacing: -0.5,
-                                        ),
-                                      )
-                                    : Text(
-                                        'Total Referral',
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall!
-                                            .copyWith(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w300,
-                                          letterSpacing: -0.5,
-                                        ),
-                                      ).translate(),
-                                GetPlatform.isWeb
-                                    ? TranslationTextWidget(
-                                        text: 'Cashback Earned',
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall!
-                                            .copyWith(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w300,
-                                          letterSpacing: -0.2,
-                                        ),
-                                      )
-                                    : Text(
-                                        'Cashback Earned',
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall!
-                                            .copyWith(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w300,
-                                          letterSpacing: -0.2,
-                                        ),
-                                      ).translate(),
+                                Text(
+                                  AppLocalizations.of(context)!.total_referral,
+                                  style: Get.theme.primaryTextTheme.bodySmall!
+                                      .copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w300,
+                                    letterSpacing: -0.5,
+                                  ),
+                                ),
+                                Text(
+                                  AppLocalizations.of(context)!.cashback_earned,
+                                  style: Get.theme.primaryTextTheme.bodySmall!
+                                      .copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w300,
+                                    letterSpacing: -0.2,
+                                  ),
+                                ),
                               ],
                             ),
                             Container(
@@ -187,27 +143,15 @@ class ReferralNetworkScreen extends StatelessWidget {
                                     letterSpacing: -0.2,
                                   ),
                                 ),
-                                GetPlatform.isWeb
-                                    ? TranslationTextWidget(
-                                        text: 'Friends Joined',
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall!
-                                            .copyWith(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w300,
-                                          letterSpacing: -0.2,
-                                        ),
-                                      )
-                                    : Text(
-                                        'Friends Joined',
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall!
-                                            .copyWith(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w300,
-                                          letterSpacing: -0.2,
-                                        ),
-                                      ).translate(),
+                                Text(
+                                  AppLocalizations.of(context)!.friends_joined,
+                                  style: Get.theme.primaryTextTheme.bodySmall!
+                                      .copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w300,
+                                    letterSpacing: -0.2,
+                                  ),
+                                ),
                               ],
                             ),
                           ],
@@ -375,45 +319,26 @@ class ReferralNetworkScreen extends StatelessWidget {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                GetPlatform.isWeb
-                                    ? TranslationTextWidget(
-                                        text: 'There is no Refferal Earnings',
-                                        textAlign: TextAlign.center,
-                                        style: Get
-                                            .theme.primaryTextTheme.bodyMedium,
-                                      )
-                                    : Text(
-                                        'There is no Refferal Earnings',
-                                        textAlign: TextAlign.center,
-                                        style: Get
-                                            .theme.primaryTextTheme.bodyMedium,
-                                      ).translate(),
+                                Text(
+                                  AppLocalizations.of(context)!
+                                      .no_referral_earnings,
+                                  textAlign: TextAlign.center,
+                                  style: Get.theme.primaryTextTheme.bodyMedium,
+                                ),
                                 SizedBox(
                                   height: 5,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20),
-                                  child: GetPlatform.isWeb
-                                      ? TranslationTextWidget(
-                                          text:
-                                              "You are now entited to 10% Extra Referral Earnings everytime your friend shops via us! You can earn more if you refer us to more people in your network.",
-                                          textAlign: TextAlign.center,
-                                          style: Get
-                                              .theme.primaryTextTheme.bodySmall!
-                                              .copyWith(
-                                                  fontSize: 11,
-                                                  color: Colors.black54),
-                                        )
-                                      : Text(
-                                          "You are now entited to 10% Extra Referral Earnings everytime your friend shops via us! You can earn more if you refer us to more people in your network.",
-                                          textAlign: TextAlign.center,
-                                          style: Get
-                                              .theme.primaryTextTheme.bodySmall!
-                                              .copyWith(
-                                                  fontSize: 11,
-                                                  color: Colors.black54),
-                                        ).translate(),
+                                  child: Text(
+                                    "You are now entited to 10% Extra Referral Earnings everytime your friend shops via us! You can earn more if you refer us to more people in your network.",
+                                    textAlign: TextAlign.center,
+                                    style: Get.theme.primaryTextTheme.bodySmall!
+                                        .copyWith(
+                                            fontSize: 11,
+                                            color: Colors.black54),
+                                  ),
                                 ),
                               ],
                             )
@@ -467,23 +392,13 @@ class ReferralNetworkScreen extends StatelessWidget {
                     ),
                   ),
                   alignment: Alignment.center,
-                  child: GetPlatform.isWeb
-                      ? TranslationTextWidget(
-                          text: 'REFER & EARN NOW',
-                          style:
-                              Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        )
-                      : Text(
-                          'REFER & EARN NOW',
-                          style:
-                              Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ).translate(),
+                  child: Text(
+                    AppLocalizations.of(context)!.refer_earn.toUpperCase(),
+                    style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
               ),
             ),

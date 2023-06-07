@@ -8,7 +8,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 // import 'package:video_player/video_player.dart';
 
 import 'package:get/get.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../utils/images.dart';
 
 class GetStartedScreen extends StatelessWidget {
@@ -88,20 +88,13 @@ class GetStartedScreen extends StatelessWidget {
                             SizedBox(
                               width: 5,
                             ),
-                            FutureBuilder(
-                              future: global.translatedText('Login with Apple'),
-                              builder: (context, snapshot) {
-                                return Text(
-                                  snapshot.data != null
-                                      ? snapshot.data!
-                                      : 'Login with Apple',
-                                  style: Get.theme.primaryTextTheme.titleMedium!
-                                      .copyWith(
-                                    color: Get.theme.secondaryHeaderColor,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                );
-                              },
+                            Text(
+                              AppLocalizations.of(context)!.login_apple,
+                              style: Get.theme.primaryTextTheme.titleMedium!
+                                  .copyWith(
+                                color: Get.theme.secondaryHeaderColor,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ],
                         ),
@@ -132,21 +125,13 @@ class GetStartedScreen extends StatelessWidget {
                             SizedBox(
                               width: 5,
                             ),
-                            FutureBuilder(
-                              future:
-                                  global.translatedText('Login with Google'),
-                              builder: (context, snapshot) {
-                                return Text(
-                                  snapshot.data != null
-                                      ? snapshot.data!
-                                      : 'Login with Google',
-                                  style: Get.theme.primaryTextTheme.titleMedium!
-                                      .copyWith(
-                                    color: Get.theme.secondaryHeaderColor,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                );
-                              },
+                            Text(
+                              AppLocalizations.of(context)!.login_google,
+                              style: Get.theme.primaryTextTheme.titleMedium!
+                                  .copyWith(
+                                color: Get.theme.secondaryHeaderColor,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ],
                         ),
@@ -198,20 +183,12 @@ class GetStartedScreen extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                      FutureBuilder(
-                        future: global.translatedText('Login with Phone'),
-                        builder: (context, snapshot) {
-                          return Text(
-                            snapshot.data != null
-                                ? snapshot.data!
-                                : 'Login with Phone',
-                            style: Get.theme.primaryTextTheme.titleMedium!
-                                .copyWith(
-                              color: Get.theme.secondaryHeaderColor,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          );
-                        },
+                      Text(
+                        AppLocalizations.of(context)!.login_phone,
+                        style: Get.theme.primaryTextTheme.titleMedium!.copyWith(
+                          color: Get.theme.secondaryHeaderColor,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ],
                   ),
@@ -264,20 +241,12 @@ class GetStartedScreen extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                      FutureBuilder(
-                        future: global.translatedText('Login with Email'),
-                        builder: (context, snapshot) {
-                          return Text(
-                            snapshot.data != null
-                                ? snapshot.data!
-                                : 'Login with Email',
-                            style: Get.theme.primaryTextTheme.titleMedium!
-                                .copyWith(
-                              color: Get.theme.secondaryHeaderColor,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          );
-                        },
+                      Text(
+                        AppLocalizations.of(context)!.login_email,
+                        style: Get.theme.primaryTextTheme.titleMedium!.copyWith(
+                          color: Get.theme.secondaryHeaderColor,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ],
                   ),
@@ -294,17 +263,12 @@ class GetStartedScreen extends StatelessWidget {
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 15, top: 10),
-                        child: FutureBuilder(
-                          future: global.translatedText('Skip'),
-                          builder: (context, snapshot) {
-                            return Text(
-                              snapshot.data != null ? snapshot.data! : 'Skip',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Get.theme.secondaryHeaderColor,
-                                  fontSize: 16),
-                            );
-                          },
+                        child: Text(
+                          AppLocalizations.of(context)!.skip,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Get.theme.secondaryHeaderColor,
+                              fontSize: 16),
                         ),
                       ),
                     )

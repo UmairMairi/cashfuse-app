@@ -12,7 +12,7 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:customizable_space_bar/customizable_space_bar.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 
@@ -229,7 +229,8 @@ class _WebAdmitedDetailScreenState extends State<WebAdmitedDetailScreen> {
                                       ),
                                       child: Row(
                                         children: [
-                                          Text('Share'),
+                                          Text(
+                                              '${AppLocalizations.of(context)!.share}  '),
                                           CircleAvatar(
                                             radius: 12,
                                             backgroundColor: Colors.green[700],
@@ -269,16 +270,9 @@ class _WebAdmitedDetailScreenState extends State<WebAdmitedDetailScreen> {
                               SizedBox(
                                 height: 15,
                               ),
-                              FutureBuilder(
-                                  future: global
-                                      .translatedText(admitedData.description!),
-                                  builder: (context, snapShot) {
-                                    return HtmlWidget(
-                                      snapShot.data != null
-                                          ? snapShot.data!
-                                          : admitedData.description!,
-                                    );
-                                  }),
+                              HtmlWidget(
+                                admitedData.description!,
+                              ),
                               InkWell(
                                 onTap: () async {
                                   if (global.currentUser.id != null) {
@@ -340,7 +334,7 @@ class _WebAdmitedDetailScreenState extends State<WebAdmitedDetailScreen> {
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      "Grab Now",
+                                      AppLocalizations.of(context)!.grab_now,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,

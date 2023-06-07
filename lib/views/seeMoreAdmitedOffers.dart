@@ -2,7 +2,7 @@ import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/webScreen/webAdmitedOfferDetailScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,8 +36,8 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TranslationTextWidget(
-                      text: 'See More Offers',
+                    Text(
+                      AppLocalizations.of(context)!.see_more_offers,
                       style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.1,
@@ -63,7 +63,7 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
               ),
               homeController.seeMoreAdsList.length == 0
                   ? Center(
-                      child: TranslationTextWidget(text: "No More Offers"),
+                      child: Text(AppLocalizations.of(context)!.no_more_offers),
                     )
                   : Expanded(
                       child: ListView.builder(
@@ -89,8 +89,8 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        TranslationTextWidget(
-                                          text: homeController
+                                        Text(
+                                          homeController
                                               .seeMoreAdsList[index].name!,
                                           textAlign: TextAlign.start,
                                           style: Get.theme.primaryTextTheme
@@ -98,9 +98,8 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                                         ),
                                         Container(
                                           width: 250,
-                                          child: TranslationTextWidget(
-                                            text: homeController
-                                                .seeMoreAdsList[index]
+                                          child: Text(
+                                            homeController.seeMoreAdsList[index]
                                                 .description!,
                                             maxLines: 3,
                                             overflow: TextOverflow.ellipsis,
@@ -147,8 +146,8 @@ class _MoreAdmitedOffersState extends State<MoreAdmitedOffers> {
                                         width: 1,
                                       )),
                                   alignment: Alignment.center,
-                                  child: TranslationTextWidget(
-                                    text: "Grob Now",
+                                  child: Text(
+                                    AppLocalizations.of(context)!.grab_now,
                                     style: TextStyle(
                                         color: Get.theme.secondaryHeaderColor,
                                         fontSize: 14,

@@ -1,9 +1,7 @@
 import 'package:cashfuse/controllers/authController.dart';
-
 import 'package:flutter/material.dart';
-import 'package:cashfuse/utils/global.dart' as global;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
 class LoginWithEmailScreen extends StatelessWidget {
   final bool fromMenu;
@@ -32,38 +30,23 @@ class LoginWithEmailScreen extends StatelessWidget {
                 ),
               ),
               Center(
-                child: FutureBuilder(
-                  future: global.translatedText('Login or signup'),
-                  builder: (context, snapshot) {
-                    return Text(
-                      snapshot.data != null
-                          ? snapshot.data!
-                          : 'Login or signup',
-                      style: Get.theme.primaryTextTheme.displaySmall!.copyWith(
-                        letterSpacing: -1,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    );
-                  },
+                child: Text(
+                  AppLocalizations.of(context)!.login,
+                  style: Get.theme.primaryTextTheme.displaySmall!.copyWith(
+                    letterSpacing: -1,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: GetPlatform.isWeb
-                    ? Text(
-                        'We will send a SMS to verify',
-                        style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                          letterSpacing: -0.2,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
-                    : Text(
-                        'We will send a SMS to verify',
-                        style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                          letterSpacing: -0.2,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ).translate(),
+                child: Text(
+                  AppLocalizations.of(context)!.login_subtitle,
+                  style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                    letterSpacing: -0.2,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
               Padding(
                 padding:
@@ -121,21 +104,13 @@ class LoginWithEmailScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 alignment: Alignment.center,
-                child: GetPlatform.isWeb
-                    ? Text(
-                        'Continue',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
-                      )
-                    : Text(
-                        'Continue',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
-                      ).translate(),
+                child: Text(
+                  AppLocalizations.of(context)!.conti,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600),
+                ),
               ),
             ),
           ],

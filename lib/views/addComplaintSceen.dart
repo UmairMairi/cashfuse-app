@@ -5,8 +5,8 @@ import 'package:cashfuse/models/orderModel.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:google_translator/google_translator.dart';
 
 class AddComplaintSceen extends StatelessWidget {
   final OrderModel? orderModel;
@@ -27,10 +27,10 @@ class AddComplaintSceen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Add Complaint',
+          AppLocalizations.of(context)!.add_complaint,
           style: Get.theme.primaryTextTheme.titleSmall!
               .copyWith(color: Colors.white),
-        ).translate(),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -68,12 +68,12 @@ class AddComplaintSceen extends StatelessWidget {
           color: Get.theme.secondaryHeaderColor,
           alignment: Alignment.center,
           child: Text(
-            'SUBMIT',
+            AppLocalizations.of(context)!.submit,
             style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w600,
             ),
-          ).translate(),
+          ),
         ),
       ),
     );

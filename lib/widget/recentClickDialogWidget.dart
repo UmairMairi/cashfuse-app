@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
-import 'package:google_translator/google_translator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RecentClickDialogWidget extends StatelessWidget {
   final ClickModel click;

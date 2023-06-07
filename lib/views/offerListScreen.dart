@@ -13,7 +13,7 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
-import 'package:google_translator/google_translator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OfferListScreen extends StatelessWidget {
   final CategoryModel? categoryModel;
@@ -40,21 +40,13 @@ class OfferListScreen extends StatelessWidget {
                     Icons.arrow_back,
                   ),
                 ),
-                title: GetPlatform.isWeb
-                    ? Text(
-                        categoryModel != null
-                            ? categoryModel!.name!
-                            : 'NEW FLASH DEALS - LIVE NOW',
-                        style: Get.theme.primaryTextTheme.titleSmall!
-                            .copyWith(color: Colors.white),
-                      )
-                    : Text(
-                        categoryModel != null
-                            ? categoryModel!.name!
-                            : 'NEW FLASH DEALS - LIVE NOW',
-                        style: Get.theme.primaryTextTheme.titleSmall!
-                            .copyWith(color: Colors.white),
-                      ).translate(),
+                title: Text(
+                  categoryModel != null
+                      ? categoryModel!.name!
+                      : AppLocalizations.of(context)!.new_flash_deals,
+                  style: Get.theme.primaryTextTheme.titleSmall!
+                      .copyWith(color: Colors.white),
+                ),
               ),
         body: Align(
           alignment: Alignment.topCenter,
@@ -232,26 +224,23 @@ class OfferListScreen extends StatelessWidget {
                                           .toString(),
                                     );
 
-                                    if(GetPlatform.isWeb){
+                                    if (GetPlatform.isWeb) {
                                       Get.to(
-                                      () => WebOfferDetailScreen(
-                                        offer: homeController.offer,
-                                        fromSeeMore: false,
-                                      ),
-                                      routeName: 'offer',
-                                    );
-
-                                    }else{
+                                        () => WebOfferDetailScreen(
+                                          offer: homeController.offer,
+                                          fromSeeMore: false,
+                                        ),
+                                        routeName: 'offer',
+                                      );
+                                    } else {
                                       Get.to(
-                                      () => OfferDetailScreen(
-                                        offer: homeController.offer,
-                                        fromSeeMore: false,
-                                      ),
-                                      routeName: 'offer',
-                                    );
-
+                                        () => OfferDetailScreen(
+                                          offer: homeController.offer,
+                                          fromSeeMore: false,
+                                        ),
+                                        routeName: 'offer',
+                                      );
                                     }
-                                    
                                   },
                                   child: OfferWidget(
                                     offer:

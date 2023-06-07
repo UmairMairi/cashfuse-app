@@ -4,11 +4,9 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/offerDetailScreen.dart';
 import 'package:cashfuse/views/webScreen/webOfferDetailScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-
-import 'package:google_translator/google_translator.dart';
 
 class MoreOfferScreen extends StatelessWidget {
   @override
@@ -35,23 +33,13 @@ class MoreOfferScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      GetPlatform.isWeb
-                          ? TranslationTextWidget(
-                              text: 'See More Offers',
-                              style: Get.theme.primaryTextTheme.titleSmall!
-                                  .copyWith(
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: -0.1,
-                              ),
-                            )
-                          : Text(
-                              'See More Offers',
-                              style: Get.theme.primaryTextTheme.titleSmall!
-                                  .copyWith(
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: -0.1,
-                              ),
-                            ).translate(),
+                      Text(
+                        AppLocalizations.of(context)!.see_more_offers,
+                        style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: -0.1,
+                        ),
+                      ),
                       InkWell(
                         onTap: () {
                           Get.back();
@@ -99,36 +87,18 @@ class MoreOfferScreen extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      GetPlatform.isWeb
-                                          ? TranslationTextWidget(
-                                              text: homeController
-                                                  .seeMoreOfferList[index]
-                                                  .name!,
-                                              textAlign: TextAlign.start,
-                                              style: Get.theme.primaryTextTheme
-                                                  .titleSmall,
-                                            )
-                                          : Text(
-                                              homeController
-                                                  .seeMoreOfferList[index]
-                                                  .name!,
-                                              textAlign: TextAlign.start,
-                                              style: Get.theme.primaryTextTheme
-                                                  .titleSmall,
-                                            ).translate(),
-                                      GetPlatform.isWeb
-                                          ? TranslationTextWidget(
-                                              text: homeController
-                                                  .seeMoreOfferList[index]
-                                                  .description!,
-                                              textAlign: TextAlign.center,
-                                            )
-                                          : Text(
-                                              homeController
-                                                  .seeMoreOfferList[index]
-                                                  .description!,
-                                              textAlign: TextAlign.center,
-                                            ).translate(),
+                                      Text(
+                                        homeController
+                                            .seeMoreOfferList[index].name!,
+                                        textAlign: TextAlign.start,
+                                        style: Get
+                                            .theme.primaryTextTheme.titleSmall,
+                                      ),
+                                      Text(
+                                        homeController.seeMoreOfferList[index]
+                                            .description!,
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -175,23 +145,14 @@ class MoreOfferScreen extends StatelessWidget {
                                     width: 1,
                                   )),
                               alignment: Alignment.center,
-                              child: GetPlatform.isWeb
-                                  ? TranslationTextWidget(
-                                      text: homeController
-                                          .seeMoreOfferList[index].buttonText!,
-                                      style: TextStyle(
-                                          color: Get.theme.secondaryHeaderColor,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600),
-                                    )
-                                  : Text(
-                                      homeController
-                                          .seeMoreOfferList[index].buttonText!,
-                                      style: TextStyle(
-                                          color: Get.theme.secondaryHeaderColor,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600),
-                                    ).translate(),
+                              child: Text(
+                                homeController
+                                    .seeMoreOfferList[index].buttonText!,
+                                style: TextStyle(
+                                    color: Get.theme.secondaryHeaderColor,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
+                              ),
                             ),
                           ),
                           Container(

@@ -6,7 +6,7 @@ import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/webScreen/webMyOrdersScreen.dart';
 import 'package:cashfuse/views/webScreen/webRequestPaymentScreen.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -36,8 +36,8 @@ class WebMyEarningSceen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: TranslationTextWidget(
-                text: 'My Earnings',
+              title: Text(
+                AppLocalizations.of(context)!.my_earnings,
                 style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ),
@@ -72,8 +72,8 @@ class WebMyEarningSceen extends StatelessWidget {
                         ListTile(
                           title: Row(
                             children: [
-                              TranslationTextWidget(
-                                text: 'Total Earnings',
+                              Text(
+                                AppLocalizations.of(context)!.total_earning,
                               ),
                               InkWell(
                                 onTap: () {
@@ -139,9 +139,8 @@ class WebMyEarningSceen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10),
-                          child: TranslationTextWidget(
-                            text:
-                                'Earning will show here within 24 hours of your shopping via ${global.appName}.',
+                          child: Text(
+                            '${AppLocalizations.of(context)!.my_earnings_subtitile} ${global.appName}.',
                             style:
                                 Get.theme.primaryTextTheme.bodyLarge!.copyWith(
                               color: Colors.grey[600],
@@ -198,8 +197,9 @@ class WebMyEarningSceen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        TranslationTextWidget(
-                                          text: 'My Order Details',
+                                        Text(
+                                          AppLocalizations.of(context)!
+                                              .my_order_details,
                                           style: Get.theme.primaryTextTheme
                                               .titleSmall!
                                               .copyWith(
@@ -220,8 +220,8 @@ class WebMyEarningSceen extends StatelessWidget {
                                         ),
                                         Row(
                                           children: [
-                                            TranslationTextWidget(
-                                              text: 'View More',
+                                            Text(
+                                              '${AppLocalizations.of(context)!.view_more} ',
                                               style: Get.theme.primaryTextTheme
                                                   .titleSmall!
                                                   .copyWith(
@@ -312,8 +312,9 @@ class WebMyEarningSceen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        TranslationTextWidget(
-                                          text: 'Recents Clicks',
+                                        Text(
+                                          AppLocalizations.of(context)!
+                                              .recents_clicks,
                                           style: Get.theme.primaryTextTheme
                                               .titleSmall!
                                               .copyWith(
@@ -334,8 +335,8 @@ class WebMyEarningSceen extends StatelessWidget {
                                         ),
                                         Row(
                                           children: [
-                                            TranslationTextWidget(
-                                              text: 'View More',
+                                            Text(
+                                              '${AppLocalizations.of(context)!.view_more} ',
                                               style: Get.theme.primaryTextTheme
                                                   .titleSmall!
                                                   .copyWith(
@@ -420,8 +421,9 @@ class WebMyEarningSceen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        TranslationTextWidget(
-                                          text: 'Request Payments',
+                                        Text(
+                                          AppLocalizations.of(context)!
+                                              .request_paymets,
                                           style: Get.theme.primaryTextTheme
                                               .titleSmall!
                                               .copyWith(
@@ -442,8 +444,8 @@ class WebMyEarningSceen extends StatelessWidget {
                                         ),
                                         Row(
                                           children: [
-                                            TranslationTextWidget(
-                                              text: 'View More',
+                                            Text(
+                                              '${AppLocalizations.of(context)!.view_more} ',
                                               style: Get.theme.primaryTextTheme
                                                   .titleSmall!
                                                   .copyWith(
@@ -530,8 +532,9 @@ class WebMyEarningSceen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        TranslationTextWidget(
-                                          text: 'Get Help',
+                                        Text(
+                                          AppLocalizations.of(context)!
+                                              .get_help,
                                           style: Get.theme.primaryTextTheme
                                               .titleSmall!
                                               .copyWith(
@@ -552,8 +555,8 @@ class WebMyEarningSceen extends StatelessWidget {
                                         ),
                                         Row(
                                           children: [
-                                            TranslationTextWidget(
-                                              text: 'View More',
+                                            Text(
+                                              '${AppLocalizations.of(context)!.view_more} ',
                                               style: Get.theme.primaryTextTheme
                                                   .titleSmall!
                                                   .copyWith(
@@ -662,9 +665,8 @@ class WebMyEarningSceen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      TranslationTextWidget(
-                        text:
-                            'Your total eanings and amount includes your Cashback + Rewards + Refferal amount.',
+                      Text(
+                        AppLocalizations.of(context)!.earning_desc,
                         style: Get.theme.primaryTextTheme.bodyMedium,
                       ),
                     ],

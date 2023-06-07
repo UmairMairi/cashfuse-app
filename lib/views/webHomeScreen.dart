@@ -18,7 +18,7 @@ import 'package:cashfuse/views/webScreen/webCouponDetailScreen.dart';
 import 'package:cashfuse/widget/couponWidget.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/offerWidget.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cashfuse/widget/web/homeWebCategoryView.dart';
 import 'package:cashfuse/widget/web/homeWebTopCashbackView.dart';
 import 'package:cashfuse/widget/web/webBannerView.dart';
@@ -53,7 +53,7 @@ class WebHomeScreen extends StatelessWidget {
                         padding:
                             EdgeInsets.symmetric(vertical: Get.height * 0.25),
                         child: Text(
-                          'No offers available in your country.',
+                          AppLocalizations.of(context)!.no_offers_available,
                           style:
                               Get.theme.primaryTextTheme.titleMedium!.copyWith(
                             fontWeight: FontWeight.w600,
@@ -79,8 +79,9 @@ class WebHomeScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  TranslationTextWidget(
-                                    text: 'TOP CATEGORIES',
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .top_categories,
                                     style: TextStyle(
                                       fontSize: global.getPlatFrom() ? 16 : 13,
                                       fontWeight: FontWeight.w600,
@@ -95,8 +96,8 @@ class WebHomeScreen extends StatelessWidget {
                                         routeName: 'allcategory',
                                       );
                                     },
-                                    child: TranslationTextWidget(
-                                      text: 'View All >',
+                                    child: Text(
+                                      '${AppLocalizations.of(context)!.view_all} >',
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -123,8 +124,10 @@ class WebHomeScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  TranslationTextWidget(
-                                    text: 'Coupons of the day'.toUpperCase(),
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .coupons_of_the_day
+                                        .toUpperCase(),
                                     style: TextStyle(
                                       fontSize: global.getPlatFrom() ? 16 : 13,
                                       fontWeight: FontWeight.w600,
@@ -140,8 +143,8 @@ class WebHomeScreen extends StatelessWidget {
                                               routeName: 'coupon',
                                             );
                                           },
-                                          child: TranslationTextWidget(
-                                            text: 'View All >',
+                                          child: Text(
+                                            '${AppLocalizations.of(context)!.view_all} >',
                                             style: Get.theme.primaryTextTheme
                                                 .bodySmall!
                                                 .copyWith(
@@ -302,8 +305,8 @@ class WebHomeScreen extends StatelessWidget {
                           ? Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 6, vertical: 15),
-                              child: TranslationTextWidget(
-                                text: 'EXCLUSIVE OFFERS FOR YOU',
+                              child: Text(
+                                AppLocalizations.of(context)!.exclusive_offers,
                                 style: TextStyle(
                                   fontSize: global.getPlatFrom() ? 16 : 13,
                                   fontWeight: FontWeight.w600,
@@ -471,8 +474,9 @@ class WebHomeScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  TranslationTextWidget(
-                                    text: 'TOP CASHBACK STORES',
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .top_cashback_stores,
                                     style: TextStyle(
                                       fontSize: global.getPlatFrom() ? 16 : 13,
                                       fontWeight: FontWeight.w600,
@@ -489,8 +493,8 @@ class WebHomeScreen extends StatelessWidget {
                                         routeName: 'all',
                                       );
                                     },
-                                    child: TranslationTextWidget(
-                                      text: 'View All >',
+                                    child: Text(
+                                      '${AppLocalizations.of(context)!.view_all} >',
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -514,8 +518,9 @@ class WebHomeScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  TranslationTextWidget(
-                                    text: "LATEST PRODUCTS",
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .latest_product,
                                     style: TextStyle(
                                       fontSize: global.getPlatFrom() ? 16 : 13,
                                       fontWeight: FontWeight.w600,
@@ -534,8 +539,8 @@ class WebHomeScreen extends StatelessWidget {
                                         routeName: 'all',
                                       );
                                     },
-                                    child: TranslationTextWidget(
-                                      text: 'View All >',
+                                    child: Text(
+                                      '${AppLocalizations.of(context)!.view_all} >',
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -559,8 +564,9 @@ class WebHomeScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  TranslationTextWidget(
-                                    text: 'NEW FLASH DEALS - LIVE NOW',
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .new_flash_deals,
                                     style: TextStyle(
                                       fontSize: global.getPlatFrom() ? 16 : 13,
                                       fontWeight: FontWeight.w600,
@@ -575,8 +581,8 @@ class WebHomeScreen extends StatelessWidget {
                                         routeName: 'all',
                                       );
                                     },
-                                    child: TranslationTextWidget(
-                                      text: 'View All >',
+                                    child: Text(
+                                      '${AppLocalizations.of(context)!.view_all} >',
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -756,8 +762,9 @@ class WebHomeScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  TranslationTextWidget(
-                                    text: "TRENDING PRODUCTS",
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .trending_products,
                                     style: TextStyle(
                                       fontSize: global.getPlatFrom() ? 16 : 13,
                                       fontWeight: FontWeight.w600,
@@ -776,8 +783,8 @@ class WebHomeScreen extends StatelessWidget {
                                         routeName: 'all',
                                       );
                                     },
-                                    child: TranslationTextWidget(
-                                      text: 'View All >',
+                                    child: Text(
+                                      '${AppLocalizations.of(context)!.view_all} >',
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -817,8 +824,8 @@ class WebHomeScreen extends StatelessWidget {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              TranslationTextWidget(
-                                                text: homeController
+                                              Text(
+                                                homeController
                                                     .homeAdvList[index].name!
                                                     .toUpperCase(),
                                                 style: TextStyle(
@@ -843,8 +850,8 @@ class WebHomeScreen extends StatelessWidget {
                                                     routeName: 'all',
                                                   );
                                                 },
-                                                child: TranslationTextWidget(
-                                                  text: 'View All >',
+                                                child: Text(
+                                                  '${AppLocalizations.of(context)!.view_all} >',
                                                   style: Get
                                                       .theme
                                                       .primaryTextTheme

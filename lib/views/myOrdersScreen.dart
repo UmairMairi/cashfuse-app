@@ -11,7 +11,7 @@ import 'package:cashfuse/widget/customImage.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class MyOrdersScreen extends StatelessWidget {
@@ -32,10 +32,10 @@ class MyOrdersScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'My Orders',
+          AppLocalizations.of(context)!.my_orders,
           style: Get.theme.primaryTextTheme.titleSmall!
               .copyWith(color: Colors.white),
-        ).translate(),
+        ),
       ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -91,7 +91,7 @@ class MyOrdersScreen extends StatelessWidget {
                                           title: Text(orderController
                                                   .orderList[index]
                                                   .advertisers!)
-                                              .translate(),
+                                              ,
                                           trailing: InkWell(
                                             onTap: () async {
                                               await orderController
@@ -119,12 +119,12 @@ class MyOrdersScreen extends StatelessWidget {
                                                 ),
                                               ),
                                               child: Text(
-                                                'Raise Complaint',
+                                                AppLocalizations.of(context)!.raise_complaint,
                                                 style: TextStyle(
                                                   fontSize: 10,
                                                   color: Get.theme.primaryColor,
                                                 ),
-                                              ).translate(),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -207,7 +207,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                                 ? Colors.green
                                                                 : Colors.red,
                                                       ),
-                                                    ).translate(),
+                                                    ),
                                                   ],
                                                 ),
                                               ),
@@ -308,7 +308,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                     ? Colors.black
                                                     : Colors.grey,
                                               ),
-                                            ).translate(),
+                                            ),
                                           ),
                                           Expanded(child: SizedBox()),
                                           orderController.orderList[index]
@@ -406,7 +406,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                         ? Colors.black
                                                         : Colors.grey,
                                                   ),
-                                                ).translate(),
+                                                ),
                                               ),
                                               Expanded(child: SizedBox()),
                                               orderController.orderList[index]
@@ -485,7 +485,7 @@ class MyOrdersScreen extends StatelessWidget {
                                                     ? Colors.black
                                                     : Colors.grey,
                                               ),
-                                            ).translate(),
+                                            ),
                                           ),
                                           Expanded(child: SizedBox()),
                                           orderController.orderList[index]
@@ -525,10 +525,10 @@ class MyOrdersScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child: Text(
-                                'There is where it all happens!',
+                                AppLocalizations.of(context)!.orders_title,
                                 style: Get.theme.primaryTextTheme.titleMedium!
                                     .copyWith(fontWeight: FontWeight.w500),
-                              ).translate(),
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
@@ -536,7 +536,7 @@ class MyOrdersScreen extends StatelessWidget {
                               child: Text(
                                 "Once you shop via ${global.appName}, your order details will appear here within 72 hours.",
                                 textAlign: TextAlign.center,
-                              ).translate(),
+                              ),
                             ),
                             InkWell(
                               onTap: () async {
@@ -561,12 +561,12 @@ class MyOrdersScreen extends StatelessWidget {
                                 ),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'SEE BEST DEALS',
+                                  AppLocalizations.of(context)!.see_best_deals,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600),
-                                ).translate(),
+                                ),
                               ),
                             ),
                           ],

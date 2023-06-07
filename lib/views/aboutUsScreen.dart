@@ -8,7 +8,7 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AboutUsScreen extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -33,17 +33,11 @@ class AboutUsScreen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: GetPlatform.isWeb
-                  ? Text(
-                      'About Us',
-                      style: Get.theme.primaryTextTheme.titleSmall!
-                          .copyWith(color: Colors.white),
-                    )
-                  : Text(
-                      'About Us',
-                      style: Get.theme.primaryTextTheme.titleSmall!
-                          .copyWith(color: Colors.white),
-                    ).translate(),
+              title: Text(
+                AppLocalizations.of(context)!.about_us,
+                style: Get.theme.primaryTextTheme.titleSmall!
+                    .copyWith(color: Colors.white),
+              ),
             ),
       body: GetBuilder<CommonController>(builder: (controller) {
         return Center(
@@ -58,14 +52,9 @@ class AboutUsScreen extends StatelessWidget {
                 ? EdgeInsets.zero
                 : EdgeInsets.all(10).copyWith(bottom: 0),
             child: SingleChildScrollView(
-              child: FutureBuilder(
-                  future: global.translatedText(commonController.aboutUs),
-                  builder: (context, snapShot) {
-                    return HtmlWidget(
-                      snapShot.data != null ? snapShot.data! : '',
-                    );
-                  }),
-            ),
+                child: HtmlWidget(
+              commonController.aboutUs,
+            )),
           ),
         );
       }),

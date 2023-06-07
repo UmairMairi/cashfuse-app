@@ -15,7 +15,7 @@ import 'package:cashfuse/views/webScreen/webOfferDetailScreen.dart';
 import 'package:cashfuse/widget/adsCampaignWidget.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/offerWidget.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
@@ -83,7 +83,7 @@ class WebSearchScreen extends StatelessWidget {
                     searchController.searchData!.commonList!.isEmpty &&
                     searchController.searchData!.offerList!.isEmpty
                 ? Center(
-                    child: TranslationTextWidget(text: 'No data found'),
+                    child: Text(AppLocalizations.of(context)!.no_data_found),
                   )
                 : SingleChildScrollView(
                     child: Column(
@@ -96,8 +96,8 @@ class WebSearchScreen extends StatelessWidget {
                             ? Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 10),
-                                child: TranslationTextWidget(
-                                  text: 'in Stores',
+                                child: Text(
+                                  AppLocalizations.of(context)!.in_stores,
                                   style: Get.theme.primaryTextTheme.titleSmall,
                                 ),
                               )
@@ -160,8 +160,8 @@ class WebSearchScreen extends StatelessWidget {
                             ? Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 10),
-                                child: TranslationTextWidget(
-                                  text: 'in Offers & Deals',
+                                child: Text(
+                                  AppLocalizations.of(context)!.in_offers_deals,
                                   style: Get.theme.primaryTextTheme.titleSmall,
                                 ),
                               )
@@ -280,8 +280,8 @@ class WebSearchScreen extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: TranslationTextWidget(
-                          text: 'Trending Keywords',
+                        child: Text(
+                          AppLocalizations.of(context)!.trending_keyword,
                           style: Get.theme.primaryTextTheme.titleSmall,
                         ),
                       ),
@@ -313,8 +313,9 @@ class WebSearchScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    TranslationTextWidget(
-                                      text: 'TOP CASHBACK STORES',
+                                    Text(
+                                      AppLocalizations.of(context)!
+                                          .top_cashback_stores,
                                       style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
@@ -331,8 +332,8 @@ class WebSearchScreen extends StatelessWidget {
                                           routeName: 'all',
                                         );
                                       },
-                                      child: TranslationTextWidget(
-                                        text: 'View All >',
+                                      child: Text(
+                                        '${AppLocalizations.of(context)!.view_all} >',
                                         style: Get
                                             .theme.primaryTextTheme.bodySmall!
                                             .copyWith(color: Colors.teal),
@@ -426,8 +427,9 @@ class WebSearchScreen extends StatelessWidget {
                             ? Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 6, vertical: 15),
-                                child: TranslationTextWidget(
-                                  text: 'EXCLUSIVE OFFERS FOR YOU',
+                                child: Text(
+                                  AppLocalizations.of(context)!
+                                      .exclusive_offers,
                                   style: TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,

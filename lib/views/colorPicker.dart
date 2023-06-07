@@ -2,9 +2,8 @@ import 'package:cashfuse/controllers/themeController.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
 class ColorPickerPage extends StatefulWidget {
   const ColorPickerPage({this.themeMode}) : super();
@@ -82,8 +81,8 @@ class _ColorPickerPageState extends State<ColorPickerPage>
             elevation: 0,
             centerTitle: true,
             title: Text(
-              'Theme',
-            ).translate(),
+              AppLocalizations.of(context)!.theme,
+            ),
             leading: InkWell(
               splashColor: Colors.transparent,
               focusColor: Colors.transparent,

@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AdmitedDetailScreen extends StatefulWidget {
   final bool? fromSeeMore;
@@ -231,7 +231,8 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                       ),
                                       child: Row(
                                         children: [
-                                          Text('Share').translate(),
+                                          Text(
+                                              '${AppLocalizations.of(context)!.share}  '),
                                           CircleAvatar(
                                             radius: 12,
                                             backgroundColor: Colors.green[700],
@@ -267,20 +268,13 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                 style: TextStyle(
                                     fontStyle: FontStyle.italic,
                                     color: Get.theme.primaryColor),
-                              ).translate(),
+                              ),
                               SizedBox(
                                 height: 15,
                               ),
-                              FutureBuilder(
-                                  future: global
-                                      .translatedText(admitedData.description!),
-                                  builder: (context, snapShot) {
-                                    return HtmlWidget(
-                                      snapShot.data != null
-                                          ? snapShot.data!
-                                          : admitedData.description!,
-                                    );
-                                  }),
+                              HtmlWidget(
+                                admitedData.description!,
+                              ),
                               InkWell(
                                 onTap: () async {
                                   if (global.currentUser.id != null) {
@@ -342,12 +336,12 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      "Grab Now",
+                                      AppLocalizations.of(context)!.grab_now,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600),
-                                    ).translate(),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -422,12 +416,12 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.w300,
                                               fontSize: 13),
-                                        ).translate(),
+                                        ),
                                         Text(
                                           'Today',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600),
-                                        ).translate(),
+                                        ),
                                       ],
                                     ),
                                     SizedBox(
@@ -440,16 +434,17 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Cashback tracks in',
+                                          AppLocalizations.of(context)!
+                                              .cashback_tracks_in,
                                           style: TextStyle(
                                               fontWeight: FontWeight.w300,
                                               fontSize: 13),
-                                        ).translate(),
+                                        ),
                                         Text(
                                           '24 hours',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600),
-                                        ).translate(),
+                                        ),
                                       ],
                                     )
                                   ],
@@ -511,13 +506,14 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                                   )),
                                               alignment: Alignment.center,
                                               child: Text(
-                                                'See More Offers  >',
+                                                AppLocalizations.of(context)!
+                                                    .see_more_offers,
                                                 style: TextStyle(
                                                     color: Colors.teal[200],
                                                     fontSize: 14,
                                                     fontWeight:
                                                         FontWeight.w400),
-                                              ).translate(),
+                                              ),
                                             ),
                                           ),
                                         )

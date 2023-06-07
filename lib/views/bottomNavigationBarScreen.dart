@@ -2,7 +2,6 @@
 
 import 'dart:async';
 
-import 'package:cashfuse/controllers/localizationController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/allInOneSearchScreen.dart';
 import 'package:cashfuse/views/homeScreen.dart';
@@ -15,9 +14,8 @@ import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
-import 'package:translator/translator.dart';
 
 class BottomNavigationBarScreen extends StatefulWidget {
   int? pageIndex;
@@ -30,12 +28,6 @@ class BottomNavigationBarScreen extends StatefulWidget {
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   bool _canExit = global.getPlatFrom() ? true : false;
   int? bottomNavIndex;
-
-  bool _isHomeIndex = false;
-  bool _isSearchIndex = false;
-  bool _isAllInOneIndex = false;
-  bool _isRecentClickIndex = false;
-  bool _isProfileIndex = false;
 
   CircularBottomNavigationController? navigationController;
 
@@ -87,16 +79,15 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
     }
   }
 
-  List<String> tabList = [
-    'Home',
-    'Search',
-    'All in one\n Search',
-    'Recents Clicks',
-    'Profile',
-  ];
-
   @override
   Widget build(BuildContext context) {
+    List<String> tabList = [
+      AppLocalizations.of(context)!.home,
+      AppLocalizations.of(context)!.search,
+      AppLocalizations.of(context)!.bottom_allInOne,
+      AppLocalizations.of(context)!.recents_clicks,
+      AppLocalizations.of(context)!.profile,
+    ];
     return WillPopScope(
       onWillPop: () async {
         if (bottomNavIndex != 0) {
@@ -115,9 +106,8 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
           } else {
             !GetPlatform.isWeb
                 ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text('Back press again to exit from app',
-                            style: TextStyle(color: Colors.white))
-                        .translate(),
+                    content: Text(AppLocalizations.of(context)!.exit_app,
+                        style: TextStyle(color: Colors.white)),
                     behavior: SnackBarBehavior.floating,
                     backgroundColor: Colors.green,
                     duration: Duration(seconds: 2),
@@ -143,171 +133,35 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         ),
         bottomNavigationBar: global.getPlatFrom()
             ? SizedBox()
-            : GetBuilder<LocalizationController>(
-                builder: (localizationController) => Container(
-                  color: Colors.grey[200],
-                  child: CircularBottomNavigation(
-                      List.generate(iconList.length, (index) {
-                        final translator = GoogleTranslator();
-                        if (index == 0) {
-                          if (_isHomeIndex == false) {
-                            Future.delayed(Duration.zero).then((value) {
-                              translator
-                                  .translate(tabList[index],
-                                      to: localizationController.languageCode)
-                                  .then(
-                                (value) {
-                                  tabList[index] = value.text;
-                                  setState(() {});
-                                },
-                              );
-                            });
-                            _isHomeIndex = true;
-                          }
-
-                          return TabItem(
-                            iconList[index],
-                            tabList[index],
-                            colorList[index],
-                            labelStyle: TextStyle(
-                              color: colorList[index],
-                              height: 1.2,
-                              fontSize: 12,
-                            ),
-                          );
-                        } else if (index == 1) {
-                          if (_isSearchIndex == false) {
-                            Future.delayed(Duration.zero).then((value) {
-                              translator
-                                  .translate(tabList[index],
-                                      to: localizationController.languageCode)
-                                  .then(
-                                (value) {
-                                  tabList[index] = value.text;
-                                  setState(() {});
-                                },
-                              );
-                            });
-                            _isSearchIndex = true;
-                          }
-                          return TabItem(
-                            iconList[index],
-                            tabList[index],
-                            colorList[index],
-                            labelStyle: TextStyle(
-                              color: colorList[index],
-                              height: 1.2,
-                              fontSize: 12,
-                            ),
-                          );
-                        } else if (index == 2) {
-                          if (_isAllInOneIndex == false) {
-                            Future.delayed(Duration.zero).then((value) {
-                              translator
-                                  .translate(tabList[index],
-                                      to: localizationController.languageCode)
-                                  .then(
-                                (value) {
-                                  tabList[index] = value.text;
-                                  setState(() {});
-                                },
-                              );
-                            });
-
-                            _isAllInOneIndex = true;
-                          }
-                          return TabItem(
-                            iconList[index],
-                            tabList[index],
-                            colorList[index],
-                            labelStyle: TextStyle(
-                              color: colorList[index],
-                              height: 1.2,
-                              fontSize: 12,
-                            ),
-                          );
-                        } else if (index == 3) {
-                          if (_isRecentClickIndex == false) {
-                            Future.delayed(Duration.zero).then((value) {
-                              translator
-                                  .translate(tabList[index],
-                                      to: localizationController.languageCode)
-                                  .then(
-                                (value) {
-                                  tabList[index] = value.text;
-                                  setState(() {});
-                                },
-                              );
-                            });
-
-                            _isRecentClickIndex = true;
-                          }
-                          return TabItem(
-                            iconList[index],
-                            tabList[index],
-                            colorList[index],
-                            labelStyle: TextStyle(
-                              color: colorList[index],
-                              height: 1.2,
-                              fontSize: 12,
-                            ),
-                          );
-                        } else {
-                          if (_isProfileIndex == false) {
-                            Future.delayed(Duration.zero).then((value) {
-                              translator
-                                  .translate(tabList[index],
-                                      to: localizationController.languageCode)
-                                  .then(
-                                (value) {
-                                  tabList[index] = value.text;
-                                  setState(() {});
-                                },
-                              );
-                            });
-
-                            _isProfileIndex = true;
-                          }
-                          return TabItem(
-                            iconList[index],
-                            tabList[index],
-                            colorList[index],
-                            labelStyle: TextStyle(
-                              color: colorList[index],
-                              height: 1.2,
-                              fontSize: 12,
-                            ),
-                          );
-                        }
-                      }),
-                      circleSize: 50,
-                      iconsSize: 25,
-                      barHeight: 50,
-                      normalIconColor: Colors.grey,
-                      selectedIconColor: Colors.white,
-                      controller: navigationController,
-                      selectedPos: bottomNavIndex!,
-                      barBackgroundColor: Colors.white,
-                      animationDuration: Duration(milliseconds: 300),
-                      selectedCallback: (int? selectedPos) async {
-                    bottomNavIndex = selectedPos;
-                    setState(() {});
-                    if (bottomNavIndex == 0) {
-                      _isHomeIndex = false;
-                    } else if (bottomNavIndex == 1) {
-                      _isSearchIndex = false;
-                    } else if (bottomNavIndex == 2) {
-                      _isAllInOneIndex = false;
-                    } else if (bottomNavIndex == 3) {
-                      _isRecentClickIndex = false;
-                    } else {
-                      _isProfileIndex = false;
-                    }
-
-                    setState(() {});
-                    global.showInterstitialAd();
-                  }),
-                ),
+            : Container(
+                color: Colors.grey[200],
+                child: CircularBottomNavigation(
+                    List.generate(iconList.length, (index) {
+                      return TabItem(
+                        iconList[index],
+                        tabList[index],
+                        colorList[index],
+                        labelStyle: TextStyle(
+                          color: colorList[index],
+                          height: 1.2,
+                          fontSize: 12,
+                        ),
+                      );
+                    }),
+                    circleSize: 50,
+                    iconsSize: 25,
+                    barHeight: 50,
+                    normalIconColor: Colors.grey,
+                    selectedIconColor: Colors.white,
+                    controller: navigationController,
+                    selectedPos: bottomNavIndex!,
+                    barBackgroundColor: Colors.white,
+                    animationDuration: Duration(milliseconds: 300),
+                    selectedCallback: (int? selectedPos) async {
+                  bottomNavIndex = selectedPos;
+                  setState(() {});
+                  global.showInterstitialAd();
+                }),
               ),
         body: _screens().elementAt(bottomNavIndex!),
       ),

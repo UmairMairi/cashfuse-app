@@ -7,7 +7,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -61,8 +61,8 @@ class WebCouponDetailScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  TranslationTextWidget(
-                    text: 'Deal ends in:',
+                  Text(
+                    AppLocalizations.of(context)!.deal_ends_in,
                     style: Get.theme.primaryTextTheme.titleSmall,
                   ),
                   coupon!.dayDifference != null && coupon!.dayDifference! > 0
@@ -133,8 +133,8 @@ class WebCouponDetailScreen extends StatelessWidget {
                             ? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  TranslationTextWidget(
-                                    text: 'Use Code',
+                                  Text(
+                                    AppLocalizations.of(context)!.use_code,
                                     style: Get.theme.primaryTextTheme.bodyLarge!
                                         .copyWith(
                                       color: Colors.grey,
@@ -169,8 +169,8 @@ class WebCouponDetailScreen extends StatelessWidget {
                                         );
                                       });
                                     },
-                                    child: TranslationTextWidget(
-                                      text: 'Copy Code',
+                                    child: Text(
+                                      AppLocalizations.of(context)!.copy_code,
                                       style: Get
                                           .theme.primaryTextTheme.bodyLarge!
                                           .copyWith(
@@ -181,8 +181,8 @@ class WebCouponDetailScreen extends StatelessWidget {
                                   )
                                 ],
                               )
-                            : TranslationTextWidget(
-                                text: '*Coupon code not required',
+                            : Text(
+                                '*${AppLocalizations.of(context)!.code_not_required}',
                                 style: TextStyle(color: Colors.red),
                               ),
                         InkWell(
@@ -234,8 +234,8 @@ class WebCouponDetailScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(2),
                             ),
                             alignment: Alignment.center,
-                            child: TranslationTextWidget(
-                              text: coupon!.buttonText!,
+                            child: Text(
+                              coupon!.buttonText!,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
@@ -257,21 +257,21 @@ class WebCouponDetailScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TranslationTextWidget(
-                            text: 'About this Coupon',
+                          Text(
+                            AppLocalizations.of(context)!.about_this_coupon,
                             style: global.getPlatFrom()
                                 ? Get.theme.primaryTextTheme.titleMedium!
                                     .copyWith(fontWeight: FontWeight.w600)
                                 : Get.theme.primaryTextTheme.titleSmall,
                           ),
                           Divider(),
-                          TranslationTextWidget(
-                            text: coupon!.heading!,
+                          Text(
+                            coupon!.heading!,
                             style: Get.theme.primaryTextTheme.bodyMedium!
                                 .copyWith(fontWeight: FontWeight.w500),
                           ),
-                          TranslationTextWidget(
-                            text: coupon!.description!,
+                          Text(
+                            coupon!.description!,
                             style: Get.theme.primaryTextTheme.bodyMedium!
                                 .copyWith(fontWeight: FontWeight.w300),
                           ),

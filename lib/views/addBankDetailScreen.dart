@@ -1,13 +1,12 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:cashfuse/controllers/paymentController.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/addBankAccountDialog.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:cashfuse/utils/global.dart' as global;
-import 'package:google_translator/google_translator.dart';
 
 class AddPaymentDetailScreen extends StatelessWidget {
   PaymentController paymentController = Get.find<PaymentController>();
@@ -28,17 +27,11 @@ class AddPaymentDetailScreen extends StatelessWidget {
                     Icons.arrow_back,
                   ),
                 ),
-                title: GetPlatform.isWeb
-                    ? TranslationTextWidget(
-                        text: 'Bank Transfer Redeem',
-                        style: Get.theme.primaryTextTheme.titleSmall!
-                            .copyWith(color: Colors.white),
-                      )
-                    : Text(
-                        'Bank Transfer Redeem',
-                        style: Get.theme.primaryTextTheme.titleSmall!
-                            .copyWith(color: Colors.white),
-                      ).translate(),
+                title: Text(
+                  AppLocalizations.of(context)!.bank_transfer_redeem,
+                  style: Get.theme.primaryTextTheme.titleSmall!
+                      .copyWith(color: Colors.white),
+                ),
               ),
         body: SingleChildScrollView(
           child: Padding(
@@ -81,17 +74,11 @@ class AddPaymentDetailScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          GetPlatform.isWeb
-                              ? TranslationTextWidget(
-                                  text: 'Account Details',
-                                  style: Get.theme.primaryTextTheme.titleMedium!
-                                      .copyWith(fontWeight: FontWeight.w600),
-                                )
-                              : Text(
-                                  'Account Details',
-                                  style: Get.theme.primaryTextTheme.titleMedium!
-                                      .copyWith(fontWeight: FontWeight.w600),
-                                ).translate(),
+                          Text(
+                            AppLocalizations.of(context)!.account_details,
+                            style: Get.theme.primaryTextTheme.titleMedium!
+                                .copyWith(fontWeight: FontWeight.w600),
+                          ),
                           InkWell(
                             onTap: () {
                               Get.dialog(
@@ -112,26 +99,18 @@ class AddPaymentDetailScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               alignment: Alignment.center,
-                              child: GetPlatform.isWeb
-                                  ? TranslationTextWidget(
-                                      text:
-                                          paymentController.bankDetails != null
-                                              ? 'edit'.toUpperCase()
-                                              : 'add'.toUpperCase(),
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600),
-                                    )
-                                  : Text(
-                                      paymentController.bankDetails != null
-                                          ? 'edit'.toUpperCase()
-                                          : 'add'.toUpperCase(),
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600),
-                                    ).translate(),
+                              child: Text(
+                                paymentController.bankDetails != null
+                                    ? AppLocalizations.of(context)!
+                                        .edit
+                                        .toString()
+                                        .toUpperCase()
+                                    : '${AppLocalizations.of(context)!.add.toString().toUpperCase()} +',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
+                              ),
                             ),
                           ),
                         ],
@@ -140,121 +119,104 @@ class AddPaymentDetailScreen extends StatelessWidget {
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                FutureBuilder(
-                                    future:
-                                        global.translatedText("Holder Name: "),
-                                    builder: (context, snapShot) {
-                                      return Padding(
-                                        padding: EdgeInsets.only(top: 0),
-                                        child: RichText(
-                                          text: TextSpan(
-                                            text: snapShot.data,
-                                            style: Get.theme.primaryTextTheme
-                                                .titleSmall!
-                                                .copyWith(
-                                              letterSpacing: -0.2,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                            children: <TextSpan>[
-                                              TextSpan(
-                                                text:
-                                                    " ${paymentController.bankDetails!.acHolderName}",
-                                                style: Get.theme
-                                                    .primaryTextTheme.bodySmall!
-                                                    .copyWith(
-                                                  letterSpacing: -0.2,
-                                                  fontWeight: FontWeight.w300,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                                FutureBuilder(
-                                    future:
-                                        global.translatedText("Account No: "),
-                                    builder: (context, snapShot) {
-                                      return RichText(
-                                        text: TextSpan(
-                                          text: snapShot.data,
-                                          style: Get.theme.primaryTextTheme
-                                              .titleSmall!
+                                Padding(
+                                  padding: EdgeInsets.only(top: 0),
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: AppLocalizations.of(context)!
+                                          .holder_name,
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall!
+                                          .copyWith(
+                                        letterSpacing: -0.2,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text:
+                                              " ${paymentController.bankDetails!.acHolderName}",
+                                          style: Get
+                                              .theme.primaryTextTheme.bodySmall!
                                               .copyWith(
                                             letterSpacing: -0.2,
-                                            fontWeight: FontWeight.w500,
+                                            fontWeight: FontWeight.w300,
                                           ),
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text:
-                                                  " ${paymentController.bankDetails!.acNo}",
-                                              style: Get.theme.primaryTextTheme
-                                                  .bodySmall!
-                                                  .copyWith(
-                                                letterSpacing: -0.2,
-                                                fontWeight: FontWeight.w300,
-                                              ),
-                                            ),
-                                          ],
                                         ),
-                                      );
-                                    }),
-                                FutureBuilder(
-                                    future:
-                                        global.translatedText("Bank Name: "),
-                                    builder: (context, snapShot) {
-                                      return RichText(
-                                        text: TextSpan(
-                                          text: snapShot.data,
-                                          style: Get.theme.primaryTextTheme
-                                              .titleSmall!
-                                              .copyWith(
-                                            letterSpacing: -0.2,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text:
-                                                  " ${paymentController.bankDetails!.bankName}",
-                                              style: Get.theme.primaryTextTheme
-                                                  .bodySmall!
-                                                  .copyWith(
-                                                letterSpacing: -0.2,
-                                                fontWeight: FontWeight.w300,
-                                              ),
-                                            ),
-                                          ],
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    text: AppLocalizations.of(context)!
+                                        .account_no,
+                                    style: Get
+                                        .theme.primaryTextTheme.titleSmall!
+                                        .copyWith(
+                                      letterSpacing: -0.2,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text:
+                                            " ${paymentController.bankDetails!.acNo}",
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall!
+                                            .copyWith(
+                                          letterSpacing: -0.2,
+                                          fontWeight: FontWeight.w300,
                                         ),
-                                      );
-                                    }),
-                                FutureBuilder(
-                                    future:
-                                        global.translatedText("IFSC Code: "),
-                                    builder: (context, snapShot) {
-                                      return RichText(
-                                        text: TextSpan(
-                                          text: snapShot.data,
-                                          style: Get.theme.primaryTextTheme
-                                              .titleSmall!
-                                              .copyWith(
-                                            letterSpacing: -0.2,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text:
-                                                  " ${paymentController.bankDetails!.ifsc}",
-                                              style: Get.theme.primaryTextTheme
-                                                  .bodySmall!
-                                                  .copyWith(
-                                                letterSpacing: -0.2,
-                                                fontWeight: FontWeight.w300,
-                                              ),
-                                            ),
-                                          ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    text:
+                                        AppLocalizations.of(context)!.bank_name,
+                                    style: Get
+                                        .theme.primaryTextTheme.titleSmall!
+                                        .copyWith(
+                                      letterSpacing: -0.2,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text:
+                                            " ${paymentController.bankDetails!.bankName}",
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall!
+                                            .copyWith(
+                                          letterSpacing: -0.2,
+                                          fontWeight: FontWeight.w300,
                                         ),
-                                      );
-                                    }),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    text: AppLocalizations.of(context)!.ifsc_code,
+                                    style: Get
+                                        .theme.primaryTextTheme.titleSmall!
+                                        .copyWith(
+                                      letterSpacing: -0.2,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text:
+                                            " ${paymentController.bankDetails!.ifsc}",
+                                        style: Get
+                                            .theme.primaryTextTheme.bodySmall!
+                                            .copyWith(
+                                          letterSpacing: -0.2,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ],
                             )
                           : SizedBox(),
@@ -280,21 +242,13 @@ class AddPaymentDetailScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   alignment: Alignment.center,
-                  child: GetPlatform.isWeb
-                      ? TranslationTextWidget(
-                          text: 'Send Withdrawal Request',
+                  child:  Text(
+                          AppLocalizations.of(context)!.send_withdrawal_request,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,
                               fontWeight: FontWeight.w600),
-                        )
-                      : Text(
-                          'Send Withdrawal Request',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
-                        ).translate(),
+                        ),
                 ),
               )
             : SizedBox(),

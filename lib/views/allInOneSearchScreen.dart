@@ -11,13 +11,12 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -400,8 +399,8 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                             : Expanded(
                                 child: Center(
                                   child: Text(
-                                    'No data found.',
-                                  ).translate(),
+                                    AppLocalizations.of(context)!.no_data_found,
+                                  ),
                                 ),
                               )
                         : Expanded(
@@ -415,25 +414,25 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Login or signup',
+                              AppLocalizations.of(context)!.login,
                               style: Get.theme.primaryTextTheme.displaySmall!
                                   .copyWith(
                                 letterSpacing: -1,
                                 fontWeight: FontWeight.w700,
                               ),
-                            ).translate(),
+                            ),
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 15),
                               child: Text(
-                                'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
+                                AppLocalizations.of(context)!.profile_desc,
                                 textAlign: TextAlign.center,
                                 style: Get.theme.primaryTextTheme.titleSmall!
                                     .copyWith(
                                   letterSpacing: -0.2,
                                   fontWeight: FontWeight.w600,
                                 ),
-                              ).translate(),
+                              ),
                             ),
                             InkWell(
                               onTap: () async {
@@ -476,12 +475,13 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                 ),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'Continue'.toUpperCase(),
+                                  "${AppLocalizations.of(context)!.conti}"
+                                      .toUpperCase(),
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600),
-                                ).translate(),
+                                ),
                               ),
                             ),
                           ],
@@ -600,17 +600,10 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 4),
-                              child: GetPlatform.isWeb
-                                  ? Text(
-                                      searchController
-                                          .addNewTabList2![index].name!,
-                                      style: TextStyle(color: Colors.white),
-                                    )
-                                  : Text(
-                                      searchController
-                                          .addNewTabList2![index].name!,
-                                      style: TextStyle(color: Colors.white),
-                                    ).translate(),
+                              child: Text(
+                                searchController.addNewTabList2![index].name!,
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
                             // Padding(
                             //   padding: const EdgeInsets.only(left: 4),
@@ -652,9 +645,8 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 20, horizontal: 15),
-                              child: TranslationTextWidget(
-                                text:
-                                    'To access this feature, download the app',
+                              child: Text(
+                                AppLocalizations.of(context)!.access_feature,
                                 textAlign: TextAlign.center,
                                 style: Get.theme.primaryTextTheme.titleLarge!
                                     .copyWith(
@@ -676,8 +668,8 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                 width: AppConstants.WEB_MAX_WIDTH / 4,
                                 color: Get.theme.secondaryHeaderColor,
                                 alignment: Alignment.center,
-                                child: TranslationTextWidget(
-                                  text: 'Download The App',
+                                child: Text(
+                                   AppLocalizations.of(context)!.download_app,
                                   style: Get.theme.primaryTextTheme.titleSmall!
                                       .copyWith(
                                     color: Colors.white,
@@ -723,7 +715,7 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                                 .titleMedium!
                                                 .copyWith(
                                                     color: Colors.black54),
-                                          ).translate(),
+                                          ),
                                           DropdownButton(
                                             items: searchController.allInOneList
                                                 .map<
@@ -745,7 +737,7 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                                           .copyWith(
                                                               color: Colors
                                                                   .black54),
-                                                    ).translate(),
+                                                    ),
                                                     Divider(
                                                       color: Colors.grey,
                                                     ),
@@ -788,7 +780,7 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                                   .titleMedium!
                                                   .copyWith(
                                                       color: Colors.black54),
-                                            ).translate(),
+                                            ),
                                           ),
                                           InkWell(
                                             onTap: () {
@@ -906,12 +898,12 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                           ),
                                           alignment: Alignment.center,
                                           child: Text(
-                                            'SAVE',
+                                            AppLocalizations.of(context)!.save,
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w400),
-                                          ).translate(),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -935,12 +927,13 @@ class _AllInOneSearchScreenState extends State<AllInOneSearchScreen>
                                           ),
                                           alignment: Alignment.center,
                                           child: Text(
-                                            'ADD NEW TAB',
+                                            AppLocalizations.of(context)!
+                                                .add_new_tab,
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w400),
-                                          ).translate(),
+                                          ),
                                         ),
                                       ),
                                     ),

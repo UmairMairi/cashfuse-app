@@ -17,12 +17,11 @@ import 'package:cashfuse/widget/offerWidget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
 class SearchScreen extends StatelessWidget {
-  
   SearchScreen();
   SearchGetController searchController = Get.find<SearchGetController>();
   HomeController homeController = Get.find<HomeController>();
@@ -84,8 +83,7 @@ class SearchScreen extends StatelessWidget {
                     searchController.searchData!.commonList!.isEmpty &&
                     searchController.searchData!.offerList!.isEmpty
                 ? Center(
-                    child: Text('No data found')
-                        .translate(),
+                    child: Text(AppLocalizations.of(context)!.no_data_found),
                   )
                 : SingleChildScrollView(
                     child: Column(
@@ -99,9 +97,9 @@ class SearchScreen extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 10),
                                 child: Text(
-                                  'in Stores',
+                                  AppLocalizations.of(context)!.in_stores,
                                   style: Get.theme.primaryTextTheme.titleSmall,
-                                ).translate(),
+                                ),
                               )
                             : SizedBox(),
                         searchController.searchData!.advertiserList != null &&
@@ -156,19 +154,21 @@ class SearchScreen extends StatelessWidget {
                               )
                             : SizedBox(),
                         searchController.searchData!.commonList != null &&
-                                searchController.searchData!.commonList!.length >
+                                searchController
+                                        .searchData!.commonList!.length >
                                     0
                             ? Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 10),
                                 child: Text(
-                                  'in Offers & Deals',
+                                  AppLocalizations.of(context)!.in_offers_deals,
                                   style: Get.theme.primaryTextTheme.titleSmall,
-                                ).translate(),
+                                ),
                               )
                             : SizedBox(),
                         searchController.searchData!.commonList != null &&
-                                searchController.searchData!.commonList!.length >
+                                searchController
+                                        .searchData!.commonList!.length >
                                     0
                             ? SizedBox(
                                 height: 155,
@@ -233,7 +233,8 @@ class SearchScreen extends StatelessWidget {
                               )
                             : SizedBox(),
                         searchController.searchData!.offerList != null &&
-                                searchController.searchData!.offerList!.length > 0
+                                searchController.searchData!.offerList!.length >
+                                    0
                             ? SizedBox(
                                 height: 230,
                                 child: ListView.builder(
@@ -247,8 +248,8 @@ class SearchScreen extends StatelessWidget {
                                     return InkWell(
                                       onTap: () async {
                                         await homeController.getOfferDetails(
-                                            searchController
-                                                .searchData!.offerList![index].id
+                                            searchController.searchData!
+                                                .offerList![index].id
                                                 .toString());
                                         Get.to(
                                           () => OfferDetailScreen(
@@ -280,9 +281,9 @@ class SearchScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Text(
-                          'Trending Keywords',
+                          AppLocalizations.of(context)!.trending_keyword,
                           style: Get.theme.primaryTextTheme.titleSmall,
-                        ).translate(),
+                        ),
                       ),
                       Wrap(
                         runSpacing: 0,
@@ -313,14 +314,15 @@ class SearchScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'TOP CASHBACK STORES',
+                                      AppLocalizations.of(context)!
+                                          .top_cashback_stores,
                                       style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black.withOpacity(0.79),
                                         letterSpacing: -0.3,
                                       ),
-                                    ).translate(),
+                                    ),
                                     InkWell(
                                       onTap: () {
                                         Get.to(
@@ -331,11 +333,11 @@ class SearchScreen extends StatelessWidget {
                                         );
                                       },
                                       child: Text(
-                                        'View All >',
+                                        '${AppLocalizations.of(context)!.view_all} >',
                                         style: Get
                                             .theme.primaryTextTheme.bodySmall!
                                             .copyWith(color: Colors.teal),
-                                      ).translate(),
+                                      ),
                                     )
                                   ],
                                 ),
@@ -426,14 +428,14 @@ class SearchScreen extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 6, vertical: 15),
                                 child: Text(
-                                  'EXCLUSIVE OFFERS FOR YOU',
+                                  AppLocalizations.of(context)!.exclusive_offers,
                                   style: TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.black.withOpacity(0.79),
                                     letterSpacing: -0.3,
                                   ),
-                                ).translate(),
+                                ),
                               )
                             : SizedBox();
                       }),

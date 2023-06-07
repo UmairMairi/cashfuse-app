@@ -1,15 +1,13 @@
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/dateConverter.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:cashfuse/utils/global.dart' as global;
-
-import 'package:google_translator/google_translator.dart';
 
 class PaymentScreen extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -32,17 +30,11 @@ class PaymentScreen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: GetPlatform.isWeb
-                  ? TranslationTextWidget(
-                      text: 'Payments',
-                      style: Get.theme.primaryTextTheme.titleSmall!
-                          .copyWith(color: Colors.white),
-                    )
-                  : Text(
-                      'Payments',
-                      style: Get.theme.primaryTextTheme.titleSmall!
-                          .copyWith(color: Colors.white),
-                    ).translate(),
+              title: Text(
+                AppLocalizations.of(context)!.payments,
+                style: Get.theme.primaryTextTheme.titleSmall!
+                    .copyWith(color: Colors.white),
+              ),
             ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -160,8 +152,8 @@ class PaymentScreen extends StatelessWidget {
                                                     ? Colors.red
                                                     : Colors.orange,
                                           ),
-                                          child: TranslationTextWidget(
-                                            text: global
+                                          child: Text(
+                                             global
                                                         .currentUser
                                                         .withdrawalRequest![
                                                             index]
@@ -274,72 +266,36 @@ class PaymentScreen extends StatelessWidget {
                                           ? Colors.red
                                           : Colors.orange,
                                 ),
-                                child: GetPlatform.isWeb
-                                    ? TranslationTextWidget(
-                                        text: global
-                                                    .currentUser
-                                                    .withdrawalRequest![index]
-                                                    .approved ==
-                                                1
-                                            ? 'Approved'
-                                            : global
-                                                        .currentUser
-                                                        .withdrawalRequest![
-                                                            index]
-                                                        .approved ==
-                                                    2
-                                                ? 'Rejected'
-                                                : global
-                                                            .currentUser
-                                                            .withdrawalRequest![
-                                                                index]
-                                                            .approved ==
-                                                        0
-                                                    ? 'Pending'
-                                                    : '',
-                                        style: Get
-                                            .theme.primaryTextTheme.titleSmall!
-                                            .copyWith(color: Colors.white),
-                                      )
-                                    : Text(
-                                        global
-                                                    .currentUser
-                                                    .withdrawalRequest![index]
-                                                    .approved ==
-                                                1
-                                            ? 'Approved'
-                                            : global
-                                                        .currentUser
-                                                        .withdrawalRequest![
-                                                            index]
-                                                        .approved ==
-                                                    2
-                                                ? 'Rejected'
-                                                : global
-                                                            .currentUser
-                                                            .withdrawalRequest![
-                                                                index]
-                                                            .approved ==
-                                                        0
-                                                    ? 'Pending'
-                                                    : '',
-                                        style: Get
-                                            .theme.primaryTextTheme.titleSmall!
-                                            .copyWith(color: Colors.white),
-                                      ).translate(),
+                                child: Text(
+                                  global.currentUser.withdrawalRequest![index]
+                                              .approved ==
+                                          1
+                                      ? 'Approved'
+                                      : global
+                                                  .currentUser
+                                                  .withdrawalRequest![index]
+                                                  .approved ==
+                                              2
+                                          ? 'Rejected'
+                                          : global
+                                                      .currentUser
+                                                      .withdrawalRequest![index]
+                                                      .approved ==
+                                                  0
+                                              ? 'Pending'
+                                              : '',
+                                  style: Get.theme.primaryTextTheme.titleSmall!
+                                      .copyWith(color: Colors.white),
+                                ),
                               ),
                             ),
                           );
                         },
                       )
                 : Center(
-                    child: GetPlatform.isWeb
-                        ? TranslationTextWidget(
-                            text: 'No data found',
-                          )
-                        : Text(
-                            'No data found',
-                          ).translate(),
+                    child:  Text(
+                            AppLocalizations.of(context)!.no_data_found,
+                          ),
                   );
           }),
         ),

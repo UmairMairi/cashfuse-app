@@ -8,7 +8,7 @@ import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/moreCampignScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
@@ -102,8 +102,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                               Get.back();
                             },
                           ),
-                          title: TranslationTextWidget(
-                            text: campaign!.partner != null
+                          title: Text(
+                            campaign!.partner != null
                                 ? campaign!.partner!.name!
                                 : '',
                             style: Get.theme.primaryTextTheme.titleSmall!
@@ -204,7 +204,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                       ),
                                       child: Row(
                                         children: [
-                                          TranslationTextWidget(text: 'Share'),
+                                          Text(
+                                              '${AppLocalizations.of(context)!.share}  '),
                                           CircleAvatar(
                                             radius: 12,
                                             backgroundColor: Colors.green[700],
@@ -233,8 +234,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                               SizedBox(
                                 height: 40,
                               ),
-                              TranslationTextWidget(
-                                text: campaign!.name!,
+                              Text(
+                                campaign!.name!,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontStyle: FontStyle.italic,
@@ -243,14 +244,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                               SizedBox(
                                 height: 15,
                               ),
-                              FutureBuilder(
-                                future: global
-                                    .translatedText(campaign!.description!),
-                                builder: (context, snapshot) {
-                                  return HtmlWidget(
-                                    snapshot.data != null ? snapshot.data! : '',
-                                  );
-                                },
+                              HtmlWidget(
+                                campaign!.description!,
                               ),
                               InkWell(
                                 onTap: () async {
@@ -310,8 +305,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     alignment: Alignment.center,
-                                    child: TranslationTextWidget(
-                                      text: campaign!.buttonText!.isNotEmpty
+                                    child: Text(
+                                      campaign!.buttonText!.isNotEmpty
                                           ? campaign!.buttonText!
                                           : 'EARN CASHBACK',
                                       style: TextStyle(
@@ -356,8 +351,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                           elevation: 0,
                                           shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.zero),
-                                          child: TranslationTextWidget(
-                                            text: '>>',
+                                          child: Text(
+                                            '>>',
                                             style: TextStyle(
                                                 color: Colors.grey,
                                                 fontSize: 20,
@@ -390,14 +385,15 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          TranslationTextWidget(
-                                            text: 'Purchase',
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .purchase,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13),
                                           ),
-                                          TranslationTextWidget(
-                                            text: 'Today',
+                                          Text(
+                                            'Today',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -412,14 +408,15 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          TranslationTextWidget(
-                                            text: 'Cashback tracks in',
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .cashback_tracks_in,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13),
                                           ),
-                                          TranslationTextWidget(
-                                            text: '24 hours',
+                                          Text(
+                                            '24 hours',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -488,8 +485,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                                       width: 1.5,
                                                     )),
                                                 alignment: Alignment.center,
-                                                child: TranslationTextWidget(
-                                                  text: 'See More Offers  >',
+                                                child: Text(
+                                                  '${AppLocalizations.of(context)!.see_more_offers}  >',
                                                   style: TextStyle(
                                                       color: Colors.teal[200],
                                                       fontSize: 14,
@@ -551,8 +548,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: TranslationTextWidget(
-                              text: campaign!.partner!.leftTab!,
+                            child: Text(
+                              campaign!.partner!.leftTab!,
                               style: Get.theme.primaryTextTheme.titleSmall!
                                   .copyWith(
                                       fontWeight: FontWeight.w400,
@@ -582,8 +579,8 @@ class WebCampaignDetailScreen extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: TranslationTextWidget(
-                              text: campaign!.partner!.rightTab!.camelCase!,
+                            child: Text(
+                              campaign!.partner!.rightTab!.camelCase!,
                               style: Get.theme.primaryTextTheme.titleSmall!
                                   .copyWith(
                                       fontWeight: FontWeight.w400,

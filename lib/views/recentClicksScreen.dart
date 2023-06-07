@@ -8,16 +8,14 @@ import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/widget/confirmationDialog.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
-import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/recentClickDialogWidget.dart';
+import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
 class RecentClickScreen extends StatelessWidget {
   RecentClickScreen();
@@ -52,15 +50,10 @@ class RecentClickScreen extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                title: GetPlatform.isWeb
-                    ? TranslationTextWidget(
-                        text: 'Recents Clicks',
-                        style: Get.theme.primaryTextTheme.titleSmall,
-                      )
-                    : Text(
-                        'Recents Clicks',
-                        style: Get.theme.primaryTextTheme.titleSmall,
-                      ).translate(),
+                title: Text(
+                  AppLocalizations.of(context)!.recents_clicks,
+                  style: Get.theme.primaryTextTheme.titleSmall,
+                ),
                 actions: [
                   global.currentUser.id != null &&
                           homeController.recentClickList != null &&
@@ -69,12 +62,12 @@ class RecentClickScreen extends StatelessWidget {
                           onTap: () {
                             showConfirmationDialog(
                               context,
-                              'Delete',
-                              'Are you sure, You want to delete clicks older than 10 days ?',
+                              AppLocalizations.of(context)!.delete,
+                              AppLocalizations.of(context)!.delete_desc_click,
                               [
                                 CupertinoDialogAction(
-                                  child: TranslationTextWidget(
-                                    text: 'Yes',
+                                  child: Text(
+                                    AppLocalizations.of(context)!.yes,
                                     style: Get
                                         .theme.primaryTextTheme.titleSmall!
                                         .copyWith(color: Colors.red),
@@ -85,8 +78,8 @@ class RecentClickScreen extends StatelessWidget {
                                   },
                                 ),
                                 CupertinoDialogAction(
-                                  child: TranslationTextWidget(
-                                    text: 'No',
+                                  child: Text(
+                                    AppLocalizations.of(context)!.no,
                                     style: Get
                                         .theme.primaryTextTheme.titleSmall!
                                         .copyWith(color: Colors.blue),
@@ -192,10 +185,8 @@ class RecentClickScreen extends StatelessWidget {
                                                           const EdgeInsets.only(
                                                               left: 20,
                                                               right: 20),
-                                                      child:
-                                                          TranslationTextWidget(
-                                                        text:
-                                                            'Did you shop on ${homeController.recentClickList[index].name}?',
+                                                      child: Text(
+                                                        '${AppLocalizations.of(context)!.did_you_shop_on} ${homeController.recentClickList[index].name}?',
                                                         style: Get
                                                             .theme
                                                             .primaryTextTheme
@@ -258,8 +249,8 @@ class RecentClickScreen extends StatelessWidget {
                                                               MainAxisAlignment
                                                                   .start,
                                                           children: [
-                                                            TranslationTextWidget(
-                                                              text: 'Yes I Did',
+                                                              Text(
+                                                              '${AppLocalizations.of(context)!.yes_i_did} ',
                                                               textAlign:
                                                                   TextAlign
                                                                       .center,
@@ -347,30 +338,14 @@ class RecentClickScreen extends StatelessWidget {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 20, right: 20),
-                                            child: GetPlatform.isWeb
-                                                ? TranslationTextWidget(
-                                                    text:
-                                                        'Did you shop on ${homeController.recentClickList[index].name}?',
-                                                    style: Get
-                                                        .theme
-                                                        .primaryTextTheme
-                                                        .bodyMedium!
-                                                        .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.w300,
-                                                    ),
-                                                  )
-                                                : Text(
-                                                    'Did you shop on ${homeController.recentClickList[index].name}?',
-                                                    style: Get
-                                                        .theme
-                                                        .primaryTextTheme
-                                                        .bodyMedium!
-                                                        .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.w300,
-                                                    ),
-                                                  ).translate(),
+                                            child: Text(
+                                              '${AppLocalizations.of(context)!.did_you_shop_on} ${homeController.recentClickList[index].name}?',
+                                              style: Get.theme.primaryTextTheme
+                                                  .bodyMedium!
+                                                  .copyWith(
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                            ),
                                           ),
                                           SizedBox(
                                             height: 25,
@@ -412,31 +387,17 @@ class RecentClickScreen extends StatelessWidget {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
                                                 children: [
-                                                  GetPlatform.isWeb
-                                                      ? TranslationTextWidget(
-                                                          text: 'Yes I Did',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: Get
-                                                              .theme
-                                                              .primaryTextTheme
-                                                              .bodySmall!
-                                                              .copyWith(
-                                                            color: Colors.teal,
-                                                          ),
-                                                        )
-                                                      : Text(
-                                                          'Yes I Did',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: Get
-                                                              .theme
-                                                              .primaryTextTheme
-                                                              .bodySmall!
-                                                              .copyWith(
-                                                            color: Colors.teal,
-                                                          ),
-                                                        ).translate(),
+                                                  Text(
+                                                    '${AppLocalizations.of(context)!.yes_i_did} ',
+                                                    textAlign: TextAlign.center,
+                                                    style: Get
+                                                        .theme
+                                                        .primaryTextTheme
+                                                        .bodySmall!
+                                                        .copyWith(
+                                                      color: Colors.teal,
+                                                    ),
+                                                  ),
                                                   CircleAvatar(
                                                     radius: 6,
                                                     backgroundColor:
@@ -471,39 +432,22 @@ class RecentClickScreen extends StatelessWidget {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),
-                                    child: GetPlatform.isWeb
-                                        ? TranslationTextWidget(
-                                            text: "Don't stop, just shop!",
-                                            style: Get.theme.primaryTextTheme
-                                                .titleMedium!
-                                                .copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                          )
-                                        : Text(
-                                            "Don't stop, just shop!",
-                                            style: Get.theme.primaryTextTheme
-                                                .titleMedium!
-                                                .copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                          ).translate(),
+                                    child: Text(
+                                      AppLocalizations.of(context)!.click_title,
+                                      style: Get
+                                          .theme.primaryTextTheme.titleMedium!
+                                          .copyWith(
+                                              fontWeight: FontWeight.w500),
+                                    ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 15),
-                                    child: GetPlatform.isWeb
-                                        ? TranslationTextWidget(
-                                            text:
-                                                "When you visit any of the sites on ${global.appName}, it will record your click and display on it.",
-                                            textAlign: TextAlign.center,
-                                            //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
-                                          )
-                                        : Text(
-                                            "When you visit any of the sites on ${global.appName}, it will record your click and display on it.",
-                                            textAlign: TextAlign.center,
-                                            //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
-                                          ).translate(),
+                                    child: Text(
+                                      "When you visit any of the sites on ${global.appName}, it will record your click and display on it.",
+                                      textAlign: TextAlign.center,
+                                      //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
+                                    ),
                                   ),
                                   InkWell(
                                     onTap: () async {
@@ -527,21 +471,14 @@ class RecentClickScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(5),
                                       ),
                                       alignment: Alignment.center,
-                                      child: GetPlatform.isWeb
-                                          ? TranslationTextWidget(
-                                              text: 'SEE BEST DEALS',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600),
-                                            )
-                                          : Text(
-                                              'SEE BEST DEALS',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600),
-                                            ).translate(),
+                                      child: Text(
+                                        AppLocalizations.of(context)!
+                                            .see_best_deals,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -560,16 +497,10 @@ class RecentClickScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 15),
-                            child: GetPlatform.isWeb
-                                ? TranslationTextWidget(
-                                    text:
-                                        'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
-                                    textAlign: TextAlign.center,
-                                  )
-                                : Text(
-                                    'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
-                                    textAlign: TextAlign.center,
-                                  ).translate(),
+                            child: Text(
+                              AppLocalizations.of(context)!.profile_desc,
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                           InkWell(
                             onTap: () async {
@@ -589,7 +520,6 @@ class RecentClickScreen extends StatelessWidget {
                                   ),
                                   routeName: 'login',
                                 );
-                              
                               }
                             },
                             child: Container(
@@ -602,21 +532,13 @@ class RecentClickScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               alignment: Alignment.center,
-                              child: GetPlatform.isWeb
-                                  ? TranslationTextWidget(
-                                      text: 'Login or signup',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600),
-                                    )
-                                  : Text(
-                                      'Login or signup',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600),
-                                    ).translate(),
+                              child: Text(
+                                AppLocalizations.of(context)!.login,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
+                              ),
                             ),
                           ),
                         ],

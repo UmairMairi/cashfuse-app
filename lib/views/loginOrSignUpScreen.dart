@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/country_picker_dialog.dart';
-// import 'package:intl_phone_field/country_picker_dialog.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 class LoginOrSignUpScreen extends StatelessWidget {
@@ -36,37 +36,23 @@ class LoginOrSignUpScreen extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: FutureBuilder(
-                  future: global.translatedText('Login or signup'),
-                  builder: (context, snapshot) {
-                    return Text(
-                      snapshot.data != null
-                          ? snapshot.data!
-                          : 'Login or signup',
-                      style: Get.theme.primaryTextTheme.displaySmall!.copyWith(
-                        letterSpacing: -1,
-                        height: 1.2,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    );
-                  },
+                child: Text(
+                  AppLocalizations.of(context)!.login,
+                  style: Get.theme.primaryTextTheme.displaySmall!.copyWith(
+                    letterSpacing: -1,
+                    height: 1.2,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: FutureBuilder(
-                  future: global.translatedText('We will send a SMS to verify'),
-                  builder: (context, snapshot) {
-                    return Text(
-                      snapshot.data != null
-                          ? snapshot.data!
-                          : 'We will send a SMS to verify',
-                      style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                        letterSpacing: -0.2,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    );
-                  },
+                child: Text(
+                  AppLocalizations.of(context)!.login_subtitle,
+                  style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                    letterSpacing: -0.2,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               Padding(
@@ -149,17 +135,12 @@ class LoginOrSignUpScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 alignment: Alignment.center,
-                child: FutureBuilder(
-                  future: global.translatedText('Continue'),
-                  builder: (context, snapshot) {
-                    return Text(
-                      'Continue',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600),
-                    );
-                  },
+                child: Text(
+                  AppLocalizations.of(context)!.conti,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600),
                 ),
               ),
             ),

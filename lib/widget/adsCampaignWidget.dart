@@ -4,7 +4,6 @@ import 'package:cashfuse/widget/customImage.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
 class AdsCampaignWidget extends StatelessWidget {
   final CommonModel commonModel;
@@ -43,25 +42,15 @@ class AdsCampaignWidget extends StatelessWidget {
                         padding: EdgeInsets.only(top: 5),
                         child: RotatedBox(
                           quarterTurns: 45,
-                          child: GetPlatform.isWeb
-                              ? Text(
-                                  commonModel.tagline!,
-                                  textAlign: TextAlign.center,
-                                  style: Get.theme.primaryTextTheme.bodySmall!
-                                      .copyWith(
-                                    color: Colors.white,
-                                    fontSize: 10,
-                                  ),
-                                )
-                              : Text(
-                                  commonModel.tagline!,
-                                  textAlign: TextAlign.center,
-                                  style: Get.theme.primaryTextTheme.bodySmall!
-                                      .copyWith(
-                                    color: Colors.white,
-                                    fontSize: 10,
-                                  ),
-                                ).translate(),
+                          child: Text(
+                            commonModel.tagline!,
+                            textAlign: TextAlign.center,
+                            style:
+                                Get.theme.primaryTextTheme.bodySmall!.copyWith(
+                              color: Colors.white,
+                              fontSize: 10,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -82,21 +71,13 @@ class AdsCampaignWidget extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: GetPlatform.isWeb
-                ? Text(
-                    commonModel.name!,
-                    style: Get.theme.primaryTextTheme.bodySmall,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                  )
-                : Text(
-                    commonModel.name!,
-                    style: Get.theme.primaryTextTheme.bodySmall,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                  ).translate(),
+            child: Text(
+              commonModel.name!,
+              style: Get.theme.primaryTextTheme.bodySmall,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+            ),
           ),
           Container(
             margin: EdgeInsets.only(top: 10),
@@ -105,25 +86,15 @@ class AdsCampaignWidget extends StatelessWidget {
               color: Get.theme.secondaryHeaderColor,
               borderRadius: BorderRadius.circular(2),
             ),
-            child: GetPlatform.isWeb
-                ? Text(
-                    commonModel.buttonText != null
-                        ? commonModel.buttonText!
-                        : 'Grab deal',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w600),
-                  )
-                : Text(
-                    commonModel.buttonText != null
-                        ? commonModel.buttonText!
-                        : 'Grab deal',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w600),
-                  ).translate(),
+            child: Text(
+              commonModel.buttonText != null
+                  ? commonModel.buttonText!
+                  : 'Grab deal',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600),
+            ),
           ),
         ],
       ),

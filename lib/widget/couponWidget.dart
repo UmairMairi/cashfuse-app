@@ -94,29 +94,15 @@ class CouponWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           alignment: Alignment.center,
-                          child: FutureBuilder(
-                            future: global.translatedText(
-                                coupon.code != null && coupon.code!.isNotEmpty
-                                    ? 'See code'
-                                    : coupon.buttonText != null &&
-                                            coupon.buttonText!.isNotEmpty
-                                        ? coupon.buttonText!
-                                        : 'Grab Now'),
-                            builder: (context, snapshot) {
-                              return Text(
-                                snapshot.data != null
-                                    ? snapshot.data!
-                                    : coupon.code != null &&
-                                            coupon.code!.isNotEmpty
-                                        ? 'See code'
-                                        : coupon.buttonText != null &&
-                                                coupon.buttonText!.isNotEmpty
-                                            ? coupon.buttonText!
-                                            : 'Grab Now',
-                                style: Get.theme.primaryTextTheme.titleSmall!
-                                    .copyWith(color: Colors.white),
-                              );
-                            },
+                          child: Text(
+                            coupon.code != null && coupon.code!.isNotEmpty
+                                ? 'See code'
+                                : coupon.buttonText != null &&
+                                        coupon.buttonText!.isNotEmpty
+                                    ? coupon.buttonText!
+                                    : 'Grab Now',
+                            style: Get.theme.primaryTextTheme.titleSmall!
+                                .copyWith(color: Colors.white),
                           )),
                     ),
                   ],

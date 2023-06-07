@@ -9,6 +9,7 @@ import 'package:cashfuse/controllers/localizationController.dart';
 import 'package:cashfuse/controllers/networkController.dart';
 import 'package:cashfuse/controllers/splashController.dart';
 import 'package:cashfuse/controllers/themeController.dart';
+import 'package:cashfuse/provider/local_provider.dart';
 import 'package:cashfuse/theme/nativeTheme.dart';
 import 'package:cashfuse/utils/binding/networkBinding.dart';
 import 'package:cashfuse/utils/firebaseoption.dart';
@@ -22,8 +23,12 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:google_translator/google_translator.dart';
+import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'l10n/l10n.dart';
 
 FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 void main() async {
@@ -50,7 +55,6 @@ void main() async {
     Get.put(NetworkController());
     Get.put(SplashController());
     Get.put(CouponController());
-    // Get.lazyPut<HomeController>(() => HomeController());
   }
 
   runApp(MyApp());
@@ -89,45 +93,73 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LocalizationController>(
-      builder: (localizationController) =>
-          GetBuilder<ThemeController>(builder: (themeController) {
-        return GetPlatform.isWeb
-            ? GetMaterialApp(
-                navigatorKey: Get.key,
-                debugShowCheckedModeBanner: false,
-                enableLog: true,
-                theme: nativeTheme(),
-                initialBinding: NetworkBinding(),
-                title: global.appName,
-                home: global.getPlatFrom()
-                    ? HomeScreen()
-                    : BottomNavigationBarScreen()
-                // global.getPlatFrom()
-                //     ? BottomNavigationBarScreen()
-                //     : GetPlatform.isWeb
-                //         ? HomeScreen()
-                //         : SplashScreen(),
-                )
-            : GoogleTranslatorInit(global.languageApiKey,
-                translateFrom: Locale(
-                    localizationController.languageCode == 'en' ? 'hi' : 'en'),
-                translateTo: Locale(localizationController.languageCode),
-                automaticDetection: true, builder: () {
-                return GetMaterialApp(
-                  navigatorKey: Get.key,
-                  textDirection:
-                      global.isRTL ? TextDirection.rtl : TextDirection.ltr,
-                  debugShowCheckedModeBanner: false,
-                  enableLog: true,
-                  theme: nativeTheme(),
-                  initialBinding: NetworkBinding(),
-                  title: global.appName,
-                  home: SplashScreen(),
-                );
-              });
-      }),
-    );
+    return ChangeNotifierProvider(
+        create: (context) => LocaleProvider(),
+        builder: (context, child) {
+          final provider = Provider.of<LocaleProvider>(context);
+          return GetBuilder<ThemeController>(builder: (themeController) {
+            return GetMaterialApp(
+              navigatorKey: Get.key,
+              debugShowCheckedModeBanner: false,
+              enableLog: true,
+              theme: nativeTheme(),
+              initialBinding: NetworkBinding(),
+              title: global.appName,
+              locale: provider.locale,
+              supportedLocales: L10n.all,
+              localizationsDelegates: [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              home: global.getPlatFrom()
+                  ? HomeScreen()
+                  : GetPlatform.isWeb
+                      ? BottomNavigationBarScreen()
+                      : SplashScreen(),
+            );
+          });
+        });
+    // GetBuilder<LocalizationController>(
+    //   builder: (localizationController) =>
+    //       GetBuilder<ThemeController>(builder: (themeController) {
+    //     return GetPlatform.isWeb
+    //         ? GetMaterialApp(
+    //             navigatorKey: Get.key,
+    //             debugShowCheckedModeBanner: false,
+    //             enableLog: true,
+    //             theme: nativeTheme(),
+    //             initialBinding: NetworkBinding(),
+    //             title: global.appName,
+    //             home: global.getPlatFrom()
+    //                 ? HomeScreen()
+    //                 : BottomNavigationBarScreen()
+    //             // global.getPlatFrom()
+    //             //     ? BottomNavigationBarScreen()
+    //             //     : GetPlatform.isWeb
+    //             //         ? HomeScreen()
+    //             //         : SplashScreen(),
+    //             )
+    //         : GoogleTranslatorInit(global.languageApiKey,
+    //             translateFrom: Locale(
+    //                 localizationController.languageCode == 'en' ? 'hi' : 'en'),
+    //             translateTo: Locale(localizationController.languageCode),
+    //             automaticDetection: true, builder: () {
+    //             return GetMaterialApp(
+    //               navigatorKey: Get.key,
+    //               textDirection:
+    //                   global.isRTL ? TextDirection.rtl : TextDirection.ltr,
+    //               debugShowCheckedModeBanner: false,
+    //               enableLog: true,
+    //               theme: nativeTheme(),
+    //               initialBinding: NetworkBinding(),
+    //               title: global.appName,
+    //               home: SplashScreen(),
+    //             );
+    //           });
+    //   }),
+    // );
   }
 }
 

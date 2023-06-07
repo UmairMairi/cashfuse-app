@@ -4,7 +4,7 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/aboutUsScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/privacyPolicyScreen.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -62,8 +62,7 @@ class WebFooterWidget extends StatelessWidget {
                             );
                           },
                           behavior: HitTestBehavior.opaque,
-                          child: TranslationTextWidget(
-                            text: 'About Us',
+                          child: Text('About Us',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
@@ -78,8 +77,7 @@ class WebFooterWidget extends StatelessWidget {
                             );
                           },
                           behavior: HitTestBehavior.opaque,
-                          child: TranslationTextWidget(
-                            text: 'Get Help',
+                          child: Text('Get Help',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
@@ -94,8 +92,7 @@ class WebFooterWidget extends StatelessWidget {
                             );
                           },
                           behavior: HitTestBehavior.opaque,
-                          child: TranslationTextWidget(
-                            text: 'Privacy Policy',
+                          child: Text('Privacy Policy',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
@@ -105,8 +102,7 @@ class WebFooterWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          TranslationTextWidget(
-                            text: 'Download our app',
+                          Text('Download our app',
                             style: TextStyle(fontSize: 28, color: Colors.white),
                           ),
                           SizedBox(

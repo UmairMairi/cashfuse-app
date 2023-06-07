@@ -8,7 +8,7 @@ import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/moreOfferScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
@@ -57,74 +57,11 @@ class WebOfferDetailScreen extends StatelessWidget {
                       Get.back();
                     },
                   ),
-                  title: TranslationTextWidget(
-                    text: offer.name!,
+                  title: Text(
+                    offer.name!,
                     style: Get.theme.primaryTextTheme.titleSmall!
                         .copyWith(color: Colors.white),
                   ),
-                  actions: [
-                    !GetPlatform.isWeb
-                        ? InkWell(
-                            onTap: () async {
-                              if (global.currentUser.id != null) {
-                                await homeController.getTrackingLink(
-                                    offer.url!, offer.affiliatePartner!);
-                                global.share(
-                                  homeController.createdLink.isNotEmpty
-                                      ? homeController.createdLink
-                                      : offer.url!,
-                                  offer.bannerImage!.isNotEmpty &&
-                                          !offer.isImageError
-                                      ? '${global.appInfo.baseUrls!.offerImageUrl}/${offer.bannerImage}'
-                                      : '',
-                                  '',
-                                );
-                              } else {
-                                if (global.getPlatFrom()) {
-                                  Get.dialog(Dialog(
-                                    child: SizedBox(
-                                      width: Get.width / 3,
-                                      child: GetStartedScreen(
-                                        fromMenu: true,
-                                      ),
-                                    ),
-                                  ));
-                                } else {
-                                  Get.to(
-                                    () => GetStartedScreen(
-                                      fromMenu: true,
-                                    ),
-                                    routeName: 'login',
-                                  );
-                                }
-                              }
-                            },
-                            child: Container(
-                              margin: EdgeInsets.symmetric(vertical: 12)
-                                  .copyWith(right: 10),
-                              padding: EdgeInsets.only(left: 10, right: 3),
-                              decoration: BoxDecoration(
-                                color: Colors.green[500],
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Row(
-                                children: [
-                                  TranslationTextWidget(text: 'Share'),
-                                  CircleAvatar(
-                                    radius: 12,
-                                    backgroundColor: Colors.green[700],
-                                    child: Icon(
-                                      Icons.share_outlined,
-                                      color: Colors.white,
-                                      size: 15,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          )
-                        : SizedBox()
-                  ],
                 )
               : SliverToBoxAdapter(child: SizedBox()),
           SliverFillRemaining(
@@ -229,8 +166,8 @@ class WebOfferDetailScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(2),
                                 ),
                                 alignment: Alignment.center,
-                                child: TranslationTextWidget(
-                                  text: offer.buttonText!,
+                                child: Text(
+                                  offer.buttonText!,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
@@ -254,8 +191,8 @@ class WebOfferDetailScreen extends StatelessWidget {
                                 ? CrossAxisAlignment.center
                                 : CrossAxisAlignment.start,
                             children: [
-                              TranslationTextWidget(
-                                text: offer.name!,
+                              Text(
+                                offer.name!,
                                 style: Get.theme.primaryTextTheme.titleSmall,
                               ),
                               HtmlWidget(
@@ -287,8 +224,8 @@ class WebOfferDetailScreen extends StatelessWidget {
                                         elevation: 0,
                                         shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.zero),
-                                        child: TranslationTextWidget(
-                                          text: '>>',
+                                        child: Text(
+                                          '>>',
                                           style: TextStyle(
                                               color: Colors.grey,
                                               fontSize: 20,
@@ -320,14 +257,15 @@ class WebOfferDetailScreen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        TranslationTextWidget(
-                                          text: 'Purchase',
+                                        Text(
+                                          AppLocalizations.of(context)!
+                                              .purchase,
                                           style: TextStyle(
                                               fontWeight: FontWeight.w300,
                                               fontSize: 13),
                                         ),
-                                        TranslationTextWidget(
-                                          text: 'Today',
+                                        Text(
+                                          'Today',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600),
                                         ),
@@ -342,14 +280,15 @@ class WebOfferDetailScreen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        TranslationTextWidget(
-                                          text: 'Cashback tracks in',
+                                        Text(
+                                          AppLocalizations.of(context)!
+                                              .cashback_tracks_in,
                                           style: TextStyle(
                                               fontWeight: FontWeight.w300,
                                               fontSize: 13),
                                         ),
-                                        TranslationTextWidget(
-                                          text: '24 hours',
+                                        Text(
+                                          '24 hours',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600),
                                         ),
@@ -411,8 +350,8 @@ class WebOfferDetailScreen extends StatelessWidget {
                                                   width: 1.5,
                                                 )),
                                             alignment: Alignment.center,
-                                            child: TranslationTextWidget(
-                                              text: 'See More Offers  >',
+                                            child: Text(
+                                              '${AppLocalizations.of(context)!.see_more_offers}  >',
                                               style: TextStyle(
                                                   color: Colors.teal[200],
                                                   fontSize: 14,
@@ -468,8 +407,8 @@ class WebOfferDetailScreen extends StatelessWidget {
                               ),
                             );
                           },
-                          child: TranslationTextWidget(
-                            text: offer.partner!.leftTab!,
+                          child: Text(
+                            offer.partner!.leftTab!,
                             style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(
                                     fontWeight: FontWeight.w400,
@@ -500,8 +439,8 @@ class WebOfferDetailScreen extends StatelessWidget {
                               isScrollControlled: true,
                             );
                           },
-                          child: TranslationTextWidget(
-                            text: offer.partner!.rightTab!,
+                          child: Text(
+                            offer.partner!.rightTab!,
                             style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(
                                     fontWeight: FontWeight.w400,

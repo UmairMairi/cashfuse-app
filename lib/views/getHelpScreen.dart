@@ -1,16 +1,14 @@
 // ignore_for_file: unnecessary_null_comparison
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/commonController.dart';
 import 'package:cashfuse/views/helpDetailSceen.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cashfuse/utils/global.dart' as global;
-import 'package:google_translator/google_translator.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class GetHelpScreen extends StatelessWidget {
@@ -36,17 +34,11 @@ class GetHelpScreen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: GetPlatform.isWeb
-                  ? TranslationTextWidget(
-                      text: 'Get Help',
-                      style: Get.theme.primaryTextTheme.titleSmall!
-                          .copyWith(color: Colors.white),
-                    )
-                  : Text(
-                      'Get Help',
-                      style: Get.theme.primaryTextTheme.titleSmall!
-                          .copyWith(color: Colors.white),
-                    ).translate(),
+              title: Text(
+                AppLocalizations.of(context)!.get_help,
+                style: Get.theme.primaryTextTheme.titleSmall!
+                    .copyWith(color: Colors.white),
+              ),
             ),
       body: Center(
         child: SizedBox(
@@ -147,26 +139,15 @@ class GetHelpScreen extends StatelessWidget {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        GetPlatform.isWeb
-                                            ? TranslationTextWidget(
-                                                text: controller
-                                                    .faqList[index].ques!,
-                                                textAlign: TextAlign.center,
-                                                style: global.getPlatFrom()
-                                                    ? Get.theme.primaryTextTheme
-                                                        .titleMedium
-                                                    : Get.theme.primaryTextTheme
-                                                        .titleSmall,
-                                              )
-                                            : Text(
-                                                controller.faqList[index].ques!,
-                                                textAlign: TextAlign.center,
-                                                style: global.getPlatFrom()
-                                                    ? Get.theme.primaryTextTheme
-                                                        .titleMedium
-                                                    : Get.theme.primaryTextTheme
-                                                        .titleSmall,
-                                              ).translate(),
+                                        Text(
+                                          controller.faqList[index].ques!,
+                                          textAlign: TextAlign.center,
+                                          style: global.getPlatFrom()
+                                              ? Get.theme.primaryTextTheme
+                                                  .titleMedium
+                                              : Get.theme.primaryTextTheme
+                                                  .titleSmall,
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -175,15 +156,10 @@ class GetHelpScreen extends StatelessWidget {
                             )
                           : Expanded(
                               child: Center(
-                                child: GetPlatform.isWeb
-                                    ? TranslationTextWidget(
-                                        text: 'No Data found.',
+                                child:Text(
+                                        AppLocalizations.of(context)!.no_data_found,
                                         style: TextStyle(color: Colors.white),
-                                      )
-                                    : Text(
-                                        'No Data found.',
-                                        style: TextStyle(color: Colors.white),
-                                      ).translate(),
+                                      ),
                               ),
                             )
                       : GridView.builder(

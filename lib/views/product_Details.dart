@@ -7,7 +7,7 @@ import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../utils/myColors.dart';
 
@@ -41,7 +41,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           widget.title,
           style: Get.theme.primaryTextTheme.titleSmall!
               .copyWith(color: Colors.white),
-        ).translate(),
+        ),
       ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -85,12 +85,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   color: Colors.grey.shade300,
                   width: MediaQuery.of(context).size.width,
                   child: Text(
-                    "Choose Best Price",
+                    AppLocalizations.of(context)!.choose_best_price,
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 12,
                         fontWeight: FontWeight.w500),
-                  ).translate(),
+                  ),
                 ),
                 SizedBox(
                   height: 10,
@@ -170,12 +170,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       color: Colors.black,
                                     ),
                                     child: Text(
-                                      "Grab Now",
+                                      AppLocalizations.of(context)!.grab_now,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 13),
-                                    ).translate(),
+                                    ),
                                   ),
                                 )
                               ],
@@ -201,14 +201,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           color: Colors.black54,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12),
-                                    ).translate(),
+                                    ),
                                     Text(
-                                      "Seller price",
+                                      AppLocalizations.of(context)!.seller_price,
                                       style: TextStyle(
                                           color: Colors.black54,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12),
-                                    ).translate(),
+                                    ),
                                   ],
                                 ),
                                 SizedBox(
@@ -223,12 +223,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     ? Container(
                                         width: 70,
                                         child: Text(
-                                          "This is the best Price",
+                                          AppLocalizations.of(context)!.this_is_best_price,
                                           style: TextStyle(
                                               color: Colors.black54,
                                               fontWeight: FontWeight.w400,
                                               fontSize: 12),
-                                        ).translate(),
+                                        ),
                                       )
                                     : Column(
                                         children: [
@@ -238,14 +238,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                                 color: Mycolors.orange,
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 12),
-                                          ).translate(),
+                                          ),
                                           Text(
                                             "CashBack",
                                             style: TextStyle(
                                                 color: Colors.black54,
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 12),
-                                          ).translate(),
+                                          ),
                                         ],
                                       ),
                                 SizedBox(
@@ -264,14 +264,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 12),
-                                    ).translate(),
+                                    ),
                                     Text(
                                       "Best Price",
                                       style: TextStyle(
                                           color: Colors.black54,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12),
-                                    ).translate(),
+                                    ),
                                   ],
                                 ),
                                 SizedBox(

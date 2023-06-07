@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:cashfuse/utils/global.dart' as global;
-import 'package:google_translator/google_translator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CouponListScreen extends StatelessWidget {
   CouponController couponController = Get.find<CouponController>();
@@ -30,17 +30,11 @@ class CouponListScreen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: GetPlatform.isWeb
-                  ? Text(
-                      'Coupons of the day'.toUpperCase(),
-                      style: Get.theme.primaryTextTheme.titleSmall!
-                          .copyWith(color: Colors.white),
-                    )
-                  : Text(
-                      'Coupons of the day'.toUpperCase(),
-                      style: Get.theme.primaryTextTheme.titleSmall!
-                          .copyWith(color: Colors.white),
-                    ).translate(),
+              title: Text(
+                AppLocalizations.of(context)!.coupons_of_the_day.toUpperCase(),
+                style: Get.theme.primaryTextTheme.titleSmall!
+                    .copyWith(color: Colors.white),
+              ),
             ),
       body: Align(
         alignment: Alignment.topCenter,

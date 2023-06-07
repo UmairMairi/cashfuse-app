@@ -17,7 +17,7 @@ import 'package:cashfuse/views/webScreen/webAccountSettingScreen.dart';
 import 'package:cashfuse/views/webScreen/webMyEarningScreen.dart';
 import 'package:cashfuse/widget/confirmationDialog.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -63,8 +63,10 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                 Icons.arrow_back,
               ),
             ),
-            title: TranslationTextWidget(
-              text: global.currentUser.id != null ? 'Profile' : '',
+            title: Text(
+              global.currentUser.id != null
+                  ? AppLocalizations.of(context)!.profile
+                  : '',
               style: Get.theme.primaryTextTheme.titleSmall!
                   .copyWith(color: Colors.white),
             ),
@@ -125,8 +127,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    TranslationTextWidget(
-                                      text: 'Pending',
+                                    Text(
+                                      AppLocalizations.of(context)!.pending,
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -157,8 +159,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    TranslationTextWidget(
-                                      text: 'Approved',
+                                    Text(
+                                      AppLocalizations.of(context)!.approved,
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -189,8 +191,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    TranslationTextWidget(
-                                      text: 'Redeemed',
+                                    Text(
+                                      AppLocalizations.of(context)!.redeemed,
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -221,8 +223,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    TranslationTextWidget(
-                                      text: 'Rewards',
+                                    Text(
+                                      AppLocalizations.of(context)!.rewards,
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -289,8 +291,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              TranslationTextWidget(
-                                text: 'Account Settings',
+                              Text(
+                                AppLocalizations.of(context)!.account_settings,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -325,8 +327,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              TranslationTextWidget(
-                                text: 'My Earnings',
+                              Text(
+                                AppLocalizations.of(context)!.my_earnings,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -357,8 +359,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              TranslationTextWidget(
-                                text: 'Payments',
+                              Text(
+                                AppLocalizations.of(context)!.payments,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -393,8 +395,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              TranslationTextWidget(
-                                text: 'Payment History',
+                              Text(
+                                AppLocalizations.of(context)!.payment_history,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -429,8 +431,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              TranslationTextWidget(
-                                text: 'Recents Clicks',
+                              Text(
+                                AppLocalizations.of(context)!.recents_clicks,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -461,8 +463,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              TranslationTextWidget(
-                                text: 'Referral Network',
+                              Text(
+                                AppLocalizations.of(context)!.referral_network,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -497,8 +499,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              TranslationTextWidget(
-                                text: 'Get Help',
+                              Text(
+                                AppLocalizations.of(context)!.get_help,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -535,8 +537,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                                     SizedBox(
                                       width: 20,
                                     ),
-                                    TranslationTextWidget(
-                                      text: 'Theme',
+                                    Text(
+                                      AppLocalizations.of(context)!.theme,
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -575,8 +577,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              TranslationTextWidget(
-                                text: 'Language',
+                              Text(
+                                AppLocalizations.of(context)!.language,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -611,8 +613,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                                     SizedBox(
                                       width: 20,
                                     ),
-                                    TranslationTextWidget(
-                                      text: 'Rate us',
+                                    Text(
+                                      AppLocalizations.of(context)!.rate_us,
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
@@ -652,8 +654,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              TranslationTextWidget(
-                                text: 'About Us',
+                              Text(
+                                AppLocalizations.of(context)!.about_us,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -688,8 +690,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              TranslationTextWidget(
-                                text: 'Privacy Policy',
+                              Text(
+                                AppLocalizations.of(context)!.privacy_policy,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
@@ -708,8 +710,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                             'Are you sure you want to Signout?',
                             [
                               CupertinoDialogAction(
-                                child: TranslationTextWidget(
-                                  text: 'Yes',
+                                child: Text(
+                                  AppLocalizations.of(context)!.yes,
                                   style: Get.theme.primaryTextTheme.titleSmall!
                                       .copyWith(color: Colors.red),
                                 ),
@@ -720,8 +722,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                                 },
                               ),
                               CupertinoDialogAction(
-                                child: TranslationTextWidget(
-                                  text: 'No',
+                                child: Text(
+                                  AppLocalizations.of(context)!.no,
                                   style: Get.theme.primaryTextTheme.titleSmall!
                                       .copyWith(color: Colors.blue),
                                 ),
@@ -744,8 +746,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                               SizedBox(
                                 width: 20,
                               ),
-                              TranslationTextWidget(
-                                text: 'Signout',
+                              Text(
+                                AppLocalizations.of(context)!.logout,
                                 style: Get.theme.primaryTextTheme.bodyMedium!
                                     .copyWith(
                                   letterSpacing: -0.5,
@@ -765,8 +767,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TranslationTextWidget(
-                        text: 'Login or signup',
+                      Text(
+                        AppLocalizations.of(context)!.login,
                         style:
                             Get.theme.primaryTextTheme.displaySmall!.copyWith(
                           letterSpacing: -1,
@@ -775,9 +777,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: TranslationTextWidget(
-                          text:
-                              'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
+                        child: Text(
+                          AppLocalizations.of(context)!.profile_desc,
                           textAlign: TextAlign.center,
                           style:
                               Get.theme.primaryTextTheme.titleSmall!.copyWith(
@@ -817,8 +818,8 @@ class _WebProfileMobileViewState extends State<WebProfileMobileView> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           alignment: Alignment.center,
-                          child: TranslationTextWidget(
-                            text: 'Continue'.toUpperCase(),
+                          child: Text(
+                            AppLocalizations.of(context)!.conti.toUpperCase(),
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,

@@ -8,15 +8,14 @@ import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/loginOrSignUpScreen.dart';
 import 'package:cashfuse/views/moreOfferScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/ratesAndOfferTermsSheetWidget.dart';
+import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OfferDetailScreen extends StatelessWidget {
   final OfferModel offer;
@@ -61,7 +60,7 @@ class OfferDetailScreen extends StatelessWidget {
                     offer.name!,
                     style: Get.theme.primaryTextTheme.titleSmall!
                         .copyWith(color: Colors.white),
-                  ).translate(),
+                  ),
                   actions: [
                     !GetPlatform.isWeb
                         ? InkWell(
@@ -109,7 +108,7 @@ class OfferDetailScreen extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  Text('Share').translate(),
+                                  Text('${AppLocalizations.of(context)!.share}  '),
                                   CircleAvatar(
                                     radius: 12,
                                     backgroundColor: Colors.green[700],
@@ -235,7 +234,7 @@ class OfferDetailScreen extends StatelessWidget {
                                       color: Colors.white,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600),
-                                ).translate(),
+                                ),
                               ),
                             ),
                           ],
@@ -257,7 +256,7 @@ class OfferDetailScreen extends StatelessWidget {
                               Text(
                                 offer.name!,
                                 style: Get.theme.primaryTextTheme.titleSmall,
-                              ).translate(),
+                              ),
                               HtmlWidget(
                                 offer.description!,
                                 //style: Get.theme.primaryTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w300),
@@ -321,16 +320,16 @@ class OfferDetailScreen extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Purchase',
+                                          AppLocalizations.of(context)!.purchase,
                                           style: TextStyle(
                                               fontWeight: FontWeight.w300,
                                               fontSize: 13),
-                                        ).translate(),
+                                        ),
                                         Text(
                                           'Today',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600),
-                                        ).translate(),
+                                        ),
                                       ],
                                     ),
                                     SizedBox(
@@ -343,16 +342,17 @@ class OfferDetailScreen extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Cashback tracks in',
+                                           AppLocalizations.of(context)!
+                                              .cashback_tracks_in,
                                           style: TextStyle(
                                               fontWeight: FontWeight.w300,
                                               fontSize: 13),
-                                        ).translate(),
+                                        ),
                                         Text(
                                           '24 hours',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600),
-                                        ).translate(),
+                                        ),
                                       ],
                                     )
                                   ],
@@ -412,12 +412,12 @@ class OfferDetailScreen extends StatelessWidget {
                                                 )),
                                             alignment: Alignment.center,
                                             child: Text(
-                                              'See More Offers  >',
+                                              '${AppLocalizations.of(context)!.see_more_offers}  >',
                                               style: TextStyle(
                                                   color: Colors.teal[200],
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w400),
-                                            ).translate(),
+                                            ),
                                           ),
                                         )
                                       : SizedBox(),
@@ -474,7 +474,7 @@ class OfferDetailScreen extends StatelessWidget {
                                 .copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: Colors.white),
-                          ).translate(),
+                          ),
                         ),
                         (offer.partner!.leftTab!.isNotEmpty &&
                                 offer.partner!.rightTab!.isNotEmpty)
@@ -506,7 +506,7 @@ class OfferDetailScreen extends StatelessWidget {
                                 .copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: Colors.white),
-                          ).translate(),
+                          ),
                         ),
                       ],
                     ),

@@ -3,14 +3,12 @@
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/dateConverter.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-
-import 'package:cashfuse/utils/global.dart' as global;
-import 'package:google_translator/google_translator.dart';
 
 class PaymentHistoryScreen extends StatelessWidget {
   @override
@@ -28,17 +26,11 @@ class PaymentHistoryScreen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: GetPlatform.isWeb
-                  ? TranslationTextWidget(
-                      text: 'Payment History',
-                      style: Get.theme.primaryTextTheme.titleSmall!
-                          .copyWith(color: Colors.white),
-                    )
-                  : Text(
-                      'Payment History',
-                      style: Get.theme.primaryTextTheme.titleSmall!
-                          .copyWith(color: Colors.white),
-                    ).translate(),
+              title: Text(
+                AppLocalizations.of(context)!.payment_history,
+                style: Get.theme.primaryTextTheme.titleSmall!
+                    .copyWith(color: Colors.white),
+              ),
             ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -151,8 +143,8 @@ class PaymentHistoryScreen extends StatelessWidget {
                                                         ? Colors.red
                                                         : Colors.orange,
                                               ),
-                                              child: TranslationTextWidget(
-                                                text: controller
+                                              child: Text(
+                                                controller
                                                             .paymentHistoryList[
                                                                 index]
                                                             .approved ==
@@ -258,66 +250,35 @@ class PaymentHistoryScreen extends StatelessWidget {
                                               ? Colors.red
                                               : Colors.orange,
                                     ),
-                                    child: GetPlatform.isWeb
-                                        ? TranslationTextWidget(
-                                            text: controller
-                                                        .paymentHistoryList[
-                                                            index]
-                                                        .approved ==
-                                                    1
-                                                ? 'Approved'
-                                                : controller
-                                                            .paymentHistoryList[
-                                                                index]
-                                                            .approved ==
-                                                        2
-                                                    ? 'Rejected'
-                                                    : controller
-                                                                .paymentHistoryList[
-                                                                    index]
-                                                                .approved ==
-                                                            0
-                                                        ? 'Pending'
-                                                        : '',
-                                            style: Get.theme.primaryTextTheme
-                                                .titleSmall!
-                                                .copyWith(color: Colors.white),
-                                          )
-                                        : Text(
-                                            controller.paymentHistoryList[index]
-                                                        .approved ==
-                                                    1
-                                                ? 'Approved'
-                                                : controller
-                                                            .paymentHistoryList[
-                                                                index]
-                                                            .approved ==
-                                                        2
-                                                    ? 'Rejected'
-                                                    : controller
-                                                                .paymentHistoryList[
-                                                                    index]
-                                                                .approved ==
-                                                            0
-                                                        ? 'Pending'
-                                                        : '',
-                                            style: Get.theme.primaryTextTheme
-                                                .titleSmall!
-                                                .copyWith(color: Colors.white),
-                                          ).translate(),
+                                    child: Text(
+                                      controller.paymentHistoryList[index]
+                                                  .approved ==
+                                              1
+                                          ? 'Approved'
+                                          : controller.paymentHistoryList[index]
+                                                      .approved ==
+                                                  2
+                                              ? 'Rejected'
+                                              : controller
+                                                          .paymentHistoryList[
+                                                              index]
+                                                          .approved ==
+                                                      0
+                                                  ? 'Pending'
+                                                  : '',
+                                      style: Get
+                                          .theme.primaryTextTheme.titleSmall!
+                                          .copyWith(color: Colors.white),
+                                    ),
                                   ),
                                 ),
                               );
                             },
                           )
                     : Center(
-                        child: GetPlatform.isWeb
-                            ? TranslationTextWidget(
-                                text: 'No data found',
-                              )
-                            : Text(
-                                'No data found',
-                              ).translate(),
+                        child: Text(
+                          AppLocalizations.of(context)!.no_data_found,
+                        ),
                       )
                 : Center(
                     child: CircularProgressIndicator(),

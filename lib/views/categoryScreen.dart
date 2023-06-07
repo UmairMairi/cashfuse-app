@@ -12,14 +12,13 @@ import 'package:cashfuse/views/webScreen/webAdsDetailScreen.dart';
 import 'package:cashfuse/views/webScreen/webCampaignDetailScreen.dart';
 import 'package:cashfuse/widget/admobNativeAdWidget.dart';
 import 'package:cashfuse/widget/adsCampaignWidget.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/fbNativeAdWidget.dart';
 import 'package:cashfuse/widget/web/webAdsCampaignWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'admitedOfferDetailScreen.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -72,8 +71,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   Icons.arrow_back,
                 ),
               ),
-              title: TranslationTextWidget(
-                  text: widget.category != null ? widget.category!.name! : '',
+              title: Text(widget.category != null ? widget.category!.name! : '',
                   style: Get.theme.primaryTextTheme.titleSmall!
                       .copyWith(color: Colors.white)),
             ),
@@ -248,8 +246,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       : SizedBox(
                           // height: Get.height,
                           child: Center(
-                              child: TranslationTextWidget(
-                            text: 'No data found.',
+                              child: Text(
+                            AppLocalizations.of(context)!.no_data_found,
                             textAlign: TextAlign.center,
                           )),
                         ),

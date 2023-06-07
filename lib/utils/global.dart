@@ -21,7 +21,6 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:translator/translator.dart';
 import 'package:universal_html/html.dart' as html;
 
 String appName = "Cashfuse";
@@ -53,7 +52,6 @@ FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 int totalJoinedCount = 0;
 int admobclickCount = 0;
 int fbclickCount = 0;
-final translator = GoogleTranslator();
 String countrySlug = '';
 CountryModel? country;
 String countryCode = '';
@@ -132,12 +130,6 @@ void showInterstitialAd() async {
   } catch (e) {
     print("Exception - global.dart - showInterstitialAd():" + e.toString());
   }
-}
-
-Future<String> translatedText(String text) async {
-  var textTranslation = await translator.translate(text,
-      to: Get.find<LocalizationController>().languageCode);
-  return textTranslation.text;
 }
 
 Future<void> launchInBrowser(String url) async {

@@ -6,13 +6,11 @@ import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cashfuse/utils/global.dart' as global;
-import 'package:google_translator/google_translator.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 class AmazonPayRedeemScreen extends StatelessWidget {
@@ -39,17 +37,11 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                     Icons.arrow_back,
                   ),
                 ),
-                title: GetPlatform.isWeb
-                    ? TranslationTextWidget(
-                        text: 'Amazon Pay Redeem',
-                        style: Get.theme.primaryTextTheme.titleSmall!
-                            .copyWith(color: Colors.white),
-                      )
-                    : Text(
-                        'Amazon Pay Redeem',
-                        style: Get.theme.primaryTextTheme.titleSmall!
-                            .copyWith(color: Colors.white),
-                      ).translate(),
+                title: Text(
+                  AppLocalizations.of(context)!.amazon_pay_redeem,
+                  style: Get.theme.primaryTextTheme.titleSmall!
+                      .copyWith(color: Colors.white),
+                ),
               ),
         body: SingleChildScrollView(
           child: Padding(
@@ -93,17 +85,11 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          GetPlatform.isWeb
-                              ? TranslationTextWidget(
-                                  text: 'Account Details',
-                                  style: Get.theme.primaryTextTheme.titleMedium!
-                                      .copyWith(fontWeight: FontWeight.w600),
-                                )
-                              : Text(
-                                  'Account Details',
-                                  style: Get.theme.primaryTextTheme.titleMedium!
-                                      .copyWith(fontWeight: FontWeight.w600),
-                                ).translate(),
+                          Text(
+                            AppLocalizations.of(context)!.account_details,
+                            style: Get.theme.primaryTextTheme.titleMedium!
+                                .copyWith(fontWeight: FontWeight.w600),
+                          ),
                           InkWell(
                             onTap: () async {
                               if (paymentController.amazonDetails != null &&
@@ -137,27 +123,15 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          GetPlatform.isWeb
-                                              ? TranslationTextWidget(
-                                                  text: 'Add Amazon Account',
-                                                  style: Get
-                                                      .theme
-                                                      .primaryTextTheme
-                                                      .titleLarge!
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                )
-                                              : Text(
-                                                  'Add Amazon Account',
-                                                  style: Get
-                                                      .theme
-                                                      .primaryTextTheme
-                                                      .titleLarge!
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                ).translate(),
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .add_amazon_account,
+                                            style: Get.theme.primaryTextTheme
+                                                .titleLarge!
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                          ),
                                           TextFormField(
                                             controller: contactNo,
                                             focusNode: fContactNo,
@@ -245,33 +219,22 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                                     BorderRadius.circular(5),
                                               ),
                                               alignment: Alignment.center,
-                                              child: GetPlatform.isWeb
-                                                  ? TranslationTextWidget(
-                                                      text: paymentController
-                                                                  .amazonDetails !=
-                                                              null
-                                                          ? 'edit'.toUpperCase()
-                                                          : 'add'.toUpperCase() +
-                                                              '+',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                    )
-                                                  : Text(
-                                                      paymentController
-                                                                  .amazonDetails !=
-                                                              null
-                                                          ? 'edit'.toUpperCase()
-                                                          : 'add'.toUpperCase() +
-                                                              '+',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                    ).translate(),
+                                              child: Text(
+                                                paymentController
+                                                            .amazonDetails !=
+                                                        null
+                                                    ? AppLocalizations.of(
+                                                            context)!
+                                                        .edit
+                                                        .toString()
+                                                        .toUpperCase()
+                                                    : '${AppLocalizations.of(context)!.add.toString().toUpperCase()} +',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -290,58 +253,44 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               alignment: Alignment.center,
-                              child: GetPlatform.isWeb
-                                  ? TranslationTextWidget(
-                                      text: paymentController.amazonDetails !=
-                                              null
-                                          ? 'edit'.toUpperCase()
-                                          : 'add'.toUpperCase() + '+',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600),
-                                    )
-                                  : Text(
-                                      paymentController.amazonDetails != null
-                                          ? 'edit'.toUpperCase()
-                                          : 'add'.toUpperCase() + '+',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600),
-                                    ).translate(),
+                              child: Text(
+                                paymentController.amazonDetails != null
+                                    ? AppLocalizations.of(context)!
+                                        .edit
+                                        .toString()
+                                        .toUpperCase()
+                                    : '${AppLocalizations.of(context)!.add.toString().toUpperCase()} +',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
+                              ),
                             ),
                           ),
                         ],
                       ),
                       paymentController.amazonDetails != null
-                          ? FutureBuilder(
-                              future: global.translatedText("Phone No: "),
-                              builder: (context, snapShot) {
-                                return RichText(
-                                  text: TextSpan(
-                                    text: snapShot.data,
-                                    style: Get
-                                        .theme.primaryTextTheme.titleSmall!
+                          ? RichText(
+                              text: TextSpan(
+                                text: AppLocalizations.of(context)!.phone_no,
+                                style: Get.theme.primaryTextTheme.titleSmall!
+                                    .copyWith(
+                                  letterSpacing: -0.2,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text:
+                                        " ${paymentController.amazonDetails!.amazonNo!}",
+                                    style: Get.theme.primaryTextTheme.bodySmall!
                                         .copyWith(
                                       letterSpacing: -0.2,
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w300,
                                     ),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text:
-                                            " ${paymentController.amazonDetails!.amazonNo!}",
-                                        style: Get
-                                            .theme.primaryTextTheme.bodySmall!
-                                            .copyWith(
-                                          letterSpacing: -0.2,
-                                          fontWeight: FontWeight.w300,
-                                        ),
-                                      ),
-                                    ],
                                   ),
-                                );
-                              })
+                                ],
+                              ),
+                            )
                           : SizedBox(),
                     ],
                   ),
@@ -365,21 +314,13 @@ class AmazonPayRedeemScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   alignment: Alignment.center,
-                  child: GetPlatform.isWeb
-                      ? TranslationTextWidget(
-                          text: 'Send Withdrawal Request',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
-                        )
-                      : Text(
-                          'Send Withdrawal Request',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
-                        ).translate(),
+                  child: Text(
+                    AppLocalizations.of(context)!.send_withdrawal_request,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  ),
                 ),
               )
             : SizedBox(),

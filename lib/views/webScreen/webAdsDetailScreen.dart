@@ -13,11 +13,9 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:customizable_space_bar/customizable_space_bar.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
-
-import '../../widget/translationTextWidget.dart';
 
 class WebAdsDetailScreen extends StatelessWidget {
   final AdsModel? ads;
@@ -108,9 +106,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                               Get.back();
                             },
                           ),
-                          title: TranslationTextWidget(
-                            text:
-                                ads!.partner != null ? ads!.partner!.name! : '',
+                          title: Text(
+                            ads!.partner != null ? ads!.partner!.name! : '',
                             style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(color: Colors.white),
                           ),
@@ -209,7 +206,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                                       ),
                                       child: Row(
                                         children: [
-                                          TranslationTextWidget(text: 'Share'),
+                                          Text(
+                                              '${AppLocalizations.of(context)!.share}  '),
                                           CircleAvatar(
                                             radius: 12,
                                             backgroundColor: Colors.green[700],
@@ -239,8 +237,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                               SizedBox(
                                 height: 40,
                               ),
-                              TranslationTextWidget(
-                                text: ads!.name!,
+                              Text(
+                                ads!.name!,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontStyle: FontStyle.italic,
@@ -251,16 +249,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                               ),
                               Align(
                                 alignment: Alignment.center,
-                                child: FutureBuilder(
-                                  future:
-                                      global.translatedText(ads!.description!),
-                                  builder: (context, snapshot) {
-                                    return HtmlWidget(
-                                      snapshot.data != null
-                                          ? snapshot.data!
-                                          : '',
-                                    );
-                                  },
+                                child: HtmlWidget(
+                                  ads!.description!,
                                 ),
                               ),
                               InkWell(
@@ -323,8 +313,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     alignment: Alignment.center,
-                                    child: TranslationTextWidget(
-                                      text: ads!.buttonText!,
+                                    child: Text(
+                                      ads!.buttonText!,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
@@ -367,8 +357,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                                           elevation: 0,
                                           shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.zero),
-                                          child: TranslationTextWidget(
-                                            text: '>>',
+                                          child: Text(
+                                            '>>',
                                             style: TextStyle(
                                                 color: Colors.grey,
                                                 fontSize: 20,
@@ -401,14 +391,14 @@ class WebAdsDetailScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          TranslationTextWidget(
-                                            text: 'Purchase',
+                                          Text(
+                                            'Purchase',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13),
                                           ),
-                                          TranslationTextWidget(
-                                            text: 'Today',
+                                          Text(
+                                            'Today',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -423,14 +413,15 @@ class WebAdsDetailScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          TranslationTextWidget(
-                                            text: 'Cashback tracks in',
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .cashback_tracks_in,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13),
                                           ),
-                                          TranslationTextWidget(
-                                            text: '24 hours',
+                                          Text(
+                                            '24 hours',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -471,8 +462,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                                                 width: 1.5,
                                               )),
                                           alignment: Alignment.center,
-                                          child: TranslationTextWidget(
-                                            text: 'See More Offers  >',
+                                          child: Text(
+                                            '${AppLocalizations.of(context)!.see_more_offers}  >',
                                             style: TextStyle(
                                                 color: Colors.teal[200],
                                                 fontSize: 14,
@@ -523,8 +514,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                               ),
                             );
                           },
-                          child: TranslationTextWidget(
-                            text: ads!.partner!.leftTab!,
+                          child: Text(
+                            ads!.partner!.leftTab!,
                             style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(
                                     fontWeight: FontWeight.w400,
@@ -554,8 +545,8 @@ class WebAdsDetailScreen extends StatelessWidget {
                               ),
                             );
                           },
-                          child: TranslationTextWidget(
-                            text: ads!.partner!.rightTab!,
+                          child: Text(
+                            ads!.partner!.rightTab!,
                             style: Get.theme.primaryTextTheme.titleSmall!
                                 .copyWith(
                                     fontWeight: FontWeight.w400,

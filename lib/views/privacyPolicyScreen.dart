@@ -9,7 +9,7 @@ import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart
 import 'package:get/get.dart';
 
 import 'package:cashfuse/utils/global.dart' as global;
-import 'package:google_translator/google_translator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
   CommonController commonController = Get.find<CommonController>();
@@ -34,17 +34,11 @@ class PrivacyPolicyScreen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: GetPlatform.isWeb
-                  ? Text(
-                      'Privacy Policy',
-                      style: Get.theme.primaryTextTheme.titleSmall!
-                          .copyWith(color: Colors.white),
-                    )
-                  : Text(
-                      'Privacy Policy',
-                      style: Get.theme.primaryTextTheme.titleSmall!
-                          .copyWith(color: Colors.white),
-                    ).translate(),
+              title: Text(
+                AppLocalizations.of(context)!.privacy_policy,
+                style: Get.theme.primaryTextTheme.titleSmall!
+                    .copyWith(color: Colors.white),
+              ),
             ),
       body: GetBuilder<CommonController>(builder: (controller) {
         return Center(
@@ -59,14 +53,9 @@ class PrivacyPolicyScreen extends StatelessWidget {
               ? EdgeInsets.zero
               : EdgeInsets.all(10).copyWith(bottom: 0),
           child: SingleChildScrollView(
-            child: FutureBuilder(
-                future: global.translatedText(commonController.privacyPolicy),
-                builder: (context, snapShot) {
-                  return HtmlWidget(
-                    snapShot.data != null ? snapShot.data! : '',
-                  );
-                }),
-          ),
+              child: HtmlWidget(
+            commonController.privacyPolicy,
+          )),
         ));
       }),
     );

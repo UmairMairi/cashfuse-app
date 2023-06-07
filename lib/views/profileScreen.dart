@@ -21,7 +21,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -64,10 +64,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             title: Text(
-              global.currentUser.id != null ? 'Profile' : '',
+              global.currentUser.id != null
+                  ? AppLocalizations.of(context)!.profile
+                  : '',
               style: Get.theme.primaryTextTheme.titleSmall!
                   .copyWith(color: Colors.white),
-            ).translate(),
+            ),
           ),
           body: global.currentUser.id != null
               ? SingleChildScrollView(
@@ -131,7 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Pending',
+                                        AppLocalizations.of(context)!.pending,
                                         style: Get
                                             .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
@@ -139,7 +141,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           fontSize: 11,
                                           letterSpacing: 0,
                                         ),
-                                      ).translate(),
+                                      ),
                                       Text(
                                         global.currentUser.earning != null
                                             ? '${global.appInfo.currency}${global.currentUser.earning!.pendingEarning}'
@@ -148,7 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         style: Get
                                             .theme.primaryTextTheme.titleSmall!
                                             .copyWith(color: Colors.white),
-                                      ).translate(),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(
@@ -164,7 +166,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Approved',
+                                        AppLocalizations.of(context)!.approved,
                                         style: Get
                                             .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
@@ -172,7 +174,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           letterSpacing: 0,
                                           fontSize: 11,
                                         ),
-                                      ).translate(),
+                                      ),
                                       Text(
                                         global.currentUser.earning != null
                                             ? '${global.appInfo.currency}${global.currentUser.earning!.remEarning}'
@@ -181,7 +183,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         style: Get
                                             .theme.primaryTextTheme.titleSmall!
                                             .copyWith(color: Colors.white),
-                                      ).translate(),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(
@@ -197,7 +199,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Redeemed',
+                                        AppLocalizations.of(context)!.redeemed,
                                         style: Get
                                             .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
@@ -205,7 +207,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           letterSpacing: 0,
                                           fontSize: 11,
                                         ),
-                                      ).translate(),
+                                      ),
                                       Text(
                                         global.currentUser.earning != null
                                             ? '${global.appInfo.currency}${global.currentUser.earning!.withdrawal}'
@@ -214,7 +216,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         style: Get
                                             .theme.primaryTextTheme.titleSmall!
                                             .copyWith(color: Colors.white),
-                                      ).translate(),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(
@@ -230,7 +232,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Rewards',
+                                        AppLocalizations.of(context)!.rewards,
                                         style: Get
                                             .theme.primaryTextTheme.bodySmall!
                                             .copyWith(
@@ -238,7 +240,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           letterSpacing: 0,
                                           fontSize: 11,
                                         ),
-                                      ).translate(),
+                                      ),
                                       Text(
                                         global.currentUser.earning != null
                                             ? '${global.appInfo.currency}${global.currentUser.earning!.rewardEarning}'
@@ -247,7 +249,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         style: Get
                                             .theme.primaryTextTheme.titleSmall!
                                             .copyWith(color: Colors.white),
-                                      ).translate(),
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -298,13 +300,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 width: 20,
                               ),
                               Text(
-                                'Account Settings',
+                                AppLocalizations.of(context)!.account_settings,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
-                              ).translate(),
+                              ),
                             ],
                           ),
                         ),
@@ -334,13 +336,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 width: 20,
                               ),
                               Text(
-                                'My Earnings',
+                                AppLocalizations.of(context)!.my_earnings,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
-                              ).translate(),
+                              ),
                             ],
                           ),
                         ),
@@ -366,13 +368,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 width: 20,
                               ),
                               Text(
-                                'Payments',
+                                AppLocalizations.of(context)!.payments,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
-                              ).translate(),
+                              ),
                             ],
                           ),
                         ),
@@ -402,13 +404,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 width: 20,
                               ),
                               Text(
-                                'Payment History',
+                                AppLocalizations.of(context)!.payment_history,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
-                              ).translate(),
+                              ),
                             ],
                           ),
                         ),
@@ -437,13 +439,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 width: 20,
                               ),
                               Text(
-                                'Recents Clicks',
+                                AppLocalizations.of(context)!.recents_clicks,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
-                              ).translate(),
+                              ),
                             ],
                           ),
                         ),
@@ -469,13 +471,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 width: 20,
                               ),
                               Text(
-                                'Referral Network',
+                                AppLocalizations.of(context)!.referral_network,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
-                              ).translate(),
+                              ),
                             ],
                           ),
                         ),
@@ -505,13 +507,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 width: 20,
                               ),
                               Text(
-                                'Get Help',
+                                AppLocalizations.of(context)!.get_help,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
-                              ).translate(),
+                              ),
                             ],
                           ),
                         ),
@@ -541,13 +543,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 width: 20,
                               ),
                               Text(
-                                'Theme',
+                                AppLocalizations.of(context)!.theme,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
-                              ).translate(),
+                              ),
                             ],
                           ),
                         ),
@@ -577,13 +579,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 width: 20,
                               ),
                               Text(
-                                'Language',
+                                AppLocalizations.of(context)!.language,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
-                              ).translate(),
+                              ),
                             ],
                           ),
                         ),
@@ -612,14 +614,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       width: 20,
                                     ),
                                     Text(
-                                      'Rate us',
+                                      AppLocalizations.of(context)!.rate_us,
                                       style: Get
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
                                         letterSpacing: 0,
                                         color: Colors.black.withOpacity(0.75),
                                       ),
-                                    ).translate(),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -653,13 +655,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 width: 20,
                               ),
                               Text(
-                                'About Us',
+                                AppLocalizations.of(context)!.about_us,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
-                              ).translate(),
+                              ),
                             ],
                           ),
                         ),
@@ -689,13 +691,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 width: 20,
                               ),
                               Text(
-                                'Privacy Policy',
+                                AppLocalizations.of(context)!.privacy_policy,
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   letterSpacing: 0,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
-                              ).translate(),
+                              ),
                             ],
                           ),
                         ),
@@ -704,15 +706,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         onTap: () {
                           showConfirmationDialog(
                             context,
-                            'Signout',
-                            'Are you sure you want to Signout?',
+                             AppLocalizations.of(context)!.logout,
+                            AppLocalizations.of(context)!.logout_desc,
                             [
                               CupertinoDialogAction(
                                 child: Text(
-                                  'Yes',
+                                  AppLocalizations.of(context)!.yes,
                                   style: Get.theme.primaryTextTheme.titleSmall!
                                       .copyWith(color: Colors.red),
-                                ).translate(),
+                                ),
                                 onPressed: () {
                                   authController.logout();
 
@@ -721,10 +723,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               CupertinoDialogAction(
                                 child: Text(
-                                  'No',
+                                   AppLocalizations.of(context)!.no,
                                   style: Get.theme.primaryTextTheme.titleSmall!
                                       .copyWith(color: Colors.blue),
-                                ).translate(),
+                                ),
                                 onPressed: () {
                                   Get.back();
                                 },
@@ -745,14 +747,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 width: 20,
                               ),
                               Text(
-                                'Signout',
+                                AppLocalizations.of(context)!.logout,
                                 style: Get.theme.primaryTextTheme.bodyMedium!
                                     .copyWith(
                                   letterSpacing: -0.5,
                                   color: Colors.red,
                                   fontWeight: FontWeight.w500,
                                 ),
-                              ).translate(),
+                              ),
                             ],
                           ),
                         ),
@@ -766,24 +768,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Login or signup',
+                        AppLocalizations.of(context)!.login,
                         style:
                             Get.theme.primaryTextTheme.displaySmall!.copyWith(
                           letterSpacing: -1,
                           fontWeight: FontWeight.w700,
                         ),
-                      ).translate(),
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Text(
-                          'Sign up or login to get exclusive Coupons & extras Cashback on all your online shopping',
+                          AppLocalizations.of(context)!.profile_desc,
                           textAlign: TextAlign.center,
                           style:
                               Get.theme.primaryTextTheme.titleSmall!.copyWith(
                             letterSpacing: -0.2,
                             fontWeight: FontWeight.w600,
                           ),
-                        ).translate(),
+                        ),
                       ),
                       InkWell(
                         onTap: () async {
@@ -826,12 +828,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           alignment: Alignment.center,
                           child: Text(
-                            'Continue'.toUpperCase(),
+                            AppLocalizations.of(context)!.conti.toUpperCase(),
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600),
-                          ).translate(),
+                          ),
                         ),
                       ),
                     ],

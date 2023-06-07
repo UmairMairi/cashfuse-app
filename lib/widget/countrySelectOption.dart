@@ -5,7 +5,7 @@ import 'package:cashfuse/controllers/couponController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:flutter/material.dart';
@@ -76,8 +76,7 @@ class _CountrySelectWidgetState extends State<CountrySelectWidget> {
                   global.appInfo.countryselection == 1
                       ? Padding(
                           padding: const EdgeInsets.only(top: 10),
-                          child: TranslationTextWidget(
-                            text: 'Please select country from below list',
+                          child: Text('Please select country from below list',
                             style:
                                 Get.theme.primaryTextTheme.bodySmall!.copyWith(
                               // fontWeight: FontWeight.w600,

@@ -2,14 +2,12 @@
 
 import 'package:cashfuse/controllers/paymentController.dart';
 import 'package:cashfuse/services/apiHelper.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/widget/customSnackbar.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-
-import 'package:cashfuse/utils/global.dart' as global;
-import 'package:google_translator/google_translator.dart';
 
 class AddBankAccountDialog extends StatelessWidget {
   final fName = new FocusNode();
@@ -46,17 +44,11 @@ class AddBankAccountDialog extends StatelessWidget {
           // SizedBox(
           //   height: 20,
           // ),
-          GetPlatform.isWeb
-              ? TranslationTextWidget(
-                  text: 'Add Bank Account',
-                  style: Get.theme.primaryTextTheme.titleLarge!
-                      .copyWith(fontWeight: FontWeight.w600),
-                )
-              : Text(
-                  'Add Bank Account',
-                  style: Get.theme.primaryTextTheme.titleLarge!
-                      .copyWith(fontWeight: FontWeight.w600),
-                ).translate(),
+          Text(
+            AppLocalizations.of(context)!.add_bank_account,
+            style: Get.theme.primaryTextTheme.titleLarge!
+                .copyWith(fontWeight: FontWeight.w600),
+          ),
 
           StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) => Padding(
@@ -280,8 +272,8 @@ class AddBankAccountDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
               ),
               alignment: Alignment.center,
-              child: TranslationTextWidget(
-                text: '${'add'.toUpperCase()} +',
+              child: Text(
+                '${AppLocalizations.of(context)!.add.toString().toUpperCase()} +',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

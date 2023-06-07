@@ -9,7 +9,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/widget/confirmationDialog.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:cashfuse/widget/customSnackbar.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:email_validator/email_validator.dart';
@@ -53,8 +53,8 @@ class WebAccountSettingScreen extends StatelessWidget {
                       Icons.arrow_back,
                     ),
                   ),
-                  title: TranslationTextWidget(
-                    text: 'Account Settings',
+                  title: Text(
+                    AppLocalizations.of(context)!.account_settings,
                     style: Get.theme.primaryTextTheme.titleLarge!
                         .copyWith(color: Colors.white),
                   ),
@@ -132,8 +132,8 @@ class WebAccountSettingScreen extends StatelessWidget {
                               onTap: () {
                                 Get.bottomSheet(
                                   CupertinoActionSheet(
-                                    title: TranslationTextWidget(
-                                      text: 'Select',
+                                    title: Text(
+                                      AppLocalizations.of(context)!.select,
                                       style: Get
                                           .theme.primaryTextTheme.titleLarge!
                                           .copyWith(
@@ -150,8 +150,9 @@ class WebAccountSettingScreen extends StatelessWidget {
                                         child: Container(
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(15),
-                                          child: TranslationTextWidget(
-                                            text: 'Take Picture',
+                                          child: Text(
+                                            AppLocalizations.of(context)!
+                                                .take_picture,
                                             style: Get.theme.primaryTextTheme
                                                 .titleMedium,
                                           ),
@@ -166,8 +167,9 @@ class WebAccountSettingScreen extends StatelessWidget {
                                         child: Container(
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(15),
-                                          child: TranslationTextWidget(
-                                            text: 'Image from Gallery',
+                                          child: Text(
+                                            AppLocalizations.of(context)!
+                                                .image_from_gallery,
                                             style: Get.theme.primaryTextTheme
                                                 .titleMedium,
                                           ),
@@ -175,8 +177,8 @@ class WebAccountSettingScreen extends StatelessWidget {
                                       ),
                                     ],
                                     cancelButton: TextButton(
-                                      child: TranslationTextWidget(
-                                        text: 'Cancel',
+                                      child: Text(
+                                        AppLocalizations.of(context)!.cancel,
                                         style: Get
                                             .theme.primaryTextTheme.titleMedium!
                                             .copyWith(color: Colors.red),
@@ -207,8 +209,8 @@ class WebAccountSettingScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TranslationTextWidget(
-                            text: 'Full Name',
+                          Text(
+                            AppLocalizations.of(context)!.full_name,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w300),
@@ -249,8 +251,8 @@ class WebAccountSettingScreen extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
-                          TranslationTextWidget(
-                            text: 'Email Address',
+                          Text(
+                            AppLocalizations.of(context)!.email_address,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w300),
@@ -297,8 +299,8 @@ class WebAccountSettingScreen extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
-                          TranslationTextWidget(
-                            text: 'Mobile Number',
+                          Text(
+                            AppLocalizations.of(context)!.mobile_number,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w300),
@@ -406,8 +408,8 @@ class WebAccountSettingScreen extends StatelessWidget {
                                   'Are you sure you want to delete Account ?',
                                   [
                                     CupertinoDialogAction(
-                                      child: TranslationTextWidget(
-                                        text: 'Yes',
+                                      child: Text(
+                                        AppLocalizations.of(context)!.yes,
                                         style: Get
                                             .theme.primaryTextTheme.titleSmall!
                                             .copyWith(color: Colors.red),
@@ -417,8 +419,8 @@ class WebAccountSettingScreen extends StatelessWidget {
                                       },
                                     ),
                                     CupertinoDialogAction(
-                                      child: TranslationTextWidget(
-                                        text: 'No',
+                                      child: Text(
+                                        AppLocalizations.of(context)!.no,
                                         style: Get
                                             .theme.primaryTextTheme.titleSmall!
                                             .copyWith(color: Colors.blue),
@@ -444,8 +446,8 @@ class WebAccountSettingScreen extends StatelessWidget {
                                     SizedBox(
                                       width: 4,
                                     ),
-                                    TranslationTextWidget(
-                                      text: 'Delete My Account',
+                                    Text(
+                                      'Delete My Account',
                                       style: Get
                                           .theme.primaryTextTheme.bodyMedium!
                                           .copyWith(
@@ -522,8 +524,8 @@ class WebAccountSettingScreen extends StatelessWidget {
                       ),
                     ),
                     alignment: Alignment.center,
-                    child: TranslationTextWidget(
-                      text: 'SAVE CHANGES',
+                    child: Text(
+                      AppLocalizations.of(context)!.save_changes,
                       style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,

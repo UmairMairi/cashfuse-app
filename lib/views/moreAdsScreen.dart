@@ -3,7 +3,7 @@ import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/adsDetailScreen.dart';
 import 'package:cashfuse/views/webScreen/webAdsDetailScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,8 +26,8 @@ class MoreAdsScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TranslationTextWidget(
-                      text: 'See More Offers',
+                    Text(
+                      AppLocalizations.of(context)!.see_more_offers,
                       style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.1,
@@ -74,15 +74,15 @@ class MoreAdsScreen extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    TranslationTextWidget(
-                                      text: homeController
+                                    Text(
+                                      homeController
                                           .seeMoreAdsList[index].name!,
                                       textAlign: TextAlign.start,
                                       style:
                                           Get.theme.primaryTextTheme.titleSmall,
                                     ),
-                                    TranslationTextWidget(
-                                      text: homeController
+                                    Text(
+                                      homeController
                                           .seeMoreAdsList[index].description!,
                                       textAlign: TextAlign.start,
                                     ),
@@ -131,9 +131,8 @@ class MoreAdsScreen extends StatelessWidget {
                                   width: 1,
                                 )),
                             alignment: Alignment.center,
-                            child: TranslationTextWidget(
-                              text: homeController
-                                  .seeMoreAdsList[index].buttonText!,
+                            child: Text(
+                              homeController.seeMoreAdsList[index].buttonText!,
                               style: TextStyle(
                                   color: Get.theme.secondaryHeaderColor,
                                   fontSize: 14,

@@ -4,7 +4,7 @@ import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/utils/myColors.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/webScreen/webProductDetails.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';

@@ -3,7 +3,7 @@
 import 'package:cashfuse/controllers/localizationController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,8 +34,8 @@ class LanguageScreen extends StatelessWidget {
             ),
           ),
           title: GetBuilder<LocalizationController>(
-            builder: (controller) => TranslationTextWidget(
-              text: 'Language',
+            builder: (controller) => Text(
+              AppLocalizations.of(context)!.language,
               style: Get.theme.primaryTextTheme.titleSmall!
                   .copyWith(color: Colors.white),
             ),

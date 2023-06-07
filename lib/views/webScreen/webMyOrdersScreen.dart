@@ -8,7 +8,7 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/orderComplaintScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -39,8 +39,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                   Icons.arrow_back,
                 ),
               ),
-              title: TranslationTextWidget(
-                text: 'My Orders',
+              title: Text(
+                AppLocalizations.of(context)!.my_orders,
                 style: Get.theme.primaryTextTheme.titleSmall!
                     .copyWith(color: Colors.white),
               ),
@@ -118,8 +118,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                           width: 50,
                                                         ),
                                                         //),
-                                                        title: TranslationTextWidget(
-                                                            text: orderController
+                                                        title: Text(
+                                                            orderController
                                                                 .orderList[
                                                                     index]
                                                                 .advertisers!),
@@ -164,10 +164,10 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                                     .primaryColor,
                                                               ),
                                                             ),
-                                                            child:
-                                                                TranslationTextWidget(
-                                                              text:
-                                                                  'Raise Complaint',
+                                                            child: Text(
+                                                              AppLocalizations.of(
+                                                                      context)!
+                                                                  .raise_complaint,
                                                               style: TextStyle(
                                                                 fontSize: 10,
                                                                 color: Get.theme
@@ -232,8 +232,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                                             : Colors.red,
                                                                     size: 20,
                                                                   ),
-                                                                  TranslationTextWidget(
-                                                                    text: orderController.orderList[index].orderStatus ==
+                                                                  Text(
+                                                                    orderController.orderList[index].orderStatus ==
                                                                             0.toString()
                                                                         ? 'Purchase Tracked'
                                                                         : orderController.orderList[index].orderStatus == 1.toString()
@@ -298,10 +298,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                               const EdgeInsets
                                                                       .only(
                                                                   left: 10),
-                                                          child:
-                                                              TranslationTextWidget(
-                                                            text:
-                                                                'Clicked Tracked',
+                                                          child: Text(
+                                                            'Clicked Tracked',
                                                             style: TextStyle(
                                                               fontWeight:
                                                                   FontWeight
@@ -412,10 +410,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                                   const EdgeInsets
                                                                           .only(
                                                                       left: 10),
-                                                              child:
-                                                                  TranslationTextWidget(
-                                                                text:
-                                                                    'Purchase Tracked',
+                                                              child: Text(
+                                                                'Purchase Tracked',
                                                                 style:
                                                                     TextStyle(
                                                                   fontWeight:
@@ -522,9 +518,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                               const EdgeInsets
                                                                       .only(
                                                                   left: 10),
-                                                          child:
-                                                              TranslationTextWidget(
-                                                            text: orderController
+                                                          child: Text(
+                                                            orderController
                                                                         .orderList[
                                                                             index]
                                                                         .orderStatus ==
@@ -614,10 +609,9 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                 width: 50,
                                               ),
                                               //),
-                                              title: TranslationTextWidget(
-                                                  text: orderController
-                                                      .orderList[index]
-                                                      .advertisers!),
+                                              title: Text(orderController
+                                                  .orderList[index]
+                                                  .advertisers!),
                                               trailing: InkWell(
                                                 onTap: () async {
                                                   await orderController
@@ -649,8 +643,10 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                           .theme.primaryColor,
                                                     ),
                                                   ),
-                                                  child: TranslationTextWidget(
-                                                    text: 'Raise Complaint',
+                                                  child: Text(
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .raise_complaint,
                                                     style: TextStyle(
                                                       fontSize: 10,
                                                       color: Get
@@ -715,8 +711,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                                   : Colors.red,
                                                           size: 20,
                                                         ),
-                                                        TranslationTextWidget(
-                                                          text: orderController
+                                                        Text(
+                                                          orderController
                                                                       .orderList[
                                                                           index]
                                                                       .orderStatus ==
@@ -792,8 +788,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     left: 10),
-                                                child: TranslationTextWidget(
-                                                  text: 'Clicked Tracked',
+                                                child: Text(
+                                                  'Clicked Tracked',
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 12,
@@ -896,9 +892,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                                     padding:
                                                         const EdgeInsets.only(
                                                             left: 10),
-                                                    child:
-                                                        TranslationTextWidget(
-                                                      text: 'Purchase Tracked',
+                                                    child: Text(
+                                                      'Purchase Tracked',
                                                       style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -994,8 +989,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     left: 10),
-                                                child: TranslationTextWidget(
-                                                  text: orderController
+                                                child: Text(
+                                                  orderController
                                                               .orderList[index]
                                                               .orderStatus ==
                                                           2.toString()
@@ -1051,37 +1046,20 @@ class WebMyOrdersScreen extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 10),
-                              child: GetPlatform.isWeb
-                                  ? TranslationTextWidget(
-                                      text: 'There is where it all happens!',
-                                      style: Get
-                                          .theme.primaryTextTheme.titleMedium!
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500),
-                                    )
-                                  : Text(
-                                      'There is where it all happens!',
-                                      style: Get
-                                          .theme.primaryTextTheme.titleMedium!
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500),
-                                    ),
+                              child: Text(
+                                AppLocalizations.of(context)!.orders_title,
+                                style: Get.theme.primaryTextTheme.titleMedium!
+                                    .copyWith(fontWeight: FontWeight.w500),
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 15),
-                              child: GetPlatform.isWeb
-                                  ? TranslationTextWidget(
-                                      text:
-                                          "Once you shop via ${global.appName}, your order details will appear here within 72 hours.",
-                                      textAlign: TextAlign.center,
-                                      //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
-                                    )
-                                  : Text(
-                                      "Once you shop via ${global.appName}, your order details will appear here within 72 hours.",
-                                      textAlign: TextAlign.center,
-                                      //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
-                                    ),
+                              child: Text(
+                                "Once you shop via ${global.appName}, your order details will appear here within 72 hours.",
+                                textAlign: TextAlign.center,
+                                //style: Get.theme.primaryTextTheme.titleSmall.copyWith(fontWeight: FontWeight.w500),
+                              ),
                             ),
                             InkWell(
                               onTap: () async {
@@ -1105,21 +1083,13 @@ class WebMyOrdersScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 alignment: Alignment.center,
-                                child: GetPlatform.isWeb
-                                    ? TranslationTextWidget(
-                                        text: 'SEE BEST DEALS',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600),
-                                      )
-                                    : Text(
-                                        'SEE BEST DEALS',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600),
-                                      ),
+                                child: Text(
+                                  AppLocalizations.of(context)!.see_best_deals,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600),
+                                ),
                               ),
                             ),
                           ],

@@ -1,6 +1,6 @@
 import 'package:cashfuse/controllers/authController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -37,8 +37,8 @@ class OtpVerificationScreen extends StatelessWidget {
               ),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: TranslationTextWidget(
-                    text: 'Enter 6 digit code we have sent you',
+                  child: Text(
+                    AppLocalizations.of(context)!.otp_title,
                     textAlign: TextAlign.left,
                     style: Get.theme.primaryTextTheme.displaySmall!.copyWith(
                       height: 1.2,
@@ -52,10 +52,10 @@ class OtpVerificationScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TranslationTextWidget(
-                      text: !isEmail
-                          ? 'Code sent to ${authController.coutryDialCode} ${authController.contactNo.text}'
-                          : 'Code sent to ${authController.email.text}',
+                    Text(
+                      !isEmail
+                          ? '${AppLocalizations.of(context)!.otp_subtitle} ${authController.coutryDialCode} ${authController.contactNo.text}'
+                          : '${AppLocalizations.of(context)!.otp_subtitle} ${authController.email.text}',
                       style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
                         letterSpacing: -0.2,
                         fontWeight: FontWeight.w500,
@@ -111,9 +111,8 @@ class OtpVerificationScreen extends StatelessWidget {
               authController.seconds != 0
                   ? Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: TranslationTextWidget(
-                        text:
-                            "Wait 00 : ${authController.seconds.toString().padLeft(2, '0')}",
+                      child: Text(
+                        "Wait 00 : ${authController.seconds.toString().padLeft(2, '0')}",
                       ),
                     )
                   : InkWell(
@@ -173,8 +172,8 @@ class OtpVerificationScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             alignment: Alignment.center,
-            child: TranslationTextWidget(
-              text: 'Continue',
+            child: Text(
+              AppLocalizations.of(context)!.conti,
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 14,

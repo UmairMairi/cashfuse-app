@@ -2,14 +2,12 @@
 
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/views/helpDetailSceen.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webDrawerWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-
-import 'package:google_translator/google_translator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import '../controllers/commonController.dart';
 import 'package:cashfuse/utils/global.dart' as global;
@@ -57,17 +55,11 @@ class FaqScreen extends StatelessWidget {
                           commonController.faqLocalSearch();
                         },
                       )
-                    : GetPlatform.isWeb
-                        ? TranslationTextWidget(
-                            text: 'FAQs',
-                            style: Get.theme.primaryTextTheme.titleLarge!
-                                .copyWith(color: Colors.white),
-                          )
-                        : Text(
-                            'FAQs',
-                            style: Get.theme.primaryTextTheme.titleLarge!
-                                .copyWith(color: Colors.white),
-                          ).translate(),
+                    : Text(
+                        AppLocalizations.of(context)!.faqs,
+                        style: Get.theme.primaryTextTheme.titleLarge!
+                            .copyWith(color: Colors.white),
+                      ),
                 actions: [
                   InkWell(
                     onTap: () {
@@ -121,29 +113,13 @@ class FaqScreen extends StatelessWidget {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: GetPlatform.isWeb
-                                            ? TranslationTextWidget(
-                                                text: commonController
-                                                    .faqList[index].ques!,
-                                                style: Get
-                                                    .theme
-                                                    .primaryTextTheme
-                                                    .bodyMedium!
-                                                    .copyWith(
-                                                        color:
-                                                            Colors.grey[600]),
-                                              )
-                                            : Text(
-                                                commonController
-                                                    .faqList[index].ques!,
-                                                style: Get
-                                                    .theme
-                                                    .primaryTextTheme
-                                                    .bodyMedium!
-                                                    .copyWith(
-                                                        color:
-                                                            Colors.grey[600]),
-                                              ).translate(),
+                                        child: Text(
+                                          commonController.faqList[index].ques!,
+                                          style: Get.theme.primaryTextTheme
+                                              .bodyMedium!
+                                              .copyWith(
+                                                  color: Colors.grey[600]),
+                                        ),
                                       ),
                                       Divider(
                                         color: Colors.grey,
@@ -155,13 +131,8 @@ class FaqScreen extends StatelessWidget {
                               },
                             )
                           : Center(
-                              child: GetPlatform.isWeb
-                                  ? TranslationTextWidget(
-                                      text: 'No data found',
-                                    )
-                                  : Text(
-                                      'No data found',
-                                    ).translate(),
+                              child: Text(
+                                  AppLocalizations.of(context)!.no_data_found),
                             )
                       : ListView.builder(
                           shrinkWrap: true,

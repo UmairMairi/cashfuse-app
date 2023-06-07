@@ -44,7 +44,7 @@ import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:slide_countdown/slide_countdown.dart';
@@ -626,7 +626,8 @@ class HomeScreen extends StatelessWidget {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  'TOP CATEGORIES',
+                                                  AppLocalizations.of(context)!
+                                                      .top_categories,
                                                   style: TextStyle(
                                                     fontSize: 13,
                                                     fontWeight: FontWeight.w600,
@@ -634,7 +635,7 @@ class HomeScreen extends StatelessWidget {
                                                         .withOpacity(0.79),
                                                     letterSpacing: -0.3,
                                                   ),
-                                                ).translate(),
+                                                ),
                                                 InkWell(
                                                   onTap: () {
                                                     Get.to(
@@ -644,7 +645,7 @@ class HomeScreen extends StatelessWidget {
                                                     );
                                                   },
                                                   child: Text(
-                                                    'View All >',
+                                                    '${AppLocalizations.of(context)!.view_all} >',
                                                     style: Get
                                                         .theme
                                                         .primaryTextTheme
@@ -733,7 +734,7 @@ class HomeScreen extends StatelessWidget {
                                                                 FontWeight.w500,
                                                             color: Colors.black,
                                                           ),
-                                                        ).translate(),
+                                                        ),
                                                         SizedBox(
                                                           height: 5,
                                                         ),
@@ -810,7 +811,8 @@ class HomeScreen extends StatelessWidget {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  'Coupons of the day'
+                                                  AppLocalizations.of(context)!
+                                                      .coupons_of_the_day
                                                       .toUpperCase(),
                                                   style: TextStyle(
                                                     fontSize:
@@ -822,7 +824,7 @@ class HomeScreen extends StatelessWidget {
                                                         .withOpacity(0.79),
                                                     letterSpacing: -0.3,
                                                   ),
-                                                ).translate(),
+                                                ),
                                                 couponController
                                                             .couponList.length >
                                                         6
@@ -836,7 +838,7 @@ class HomeScreen extends StatelessWidget {
                                                           );
                                                         },
                                                         child: Text(
-                                                          'View All >',
+                                                          '${AppLocalizations.of(context)!.view_all} >',
                                                           style: Get
                                                               .theme
                                                               .primaryTextTheme
@@ -848,7 +850,7 @@ class HomeScreen extends StatelessWidget {
                                                                           .getPlatFrom()
                                                                       ? 16
                                                                       : null),
-                                                        ).translate(),
+                                                        ),
                                                       )
                                                     : SizedBox(),
                                               ],
@@ -967,7 +969,8 @@ class HomeScreen extends StatelessWidget {
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 6, vertical: 15),
                                             child: Text(
-                                              'EXCLUSIVE OFFERS FOR YOU',
+                                              AppLocalizations.of(context)!
+                                                  .exclusive_offers,
                                               style: TextStyle(
                                                 fontSize: global.getPlatFrom()
                                                     ? 16
@@ -977,7 +980,7 @@ class HomeScreen extends StatelessWidget {
                                                     .withOpacity(0.79),
                                                 letterSpacing: -0.3,
                                               ),
-                                            ).translate(),
+                                            ),
                                           )
                                         : SizedBox(),
                                     homeController.isOfferLoaded
@@ -1182,7 +1185,8 @@ class HomeScreen extends StatelessWidget {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  'TOP CASHBACK STORES',
+                                                  AppLocalizations.of(context)!
+                                                      .top_cashback_stores,
                                                   style: TextStyle(
                                                     fontSize:
                                                         global.getPlatFrom()
@@ -1193,7 +1197,7 @@ class HomeScreen extends StatelessWidget {
                                                         .withOpacity(0.79),
                                                     letterSpacing: -0.3,
                                                   ),
-                                                ).translate(),
+                                                ),
                                                 InkWell(
                                                   onTap: () {
                                                     Get.to(
@@ -1206,7 +1210,7 @@ class HomeScreen extends StatelessWidget {
                                                     );
                                                   },
                                                   child: Text(
-                                                    'View All >',
+                                                    '${AppLocalizations.of(context)!.view_all} >',
                                                     style: Get
                                                         .theme
                                                         .primaryTextTheme
@@ -1217,7 +1221,7 @@ class HomeScreen extends StatelessWidget {
                                                                     .getPlatFrom()
                                                                 ? 16
                                                                 : null),
-                                                  ).translate(),
+                                                  ),
                                                 )
                                               ],
                                             ),
@@ -1339,7 +1343,8 @@ class HomeScreen extends StatelessWidget {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  "LATEST PRODUCTS",
+                                                  AppLocalizations.of(context)!
+                                                      .latest_product,
                                                   style: TextStyle(
                                                     fontSize:
                                                         global.getPlatFrom()
@@ -1350,7 +1355,7 @@ class HomeScreen extends StatelessWidget {
                                                         .withOpacity(0.79),
                                                     letterSpacing: -0.3,
                                                   ),
-                                                ).translate(),
+                                                ),
                                                 InkWell(
                                                   onTap: () {
                                                     Navigator.push(
@@ -1366,7 +1371,7 @@ class HomeScreen extends StatelessWidget {
                                                                 )));
                                                   },
                                                   child: Text(
-                                                    'View All >',
+                                                    '${AppLocalizations.of(context)!.view_all} >',
                                                     style: Get
                                                         .theme
                                                         .primaryTextTheme
@@ -1377,7 +1382,7 @@ class HomeScreen extends StatelessWidget {
                                                                     .getPlatFrom()
                                                                 ? 16
                                                                 : null),
-                                                  ).translate(),
+                                                  ),
                                                 )
                                               ],
                                             ),
@@ -1453,31 +1458,35 @@ class HomeScreen extends StatelessWidget {
                                                                 CrossAxisAlignment
                                                                     .center,
                                                             children: [
-                                                              FutureBuilder(
-                                                                  future: global
-                                                                      .translatedText(
-                                                                          "Price Compared "),
-                                                                  builder: (context,
-                                                                      snapShot) {
-                                                                    return Container(
-                                                                      padding: EdgeInsets.only(
-                                                                          top:
-                                                                              15,
-                                                                          bottom:
-                                                                              15),
-                                                                      child:
-                                                                          RichText(
-                                                                        text: TextSpan(
-                                                                            text: snapShot.data != null
-                                                                                ? snapShot.data!
-                                                                                : 'Price Compared ',
-                                                                            style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w500, fontSize: 10),
-                                                                            children: [
-                                                                              TextSpan(text: ' (${homeController.productList[index].productPrices!.length} Sellers)', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 10, color: Colors.blueAccent.shade400)),
-                                                                            ]),
-                                                                      ),
-                                                                    );
-                                                                  }),
+                                                              Container(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        top: 15,
+                                                                        bottom:
+                                                                            15),
+                                                                child: RichText(
+                                                                  text: TextSpan(
+                                                                      text: AppLocalizations.of(
+                                                                              context)!
+                                                                          .price_compared,
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black54,
+                                                                          fontWeight: FontWeight
+                                                                              .w500,
+                                                                          fontSize:
+                                                                              10),
+                                                                      children: [
+                                                                        TextSpan(
+                                                                            text:
+                                                                                ' (${homeController.productList[index].productPrices!.length} Sellers)',
+                                                                            style: TextStyle(
+                                                                                fontWeight: FontWeight.w500,
+                                                                                fontSize: 10,
+                                                                                color: Colors.blueAccent.shade400)),
+                                                                      ]),
+                                                                ),
+                                                              ),
                                                               Container(
                                                                 color: Colors
                                                                     .grey
@@ -1512,7 +1521,7 @@ class HomeScreen extends StatelessWidget {
                                                                               .w500,
                                                                       fontSize:
                                                                           10),
-                                                                ).translate(),
+                                                                ),
                                                               ),
                                                               Container(
                                                                 decoration: BoxDecoration(
@@ -1537,7 +1546,7 @@ class HomeScreen extends StatelessWidget {
                                                                               .w700,
                                                                       color: Mycolors
                                                                           .orange),
-                                                                ).translate(),
+                                                                ),
                                                               ),
                                                               Padding(
                                                                 padding:
@@ -1557,7 +1566,7 @@ class HomeScreen extends StatelessWidget {
                                                                               .w600,
                                                                       fontSize:
                                                                           12),
-                                                                ).translate(),
+                                                                ),
                                                               ),
                                                             ],
                                                           ),
@@ -1580,7 +1589,8 @@ class HomeScreen extends StatelessWidget {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  'NEW FLASH DEALS - LIVE NOW',
+                                                  AppLocalizations.of(context)!
+                                                      .new_flash_deals,
                                                   style: TextStyle(
                                                     fontSize:
                                                         global.getPlatFrom()
@@ -1591,7 +1601,7 @@ class HomeScreen extends StatelessWidget {
                                                         .withOpacity(0.79),
                                                     letterSpacing: -0.3,
                                                   ),
-                                                ).translate(),
+                                                ),
                                                 InkWell(
                                                   onTap: () {
                                                     Get.to(
@@ -1600,7 +1610,7 @@ class HomeScreen extends StatelessWidget {
                                                     );
                                                   },
                                                   child: Text(
-                                                    'View All >',
+                                                    '${AppLocalizations.of(context)!.view_all} >',
                                                     style: Get
                                                         .theme
                                                         .primaryTextTheme
@@ -1611,7 +1621,7 @@ class HomeScreen extends StatelessWidget {
                                                                     .getPlatFrom()
                                                                 ? 16
                                                                 : null),
-                                                  ).translate(),
+                                                  ),
                                                 )
                                               ],
                                             ),
@@ -1760,7 +1770,8 @@ class HomeScreen extends StatelessWidget {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  "TRENDING PRODUCTS",
+                                                  AppLocalizations.of(context)!
+                                                      .trending_products,
                                                   style: TextStyle(
                                                     fontSize:
                                                         global.getPlatFrom()
@@ -1771,7 +1782,7 @@ class HomeScreen extends StatelessWidget {
                                                         .withOpacity(0.79),
                                                     letterSpacing: -0.3,
                                                   ),
-                                                ).translate(),
+                                                ),
                                                 InkWell(
                                                   onTap: () {
                                                     Navigator.push(
@@ -1787,7 +1798,7 @@ class HomeScreen extends StatelessWidget {
                                                                 )));
                                                   },
                                                   child: Text(
-                                                    'View All >',
+                                                    '${AppLocalizations.of(context)!.view_all} >',
                                                     style: Get
                                                         .theme
                                                         .primaryTextTheme
@@ -1798,7 +1809,7 @@ class HomeScreen extends StatelessWidget {
                                                                     .getPlatFrom()
                                                                 ? 16
                                                                 : null),
-                                                  ).translate(),
+                                                  ),
                                                 )
                                               ],
                                             ),
@@ -1885,33 +1896,35 @@ class HomeScreen extends StatelessWidget {
                                                                 CrossAxisAlignment
                                                                     .center,
                                                             children: [
-                                                              FutureBuilder(
-                                                                  future: global
-                                                                      .translatedText(
-                                                                          "Price Compared "),
-                                                                  builder: (context,
-                                                                      snapShot) {
-                                                                    return Container(
-                                                                      padding: EdgeInsets.only(
-                                                                          top:
-                                                                              15,
-                                                                          bottom:
-                                                                              15),
-                                                                      child:
-                                                                          RichText(
-                                                                        text: TextSpan(
-                                                                            text: snapShot
-                                                                                .data,
+                                                              Container(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        top: 15,
+                                                                        bottom:
+                                                                            15),
+                                                                child: RichText(
+                                                                  text: TextSpan(
+                                                                      text: AppLocalizations.of(
+                                                                              context)!
+                                                                          .price_compared,
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black54,
+                                                                          fontWeight: FontWeight
+                                                                              .w500,
+                                                                          fontSize:
+                                                                              10),
+                                                                      children: [
+                                                                        TextSpan(
+                                                                            text:
+                                                                                ' (${homeController.trendingProductList[index].productPrices!.length} Sellers)',
                                                                             style: TextStyle(
-                                                                                color: Colors.black54,
                                                                                 fontWeight: FontWeight.w500,
-                                                                                fontSize: 10),
-                                                                            children: [
-                                                                              TextSpan(text: ' (${homeController.trendingProductList[index].productPrices!.length} Sellers)', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 10, color: Colors.blueAccent.shade400)),
-                                                                            ]),
-                                                                      ),
-                                                                    );
-                                                                  }),
+                                                                                fontSize: 10,
+                                                                                color: Colors.blueAccent.shade400)),
+                                                                      ]),
+                                                                ),
+                                                              ),
                                                               Container(
                                                                 color: Colors
                                                                     .grey
@@ -1977,7 +1990,7 @@ class HomeScreen extends StatelessWidget {
                                                                               .w500,
                                                                       fontSize:
                                                                           10),
-                                                                ).translate(),
+                                                                ),
                                                               ),
                                                               Container(
                                                                 decoration: BoxDecoration(
@@ -2002,7 +2015,7 @@ class HomeScreen extends StatelessWidget {
                                                                               .w700,
                                                                       color: Mycolors
                                                                           .orange),
-                                                                ).translate(),
+                                                                ),
                                                               ),
                                                               Padding(
                                                                 padding:
@@ -2022,7 +2035,7 @@ class HomeScreen extends StatelessWidget {
                                                                               .w600,
                                                                       fontSize:
                                                                           12),
-                                                                ).translate(),
+                                                                ),
                                                               ),
                                                             ],
                                                           ),
@@ -2108,7 +2121,7 @@ class HomeScreen extends StatelessWidget {
                                                                 letterSpacing:
                                                                     -0.3,
                                                               ),
-                                                            ).translate(),
+                                                            ),
                                                             InkWell(
                                                               onTap: () {
                                                                 Get.to(
@@ -2123,7 +2136,7 @@ class HomeScreen extends StatelessWidget {
                                                                 );
                                                               },
                                                               child: Text(
-                                                                'View All >',
+                                                                '${AppLocalizations.of(context)!.view_all} >',
                                                                 style: Get
                                                                     .theme
                                                                     .primaryTextTheme
@@ -2134,7 +2147,7 @@ class HomeScreen extends StatelessWidget {
                                                                         fontSize: global.getPlatFrom()
                                                                             ? 16
                                                                             : null),
-                                                              ).translate(),
+                                                              ),
                                                             )
                                                           ],
                                                         ),
@@ -2369,7 +2382,8 @@ class HomeScreen extends StatelessWidget {
                       else
                         return Center(
                           child: Text(
-                            'No offers available in your country.',
+                             AppLocalizations.of(context)!
+                                                  .no_offers_available,
                             style: Get.theme.primaryTextTheme.titleMedium!
                                 .copyWith(
                               fontWeight: FontWeight.w600,

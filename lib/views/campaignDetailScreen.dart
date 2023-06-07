@@ -13,7 +13,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CampaignDetailScreen extends StatelessWidget {
   final CampaignModel? campaign;
@@ -52,7 +52,7 @@ class CampaignDetailScreen extends StatelessWidget {
                       campaign!.partner != null ? campaign!.partner!.name! : '',
                       style: Get.theme.primaryTextTheme.titleSmall!
                           .copyWith(color: Colors.white),
-                    ).translate(),
+                    ),
                     flexibleSpace:
                         CustomizableSpaceBar(builder: (context, scrollingRate) {
                       return (scrollingRate != 1.0)
@@ -133,7 +133,7 @@ class CampaignDetailScreen extends StatelessWidget {
                           ),
                           child: Row(
                             children: [
-                              Text('Share').translate(),
+                              Text('${AppLocalizations.of(context)!.share}  '),
                               CircleAvatar(
                                 radius: 12,
                                 backgroundColor: Colors.green[700],
@@ -167,7 +167,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontStyle: FontStyle.italic,
                                     color: Get.theme.primaryColor),
-                              ).translate(),
+                              ),
                               SizedBox(
                                 height: 15,
                               ),
@@ -227,7 +227,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                           color: Colors.white,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600),
-                                    ).translate(),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -300,16 +300,17 @@ class CampaignDetailScreen extends StatelessWidget {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Purchase',
+                                            AppLocalizations.of(context)!
+                                                .purchase,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13),
-                                          ).translate(),
+                                          ),
                                           Text(
                                             'Today',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
-                                          ).translate(),
+                                          ),
                                         ],
                                       ),
                                       SizedBox(
@@ -322,16 +323,17 @@ class CampaignDetailScreen extends StatelessWidget {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Cashback tracks in',
+                                            AppLocalizations.of(context)!
+                                                .cashback_tracks_in,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 13),
-                                          ).translate(),
+                                          ),
                                           Text(
                                             '24 hours',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600),
-                                          ).translate(),
+                                          ),
                                         ],
                                       )
                                     ],
@@ -382,13 +384,13 @@ class CampaignDetailScreen extends StatelessWidget {
                                                     )),
                                                 alignment: Alignment.center,
                                                 child: Text(
-                                                  'See More Offers  >',
+                                                  '${AppLocalizations.of(context)!.see_more_offers}  >',
                                                   style: TextStyle(
                                                       color: Colors.teal[200],
                                                       fontSize: 14,
                                                       fontWeight:
                                                           FontWeight.w400),
-                                                ).translate(),
+                                                ),
                                               ),
                                             ),
                                           )
@@ -450,7 +452,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                   .copyWith(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white),
-                            ).translate(),
+                            ),
                           ),
                           (campaign!.partner!.leftTab!.isNotEmpty &&
                                   campaign!.partner!.rightTab!.isNotEmpty)
@@ -481,7 +483,7 @@ class CampaignDetailScreen extends StatelessWidget {
                                   .copyWith(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white),
-                            ).translate(),
+                            ),
                           ),
                         ],
                       ),

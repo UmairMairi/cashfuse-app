@@ -26,7 +26,7 @@ import 'package:cashfuse/views/webScreen/webAccountSettingScreen.dart';
 import 'package:cashfuse/views/webScreen/webMyEarningScreen.dart';
 import 'package:cashfuse/views/webScreen/webSearchScreen.dart';
 import 'package:cashfuse/widget/confirmationDialog.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -273,8 +273,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       child: Row(
                         children: [
                           Icon(Icons.person),
-                          TranslationTextWidget(
-                            text: '  My Account',
+                          Text('  My Account',
                           ),
                         ],
                       ),

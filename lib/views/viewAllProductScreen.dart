@@ -3,11 +3,10 @@ import 'package:cashfuse/models/productModel.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/webScreen/webProductDetailMobileView.dart';
 import 'package:cashfuse/views/webScreen/webProductDetails.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:cashfuse/widget/web/webTopBarWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:google_translator/google_translator.dart';
 
 import '../utils/myColors.dart';
 import 'product_Details.dart';
@@ -42,17 +41,11 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                   Icons.arrow_back,
                 ),
               ),
-              title: GetPlatform.isWeb
-                  ? TranslationTextWidget(
-                      text: title,
-                      style: Get.theme.primaryTextTheme.titleSmall!
-                          .copyWith(color: Colors.white),
-                    )
-                  : Text(
-                      title,
-                      style: Get.theme.primaryTextTheme.titleSmall!
-                          .copyWith(color: Colors.white),
-                    ).translate(),
+              title: Text(
+                title,
+                style: Get.theme.primaryTextTheme.titleSmall!
+                    .copyWith(color: Colors.white),
+              ),
             ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -113,31 +106,27 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        FutureBuilder(
-                            future: global.translatedText("Price Compared "),
-                            builder: (context, snapShot) {
-                              return Container(
-                                padding: EdgeInsets.only(top: 15, bottom: 15),
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: snapShot.data,
+                        Container(
+                          padding: EdgeInsets.only(top: 15, bottom: 15),
+                          child: RichText(
+                            text: TextSpan(
+                                text: AppLocalizations.of(context)!
+                                    .price_compared,
+                                style: TextStyle(
+                                    color: Colors.black54,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 10),
+                                children: [
+                                  TextSpan(
+                                      text:
+                                          '(${productList[index].productPrices!.length} Sellers)',
                                       style: TextStyle(
-                                          color: Colors.black54,
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 10),
-                                      children: [
-                                        TextSpan(
-                                            text:
-                                                '(${productList[index].productPrices!.length} Sellers)',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 10,
-                                                color: Colors
-                                                    .blueAccent.shade400)),
-                                      ]),
-                                ),
-                              );
-                            }),
+                                          fontSize: 10,
+                                          color: Colors.blueAccent.shade400)),
+                                ]),
+                          ),
+                        ),
                         Container(
                           color: Colors.grey.shade400,
                           height: 1,
@@ -153,21 +142,13 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                          child: GetPlatform.isWeb
-                              ? TranslationTextWidget(
-                                  text: "${productList[index].name} ",
-                                  style: TextStyle(
-                                      color: Colors.black54,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 10),
-                                )
-                              : Text(
-                                  "${productList[index].name} ",
-                                  style: TextStyle(
-                                      color: Colors.black54,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 10),
-                                ).translate(),
+                          child: Text(
+                            "${productList[index].name} ",
+                            style: TextStyle(
+                                color: Colors.black54,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 10),
+                          ),
                         ),
                         Container(
                           decoration: BoxDecoration(
@@ -175,41 +156,23 @@ class _ViewAllProductScreenState extends State<ViewAllProductScreen> {
                               border: Border.all(color: Mycolors.orange)),
                           padding:
                               EdgeInsets.symmetric(horizontal: 13, vertical: 3),
-                          child: GetPlatform.isWeb
-                              ? TranslationTextWidget(
-                                  text:
-                                      "+ ${global.appInfo.currency} ${productList[index].productPrices![0].cashback}  REWARDS",
-                                  style: TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w600,
-                                      color: Mycolors.orange),
-                                )
-                              : Text(
-                                  "+ ${global.appInfo.currency} ${productList[index].productPrices![0].cashback}  REWARDS",
-                                  style: TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w600,
-                                      color: Mycolors.orange),
-                                ).translate(),
+                          child: Text(
+                            "+ ${global.appInfo.currency} ${productList[index].productPrices![0].cashback}  REWARDS",
+                            style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                color: Mycolors.orange),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                          child: GetPlatform.isWeb
-                              ? TranslationTextWidget(
-                                  text:
-                                      "Final Price ${global.appInfo.currency} ${productList[index].productPrices![0].price}",
-                                  style: TextStyle(
-                                      color: Mycolors.blue,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12),
-                                )
-                              : Text(
-                                  "Final Price ${global.appInfo.currency} ${productList[index].productPrices![0].price}",
-                                  style: TextStyle(
-                                      color: Mycolors.blue,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12),
-                                ).translate(),
+                          child: Text(
+                            "Final Price ${global.appInfo.currency} ${productList[index].productPrices![0].price}",
+                            style: TextStyle(
+                                color: Mycolors.blue,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12),
+                          ),
                         ),
                       ],
                     ),

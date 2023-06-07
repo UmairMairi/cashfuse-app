@@ -1,13 +1,11 @@
 import 'package:cashfuse/controllers/homeController.dart';
+import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/views/campaignDetailScreen.dart';
 import 'package:cashfuse/views/webScreen/webCampaignDetailScreen.dart';
 import 'package:cashfuse/widget/customImage.dart';
-import 'package:cashfuse/widget/translationTextWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:cashfuse/utils/global.dart' as global;
-
-import 'package:google_translator/google_translator.dart';
 
 class MoreCampignScreen extends StatelessWidget {
   @override
@@ -26,23 +24,13 @@ class MoreCampignScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GetPlatform.isWeb
-                        ? TranslationTextWidget(
-                            text: 'See More Offers',
-                            style:
-                                Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: -0.1,
-                            ),
-                          )
-                        : Text(
-                            'See More Offers',
-                            style:
-                                Get.theme.primaryTextTheme.titleSmall!.copyWith(
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: -0.1,
-                            ),
-                          ).translate(),
+                    Text(
+                      AppLocalizations.of(context)!.see_more_offers,
+                      style: Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: -0.1,
+                      ),
+                    ),
                     InkWell(
                       onTap: () {
                         Get.back();
@@ -84,34 +72,18 @@ class MoreCampignScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  GetPlatform.isWeb
-                                      ? TranslationTextWidget(
-                                          text: homeController
-                                              .seeMoreCampaignList[index].name!,
-                                          textAlign: TextAlign.start,
-                                          style: Get.theme.primaryTextTheme
-                                              .titleSmall,
-                                        )
-                                      : Text(
-                                          homeController
-                                              .seeMoreCampaignList[index].name!,
-                                          textAlign: TextAlign.start,
-                                          style: Get.theme.primaryTextTheme
-                                              .titleSmall,
-                                        ).translate(),
-                                  GetPlatform.isWeb
-                                      ? TranslationTextWidget(
-                                          text: homeController
-                                              .seeMoreCampaignList[index]
-                                              .description!,
-                                          textAlign: TextAlign.start,
-                                        )
-                                      : Text(
-                                          homeController
-                                              .seeMoreCampaignList[index]
-                                              .description!,
-                                          textAlign: TextAlign.start,
-                                        ).translate(),
+                                  Text(
+                                    homeController
+                                        .seeMoreCampaignList[index].name!,
+                                    textAlign: TextAlign.start,
+                                    style:
+                                        Get.theme.primaryTextTheme.titleSmall,
+                                  ),
+                                  Text(
+                                    homeController.seeMoreCampaignList[index]
+                                        .description!,
+                                    textAlign: TextAlign.start,
+                                  ),
                                 ],
                               ),
                             ),
@@ -156,23 +128,14 @@ class MoreCampignScreen extends StatelessWidget {
                                   width: 1,
                                 )),
                             alignment: Alignment.center,
-                            child: GetPlatform.isWeb
-                                ? TranslationTextWidget(
-                                    text: homeController
-                                        .seeMoreCampaignList[index].buttonText!,
-                                    style: TextStyle(
-                                        color: Get.theme.secondaryHeaderColor,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600),
-                                  )
-                                : Text(
-                                    homeController
-                                        .seeMoreCampaignList[index].buttonText!,
-                                    style: TextStyle(
-                                        color: Get.theme.secondaryHeaderColor,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600),
-                                  ).translate(),
+                            child: Text(
+                              homeController
+                                  .seeMoreCampaignList[index].buttonText!,
+                              style: TextStyle(
+                                  color: Get.theme.secondaryHeaderColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600),
+                            ),
                           ),
                         ),
                         Container(
