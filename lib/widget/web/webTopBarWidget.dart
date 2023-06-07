@@ -17,7 +17,6 @@ import 'package:cashfuse/views/bottomNavigationBarScreen.dart';
 import 'package:cashfuse/views/getHelpScreen.dart';
 import 'package:cashfuse/views/getStartedScreen.dart';
 import 'package:cashfuse/views/homeScreen.dart';
-import 'package:cashfuse/views/myEarningScreen.dart';
 import 'package:cashfuse/views/paymentHistoryScreen.dart';
 import 'package:cashfuse/views/paymentScreen.dart';
 import 'package:cashfuse/views/privacyPolicyScreen.dart';
@@ -304,7 +303,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 ? InkWell(
                     onTap: () {
                       Get.to(
-                        () => MyEarningSceen(),
+                        () => WebMyEarningSceen(),
                         routeName: 'earning',
                       );
                     },

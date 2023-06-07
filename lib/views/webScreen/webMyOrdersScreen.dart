@@ -67,8 +67,8 @@ class WebMyOrdersScreen extends StatelessWidget {
                                         mainAxisSpacing: 15.0,
                                         childAspectRatio: 1.45,
                                       ),
-                                      itemCount: global.currentUser
-                                          .withdrawalRequest!.length,
+                                      itemCount:
+                                          orderController.orderList.length,
                                       shrinkWrap: true,
                                       padding:
                                           EdgeInsets.all(10).copyWith(top: 20),
