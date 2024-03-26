@@ -1,50 +1,49 @@
 {
   "project_info": {
-    "project_number": "521109211624",
-    "project_id": "cashfuse-60939",
-    "storage_bucket": "cashfuse-60939.appspot.com"
+    "project_number": "773714635993",
+    "project_id": "bovi-price",
+    "storage_bucket": "bovi-price.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:521109211624:android:73898e9cbfabc8e4c53c5d",
+        "mobilesdk_app_id": "1:773714635993:android:76b9e3afaad27509c062c8",
         "android_client_info": {
           "package_name": "com.cashfuse.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "521109211624-62evm82p8opmhmdos1j0id192hfnhkoo.apps.googleusercontent.com",
+          "client_id": "773714635993-vkrq0ge5a5j9q7soj1mgujnp03j3k9gr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.cashfuse.app",
-            "certificate_hash": "a0c043a53cfaae18772d6e004bdc5c30a526492f"
+            "certificate_hash": "932f64d91689ab69c64f4e1e65bf8646bda41c82"
           }
         },
         {
-          "client_id": "521109211624-b46rqpf7a68e227r8k0rur1gb5f5uaim.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.cashfuse.app",
-            "certificate_hash": "fdd456e1cdf249d2ef3e9a09806313514123daf1"
-          }
-        },
-        {
-          "client_id": "521109211624-ht7a2ge4jl36jp2efmc3nsgoprnu8btc.apps.googleusercontent.com",
+          "client_id": "773714635993-2nms9t9irifhrsfq3a756auhsg4s3te2.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCuGP6eCEJW5mGHvk4YoCOoXz6TiKxKJSM"
+          "current_key": "AIzaSyD5HujxmsmauocAtWnOm-E8px5FX8SxZsE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "521109211624-ht7a2ge4jl36jp2efmc3nsgoprnu8btc.apps.googleusercontent.com",
+              "client_id": "773714635993-2nms9t9irifhrsfq3a756auhsg4s3te2.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "773714635993-63m1kn78oggba1kf1ghf7pvf26gdcrrc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cashfuse.app"
+              }
             }
           ]
         }

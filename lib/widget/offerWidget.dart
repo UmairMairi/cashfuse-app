@@ -51,7 +51,8 @@ class OfferWidget extends StatelessWidget {
                                 : 145,
                         width: Get.width,
                         fit: BoxFit.fill,
-                        errorImage: Images.dummyImage,
+                        errorImage:
+                            '${global.appInfo.baseUrls!.businessLogoUrl}/${global.appInfo.dummyImage}',
                       ),
                     ),
                     Card(
@@ -83,25 +84,14 @@ class OfferWidget extends StatelessWidget {
                             color: Get.theme.secondaryHeaderColor,
                             borderRadius: BorderRadius.circular(2),
                           ),
-                          child: FutureBuilder(
-                            future: global.translatedText(
-                              commonModel!.buttonText!.isNotEmpty
-                                  ? commonModel!.buttonText!
-                                  : 'Grab Now',
-                            ),
-                            builder: (context, snapshot) {
-                              return Text(
-                                snapshot.data != null
-                                    ? snapshot.data!
-                                    : commonModel!.buttonText!.isNotEmpty
-                                        ? commonModel!.buttonText!
-                                        : 'Grab Now',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w500),
-                              );
-                            },
+                          child: Text(
+                            commonModel!.buttonText!.isNotEmpty
+                                ? commonModel!.buttonText!
+                                : 'Grab Now',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500),
                           )),
                     ],
                   ),
@@ -178,20 +168,12 @@ class OfferWidget extends StatelessWidget {
                                 color: Get.theme.secondaryHeaderColor,
                                 borderRadius: BorderRadius.circular(2),
                               ),
-                              child: FutureBuilder(
-                                future:
-                                    global.translatedText(offer!.buttonText!),
-                                builder: (context, snapshot) {
-                                  return Text(
-                                    snapshot.data != null
-                                        ? snapshot.data!
-                                        : offer!.buttonText!,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500),
-                                  );
-                                },
+                              child: Text(
+                                offer!.buttonText!,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500),
                               ),
                             ),
                           ],

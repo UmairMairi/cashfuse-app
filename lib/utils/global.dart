@@ -5,8 +5,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cashfuse/controllers/adController.dart';
-import 'package:cashfuse/controllers/localizationController.dart';
-
 import 'package:cashfuse/models/admobSettingModel.dart';
 import 'package:cashfuse/models/appInfoModel.dart';
 import 'package:cashfuse/models/countryModel.dart';
@@ -26,7 +24,8 @@ import 'package:universal_html/html.dart' as html;
 String appName = "Cashfuse";
 String appPackageName = 'com.cashfuse.app';
 
-String baseUrl = 'https://cash.codefuse.org/admin/api';
+// String baseUrl = 'https://cash.codefuse.org/admin/api';
+String baseUrl = 'https://price.ai.backofficevi.com/admin/api';
 
 String webConfigurationKey =
     "BGPWwFL-u-5K7CdmI7bW1Qav23aJxTUFtksG5SDigWG3M2J1-pqgwY-qB1fMQlRJepzlqq9Qv8rDUqk4v9Ph584";

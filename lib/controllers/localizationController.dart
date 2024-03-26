@@ -37,21 +37,4 @@ class LocalizationController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  Future setLanguage(String code) async {
-    try {
-      languageCode = code;
-      update();
-      if (global.rtlLanguageCodeLList.contains(languageCode)) {
-        global.isRTL = true;
-      } else {
-        global.isRTL = false;
-      }
-      global.sp!.setString('languageCode', languageCode);
-      update();
-    } catch (e) {
-      print("Exception - LocalizationController.dart - setLanguage():" +
-          e.toString());
-    }
-  }
 }

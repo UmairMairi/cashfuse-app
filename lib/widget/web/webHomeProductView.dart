@@ -1,13 +1,13 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'package:cashfuse/controllers/homeController.dart';
-import 'package:cashfuse/utils/myColors.dart';
 import 'package:cashfuse/utils/global.dart' as global;
+import 'package:cashfuse/utils/myColors.dart';
 import 'package:cashfuse/views/webScreen/webProductDetails.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WebHomeProductView extends StatelessWidget {
   WebHomeProductView() : super();
@@ -84,7 +84,9 @@ class WebHomeProductView extends StatelessWidget {
                                             top: 15, bottom: 15),
                                         child: RichText(
                                           text: TextSpan(
-                                              text: "Price Compared ",
+                                              text:
+                                                  AppLocalizations.of(context)!
+                                                      .price_compared,
                                               style: TextStyle(
                                                   color: Colors.black54,
                                                   fontWeight: FontWeight.w500,
@@ -114,9 +116,8 @@ class WebHomeProductView extends StatelessWidget {
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             top: 8.0, bottom: 8),
-                                        child: TranslationTextWidget(
-                                          text:
-                                              "${homeController.productList[index].name} ",
+                                        child: Text(
+                                          "${homeController.productList[index].name} ",
                                           style: TextStyle(
                                               color: Colors.black54,
                                               fontWeight: FontWeight.w500,
@@ -130,9 +131,8 @@ class WebHomeProductView extends StatelessWidget {
                                                 color: Mycolors.orange)),
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 13, vertical: 3),
-                                        child: TranslationTextWidget(
-                                          text:
-                                              "+ ${global.appInfo.currency} ${homeController.productList[index].productPrices![0].cashback}  REWARDS",
+                                        child: Text(
+                                          "+ ${global.appInfo.currency} ${homeController.productList[index].productPrices![0].cashback}  REWARDS",
                                           style: TextStyle(
                                               fontSize: 11,
                                               fontWeight: FontWeight.w700,
@@ -142,9 +142,8 @@ class WebHomeProductView extends StatelessWidget {
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             top: 8.0, bottom: 8),
-                                        child: TranslationTextWidget(
-                                          text:
-                                              "Final Price ${global.appInfo.currency} ${homeController.productList[index].productPrices![0].price}",
+                                        child: Text(
+                                          "Final Price ${global.appInfo.currency} ${homeController.productList[index].productPrices![0].price}",
                                           style: TextStyle(
                                               color: Mycolors.blue,
                                               fontWeight: FontWeight.w600,

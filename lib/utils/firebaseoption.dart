@@ -15,23 +15,23 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: "AIzaSyB29Rl1IKWA-sTP-gHvlrN7scS7hO4Mp4s",
-    authDomain: "cashfuse-60939.firebaseapp.com",
-    projectId: "cashfuse-60939",
-    storageBucket: "cashfuse-60939.appspot.com",
-    messagingSenderId: "521109211624",
-    appId: "1:521109211624:web:1f3cec9c3cbbfea4c53c5d",
-    measurementId: "G-KBPRBBZRYC",
+      apiKey: "AIzaSyAejv97J4qFVvHehCI8K2hoQT3C9Gl5MH0",
+      authDomain: "bovi-price.firebaseapp.com",
+      projectId: "bovi-price",
+      storageBucket: "bovi-price.appspot.com",
+      messagingSenderId: "773714635993",
+      appId: "1:773714635993:web:a0452d67e8560f7dc062c8",
+      measurementId: "G-HSM06TWT3P"
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: "AIzaSyCuGP6eCEJW5mGHvk4YoCOoXz6TiKxKJSM",
-    authDomain: "cashfuse-60939.firebaseapp.com",
-    projectId: "cashfuse-60939",
-    storageBucket: "cashfuse-60939.appspot.com",
-    messagingSenderId: "521109211624",
-    appId: "1:521109211624:android:73898e9cbfabc8e4c53c5d",
-    measurementId: "G-KBPRBBZRYC",
+    apiKey: "AIzaSyD5HujxmsmauocAtWnOm-E8px5FX8SxZsE",
+    authDomain: "bovi-price.firebaseapp.com",
+    projectId: "bovi-price",
+    storageBucket: "bovi-price.appspot.com",
+    messagingSenderId: "773714635993",
+    appId: "1:773714635993:android:76b9e3afaad27509c062c8",
+    measurementId: "G-HSM06TWT3P",
   );
 
   static const FirebaseOptions ios = FirebaseOptions(

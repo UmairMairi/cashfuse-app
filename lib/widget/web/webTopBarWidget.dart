@@ -10,6 +10,8 @@ import 'package:cashfuse/controllers/couponController.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/controllers/localizationController.dart';
 import 'package:cashfuse/controllers/searchController.dart';
+import 'package:cashfuse/l10n/l10n.dart';
+import 'package:cashfuse/provider/local_provider.dart';
 import 'package:cashfuse/utils/global.dart' as global;
 import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/views/aboutUsScreen.dart';
@@ -32,6 +34,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
+import 'package:provider/provider.dart';
 
 class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState>? scaffoldKey;
@@ -43,6 +46,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<LocaleProvider>(context);
+    var locale = provider.locale;
     return Container(
       color: Colors.white,
       alignment: Alignment.center,
@@ -113,43 +118,53 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
               }),
             ),
             Expanded(child: SizedBox()),
-            global.appInfo.languages != null &&
-                    global.appInfo.languages!.length > 0
-                ? GetBuilder<LocalizationController>(
-                    builder: (localizationController) {
-                    return Card(
-                      elevation: 5,
-                      margin: EdgeInsets.only(top: 20, right: 10, bottom: 20),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: DropdownButton(
-                        value: localizationController.languageCode,
+            GetBuilder<LocalizationController>(
+                builder: (localizationController) {
+              return Card(
+                elevation: 5,
+                margin: EdgeInsets.only(top: 20, right: 10, bottom: 20),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: DropdownButton(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  value: global.languageCode,
+                  alignment: AlignmentDirectional.center,
+                  elevation: 0,
+                  underline: SizedBox(),
+                  borderRadius: BorderRadius.circular(10),
+                  items:
+                      List.generate(L10n.all.length, (index) {
+                    return DropdownMenuItem(
                         alignment: AlignmentDirectional.center,
-                        elevation: 0,
-                        underline: SizedBox(),
-                        borderRadius: BorderRadius.circular(10),
-                        items: List.generate(global.appInfo.languages!.length,
-                            (index) {
-                          return DropdownMenuItem(
-                              alignment: AlignmentDirectional.center,
-                              value:
-                                  global.appInfo.languages![index].languageCode,
-                              child: Text(global
-                                  .appInfo.languages![index].languageName!));
-                        }),
-                        onChanged: (value) {
-                          Get.back();
-                          Get.to(() => BottomNavigationBarScreen(),
-                              preventDuplicates: false, routeName: 'home');
-                          homeController.update();
-                          localizationController.setLanguage(value!);
-                          localizationController.refresh();
-                        },
-                      ),
-                    );
-                  })
-                : SizedBox(),
+                        value: L10n.all[index].languageCode,
+                        child: Text(
+                            L10n.languageListName[index]));
+                  }),
+                  onChanged: (value) {
+                    Get.back();
+                    Get.to(() => BottomNavigationBarScreen(),
+                        preventDuplicates: false, routeName: 'home');
+                    homeController.update();
+                    // localizationController.setLanguage(value!);
+                    // localizationController.refresh();
+
+                    global.languageCode = value!;
+                    final provider =
+                        Provider.of<LocaleProvider>(context, listen: false);
+                    locale = Locale(global.languageCode);
+                    provider.setLocale(locale!);
+                    global.languageCode = locale!.languageCode;
+                    if (global.languageCode == 'ar') {
+                      global.isRTL = false;
+                    } else {
+                      global.isRTL = true;
+                    }
+                    Get.updateLocale(locale!);
+                  },
+                ),
+              );
+            }),
             global.country != null
                 ? GetBuilder<HomeController>(
                     builder: (controller) => PopupMenuButton(
@@ -247,7 +262,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
               },
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: TranslationTextWidget(text: 'How It Works'),
+                child: Text(AppLocalizations.of(context)!.how_it_works),
               ),
             ),
             VerticalDivider(
@@ -273,7 +288,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       child: Row(
                         children: [
                           Icon(Icons.person),
-                          Text('  My Account',
+                          Text(
+                            '  My Account',
                           ),
                         ],
                       ),
@@ -295,7 +311,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: TranslationTextWidget(text: 'signup'),
+                      child: Text(AppLocalizations.of(context)!.login),
                     ),
                   ),
             global.currentUser.id != null
@@ -370,8 +386,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'account',
                         );
                       },
-                      child: TranslationTextWidget(
-                        text: 'Account Settings',
+                      child: Text(
+                        AppLocalizations.of(context)!.account_settings,
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -387,8 +403,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'earning',
                         );
                       },
-                      child: TranslationTextWidget(
-                        text: 'My Earnings',
+                      child: Text(
+                        AppLocalizations.of(context)!.my_earnings,
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -404,8 +420,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'payment',
                         );
                       },
-                      child: TranslationTextWidget(
-                        text: 'Payments',
+                      child: Text(
+                        AppLocalizations.of(context)!.payments,
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -421,8 +437,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'payment-history',
                         );
                       },
-                      child: TranslationTextWidget(
-                        text: 'Payment History',
+                      child: Text(
+                        AppLocalizations.of(context)!.payment_history,
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -438,8 +454,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'recent-clicks',
                         );
                       },
-                      child: TranslationTextWidget(
-                        text: 'Recents Clicks',
+                      child: Text(
+                        AppLocalizations.of(context)!.recents_clicks,
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -455,8 +471,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'referral-network',
                         );
                       },
-                      child: TranslationTextWidget(
-                        text: 'Referral Network',
+                      child: Text(
+                        AppLocalizations.of(context)!.referral_network,
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -472,8 +488,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'faq',
                         );
                       },
-                      child: TranslationTextWidget(
-                        text: 'Get Help',
+                      child: Text(
+                        AppLocalizations.of(context)!.get_help,
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -489,8 +505,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'about',
                         );
                       },
-                      child: TranslationTextWidget(
-                        text: 'About Us',
+                      child: Text(
+                        AppLocalizations.of(context)!.about_us,
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -506,8 +522,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           routeName: 'privacy',
                         );
                       },
-                      child: TranslationTextWidget(
-                        text: 'Privacy Policy',
+                      child: Text(
+                        AppLocalizations.of(context)!.privacy_policy,
                         style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
                           letterSpacing: 0,
                           color: Colors.black.withOpacity(0.75),
@@ -520,12 +536,12 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                         Get.back();
                         showConfirmationDialog(
                           context,
-                          'Logout',
-                          'Are you sure you want to logout ?',
+                          AppLocalizations.of(context)!.logout,
+                          AppLocalizations.of(context)!.logout_desc,
                           [
                             CupertinoDialogAction(
                               child: Text(
-                                'Yes',
+                                AppLocalizations.of(context)!.yes,
                                 style: Get.theme.primaryTextTheme.titleSmall!
                                     .copyWith(color: Colors.red),
                               ),
@@ -541,7 +557,7 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                             ),
                             CupertinoDialogAction(
                               child: Text(
-                                'No',
+                                AppLocalizations.of(context)!.no,
                                 style: Get.theme.primaryTextTheme.titleSmall!
                                     .copyWith(color: Colors.blue),
                               ),
@@ -552,8 +568,8 @@ class WebTopBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           ],
                         );
                       },
-                      child: TranslationTextWidget(
-                        text: 'Logout',
+                      child: Text(
+                        AppLocalizations.of(context)!.logout,
                         style: Get.theme.primaryTextTheme.bodyMedium!.copyWith(
                           letterSpacing: -0.5,
                           color: Colors.red,

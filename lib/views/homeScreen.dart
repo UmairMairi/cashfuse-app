@@ -56,8 +56,7 @@ class HomeScreen extends StatelessWidget {
   final bgColor;
   HomeScreen({this.bgColor});
 
-  AdController _adController =
-      GetPlatform.isWeb ? Get.put(AdController()) : Get.find<AdController>();
+  AdController _adController = GetPlatform.isWeb ? Get.put(AdController()) : Get.find<AdController>();
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -432,11 +431,8 @@ class HomeScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     homeController.isBannerLoaded
-                                        ? homeController.topBannerList !=
-                                                    null &&
-                                                homeController
-                                                        .topBannerList.length >
-                                                    0
+                                        ? homeController.topBannerList != null &&
+                                                homeController.topBannerList.length > 0
                                             ? Stack(
                                                 alignment:
                                                     Alignment.bottomCenter,

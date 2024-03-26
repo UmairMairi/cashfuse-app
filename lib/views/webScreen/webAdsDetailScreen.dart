@@ -430,48 +430,69 @@ class WebAdsDetailScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                homeController.seeMoreAdsList != null &&
-                                        homeController.seeMoreAdsList.length > 0
-                                    ? InkWell(
-                                        onTap: () async {
-                                          //await homeController.getMoreAds(ads.id.toString());
-                                          Get.bottomSheet(
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(15),
-                                                topRight: Radius.circular(15),
+                                fromSeeMore!
+                                    ? SizedBox()
+                                    : homeController.seeMoreAdsList != null &&
+                                            homeController
+                                                    .seeMoreAdsList.length >
+                                                0
+                                        ? InkWell(
+                                            onTap: () async {
+                                              //await homeController.getMoreAds(ads.id.toString());
+                                              global.getPlatFrom()
+                                                  ? Get.dialog(
+                                                      Dialog(
+                                                        child: SizedBox(
+                                                          height: 500,
+                                                          width: 500,
+                                                          child:
+                                                              MoreAdsScreen(),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : Get.bottomSheet(
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  15),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  15),
+                                                        ),
+                                                        child: MoreAdsScreen(),
+                                                      ),
+                                                    );
+                                            },
+                                            child: Container(
+                                              width: global.getPlatFrom()
+                                                  ? Get.width / 3
+                                                  : Get.width,
+                                              height: 45,
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: 30, vertical: 15),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 7, vertical: 8),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                    color: Colors.teal[200]!,
+                                                    width: 1.5,
+                                                  )),
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                '${AppLocalizations.of(context)!.see_more_offers}  >',
+                                                style: TextStyle(
+                                                    color: Colors.teal[200],
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
-                                              child: MoreAdsScreen(),
                                             ),
-                                          );
-                                        },
-                                        child: Container(
-                                          width: global.getPlatFrom()
-                                              ? Get.width / 3
-                                              : Get.width,
-                                          height: 45,
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: 30, vertical: 15),
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 7, vertical: 8),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                color: Colors.teal[200]!,
-                                                width: 1.5,
-                                              )),
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            '${AppLocalizations.of(context)!.see_more_offers}  >',
-                                            style: TextStyle(
-                                                color: Colors.teal[200],
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                      )
-                                    : SizedBox(),
+                                          )
+                                        : SizedBox(),
                               ],
                             ),
                           ),

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>773714635993-63m1kn78oggba1kf1ghf7pvf26gdcrrc.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.773714635993-63m1kn78oggba1kf1ghf7pvf26gdcrrc</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>773714635993-vkrq0ge5a5j9q7soj1mgujnp03j3k9gr.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAkTUMWWgxYFK7zG7rlPcguay6HW4SYa8s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>773714635993</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.cashfuse.app</string>
+	<key>PROJECT_ID</key>
+	<string>bovi-price</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bovi-price.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:773714635993:ios:ec8db40b00b19902c062c8</string>
+</dict>
+</plist>

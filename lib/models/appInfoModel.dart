@@ -17,6 +17,7 @@ class AppInfo {
   List<LanguageModel>? languages;
   List<CountryModel>? countries;
   int? countryselection;
+  String? dummyImage;
 
   AppInfo({
     this.admob,
@@ -30,6 +31,7 @@ class AppInfo {
     this.languages,
     this.countries,
     this.countryselection,
+    this.dummyImage,
   });
 
   AppInfo.fromJson(Map<String, dynamic> json) {
@@ -63,6 +65,7 @@ class AppInfo {
           : [];
       countryselection =
           json['countryselection'] != null ? json['countryselection'] : 0;
+      dummyImage = json["dummy_image"] != null ? json["dummy_image"] : '';
     } catch (e) {
       print("Exception - AppInfo.dart - AppInfo.fromJson():" + e.toString());
     }

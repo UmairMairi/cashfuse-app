@@ -80,11 +80,7 @@ class _AdmitedDetailScreenState extends State<AdmitedDetailScreen> {
                                   fit: BoxFit.fill,
                                   admitedOffersModal: admitedData,
                                 ),
-                                // Image.asset(
-                                //   Images.dummyImage,
-                                //   width: Get.width,
-                                //   fit: BoxFit.cover,
-                                // ),
+                                
                               ),
                               Positioned(
                                 bottom: -30,

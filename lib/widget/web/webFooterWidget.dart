@@ -47,8 +47,8 @@ class WebFooterWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        TranslationTextWidget(
-                          text: 'Quick Links',
+                        Text(
+                          AppLocalizations.of(context)!.quick_links,
                           style: TextStyle(fontSize: 28, color: Colors.white),
                         ),
                         SizedBox(
@@ -62,7 +62,8 @@ class WebFooterWidget extends StatelessWidget {
                             );
                           },
                           behavior: HitTestBehavior.opaque,
-                          child: Text('About Us',
+                          child: Text(
+                            AppLocalizations.of(context)!.about_us,
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
@@ -77,7 +78,8 @@ class WebFooterWidget extends StatelessWidget {
                             );
                           },
                           behavior: HitTestBehavior.opaque,
-                          child: Text('Get Help',
+                          child: Text(
+                            AppLocalizations.of(context)!.get_help,
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
@@ -92,7 +94,8 @@ class WebFooterWidget extends StatelessWidget {
                             );
                           },
                           behavior: HitTestBehavior.opaque,
-                          child: Text('Privacy Policy',
+                          child: Text(
+                            AppLocalizations.of(context)!.privacy_policy,
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
@@ -102,7 +105,8 @@ class WebFooterWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text('Download our app',
+                          Text(
+                            AppLocalizations.of(context)!.download_app,
                             style: TextStyle(fontSize: 28, color: Colors.white),
                           ),
                           SizedBox(
@@ -138,14 +142,15 @@ class WebFooterWidget extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          TranslationTextWidget(
-                                            text: 'Get it on',
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .get_it_on,
                                             style: TextStyle(
                                                 fontSize: 14,
                                                 color: Colors.white),
                                           ),
-                                          TranslationTextWidget(
-                                            text: 'Play Store',
+                                          Text(
+                                            'Play Store',
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 color: Colors.white),
@@ -185,14 +190,15 @@ class WebFooterWidget extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          TranslationTextWidget(
-                                            text: 'Get it on',
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .get_it_on,
                                             style: TextStyle(
                                                 fontSize: 14,
                                                 color: Colors.white),
                                           ),
-                                          TranslationTextWidget(
-                                            text: 'App Store',
+                                          Text(
+                                            'App Store',
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 color: Colors.white),
@@ -215,8 +221,8 @@ class WebFooterWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            TranslationTextWidget(
-                              text: 'Contact Us',
+                            Text(AppLocalizations.of(context)!
+                                                .contact_us,
                               style:
                                   TextStyle(fontSize: 28, color: Colors.white),
                             ),

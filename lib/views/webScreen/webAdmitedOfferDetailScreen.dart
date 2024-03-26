@@ -511,7 +511,8 @@ class _WebAdmitedDetailScreenState extends State<WebAdmitedDetailScreen> {
                                                   )),
                                               alignment: Alignment.center,
                                               child: Text(
-                                                'See More Offers  >',
+                                                AppLocalizations.of(context)!
+                                                    .see_more_offers,
                                                 style: TextStyle(
                                                     color: Colors.teal[200],
                                                     fontSize: 14,

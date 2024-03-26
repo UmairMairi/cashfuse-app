@@ -851,7 +851,7 @@ class HomeController extends GetxController {
       if (networkController.connectionStatus.value == 1 ||
           networkController.connectionStatus.value == 2) {
         Get.dialog(CustomLoader(), barrierDismissible: false);
-        await apiHelper.getTrackingLink(url, type, cId: cId!).then((response) {
+        await apiHelper.getTrackingLink(url, type, cId: cId != null ? cId : null).then((response) {
           Get.back();
           if (response.status == "1") {
             createdLink = response.data;

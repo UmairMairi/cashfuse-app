@@ -1,11 +1,9 @@
 import 'package:cashfuse/constants/appConstant.dart';
 import 'package:cashfuse/controllers/homeController.dart';
 import 'package:cashfuse/models/categoryModel.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RatesAndOfferTermsSheetWidget extends StatelessWidget {
   final CategoryModel partner;
@@ -39,27 +37,16 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        GetPlatform.isWeb
-                            ? TranslationTextWidget(
-                                text: homeController.isOffer
-                                    ? partner.rightTab!
-                                    : partner.leftTab!,
-                                style: Get.theme.primaryTextTheme.titleSmall!
-                                    .copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: -0.1,
-                                ),
-                              )
-                            : Text(
-                                homeController.isOffer
-                                    ? partner.rightTab!
-                                    : partner.leftTab!,
-                                style: Get.theme.primaryTextTheme.titleSmall!
-                                    .copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: -0.1,
-                                ),
-                              ).translate(),
+                        Text(
+                          homeController.isOffer
+                              ? partner.rightTab!
+                              : partner.leftTab!,
+                          style:
+                              Get.theme.primaryTextTheme.titleSmall!.copyWith(
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: -0.1,
+                          ),
+                        ),
                         InkWell(
                           onTap: () {
                             Get.back();
@@ -107,23 +94,14 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                                     Get.find<HomeController>()
                                         .setIsOffer(false);
                                   },
-                                  child: GetPlatform.isWeb
-                                      ? TranslationTextWidget(
-                                          text: partner.leftTab!,
-                                          style: Get.theme.primaryTextTheme
-                                              .titleSmall!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Colors.white),
-                                        )
-                                      : Text(
-                                          partner.leftTab!,
-                                          style: Get.theme.primaryTextTheme
-                                              .titleSmall!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Colors.white),
-                                        ).translate(),
+                                  child: Text(
+                                    partner.leftTab!,
+                                    style: Get
+                                        .theme.primaryTextTheme.titleSmall!
+                                        .copyWith(
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                  ),
                                 ),
                                 Icon(
                                   Icons.more_vert,
@@ -134,23 +112,14 @@ class RatesAndOfferTermsSheetWidget extends StatelessWidget {
                                   onTap: () {
                                     homeController.setIsOffer(true);
                                   },
-                                  child: GetPlatform.isWeb
-                                      ? TranslationTextWidget(
-                                          text: partner.rightTab!,
-                                          style: Get.theme.primaryTextTheme
-                                              .titleSmall!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Colors.white),
-                                        )
-                                      : Text(
-                                          partner.rightTab!,
-                                          style: Get.theme.primaryTextTheme
-                                              .titleSmall!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Colors.white),
-                                        ).translate(),
+                                  child: Text(
+                                    partner.rightTab!,
+                                    style: Get
+                                        .theme.primaryTextTheme.titleSmall!
+                                        .copyWith(
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                  ),
                                 ),
                               ],
                             ),

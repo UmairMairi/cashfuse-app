@@ -46,26 +46,16 @@ class RecentClickDialogWidget extends StatelessWidget {
             fit: BoxFit.contain,
             height: 100,
           ),
-          GetPlatform.isWeb
-              ? Text(
-                  'All is well!',
-                  style: Get.theme.primaryTextTheme.titleLarge,
-                )
-              : Text(
-                  'All is well!',
-                  style: Get.theme.primaryTextTheme.titleLarge,
-                ).translate(),
+          Text(
+            'All is well!',
+            style: Get.theme.primaryTextTheme.titleLarge,
+          ),
           Padding(
             padding: const EdgeInsets.all(15.0),
-            child: GetPlatform.isWeb
-                ? Text(
-                    homeController.clickDialogText(click),
-                    textAlign: TextAlign.center,
-                  )
-                : Text(
-                    homeController.clickDialogText(click),
-                    textAlign: TextAlign.center,
-                  ).translate(),
+            child: Text(
+              homeController.clickDialogText(click),
+              textAlign: TextAlign.center,
+            ),
           ),
           InkWell(
             onTap: () async {
@@ -88,21 +78,13 @@ class RecentClickDialogWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
               ),
               alignment: Alignment.center,
-              child: GetPlatform.isWeb
-                  ? Text(
-                      'SEE BEST DEALS',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600),
-                    )
-                  : Text(
-                      'SEE BEST DEALS',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600),
-                    ).translate(),
+              child: Text(
+                AppLocalizations.of(context)!.see_best_deals,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600),
+              ),
             ),
           ),
           Expanded(child: SizedBox()),
