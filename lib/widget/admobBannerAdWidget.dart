@@ -43,14 +43,14 @@ class _AdmobBannerAdWidgetState extends State<AdmobBannerAdWidget> {
   void initState() {
     super.initState();
     log('AdmobBannerAdWidget');
-    _init();
+    // _init();
   }
 
   @override
   void dispose() {
     super.dispose();
     if (_bannerAd != null) {
-      _bannerAd!.dispose();
+      _bannerAd?.dispose();
     }
   }
 
@@ -69,14 +69,14 @@ class _AdmobBannerAdWidgetState extends State<AdmobBannerAdWidget> {
           onAdFailedToLoad: (Ad ad, LoadAdError error) async {
             print('$BannerAd failedToLoad: $error');
             isAdmobBannerAdLoaed1 = false;
-            await _bannerAd!.load();
+            await _bannerAd?.load();
             setState(() {});
           },
           onAdOpened: (Ad ad) => print('$BannerAd onAdOpened.'),
           onAdClosed: (Ad ad) => print('$BannerAd onAdClosed.'),
         ),
       );
-      await _bannerAd!.load();
+      await _bannerAd?.load();
     } catch (e) {
       print("Exception - AdmobBannerAdWidget.dart - _init():" + e.toString());
     }

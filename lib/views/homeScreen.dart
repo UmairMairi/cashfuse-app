@@ -104,7 +104,6 @@ class HomeScreen extends StatelessWidget {
                   height: 35,
                   // width: 100,
                 ),
-
                 actions: [
                   InkWell(
                     onTap: () {
@@ -660,6 +659,7 @@ class HomeScreen extends StatelessWidget {
                                         : SizedBox(
                                             height: 15,
                                           ),
+
                                     SizedBox(
                                       height: 80,
                                       child: homeController.isCategoryLoaded
@@ -2044,11 +2044,11 @@ class HomeScreen extends StatelessWidget {
                                     GetBuilder<AdController>(
                                       builder: (adController) {
                                         return _adController
-                                                .isAdmobBannerAd2Exist
+                                            .isAdmobBannerAd2Exist
                                             ? AdmobBannerAdWidget(
-                                                adId:
-                                                    "ca-app-pub-3940256099942544/6300978111",
-                                              )
+                                          adId:
+                                          "ca-app-pub-3940256099942544/6300978111",
+                                        )
                                             : SizedBox();
                                       },
                                     ),
@@ -2056,15 +2056,15 @@ class HomeScreen extends StatelessWidget {
                                       builder: (adController) {
                                         return _adController.isFbBannerAd2Exist
                                             ? FbBannerAdWidget(
-                                                adId:
-                                                    'IMG_16_9_APP_INSTALL#536153035214384_536898305139857',
-                                              )
+                                          adId:
+                                          'IMG_16_9_APP_INSTALL#536153035214384_536898305139857',
+                                        )
                                             : SizedBox();
                                       },
                                     ),
                                     ListView.builder(
                                       itemCount:
-                                          homeController.homeAdvList.length,
+                                      homeController.homeAdvList.length,
                                       shrinkWrap: true,
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 6),
@@ -2072,273 +2072,273 @@ class HomeScreen extends StatelessWidget {
                                       itemBuilder: (context, index) {
                                         return homeController.isHomeAdvLoaded
                                             ? homeController.homeAdvList[index]
-                                                            .commonList !=
-                                                        null &&
+                                            .commonList !=
+                                            null &&
+                                            homeController
+                                                .homeAdvList[index]
+                                                .commonList
+                                                .length >
+                                                0
+                                            ? Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets
+                                                  .symmetric(
+                                                  horizontal: 6)
+                                                  .copyWith(
+                                                  bottom: 10,
+                                                  top: 15),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceBetween,
+                                                children: [
+                                                  Text(
                                                     homeController
-                                                            .homeAdvList[index]
-                                                            .commonList
-                                                            .length >
-                                                        0
-                                                ? Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Padding(
-                                                        padding: const EdgeInsets
-                                                                    .symmetric(
-                                                                horizontal: 6)
-                                                            .copyWith(
-                                                                bottom: 10,
-                                                                top: 15),
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Text(
+                                                        .homeAdvList[
+                                                    index]
+                                                        .name!
+                                                        .toUpperCase(),
+                                                    style: TextStyle(
+                                                      fontSize: global
+                                                          .getPlatFrom()
+                                                          ? 16
+                                                          : 13,
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .w600,
+                                                      color: Colors
+                                                          .black
+                                                          .withOpacity(
+                                                          0.79),
+                                                      letterSpacing:
+                                                      -0.3,
+                                                    ),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Get.to(
+                                                            () =>
+                                                            OfferListScreen(
+                                                              categoryModel:
                                                               homeController
-                                                                  .homeAdvList[
-                                                                      index]
-                                                                  .name!
-                                                                  .toUpperCase(),
-                                                              style: TextStyle(
-                                                                fontSize: global
-                                                                        .getPlatFrom()
-                                                                    ? 16
-                                                                    : 13,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color: Colors
-                                                                    .black
-                                                                    .withOpacity(
-                                                                        0.79),
-                                                                letterSpacing:
-                                                                    -0.3,
-                                                              ),
+                                                                  .homeAdvList[index],
                                                             ),
-                                                            InkWell(
-                                                              onTap: () {
-                                                                Get.to(
-                                                                  () =>
-                                                                      OfferListScreen(
-                                                                    categoryModel:
-                                                                        homeController
-                                                                            .homeAdvList[index],
-                                                                  ),
-                                                                  routeName:
-                                                                      'all',
-                                                                );
-                                                              },
-                                                              child: Text(
-                                                                '${AppLocalizations.of(context)!.view_all} >',
-                                                                style: Get
-                                                                    .theme
-                                                                    .primaryTextTheme
-                                                                    .bodySmall!
-                                                                    .copyWith(
-                                                                        color: Colors
-                                                                            .teal,
-                                                                        fontSize: global.getPlatFrom()
-                                                                            ? 16
-                                                                            : null),
-                                                              ),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.only(
-                                                            bottom: (global
-                                                                        .getPlatFrom() &&
-                                                                    (homeController.homeAdvList[index].commonList.length -
-                                                                            1) !=
-                                                                        null)
-                                                                ? 20
-                                                                : 0),
-                                                        child: SizedBox(
-                                                          height: global
-                                                                  .getPlatFrom()
-                                                              ? 230
-                                                              : 200,
-                                                          child:
-                                                              ListView.builder(
-                                                                  itemCount: homeController
-                                                                      .homeAdvList[
-                                                                          index]
-                                                                      .commonList
-                                                                      .length,
-                                                                  shrinkWrap:
-                                                                      true,
-                                                                  padding: const EdgeInsets
-                                                                          .symmetric(
-                                                                      horizontal:
-                                                                          6),
-                                                                  scrollDirection:
-                                                                      Axis
-                                                                          .horizontal,
-                                                                  itemBuilder:
-                                                                      (context,
-                                                                          i) {
-                                                                    return InkWell(
-                                                                      onTap:
-                                                                          () async {
-                                                                        if (homeController.homeAdvList[index].commonList[i].adId !=
-                                                                                null &&
-                                                                            homeController.homeAdvList[index].commonList[i].adId!.isNotEmpty) {
-                                                                          await homeController.getAdDetails(homeController
-                                                                              .homeAdvList[index]
-                                                                              .commonList[i]
-                                                                              .adId!);
-                                                                          Get.to(
-                                                                            () =>
-                                                                                AdsDetailScreen(
-                                                                              ads: homeController.ads,
-                                                                              fromSeeMore: false,
-                                                                            ),
-                                                                            routeName:
-                                                                                'detail',
-                                                                          );
-                                                                        } else if (homeController.homeAdvList[index].commonList[i].from == 'admit') {
-                                                                          await homeController.getAdmitedDetails(homeController
-                                                                              .homeAdvList[index]
-                                                                              .commonList[i]
-                                                                              .campaignId!);
-
-                                                                          Get.to(
-                                                                              () => AdmitedDetailScreen(
-                                                                                    admitedData: controller.admitedOffer,
-                                                                                    fromSeeMore: false,
-                                                                                  ),
-                                                                              routeName: 'detail');
-                                                                        } else {
-                                                                          await homeController.getCampignDetails(homeController
-                                                                              .homeAdvList[index]
-                                                                              .commonList[i]
-                                                                              .campaignId
-                                                                              .toString());
-                                                                          Get.to(
-                                                                            () =>
-                                                                                CampaignDetailScreen(
-                                                                              campaign: homeController.campaign,
-                                                                              fromSeeMore: false,
-                                                                            ),
-                                                                            routeName:
-                                                                                'detail',
-                                                                          );
-                                                                        }
-                                                                      },
-                                                                      child:
-                                                                          OfferWidget(
-                                                                        commonModel: homeController
-                                                                            .homeAdvList[index]
-                                                                            .commonList[i],
-                                                                        domainImage: homeController
-                                                                            .homeAdvList[index]
-                                                                            .image!,
-                                                                        fromList:
-                                                                            false,
-                                                                      ),
-                                                                    );
-                                                                  }),
-                                                        ),
-                                                      ),
-                                                    ],
+                                                        routeName:
+                                                        'all',
+                                                      );
+                                                    },
+                                                    child: Text(
+                                                      '${AppLocalizations.of(context)!.view_all} >',
+                                                      style: Get
+                                                          .theme
+                                                          .primaryTextTheme
+                                                          .bodySmall!
+                                                          .copyWith(
+                                                          color: Colors
+                                                              .teal,
+                                                          fontSize: global.getPlatFrom()
+                                                              ? 16
+                                                              : null),
+                                                    ),
                                                   )
-                                                : SizedBox()
-                                            : SizedBox(
-                                                height: 230,
-                                                child: ListView.builder(
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                  bottom: (global
+                                                      .getPlatFrom() &&
+                                                      (homeController.homeAdvList[index].commonList.length -
+                                                          1) !=
+                                                          null)
+                                                      ? 20
+                                                      : 0),
+                                              child: SizedBox(
+                                                height: global
+                                                    .getPlatFrom()
+                                                    ? 230
+                                                    : 200,
+                                                child:
+                                                ListView.builder(
+                                                    itemCount: homeController
+                                                        .homeAdvList[
+                                                    index]
+                                                        .commonList
+                                                        .length,
+                                                    shrinkWrap:
+                                                    true,
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal:
+                                                        6),
                                                     scrollDirection:
-                                                        Axis.horizontal,
-                                                    itemCount: 5,
-                                                    shrinkWrap: true,
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 20,
-                                                            bottom: 10),
+                                                    Axis
+                                                        .horizontal,
                                                     itemBuilder:
-                                                        (context, index) {
-                                                      return Shimmer(
-                                                        duration: Duration(
-                                                            seconds: 2),
-                                                        child: Container(
-                                                          width: Get.width - 60,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 15),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: Colors.white,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10),
-                                                          ),
-                                                          child: Column(
-                                                            children: [
-                                                              Container(
-                                                                width:
-                                                                    Get.width -
-                                                                        60,
-                                                                height: 145,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: Colors
-                                                                          .grey[
-                                                                      300],
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .only(
-                                                                    topLeft: Radius
-                                                                        .circular(
-                                                                            11),
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                            11),
+                                                        (context,
+                                                        i) {
+                                                      return InkWell(
+                                                        onTap:
+                                                            () async {
+                                                          if (homeController.homeAdvList[index].commonList[i].adId !=
+                                                              null &&
+                                                              homeController.homeAdvList[index].commonList[i].adId!.isNotEmpty) {
+                                                            await homeController.getAdDetails(homeController
+                                                                .homeAdvList[index]
+                                                                .commonList[i]
+                                                                .adId!);
+                                                            Get.to(
+                                                                  () =>
+                                                                  AdsDetailScreen(
+                                                                    ads: homeController.ads,
+                                                                    fromSeeMore: false,
                                                                   ),
+                                                              routeName:
+                                                              'detail',
+                                                            );
+                                                          } else if (homeController.homeAdvList[index].commonList[i].from == 'admit') {
+                                                            await homeController.getAdmitedDetails(homeController
+                                                                .homeAdvList[index]
+                                                                .commonList[i]
+                                                                .campaignId!);
+
+                                                            Get.to(
+                                                                    () => AdmitedDetailScreen(
+                                                                  admitedData: controller.admitedOffer,
+                                                                  fromSeeMore: false,
                                                                 ),
-                                                              ),
-                                                              Align(
-                                                                alignment: Alignment
-                                                                    .centerRight,
-                                                                child:
-                                                                    Container(
-                                                                  height: 35,
-                                                                  width: 80,
-                                                                  margin: EdgeInsets.symmetric(
-                                                                      vertical:
-                                                                          10,
-                                                                      horizontal:
-                                                                          20),
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: Colors
-                                                                            .grey[
-                                                                        300],
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(2),
+                                                                routeName: 'detail');
+                                                          } else {
+                                                            await homeController.getCampignDetails(homeController
+                                                                .homeAdvList[index]
+                                                                .commonList[i]
+                                                                .campaignId
+                                                                .toString());
+                                                            Get.to(
+                                                                  () =>
+                                                                  CampaignDetailScreen(
+                                                                    campaign: homeController.campaign,
+                                                                    fromSeeMore: false,
                                                                   ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
+                                                              routeName:
+                                                              'detail',
+                                                            );
+                                                          }
+                                                        },
+                                                        child:
+                                                        OfferWidget(
+                                                          commonModel: homeController
+                                                              .homeAdvList[index]
+                                                              .commonList[i],
+                                                          domainImage: homeController
+                                                              .homeAdvList[index]
+                                                              .image!,
+                                                          fromList:
+                                                          false,
                                                         ),
                                                       );
                                                     }),
-                                              );
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                            : SizedBox()
+                                            : SizedBox(
+                                          height: 230,
+                                          child: ListView.builder(
+                                              scrollDirection:
+                                              Axis.horizontal,
+                                              itemCount: 5,
+                                              shrinkWrap: true,
+                                              padding:
+                                              const EdgeInsets.only(
+                                                  top: 20,
+                                                  bottom: 10),
+                                              itemBuilder:
+                                                  (context, index) {
+                                                return Shimmer(
+                                                  duration: Duration(
+                                                      seconds: 2),
+                                                  child: Container(
+                                                    width: Get.width - 60,
+                                                    margin:
+                                                    EdgeInsets.only(
+                                                        right: 15),
+                                                    decoration:
+                                                    BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                      BorderRadius
+                                                          .circular(
+                                                          10),
+                                                    ),
+                                                    child: Column(
+                                                      children: [
+                                                        Container(
+                                                          width:
+                                                          Get.width -
+                                                              60,
+                                                          height: 145,
+                                                          decoration:
+                                                          BoxDecoration(
+                                                            color: Colors
+                                                                .grey[
+                                                            300],
+                                                            borderRadius:
+                                                            BorderRadius
+                                                                .only(
+                                                              topLeft: Radius
+                                                                  .circular(
+                                                                  11),
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                  11),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Align(
+                                                          alignment: Alignment
+                                                              .centerRight,
+                                                          child:
+                                                          Container(
+                                                            height: 35,
+                                                            width: 80,
+                                                            margin: EdgeInsets.symmetric(
+                                                                vertical:
+                                                                10,
+                                                                horizontal:
+                                                                20),
+                                                            decoration:
+                                                            BoxDecoration(
+                                                              color: Colors
+                                                                  .grey[
+                                                              300],
+                                                              borderRadius:
+                                                              BorderRadius
+                                                                  .circular(2),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                        );
                                       },
                                     ),
                                     GetBuilder<AdController>(
                                       builder: (adController) {
                                         return _adController
-                                                .isAdmobBannerAd3Exist
+                                            .isAdmobBannerAd3Exist
                                             ? AdmobBannerAdWidget(
-                                                adId:
-                                                    "ca-app-pub-3940256099942544/6300978111",
-                                              )
+                                          adId:
+                                          "ca-app-pub-3940256099942544/6300978111",
+                                        )
                                             : SizedBox();
                                       },
                                     ),
@@ -2346,12 +2346,13 @@ class HomeScreen extends StatelessWidget {
                                       builder: (adController) {
                                         return _adController.isFbBannerAd3Exist
                                             ? FbBannerAdWidget(
-                                                adId:
-                                                    'IMG_16_9_APP_INSTALL#536153035214384_536898305139857',
-                                              )
+                                          adId:
+                                          'IMG_16_9_APP_INSTALL#536153035214384_536898305139857',
+                                        )
                                             : SizedBox();
                                       },
                                     ),
+
                                   ],
                                 ),
                               ));

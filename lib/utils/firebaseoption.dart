@@ -40,7 +40,7 @@ class DefaultFirebaseOptions {
     projectId: "cashfuse-60939",
     storageBucket: "cashfuse-60939.appspot.com",
     messagingSenderId: "521109211624",
-    appId: "1:521109211624:android:73898e9cbfabc8e4c53c5d",
+    appId: "1:773714635993:ios:ec8db40b00b19902c062c8",
     measurementId: "G-KBPRBBZRYC",
   );
 }
