@@ -139,7 +139,7 @@ class CouponDetailScreen extends StatelessWidget {
                               days: 'day',
                             ),
                             slideDirection: SlideDirection.none,
-                            textStyle: TextStyle(
+                            style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 10,
                                 fontWeight: FontWeight.w600),

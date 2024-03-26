@@ -113,7 +113,7 @@ class MyApp extends StatelessWidget {
                 GlobalCupertinoLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
-              home: global.getPlatFrom()
+              home: false
                   ? HomeScreen()
                   : GetPlatform.isWeb
                       ? BottomNavigationBarScreen()

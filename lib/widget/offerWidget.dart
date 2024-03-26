@@ -8,7 +8,6 @@ import 'package:cashfuse/utils/images.dart';
 import 'package:cashfuse/widget/customImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:slide_countdown/slide_countdown.dart';
 
 class OfferWidget extends StatelessWidget {
@@ -149,7 +148,7 @@ class OfferWidget extends StatelessWidget {
                                     offer!.dayDifference! > 0
                                 ? SlideCountdown(
                                     slideDirection: SlideDirection.none,
-                                    textStyle: TextStyle(
+                                    style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 10,
                                         fontWeight: FontWeight.w600),

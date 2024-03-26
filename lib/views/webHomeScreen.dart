@@ -411,7 +411,7 @@ class WebHomeScreen extends StatelessWidget {
                                                       child: SlideCountdown(
                                                         slideDirection:
                                                             SlideDirection.none,
-                                                        textStyle: TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.white,
                                                             fontSize: 10,
                                                             fontWeight:

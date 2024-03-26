@@ -531,7 +531,7 @@ class WebSearchScreen extends StatelessWidget {
                                                           slideDirection:
                                                               SlideDirection
                                                                   .none,
-                                                          textStyle: TextStyle(
+                                                          style: TextStyle(
                                                               color:
                                                                   Colors.white,
                                                               fontSize: 10,

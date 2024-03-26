@@ -169,8 +169,7 @@ class WebHomeMobileView extends StatelessWidget {
                                           child: DotsIndicator(
                                             dotsCount: homeController
                                                 .topBannerList.length,
-                                            position: homeController.bannerIndex
-                                                .toDouble(),
+                                            position: homeController.bannerIndex,
                                             decorator: DotsDecorator(
                                               activeSize: Size(7, 7),
                                               size: Size(7, 7),
@@ -550,7 +549,7 @@ class WebHomeMobileView extends StatelessWidget {
                                                   child: SlideCountdown(
                                                     slideDirection:
                                                         SlideDirection.none,
-                                                    textStyle: TextStyle(
+                                                    style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 10,
                                                         fontWeight:

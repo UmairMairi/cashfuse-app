@@ -7,20 +7,19 @@ import 'package:get/get.dart';
 class NetworkController extends GetxController {
   var connectionStatus = GetPlatform.isWeb ? 1.obs : 0.obs;
   final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
 
   @override
   void onInit() async {
     await initConnectivity();
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(updateConnectivity);
+    _connectivitySubscription = _connectivity.onConnectivityChanged.listen((event) => updateConnectivity,);
     super.onInit();
   }
 
   Future<void> initConnectivity() async {
     ConnectivityResult result;
     try {
-      result = await _connectivity.checkConnectivity();
+      result = (await _connectivity.checkConnectivity()).first;
       return updateConnectivity(result);
     } catch (e) {
       print("Exception - NetworkController.dart - initConnectivity():" +

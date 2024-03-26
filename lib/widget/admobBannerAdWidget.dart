@@ -43,7 +43,7 @@ class _AdmobBannerAdWidgetState extends State<AdmobBannerAdWidget> {
   void initState() {
     super.initState();
     log('AdmobBannerAdWidget');
-    // _init();
+    _init();
   }
 
   @override

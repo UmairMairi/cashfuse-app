@@ -571,10 +571,7 @@ class HomeScreen extends StatelessWidget {
                                                                   homeController
                                                                       .topBannerList
                                                                       .length,
-                                                              position:
-                                                                  homeController
-                                                                      .bannerIndex
-                                                                      .toDouble(),
+                                                              position:homeController.bannerIndex,
                                                               decorator:
                                                                   DotsDecorator(
                                                                 activeSize:
@@ -1108,7 +1105,7 @@ class HomeScreen extends StatelessWidget {
                                                                       slideDirection:
                                                                           SlideDirection
                                                                               .none,
-                                                                      textStyle: TextStyle(
+                                                                          style: TextStyle(
                                                                           color: Colors
                                                                               .white,
                                                                           fontSize:
